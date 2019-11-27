@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 
-class SingleUser extends Component {
+class Menu extends Component {
 	render() {
 		return (
 			<ul>
@@ -13,4 +13,4 @@ class SingleUser extends Component {
 	}
 }
 
-export default withRouter(SingleUser)
+export default withRouter(Menu)
