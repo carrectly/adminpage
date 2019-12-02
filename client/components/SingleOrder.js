@@ -13,4 +13,4 @@ class SingleOrder extends Component {
 	}
 }
 
-export default withRouter(SingleOrder)
+export default SingleOrder

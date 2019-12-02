@@ -13,4 +13,4 @@ class AllUsers extends Component {
 	}
 }
 
-export default withRouter(AllUsers)
+export default AllUsers

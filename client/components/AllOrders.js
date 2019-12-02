@@ -13,4 +13,4 @@ class AllOrders extends Component {
 	}
 }
 
-export default withRouter(AllOrders)
+export default AllOrders

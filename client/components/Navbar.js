@@ -16,31 +16,15 @@ class Navbar extends React.Component {
 					</div>
 				</div>
 
-				<div>
-					<Link to='/AllOrders' className='link'>
-						All Orders
-					</Link>
-				</div>
+				<Link to='/allOrders' className='link'>
+					All Orders
+				</Link>
 
-				{/* <div className="link search-container">
-          <input
-            className="search search-element"
-            name="searchValue"
-            type="text"
-            value={this.state.searchValue}
-            onChange={this.handleChange}
-          />
-          <button
-            className="search-button search-element"
-            onClick={this.handleSubmit}
-          >
-            <Link to="/items" className="link fa">
-              <i className="fa fa-search fa-3x" />
-            </Link>
-          </button>
-        </div> */}
+				<Link to='/account' className='link'>
+					Account
+				</Link>
 
-				<Link to='/AllUsers' className='link'>
+				<Link to='/allUsers' className='link'>
 					AllUsers
 				</Link>
 			</div>
@@ -48,4 +32,4 @@ class Navbar extends React.Component {
 	}
 }
 
-export default Navbar
+export default connect(null, null)(Navbar)

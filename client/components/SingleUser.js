@@ -13,4 +13,4 @@ class SingleUser extends Component {
 	}
 }
 
-export default withRouter(SingleUser)
+export default SingleUser

@@ -8,19 +8,18 @@ import {
 	Gmail,
 	Menu,
 	Navbar,
-	SingleOrder,
-	SingleUser,
+	Account,
+	Dashboard,
 } from './components'
 
 class Routes extends Component {
 	render() {
 		return (
 			<Switch>
-				<Route exact path='/' component={AllOrders} />
-				<Route path='/orders/:orderid' component={SingleOrder} />
+				<Route exact path='/' component={Dashboard} />
 				<Route path='/orders' component={AllOrders} />
-				<Route path='/users/:userid' component={SingleUser} />
 				<Route path='/users' component={AllUsers} />
+				<Route path='/account' component={Account} />
 			</Switch>
 		)
 	}
@@ -28,4 +27,4 @@ class Routes extends Component {
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(Routes)
+export default withRouter(connect(null, null)(Routes))

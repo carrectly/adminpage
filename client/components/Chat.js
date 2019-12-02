@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 class Chat extends Component {
 	render() {
@@ -11,4 +12,4 @@ class Chat extends Component {
 	}
 }
 
-export default withRouter(Chat)
+export default withRouter(connect(null, null)(Chat))
