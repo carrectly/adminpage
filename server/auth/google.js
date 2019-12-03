@@ -64,24 +64,21 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
 router.get('/gmail', async (req, res, next) => {
 	try {
-		const result = await runGmailApi()
-
-		console.log('RESULTS', result)
+		let result = await runGmailApi()
+		console.log(result)
+		res.json(result)
 	} catch (err) {
 		next(err)
 	}
 })
 
-function runGmailApi() {
-	return fs.readFile(
+async function runGmailApi() {
+	const content = await fs.readFileSync(
 		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
-		(err, content) => {
-			if (err)
-				return console.log('Error loading client secret file:', err)
-			// Authorize a client with credentials, then call the Gmail API.
-			return authorize(JSON.parse(content), listLabels)
-		}
+		'utf8'
 	)
+	let output = await authorize(JSON.parse(content), await listLabels)
+	return output
 }
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -89,7 +86,7 @@ function runGmailApi() {
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials, callback) {
+async function authorize(credentials, callback) {
 	const {client_secret, client_id, redirect_uris} = credentials.installed
 	const oAuth2Client = new google.auth.OAuth2(
 		client_id,
@@ -97,12 +94,14 @@ function authorize(credentials, callback) {
 		redirect_uris[0]
 	)
 
-	// Check if we have previously stored a token.
-	fs.readFile(TOKEN_PATH, (err, token) => {
-		if (err) return getNewToken(oAuth2Client, callback)
-		oAuth2Client.setCredentials(JSON.parse(token))
-		callback(oAuth2Client)
-	})
+	const tkn = await JSON.parse(fs.readFileSync(TOKEN_PATH, 'utf8'))
+
+	if (!tkn) {
+		return getNewToken(oAuth2Client, await callback)
+	} else {
+		oAuth2Client.setCredentials(tkn)
+		return callback(oAuth2Client)
+	}
 }
 
 /**
@@ -132,7 +131,7 @@ function getNewToken(oAuth2Client, callback) {
 				console.log('Token stored to', TOKEN_PATH)
 			})
 
-			callback(oAuth2Client)
+			return callback(oAuth2Client)
 		})
 	})
 }
@@ -142,31 +141,18 @@ function getNewToken(oAuth2Client, callback) {
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
-function listLabels(auth) {
-	const gmail = google.gmail({version: 'v1', auth})
-	//console.log('GMAIL METADATA', gmail)
-	// console.log('GMAIL METADATA', gmail.users)
-	// console.log('GMAIL METADATA', gmail.users.labels)
-	//console.log('GMAIL METADATA', gmail.users.labels.list)
-	gmail.users.labels.list(
+async function listLabels(auth) {
+	const gmail = await google.gmail({version: 'v1', auth})
+	let response = await gmail.users.labels.list(
 		{
 			userId: 'me',
 		},
-		(err, res) => {
-			if (err) return console.log('The API returned an error: ' + err)
-			const labels = res.data.labels
-			console.log('returning labels - line 150')
-			console.log('sending labels')
-			console.log(labels[0])
-			return labels[0]
-			// if (labels.length) {
-			// 	console.log('Labels:')
-			// 	labels.forEach(label => {
-			// 		console.log(`- ${label.name}`)
-			// 	})
-			// } else {
-			// 	console.log('No labels found.')
-			// }
-		}
+		'utf8'
 	)
+
+	if (!response) {
+		return console.log('The API returned an error: ')
+	} else {
+		return response.data.labels
+	}
 }
