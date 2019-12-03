@@ -1,0 +1,7 @@
+{
+	"access_token": "ya29.Il-zByGDsXYP0KR6BRSGPjUBbfE_n0k9lLp5XTlyiO3mActWg19xkqXKvWHzqXMEWAMx0JpBxqO0jFawuqxalclFzFN6gzHXGqpbxphNtx1AVRwsKqPZFJSG6SUwiL03Bw",
+	"refresh_token": "1//04dR750i8jvyfCgYIARAAGAQSNwF-L9IrUTfRYd4Q17mSgybW3aHvdOMGMmjs1MBS4CwKTN-w0mFbrHWMZ9nOR716q4mGO7XHwxQ",
+	"scope": "https://www.googleapis.com/auth/calendar.readonly",
+	"token_type": "Bearer",
+	"expiry_date": 1575400036946
+}

@@ -21,7 +21,10 @@ module.exports = router
  * process.env.GOOGLE_CALLBACK = '/your/google/callback'
  */
 
-const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
+const SCOPES = [
+	'https://www.googleapis.com/auth/gmail.readonly',
+	'https://www.googleapis.com/auth/calendar.readonly',
+]
 const TOKEN_PATH = '/Users/abirkus/Desktop/carrectly/adminpage/tocken.json'
 
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
@@ -62,97 +65,5 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 	)
 }
 
-router.get('/gmail', async (req, res, next) => {
-	try {
-		let result = await runGmailApi()
-		console.log(result)
-		res.json(result)
-	} catch (err) {
-		next(err)
-	}
-})
-
-async function runGmailApi() {
-	const content = await fs.readFileSync(
-		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
-		'utf8'
-	)
-	let output = await authorize(JSON.parse(content), await listLabels)
-	return output
-}
-/**
- * Create an OAuth2 client with the given credentials, and then execute the
- * given callback function.
- * @param {Object} credentials The authorization client credentials.
- * @param {function} callback The callback to call with the authorized client.
- */
-async function authorize(credentials, callback) {
-	const {client_secret, client_id, redirect_uris} = credentials.installed
-	const oAuth2Client = new google.auth.OAuth2(
-		client_id,
-		client_secret,
-		redirect_uris[0]
-	)
-
-	const tkn = await JSON.parse(fs.readFileSync(TOKEN_PATH, 'utf8'))
-
-	if (!tkn) {
-		return getNewToken(oAuth2Client, await callback)
-	} else {
-		oAuth2Client.setCredentials(tkn)
-		return callback(oAuth2Client)
-	}
-}
-
-/**
- * Get and store new token after prompting for user authorization, and then
- * execute the given callback with the authorized OAuth2 client.
- * @param {google.auth.OAuth2} oAuth2Client The OAuth2 client to get token for.
- * @param {getEventsCallback} callback The callback for the authorized client.
- */
-function getNewToken(oAuth2Client, callback) {
-	const authUrl = oAuth2Client.generateAuthUrl({
-		access_type: 'offline',
-		scope: SCOPES,
-	})
-	console.log('Authorize this app by visiting this url:', authUrl)
-	const rl = readline.createInterface({
-		input: process.stdin,
-		output: process.stdout,
-	})
-	rl.question('Enter the code from that page here: ', code => {
-		rl.close()
-		oAuth2Client.getToken(code, (err, token) => {
-			if (err) return console.error('Error retrieving access token', err)
-			oAuth2Client.setCredentials(token)
-			// Store the token to disk for later program executions
-			fs.writeFile(TOKEN_PATH, JSON.stringify(token), err => {
-				if (err) return console.error(err)
-				console.log('Token stored to', TOKEN_PATH)
-			})
-
-			return callback(oAuth2Client)
-		})
-	})
-}
-
-/**
- * Lists the labels in the user's account.
- *
- * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
- */
-async function listLabels(auth) {
-	const gmail = await google.gmail({version: 'v1', auth})
-	let response = await gmail.users.labels.list(
-		{
-			userId: 'me',
-		},
-		'utf8'
-	)
-
-	if (!response) {
-		return console.log('The API returned an error: ')
-	} else {
-		return response.data.labels
-	}
-}
+router.use('/gmail', require('./gmail'))
+router.use('/calendar', require('./calendar'))

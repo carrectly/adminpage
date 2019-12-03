@@ -4,10 +4,12 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import emails from './emails'
+import calendar from './calendar'
 
 const reducer = combineReducers({
 	user,
 	emails,
+	calendar,
 })
 
 const middleware = composeWithDevTools(
