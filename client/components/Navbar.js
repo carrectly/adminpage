@@ -16,6 +16,10 @@ class Navbar extends React.Component {
 					</div>
 				</div>
 
+				<Link to='/dashboard' className='link'>
+					Dashboard
+				</Link>
+
 				<Link to='/allOrders' className='link'>
 					All Orders
 				</Link>
@@ -27,9 +31,19 @@ class Navbar extends React.Component {
 				<Link to='/allUsers' className='link'>
 					AllUsers
 				</Link>
+
+				{/* <Link to='/gmail' className='link'>
+					Gmail
+				</Link> */}
 			</div>
 		)
 	}
 }
 
-export default connect(null, null)(Navbar)
+const mapState = state => {
+	return {
+		isLoggedIn: !!state.user.id,
+	}
+}
+
+export default connect(mapState, null)(Navbar)

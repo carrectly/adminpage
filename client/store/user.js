@@ -24,6 +24,8 @@ const removeUser = () => ({type: REMOVE_USER})
 export const me = () => async dispatch => {
 	try {
 		const res = await axios.get('/auth/me')
+		console.log('INSIDE ME THUNK')
+		console.log(res.data)
 		dispatch(getUser(res.data))
 		history.push('/home')
 	} catch (err) {
@@ -34,8 +36,8 @@ export const me = () => async dispatch => {
 export const auth = (email, password, method) => async dispatch => {
 	try {
 		const res = await axios.post(`/auth/${method}`, {email, password})
-		dispatch(getUser(res.data))
-		console.log('here is the attempt')
+		console.log('INSIDE AUTH', res.data.user)
+		dispatch(getUser(res.data.user))
 		history.push('/home')
 	} catch (dispatchOrHistoryErr) {
 		console.error(dispatchOrHistoryErr)

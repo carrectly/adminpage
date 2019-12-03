@@ -5,6 +5,7 @@ import AllOrders from './AllOrders'
 
 class Dashboard extends Component {
 	render() {
+		console.log('OUR USER', this.props.user)
 		const list = [
 			{
 				id: 1,
@@ -39,7 +40,8 @@ class Dashboard extends Component {
 			{
 				id: 6,
 				name: "Create a booking on client's behalf",
-				photo: 'http://clipart-library.com/img/1725068.gif',
+				photo:
+					'https://www.illustrationsof.com/royalty-free-phone-call-clipart-illustration-440358.jpg',
 			},
 		]
 
@@ -66,16 +68,15 @@ class Dashboard extends Component {
 	}
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     categories: state.categories,
-//     isAdmin: state.user.isAdmin
-//   }
-// }
+const mapStateToProps = state => {
+	return {
+		user: state.user,
+	}
+}
 // const mapDispatchToProps = dispatch => {
 //   return {
 //     deletedashboard: id => dispatch(deletedashboardThunk(id))
 //   }
 // }
 
-export default withRouter(connect(null, null)(Dashboard))
+export default withRouter(connect(mapStateToProps, null)(Dashboard))

@@ -5,16 +5,6 @@ const {User} = require('../db/models')
 module.exports = router
 
 /**
- * OATH ClientID
- * 102569396897-sm9f38hfoa2en10vmb2qn275r1lagh21.apps.googleusercontent.com
- *client secret
- *E9y5zAov9rOHX5OANYi7Ovtz
- *
- *
- *
- */
-
-/**
  * For OAuth keys and other secrets, your Node process will search
  * process.env to find environment variables. On your production server,
  * you will be able to set these environment variables with the appropriate
@@ -40,6 +30,9 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 	const strategy = new GoogleStrategy(
 		googleConfig,
 		(token, refreshToken, profile, done) => {
+			console.log('---', 'in verification callback', profile, '---')
+			console.log('---', 'in verification callback', token, '---')
+			console.log('---', 'in verification callback', refreshToken, '---')
 			const googleId = profile.id
 			const name = profile.displayName
 			const email = profile.emails[0].value

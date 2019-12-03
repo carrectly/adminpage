@@ -116,3 +116,10 @@ nav a {
 	width: 25vw;
 	padding-top: 0px;
 }
+
+.google {
+	width: 50px;
+	margin-top: 10px;
+	margin-right: auto;
+	margin-left: auto;
+}
