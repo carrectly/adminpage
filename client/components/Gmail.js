@@ -1,21 +1,40 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import axios from 'axios'
+import {getEmailsThunk} from '../store/emails'
 
 class Gmail extends Component {
-	async componentDidMount() {
-		console.log('mounted')
-		const res = await axios.get('/auth/google/gmail')
-		console.log('mounted for sure')
-	}
 	render() {
+		const emails = this.props.emails || []
 		return (
 			<div>
-				<h1>Gmail coming soon</h1>
+				<div>
+					<h1>Gmail coming soon</h1>
+					<button
+						type='button'
+						onClick={() => this.props.getEmails()}>
+						View Labels
+					</button>
+				</div>
+				<div>
+					{emails.map(email => (
+						<li key={email.id}>{email.name}</li>
+					))}
+				</div>
 			</div>
 		)
 	}
 }
 
-export default withRouter(connect(null, null)(Gmail))
+const mapStateToProps = state => {
+	return {
+		emails: state.emails,
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+	return {
+		getEmails: () => dispatch(getEmailsThunk()),
+	}
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Gmail))

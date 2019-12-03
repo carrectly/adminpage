@@ -3,9 +3,11 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
+import emails from './emails'
 
 const reducer = combineReducers({
 	user,
+	emails,
 })
 
 const middleware = composeWithDevTools(
