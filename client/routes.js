@@ -23,14 +23,14 @@ class Routes extends Component {
 	render() {
 		return (
 			<Switch>
-				<Route exact path='/' component={Login} />
+				<Route exact path='/' component={Account} />
 				<Route path='/login' component={Login} />
 				<Route path='/dashboard' component={Dashboard} />
 				<Route path='/home' component={UserHome} />
 				<Route path='/orders' component={AllOrders} />
 				<Route path='/users' component={AllUsers} />
 				<Route path='/account' component={Account} />
-				{/* <Route path='/gmail' component={Gmail} /> */}
+				<Route path='/google/gmail' component={Gmail} />
 			</Switch>
 		)
 	}

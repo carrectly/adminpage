@@ -32,9 +32,9 @@ class Navbar extends React.Component {
 					AllUsers
 				</Link>
 
-				{/* <Link to='/gmail' className='link'>
+				<Link to='/google/gmail' className='link'>
 					Gmail
-				</Link> */}
+				</Link>
 			</div>
 		)
 	}
