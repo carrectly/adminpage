@@ -4,14 +4,14 @@ const {google} = require('googleapis')
 const readline = require('readline')
 module.exports = router
 
-const SCOPES = ['https://www.googleapis.com/auth/calendar.events.readonly']
+const SCOPES = ['https://www.googleapis.com/auth/contacts.readonly']
 
 const TOKEN_PATH =
-	'/Users/abirkus/Desktop/carrectly/adminpage/tockencalendar.json'
+	'/Users/abirkus/Desktop/carrectly/adminpage/tockencontacts.json'
 
 router.get('/', async (req, res, next) => {
 	try {
-		let result = await runCalendarApi()
+		let result = await runContactsApi()
 		//console.log(result)
 		res.json(result)
 	} catch (err) {
@@ -19,12 +19,12 @@ router.get('/', async (req, res, next) => {
 	}
 })
 
-async function runCalendarApi() {
+async function runContactsApi() {
 	const content = await fs.readFileSync(
 		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
 		'utf8'
 	)
-	let output = await authorize(JSON.parse(content), await listEvents)
+	let output = await authorize(JSON.parse(content), await listConnectionNames)
 	return output
 }
 
@@ -85,34 +85,25 @@ function getNewToken(oAuth2Client, callback) {
 	})
 }
 
-async function listEvents(auth) {
-	const calendar = await google.calendar({version: 'v3', auth})
-	let response = await calendar.events.list(
+/**
+ * Print the display name if available for 10 connections.
+ *
+ * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+ */
+async function listConnectionNames(auth) {
+	const service = await google.people({version: 'v1', auth})
+	const response = await service.people.connections.list(
 		{
-			calendarId: 'primary',
-			timeMin: new Date().toISOString(),
-			maxResults: 10,
-			singleEvents: true,
-			orderBy: 'startTime',
+			resourceName: 'people/me',
+			pageSize: 10,
+			personFields: 'names,emailAddresses',
 		},
 		'utf8'
 	)
+
 	if (!response) {
 		return console.log('The API returned an error: ')
 	} else {
-		return response.data.items
+		return response.data.connections
 	}
-
-	// (err, res) => {
-	// 	if (err) return console.log('The API returned an error: ' + err)
-	// 	const events = res.data.items
-	// 	if (events.length) {
-	// 		console.log('Upcoming 10 events:')
-	// 		events.map((event, i) => {
-	// 			const start = event.start.dateTime || event.start.date
-	// 			console.log(`${start} - ${event.summary}`)
-	// 		})
-	// 	} else {
-	// 		console.log('No upcoming events found.')
-	// 	}
 }

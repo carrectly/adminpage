@@ -1,10 +1,7 @@
 const passport = require('passport')
-const fs = require('fs')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const {User} = require('../db/models')
-const {google} = require('googleapis')
-const readline = require('readline')
 module.exports = router
 
 /**
@@ -20,12 +17,6 @@ module.exports = router
  * process.env.GOOGLE_CLIENT_SECRET = 'your google client secret'
  * process.env.GOOGLE_CALLBACK = '/your/google/callback'
  */
-
-const SCOPES = [
-	'https://www.googleapis.com/auth/gmail.readonly',
-	'https://www.googleapis.com/auth/calendar.readonly',
-]
-const TOKEN_PATH = '/Users/abirkus/Desktop/carrectly/adminpage/tocken.json'
 
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 	console.log('Google client ID / secret not found. Skipping Google OAuth.')
@@ -67,3 +58,4 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
 router.use('/gmail', require('./gmail'))
 router.use('/calendar', require('./calendar'))
+router.use('/contacts', require('./contacts'))
