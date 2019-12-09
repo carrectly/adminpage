@@ -2,6 +2,9 @@ const fs = require('fs')
 const router = require('express').Router()
 const {google} = require('googleapis')
 const readline = require('readline')
+//var rp = require('request-promise')
+var parseMessage = require('gmail-api-parse-message')
+
 module.exports = router
 
 const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
@@ -11,7 +14,7 @@ const TOKEN_PATH = '/Users/abirkus/Desktop/carrectly/adminpage/tockengmail.json'
 // router.get('/', async (req, res, next) => {
 // 	try {
 // 		console.log('AXIOS RECEIVED')
-// 		let result = await runGmailApi()
+// 		let result = await fetchLabels()
 // 		//console.log(result)
 // 		res.json(result)
 // 	} catch (err) {
@@ -19,32 +22,54 @@ const TOKEN_PATH = '/Users/abirkus/Desktop/carrectly/adminpage/tockengmail.json'
 // 	}
 // })
 
-router.get('/lottery', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
 	try {
-		console.log('AXIOS RECEIVED')
-		let result = await fetchLottery()
-		//console.log(result)
+		let result = await fetchEmails()
 		res.json(result)
 	} catch (err) {
 		next(err)
 	}
 })
 
-async function runGmailApi() {
+router.get('/:messageid', async (req, res, next) => {
+	try {
+		const id = req.params.messageid
+		console.log('API request ID', id)
+		//console.log('USER making the request', req.user)
+		let result = await fetchSingleEmail(id)
+		res.json(result)
+	} catch (err) {
+		next(err)
+	}
+})
+
+// async function fetchLabels() {
+// 	const content = await fs.readFileSync(
+// 		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
+// 		'utf8'
+// 	)
+// 	let output = await authorize(JSON.parse(content), await listLabels)
+// 	return output
+// }
+
+async function fetchEmails() {
 	const content = await fs.readFileSync(
 		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
 		'utf8'
 	)
-	let output = await authorize(JSON.parse(content), await listLabels)
+	let output = await authorize(JSON.parse(content), listMessages)
+	//console.log('fetching output', output)
 	return output
 }
 
-async function fetchLottery() {
+async function fetchSingleEmail(id) {
 	const content = await fs.readFileSync(
 		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
 		'utf8'
 	)
-	let output = await authorize(JSON.parse(content), await listMessages)
+	//let output = await getMessage(JSON.parse(content), id)
+	let output = await authorize(JSON.parse(content), getMessage, id)
+	console.log('fetching output', output)
 	return output
 }
 /**
@@ -53,7 +78,7 @@ async function fetchLottery() {
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-async function authorize(credentials, callback) {
+async function authorize(credentials, callback, query) {
 	const {client_secret, client_id, redirect_uris} = credentials.installed
 	const oAuth2Client = new google.auth.OAuth2(
 		client_id,
@@ -63,13 +88,21 @@ async function authorize(credentials, callback) {
 
 	let tkn = await fs.readFileSync(TOKEN_PATH, 'utf8')
 
-	if (!tkn) {
-		return getNewToken(oAuth2Client, await callback)
-	} else {
-		tkn = JSON.parse(tkn)
-		oAuth2Client.setCredentials(tkn)
-		return callback(oAuth2Client)
-	}
+	if (!query) {
+		if (!tkn) {
+			return getNewToken(oAuth2Client, await callback)
+		} else {
+			tkn = JSON.parse(tkn)
+			oAuth2Client.setCredentials(tkn)
+			return callback(oAuth2Client)
+		}
+	} else if (!tkn) {
+			return getNewToken(oAuth2Client, await callback, query)
+		} else {
+			tkn = JSON.parse(tkn)
+			oAuth2Client.setCredentials(tkn)
+			return callback(oAuth2Client, query)
+		}
 }
 
 /**
@@ -78,7 +111,7 @@ async function authorize(credentials, callback) {
  * @param {google.auth.OAuth2} oAuth2Client The OAuth2 client to get token for.
  * @param {getEventsCallback} callback The callback for the authorized client.
  */
-function getNewToken(oAuth2Client, callback) {
+function getNewToken(oAuth2Client, callback, query) {
 	const authUrl = oAuth2Client.generateAuthUrl({
 		access_type: 'offline',
 		scope: SCOPES,
@@ -98,8 +131,11 @@ function getNewToken(oAuth2Client, callback) {
 				if (err) return console.error(err)
 				console.log('Token stored to', TOKEN_PATH)
 			})
-
-			return callback(oAuth2Client)
+			if (!query) {
+				return callback(oAuth2Client)
+			} else {
+				return callback(oAuth2Client, query)
+			}
 		})
 	})
 }
@@ -125,16 +161,6 @@ async function listLabels(auth) {
 	}
 }
 
-// function listLabels(userId, callback) {
-// 	var request = gapi.client.gmail.users.labels.list({
-// 		userId: userId,
-// 	})
-// 	request.execute(function(resp) {
-// 		var labels = resp.labels
-// 		callback(labels)
-// 	})
-// }
-
 /**
  * Retrieve Messages in user's mailbox matching query.
  *
@@ -146,11 +172,8 @@ async function listLabels(auth) {
 
 async function listMessages(auth) {
 	const userId = 'me'
-	const query = 'subject:lottery'
-	let arr = []
-	const callback = inpt => {
-		arr.push(inpt)
-	}
+	//const query = 'subject:lottery'
+	const query = 'subject:EVE of the EVE and Harris Associates'
 
 	const gmail = await google.gmail({version: 'v1', auth})
 
@@ -159,30 +182,13 @@ async function listMessages(auth) {
 		q: query,
 	})
 
-	console.log('initial Request first message', initialRequest)
-
 	let nextPage = initialRequest.data.nextPageToken
-	console.log('next page token', nextPage)
-	// while (nextPage) {
-	// 	let request = await gmail.users.messages.list({
-	// 		userId: userId,
-	// 		pageToken: nextPage,
-	// 		q: query,
-	// 	})
-	// 	console.log('REQUEST', request)
-	// 	ourArray = ourArray.concat(request.data)
-	// 	nextPage = request.data.nextPageToken
-	// }
 
 	var loopContinue = true
 	let newArr = []
 	newArr = [...newArr, ...initialRequest.data.messages]
-	let counter = 0
 	async function Managework() {
 		while (loopContinue) {
-			//seemingly an infinite loop
-			//await (doWork(n));
-			counter++
 			await doWork(nextPage)
 				.then(val => {
 					newArr = [...newArr, ...val.data.messages]
@@ -192,27 +198,20 @@ async function listMessages(auth) {
 					console.log('Promise fail')
 					loopContinue = false
 				})
-			console.log('Each loop iteration', counter)
 		}
-		console.log('all lottery pages', newArr.length)
+		return newArr
 	}
-
-	Managework()
 
 	function doWork(tkn) {
 		return new Promise((resolve, reject) => {
 			console.log('Promise req received')
 			if (tkn) {
-				console.log('inside promise if statement')
+				//console.log('inside promise if statement')
 				let request = gmail.users.messages.list({
 					userId: userId,
 					pageToken: tkn,
 					q: query,
 				})
-				//nextPage = request.data.nextPageToken
-				console.log('new page token', nextPage)
-				console.log('request data inside promise', request.data)
-				//resolve(request.data.messages)
 				resolve(request)
 			} else {
 				reject('no more pages')
@@ -220,57 +219,7 @@ async function listMessages(auth) {
 		})
 	}
 
-	//console.log('LOTTERY RESPONSE', ourArray)
-	// var getPageOfMessages = (request, result) => {
-	// 	request(function(resp) {
-	// 		result = result.concat(resp.messages)
-	// 		var nextPageToken = resp.nextPageToken
-	// 		if (nextPageToken) {
-	// 			request = gmail.users.messages.list({
-	// 				userId: userId,
-	// 				pageToken: nextPageToken,
-	// 				q: query,
-	// 			})
-	// 			getPageOfMessages(request, result)
-	// 		} else {
-	// 			callback(result)
-	// 		}
-	// 	})
-	// }
-
-	// const innerCallback = resp => {
-	// 	result = result.concat(resp.messages)
-	// 	var nextPageToken = resp.nextPageToken
-	// 	if (nextPageToken) {
-	// 		request = gmail.users.messages.list({
-	// 			userId: userId,
-	// 			pageToken: nextPageToken,
-	// 			q: query,
-	// 		})
-	// 		getPageOfMessages(request, result)
-	// 	} else {
-	// 		callback(result)
-	// 	}
-	// }
-
-	// var getPageOfMessages = (request, result) => {
-	// 	request.execute(function(resp) {
-	// 		result = result.concat(resp.messages)
-	// 		var nextPageToken = resp.nextPageToken
-	// 		if (nextPageToken) {
-	// 			request = gmail.users.messages.list({
-	// 				userId: userId,
-	// 				pageToken: nextPageToken,
-	// 				q: query,
-	// 			})
-	// 			getPageOfMessages(request, result)
-	// 		} else {
-	// 			callback(result)
-	// 		}
-	// 	})
-	// }
-
-	//getPageOfMessages(initialRequest, [])
+	return Managework()
 }
 
 /**
@@ -281,10 +230,23 @@ async function listMessages(auth) {
  * @param  {String} messageId ID of Message to get.
  * @param  {Function} callback Function to call when the request is complete.
  */
-// function getMessage(userId, messageId, callback) {
-// 	var request = gapi.client.gmail.users.messages.get({
-// 		userId: userId,
-// 		id: messageId,
-// 	})
-// 	request.execute(callback)
-// }
+async function getMessage(auth, messageId) {
+	const userId = 'me'
+
+	const gmail = await google.gmail({version: 'v1', auth})
+
+	var response = await gmail.users.messages.get({
+		userId: userId,
+		id: messageId,
+	})
+
+	let decoded = parseMessage(response.data).textHtml
+
+	console.log('message contents after decoding', decoded)
+
+	if (!decoded) {
+		return console.log('The API returned an error: ')
+	} else {
+		return decoded
+	}
+}

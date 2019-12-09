@@ -123,3 +123,13 @@ nav a {
 	margin-right: auto;
 	margin-left: auto;
 }
+
+.emailboard {
+	display: flex;
+	flex-direction: row;
+	align-items: space-around;
+}
+
+.emailsubject {
+	flex-basis: 20%;
+}

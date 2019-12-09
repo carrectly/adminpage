@@ -21,7 +21,7 @@ const getEmails = emails => ({type: GET_EMAILS, emails})
  */
 export const getEmailsThunk = () => async dispatch => {
 	try {
-		const res = await axios.get('/auth/google/gmail/lottery')
+		const res = await axios.get('/auth/google/gmail')
 		dispatch(getEmails(res.data))
 	} catch (err) {
 		console.error(err)
