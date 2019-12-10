@@ -127,9 +127,17 @@ nav a {
 .emailboard {
 	display: flex;
 	flex-direction: row;
-	align-items: space-around;
+	align-content: stretch;
 }
 
 .emailsubject {
-	flex-basis: 20%;
+	-webkit-flex: 1;
+	flex: 1;
+	min-width: 200px;
+	max-width: 400px;
+	background: gray;
+}
+.emailcontent {
+	background: lightgoldenrodyellow;
+	flex-grow: 5;
 }

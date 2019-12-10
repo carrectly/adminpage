@@ -2,8 +2,14 @@ import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getEventsThunk} from '../store/calendar'
+//import Calendar from 'react-google-calendar'
+import {Calendar, momentLocalizer} from 'react-big-calendar'
+import moment from 'moment'
+//import '../../public/react-big-calendar.css'
 
-class Calendar extends Component {
+const localizer = momentLocalizer(moment)
+
+class CalendarView extends Component {
 	render() {
 		const events = this.props.calendar || []
 		return (
@@ -15,6 +21,15 @@ class Calendar extends Component {
 						onClick={() => this.props.getEvents()}>
 						View Calendar Events
 					</button>
+				</div>
+				<div>
+					<Calendar
+						localizer={localizer}
+						events={events}
+						startAccessor='start'
+						endAccessor='end'
+						style={{height: 500}}
+					/>
 				</div>
 				<div>
 					{events.map(event => (
@@ -38,5 +53,5 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 export default withRouter(
-	connect(mapStateToProps, mapDispatchToProps)(Calendar)
+	connect(mapStateToProps, mapDispatchToProps)(CalendarView)
 )

@@ -13,7 +13,7 @@ import {
 	Dashboard,
 	UserHome,
 	Login,
-	Calendar,
+	CalendarView,
 } from './components'
 
 class Routes extends Component {
@@ -32,7 +32,7 @@ class Routes extends Component {
 				<Route path='/allusers' component={AllUsers} />
 				<Route path='/account' component={Account} />
 				<Route path='/gmail' component={Gmail} />
-				<Route path='/calendar' component={Calendar} />
+				<Route path='/calendar' component={CalendarView} />
 			</Switch>
 		)
 	}

@@ -35,7 +35,6 @@ router.get('/:messageid', async (req, res, next) => {
 	try {
 		const id = req.params.messageid
 		console.log('API request ID', id)
-		//console.log('USER making the request', req.user)
 		let result = await fetchSingleEmail(id)
 		res.json(result)
 	} catch (err) {
@@ -58,7 +57,8 @@ async function fetchEmails() {
 		'utf8'
 	)
 	let output = await authorize(JSON.parse(content), listMessages)
-	//console.log('fetching output', output)
+	console.log('fetching output change for each loop', output)
+
 	return output
 }
 
@@ -69,7 +69,7 @@ async function fetchSingleEmail(id) {
 	)
 	//let output = await getMessage(JSON.parse(content), id)
 	let output = await authorize(JSON.parse(content), getMessage, id)
-	console.log('fetching output', output)
+	//console.log('fetching output', output)
 	return output
 }
 /**
@@ -97,12 +97,12 @@ async function authorize(credentials, callback, query) {
 			return callback(oAuth2Client)
 		}
 	} else if (!tkn) {
-			return getNewToken(oAuth2Client, await callback, query)
-		} else {
-			tkn = JSON.parse(tkn)
-			oAuth2Client.setCredentials(tkn)
-			return callback(oAuth2Client, query)
-		}
+		return getNewToken(oAuth2Client, await callback, query)
+	} else {
+		tkn = JSON.parse(tkn)
+		oAuth2Client.setCredentials(tkn)
+		return callback(oAuth2Client, query)
+	}
 }
 
 /**
@@ -173,9 +173,13 @@ async function listLabels(auth) {
 async function listMessages(auth) {
 	const userId = 'me'
 	//const query = 'subject:lottery'
-	const query = 'subject:EVE of the EVE and Harris Associates'
+	const query = 'subject:poker'
+	//const query = 'subject:EVE of the EVE and Harris Associates'
 
-	const gmail = await google.gmail({version: 'v1', auth})
+	const gmail = await google.gmail({
+		version: 'v1',
+		auth,
+	})
 
 	var initialRequest = await gmail.users.messages.list({
 		userId: userId,
@@ -199,14 +203,33 @@ async function listMessages(auth) {
 					loopContinue = false
 				})
 		}
-		return newArr
+
+		let headersArray = []
+
+		await asyncForEach(newArr, async msg => {
+			let resp = await gmail.users.messages.get({
+				userId: userId,
+				id: msg.id,
+				format: 'metadata',
+				metadataHeaders: ['Subject', 'From', 'Date'],
+			})
+			let obj = {
+				id: msg.id,
+			}
+			resp.data.payload.headers.forEach(el => {
+				obj[el.name] = el.value
+			})
+			headersArray.push(obj)
+		})
+
+		return headersArray
 	}
+
+	return Managework()
 
 	function doWork(tkn) {
 		return new Promise((resolve, reject) => {
-			console.log('Promise req received')
 			if (tkn) {
-				//console.log('inside promise if statement')
 				let request = gmail.users.messages.list({
 					userId: userId,
 					pageToken: tkn,
@@ -219,7 +242,11 @@ async function listMessages(auth) {
 		})
 	}
 
-	return Managework()
+	async function asyncForEach(array, callback) {
+		for (let index = 0; index < array.length; index++) {
+			await callback(array[index], index, array)
+		}
+	}
 }
 
 /**
@@ -240,9 +267,7 @@ async function getMessage(auth, messageId) {
 		id: messageId,
 	})
 
-	let decoded = parseMessage(response.data).textHtml
-
-	console.log('message contents after decoding', decoded)
+	let decoded = parseMessage(response.data).textPlain
 
 	if (!decoded) {
 		return console.log('The API returned an error: ')

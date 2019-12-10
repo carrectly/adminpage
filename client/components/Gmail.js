@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {getEmailsThunk} from '../store/emails'
 import SingleEmail from './SingleEmail.js'
 import {getSingleEmailThunk} from '../store/singleemail'
+import ErrorHandler from './ErrorHandler'
 
 class Gmail extends Component {
 	render() {
@@ -27,20 +28,30 @@ class Gmail extends Component {
 					<div className='emailsubject'>
 						<h3>Email Subject</h3>
 						{emails.map(email => (
-							<li
-								key={email.id}
-								onClick={() =>
-									this.props.getSingleEmail(email.id)
-								}>
-								{email.id}
-							</li>
+							<div key={email.id}>
+								<a
+									onClick={() =>
+										this.props.getSingleEmail(email.id)
+									}>
+									<div>
+										Subject: {email.Subject}
+										<br />
+										From: {email.From}
+										<br />
+										Date: {email.Date}
+									</div>
+								</a>
+								<hr />
+							</div>
 						))}
 					</div>
 					<div className='emailcontent'>
 						<h3>Message Preview</h3>
 						{single ? (
 							<div>
-								<SingleEmail single={single} />
+								<ErrorHandler>
+									<SingleEmail single={single} />
+								</ErrorHandler>
 							</div>
 						) : (
 							<div />
