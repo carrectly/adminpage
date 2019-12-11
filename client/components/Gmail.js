@@ -5,11 +5,27 @@ import {getEmailsThunk} from '../store/emails'
 import SingleEmail from './SingleEmail.js'
 import {getSingleEmailThunk} from '../store/singleemail'
 import ErrorHandler from './ErrorHandler'
+import Spinner from 'react-bootstrap/Spinner'
 
 class Gmail extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {spinner: false}
+		this.handleClick = this.handleClick.bind(this)
+	}
+
+	async handleClick() {
+		let temp = this.state.spinner
+		this.setState({spinner: !temp})
+		await this.props.getEmails()
+		this.setState({spinner: temp})
+	}
 	render() {
 		const emails = this.props.emails || []
 		const single = this.props.singleemail || {}
+		// return (
+
+		// )
 		return (
 			<div>
 				<div>
@@ -18,32 +34,40 @@ class Gmail extends Component {
 						<span>
 							<button
 								type='button'
-								onClick={() => this.props.getEmails()}>
+								onClick={() => this.handleClick()}>
 								View Emails
 							</button>
 						</span>
-					</h1>{' '}
+					</h1>
 				</div>
 				<div className='emailboard'>
 					<div className='emailsubject'>
 						<h3>Email Subject</h3>
-						{emails.map(email => (
-							<div key={email.id}>
-								<a
-									onClick={() =>
-										this.props.getSingleEmail(email.id)
-									}>
-									<div>
-										Subject: {email.Subject}
-										<br />
-										From: {email.From}
-										<br />
-										Date: {email.Date}
-									</div>
-								</a>
-								<hr />
-							</div>
-						))}
+						{this.state.spinner ? (
+							<Spinner animation='border' role='status'>
+								<span className='align-self-center sr-only'>
+									Loading...
+								</span>
+							</Spinner>
+						) : (
+							emails.map(email => (
+								<div key={email.id}>
+									<a
+										onClick={() =>
+											this.props.getSingleEmail(email.id)
+										}>
+										<div>
+											Subject: {email.Subject}
+											<br />
+											From: {email.From}
+											<br />
+											Date: {email.Date}
+										</div>
+									</a>
+									<hr />
+								</div>
+							))
+						)}
 					</div>
 					<div className='emailcontent'>
 						<h3>Message Preview</h3>

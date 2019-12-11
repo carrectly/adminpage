@@ -49,19 +49,60 @@ class Dashboard extends Component {
 			<div className='dashboard-view'>
 				<h3 className='center'>Management Dashboard</h3>
 				<div className='dashboard-body'>
-					{list.map(ctg => (
-						<div
-							key={ctg.id}
-							className='dashboard-card flex-display flex-wrap'>
-							<Link to='/service' className='clean-dashboard'>
-								<img
-									className='dashboard-image'
-									src={ctg.photo}
-								/>
-								<p>{ctg.name}</p>
-							</Link>
-						</div>
-					))}
+					<div className='dashboard-card flex-display flex-wrap'>
+						<Link to='/orders' className='clean-dashboard'>
+							<img
+								className='dashboard-image'
+								src={list[0].photo}
+							/>
+							<p>{list[0].name}</p>
+						</Link>
+					</div>
+					<div className='dashboard-card flex-display flex-wrap'>
+						<Link to='/allusers' className='clean-dashboard'>
+							<img
+								className='dashboard-image'
+								src={list[1].photo}
+							/>
+							<p>{list[1].name}</p>
+						</Link>
+					</div>
+					<div className='dashboard-card flex-display flex-wrap'>
+						<Link to='/home' className='clean-dashboard'>
+							<img
+								className='dashboard-image'
+								src={list[2].photo}
+							/>
+							<p>{list[2].name}</p>
+						</Link>
+					</div>
+					<div className='dashboard-card flex-display flex-wrap'>
+						<Link to='/home' className='clean-dashboard'>
+							<img
+								className='dashboard-image'
+								src={list[3].photo}
+							/>
+							<p>{list[3].name}</p>
+						</Link>
+					</div>
+					<div className='dashboard-card flex-display flex-wrap'>
+						<Link to='/calendar' className='clean-dashboard'>
+							<img
+								className='dashboard-image'
+								src={list[4].photo}
+							/>
+							<p>{list[4].name}</p>
+						</Link>
+					</div>
+					<div className='dashboard-card flex-display flex-wrap'>
+						<Link to='/home' className='clean-dashboard'>
+							<img
+								className='dashboard-image'
+								src={list[5].photo}
+							/>
+							<p>{list[5].name}</p>
+						</Link>
+					</div>
 				</div>
 			</div>
 		)
