@@ -4,6 +4,7 @@ const {google} = require('googleapis')
 const readline = require('readline')
 //var rp = require('request-promise')
 var parseMessage = require('gmail-api-parse-message')
+var Base64 = require('js-base64').Base64
 
 module.exports = router
 
@@ -23,8 +24,9 @@ router.get('/', async (req, res, next) => {
 router.get('/:messageid', async (req, res, next) => {
 	try {
 		const id = req.params.messageid
-		console.log('API request ID', id)
+
 		let result = await fetchSingleEmail(id)
+
 		res.json(result)
 	} catch (err) {
 		next(err)
@@ -49,7 +51,8 @@ async function fetchSingleEmail(id) {
 	)
 	//let output = await getMessage(JSON.parse(content), id)
 	let output = await authorize(JSON.parse(content), getMessage, id)
-	//console.log('fetching output', output)
+	console.log('fetching output', output)
+
 	return output
 }
 /**
@@ -132,8 +135,8 @@ function getNewToken(oAuth2Client, callback, query) {
 async function listMessages(auth) {
 	const userId = 'me'
 	//const query = 'subject:lottery'
-	const query = 'subject:poker'
-	//const query = 'subject:EVE of the EVE and Harris Associates'
+	//const query = 'subject:poker'
+	const query = 'subject:EVE of the EVE and Harris Associates'
 
 	const gmail = await google.gmail({
 		version: 'v1',
@@ -226,11 +229,76 @@ async function getMessage(auth, messageId) {
 		id: messageId,
 	})
 
+	var parts = response.data.payload.parts
+
+	//console.log('PARTS', parts)
 	let decoded = parseMessage(response.data).textPlain
+
+	let attachmentsArray = []
+
+	await asyncForEach(parts, async part => {
+		let obj = {}
+		if (part.filename && part.filename.length > 0) {
+			var attachId = part.body.attachmentId
+			var request = await gmail.users.messages.attachments.get({
+				id: attachId,
+				messageId: messageId,
+				userId: userId,
+			})
+
+			console.log('Request attachement', Object.keys(request.data))
+			obj.filename = part.filename
+			obj.attachment = request
+			obj.type = part.mimeType
+			attachmentsArray.push(obj)
+			await imgDecoder(
+				request.data.data,
+				`/Users/abirkus/Desktop/carrectly/adminpage/server/auth/${part.filename}`
+			)
+		}
+	})
 
 	if (!decoded) {
 		return console.log('The API returned an error: ')
 	} else {
-		return decoded
+		return {decoded, attachmentsArray}
+	}
+
+	async function asyncForEach(array, callback) {
+		for (let index = 0; index < array.length; index++) {
+			await callback(array[index], index, array)
+		}
+	}
+
+	async function imgDecoder(base64str, file) {
+		// create buffer object from base64 encoded string, it is important to tell the constructor that the string is base64 encoded
+		var bitmap = await Buffer.from(base64str, 'base64')
+		fs.writeFileSync(file, bitmap)
 	}
 }
+
+// /**
+//  * Get Attachments from a given Message.
+//  *
+//  * @param  {String} userId User's email address. The special value 'me'
+//  * can be used to indicate the authenticated user.
+//  * @param  {String} messageId ID of Message with attachments.
+//  * @param  {Function} callback Function to call when the request is complete.
+//  */
+// function getAttachments(userId, message, callback) {
+// 	var parts = message.payload.parts
+// 	for (var i = 0; i < parts.length; i++) {
+// 		var part = parts[i]
+// 		if (part.filename && part.filename.length > 0) {
+// 			var attachId = part.body.attachmentId
+// 			var request = gapi.client.gmail.users.messages.attachments.get({
+// 				id: attachId,
+// 				messageId: message.id,
+// 				userId: userId,
+// 			})
+// 			request.execute(function(attachment) {
+// 				callback(part.filename, part.mimeType, attachment)
+// 			})
+// 		}
+// 	}
+// }

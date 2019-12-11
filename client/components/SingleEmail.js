@@ -13,14 +13,7 @@ class SingleEmail extends Component {
 	render() {
 		let message = 'Nothing to Preview'
 		if (this.props.single.length) {
-			// let parsedHtml = parser.parseFromString(
-			// 	this.props.single,
-			// 	'text/html'
-			// )
-
-			// message = parsedHtml.rawHTML
 			message = this.props.single
-			//message = parse(parsedHtml.rawHTML)
 		}
 
 		return <div>{nl2br(message)}</div>

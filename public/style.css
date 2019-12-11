@@ -124,6 +124,11 @@ nav a {
 	margin-left: auto;
 }
 
+.eheader {
+	height: 10%;
+	margin: 0;
+}
+
 .emailboard {
 	display: flex;
 	flex-direction: row;
@@ -136,8 +141,25 @@ nav a {
 	min-width: 200px;
 	max-width: 400px;
 	background: gray;
+	height: 80vh;
+	overflow: scroll;
 }
 .emailcontent {
 	background: lightgoldenrodyellow;
+	height: 80vh;
 	flex-grow: 5;
+}
+
+.emailcontentdetails {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	height: 90%;
+	overflow: scroll;
+}
+
+.attachements {
+	height: 10%;
+	width: inherit;
+	border: 1px black solid;
 }

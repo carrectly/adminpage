@@ -8,7 +8,7 @@ const GET_SINGLE_EMAIL = 'GET_SINGLE_EMAIL'
 /**
  * INITIAL STATE
  */
-const singleEmail = ''
+const singleEmail = {}
 
 /**
  * ACTION CREATORS
