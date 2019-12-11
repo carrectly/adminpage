@@ -57,6 +57,7 @@
 		"html-react-parser": "^0.10.0",
 		"moment": "^2.24.0",
 		"morgan": "^1.9.1",
+		"mysql2": "^2.0.2",
 		"node-html-parser": "^1.1.16",
 		"passport": "^0.4.0",
 		"passport-google-oauth": "^2.0.0",

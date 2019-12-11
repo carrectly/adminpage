@@ -1,6 +1,6 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
-const db = require('../database')
+const {db} = require('../database')
 
 const User = db.define('user', {
 	email: {

@@ -11,17 +11,6 @@ const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
 const TOKEN_PATH = '/Users/abirkus/Desktop/carrectly/adminpage/tockengmail.json'
 
-// router.get('/', async (req, res, next) => {
-// 	try {
-// 		console.log('AXIOS RECEIVED')
-// 		let result = await fetchLabels()
-// 		//console.log(result)
-// 		res.json(result)
-// 	} catch (err) {
-// 		next(err)
-// 	}
-// })
-
 router.get('/', async (req, res, next) => {
 	try {
 		let result = await fetchEmails()
@@ -42,22 +31,13 @@ router.get('/:messageid', async (req, res, next) => {
 	}
 })
 
-// async function fetchLabels() {
-// 	const content = await fs.readFileSync(
-// 		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
-// 		'utf8'
-// 	)
-// 	let output = await authorize(JSON.parse(content), await listLabels)
-// 	return output
-// }
-
 async function fetchEmails() {
 	const content = await fs.readFileSync(
 		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
 		'utf8'
 	)
 	let output = await authorize(JSON.parse(content), listMessages)
-	console.log('fetching output change for each loop', output)
+	//console.log('fetching output change for each loop', output)
 
 	return output
 }
@@ -138,27 +118,6 @@ function getNewToken(oAuth2Client, callback, query) {
 			}
 		})
 	})
-}
-
-/**
- * Lists the labels in the user's account.
- *
- * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
- */
-async function listLabels(auth) {
-	const gmail = await google.gmail({version: 'v1', auth})
-	let response = await gmail.users.labels.list(
-		{
-			userId: 'me',
-		},
-		'utf8'
-	)
-
-	if (!response) {
-		return console.log('The API returned an error: ')
-	} else {
-		return response.data.labels
-	}
 }
 
 /**
