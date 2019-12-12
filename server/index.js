@@ -13,12 +13,6 @@ const app = express()
 const {Pup} = require('./db/models')
 module.exports = app
 
-// This is a global Mocha hook, used for resource cleanup.
-// Otherwise, Mocha v4+ never quits after tests.
-if (process.env.NODE_ENV === 'test') {
-	after('close the session store', () => sessionStore.stopExpiringSessions())
-}
-
 /**
  * In your development environment, you can keep all of your
  * app's secret API keys in a file called `secrets.js`, in your project
@@ -96,17 +90,6 @@ const createApp = () => {
 			err.message || 'Internal server error.'
 		)
 	})
-
-	// dbMYSQL
-	// 	.authenticate()
-	// 	.then(function(err) {
-	// 		console.log(
-	// 			'Connection to puppies has been established successfully.'
-	// 		)
-	// 	})
-	// 	.catch(function(err) {
-	// 		console.log('Unable to connect to puppies the database:', err)
-	// 	})
 }
 
 const startListening = () => {
@@ -117,18 +100,14 @@ const startListening = () => {
 }
 
 const syncDb = () => db.sync()
+const syncDb2 = () => dbMYSQL.sync()
 
 async function bootApp() {
 	await sessionStore.sync()
 	await syncDb()
+	await syncDb2()
 	await createApp()
 	await startListening()
-	// await dbMYSQL.sync({force: true}).then(function() {
-	// 	return Pup.create({
-	// 		name: 'Rocky',
-	// 		age: 13,
-	// 	})
-	// })
 }
 // This evaluates as true when this file is run directly from the command line,
 // i.e. when we say 'node server/index.js' (or 'nodemon server/index.js', or 'nodemon server', etc)

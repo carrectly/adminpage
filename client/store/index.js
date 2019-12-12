@@ -7,6 +7,7 @@ import emails from './emails'
 import calendar from './calendar'
 import contacts from './contacts'
 import singleemail from './singleemail'
+import orders from './orders'
 
 const reducer = combineReducers({
 	user,
@@ -14,6 +15,7 @@ const reducer = combineReducers({
 	calendar,
 	contacts,
 	singleemail,
+	orders,
 })
 
 const middleware = composeWithDevTools(

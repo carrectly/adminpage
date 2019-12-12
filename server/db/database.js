@@ -5,9 +5,11 @@ const db = new Sequelize(`postgres://localhost:5432/adminpage`, {
 	logging: false,
 })
 
-const dbMYSQL = new Sequelize('puppies', 'root', '12345678', {
-	host: `localhost`,
+const dbMYSQL = new Sequelize('carrectl_wp', 'carrectl_vadym', 'An;z([KBpiM3', {
+	host: 'us58.siteground.us',
+	port: 3306,
 	dialect: 'mysql',
+	logging: false,
 	pool: {
 		max: 5,
 		min: 0,
@@ -16,18 +18,3 @@ const dbMYSQL = new Sequelize('puppies', 'root', '12345678', {
 })
 
 module.exports = {db, dbMYSQL}
-
-// dbMYSQL
-// 	.authenticate()
-// 	.then(function(err) {
-// 		console.log('Connection to puppies has been established successfully.')
-// 	})
-// 	.catch(function(err) {
-// 		console.log('Unable to connect to puppies the database:', err)
-// 	})
-
-// This is a global Mocha hook used for resource cleanup.
-// Otherwise, Mocha v4+ does not exit after tests.
-if (process.env.NODE_ENV === 'test') {
-	after('close database connection', () => db.close())
-}

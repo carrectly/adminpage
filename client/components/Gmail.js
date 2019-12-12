@@ -7,7 +7,7 @@ import {getSingleEmailThunk} from '../store/singleemail'
 import ErrorHandler from './ErrorHandler'
 import Spinner from 'react-bootstrap/Spinner'
 import LazyImage from './LazyImage'
-import logo from '/Users/abirkus/Desktop/carrectly/adminpage/server/auth/image.png'
+//import logo from '/Users/abirkus/Desktop/carrectly/adminpage/server/auth/image.png'
 
 class Gmail extends Component {
 	constructor(props) {
@@ -84,7 +84,8 @@ class Gmail extends Component {
 								<div className='attachements'>
 									{attachments.map(el => (
 										<p key={1}>
-											<img src={logo} />
+											No image yet
+											{/* <img src={logo} />
 											{/* <LazyImage
 												unloadedSrc={require(`/Users/abirkus/Desktop/carrectly/adminpage/server/auth/image.png`)}
 												src={require(`/Users/abirkus/Desktop/carrectly/adminpage/server/auth/image.png`)}

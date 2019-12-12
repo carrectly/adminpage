@@ -28,7 +28,7 @@ class Routes extends Component {
 				<Route path='/login' component={Login} />
 				<Route path='/dashboard' component={Dashboard} />
 				<Route path='/home' component={UserHome} />
-				<Route path='/orders' component={AllOrders} />
+				<Route path='/allOrders' component={AllOrders} />
 				<Route path='/allusers' component={AllUsers} />
 				<Route path='/account' component={Account} />
 				<Route path='/gmail' component={Gmail} />

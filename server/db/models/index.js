@@ -1,7 +1,6 @@
 const User = require('./user')
-const Pup = require('./pup')
+//const Order = require('./order')
 
 module.exports = {
 	User,
-	Pup,
 }
