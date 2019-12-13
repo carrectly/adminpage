@@ -5649,7 +5649,7 @@ a.close.disabled {
 	left: 0;
 	z-index: 1050;
 	display: none;
-	width: 100%;
+	width: fit-content;
 	height: 100%;
 	overflow: hidden;
 	outline: 0;
@@ -5735,7 +5735,7 @@ a.close.disabled {
 	-webkit-box-direction: normal;
 	-ms-flex-direction: column;
 	flex-direction: column;
-	width: 100%;
+	width: fit-content;
 	pointer-events: auto;
 	background-color: #32383e;
 	background-clip: padding-box;

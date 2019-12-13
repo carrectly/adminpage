@@ -6,14 +6,15 @@ import SingleEmail from './SingleEmail.js'
 import {getSingleEmailThunk} from '../store/singleemail'
 import ErrorHandler from './ErrorHandler'
 import Spinner from 'react-bootstrap/Spinner'
-import LazyImage from './LazyImage'
-//import logo from '/Users/abirkus/Desktop/carrectly/adminpage/server/auth/image.png'
+import {Modal, Button} from 'react-bootstrap'
 
 class Gmail extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {spinner: false}
+		this.state = {spinner: false, showModal: false}
 		this.handleClick = this.handleClick.bind(this)
+		this.handleClose = this.handleClose.bind(this)
+		this.handleShow = this.handleShow.bind(this)
 	}
 
 	async handleClick() {
@@ -22,14 +23,38 @@ class Gmail extends Component {
 		await this.props.getEmails()
 		this.setState({spinner: temp})
 	}
+
+	handleShow() {
+		console.log('clicking')
+		this.setState({showModal: true})
+	}
+
+	handleClose() {
+		console.log('clicking')
+		this.setState({showModal: false})
+	}
+
 	render() {
 		const emails = this.props.emails || []
 		const single = this.props.singleemail || {}
 		let attachments = this.props.attachments || []
-		console.log(attachments)
-		attachments = attachments.map(el => {
-			return el.attachment.data.data
-		})
+		console.log('attachment IN REACT', attachments)
+		let firstImg
+		if (attachments.length >= 1) {
+			let input = attachments[0].attachment
+			firstImg = input.replace(/-/g, '+').replace(/_/g, '/')
+			// let TYPED_ARRAY = new Uint8Array(attachments[0].attachment.data)
+			// const STRING_CHAR = TYPED_ARRAY.reduce((data, byte) => {
+			// 	return data + String.fromCharCode(byte)
+			// }, '')
+			// firstImg = btoa(STRING_CHAR)
+			//console.log('atob attachment IN REACT', firstImg)
+		}
+
+		// attachments = attachments.map(el => {
+		// 	return el.attachment.data.data
+		// })
+		// console.log('attachment IN REACT', attachments)
 
 		return (
 			<div>
@@ -81,17 +106,50 @@ class Gmail extends Component {
 								<ErrorHandler>
 									<SingleEmail single={single} />
 								</ErrorHandler>
-								<div className='attachements'>
-									{attachments.map(el => (
+								<div className='attachments'>
+									{firstImg ? (
+										<div>
+											<Button
+												variant='primary'
+												onClick={this.handleShow}>
+												View attachment
+											</Button>
+											<Modal
+												show={this.state.showModal}
+												onHide={this.handleClose}>
+												<Modal.Header closeButton>
+													<Modal.Title>
+														Image
+													</Modal.Title>
+												</Modal.Header>
+												<Modal.Body>
+													<img
+														src={`data:image/png;base64,${firstImg}`}
+													/>
+												</Modal.Body>
+												<Modal.Footer>
+													<Button
+														variant='secondary'
+														onClick={
+															this.handleClose
+														}>
+														Close
+													</Button>
+												</Modal.Footer>
+											</Modal>
+										</div>
+									) : (
+										<div />
+									)}
+									{/* {attachments.map(el => (
 										<p key={1}>
 											No image yet
-											{/* <img src={logo} />
-											{/* <LazyImage
-												unloadedSrc={require(`/Users/abirkus/Desktop/carrectly/adminpage/server/auth/image.png`)}
-												src={require(`/Users/abirkus/Desktop/carrectly/adminpage/server/auth/image.png`)}
-											/> */}
+											<img
+												src={`data:image/png;base64,${el.attachment.data}`}
+											/>
+							
 										</p>
-									))}
+									))} */}
 								</div>
 							</div>
 						) : (

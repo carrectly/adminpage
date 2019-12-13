@@ -51,7 +51,6 @@ async function fetchSingleEmail(id) {
 	)
 	//let output = await getMessage(JSON.parse(content), id)
 	let output = await authorize(JSON.parse(content), getMessage, id)
-	console.log('fetching output', output)
 
 	return output
 }
@@ -230,10 +229,7 @@ async function getMessage(auth, messageId) {
 	})
 
 	var parts = response.data.payload.parts
-
-	//console.log('PARTS', parts)
 	let decoded = parseMessage(response.data).textPlain
-
 	let attachmentsArray = []
 
 	await asyncForEach(parts, async part => {
@@ -246,15 +242,11 @@ async function getMessage(auth, messageId) {
 				userId: userId,
 			})
 
-			console.log('Request attachement', Object.keys(request.data))
+			//console.log('Request attachement', request.data.data.slice(0, 200))
 			obj.filename = part.filename
-			obj.attachment = request
+			obj.attachment = request.data.data
 			obj.type = part.mimeType
 			attachmentsArray.push(obj)
-			await imgDecoder(
-				request.data.data,
-				`/Users/abirkus/Desktop/carrectly/adminpage/server/auth/${part.filename}`
-			)
 		}
 	})
 
@@ -269,36 +261,16 @@ async function getMessage(auth, messageId) {
 			await callback(array[index], index, array)
 		}
 	}
-
-	async function imgDecoder(base64str, file) {
-		// create buffer object from base64 encoded string, it is important to tell the constructor that the string is base64 encoded
-		var bitmap = await Buffer.from(base64str, 'base64')
-		fs.writeFileSync(file, bitmap)
-	}
 }
 
-// /**
-//  * Get Attachments from a given Message.
-//  *
-//  * @param  {String} userId User's email address. The special value 'me'
-//  * can be used to indicate the authenticated user.
-//  * @param  {String} messageId ID of Message with attachments.
-//  * @param  {Function} callback Function to call when the request is complete.
-//  */
-// function getAttachments(userId, message, callback) {
-// 	var parts = message.payload.parts
-// 	for (var i = 0; i < parts.length; i++) {
-// 		var part = parts[i]
-// 		if (part.filename && part.filename.length > 0) {
-// 			var attachId = part.body.attachmentId
-// 			var request = gapi.client.gmail.users.messages.attachments.get({
-// 				id: attachId,
-// 				messageId: message.id,
-// 				userId: userId,
-// 			})
-// 			request.execute(function(attachment) {
-// 				callback(part.filename, part.mimeType, attachment)
-// 			})
-// 		}
-// 	}
+// base64 to buffer conversion... initial tries
+// await imgDecoder(
+// 	request.data.data,
+// 	`/Users/abirkus/Desktop/carrectly/adminpage/server/auth/${part.filename}`
+// )
+
+// async function imgDecoder(base64str, file) {
+// 	// create buffer object from base64 encoded string, it is important to tell the constructor that the string is base64 encoded
+// 	var bitmap = await Buffer.from(base64str, 'base64')
+// 	fs.writeFileSync(file, bitmap)
 // }

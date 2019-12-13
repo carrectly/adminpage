@@ -6,6 +6,10 @@ import {getUserOrdersThunk} from '../store/userorders'
 
 class AllUsers extends Component {
 	render() {
+		var encodedData = window.btoa('Hello, world') // encode a string
+		console.log('Encoded', encodedData)
+		var decodedData = window.atob(encodedData)
+		console.log('Decoded', decodedData)
 		const contacts = this.props.contacts || []
 		return (
 			<div>
