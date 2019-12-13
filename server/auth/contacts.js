@@ -92,14 +92,12 @@ function getNewToken(oAuth2Client, callback) {
  */
 async function listConnectionNames(auth) {
 	const service = await google.people({version: 'v1', auth})
-	const response = await service.people.connections.list(
-		{
-			resourceName: 'people/me',
-			pageSize: 10,
-			personFields: 'names,emailAddresses',
-		},
-		'utf8'
-	)
+	const response = await service.people.connections.list({
+		resourceName: 'people/me',
+		pageSize: 2000,
+		sortOrder: 'FIRST_NAME_ASCENDING',
+		personFields: 'names,emailAddresses,phoneNumbers',
+	})
 
 	if (!response) {
 		return console.log('The API returned an error: ')

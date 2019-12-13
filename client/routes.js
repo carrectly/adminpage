@@ -4,6 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import {me} from './store'
 import {
 	AllUsers,
+	SingleUser,
 	AllOrders,
 	Chat,
 	Gmail,
@@ -30,6 +31,7 @@ class Routes extends Component {
 				<Route path='/home' component={UserHome} />
 				<Route path='/allOrders' component={AllOrders} />
 				<Route path='/allusers' component={AllUsers} />
+				<Route path='/singleuser/:userid' component={SingleUser} />
 				<Route path='/account' component={Account} />
 				<Route path='/gmail' component={Gmail} />
 				<Route path='/calendar' component={CalendarView} />

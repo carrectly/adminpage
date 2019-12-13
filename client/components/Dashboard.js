@@ -50,7 +50,7 @@ class Dashboard extends Component {
 				<h3 className='center'>Management Dashboard</h3>
 				<div className='dashboard-body'>
 					<div className='dashboard-card flex-display flex-wrap'>
-						<Link to='/orders' className='clean-dashboard'>
+						<Link to='/allOrders' className='clean-dashboard'>
 							<img
 								className='dashboard-image'
 								src={list[0].photo}

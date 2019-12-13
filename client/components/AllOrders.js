@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getAllOrdersThunk} from '../store/orders'
+import {getUserOrdersThunk} from '../store/userorders'
 
 class AllOrders extends Component {
 	render() {
@@ -16,11 +17,38 @@ class AllOrders extends Component {
 						View All Orders
 					</button>
 				</div>
-				<div>
-					{orders.map(ord => (
-						<li key={ord.ID}>{ord.user_email}</li>
-					))}
-				</div>
+				<table>
+					<thead>
+						<tr>
+							<th>Person Email</th>
+							<th>Phone Number</th>
+							<th>Service</th>
+							<th>Car Make</th>
+							<th>Car Model</th>
+							<th>Car Year</th>
+							<th>Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						{orders.map(ord => (
+							<tr key={ord.hash}>
+								<td>{ord.email}</td>
+								<td>
+									<Link
+										to={`/singleuser/${ord.phone_number}`}
+										id={ord.phone_number}>
+										{ord.phone_number}
+									</Link>
+								</td>
+								<td>{ord.service}</td>
+								<td>{ord.make}</td>
+								<td>{ord.model}</td>
+								<td>{ord.year}</td>
+								<td>{ord.date}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
 			</div>
 		)
 	}
