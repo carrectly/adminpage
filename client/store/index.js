@@ -9,6 +9,7 @@ import contacts from './contacts'
 import singleemail from './singleemail'
 import orders from './orders'
 import userorders from './userorders'
+import singleorder from './singleorder'
 
 const reducer = combineReducers({
 	user,
@@ -18,6 +19,7 @@ const reducer = combineReducers({
 	singleemail,
 	orders,
 	userorders,
+	singleorder,
 })
 
 const middleware = composeWithDevTools(

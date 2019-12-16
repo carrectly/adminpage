@@ -6,6 +6,7 @@ import {
 	AllUsers,
 	SingleUser,
 	AllOrders,
+	SingleOrder,
 	Chat,
 	Gmail,
 	Menu,
@@ -32,6 +33,7 @@ class Routes extends Component {
 				<Route path='/allOrders' component={AllOrders} />
 				<Route path='/allusers' component={AllUsers} />
 				<Route path='/singleuser/:userid' component={SingleUser} />
+				<Route path='/singleorder/:orderid' component={SingleOrder} />
 				<Route path='/account' component={Account} />
 				<Route path='/gmail' component={Gmail} />
 				<Route path='/calendar' component={CalendarView} />

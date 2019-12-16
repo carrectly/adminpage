@@ -3,6 +3,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getAllOrdersThunk} from '../store/orders'
 import {getUserOrdersThunk} from '../store/userorders'
+import SingleOrder from './SingleOrder.js'
 
 class AllOrders extends Component {
 	render() {
@@ -20,6 +21,7 @@ class AllOrders extends Component {
 				<table>
 					<thead>
 						<tr>
+							<th>Order ID</th>
 							<th>Person Email</th>
 							<th>Phone Number</th>
 							<th>Service</th>
@@ -32,6 +34,13 @@ class AllOrders extends Component {
 					<tbody>
 						{orders.map(ord => (
 							<tr key={ord.hash}>
+								<td>
+									<Link
+										to={`/singleorder/${ord.hash}`}
+										id={ord.hash}>
+										{ord.hash}
+									</Link>
+								</td>
 								<td>{ord.email}</td>
 								<td>
 									<Link

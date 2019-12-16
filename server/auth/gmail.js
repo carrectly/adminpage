@@ -135,7 +135,8 @@ async function listMessages(auth) {
 	const userId = 'me'
 	//const query = 'subject:lottery'
 	//const query = 'subject:poker'
-	const query = 'subject:EVE of the EVE and Harris Associates'
+	//const query = 'subject:EVE of the EVE and Harris Associates'
+	const query = 'subject:carrectlytest'
 
 	const gmail = await google.gmail({
 		version: 'v1',

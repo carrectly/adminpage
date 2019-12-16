@@ -145,7 +145,7 @@ nav a {
 	overflow: scroll;
 }
 .emailcontent {
-	background: lightgoldenrodyellow;
+	background: lightgray;
 	height: 80vh;
 	flex-grow: 5;
 }

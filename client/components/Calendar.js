@@ -9,33 +9,39 @@ import moment from 'moment'
 
 const localizer = momentLocalizer(moment)
 
+//const allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
+
 class CalendarView extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			events: [],
+		}
+	}
+
+	async componentDidMount() {
+		await this.props.getEvents()
+
+		let evts = this.props.calendar.map(evt => {
+			return {
+				title: evt.summary,
+				start: evt.start.dateTime,
+				end: evt.end.dateTime,
+			}
+		})
+		console.log('formatted events', evts)
+		this.setState({events: evts})
+	}
 	render() {
-		const events = this.props.calendar || []
 		return (
 			<div>
-				<div>
-					<h1>Calendar coming soon</h1>
-					<button
-						type='button'
-						onClick={() => this.props.getEvents()}>
-						View Calendar Events
-					</button>
-				</div>
-				<div>
-					<Calendar
-						localizer={localizer}
-						events={events}
-						startAccessor='start'
-						endAccessor='end'
-						style={{height: 500}}
-					/>
-				</div>
-				<div>
-					{events.map(event => (
-						<li key={event.id}>{event.summary}</li>
-					))}
-				</div>
+				<Calendar
+					localizer={localizer}
+					events={this.state.events}
+					startAccessor='start'
+					endAccessor='end'
+					style={{height: 500}}
+				/>
 			</div>
 		)
 	}

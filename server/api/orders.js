@@ -40,3 +40,21 @@ router.get('/:userid', async (req, res, next) => {
 		next(err)
 	}
 })
+
+router.get('/single/:orderid', async (req, res, next) => {
+	try {
+		let id = req.params.orderid.toString()
+
+		console.log('single order api request', id)
+		const orders = await dbMYSQL.query(
+			`SELECT * FROM wp_booking_data WHERE hash = '${id}'`,
+			{
+				type: Sequelize.QueryTypes.SELECT,
+			}
+		)
+		//console.log('WP USERS', orders)
+		res.json(orders)
+	} catch (err) {
+		next(err)
+	}
+})
