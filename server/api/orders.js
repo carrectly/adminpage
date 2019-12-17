@@ -7,13 +7,42 @@ module.exports = router
 router.get('/', async (req, res, next) => {
 	try {
 		console.log('Inside Order api route')
+		const orders = await dbMYSQL.query('SELECT * FROM wp_booking_data;', {
+			type: Sequelize.QueryTypes.SELECT,
+		})
+		//console.log('WP USERS', orders)
+		res.json(orders)
+	} catch (err) {
+		next(err)
+	}
+})
+
+router.put('/', async (req, res, next) => {
+	try {
+		let start = req.body.dateStart
+		let end = req.body.dateEnd
+		if (!req.body.dateStart) {
+			start = '01-12-2019'
+		}
+
+		if (!req.body.dateEnd) {
+			end = '12-12-2019'
+		}
+		start = start
+			.split('-')
+			.reverse()
+			.join('-')
+		end = end
+			.split('-')
+			.reverse()
+			.join('-')
+
 		const orders = await dbMYSQL.query(
-			'SELECT * FROM wp_booking_data LIMIT 50',
+			`SELECT * FROM wp_booking_data WHERE date = '${start}';`,
 			{
 				type: Sequelize.QueryTypes.SELECT,
 			}
 		)
-		//console.log('WP USERS', orders)
 		res.json(orders)
 	} catch (err) {
 		next(err)

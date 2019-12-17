@@ -7,7 +7,6 @@ import {getSingleEmailThunk} from '../store/singleemail'
 import ErrorHandler from './ErrorHandler'
 import Spinner from 'react-bootstrap/Spinner'
 import {Modal, Button} from 'react-bootstrap'
-import {Document} from 'react-pdf'
 
 class Gmail extends Component {
 	constructor(props) {
