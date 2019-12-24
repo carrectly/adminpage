@@ -17,6 +17,22 @@ router.get('/', async (req, res, next) => {
 	}
 })
 
+router.post('/', async (req, res, next) => {
+	try {
+		let newuser = req.body
+		const users = await User.create({
+			email: 'cody@email.com',
+			password: '123',
+			isAdmin: true,
+			shippingAddress: faker.address.streetAddress(),
+		})
+		console.log('Inside api route')
+		res.json(users)
+	} catch (err) {
+		next(err)
+	}
+})
+
 router.put('/:userid', async (req, res, next) => {
 	if (!req.params.userid === req.user.id && !req.user.isAdmin)
 		if (req.body.email) {

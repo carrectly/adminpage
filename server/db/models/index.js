@@ -1,6 +1,7 @@
 const User = require('./user')
-//const Order = require('./order')
+const Dealer = require('./dealer')
 
 module.exports = {
 	User,
+	Dealer,
 }

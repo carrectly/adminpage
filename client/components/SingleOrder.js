@@ -2,10 +2,11 @@ import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getSingleOrderThunk} from '../store/singleorder'
+import Gmail from './Gmail'
+import Invoice from './Invoice'
 
 class SingleOrder extends Component {
 	componentDidMount() {
-		console.log('props params', this.props.match.params)
 		this.props.getOrder(this.props.match.params.orderid)
 	}
 
@@ -18,18 +19,24 @@ class SingleOrder extends Component {
 		return (
 			<div>
 				<h3>Order Details</h3>
-				<table>
-					<tbody>
-						{arr.map((details, index) => (
-							<tr key={index}>
-								<th>{details.split(':')[0]}</th>
-								<td>{details.split(':')[1]}</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
+				<div className='singleordercontainer'>
+					<table className='orderdetailstable'>
+						<tbody>
+							{arr.map((details, index) => (
+								<tr key={index}>
+									<th>{details.split(':')[0]}</th>
+									<td>{details.split(':')[1]}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+					<div className='invoiceform'>
+						<Invoice />
+					</div>
+				</div>
 
 				<h3>Order Email History</h3>
+				<Gmail />
 			</div>
 		)
 	}

@@ -15,6 +15,7 @@ import {
 	Dashboard,
 	UserHome,
 	Login,
+	Dealers,
 	CalendarView,
 } from './components'
 
@@ -35,7 +36,9 @@ class Routes extends Component {
 				<Route path='/singleuser/:userid' component={SingleUser} />
 				<Route path='/singleorder/:orderid' component={SingleOrder} />
 				<Route path='/account' component={Account} />
-				<Route path='/gmail' component={Gmail} />
+				<Route path='/dealers' component={Dealers} />
+				{/* <Route path='/gmail' component={Gmail} /> */}
+				<Route path='/chat' component={Chat} />
 				<Route path='/calendar' component={CalendarView} />
 			</Switch>
 		)

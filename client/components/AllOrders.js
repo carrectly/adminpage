@@ -56,25 +56,24 @@ class AllOrders extends Component {
 		return (
 			<div>
 				<div>
-					<h1>Orders coming soon</h1>
-					<form
-						onSubmit={this.handleSubmit}
-						onChange={this.handleChange}>
+					<h1>Orders View</h1>
+					<form onSubmit={this.handleSubmit}>
 						<span>
-							<span> Start Date: </span>
+							<span> Date: </span>
 							<input
 								type='date'
 								name='dateStart'
 								min='2017-03-01'
+								onChange={this.handleChange}
 								value={this.state.dateStart}
 							/>
-							<span>End Date: </span>
-							<input
+							{/* <span>End Date: </span> */}
+							{/* <input
 								type='date'
 								name='dateEnd'
 								max={today}
 								value={this.state.dateEnd}
-							/>
+							/> */}
 							<button type='submit'> View Orders by Date </button>
 							<button
 								type='button'
@@ -88,12 +87,11 @@ class AllOrders extends Component {
 					<thead>
 						<tr>
 							<th>Order ID</th>
-							<th>Person Email</th>
+							<th>Name</th>
 							<th>Phone Number</th>
-							<th>Service</th>
 							<th>Car Make</th>
 							<th>Car Model</th>
-							<th>Car Year</th>
+							<th>Location</th>
 							<th>Date</th>
 						</tr>
 					</thead>
@@ -104,10 +102,10 @@ class AllOrders extends Component {
 									<Link
 										to={`/singleorder/${ord.hash}`}
 										id={ord.hash}>
-										{ord.hash}
+										Details
 									</Link>
 								</td>
-								<td>{ord.email}</td>
+								<td>{`${ord.first_name} ${ord.last_name}`}</td>
 								<td>
 									<Link
 										to={`/singleuser/${ord.phone_number}`}
@@ -115,10 +113,9 @@ class AllOrders extends Component {
 										{ord.phone_number}
 									</Link>
 								</td>
-								<td>{ord.service}</td>
 								<td>{ord.make}</td>
 								<td>{ord.model}</td>
-								<td>{ord.year}</td>
+								<td>{ord.location}</td>
 								<td>{ord.date}</td>
 							</tr>
 						))}

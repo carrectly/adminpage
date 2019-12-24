@@ -10,6 +10,9 @@ import singleemail from './singleemail'
 import orders from './orders'
 import userorders from './userorders'
 import singleorder from './singleorder'
+import dealers from './dealers'
+import chat from './chat'
+import stripe from './stripe'
 
 const reducer = combineReducers({
 	user,
@@ -20,6 +23,9 @@ const reducer = combineReducers({
 	orders,
 	userorders,
 	singleorder,
+	dealers,
+	chat,
+	stripe,
 })
 
 const middleware = composeWithDevTools(

@@ -163,3 +163,22 @@ nav a {
 	width: inherit;
 	border: 1px black solid;
 }
+
+.form {
+	display: flex;
+	flex-direction: column;
+}
+
+.singleordercontainer {
+	display: flex;
+	flex-direction: row;
+	align-content: stretch;
+}
+
+.orderdetailstable {
+	-webkit-flex-grow: 1;
+	flex-grow: 1;
+}
+.invoiceform {
+	flex-grow: 1;
+}

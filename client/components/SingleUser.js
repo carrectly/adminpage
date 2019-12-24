@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getUserOrdersThunk} from '../store/userorders'
+import Gmail from './Gmail'
 
 class SingleUser extends Component {
 	componentDidMount() {
@@ -26,6 +27,7 @@ class SingleUser extends Component {
 							<th>Car Model</th>
 							<th>Car Year</th>
 							<th>Date</th>
+							<th>Order Details</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -38,12 +40,20 @@ class SingleUser extends Component {
 								<td>{ord.model}</td>
 								<td>{ord.year}</td>
 								<td>{ord.date}</td>
+								<td>
+									<Link
+										to={`/singleorder/${ord.hash}`}
+										id={ord.hash}>
+										View
+									</Link>
+								</td>
 							</tr>
 						))}
 					</tbody>
 				</table>
 
 				<h3>Conversation History</h3>
+				<Gmail />
 			</div>
 		)
 	}

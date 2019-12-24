@@ -1,0 +1,33 @@
+{
+	"datecreated": "DATETIME", //timestamp
+	"dateupdated": "DATETIME",
+	"pickupdate": "DATE",
+	"pickuptimestart": "TIME", // if customer selects flexible pickuptime should be 6am of pickupdate to
+	"pickuptimeend": "TIME", //  9pm of pickup date
+	"dropofftimestart": "TIME",
+	"dropofftimeend": "TIME",
+	"location": "720 South Wells Street, Chicago, IL, USA",
+	"caryear": "2015",
+	"carmake": "BMW",
+	"carmodel": "X5",
+	"carsize": "SMALL/MID/LARGE",
+	"first_name": "Chris",
+	"last_name": "Qiu",
+	"zip_code": "60607",
+	"phone_number": "617-697-8255",
+	"email": "wsmmqmm@gmail.com",
+	"stick": "TRUE/FALSE",
+	"customercomments": "TEXT",
+	"promocode": "CHI2019", //this will be entered by user when making a booking
+	"hash/bookingid": "7671fd832e061647bad52bd30f38ab61", //every ID must be unique for each booking
+	"services": [
+		{
+			"servicename": "deluxe detail",
+			"price": "NUMBER"
+		},
+		{
+			"servicename": "oil change",
+			"price": "NUMBER"
+		}
+	]
+}

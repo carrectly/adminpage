@@ -39,7 +39,7 @@
 	--breakpoint-lg: 992px;
 	--breakpoint-xl: 1200px;
 	--font-family-sans-serif: 'Lato', -apple-system, BlinkMacSystemFont,
-		'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
+		'Segoe UI', dealero, 'Helvetica Neue', Arial, sans-serif,
 		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 	--font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
 		'Liberation Mono', 'Courier New', monospace;
@@ -70,7 +70,7 @@ section {
 }
 body {
 	margin: 0;
-	font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+	font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', dealero,
 		'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
 		'Segoe UI Emoji', 'Segoe UI Symbol';
 	font-size: 0.9375rem;
@@ -78,7 +78,7 @@ body {
 	line-height: 1.5;
 	color: black;
 	text-align: left;
-	background-color: lightseagreen;
+	background-color: lightgrey;
 }
 [tabindex='-1']:focus {
 	outline: 0 !important;
@@ -5853,7 +5853,7 @@ a.close.disabled {
 	z-index: 1070;
 	display: block;
 	margin: 0;
-	font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+	font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', dealero,
 		'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
 		'Segoe UI Emoji', 'Segoe UI Symbol';
 	font-style: normal;
@@ -5963,7 +5963,7 @@ a.close.disabled {
 	z-index: 1060;
 	display: block;
 	max-width: 276px;
-	font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+	font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', dealero,
 		'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
 		'Segoe UI Emoji', 'Segoe UI Symbol';
 	font-style: normal;

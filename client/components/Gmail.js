@@ -67,16 +67,13 @@ class Gmail extends Component {
 		return (
 			<div>
 				<div>
-					<h1>
-						Gmail coming soon{' '}
-						<span>
-							<button
-								type='button'
-								onClick={() => this.handleClick()}>
-								View Emails
-							</button>
-						</span>
-					</h1>
+					<span>
+						<button
+							type='button'
+							onClick={() => this.handleClick()}>
+							View Emails
+						</button>
+					</span>
 				</div>
 				<div className='emailboard'>
 					<div className='emailsubject'>
@@ -116,58 +113,28 @@ class Gmail extends Component {
 								</ErrorHandler>
 								<div className='attachments'>
 									{modalArray.length ? (
-										modalArray.map((item, index) => (
-											<Button variant='dark' key={index}>
-												<a
-													href={`data:${item.type};base64,${item.attachment}`}
-													download={`${item.filename}`}>
-													{item.filename}
-												</a>
-											</Button>
-										))
+										modalArray.map((item, index) =>
+											item.type.slice(0, 5) ===
+											'image' ? (
+												<img
+													key={index}
+													src={`data:image/png;base64,${item.attachment}`}
+												/>
+											) : (
+												<Button
+													variant='dark'
+													key={index}>
+													<a
+														href={`data:${item.type};base64,${item.attachment}`}
+														download={`${item.filename}`}>
+														{item.filename}
+													</a>
+												</Button>
+											)
+										)
 									) : (
-										// <div>
-										// 	<Button
-										// 		variant='primary'
-										// 		onClick={this.handleShow}>
-										// 		View attachment
-										// 	</Button>
-										// 	<Modal
-										// 		show={this.state.showModal}
-										// 		onHide={this.handleClose}>
-										// 		<Modal.Header closeButton>
-										// 			<Modal.Title>
-										// 				Image
-										// 			</Modal.Title>
-										// 		</Modal.Header>
-										// 		<Modal.Body>
-										// 			<img
-										// 				src={`data:image/png;base64,${firstImg}`}
-										// 			/>
-										// 		</Modal.Body>
-										// 		<Modal.Footer>
-										// 			<Button
-										// 				variant='secondary'
-										// 				onClick={
-										// 					this.handleClose
-										// 				}>
-										// 				Close
-										// 			</Button>
-										// 		</Modal.Footer>
-										// 	</Modal>
-										// </div>
-
 										<div />
 									)}
-									{/* {attachments.map(el => (
-										<p key={1}>
-											No image yet
-											<img
-												src={`data:image/png;base64,${el.attachment.data}`}
-											/>
-							
-										</p>
-									))} */}
 								</div>
 							</div>
 						) : (
