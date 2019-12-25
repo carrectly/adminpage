@@ -7,14 +7,14 @@ class Navbar extends React.Component {
 	render() {
 		return (
 			<div className='nav'>
-				{/* <div className='dropdown'>
-					<button className='dropbtn'>
-						<div className='fa fa-bars fa-2x link' />
+				<div className='dropdown'>
+					<button type='button' className='dropbtn'>
+						Chat
 					</button>
 					<div id='myDropdown' className='dropdown-content'>
 						<Menu />
 					</div>
-				</div> */}
+				</div>
 
 				<Link to='/dashboard' className='link'>
 					Dashboard
@@ -40,9 +40,9 @@ class Navbar extends React.Component {
 					Calendar
 				</Link>
 
-				<Link to='/chat' className='link'>
+				{/* <Link to='/chat' className='link'>
 					Chat
-				</Link>
+				</Link> */}
 			</div>
 		)
 	}

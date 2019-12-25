@@ -1,6 +1,6 @@
+import {withRouter, Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import AddDealer from './AddDealer.js'
 import {removeDealerThunk, fetchDealersThunk} from '../store/dealers.js'
 
@@ -24,24 +24,22 @@ class Dealers extends Component {
 	render() {
 		const dealers = this.props.dealers
 		return dealers.length ? (
-			<div className='allItems'>
-				<div className='list'>
-					<ul className='redx'>
-						{dealers.map(bot => (
-							<div key={bot.id}>
-								<Link to={`/dealers/${bot.id}`} key={bot.id}>
-									{bot.name}
-									<span>{bot.name}</span>
-								</Link>
-								<button
-									id={bot.id}
-									type='button'
-									onClick={id => this.handleClick(id)}>
-									delete
-								</button>
-							</div>
-						))}
-					</ul>
+			<div>
+				<h1>Here you can manage all your shops and dealers</h1>
+				<div>
+					{dealers.map(dlr => (
+						<div key={dlr.id}>
+							<Link to={`/dealers/${dlr.id}`} key={dlr.id}>
+								{dlr.name}
+							</Link>
+							<button
+								id={dlr.id}
+								type='button'
+								onClick={id => this.handleClick(id)}>
+								delete
+							</button>
+						</div>
+					))}
 					<div />
 				</div>
 				<AddDealer />
@@ -68,4 +66,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dealers)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dealers))

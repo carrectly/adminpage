@@ -14,11 +14,15 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
 	try {
+		let id = Number(req.params.id)
+		console.log('inside api', id)
 		const oneDealer = await Dealer.findOne({
 			where: {
-				id: req.params.id,
+				id: id,
 			},
 		})
+
+		console.log('found dealer', oneDealer)
 		res.json(oneDealer)
 	} catch (err) {
 		next(err)

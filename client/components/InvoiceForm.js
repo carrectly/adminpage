@@ -55,7 +55,7 @@ class InvoiceForm extends Component {
 						onChange={this.handleChange}
 					/>
 
-					<button type='submit' disabled={!this.state.name}>
+					<button type='submit' disabled={!this.state.service}>
 						Submit
 					</button>
 				</form>

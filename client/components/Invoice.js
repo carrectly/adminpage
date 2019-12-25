@@ -7,9 +7,24 @@ import InvoiceForm from './InvoiceForm'
 let cust
 
 class Invoice extends Component {
+	constructor(props) {
+		super(props)
+		this.handleClick = this.handleClick.bind(this)
+		this.state = {
+			invoice: true,
+		}
+	}
 	componentDidUpdate() {
 		cust = this.props.customer.id
 	}
+
+	handleClick(obj) {
+		this.props.getCustomer(obj)
+		this.setState({
+			invoice: false,
+		})
+	}
+
 	render() {
 		cust = this.props.customer.id || null
 
@@ -17,11 +32,12 @@ class Invoice extends Component {
 			<div>
 				<button
 					type='button'
-					onClick={() => this.props.getCustomer(this.props.order)}>
-					Check if customer exists in Square
+					onClick={() => this.handleClick(this.props.order)}>
+					Check if customer exists in Stripe
 				</button>
 				<button
 					type='button'
+					disabled={this.state.invoice}
 					onClick={() =>
 						this.props.createInvoice(
 							this.props.order,
@@ -32,7 +48,7 @@ class Invoice extends Component {
 				</button>
 				<InvoiceForm />
 				<div>
-					{cust ? <div>Customer Created in Stripe</div> : <div />}
+					{cust ? <div>{this.props.customer.status}</div> : <div />}
 				</div>
 			</div>
 		)

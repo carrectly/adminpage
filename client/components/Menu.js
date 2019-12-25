@@ -5,17 +5,9 @@ import {connect} from 'react-redux'
 class Menu extends Component {
 	render() {
 		return (
-			<ul>
-				<Link to='item1'>
-					<li>Item 1</li>
-				</Link>
-				<Link to='item2'>
-					<li>Item 2</li>
-				</Link>
-				<Link to='item3'>
-					<li>Item 3</li>
-				</Link>
-			</ul>
+			<div>
+				<h4>To view Hangouts Chat press "CTRL + SHIFT + 5"</h4>
+			</div>
 		)
 	}
 }

@@ -3,6 +3,7 @@ body {
 	width: 100vw;
 	height: 100vh;
 	margin: 0px;
+	color: black;
 }
 
 a {
@@ -32,9 +33,9 @@ nav a {
 
 .dropbtn {
 	background-color: transparent;
-	color: white;
+	color: #f1f1f1;
 	padding: 16px;
-	font-size: 16px;
+	font-size: 20px;
 	border: none;
 }
 
@@ -47,6 +48,7 @@ nav a {
 	display: none;
 	position: absolute;
 	background-color: #f1f1f1;
+	color: black;
 	min-width: 160px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	z-index: 1;

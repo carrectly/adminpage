@@ -21,24 +21,12 @@ class Dashboard extends Component {
 			},
 			{
 				id: 3,
-				name: 'Maps',
-				photo:
-					'https://image.flaticon.com/icons/png/512/235/235861.png',
-			},
-			{
-				id: 4,
-				name: 'Invoices',
-				photo:
-					'https://icon-library.net/images/invoice-icon-png/invoice-icon-png-17.jpg',
-			},
-			{
-				id: 5,
 				name: 'Calendar',
 				photo:
 					'https://p7.hiclipart.com/preview/74/186/347/computer-icons-google-calendar-calendar-date-png-calendar-icon.jpg',
 			},
 			{
-				id: 6,
+				id: 4,
 				name: "Create a booking on client's behalf",
 				photo:
 					'https://www.illustrationsof.com/royalty-free-phone-call-clipart-illustration-440358.jpg',
@@ -68,30 +56,12 @@ class Dashboard extends Component {
 						</Link>
 					</div>
 					<div className='dashboard-card flex-display flex-wrap'>
-						<Link to='/home' className='clean-dashboard'>
+						<Link to='/calendar' className='clean-dashboard'>
 							<img
 								className='dashboard-image'
 								src={list[2].photo}
 							/>
 							<p>{list[2].name}</p>
-						</Link>
-					</div>
-					<div className='dashboard-card flex-display flex-wrap'>
-						<Link to='/home' className='clean-dashboard'>
-							<img
-								className='dashboard-image'
-								src={list[3].photo}
-							/>
-							<p>{list[3].name}</p>
-						</Link>
-					</div>
-					<div className='dashboard-card flex-display flex-wrap'>
-						<Link to='/calendar' className='clean-dashboard'>
-							<img
-								className='dashboard-image'
-								src={list[4].photo}
-							/>
-							<p>{list[4].name}</p>
 						</Link>
 					</div>
 					<div className='dashboard-card flex-display flex-wrap'>
@@ -101,9 +71,9 @@ class Dashboard extends Component {
 							className='clean-dashboard'>
 							<img
 								className='dashboard-image'
-								src={list[5].photo}
+								src={list[3].photo}
 							/>
-							<p>{list[5].name}</p>
+							<p>{list[3].name}</p>
 						</a>
 					</div>
 				</div>

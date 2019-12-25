@@ -17,6 +17,7 @@ import {
 	Login,
 	Dealers,
 	CalendarView,
+	SingleDealer,
 } from './components'
 
 class Routes extends Component {
@@ -36,7 +37,9 @@ class Routes extends Component {
 				<Route path='/singleuser/:userid' component={SingleUser} />
 				<Route path='/singleorder/:orderid' component={SingleOrder} />
 				<Route path='/account' component={Account} />
+				<Route path='/dealers/:dealerid' component={SingleDealer} />
 				<Route path='/dealers' component={Dealers} />
+
 				{/* <Route path='/gmail' component={Gmail} /> */}
 				<Route path='/chat' component={Chat} />
 				<Route path='/calendar' component={CalendarView} />

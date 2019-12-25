@@ -55,6 +55,7 @@ class AddDealer extends Component {
 					<input
 						name='name'
 						type='text'
+						placeholder="required field - ex: Duran's, United Tires ..."
 						onChange={this.handleChange}
 						value={this.state.name}
 					/>
@@ -64,6 +65,7 @@ class AddDealer extends Component {
 					<input
 						name='email'
 						type='text'
+						placeholder='required field - ex: someone@email.com'
 						onChange={this.handleChange}
 					/>
 
@@ -73,6 +75,7 @@ class AddDealer extends Component {
 					<input
 						name='specialty'
 						type='text'
+						placeholder='not required - ex: body work / mechanics / tints'
 						onChange={this.handleChange}
 					/>
 
@@ -81,6 +84,7 @@ class AddDealer extends Component {
 					<input
 						name='location'
 						type='text'
+						placeholder='not required - ex: business address'
 						onChange={this.handleChange}
 					/>
 

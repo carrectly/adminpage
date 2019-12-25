@@ -1,23 +1,18 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {fetchSingledealer} from '../store/singledealer'
-import Updatedealer from './Updatedealer.js'
+import {withRouter, Link} from 'react-router-dom'
+import {fetchSingleDealerThunk} from '../store/singledealer'
 
-class Singledealer extends Component {
+class SingleDealer extends Component {
 	componentDidMount() {
 		try {
-			const dealerId = this.props.match.params.dealerId
-			this.props.fetchSingledealer(dealerId)
+			const dealerid = this.props.match.params.dealerid
+			console.log('dealer id ', dealerid)
+			console.log('params', this.props.match.params)
+			this.props.getDealer(dealerid)
 		} catch (error) {
 			console.error(error)
 		}
-	}
-
-	handleClick = evt => {
-		const dealerId = this.props.dealer.id
-		const projectId = evt.target.id
-		this.props.unassignProject(dealerId, projectId)
 	}
 
 	render() {
@@ -25,41 +20,7 @@ class Singledealer extends Component {
 		return dealer.id ? (
 			<div className='allItems'>
 				<div key={dealer.id} className='list'>
-					<ul>
-						<img src={dealer.imageUrl} height='300' width='400' />
-						<li>{dealer.name}</li>
-						<li>{dealer.fuelType}</li>
-						<li>{dealer.fuelLevel}</li>
-						{dealer.projects[0] ? (
-							<ul className='associations'>
-								{dealer.projects.map(proj => (
-									<li key={proj.id}>
-										<Link to={`/projects/${proj.id}`}>
-											<span>{proj.title}</span>
-										</Link>
-										<span>
-											<button
-												type='button'
-												id={proj.id}
-												onClick={evt => {
-													this.handleClick(evt)
-												}}>
-												Unassign
-											</button>
-										</span>
-									</li>
-								))}
-							</ul>
-						) : (
-							<li>No projects for this dealer</li>
-						)}
-					</ul>
-				</div>
-				<div className='form'>
-					<Updatedealer
-						params={this.props.match.params}
-						fetchSingledealer={this.props.fetchSingledealer}
-					/>
+					{dealer.name}
 				</div>
 			</div>
 		) : (
@@ -76,10 +37,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		fetchSingledealer: id => dispatch(fetchSingledealer(id)),
-		unassignProject: (dealerId, projectId) =>
-			dispatch(unassignProjectThunk(dealerId, projectId)),
+		getDealer: id => dispatch(fetchSingleDealerThunk(id)),
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Singledealer)
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(SingleDealer)
+)
