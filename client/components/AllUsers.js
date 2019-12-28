@@ -1,7 +1,7 @@
 import {withRouter, Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getContactsThunk} from '../store/contacts'
+import {getContactsThunk, createContactThunk} from '../store/contacts'
 import {getUserOrdersThunk} from '../store/userorders'
 
 class AllUsers extends Component {
@@ -15,6 +15,11 @@ class AllUsers extends Component {
 						type='button'
 						onClick={() => this.props.getContacts()}>
 						View All Clients
+					</button>
+					<button
+						type='button'
+						onClick={() => this.props.createContact()}>
+						Create new Contact
 					</button>
 				</div>
 				<table>
@@ -57,6 +62,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		getContacts: () => dispatch(getContactsThunk()),
+		createContact: () => dispatch(createContactThunk()),
 	}
 }
 export default withRouter(

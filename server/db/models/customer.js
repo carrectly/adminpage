@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
-const db = require('../db')
+const {db} = require('../database')
+var axios = require('axios')
 
 const Customer = db.define('customer', {
 	location: {
@@ -13,13 +14,24 @@ const Customer = db.define('customer', {
 	},
 	phoneNumber: {
 		type: Sequelize.STRING,
+		primaryKey: true,
 	},
 	email: {
-		type: Sequelize.EMAIL,
+		type: Sequelize.STRING,
 	},
-	customerId: {
-		type: Sequelize.NUMBER,
+	isInGoogle: {
+		type: Sequelize.BOOLEAN,
+		defaultValue: false,
 	},
+})
+
+Customer.beforeCreate((inst, options) => {
+	console.log('instance', inst.dataValues)
+	return axios
+		.post('http://localhost:1337/auth/google/contacts', inst.dataValues)
+		.then(function(res) {
+			inst.isInGoogle = true
+		})
 })
 
 module.exports = Customer

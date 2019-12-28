@@ -4,7 +4,7 @@ const {google} = require('googleapis')
 const readline = require('readline')
 module.exports = router
 
-const SCOPES = ['https://www.googleapis.com/auth/contacts.readonly']
+const SCOPES = ['https://www.googleapis.com/auth/contacts']
 
 const TOKEN_PATH =
 	'/Users/abirkus/Desktop/carrectly/adminpage/tockencontacts.json'
@@ -13,6 +13,26 @@ router.get('/', async (req, res, next) => {
 	try {
 		let result = await runContactsApi()
 		//console.log(result)
+		res.json(result)
+	} catch (err) {
+		next(err)
+	}
+})
+
+router.post('/', async (req, res, next) => {
+	try {
+		console.log('POST REQ RECEIVED')
+		// let newcontact = {
+		// 	email: 'Timothy10@hotmail.com',
+		// 	location: '7826 Gusikowski Glen',
+		// 	firstName: 'Alanna',
+		// 	lastName: 'Jerde',
+		// 	phoneNumber: '(381) 965-9345',
+		// }
+		console.log('REQUEST', req.body)
+		let newcontact = req.body
+		let result = await createContactsApi(newcontact)
+
 		res.json(result)
 	} catch (err) {
 		next(err)
@@ -28,13 +48,22 @@ async function runContactsApi() {
 	return output
 }
 
+async function createContactsApi(obj) {
+	console.log('create API is called')
+	const content = await fs.readFileSync(
+		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
+		'utf8'
+	)
+	let output = await authorize(JSON.parse(content), addNewContact, obj)
+	return output
+}
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-async function authorize(credentials, callback) {
+async function authorize(credentials, callback, query) {
 	const {client_secret, client_id, redirect_uris} = credentials.installed
 	const oAuth2Client = new google.auth.OAuth2(
 		client_id,
@@ -44,12 +73,20 @@ async function authorize(credentials, callback) {
 
 	let tkn = await fs.readFileSync(TOKEN_PATH, 'utf8')
 
-	if (!tkn) {
-		return getNewToken(oAuth2Client, await callback)
+	if (!query) {
+		if (!tkn) {
+			return getNewToken(oAuth2Client, await callback)
+		} else {
+			tkn = JSON.parse(tkn)
+			oAuth2Client.setCredentials(tkn)
+			return callback(oAuth2Client)
+		}
+	} else if (!tkn) {
+		return getNewToken(oAuth2Client, await callback, query)
 	} else {
 		tkn = JSON.parse(tkn)
 		oAuth2Client.setCredentials(tkn)
-		return callback(oAuth2Client)
+		return callback(oAuth2Client, query)
 	}
 }
 
@@ -99,6 +136,38 @@ async function listConnectionNames(auth) {
 		personFields: 'names,emailAddresses,phoneNumbers',
 	})
 
+	if (!response) {
+		return console.log('The API returned an error: ')
+	} else {
+		return response.data.connections
+	}
+}
+
+async function addNewContact(auth, obj) {
+	console.log('INSIDE CONTACTS API', obj)
+	const service = await google.people({version: 'v1', auth})
+
+	const response = await service.people.createContact({
+		requestBody: {
+			emailAddresses: [{value: obj.email}],
+			phoneNumbers: [
+				{
+					value: obj.phoneNumber,
+					type: 'mobile',
+					formattedType: 'Mobile',
+				},
+			],
+			names: [
+				{
+					displayName: obj.firstName + ' ' + obj.lastName,
+					familyName: obj.lastName,
+					givenName: obj.firstName,
+				},
+			],
+		},
+	})
+
+	console.log('AWAITING CREATION FROM GOOGLE CONTACTS')
 	if (!response) {
 		return console.log('The API returned an error: ')
 	} else {

@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const db = require('../db')
+const {db} = require('../database')
 
 const Service = db.define('service', {
 	name: Sequelize.STRING,

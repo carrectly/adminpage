@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const db = require('../db')
+const {db} = require('../database')
 
 const Order = db.define('order', {
 	submissionDate: {
@@ -21,7 +21,7 @@ const Order = db.define('order', {
 		},
 	},
 	carYear: {
-		type: Sequelize.NUMBER,
+		type: Sequelize.INTEGER,
 	},
 	carMake: {
 		type: Sequelize.STRING,
@@ -42,8 +42,8 @@ const Order = db.define('order', {
 		],
 		defaultValue: 'received',
 	},
-	customerId: {
-		type: Sequelize.NUMBER,
+	comments: {
+		type: Sequelize.TEXT,
 	},
 })
 
