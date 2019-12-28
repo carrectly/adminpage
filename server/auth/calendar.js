@@ -4,7 +4,7 @@ const {google} = require('googleapis')
 const readline = require('readline')
 module.exports = router
 
-const SCOPES = ['https://www.googleapis.com/auth/calendar.events.readonly']
+const SCOPES = ['https://www.googleapis.com/auth/calendar.events']
 
 const TOKEN_PATH =
 	'/Users/abirkus/Desktop/carrectly/adminpage/tockencalendar.json'
@@ -12,6 +12,17 @@ const TOKEN_PATH =
 router.get('/', async (req, res, next) => {
 	try {
 		let result = await runCalendarApi()
+		//console.log(result)
+		res.json(result)
+	} catch (err) {
+		next(err)
+	}
+})
+
+router.post('/newevent', async (req, res, next) => {
+	try {
+		const obj = req.body
+		const result = await createEventApi(obj)
 		//console.log(result)
 		res.json(result)
 	} catch (err) {
@@ -28,13 +39,21 @@ async function runCalendarApi() {
 	return output
 }
 
+async function createEventApi(obj) {
+	const content = await fs.readFileSync(
+		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
+		'utf8'
+	)
+	let output = await authorize(JSON.parse(content), createEvent, obj)
+	return output
+}
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-async function authorize(credentials, callback) {
+async function authorize(credentials, callback, query) {
 	const {client_secret, client_id, redirect_uris} = credentials.installed
 	const oAuth2Client = new google.auth.OAuth2(
 		client_id,
@@ -44,12 +63,20 @@ async function authorize(credentials, callback) {
 
 	let tkn = await fs.readFileSync(TOKEN_PATH, 'utf8')
 
-	if (!tkn) {
-		return getNewToken(oAuth2Client, await callback)
+	if (!query) {
+		if (!tkn) {
+			return getNewToken(oAuth2Client, await callback)
+		} else {
+			tkn = JSON.parse(tkn)
+			oAuth2Client.setCredentials(tkn)
+			return callback(oAuth2Client)
+		}
+	} else if (!tkn) {
+		return getNewToken(oAuth2Client, await callback, query)
 	} else {
 		tkn = JSON.parse(tkn)
 		oAuth2Client.setCredentials(tkn)
-		return callback(oAuth2Client)
+		return callback(oAuth2Client, query)
 	}
 }
 
@@ -102,17 +129,42 @@ async function listEvents(auth) {
 	} else {
 		return response.data.items
 	}
+}
 
-	// (err, res) => {
-	// 	if (err) return console.log('The API returned an error: ' + err)
-	// 	const events = res.data.items
-	// 	if (events.length) {
-	// 		console.log('Upcoming 10 events:')
-	// 		events.map((event, i) => {
-	// 			const start = event.start.dateTime || event.start.date
-	// 			console.log(`${start} - ${event.summary}`)
-	// 		})
-	// 	} else {
-	// 		console.log('No upcoming events found.')
-	// 	}
+async function createEvent(auth, evt) {
+	const calendar = await google.calendar({version: 'v3', auth})
+
+	console.log('event received from new booking', evt)
+	var event = {
+		summary: `${evt.carYear} ${evt.carMake} ${evt.carModel} ${evt.customerName}`,
+		location: `${evt.pickupLocation}`,
+		id: `${evt.hash}`,
+		description: `Customer phone number: ${evt.customerPhoneNumber} \n ${evt.comments}`,
+		start: {
+			dateTime: `${evt.pickupDate}`,
+			timeZone: 'America/Chicago',
+		},
+		end: {
+			dateTime: `${evt.dropoffDate}`,
+			timeZone: 'America/Chicago',
+		},
+		reminders: {
+			useDefault: false,
+			overrides: [
+				{method: 'email', minutes: 24 * 60},
+				{method: 'popup', minutes: 10},
+			],
+		},
+	}
+
+	var request = calendar.events.insert({
+		calendarId: 'primary',
+		resource: event,
+	})
+
+	if (!request) {
+		return console.log('The API returned an error: ')
+	} else {
+		return request.data
+	}
 }

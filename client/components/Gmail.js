@@ -3,7 +3,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getEmailsThunk} from '../store/emails'
 import SingleEmail from './SingleEmail.js'
-import {getSingleEmailThunk} from '../store/singleemail'
+import {getSingleEmailThunk, sendSingleEmailThunk} from '../store/singleemail'
 import ErrorHandler from './ErrorHandler'
 import Spinner from 'react-bootstrap/Spinner'
 import {Modal, Button} from 'react-bootstrap'
@@ -11,10 +11,9 @@ import {Modal, Button} from 'react-bootstrap'
 class Gmail extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {spinner: false, showModal: false}
+		this.state = {spinner: false}
 		this.handleClick = this.handleClick.bind(this)
-		this.handleClose = this.handleClose.bind(this)
-		this.handleShow = this.handleShow.bind(this)
+		this.handleSend = this.handleSend.bind(this)
 	}
 
 	async handleClick() {
@@ -24,14 +23,13 @@ class Gmail extends Component {
 		this.setState({spinner: temp})
 	}
 
-	handleShow() {
-		console.log('clicking')
-		this.setState({showModal: true})
-	}
-
-	handleClose() {
-		console.log('clicking')
-		this.setState({showModal: false})
+	handleSend() {
+		let obj = {}
+		obj.year = this.props.order.year
+		obj.make = this.props.order.make
+		obj.model = this.props.order.model
+		obj.orderid = this.props.order.hash
+		this.props.sendEmail(obj)
 	}
 
 	render() {
@@ -46,23 +44,8 @@ class Gmail extends Component {
 					.replace(/-/g, '+')
 					.replace(/_/g, '/')
 				return attch
-				//modalArray.push(img)
-				//console.log('modal array', modalArray)
 			})
-			// let input = attachments[0].attachment
-			// firstImg = input.replace(/-/g, '+').replace(/_/g, '/')
-			// let TYPED_ARRAY = new Uint8Array(attachments[0].attachment.data)
-			// const STRING_CHAR = TYPED_ARRAY.reduce((data, byte) => {
-			// 	return data + String.fromCharCode(byte)
-			// }, '')
-			// firstImg = btoa(STRING_CHAR)
-			//console.log('atob attachment IN REACT', firstImg)
 		}
-
-		// attachments = attachments.map(el => {
-		// 	return el.attachment.data.data
-		// })
-		// console.log('attachment IN REACT', attachments)
 
 		return (
 			<div>
@@ -72,6 +55,10 @@ class Gmail extends Component {
 							type='button'
 							onClick={() => this.handleClick()}>
 							View Emails
+						</button>
+
+						<button type='button' onClick={() => this.handleSend()}>
+							Send Test Email
 						</button>
 					</span>
 				</div>
@@ -152,6 +139,7 @@ const mapStateToProps = state => {
 		emails: state.emails,
 		singleemail: state.singleemail.decoded,
 		attachments: state.singleemail.attachmentsArray,
+		order: state.singleorder,
 	}
 }
 
@@ -159,6 +147,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		getEmails: () => dispatch(getEmailsThunk()),
 		getSingleEmail: id => dispatch(getSingleEmailThunk(id)),
+		sendEmail: obj => dispatch(sendSingleEmailThunk(obj)),
 	}
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Gmail))

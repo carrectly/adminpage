@@ -8,7 +8,10 @@ var Base64 = require('js-base64').Base64
 
 module.exports = router
 
-const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
+const SCOPES = [
+	'https://www.googleapis.com/auth/gmail.readonly',
+	'https://www.googleapis.com/auth/gmail.send',
+]
 
 const TOKEN_PATH = '/Users/abirkus/Desktop/carrectly/adminpage/tockengmail.json'
 
@@ -33,6 +36,17 @@ router.get('/:messageid', async (req, res, next) => {
 	}
 })
 
+router.post('/send', async (req, res, next) => {
+	try {
+		const obj = req.body
+
+		let result = await sendSingleEmail(obj)
+
+		res.json(result)
+	} catch (err) {
+		next(err)
+	}
+})
 async function fetchEmails() {
 	const content = await fs.readFileSync(
 		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
@@ -51,6 +65,17 @@ async function fetchSingleEmail(id) {
 	)
 	//let output = await getMessage(JSON.parse(content), id)
 	let output = await authorize(JSON.parse(content), getMessage, id)
+
+	return output
+}
+
+async function sendSingleEmail(msg) {
+	const content = await fs.readFileSync(
+		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
+		'utf8'
+	)
+	//let output = await getMessage(JSON.parse(content), id)
+	let output = await authorize(JSON.parse(content), sendEmail, msg)
 
 	return output
 }
@@ -275,3 +300,49 @@ async function getMessage(auth, messageId) {
 // 	var bitmap = await Buffer.from(base64str, 'base64')
 // 	fs.writeFileSync(file, bitmap)
 // }
+
+async function sendEmail(auth, msg) {
+	const gmail = await google.gmail({
+		version: 'v1',
+		auth,
+	})
+
+	// You can use UTF-8 encoding for the subject using the method below.
+	// You can also just use a plain string if you don't need anything fancy.
+	const subject = `${msg.orderid} - SERVICE QUOTE REQUEST FOR CARRECTLY`
+	//const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
+	const messageParts = [
+		'From: Andre Birkus <birkusandre@gmail.com>',
+		'To: Andre Birkus <birkusandre@gmail.com>',
+		'Content-Type: text/html; charset=utf-8',
+		'MIME-Version: 1.0',
+		`Subject: ${subject}`,
+		'',
+		'Hello,<br/>',
+		'Your business has been selected to service a vehicle for Carrectly <br/>',
+		'Our concierge will drop off the car shortly.',
+		'<b>PLEASE REPLY TO THIS EMAIL</b> once you have a quote estimate for the vehicle below:<br/>',
+		`Car Make: ${msg.make}<br/>`,
+		`Car Model: ${msg.model}<br/>`,
+		`Car Year: ${msg.year}<br/>`,
+		`VIN: ${msg.year}<br/>`,
+		'Thank you for your business,<br/>',
+		'TEAM CARRECTLY',
+	]
+	const message = messageParts.join('\n')
+
+	const encodedMessage = Buffer.from(message)
+		.toString('base64')
+		.replace(/\+/g, '-')
+		.replace(/\//g, '_')
+	//.replace(/=+$/, '')
+
+	const res = await gmail.users.messages.send({
+		userId: 'me',
+		requestBody: {
+			raw: encodedMessage,
+		},
+	})
+	console.log(res.data)
+	return res.data
+}

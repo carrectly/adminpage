@@ -1,13 +1,9 @@
 const Sequelize = require('sequelize')
 const {db} = require('../database')
+var axios = require('axios')
+const Customer = require('./customer')
 
 const Order = db.define('order', {
-	submissionDate: {
-		type: Sequelize.DATE,
-		validate: {
-			isDate: true,
-		},
-	},
 	pickupDate: {
 		type: Sequelize.DATE,
 		validate: {
@@ -19,6 +15,9 @@ const Order = db.define('order', {
 		validate: {
 			isDate: true,
 		},
+	},
+	pickupLocation: {
+		type: Sequelize.STRING,
 	},
 	carYear: {
 		type: Sequelize.INTEGER,
@@ -34,8 +33,7 @@ const Order = db.define('order', {
 		values: [
 			'received',
 			'waiting on quote',
-			'quote approved',
-			'servicing',
+			'quote approved - getting serviced',
 			'completed - pending invoice',
 			'completed - invoice sent',
 			'completed - paid',
@@ -45,6 +43,28 @@ const Order = db.define('order', {
 	comments: {
 		type: Sequelize.TEXT,
 	},
+	hash: {
+		type: Sequelize.INTEGER,
+	},
+	isInCalendar: {
+		type: Sequelize.BOOLEAN,
+		defaultValue: false,
+	},
 })
 
+Order.beforeCreate((inst, options) => {
+	let newinst = {...inst.dataValues}
+	console.log('new instance', newinst)
+	return Customer.findOne({
+		where: {phoneNumber: newinst.customerPhoneNumber},
+	}).then(cus => {
+		inst.isInCalendar = true
+		newinst.customerName = `${cus.firstName} ${cus.lastName}`
+		console.log('order instance after finding the customer', newinst)
+		axios.post(
+			'http://localhost:1337/auth/google/calendar/newevent',
+			newinst
+		)
+	})
+})
 module.exports = Order

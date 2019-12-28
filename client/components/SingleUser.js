@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getUserOrdersThunk} from '../store/userorders'
-import Gmail from './Gmail'
 
 class SingleUser extends Component {
 	componentDidMount() {
@@ -51,9 +50,6 @@ class SingleUser extends Component {
 						))}
 					</tbody>
 				</table>
-
-				<h3>Conversation History</h3>
-				<Gmail />
 			</div>
 		)
 	}
