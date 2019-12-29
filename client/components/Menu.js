@@ -6,7 +6,9 @@ class Menu extends Component {
 	render() {
 		return (
 			<div>
-				<h4>To view Hangouts Chat press "CTRL + SHIFT + 5"</h4>
+				<div className='chat'>
+					To view Hangouts Chat press "CTRL + SHIFT + 5"
+				</div>
 			</div>
 		)
 	}

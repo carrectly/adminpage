@@ -5,8 +5,7 @@ import {getEmailsThunk} from '../store/emails'
 import SingleEmail from './SingleEmail.js'
 import {getSingleEmailThunk, sendSingleEmailThunk} from '../store/singleemail'
 import ErrorHandler from './ErrorHandler'
-import Spinner from 'react-bootstrap/Spinner'
-import {Modal, Button} from 'react-bootstrap'
+import {Modal, Button, Spinner, Image} from 'react-bootstrap'
 
 class Gmail extends Component {
 	constructor(props) {
@@ -103,9 +102,10 @@ class Gmail extends Component {
 										modalArray.map((item, index) =>
 											item.type.slice(0, 5) ===
 											'image' ? (
-												<img
+												<Image
 													key={index}
 													src={`data:image/png;base64,${item.attachment}`}
+													fluid
 												/>
 											) : (
 												<Button

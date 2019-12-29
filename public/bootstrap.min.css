@@ -239,7 +239,7 @@ textarea {
 }
 button,
 input {
-	overflow: visible;
+	overflow: overlay;
 }
 button,
 select {
@@ -1660,7 +1660,7 @@ pre code {
 	border: 0;
 }
 .table-striped tbody tr:nth-of-type(odd) {
-	background-color: #303030;
+	background-color: #29aca5;
 }
 .table-hover tbody tr:hover {
 	color: #fff;
@@ -3104,6 +3104,7 @@ input[type='button'].btn-block {
 }
 .dropdown-toggle {
 	white-space: nowrap;
+	width: 100%;
 }
 .dropdown-toggle::after {
 	display: inline-block;
@@ -3136,6 +3137,7 @@ input[type='button'].btn-block {
 	background-clip: padding-box;
 	border: 1px solid #444;
 	border-radius: 0.25rem;
+	width: 100%;
 }
 .dropdown-menu-left {
 	right: auto;
@@ -3227,6 +3229,7 @@ input[type='button'].btn-block {
 .dropright .dropdown-toggle::after {
 	vertical-align: 0;
 }
+
 .dropleft .dropdown-menu {
 	top: 0;
 	right: 100%;

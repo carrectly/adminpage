@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getAllOrdersThunk, fetchCustomDataThunk} from '../store/orders'
+import {Table} from 'react-bootstrap'
 
 class AllOrders extends Component {
 	constructor(props) {
@@ -83,7 +84,7 @@ class AllOrders extends Component {
 						</span>
 					</form>
 				</div>
-				<table>
+				<Table striped bordered hover size='sm' variant='dark'>
 					<thead>
 						<tr>
 							<th>Order ID</th>
@@ -120,7 +121,7 @@ class AllOrders extends Component {
 							</tr>
 						))}
 					</tbody>
-				</table>
+				</Table>
 			</div>
 		)
 	}

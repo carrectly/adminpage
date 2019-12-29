@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getUserOrdersThunk} from '../store/userorders'
+import {Table} from 'react-bootstrap'
 
 class SingleUser extends Component {
 	componentDidMount() {
@@ -16,7 +17,7 @@ class SingleUser extends Component {
 				<h5>...Coming soon</h5>
 
 				<h3>Order History</h3>
-				<table>
+				<Table striped bordered hover size='sm' variant='dark'>
 					<thead>
 						<tr>
 							<th>Person Email</th>
@@ -49,7 +50,7 @@ class SingleUser extends Component {
 							</tr>
 						))}
 					</tbody>
-				</table>
+				</Table>
 			</div>
 		)
 	}

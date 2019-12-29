@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {getSingleOrderThunk} from '../store/singleorder'
 import Gmail from './Gmail'
 import Invoice from './Invoice'
+import {Table} from 'react-bootstrap'
 
 class SingleOrder extends Component {
 	componentDidMount() {
@@ -20,7 +21,7 @@ class SingleOrder extends Component {
 			<div>
 				<h3>Order Details</h3>
 				<div className='singleordercontainer'>
-					<table className='orderdetailstable'>
+					<Table striped bordered hover size='sm' variant='dark'>
 						<tbody>
 							{arr.map((details, index) => (
 								<tr key={index}>
@@ -29,10 +30,50 @@ class SingleOrder extends Component {
 								</tr>
 							))}
 						</tbody>
-					</table>
+					</Table>
 					<div className='invoiceform'>
 						<Invoice />
 					</div>
+				</div>
+				<br />
+				<div>
+					<Table striped bordered hover size='sm' variant='dark'>
+						<thead>
+							<tr>
+								<th>Service</th>
+								<th>Customer Price</th>
+								<th>Dealer Price</th>
+								<th>Update Customer Price</th>
+								<th>Update Dealer Price</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Fuel Up</td>
+								<td>$10</td>
+								<td></td>
+								<td>
+									<input
+										name='location'
+										type='text'
+										placeholder='$$$'
+									/>
+								</td>
+								<td>
+									<input
+										name='location'
+										type='text'
+										placeholder='$$$'
+									/>
+								</td>
+							</tr>
+							<tr>
+								<td colSpan='5'>
+									<button type='button'>Update prices</button>
+								</td>
+							</tr>
+						</tbody>
+					</Table>
 				</div>
 
 				<h3>Order Email History</h3>

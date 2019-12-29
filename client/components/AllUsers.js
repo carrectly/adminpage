@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getContactsThunk, createContactThunk} from '../store/contacts'
 import {getUserOrdersThunk} from '../store/userorders'
+import {Table} from 'react-bootstrap'
 
 class AllUsers extends Component {
 	render() {
@@ -22,7 +23,7 @@ class AllUsers extends Component {
 						Create new Contact
 					</button>
 				</div>
-				<table>
+				<Table striped bordered hover size='sm' variant='dark'>
 					<thead>
 						<tr>
 							<th>Name</th>
@@ -47,7 +48,7 @@ class AllUsers extends Component {
 							</tr>
 						))}
 					</tbody>
-				</table>
+				</Table>
 			</div>
 		)
 	}

@@ -18,6 +18,14 @@ nav a {
 	display: inline-block;
 }
 
+table {
+	border: 2px solid black;
+}
+
+td {
+	border: 2px solid black;
+}
+
 .center {
 	text-align: center;
 }
@@ -49,9 +57,12 @@ nav a {
 	position: absolute;
 	background-color: #f1f1f1;
 	color: black;
-	min-width: 160px;
+	min-width: 200px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	z-index: 1;
+
+	border: 1px solid black;
+	border-radius: 25px 25px 25px 25px;
 }
 
 .dropdown-content a {
@@ -181,6 +192,15 @@ nav a {
 	-webkit-flex-grow: 1;
 	flex-grow: 1;
 }
+
 .invoiceform {
 	flex-grow: 1;
+}
+
+.chat {
+	font-size: 1rem;
+	color: purple;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: red;
 }
