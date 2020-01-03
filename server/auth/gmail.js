@@ -15,19 +15,20 @@ const SCOPES = [
 
 const TOKEN_PATH = '/Users/abirkus/Desktop/carrectly/adminpage/tockengmail.json'
 
-router.get('/', async (req, res, next) => {
+router.get('/:orderid', async (req, res, next) => {
 	try {
-		let result = await fetchEmails()
+		let id = req.params.orderid
+
+		let result = await fetchEmails(id)
 		res.json(result)
 	} catch (err) {
 		next(err)
 	}
 })
 
-router.get('/:messageid', async (req, res, next) => {
+router.get('/single/:messageid', async (req, res, next) => {
 	try {
 		const id = req.params.messageid
-
 		let result = await fetchSingleEmail(id)
 
 		res.json(result)
@@ -47,13 +48,12 @@ router.post('/send', async (req, res, next) => {
 		next(err)
 	}
 })
-async function fetchEmails() {
+async function fetchEmails(id) {
 	const content = await fs.readFileSync(
 		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
 		'utf8'
 	)
-	let output = await authorize(JSON.parse(content), listMessages)
-	//console.log('fetching output change for each loop', output)
+	let output = await authorize(JSON.parse(content), listMessages, id)
 
 	return output
 }
@@ -63,9 +63,8 @@ async function fetchSingleEmail(id) {
 		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
 		'utf8'
 	)
-	//let output = await getMessage(JSON.parse(content), id)
-	let output = await authorize(JSON.parse(content), getMessage, id)
 
+	let output = await authorize(JSON.parse(content), getMessage, id)
 	return output
 }
 
@@ -156,12 +155,12 @@ function getNewToken(oAuth2Client, callback, query) {
  * @param  {Function} callback Function to call when the request is complete.
  */
 
-async function listMessages(auth) {
+async function listMessages(auth, id) {
 	const userId = 'me'
 	//const query = 'subject:lottery'
 	//const query = 'subject:poker'
 	//const query = 'subject:EVE of the EVE and Harris Associates'
-	const query = 'subject:carrectlytest'
+	const query = `subject:${id}`
 
 	const gmail = await google.gmail({
 		version: 'v1',
@@ -254,30 +253,37 @@ async function getMessage(auth, messageId) {
 		id: messageId,
 	})
 
-	var parts = response.data.payload.parts
-	let decoded = parseMessage(response.data).textPlain
+	var parts = response.data.payload.parts || []
+	//let decoded = await parseMessage(response.data.payload.body).textPlain
+	let decoded = await parseMessage(response.data)
+
+	decoded = decoded.textHtml || decoded.textPlain
+
 	let attachmentsArray = []
 
-	await asyncForEach(parts, async part => {
-		let obj = {}
-		if (part.filename && part.filename.length > 0) {
-			var attachId = part.body.attachmentId
-			var request = await gmail.users.messages.attachments.get({
-				id: attachId,
-				messageId: messageId,
-				userId: userId,
-			})
+	if (parts.length > 0) {
+		await asyncForEach(parts, async part => {
+			let obj = {}
+			if (part.filename && part.filename.length > 0) {
+				var attachId = part.body.attachmentId
+				var request = await gmail.users.messages.attachments.get({
+					id: attachId,
+					messageId: messageId,
+					userId: userId,
+				})
 
-			//console.log('Request attachement', request.data.data.slice(0, 200))
-			obj.filename = part.filename
-			obj.attachment = request.data.data
-			obj.type = part.mimeType
-			attachmentsArray.push(obj)
-		}
-	})
+				obj.filename = part.filename
+				obj.attachment = request.data.data
+				obj.type = part.mimeType
+				attachmentsArray.push(obj)
+			}
+		})
+	}
 
 	if (!decoded) {
-		return console.log('The API returned an error: ')
+		return console.log(
+			'The API returned an error inside single message fetch'
+		)
 	} else {
 		return {decoded, attachmentsArray}
 	}
@@ -313,7 +319,7 @@ async function sendEmail(auth, msg) {
 	//const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
 	const messageParts = [
 		'From: Andre Birkus <birkusandre@gmail.com>',
-		'To: Andre Birkus <birkusandre@gmail.com>',
+		`To: ${msg.email}`,
 		'Content-Type: text/html; charset=utf-8',
 		'MIME-Version: 1.0',
 		`Subject: ${subject}`,
@@ -343,6 +349,6 @@ async function sendEmail(auth, msg) {
 			raw: encodedMessage,
 		},
 	})
-	console.log(res.data)
+
 	return res.data
 }

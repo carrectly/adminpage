@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addDealerThunk} from '../store/dealers.js'
+import {updateDealerThunk, fetchSingleDealerThunk} from '../store/singledealer'
 import {Form, Button} from 'react-bootstrap'
 
-class AddDealer extends Component {
+class UpdateDealer extends Component {
 	constructor(props) {
 		super(props)
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -37,7 +37,9 @@ class AddDealer extends Component {
 		if (this.state.location) {
 			obj.location = this.state.location
 		}
-		this.props.post(obj)
+		let id = this.props.id
+		console.log('inside update form', id)
+		this.props.update(id, obj)
 		obj = {}
 		this.setState({
 			name: '',
@@ -50,7 +52,7 @@ class AddDealer extends Component {
 	render() {
 		return (
 			<div className='form'>
-				<h1>Add a new dealer</h1>
+				<h1>Update service shop info</h1>
 				<Form onSubmit={this.handleSubmit}>
 					<Form.Group controlId='formBasicName'>
 						<Form.Label>Service Shop Name</Form.Label>
@@ -97,11 +99,8 @@ class AddDealer extends Component {
 							onChange={this.handleChange}
 						/>
 					</Form.Group>
-					<Button
-						variant='primary'
-						type='submit'
-						disabled={!this.state.name}>
-						Submit
+					<Button variant='primary' type='submit'>
+						Update
 					</Button>
 				</Form>
 			</div>
@@ -111,7 +110,8 @@ class AddDealer extends Component {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		post: obj => dispatch(addDealerThunk(obj)),
+		update: (id, obj) => dispatch(updateDealerThunk(id, obj)),
+		getDealer: id => dispatch(fetchSingleDealerThunk(id)),
 	}
 }
-export default connect(null, mapDispatchToProps)(AddDealer)
+export default connect(null, mapDispatchToProps)(UpdateDealer)

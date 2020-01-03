@@ -5,7 +5,7 @@ import {getContactsThunk, createContactThunk} from '../store/contacts'
 import {getUserOrdersThunk} from '../store/userorders'
 import {Table} from 'react-bootstrap'
 
-class AllUsers extends Component {
+class AllCustomers extends Component {
 	render() {
 		const contacts = this.props.contacts || []
 		return (
@@ -40,7 +40,7 @@ class AllUsers extends Component {
 								<td>{person.phoneNumbers[0].value}</td>
 								<td>
 									<Link
-										to={`/singleuser/${person.phoneNumbers[0].value}`}
+										to={`/singlecustomer/${person.phoneNumbers[0].value}`}
 										id={person.phoneNumbers[0].value}>
 										View History
 									</Link>
@@ -67,5 +67,5 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 export default withRouter(
-	connect(mapStateToProps, mapDispatchToProps)(AllUsers)
+	connect(mapStateToProps, mapDispatchToProps)(AllCustomers)
 )

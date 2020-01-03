@@ -21,7 +21,7 @@ const sendSingleEmail = email => ({type: SEND_SINGLE_EMAIL, email})
  */
 export const getSingleEmailThunk = id => async dispatch => {
 	try {
-		const res = await axios.get(`/auth/google/gmail/${id}`)
+		const res = await axios.get(`/auth/google/gmail/single/${id}`)
 		dispatch(getSingleEmail(res.data))
 	} catch (err) {
 		console.error(err)

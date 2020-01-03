@@ -3,32 +3,29 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getEmailsThunk} from '../store/emails'
 import SingleEmail from './SingleEmail.js'
-import {getSingleEmailThunk, sendSingleEmailThunk} from '../store/singleemail'
+import {getSingleEmailThunk} from '../store/singleemail'
 import ErrorHandler from './ErrorHandler'
-import {Modal, Button, Spinner, Image} from 'react-bootstrap'
+import {Button, Spinner, Image} from 'react-bootstrap'
 
 class Gmail extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {spinner: false}
 		this.handleClick = this.handleClick.bind(this)
-		this.handleSend = this.handleSend.bind(this)
+		// this.handleSend = this.handleSend.bind(this)
 	}
 
-	async handleClick() {
+	async componentDidMount() {
+		let id = this.props.match.params.orderid
+		console.log('inside gmail params', id)
 		let temp = this.state.spinner
 		this.setState({spinner: !temp})
-		await this.props.getEmails()
+		await this.props.getEmails(id)
 		this.setState({spinner: temp})
 	}
-
-	handleSend() {
-		let obj = {}
-		obj.year = this.props.order.year
-		obj.make = this.props.order.make
-		obj.model = this.props.order.model
-		obj.orderid = this.props.order.hash
-		this.props.sendEmail(obj)
+	async handleClick(evt) {
+		console.log('event', evt.target.id)
+		await this.props.getSingleEmail(evt.target.id)
 	}
 
 	render() {
@@ -48,19 +45,6 @@ class Gmail extends Component {
 
 		return (
 			<div>
-				<div>
-					<span>
-						<button
-							type='button'
-							onClick={() => this.handleClick()}>
-							View Emails
-						</button>
-
-						<button type='button' onClick={() => this.handleSend()}>
-							Send Test Email
-						</button>
-					</span>
-				</div>
 				<div className='emailboard'>
 					<div className='emailsubject'>
 						<h3 className='eheader'>Email Subject</h3>
@@ -72,19 +56,15 @@ class Gmail extends Component {
 							</Spinner>
 						) : (
 							emails.map(email => (
-								<div key={email.id}>
-									<a
-										onClick={() =>
-											this.props.getSingleEmail(email.id)
-										}>
-										<div>
-											Subject: {email.Subject}
-											<br />
-											From: {email.From}
-											<br />
-											Date: {email.Date}
-										</div>
-									</a>
+								<div
+									key={email.id}
+									id={email.id}
+									onClick={id => this.handleClick(id)}>
+									Subject: {email.Subject}
+									<br />
+									From: {email.From}
+									<br />
+									Date: {email.Date}
 									<hr />
 								</div>
 							))
@@ -145,9 +125,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getEmails: () => dispatch(getEmailsThunk()),
+		getEmails: id => dispatch(getEmailsThunk(id)),
 		getSingleEmail: id => dispatch(getSingleEmailThunk(id)),
-		sendEmail: obj => dispatch(sendSingleEmailThunk(obj)),
 	}
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Gmail))

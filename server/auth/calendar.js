@@ -148,6 +148,7 @@ async function createEvent(auth, evt) {
 			dateTime: `${evt.dropoffDate}`,
 			timeZone: 'America/Chicago',
 		},
+		colorId: '11',
 		reminders: {
 			useDefault: false,
 			overrides: [

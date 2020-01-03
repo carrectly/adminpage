@@ -28,12 +28,12 @@ class Navbar extends React.Component {
 					Account
 				</Link>
 
-				<Link to='/allusers' className='link'>
-					All Users
+				<Link to='/allcustomers' className='link'>
+					All Customers
 				</Link>
 
 				<Link to='/dealers' className='link'>
-					Dealers/Shops
+					Service Shops
 				</Link>
 
 				<Link to='/calendar' className='link'>

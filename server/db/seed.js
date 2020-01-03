@@ -1,4 +1,11 @@
-const {User, Customer, Order, OrderDetails, Service} = require('./models')
+const {
+	User,
+	Customer,
+	Order,
+	OrderDetails,
+	Service,
+	Dealer,
+} = require('./models')
 const {db} = require('./database.js')
 var faker = require('faker')
 const Sequelize = require('sequelize')
@@ -8,6 +15,7 @@ let userSeed = []
 let orderSeed = []
 let orderDetailSeed = []
 let serviceSeed = []
+let dealerSeed = []
 const statusArray = [
 	'received',
 	'waiting on quote',
@@ -22,6 +30,24 @@ for (let i = 0; i < 10; i++) {
 		email: faker.internet.email(),
 		password: '123',
 		shippingAddress: faker.address.streetAddress(),
+	})
+}
+
+dealerSeed.push({
+	name: 'United Tires',
+	email: 'birkusandre@gmail.com',
+	phoneNumber: faker.phone.phoneNumberFormat(0),
+	specialty: faker.commerce.productName(),
+	location: faker.address.streetAddress(),
+})
+
+for (let i = 0; i < 6; i++) {
+	dealerSeed.push({
+		name: faker.commerce.productName(),
+		email: 'birkusandre@gmail.com',
+		phoneNumber: faker.phone.phoneNumberFormat(0),
+		specialty: faker.commerce.productName(),
+		location: faker.address.streetAddress(),
 	})
 }
 
@@ -64,17 +90,26 @@ for (let i = 0; i < 10; i++) {
 		customerPrice: faker.commerce.price(),
 		dealerPrice: faker.commerce.price(),
 		orderId: i + 1,
-		serviceId: i + 1,
+		serviceId: [Math.floor(Math.random() * 2)],
 	})
 }
 
-for (let i = 0; i < 10; i++) {
-	serviceSeed.push({
-		name: faker.commerce.productName(),
-		price: faker.commerce.price(),
-		description: faker.lorem.sentence(),
-	})
-}
+serviceSeed.push({
+	name: 'wash',
+	price: 30,
+	description: 'very nice car bath',
+})
+serviceSeed.push({
+	name: 'detail',
+	price: 90,
+	description: 'very nice detailing service',
+})
+
+serviceSeed.push({
+	name: 'oil change',
+	price: 100,
+	description: 'very nice oil change',
+})
 
 const seed = async () => {
 	try {
@@ -92,71 +127,77 @@ const seed = async () => {
 				console.error('User Exists', err.name)
 			}
 		)
-		await Customer.create(customerSeed[1]).catch(
-			Sequelize.ValidationError,
-			function(err) {
-				console.error('User Exists', err.name)
-			}
-		)
-		await Customer.create(customerSeed[2]).catch(
-			Sequelize.ValidationError,
-			function(err) {
-				console.error('User Exists', err.name)
-			}
-		)
-		await Customer.create(customerSeed[3]).catch(
-			Sequelize.ValidationError,
-			function(err) {
-				console.error('User Exists', err.name)
-			}
-		)
-		await Customer.create(customerSeed[4]).catch(
-			Sequelize.ValidationError,
-			function(err) {
-				console.error('User Exists', err.name)
-			}
-		)
-		await Customer.create(customerSeed[5]).catch(
-			Sequelize.ValidationError,
-			function(err) {
-				console.error('User Exists', err.name)
-			}
-		)
-		await Customer.create(customerSeed[6]).catch(
-			Sequelize.ValidationError,
-			function(err) {
-				console.error('User Exists', err.name)
-			}
-		)
-		await Customer.create(customerSeed[7]).catch(
-			Sequelize.ValidationError,
-			function(err) {
-				console.error('User Exists', err.name)
-			}
-		)
-		await Customer.create(customerSeed[8]).catch(
-			Sequelize.ValidationError,
-			function(err) {
-				console.error('User Exists', err.name)
-			}
-		)
-		await Customer.create(customerSeed[9]).catch(
-			Sequelize.ValidationError,
-			function(err) {
-				console.error('User Exists', err.name)
-			}
-		)
+		// await Customer.create(customerSeed[1]).catch(
+		// 	Sequelize.ValidationError,
+		// 	function(err) {
+		// 		console.error('User Exists', err.name)
+		// 	}
+		// )
+		// await Customer.create(customerSeed[2]).catch(
+		// 	Sequelize.ValidationError,
+		// 	function(err) {
+		// 		console.error('User Exists', err.name)
+		// 	}
+		// )
+		// await Customer.create(customerSeed[3]).catch(
+		// 	Sequelize.ValidationError,
+		// 	function(err) {
+		// 		console.error('User Exists', err.name)
+		// 	}
+		// )
+		// await Customer.create(customerSeed[4]).catch(
+		// 	Sequelize.ValidationError,
+		// 	function(err) {
+		// 		console.error('User Exists', err.name)
+		// 	}
+		// )
+		// await Customer.create(customerSeed[5]).catch(
+		// 	Sequelize.ValidationError,
+		// 	function(err) {
+		// 		console.error('User Exists', err.name)
+		// 	}
+		// )
+		// await Customer.create(customerSeed[6]).catch(
+		// 	Sequelize.ValidationError,
+		// 	function(err) {
+		// 		console.error('User Exists', err.name)
+		// 	}
+		// )
+		// await Customer.create(customerSeed[7]).catch(
+		// 	Sequelize.ValidationError,
+		// 	function(err) {
+		// 		console.error('User Exists', err.name)
+		// 	}
+		// )
+		// await Customer.create(customerSeed[8]).catch(
+		// 	Sequelize.ValidationError,
+		// 	function(err) {
+		// 		console.error('User Exists', err.name)
+		// 	}
+		// )
+		// await Customer.create(customerSeed[9]).catch(
+		// 	Sequelize.ValidationError,
+		// 	function(err) {
+		// 		console.error('User Exists', err.name)
+		// 	}
+		// )
 		//await Customer.bulkCreate(customerSeed)
 
-		await Order.create(orderSeed[0]).catch(
-			Sequelize.ValidationError,
-			function(err) {
-				console.error('User Exists', err.name)
-			}
-		)
-		//await Order.bulkCreate(orderSeed)
-		// await Service.bulkCreate(serviceSeed)
-		// await OrderDetails.bulkCreate(orderDetailSeed)
+		// const forLoop = async _ => {
+		// 	for (let i = 0; i < orderSeed.length; i++) {
+		// 		await Order.create(orderSeed[i])
+		// 	}
+		// }
+		// await forLoop()
+		// await Order.create(orderSeed[0]).catch(
+		// 	Sequelize.ValidationError,
+		// 	function(err) {
+		// 		console.error('User Exists', err.name)
+		// 	}
+		// )
+		await Dealer.bulkCreate(dealerSeed)
+		await Service.bulkCreate(serviceSeed)
+		//await OrderDetails.bulkCreate(orderDetailSeed)
 	} catch (err) {
 		console.log('Error seeding bulk file', err)
 	}

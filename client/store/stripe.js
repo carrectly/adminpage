@@ -21,7 +21,7 @@ const createInvoice = invoice => ({type: CREATE_INVOICE, invoice})
 /**
  * THUNK CREATORS
  */
-export const getCustomerThunk = obj => async dispatch => {
+export const getStripeCustomerThunk = obj => async dispatch => {
 	try {
 		const res = await axios.post('/stripe', obj)
 		dispatch(getCustomer(res.data))

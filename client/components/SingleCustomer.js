@@ -3,19 +3,38 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getUserOrdersThunk} from '../store/userorders'
 import {Table} from 'react-bootstrap'
+import {getSingleCustomerThunk} from '../store/singlecustomer'
+import UpdateCustomer from './UpdateCustomer'
 
-class SingleUser extends Component {
+class SingleCustomer extends Component {
 	componentDidMount() {
 		this.props.getOrders(this.props.match.params.userid)
+		this.props.getCustomer(this.props.match.params.userid)
 	}
 
 	render() {
 		const userorders = this.props.orders || []
+		const customer = this.props.customer || {}
+		let custArr = Object.keys(customer) || []
 		return (
 			<div>
-				<h3>User Info</h3>
-				<h5>...Coming soon</h5>
-
+				<div className='customercontainer'>
+					<div className='customerinfo'>
+						<h3>Customer Info</h3>
+						{custArr.map(key => (
+							<div key={key}>
+								<span>
+									{key} {customer[key]}
+								</span>
+							</div>
+						))}
+					</div>
+					<div className='customerupdate'>
+						<UpdateCustomer
+							phone={this.props.match.params.userid}
+						/>
+					</div>
+				</div>
 				<h3>Order History</h3>
 				<Table striped bordered hover size='sm' variant='dark'>
 					<thead>
@@ -59,14 +78,16 @@ class SingleUser extends Component {
 const mapStateToProps = state => {
 	return {
 		orders: state.userorders,
+		customer: state.singlecustomer,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
 		getOrders: id => dispatch(getUserOrdersThunk(id)),
+		getCustomer: id => dispatch(getSingleCustomerThunk(id)),
 	}
 }
 export default withRouter(
-	connect(mapStateToProps, mapDispatchToProps)(SingleUser)
+	connect(mapStateToProps, mapDispatchToProps)(SingleCustomer)
 )

@@ -15,8 +15,9 @@ class SingleEmail extends Component {
 		if (this.props.single.length) {
 			message = this.props.single
 		}
+		return <div>{renderHTML(message)}</div>
 
-		return <div>{nl2br(message)}</div>
+		//return <div>{nl2br(message)}</div>
 	}
 }
 

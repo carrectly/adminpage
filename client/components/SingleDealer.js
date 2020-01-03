@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {fetchSingleDealerThunk} from '../store/singledealer'
+import UpdateDealer from './UpdateDealer'
 
 class SingleDealer extends Component {
 	componentDidMount() {
@@ -18,10 +19,12 @@ class SingleDealer extends Component {
 	render() {
 		const dealer = this.props.dealer
 		return dealer.id ? (
-			<div className='allItems'>
-				<div key={dealer.id} className='list'>
-					{dealer.name}
-				</div>
+			<div>
+				<div>Name: {dealer.name}</div>
+				<div>Email: {dealer.email}</div>
+				<div>Specialty: {dealer.specialty}</div>
+				<div>Location: {dealer.location}</div>
+				<UpdateDealer id={this.props.match.params.dealerid} />
 			</div>
 		) : (
 			<div />

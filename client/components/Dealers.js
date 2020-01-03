@@ -3,22 +3,11 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import AddDealer from './AddDealer.js'
 import {removeDealerThunk, fetchDealersThunk} from '../store/dealers.js'
+import DealerCard from './DealerCard'
 
 class Dealers extends Component {
-	constructor(props) {
-		super(props)
-		this.handleClick = this.handleClick.bind(this)
-	}
-
 	async componentDidMount() {
 		await this.props.fetchDealers()
-	}
-
-	handleClick = evt => {
-		evt.preventDefault()
-		if (evt.target.id) {
-			this.props.remove(evt.target.id)
-		}
 	}
 
 	render() {
@@ -26,21 +15,14 @@ class Dealers extends Component {
 		return dealers.length ? (
 			<div>
 				<h1>Here you can manage all your shops and dealers</h1>
-				<div>
+				<div className='dealerscontainer'>
 					{dealers.map(dlr => (
-						<div key={dlr.id}>
-							<Link to={`/dealers/${dlr.id}`} key={dlr.id}>
-								{dlr.name}
-							</Link>
-							<button
-								id={dlr.id}
-								type='button'
-								onClick={id => this.handleClick(id)}>
-								delete
-							</button>
-						</div>
+						<DealerCard
+							dealer={dlr}
+							delete={this.props.remove}
+							key={dlr.id}
+						/>
 					))}
-					<div />
 				</div>
 				<AddDealer />
 			</div>

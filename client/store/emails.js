@@ -19,9 +19,9 @@ const getEmails = emails => ({type: GET_EMAILS, emails})
 /**
  * THUNK CREATORS
  */
-export const getEmailsThunk = () => async dispatch => {
+export const getEmailsThunk = id => async dispatch => {
 	try {
-		const res = await axios.get('/auth/google/gmail')
+		const res = await axios.get(`/auth/google/gmail/${id}`)
 		dispatch(getEmails(res.data))
 	} catch (err) {
 		console.error(err)

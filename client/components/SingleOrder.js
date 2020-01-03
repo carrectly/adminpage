@@ -5,6 +5,7 @@ import {getSingleOrderThunk} from '../store/singleorder'
 import Gmail from './Gmail'
 import Invoice from './Invoice'
 import {Table} from 'react-bootstrap'
+import UpdateOrder from './UpdateOrder'
 
 class SingleOrder extends Component {
 	componentDidMount() {
@@ -21,7 +22,7 @@ class SingleOrder extends Component {
 			<div>
 				<h3>Order Details</h3>
 				<div className='singleordercontainer'>
-					<Table striped bordered hover size='sm' variant='dark'>
+					<Table striped bordered hover variant='dark'>
 						<tbody>
 							{arr.map((details, index) => (
 								<tr key={index}>
@@ -32,6 +33,7 @@ class SingleOrder extends Component {
 						</tbody>
 					</Table>
 					<div className='invoiceform'>
+						<UpdateOrder id={this.props.match.params.orderid} />
 						<Invoice />
 					</div>
 				</div>

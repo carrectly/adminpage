@@ -10,6 +10,10 @@ const Dealer = db.define('dealer', {
 		type: Sequelize.STRING,
 		allowNull: false,
 	},
+	phoneNumber: {
+		type: Sequelize.STRING,
+		allowNull: true,
+	},
 	specialty: {
 		type: Sequelize.STRING,
 		allowNull: true,

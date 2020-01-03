@@ -54,12 +54,7 @@ export default (state = initialState, action) => {
 			return action.dealer
 		}
 		case UPDATE_DEALER: {
-			return state.map(bot => {
-				if (bot.id === Number(action.dealer.id)) {
-					bot = action.dealer
-				}
-				return bot
-			})
+			return action.dealer
 		}
 		default: {
 			return state

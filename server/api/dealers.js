@@ -55,8 +55,8 @@ router.put('/:id', async (req, res, next) => {
 	try {
 		const id = req.params.id
 		const dealer = await Dealer.findByPk(id)
-		await dealer.update(req.body)
-		res.status(204).end()
+		const newdlr = await dealer.update(req.body)
+		res.json(newdlr)
 	} catch (err) {
 		next(err)
 	}

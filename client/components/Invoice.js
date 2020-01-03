@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getCustomerThunk, createInvoiceThunk} from '../store/stripe'
+import {getStripeCustomerThunk, createInvoiceThunk} from '../store/stripe'
 import {DropdownButton, Dropdown, Button} from 'react-bootstrap'
+import {fetchDealersThunk} from '../store/dealers.js'
+import {sendSingleEmailThunk} from '../store/singleemail'
 
 let cust
 
@@ -10,24 +12,39 @@ class Invoice extends Component {
 	constructor(props) {
 		super(props)
 		this.handleClick = this.handleClick.bind(this)
+		this.handleSend = this.handleSend.bind(this)
 		this.state = {
 			invoice: true,
 		}
+	}
+
+	componentDidMount() {
+		this.props.fetchDealers()
 	}
 	componentDidUpdate() {
 		cust = this.props.customer.id
 	}
 
 	handleClick(obj) {
-		this.props.getCustomer(obj)
+		this.props.getStripeCustomer(obj)
 		this.setState({
 			invoice: false,
 		})
 	}
 
+	handleSend(evt) {
+		let obj = {}
+		obj.email = evt.target.id
+		obj.year = this.props.order.year
+		obj.make = this.props.order.make
+		obj.model = this.props.order.model
+		obj.orderid = this.props.order.hash
+		this.props.sendEmail(obj)
+	}
+
 	render() {
 		cust = this.props.customer.id || null
-
+		let dealers = this.props.dealers || []
 		return (
 			<div>
 				<p>Can't create an invoice until the status is "completed" </p>
@@ -59,52 +76,20 @@ class Invoice extends Component {
 					</Dropdown.Item>
 				</DropdownButton>
 
-				{/* <form>
-						<span>
-							<select name='status' type='text'>
-								<option value=''>change order status</option>
-								<option value='received'>Received </option>
-								<option value='waiting on quote'>
-									waiting on quote
-								</option>
-								<option value='quote approved'>
-									quote approved - getting serviced
-								</option>
-								<option value='pending invoice'>
-									completed - pending invoice
-								</option>
-								<option value='invoice sent'>
-									completed - invoice sent
-								</option>
-								<option value='invoice paid'>
-									completed - invoice paid
-								</option>
-							</select>
-							<button type='submit'>Update</button>
-						</span>
-					</form> */}
 				<DropdownButton
 					size='lg'
 					id='dropdown-basic-button'
 					title='Send Quote Request'
 					className='btn-block'>
-					<Dropdown.Item href='#/action-1'>Utires</Dropdown.Item>
-					<Dropdown.Item href='#/action-2'>Durans</Dropdown.Item>
+					{dealers.map(dlr => (
+						<Dropdown.Item
+							key={dlr.id}
+							id={dlr.email}
+							onClick={this.handleSend}>
+							{dlr.name}
+						</Dropdown.Item>
+					))}
 				</DropdownButton>
-				{/* <form>
-						<span>
-							<select name='status' type='text'>
-								<option value=''>
-									Send Quote request to dealer
-								</option>
-								<option value='received'>Dealer A </option>
-								<option value='waiting on quote'>
-									Dealer B
-								</option>
-							</select>
-							<button type='submit'>Send Email Request</button>
-						</span>
-					</form> */}
 
 				<Button
 					size='lg'
@@ -138,12 +123,15 @@ const mapStateToProps = state => {
 	return {
 		customer: state.stripe.singleCustomer,
 		order: state.singleorder,
+		dealers: state.dealers,
 	}
 }
 const mapDispatchToProps = dispatch => {
 	return {
-		getCustomer: obj => dispatch(getCustomerThunk(obj)),
+		getStripeCustomer: obj => dispatch(getStripeCustomerThunk(obj)),
 		createInvoice: (obj, str) => dispatch(createInvoiceThunk(obj, str)),
+		fetchDealers: () => dispatch(fetchDealersThunk()),
+		sendEmail: obj => dispatch(sendSingleEmailThunk(obj)),
 	}
 }
 

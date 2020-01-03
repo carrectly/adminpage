@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import {me} from './store'
 import {
-	AllUsers,
-	SingleUser,
+	AllCustomers,
+	SingleCustomer,
 	AllOrders,
 	SingleOrder,
 	Chat,
@@ -33,8 +33,11 @@ class Routes extends Component {
 				<Route path='/dashboard' component={Dashboard} />
 				<Route path='/home' component={UserHome} />
 				<Route path='/allOrders' component={AllOrders} />
-				<Route path='/allusers' component={AllUsers} />
-				<Route path='/singleuser/:userid' component={SingleUser} />
+				<Route path='/allcustomers' component={AllCustomers} />
+				<Route
+					path='/singlecustomer/:userid'
+					component={SingleCustomer}
+				/>
 				<Route path='/singleorder/:orderid' component={SingleOrder} />
 				<Route path='/account' component={Account} />
 				<Route path='/dealers/:dealerid' component={SingleDealer} />

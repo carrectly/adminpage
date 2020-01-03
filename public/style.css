@@ -180,6 +180,7 @@ td {
 .form {
 	display: flex;
 	flex-direction: column;
+	max-width: 50vw;
 }
 
 .singleordercontainer {
@@ -203,4 +204,39 @@ td {
 	font-weight: bold;
 	text-align: center;
 	text-decoration: red;
+}
+
+.customercontainer {
+	display: flex;
+	flex-direction: row;
+	align-content: stretch;
+}
+
+.customerinfo {
+	-webkit-flex-grow: 1;
+	flex-grow: 1;
+}
+
+.customerinfo {
+	flex-grow: 1;
+}
+
+.dealerscontainer {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.dlrcard {
+	flex-basis: 20%;
+}
+
+.login {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+}
+
+.calendar {
+	width: 100vw;
+	height: 100vh;
 }
