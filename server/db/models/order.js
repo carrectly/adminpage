@@ -4,6 +4,10 @@ var axios = require('axios')
 const Customer = require('./customer')
 
 const Order = db.define('order', {
+	hash: {
+		type: Sequelize.STRING,
+		primaryKey: true,
+	},
 	pickupDate: {
 		type: Sequelize.DATE,
 		validate: {
@@ -43,9 +47,6 @@ const Order = db.define('order', {
 	comments: {
 		type: Sequelize.TEXT,
 	},
-	hash: {
-		type: Sequelize.INTEGER,
-	},
 	isInCalendar: {
 		type: Sequelize.BOOLEAN,
 		defaultValue: false,
@@ -67,4 +68,16 @@ Order.beforeCreate((inst, options) => {
 		)
 	})
 })
+
+Order.afterUpdate((inst, options) => {
+	let newinst = {...inst.dataValues}
+	console.log('updating instance', newinst)
+	return axios
+		.post(
+			'http://localhost:1337/auth/google/calendar/newevent/update',
+			newinst
+		)
+		.then(res => console.log('successfully update in Calendar'))
+})
+
 module.exports = Order

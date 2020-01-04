@@ -3,6 +3,10 @@ const {db} = require('../database')
 var axios = require('axios')
 
 const Customer = db.define('customer', {
+	phoneNumber: {
+		type: Sequelize.STRING,
+		primaryKey: true,
+	},
 	location: {
 		type: Sequelize.STRING,
 	},
@@ -11,10 +15,6 @@ const Customer = db.define('customer', {
 	},
 	lastName: {
 		type: Sequelize.STRING,
-	},
-	phoneNumber: {
-		type: Sequelize.STRING,
-		primaryKey: true,
 	},
 	email: {
 		type: Sequelize.STRING,

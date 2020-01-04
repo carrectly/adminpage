@@ -5,6 +5,7 @@ import {getStripeCustomerThunk, createInvoiceThunk} from '../store/stripe'
 import {DropdownButton, Dropdown, Button} from 'react-bootstrap'
 import {fetchDealersThunk} from '../store/dealers.js'
 import {sendSingleEmailThunk} from '../store/singleemail'
+import {getEmailsThunk} from '../store/emails'
 
 let cust
 
@@ -32,7 +33,7 @@ class Invoice extends Component {
 		})
 	}
 
-	handleSend(evt) {
+	async handleSend(evt) {
 		let obj = {}
 		obj.email = evt.target.id
 		obj.year = this.props.order.year
@@ -40,6 +41,8 @@ class Invoice extends Component {
 		obj.model = this.props.order.model
 		obj.orderid = this.props.order.hash
 		this.props.sendEmail(obj)
+		await this.props.fetchEmails()
+		obj = {}
 	}
 
 	render() {
@@ -132,6 +135,7 @@ const mapDispatchToProps = dispatch => {
 		createInvoice: (obj, str) => dispatch(createInvoiceThunk(obj, str)),
 		fetchDealers: () => dispatch(fetchDealersThunk()),
 		sendEmail: obj => dispatch(sendSingleEmailThunk(obj)),
+		getEmails: id => dispatch(getEmailsThunk(id)),
 	}
 }
 

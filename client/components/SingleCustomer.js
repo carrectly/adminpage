@@ -39,26 +39,26 @@ class SingleCustomer extends Component {
 				<Table striped bordered hover size='sm' variant='dark'>
 					<thead>
 						<tr>
-							<th>Person Email</th>
-							<th>Phone Number</th>
-							<th>Service</th>
+							<th>Status</th>
+							<th>Pickup Date</th>
+							<th>Dropoff Date</th>
+							<th>Pickup Location</th>
 							<th>Car Make</th>
 							<th>Car Model</th>
 							<th>Car Year</th>
-							<th>Date</th>
 							<th>Order Details</th>
 						</tr>
 					</thead>
 					<tbody>
 						{userorders.map(ord => (
 							<tr key={ord.hash}>
-								<td>{ord.email}</td>
-								<td>{ord.phone_number}</td>
-								<td>{ord.service}</td>
-								<td>{ord.make}</td>
-								<td>{ord.model}</td>
-								<td>{ord.year}</td>
-								<td>{ord.date}</td>
+								<td>{ord.status}</td>
+								<td>{ord.pickupDate}</td>
+								<td>{ord.dropoffDate}</td>
+								<td>{ord.pickupLocation}</td>
+								<td>{ord.carMake}</td>
+								<td>{ord.carModel}</td>
+								<td>{ord.carYear}</td>
 								<td>
 									<Link
 										to={`/singleorder/${ord.hash}`}

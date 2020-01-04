@@ -2,26 +2,24 @@ import {withRouter, Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getContactsThunk, createContactThunk} from '../store/contacts'
-import {getUserOrdersThunk} from '../store/userorders'
 import {Table} from 'react-bootstrap'
 
 class AllCustomers extends Component {
+	componentDidMount() {
+		this.props.getContacts()
+	}
+
 	render() {
 		const contacts = this.props.contacts || []
 		return (
 			<div>
 				<div>
 					<h1>All Client Contacts</h1>
-					<button
+					{/* <button
 						type='button'
 						onClick={() => this.props.getContacts()}>
 						View All Clients
-					</button>
-					<button
-						type='button'
-						onClick={() => this.props.createContact()}>
-						Create new Contact
-					</button>
+					</button> */}
 				</div>
 				<Table striped bordered hover size='sm' variant='dark'>
 					<thead>

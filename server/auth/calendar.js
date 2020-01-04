@@ -30,6 +30,17 @@ router.post('/newevent', async (req, res, next) => {
 	}
 })
 
+router.post('/newevent/update', async (req, res, next) => {
+	try {
+		const obj = req.body
+		const result = await updateEventApi(obj)
+		//console.log(result)
+		res.json(result)
+	} catch (err) {
+		next(err)
+	}
+})
+
 async function runCalendarApi() {
 	const content = await fs.readFileSync(
 		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
@@ -45,6 +56,15 @@ async function createEventApi(obj) {
 		'utf8'
 	)
 	let output = await authorize(JSON.parse(content), createEvent, obj)
+	return output
+}
+
+async function updateEventApi(obj) {
+	const content = await fs.readFileSync(
+		'/Users/abirkus/Desktop/carrectly/adminpage/secretsgmail.json',
+		'utf8'
+	)
+	let output = await authorize(JSON.parse(content), updateEvent, obj)
 	return output
 }
 /**
@@ -160,6 +180,46 @@ async function createEvent(auth, evt) {
 
 	var request = calendar.events.insert({
 		calendarId: 'primary',
+		resource: event,
+	})
+
+	if (!request) {
+		return console.log('The API returned an error: ')
+	} else {
+		return request.data
+	}
+}
+
+async function updateEvent(auth, evt) {
+	const calendar = await google.calendar({version: 'v3', auth})
+
+	console.log('event received from new booking', evt)
+	var event = {
+		summary: `${evt.carYear} ${evt.carMake} ${evt.carModel} ${evt.customerName}`,
+		location: `${evt.pickupLocation}`,
+		id: `${evt.hash}`,
+		description: `Customer phone number: ${evt.customerPhoneNumber} \n ${evt.comments}`,
+		start: {
+			dateTime: `${evt.pickupDate}`,
+			timeZone: 'America/Chicago',
+		},
+		end: {
+			dateTime: `${evt.dropoffDate}`,
+			timeZone: 'America/Chicago',
+		},
+		colorId: '11',
+		reminders: {
+			useDefault: false,
+			overrides: [
+				{method: 'email', minutes: 24 * 60},
+				{method: 'popup', minutes: 10},
+			],
+		},
+	}
+
+	var request = calendar.events.update({
+		calendarId: 'primary',
+		eventId: event.hash,
 		resource: event,
 	})
 

@@ -64,7 +64,7 @@ class UpdateOrder extends Component {
 			<div className='form'>
 				<h3>Update Order info</h3>
 				<Form onSubmit={this.handleSubmit}>
-					<Form.Group controlId='formBasicName'>
+					<Form.Group controlId='formBasicDate1'>
 						<Form.Label>pickupDate</Form.Label>
 						<Form.Control
 							type='datetime-local'
@@ -75,7 +75,7 @@ class UpdateOrder extends Component {
 						/>
 					</Form.Group>
 
-					<Form.Group controlId='formBasicEmail'>
+					<Form.Group controlId='formBasicDate2'>
 						<Form.Label>dropoffDate</Form.Label>
 						<Form.Control
 							type='datetime-local'
@@ -85,7 +85,7 @@ class UpdateOrder extends Component {
 						/>
 					</Form.Group>
 
-					<Form.Group controlId='formBasicSpecialty'>
+					<Form.Group controlId='formBasicLocation'>
 						{/* <Form.Label>pickupLocation</Form.Label> */}
 						<Form.Control
 							type='text'
@@ -96,7 +96,7 @@ class UpdateOrder extends Component {
 						/>
 					</Form.Group>
 
-					<Form.Group controlId='formBasicPassword'>
+					<Form.Group controlId='formBasicYear'>
 						{/* <Form.Label>carYear</Form.Label> */}
 						<Form.Control
 							type='text'
@@ -107,7 +107,7 @@ class UpdateOrder extends Component {
 						/>
 					</Form.Group>
 
-					<Form.Group controlId='formBasicPassword'>
+					<Form.Group controlId='formBasicMake'>
 						{/* <Form.Label>carMake</Form.Label> */}
 						<Form.Control
 							type='text'
@@ -118,7 +118,7 @@ class UpdateOrder extends Component {
 						/>
 					</Form.Group>
 
-					<Form.Group controlId='formBasicPassword'>
+					<Form.Group controlId='formBasicModel'>
 						{/* <Form.Label>carModel</Form.Label> */}
 						<Form.Control
 							type='text'
