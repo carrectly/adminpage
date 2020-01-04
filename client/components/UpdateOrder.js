@@ -16,6 +16,7 @@ class UpdateOrder extends Component {
 			carYear: '',
 			carMake: '',
 			carModel: '',
+			vin: '',
 		}
 	}
 
@@ -45,6 +46,9 @@ class UpdateOrder extends Component {
 		if (this.state.carModel) {
 			obj.carModel = this.state.carModel
 		}
+		if (this.state.vin) {
+			obj.vin = this.state.vin
+		}
 		let id = this.props.id
 		console.log('inside update form', id)
 		this.props.update(id, obj)
@@ -56,6 +60,7 @@ class UpdateOrder extends Component {
 			carYear: '',
 			carMake: '',
 			carModel: '',
+			vin: '',
 		})
 	}
 
@@ -86,7 +91,6 @@ class UpdateOrder extends Component {
 					</Form.Group>
 
 					<Form.Group controlId='formBasicLocation'>
-						{/* <Form.Label>pickupLocation</Form.Label> */}
 						<Form.Control
 							type='text'
 							name='pickupLocation'
@@ -97,7 +101,6 @@ class UpdateOrder extends Component {
 					</Form.Group>
 
 					<Form.Group controlId='formBasicYear'>
-						{/* <Form.Label>carYear</Form.Label> */}
 						<Form.Control
 							type='text'
 							name='carYear'
@@ -108,7 +111,6 @@ class UpdateOrder extends Component {
 					</Form.Group>
 
 					<Form.Group controlId='formBasicMake'>
-						{/* <Form.Label>carMake</Form.Label> */}
 						<Form.Control
 							type='text'
 							name='carMake'
@@ -119,7 +121,6 @@ class UpdateOrder extends Component {
 					</Form.Group>
 
 					<Form.Group controlId='formBasicModel'>
-						{/* <Form.Label>carModel</Form.Label> */}
 						<Form.Control
 							type='text'
 							name='carModel'
@@ -128,6 +129,17 @@ class UpdateOrder extends Component {
 							onChange={this.handleChange}
 						/>
 					</Form.Group>
+
+					<Form.Group controlId='formBasicVin'>
+						<Form.Control
+							type='text'
+							name='vin'
+							placeholder='vin#'
+							value={this.state.vin}
+							onChange={this.handleChange}
+						/>
+					</Form.Group>
+
 					<Button variant='primary' type='submit'>
 						Update
 					</Button>

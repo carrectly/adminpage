@@ -64,18 +64,6 @@ class Dashboard extends Component {
 							<p>{list[2].name}</p>
 						</Link>
 					</div>
-					<div className='dashboard-card flex-display flex-wrap'>
-						<a
-							href='https://www.carrectly.com/book/'
-							target='_blank'
-							className='clean-dashboard'>
-							<img
-								className='dashboard-image'
-								src={list[3].photo}
-							/>
-							<p>{list[3].name}</p>
-						</a>
-					</div>
 				</div>
 			</div>
 		)

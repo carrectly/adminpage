@@ -1,7 +1,11 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getAllOrdersThunk, fetchCustomDataThunk} from '../store/orders'
+import {
+	getAllOrdersThunk,
+	fetchCustomDataThunk,
+	clearAllOrdersThunk,
+} from '../store/orders'
 import {Table} from 'react-bootstrap'
 
 class AllOrders extends Component {
@@ -20,6 +24,10 @@ class AllOrders extends Component {
 		this.setState({
 			[evt.target.name]: evt.target.value,
 		})
+	}
+
+	componentWillUnmount() {
+		this.props.clearOrders()
 	}
 
 	async handleSubmit(evt) {
@@ -57,43 +65,58 @@ class AllOrders extends Component {
 		return (
 			<div>
 				<div>
-					<h1>Orders View</h1>
+					<h1 className='center'>Orders View</h1>
 					<form onSubmit={this.handleSubmit}>
 						<span>
-							<span> Date: </span>
 							<input
 								type='date'
 								name='dateStart'
-								min='2017-03-01'
+								placeholder='start date'
 								onChange={this.handleChange}
 								value={this.state.dateStart}
 							/>
-							{/* <span>End Date: </span> */}
-							{/* <input
+							<input
 								type='date'
 								name='dateEnd'
-								max={today}
-								value={this.state.dateEnd}
-							/> */}
-							<button type='submit'> View Orders by Date </button>
-							<button
-								type='button'
-								onClick={() => this.props.getOrders()}>
-								View All Orders
+								placeholder='end date'
+								onChange={this.handleChange}
+								value={this.state.dateStart}
+							/>
+							<button type='submit'>
+								{' '}
+								Search Orders by Date{' '}
 							</button>
 						</span>
+						<span>
+							<input
+								type='text'
+								name='dateEnd'
+								placeholder='end date'
+								onChange={this.handleChange}
+								value={this.state.dateStart}
+							/>
+							<button type='submit'>
+								Search Orders by Customer Phone Number
+							</button>
+						</span>
+						<button
+							type='button'
+							onClick={() => this.props.getOrders()}>
+							View All Orders
+						</button>
 					</form>
 				</div>
 				<Table striped bordered hover size='sm' variant='dark'>
 					<thead>
 						<tr>
 							<th>Order ID</th>
-							<th>Name</th>
+							<th>Status</th>
+							<th>Customer Name</th>
 							<th>Phone Number</th>
 							<th>Car Make</th>
 							<th>Car Model</th>
 							<th>Location</th>
-							<th>Date</th>
+							<th>Pickup Date</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -106,18 +129,19 @@ class AllOrders extends Component {
 										Details
 									</Link>
 								</td>
-								<td>{`${ord.first_name} ${ord.last_name}`}</td>
+								<td>{ord.status}</td>
+								<td>{`${ord.customer.firstName} ${ord.customer.lastName}`}</td>
 								<td>
 									<Link
-										to={`/singleuser/${ord.phone_number}`}
-										id={ord.phone_number}>
-										{ord.phone_number}
+										to={`/singleuser/${ord.customerPhoneNumber}`}
+										id={ord.customerPhoneNumber}>
+										{ord.customerPhoneNumber}
 									</Link>
 								</td>
-								<td>{ord.make}</td>
-								<td>{ord.model}</td>
-								<td>{ord.location}</td>
-								<td>{ord.date}</td>
+								<td>{ord.carMake}</td>
+								<td>{ord.carModel}</td>
+								<td>{ord.pickupLocation}</td>
+								<td>{ord.pickupDate}</td>
 							</tr>
 						))}
 					</tbody>
@@ -137,6 +161,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		getOrders: () => dispatch(getAllOrdersThunk()),
 		fetchCustom: obj => dispatch(fetchCustomDataThunk(obj)),
+		clearOrders: () => dispatch(clearAllOrdersThunk()),
 	}
 }
 export default withRouter(

@@ -7,25 +7,12 @@ class Navbar extends React.Component {
 	render() {
 		return (
 			<div className='nav'>
-				<div className='dropdown'>
-					<button type='button' className='dropbtn'>
-						Chat
-					</button>
-					<div id='myDropdown' className='dropdown-content'>
-						<Menu />
-					</div>
-				</div>
-
-				<Link to='/dashboard' className='link'>
-					Dashboard
+				<Link to='/account' className='link'>
+					Home
 				</Link>
 
 				<Link to='/allOrders' className='link'>
-					All Orders
-				</Link>
-
-				<Link to='/account' className='link'>
-					Account
+					Orders Archive
 				</Link>
 
 				<Link to='/allcustomers' className='link'>
@@ -40,9 +27,21 @@ class Navbar extends React.Component {
 					Calendar
 				</Link>
 
-				{/* <Link to='/chat' className='link'>
-					Chat
-				</Link> */}
+				<a
+					className='link'
+					href='https://www.carrectly.com/book/'
+					target='_blank'>
+					<div>Create a booking on client's behalf</div>
+				</a>
+
+				<div className='dropdown'>
+					<button type='button' className='dropbtn'>
+						Chat
+					</button>
+					<div id='myDropdown' className='dropdown-content'>
+						<Menu />
+					</div>
+				</div>
 			</div>
 		)
 	}

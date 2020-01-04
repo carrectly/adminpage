@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const GET_SINGLE_EMAIL = 'GET_SINGLE_EMAIL'
 const SEND_SINGLE_EMAIL = 'SEND_SINGLE_EMAIL'
+const CLEAR_SINGLE_EMAIL = 'CLEAR_SINGLE_EMAIL'
 /**
  * INITIAL STATE
  */
@@ -15,7 +16,7 @@ const singleEmail = {}
  */
 const getSingleEmail = email => ({type: GET_SINGLE_EMAIL, email})
 const sendSingleEmail = email => ({type: SEND_SINGLE_EMAIL, email})
-
+const clearSingleEmail = email => ({type: CLEAR_SINGLE_EMAIL, email})
 /**
  * THUNK CREATORS
  */
@@ -36,6 +37,14 @@ export const sendSingleEmailThunk = obj => async dispatch => {
 		console.error(err)
 	}
 }
+
+export const clearSingleEmailThunk = () => dispatch => {
+	try {
+		dispatch(clearSingleEmail({}))
+	} catch (err) {
+		console.error(err)
+	}
+}
 /**
  * REDUCER
  */
@@ -44,6 +53,8 @@ export default function(state = singleEmail, action) {
 		case GET_SINGLE_EMAIL:
 			return action.email
 		case SEND_SINGLE_EMAIL:
+			return action.email
+		case CLEAR_SINGLE_EMAIL:
 			return action.email
 		default:
 			return state

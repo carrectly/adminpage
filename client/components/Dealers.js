@@ -15,16 +15,20 @@ class Dealers extends Component {
 		return dealers.length ? (
 			<div>
 				<h1>Here you can manage all your shops and dealers</h1>
-				<div className='dealerscontainer'>
-					{dealers.map(dlr => (
-						<DealerCard
-							dealer={dlr}
-							delete={this.props.remove}
-							key={dlr.id}
-						/>
-					))}
+				<div className='alldealersview'>
+					<div className='dealerscontainer'>
+						{dealers.map(dlr => (
+							<DealerCard
+								dealer={dlr}
+								delete={this.props.remove}
+								key={dlr.id}
+							/>
+						))}
+					</div>
+					<div className='adddealersform'>
+						<AddDealer />
+					</div>
 				</div>
-				<AddDealer />
 			</div>
 		) : (
 			<div>

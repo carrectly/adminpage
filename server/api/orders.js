@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const {dbMYSQL} = require('../db/database')
 const Sequelize = require('sequelize')
-const {Order, OrderDetails, Service} = require('../db/models')
+const {Order, OrderDetails, Service, Customer} = require('../db/models')
+const Op = Sequelize.Op
 
 module.exports = router
 
@@ -20,7 +21,13 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
 	try {
-		const orders = await Order.findAll()
+		const orders = await Order.findAll({
+			include: [
+				{
+					model: Customer,
+				},
+			],
+		})
 		res.json(orders)
 	} catch (err) {
 		next(err)
@@ -29,7 +36,15 @@ router.get('/', async (req, res, next) => {
 
 router.get('/bystatus', async (req, res, next) => {
 	try {
-		const orders = await Order.findAll()
+		const orders = await Order.findAll({
+			where: {
+				status: {
+					[Op.not]: ['completed - paid'],
+				},
+			},
+			order: [['status', 'ASC']],
+			include: [{model: Customer}],
+		})
 		res.json(orders)
 	} catch (err) {
 		next(err)
@@ -62,6 +77,7 @@ router.put('/', async (req, res, next) => {
 				type: Sequelize.QueryTypes.SELECT,
 			}
 		)
+		console.log('WP ORDERS', orders)
 		res.json(orders)
 	} catch (err) {
 		next(err)

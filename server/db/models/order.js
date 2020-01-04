@@ -32,6 +32,10 @@ const Order = db.define('order', {
 	carModel: {
 		type: Sequelize.STRING,
 	},
+	vin: {
+		type: Sequelize.STRING,
+		allowNull: true,
+	},
 	status: {
 		type: Sequelize.STRING,
 		values: [
@@ -72,12 +76,16 @@ Order.beforeCreate((inst, options) => {
 Order.afterUpdate((inst, options) => {
 	let newinst = {...inst.dataValues}
 	console.log('updating instance', newinst)
-	return axios
-		.post(
+	return Customer.findOne({
+		where: {phoneNumber: newinst.customerPhoneNumber},
+	}).then(cus => {
+		newinst.customerName = `${cus.firstName} ${cus.lastName}`
+		console.log('order instance after finding the customer', newinst)
+		axios.post(
 			'http://localhost:1337/auth/google/calendar/newevent/update',
 			newinst
 		)
-		.then(res => console.log('successfully update in Calendar'))
+	})
 })
 
 module.exports = Order

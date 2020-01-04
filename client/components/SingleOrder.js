@@ -78,25 +78,30 @@ class SingleOrder extends Component {
 		}
 		return (
 			<div>
-				<h3>Order Details</h3>
 				<div className='singleordercontainer'>
-					<Table striped bordered hover variant='dark'>
-						<tbody>
-							{arr.map((details, index) => (
-								<tr key={index}>
-									<th>{details.split(':')[0]}</th>
-									<td>{details.split(':')[1]}</td>
-								</tr>
-							))}
-						</tbody>
-					</Table>
+					<div className='singleordertable'>
+						<h3>Order Details</h3>
+						<Table striped bordered hover variant='dark'>
+							<tbody>
+								{arr.map((details, index) => (
+									<tr key={index}>
+										<th>{details.split(':')[0]}</th>
+										<td>{details.split(':')[1]}</td>
+									</tr>
+								))}
+							</tbody>
+						</Table>
+					</div>
 					<div className='invoiceform'>
 						<UpdateOrder id={this.props.match.params.orderid} />
-						<Invoice fetchEmails={this.fetchEmails} />
+						<Invoice
+							fetchEmails={this.fetchEmails}
+							id={this.props.match.params.orderid}
+						/>
 					</div>
 				</div>
 				<br />
-				<div>
+				<div className='servicestable'>
 					<Table striped bordered hover size='sm' variant='dark'>
 						<thead>
 							<tr>
@@ -173,7 +178,7 @@ class SingleOrder extends Component {
 					</Table>
 				</div>
 
-				<h3>Order Email History</h3>
+				<h3 className='gmailheader'>Order Email History</h3>
 				<Gmail fetchEmails={this.fetchEmails} />
 			</div>
 		)

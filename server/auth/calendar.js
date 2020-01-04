@@ -193,6 +193,19 @@ async function createEvent(auth, evt) {
 async function updateEvent(auth, evt) {
 	const calendar = await google.calendar({version: 'v3', auth})
 
+	let colorid = 11
+	if (evt.status === 'waiting on quote') {
+		colorid = 4
+	} else if (evt.status === 'quote approved - getting serviced') {
+		colorid = 5
+	} else if (evt.status === 'completed - pending invoice') {
+		colorid = 10
+	} else if (evt.status === 'completed - invoice sent') {
+		colorid = 2
+	} else if (evt.status === 'completed - paid') {
+		colorid = 8
+	}
+
 	console.log('event received from new booking', evt)
 	var event = {
 		summary: `${evt.carYear} ${evt.carMake} ${evt.carModel} ${evt.customerName}`,
@@ -207,7 +220,7 @@ async function updateEvent(auth, evt) {
 			dateTime: `${evt.dropoffDate}`,
 			timeZone: 'America/Chicago',
 		},
-		colorId: '11',
+		colorId: `${colorid}`,
 		reminders: {
 			useDefault: false,
 			overrides: [
@@ -219,7 +232,7 @@ async function updateEvent(auth, evt) {
 
 	var request = calendar.events.update({
 		calendarId: 'primary',
-		eventId: event.hash,
+		eventId: evt.hash,
 		resource: event,
 	})
 

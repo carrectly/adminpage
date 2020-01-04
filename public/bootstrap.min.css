@@ -2497,6 +2497,7 @@ fieldset:disabled a.btn {
 	color: #fff;
 	background-color: #375a7f;
 	border-color: #375a7f;
+	border: 1px solid black;
 }
 .btn-primary:hover {
 	color: #fff;
@@ -3047,6 +3048,7 @@ fieldset:disabled a.btn {
 	font-size: 1.171875rem;
 	line-height: 1.5;
 	border-radius: 0.3rem;
+	border: 1px solid black;
 }
 .btn-sm,
 .btn-group-sm > .btn {
@@ -3060,7 +3062,7 @@ fieldset:disabled a.btn {
 	width: 100%;
 }
 .btn-block + .btn-block {
-	margin-top: 0.5rem;
+	margin-top: 0;
 }
 input[type='submit'].btn-block,
 input[type='reset'].btn-block,

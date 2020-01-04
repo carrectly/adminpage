@@ -12,6 +12,7 @@ class UpdateDealer extends Component {
 		this.state = {
 			name: '',
 			email: '',
+			phoneNumber: '',
 			specialty: '',
 			location: '',
 		}
@@ -31,6 +32,9 @@ class UpdateDealer extends Component {
 		if (this.state.email) {
 			obj.email = this.state.email
 		}
+		if (this.state.phoneNumber) {
+			obj.phoneNumber = this.state.phoneNumber
+		}
 		if (this.state.specialty) {
 			obj.specialty = this.state.specialty
 		}
@@ -44,6 +48,7 @@ class UpdateDealer extends Component {
 		this.setState({
 			name: '',
 			email: '',
+			phoneNumber: '',
 			specialty: '',
 			location: '',
 		})
@@ -52,22 +57,20 @@ class UpdateDealer extends Component {
 	render() {
 		return (
 			<div className='form'>
-				<h1>Update service shop info</h1>
+				<h3>Update service shop info</h3>
 				<Form onSubmit={this.handleSubmit}>
 					<Form.Group controlId='formBasicName'>
-						<Form.Label>Service Shop Name</Form.Label>
 						<Form.Control
 							type='text'
 							name='name'
 							value={this.state.name}
-							placeholder='Enter name'
+							placeholder='Service Shop Name'
 							onChange={this.handleChange}
 						/>
 						<Form.Text className='text-muted'>*required</Form.Text>
 					</Form.Group>
 
 					<Form.Group controlId='formBasicEmail'>
-						<Form.Label>Email</Form.Label>
 						<Form.Control
 							type='email'
 							name='email'
@@ -78,24 +81,32 @@ class UpdateDealer extends Component {
 						<Form.Text className='text-muted'>*required</Form.Text>
 					</Form.Group>
 
-					<Form.Group controlId='formBasicSpecialty'>
-						<Form.Label>Specialty</Form.Label>
+					<Form.Group controlId='formBasicPhoneNumber'>
 						<Form.Control
 							type='text'
-							name='specialty'
-							value={this.state.specialty}
-							placeholder='bodywork, mechanics, etc...'
+							name='phoneNumber'
+							value={this.state.phoneNumber}
+							placeholder='phoneNumber'
 							onChange={this.handleChange}
 						/>
 					</Form.Group>
 
-					<Form.Group controlId='formBasicPassword'>
-						<Form.Label>Location</Form.Label>
+					<Form.Group controlId='formBasicSpecialty'>
+						<Form.Control
+							type='text'
+							name='specialty'
+							value={this.state.specialty}
+							placeholder='Specialty'
+							onChange={this.handleChange}
+						/>
+					</Form.Group>
+
+					<Form.Group controlId='formBasicLocation'>
 						<Form.Control
 							type='text'
 							name='location'
 							value={this.state.location}
-							placeholder='business adrress'
+							placeholder='business location'
 							onChange={this.handleChange}
 						/>
 					</Form.Group>

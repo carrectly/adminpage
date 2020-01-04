@@ -26,26 +26,39 @@ class Routes extends Component {
 	}
 
 	render() {
+		const isLoggedIn = this.props.isLoggedIn
+		console.log('WHO IS LOGGED IN', isLoggedIn)
+		let show = false
+		if (isLoggedIn === 'birkusandre@gmail.com') {
+			show = true
+		} else {
+			show = false
+		}
 		return (
 			<Switch>
 				<Route exact path='/' component={Account} />
 				<Route path='/login' component={Login} />
-				<Route path='/dashboard' component={Dashboard} />
-				<Route path='/home' component={UserHome} />
-				<Route path='/allOrders' component={AllOrders} />
-				<Route path='/allcustomers' component={AllCustomers} />
-				<Route
-					path='/singlecustomer/:userid'
-					component={SingleCustomer}
-				/>
-				<Route path='/singleorder/:orderid' component={SingleOrder} />
 				<Route path='/account' component={Account} />
-				<Route path='/dealers/:dealerid' component={SingleDealer} />
-				<Route path='/dealers' component={Dealers} />
-
-				{/* <Route path='/gmail' component={Gmail} /> */}
-				<Route path='/chat' component={Chat} />
-				<Route path='/calendar' component={CalendarView} />
+				{show && (
+					<Switch>
+						<Route path='/allOrders' component={AllOrders} />
+						<Route path='/allcustomers' component={AllCustomers} />
+						<Route
+							path='/singlecustomer/:userid'
+							component={SingleCustomer}
+						/>
+						<Route
+							path='/singleorder/:orderid'
+							component={SingleOrder}
+						/>
+						<Route
+							path='/dealers/:dealerid'
+							component={SingleDealer}
+						/>
+						<Route path='/dealers' component={Dealers} />
+						<Route path='/calendar' component={CalendarView} />
+					</Switch>
+				)}
 			</Switch>
 		)
 	}
@@ -53,9 +66,7 @@ class Routes extends Component {
 
 const mapState = state => {
 	return {
-		// Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-		// Otherwise, state.user will be an empty object, and state.user.id will be falsey
-		isLoggedIn: !!state.user.id,
+		isLoggedIn: state.user.email,
 	}
 }
 
@@ -67,6 +78,4 @@ const mapDispatch = dispatch => {
 	}
 }
 
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes))

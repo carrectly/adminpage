@@ -22,7 +22,7 @@ class Account extends Component {
 				<div className='login'>
 					<h3>
 						Welcome Carrectly Admin. Login with Google to access all
-						features
+						the features
 					</h3>
 					<Login />
 				</div>

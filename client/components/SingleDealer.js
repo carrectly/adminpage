@@ -20,11 +20,19 @@ class SingleDealer extends Component {
 		const dealer = this.props.dealer
 		return dealer.id ? (
 			<div>
-				<div>Name: {dealer.name}</div>
-				<div>Email: {dealer.email}</div>
-				<div>Specialty: {dealer.specialty}</div>
-				<div>Location: {dealer.location}</div>
-				<UpdateDealer id={this.props.match.params.dealerid} />
+				<div className='singledealerview'>
+					<div className='singledealerinfo'>
+						<h3>Dealer Info</h3>
+						<div>Name: {dealer.name}</div>
+						<div>Email: {dealer.email}</div>
+						<div>Specialty: {dealer.specialty}</div>
+						<div>Phone: {dealer.specialty}</div>
+						<div>Location: {dealer.location}</div>
+					</div>
+					<div className='adddealersform'>
+						<UpdateDealer id={this.props.match.params.dealerid} />
+					</div>
+				</div>
 			</div>
 		) : (
 			<div />

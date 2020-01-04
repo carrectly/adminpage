@@ -2,18 +2,36 @@ import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getStripeCustomerThunk, createInvoiceThunk} from '../store/stripe'
-import {DropdownButton, Dropdown, Button} from 'react-bootstrap'
+import {
+	DropdownButton,
+	Dropdown,
+	Button,
+	ButtonToolbar,
+	OverlayTrigger,
+	Tooltip,
+} from 'react-bootstrap'
 import {fetchDealersThunk} from '../store/dealers.js'
 import {sendSingleEmailThunk} from '../store/singleemail'
 import {getEmailsThunk} from '../store/emails'
+import {updateSingleOrderThunk} from '../store/singleorder'
 
 let cust
+
+const statusArray = [
+	'received',
+	'waiting on quote',
+	'quote approved - getting serviced',
+	'completed - pending invoice',
+	'completed - invoice sent',
+	'completed - paid',
+]
 
 class Invoice extends Component {
 	constructor(props) {
 		super(props)
 		this.handleClick = this.handleClick.bind(this)
 		this.handleSend = this.handleSend.bind(this)
+		this.handleStatusUpdate = this.handleStatusUpdate.bind(this)
 		this.state = {
 			invoice: true,
 		}
@@ -40,8 +58,18 @@ class Invoice extends Component {
 		obj.make = this.props.order.make
 		obj.model = this.props.order.model
 		obj.orderid = this.props.order.hash
-		this.props.sendEmail(obj)
+		await this.props.sendEmail(obj)
+		obj = {}
 		await this.props.fetchEmails()
+	}
+
+	handleStatusUpdate(evt) {
+		console.log('evt', evt.target)
+		let obj = {
+			status: evt.target.name,
+		}
+		let id = this.props.id
+		this.props.updateStatus(id, obj)
 		obj = {}
 	}
 
@@ -50,35 +78,21 @@ class Invoice extends Component {
 		let dealers = this.props.dealers || []
 		return (
 			<div>
-				<p>Can't create an invoice until the status is "completed" </p>
-				<p>
-					Can't create an invoice until we check if the user exists in
-					stripe
-				</p>
-
 				<DropdownButton
 					size='lg'
 					id='dropdown-basic-button'
 					title='Change Status'
 					className='btn-block'>
-					<Dropdown.Item href='#/action-1'>Received</Dropdown.Item>
-					<Dropdown.Item href='#/action-2'>
-						Waiting on Quote
-					</Dropdown.Item>
-					<Dropdown.Item href='#/action-3'>
-						Quote Approved - getting Serviced
-					</Dropdown.Item>
-					<Dropdown.Item href='#/action-4'>
-						Completed - pending invoice
-					</Dropdown.Item>
-					<Dropdown.Item href='#/action-5'>
-						Completed - invoice sent
-					</Dropdown.Item>
-					<Dropdown.Item href='#/action-6'>
-						Completed - invoice paid
-					</Dropdown.Item>
+					{statusArray.map((status, index) => (
+						<Dropdown.Item
+							key={index}
+							id={index}
+							name={status}
+							onClick={this.handleStatusUpdate}>
+							{status}
+						</Dropdown.Item>
+					))}
 				</DropdownButton>
-
 				<DropdownButton
 					size='lg'
 					id='dropdown-basic-button'
@@ -94,26 +108,55 @@ class Invoice extends Component {
 					))}
 				</DropdownButton>
 
-				<Button
-					size='lg'
-					block
-					variant='primary'
-					onClick={() => this.handleClick(this.props.order)}>
-					Check if customer exists in Stripe
-				</Button>
-				<Button
-					size='lg'
-					block
-					variant='primary'
-					disabled={this.state.invoice}
-					onClick={() =>
-						this.props.createInvoice(
-							this.props.order,
-							this.props.customer.id
-						)
-					}>
-					Create Invoice
-				</Button>
+				<ButtonToolbar>
+					<OverlayTrigger
+						key='left'
+						placement='left'
+						overlay={
+							<Tooltip id='tooltip-left'>
+								If customer does not exist in{' '}
+								<strong>stripe</strong>, this button will create
+								a new customer. Can't create an invoice until we
+								check if the customer exists in{' '}
+								<strong>stripe</strong>.
+							</Tooltip>
+						}>
+						<Button
+							size='lg'
+							block
+							variant='primary'
+							onClick={() => this.handleClick(this.props.order)}>
+							Check if customer exists in Stripe
+						</Button>
+					</OverlayTrigger>
+				</ButtonToolbar>
+
+				<ButtonToolbar>
+					<OverlayTrigger
+						key='left'
+						placement='left'
+						overlay={
+							<Tooltip id='tooltip-left'>
+								Can't create an invoice until we check if the
+								user exists in <strong>stripe</strong>.
+							</Tooltip>
+						}>
+						<Button
+							size='lg'
+							block
+							variant='primary'
+							disabled={this.state.invoice}
+							onClick={() =>
+								this.props.createInvoice(
+									this.props.order,
+									this.props.customer.id
+								)
+							}>
+							Create Invoice
+						</Button>
+					</OverlayTrigger>
+				</ButtonToolbar>
+
 				<div>
 					{cust ? <div>{this.props.customer.status}</div> : <div />}
 				</div>
@@ -136,6 +179,7 @@ const mapDispatchToProps = dispatch => {
 		fetchDealers: () => dispatch(fetchDealersThunk()),
 		sendEmail: obj => dispatch(sendSingleEmailThunk(obj)),
 		getEmails: id => dispatch(getEmailsThunk(id)),
+		updateStatus: (id, obj) => dispatch(updateSingleOrderThunk(id, obj)),
 	}
 }
 

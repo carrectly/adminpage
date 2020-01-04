@@ -5,9 +5,9 @@ import {getContactsThunk, createContactThunk} from '../store/contacts'
 import {Table} from 'react-bootstrap'
 
 class AllCustomers extends Component {
-	componentDidMount() {
-		this.props.getContacts()
-	}
+	// componentDidMount() {
+	// 	this.props.getContacts()
+	// }
 
 	render() {
 		const contacts = this.props.contacts || []
@@ -15,11 +15,43 @@ class AllCustomers extends Component {
 			<div>
 				<div>
 					<h1>All Client Contacts</h1>
-					{/* <button
-						type='button'
-						onClick={() => this.props.getContacts()}>
-						View All Clients
-					</button> */}
+					<form onSubmit={this.handleSubmit}>
+						<span>
+							<input
+								type='text'
+								name='customername'
+								placeholder='customer name'
+							/>
+							<button type='submit'>
+								Search by customer name
+							</button>
+						</span>
+						<span>
+							<input
+								type='text'
+								name='email'
+								placeholder='email'
+							/>
+							<button type='submit'>
+								Search by customer email
+							</button>
+						</span>
+						<span>
+							<input
+								type='text'
+								name='phone'
+								placeholder='phone'
+							/>
+							<button type='submit'>
+								Search by customer phone number
+							</button>
+						</span>
+						<button
+							type='button'
+							onClick={() => this.props.getContacts()}>
+							View All Customers
+						</button>
+					</form>
 				</div>
 				<Table striped bordered hover size='sm' variant='dark'>
 					<thead>
