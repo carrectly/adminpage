@@ -26,14 +26,6 @@ class Navbar extends React.Component {
 				<Link to='/calendar' className='link'>
 					Calendar
 				</Link>
-
-				<a
-					className='link'
-					href='https://www.carrectly.com/book/'
-					target='_blank'>
-					<div>Create a booking on client's behalf</div>
-				</a>
-
 				<div className='dropdown'>
 					<button type='button' className='dropbtn'>
 						Chat
@@ -42,6 +34,12 @@ class Navbar extends React.Component {
 						<Menu />
 					</div>
 				</div>
+				<a
+					className='link'
+					href='https://www.carrectly.com/book/'
+					target='_blank'>
+					<div>Create a booking on client's behalf</div>
+				</a>
 			</div>
 		)
 	}

@@ -16,7 +16,7 @@ import {getEmailsThunk} from '../store/emails'
 import {updateSingleOrderThunk} from '../store/singleorder'
 
 let cust
-
+let invoice
 const statusArray = [
 	'received',
 	'waiting on quote',
@@ -75,6 +75,7 @@ class Invoice extends Component {
 
 	render() {
 		cust = this.props.customer.id || null
+		invoice = this.props.invoice.id || null
 		let dealers = this.props.dealers || []
 		return (
 			<div>
@@ -159,6 +160,7 @@ class Invoice extends Component {
 
 				<div>
 					{cust ? <div>{this.props.customer.status}</div> : <div />}
+					{invoice ? <div>Invoice created succesfully</div> : <div />}
 				</div>
 			</div>
 		)
@@ -168,6 +170,7 @@ class Invoice extends Component {
 const mapStateToProps = state => {
 	return {
 		customer: state.stripe.singleCustomer,
+		invoice: state.stripe.invoice,
 		order: state.singleorder,
 		dealers: state.dealers,
 	}
