@@ -111,18 +111,25 @@
 		"hash": "f2b37eb9636f386d10cb64198aa16caf"
 	},
 	{
-		"services": "detail",
-		"pickupDate": "2020-01-12 15:05",
-		"dropoffDate": "2020-01-12 15:05",
+		"services": [
+			{
+				"name": "detail",
+				"name": "oil change"
+			}
+		],
+		"pickupDate": "2020-01-10 08:05",
+		"dropoffDate": "2020-01-10 14:05",
 		"pickupLocation": "801 South Wells Street",
-		"carYear": 2014,
+		"carYear": "2014",
 		"carMake": "Subaru",
 		"carModel": "XV Crosstrek",
-		"firstName": "Gregory",
-		"lastName": "Karpovics",
-		"location": 60607,
-		"phoneNumber": 5037094724,
-		"email": "gkarpovics@me.com",
+		"customer": {
+			"firstName": "Gregory",
+			"lastName": "Karpovics",
+			"location": "60607",
+			"phoneNumber": "5037094724",
+			"email": "gkarpovics@me.com"
+		},
 		"hash": "7bb016ba9878e9ecdc625bd9c130f1a0"
 	},
 	{

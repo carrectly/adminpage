@@ -1,7 +1,7 @@
 const router = require('express').Router()
 var SquareConnect = require('square-connect')
 var client = SquareConnect.ApiClient.instance
-
+const {Order, OrderDetails, Service, Customer} = require('../db/models')
 const config = require('../../squareconfig.json').sandbox
 // Configure OAuth2 access token for authorization: oauth2
 var oauth2 = client.authentications.oauth2
@@ -12,9 +12,17 @@ var customers = new SquareConnect.CustomersApi()
 
 router.post('/', async (req, res, next) => {
 	try {
-		//console.log('customers keys', customers.searchCustomers)
-		console.log('req body', req.body.email)
-		let email = req.body.email
+		console.log('square req body', req.body)
+
+		let phone = req.body.customerPhoneNumber
+
+		let cust = await Customer.findOne({
+			where: {
+				phoneNumber: phone,
+			},
+		})
+
+		let email = cust.dataValues.email
 		const cstmr = await customers.listCustomers()
 		console.log('cstmr', cstmr.customers)
 		let singlecstmr = cstmr.customers.filter(
@@ -24,13 +32,19 @@ router.post('/', async (req, res, next) => {
 		console.log('SINGLE CUSTOMER FOUND', singlecstmr)
 		if (singlecstmr.length !== 1) {
 			singlecstmr = await customers.createCustomer({
-				given_name: req.body.first_name,
-				family_name: req.body.last_name,
-				email_address: req.body.email,
+				given_name: cust.dataValues.firstName,
+				family_name: cust.dataValues.lastName,
+				email_address: cust.dataValues.email,
+				phone_number: cust.dataValues.phoneNumber,
 			})
+			singlecstmr = singlecstmr.customer
+			singlecstmr.status = 'NEW CUSTOMER ADDED IN SQUARE'
 		} else {
 			singlecstmr = singlecstmr[0]
+			singlecstmr.status = 'CUSTOMER EXISTS IN SQUARE'
 		}
+
+		console.log('single customer square', singlecstmr)
 		res.json(singlecstmr)
 	} catch (err) {
 		next(err)

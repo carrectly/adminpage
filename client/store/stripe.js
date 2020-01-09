@@ -21,18 +21,36 @@ const createInvoice = invoice => ({type: CREATE_INVOICE, invoice})
 /**
  * THUNK CREATORS
  */
+// export const getStripeCustomerThunk = obj => async dispatch => {
+// 	try {
+// 		const res = await axios.post('/stripe', obj)
+// 		dispatch(getCustomer(res.data))
+// 	} catch (err) {
+// 		console.error(err)
+// 	}
+// }
+
 export const getStripeCustomerThunk = obj => async dispatch => {
 	try {
-		const res = await axios.post('/stripe', obj)
+		const res = await axios.post('/square/customers', obj)
 		dispatch(getCustomer(res.data))
 	} catch (err) {
 		console.error(err)
 	}
 }
 
+// export const createInvoiceThunk = (obj, id) => async dispatch => {
+// 	try {
+// 		const res = await axios.post('/stripe/invoices', {obj, id})
+// 		dispatch(createInvoice(res.data))
+// 	} catch (err) {
+// 		console.error(err)
+// 	}
+// }
+
 export const createInvoiceThunk = (obj, id) => async dispatch => {
 	try {
-		const res = await axios.post('/stripe/invoices', {obj, id})
+		const res = await axios.post('/square/invoices', {obj, id})
 		dispatch(createInvoice(res.data))
 	} catch (err) {
 		console.error(err)
