@@ -56,7 +56,12 @@ router.post('/newbooking', async (req, res, next) => {
 
 		const forLoop3 = async _ => {
 			for (let i = 0; i < servicesFromDb.length; i++) {
-				await ordr.addService(servicesFromDb[i])
+				console.log('assigning service to order', servicesFromDb[i])
+				await ordr.addService(servicesFromDb[i], {
+					through: {
+						customerPrice: servicesFromDb[i].dataValues.price,
+					},
+				})
 			}
 		}
 

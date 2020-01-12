@@ -55,29 +55,17 @@ router.put('/', async (req, res, next) => {
 	try {
 		let start = req.body.dateStart
 		let end = req.body.dateEnd
-		if (!req.body.dateStart) {
-			start = '01-12-2019'
-		}
 
-		if (!req.body.dateEnd) {
-			end = '12-12-2019'
-		}
-		start = start
-			.split('-')
-			.reverse()
-			.join('-')
-		end = end
-			.split('-')
-			.reverse()
-			.join('-')
+		console.log('orders by date', start, end)
+		const orders = await Order.findAll({
+			where: {
+				createdAt: {
+					[Op.between]: [start, end],
+				},
+			},
+			include: [{model: Customer}],
+		})
 
-		const orders = await dbMYSQL.query(
-			`SELECT * FROM wp_booking_data WHERE date = '${start}';`,
-			{
-				type: Sequelize.QueryTypes.SELECT,
-			}
-		)
-		console.log('WP ORDERS', orders)
 		res.json(orders)
 	} catch (err) {
 		next(err)
@@ -160,7 +148,7 @@ router.get('/single/:orderid', async (req, res, next) => {
 			where: {
 				hash: id,
 			},
-			include: [{model: Service}],
+			include: [{model: Service}, {model: Customer}],
 		})
 		res.json(orders)
 	} catch (err) {
@@ -216,13 +204,17 @@ router.post('/single/services/:orderid', async (req, res, next) => {
 			},
 		})
 
-		console.log(service)
+		console.log('service object', service)
 		const order = await Order.findOne({
 			where: {
 				hash: id,
 			},
 		})
-		let resp = await order.addService(service)
+
+		let resp = await order.addService(service, {
+			through: {customerPrice: service.dataValues.price},
+		})
+
 		console.log('response afer adding service', resp)
 		res.json(resp)
 	} catch (err) {

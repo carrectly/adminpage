@@ -51,6 +51,10 @@ const Order = db.define('order', {
 	comments: {
 		type: Sequelize.TEXT,
 	},
+	promoCode: {
+		type: Sequelize.STRING,
+		allowNull: true,
+	},
 	isInCalendar: {
 		type: Sequelize.BOOLEAN,
 		defaultValue: false,

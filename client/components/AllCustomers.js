@@ -1,7 +1,11 @@
 import {withRouter, Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getContactsThunk, createContactThunk} from '../store/contacts'
+import {
+	getContactsThunk,
+	createContactThunk,
+	getContactsByQueryThunk,
+} from '../store/contacts'
 import {Table} from 'react-bootstrap'
 
 class AllCustomers extends Component {
@@ -14,9 +18,9 @@ class AllCustomers extends Component {
 		return (
 			<div>
 				<div>
-					<h1>All Client Contacts</h1>
+					<h1 className='center'>All Client Contacts</h1>
 					<form onSubmit={this.handleSubmit}>
-						<span>
+						{/* <span>
 							<input
 								type='text'
 								name='customername'
@@ -25,14 +29,18 @@ class AllCustomers extends Component {
 							<button type='submit'>
 								Search by customer name
 							</button>
-						</span>
+						</span> */}
 						<span>
 							<input
 								type='text'
 								name='email'
 								placeholder='email'
 							/>
-							<button type='submit'>
+							<button
+								type='submit'
+								onClick={() =>
+									this.props.queryContact(event.target.value)
+								}>
 								Search by customer email
 							</button>
 						</span>
@@ -65,13 +73,15 @@ class AllCustomers extends Component {
 					<tbody>
 						{contacts.map((person, index) => (
 							<tr key={index}>
-								<td>{person.names[0].displayName}</td>
-								<td>{person.emailAddresses[0].value}</td>
-								<td>{person.phoneNumbers[0].value}</td>
+								<td>
+									{person.firstName} {person.lastName}
+								</td>
+								<td>{person.email}</td>
+								<td>{person.phoneNumber}</td>
 								<td>
 									<Link
-										to={`/singlecustomer/${person.phoneNumbers[0].value}`}
-										id={person.phoneNumbers[0].value}>
+										to={`/singlecustomer/${person.phoneNumber}`}
+										id={person.phoneNumber}>
 										View History
 									</Link>
 								</td>
@@ -94,6 +104,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		getContacts: () => dispatch(getContactsThunk()),
 		createContact: () => dispatch(createContactThunk()),
+		queryContact: id => dispatch(getContactsByQueryThunk(id)),
 	}
 }
 export default withRouter(

@@ -4,6 +4,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {Login} from './auth-form'
 import {logout} from '../store'
 import BookingsByStatus from './BookingsByStatus'
+import {Button} from 'react-bootstrap'
 
 class Account extends Component {
 	constructor() {
@@ -30,13 +31,14 @@ class Account extends Component {
 		}
 		return (
 			<React.Fragment>
-				<h1 className='center'>Hello, {this.props.user.email}</h1>
-				<div className='flex-display flex-wrap account'>
-					<div className='center'>
-						<button type='button' onClick={this.handleLogout}>
-							Log Out
-						</button>
-					</div>
+				<div className='account'>
+					<h1>Hello, {this.props.user.email}</h1>
+					<Button
+						variant='secondary'
+						size='sm'
+						onClick={this.handleLogout}>
+						Log Out
+					</Button>
 				</div>
 				<div>
 					<BookingsByStatus />

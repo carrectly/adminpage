@@ -12,7 +12,7 @@ import userorders from './userorders'
 import singleorder from './singleorder'
 import dealers from './dealers'
 import chat from './chat'
-import stripe from './stripe'
+import square from './square'
 import singledealer from './singledealer'
 import singlecustomer from './singlecustomer'
 import services from './services'
@@ -28,7 +28,7 @@ const reducer = combineReducers({
 	singleorder,
 	dealers,
 	chat,
-	stripe,
+	square,
 	singledealer,
 	singlecustomer,
 	services,

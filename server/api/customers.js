@@ -1,6 +1,39 @@
 const router = require('express').Router()
 const {Customer} = require('../db/models')
 
+router.get('/', async (req, res, next) => {
+	try {
+		const allCust = await Customer.findAll({})
+		res.json(allCust)
+	} catch (err) {
+		next(err)
+	}
+})
+
+router.get('/:query', async (req, res, next) => {
+	try {
+		let q = req.params.query
+		console.log('special query', q)
+		let cust
+		if (q.includes('@')) {
+			cust = await Customer.findOne({
+				where: {
+					email: q,
+				},
+			})
+		} else {
+			cust = await Customer.findOne({
+				where: {
+					phoneNumber: q,
+				},
+			})
+		}
+		res.json(cust)
+	} catch (err) {
+		next(err)
+	}
+})
+
 router.get('/single/:id', async (req, res, next) => {
 	try {
 		let id = req.params.id

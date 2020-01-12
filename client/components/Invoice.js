@@ -1,7 +1,11 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getStripeCustomerThunk, createInvoiceThunk} from '../store/stripe'
+import {
+	getSquareCustomerThunk,
+	createInvoiceThunk,
+	clearSquareThunk,
+} from '../store/square'
 import {
 	DropdownButton,
 	Dropdown,
@@ -44,8 +48,12 @@ class Invoice extends Component {
 		cust = this.props.customer.id
 	}
 
+	componentWillUnmount() {
+		this.props.clearSquare()
+	}
+
 	handleClick(obj) {
-		this.props.getStripeCustomer(obj)
+		this.props.getSquareCustomer(obj)
 		this.setState({
 			invoice: false,
 		})
@@ -54,9 +62,10 @@ class Invoice extends Component {
 	async handleSend(evt) {
 		let obj = {}
 		obj.email = evt.target.id
-		obj.year = this.props.order.year
-		obj.make = this.props.order.make
-		obj.model = this.props.order.model
+		obj.year = this.props.order.carYear
+		obj.make = this.props.order.carMake
+		obj.model = this.props.order.carModel
+		obj.vin = this.props.order.vin
 		obj.orderid = this.props.order.hash
 		await this.props.sendEmail(obj)
 		obj = {}
@@ -116,10 +125,10 @@ class Invoice extends Component {
 						overlay={
 							<Tooltip id='tooltip-left'>
 								If customer does not exist in{' '}
-								<strong>stripe</strong>, this button will create
+								<strong>square</strong>, this button will create
 								a new customer. Can't create an invoice until we
 								check if the customer exists in{' '}
-								<strong>stripe</strong>.
+								<strong>square</strong>.
 							</Tooltip>
 						}>
 						<Button
@@ -127,7 +136,7 @@ class Invoice extends Component {
 							block
 							variant='primary'
 							onClick={() => this.handleClick(this.props.order)}>
-							Check if customer exists in Stripe
+							Check if customer exists in Square
 						</Button>
 					</OverlayTrigger>
 				</ButtonToolbar>
@@ -139,7 +148,7 @@ class Invoice extends Component {
 						overlay={
 							<Tooltip id='tooltip-left'>
 								Can't create an invoice until we check if the
-								user exists in <strong>stripe</strong>.
+								user exists in <strong>square</strong>.
 							</Tooltip>
 						}>
 						<Button
@@ -169,15 +178,16 @@ class Invoice extends Component {
 
 const mapStateToProps = state => {
 	return {
-		customer: state.stripe.singleCustomer,
-		invoice: state.stripe.invoice,
+		customer: state.square.singleCustomer,
+		invoice: state.square.invoice,
 		order: state.singleorder,
 		dealers: state.dealers,
 	}
 }
 const mapDispatchToProps = dispatch => {
 	return {
-		getStripeCustomer: obj => dispatch(getStripeCustomerThunk(obj)),
+		getSquareCustomer: obj => dispatch(getSquareCustomerThunk(obj)),
+		clearSquare: () => dispatch(clearSquareThunk()),
 		createInvoice: (obj, str) => dispatch(createInvoiceThunk(obj, str)),
 		fetchDealers: () => dispatch(fetchDealersThunk()),
 		sendEmail: obj => dispatch(sendSingleEmailThunk(obj)),

@@ -23,9 +23,9 @@ class DealerCard extends Component {
 				<Card.Body>
 					<Card.Title>{dealer.name}</Card.Title>
 					<Card.Subtitle className='mb-2 text-muted'>
-						{dealer.email}
+						<div>{dealer.email}</div>
+						<div>{dealer.location}</div>
 					</Card.Subtitle>
-					<Card.Text>{dealer.location}</Card.Text>
 					<Link to={`/dealers/${dealer.id}`}>
 						<Button variant='primary'>View/Edit</Button>
 					</Link>

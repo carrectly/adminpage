@@ -73,8 +73,15 @@ class SingleOrder extends Component {
 		const services = this.props.order.services || []
 
 		let arr = []
+
 		for (let [key, value] of Object.entries(singleorder)) {
-			arr.push(`${key}: ${value}`)
+			if (key !== 'services') {
+				if (key === 'customer') {
+					arr.push([`${key}`, `${value.firstName} ${value.lastName}`])
+				} else {
+					arr.push([`${key}`, `${value}`])
+				}
+			}
 		}
 		return (
 			<div>
@@ -85,8 +92,8 @@ class SingleOrder extends Component {
 							<tbody>
 								{arr.map((details, index) => (
 									<tr key={index}>
-										<th>{details.split(':')[0]}</th>
-										<td>{details.split(':')[1]}</td>
+										<th>{details[0]}</th>
+										<td>{details[1]}</td>
 									</tr>
 								))}
 							</tbody>

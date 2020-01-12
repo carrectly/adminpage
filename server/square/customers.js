@@ -12,8 +12,6 @@ var customers = new SquareConnect.CustomersApi()
 
 router.post('/', async (req, res, next) => {
 	try {
-		console.log('square req body', req.body)
-
 		let phone = req.body.customerPhoneNumber
 
 		let cust = await Customer.findOne({
@@ -44,7 +42,6 @@ router.post('/', async (req, res, next) => {
 			singlecstmr.status = 'CUSTOMER EXISTS IN SQUARE'
 		}
 
-		console.log('single customer square', singlecstmr)
 		res.json(singlecstmr)
 	} catch (err) {
 		next(err)

@@ -50,18 +50,8 @@ class AllOrders extends Component {
 	}
 
 	render() {
-		let today = new Date()
-		let dd = today.getDate()
-		let mm = today.getMonth() + 1
-		let yyyy = today.getFullYear()
-		if (dd < 10) {
-			dd = '0' + dd
-		}
-		if (mm < 10) {
-			mm = '0' + mm
-		}
-		today = yyyy + '-' + mm + '-' + dd
 		const orders = this.props.orders || []
+		console.log('state', this.state)
 		return (
 			<div>
 				<div>
@@ -80,25 +70,24 @@ class AllOrders extends Component {
 								name='dateEnd'
 								placeholder='end date'
 								onChange={this.handleChange}
-								value={this.state.dateStart}
+								value={this.state.dateEnd}
 							/>
 							<button type='submit'>
 								{' '}
 								Search Orders by Date{' '}
 							</button>
 						</span>
-						<span>
+						{/* <span>
 							<input
 								type='text'
-								name='dateEnd'
-								placeholder='end date'
+								name='phoneNumber'
+								placeholder='phone number'
 								onChange={this.handleChange}
-								value={this.state.dateStart}
 							/>
 							<button type='submit'>
 								Search Orders by Customer Phone Number
 							</button>
-						</span>
+						</span> */}
 						<button
 							type='button'
 							onClick={() => this.props.getOrders()}>

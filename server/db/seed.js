@@ -9,12 +9,78 @@ const {
 const {db} = require('./database.js')
 var faker = require('faker')
 const Sequelize = require('sequelize')
+const fs = require('fs')
 
 let customerSeed = []
 let userSeed = []
 let orderSeed = []
 let orderDetailSeed = []
-let serviceSeed = []
+let serviceSeed = [
+	{name: 'AC Coolant Recharge', price: 150},
+	{name: 'Alighnment', price: 140},
+	{name: 'Battery Test and Replacement', price: 55},
+	{name: 'Brake Fluid Flush', price: 150},
+	{name: 'Brake Pads & Rotors Replacement', price: 440},
+	{name: 'Brake Pads Replacement', price: 260},
+	{name: 'Car Unlock', price: 420},
+	{name: 'Ceramic Coating & Paint Correction', price: 1300},
+	{name: 'Chauffeur', price: 25},
+	{name: 'Deluxe Wash', price: 35},
+	{name: 'Dog Hair', price: 30},
+	{name: 'Emission Test', price: 55},
+	{name: 'Engine Detail', price: 55},
+	{name: 'Exterior Detail', price: 160},
+	{name: 'FREE Quote', price: 0},
+	{name: 'Fuel up', price: 10},
+	{name: 'Full Inspection', price: 100},
+	{name: 'Headlight Restoration', price: 80},
+	{name: "Independent Shops' Estimate", price: 60},
+	{name: 'Interior Detail', price: 160},
+	{name: 'Jump Start', price: 250},
+	{name: 'Jump Start & Battery Replacement', price: 240},
+	{name: 'Labor Cost', price: 120},
+	{name: 'Long-Haul Transit', price: 500},
+	{name: 'Long-Term Vehicle Storage', price: 70},
+	{name: 'One Way Transport', price: 40},
+	{name: 'Paint Correction', price: 500},
+	{name: 'Paintless Dent Removal', price: 100},
+	{name: 'Panel Repaint', price: 400},
+	{name: 'PPF Full Car', price: 3000},
+	{name: 'PPF Full Front', price: 1500},
+	{name: 'PPF half Front', price: 650},
+	{name: 'Problem Diagnostics', price: 60},
+	{name: 'Protective Plastic Floor Wrap', price: 4},
+	{name: 'Recall & Dealership Run', price: 65},
+	{name: 'Regular Maintenance', price: 280},
+	{name: 'Roundtrip Transport', price: 70},
+	{name: 'Shampoo Floor Mats', price: 20},
+	{name: 'Short-Term Vehicle Storage', price: 15},
+	{name: 'Showroom Detail', price: 260},
+	{name: 'Small Part Replacement', price: 60},
+	{name: 'Spiff / Light Detail', price: 120},
+	{name: 'Stickers & Adhesive Removal', price: 5},
+	{name: 'Synthetic Oil Change', price: 110},
+	{name: 'Tar Removal', price: 25},
+	{name: 'Tint', price: 380},
+	{name: 'Tint Removal', price: 25},
+	{name: 'Tire Balancing', price: 20},
+	{name: 'Tire Fix', price: 55},
+	{name: 'Tire Installation', price: 20},
+	{name: 'Tire Rotation', price: 90},
+	{name: 'Tire Storage', price: 100},
+	{name: 'TPMS', price: 120},
+	{name: 'TPMS Sensor Replacement', price: 120},
+	{name: 'Transmission Fluid Flush', price: 225},
+	{name: 'Wash & Wax', price: 80},
+	{name: 'Wax', price: 40},
+	{name: 'Wet Sand', price: 20},
+	{name: 'Wheel & Tire Storage', price: 120},
+	{name: 'Wheel Restoration', price: 150},
+	{name: 'Wheel Welding', price: 80},
+	{name: 'Wiper Blade Replacement', price: 140},
+	{name: 'Wrap', price: 2500},
+]
+
 let dealerSeed = []
 const statusArray = [
 	'received',
@@ -94,22 +160,22 @@ for (let i = 0; i < 10; i++) {
 	})
 }
 
-serviceSeed.push({
-	name: 'wash',
-	price: 30,
-	description: 'very nice car bath',
-})
-serviceSeed.push({
-	name: 'detail',
-	price: 90,
-	description: 'very nice detailing service',
-})
+// serviceSeed.push({
+// 	name: 'wash',
+// 	price: 30,
+// 	description: 'very nice car bath',
+// })
+// serviceSeed.push({
+// 	name: 'detail',
+// 	price: 90,
+// 	description: 'very nice detailing service',
+// })
 
-serviceSeed.push({
-	name: 'oil change',
-	price: 100,
-	description: 'very nice oil change',
-})
+// serviceSeed.push({
+// 	name: 'oil change',
+// 	price: 100,
+// 	description: 'very nice oil change',
+// })
 
 const seed = async () => {
 	try {
@@ -127,74 +193,7 @@ const seed = async () => {
 				console.error('User Exists', err.name)
 			}
 		)
-		// await Customer.create(customerSeed[1]).catch(
-		// 	Sequelize.ValidationError,
-		// 	function(err) {
-		// 		console.error('User Exists', err.name)
-		// 	}
-		// )
-		// await Customer.create(customerSeed[2]).catch(
-		// 	Sequelize.ValidationError,
-		// 	function(err) {
-		// 		console.error('User Exists', err.name)
-		// 	}
-		// )
-		// await Customer.create(customerSeed[3]).catch(
-		// 	Sequelize.ValidationError,
-		// 	function(err) {
-		// 		console.error('User Exists', err.name)
-		// 	}
-		// )
-		// await Customer.create(customerSeed[4]).catch(
-		// 	Sequelize.ValidationError,
-		// 	function(err) {
-		// 		console.error('User Exists', err.name)
-		// 	}
-		// )
-		// await Customer.create(customerSeed[5]).catch(
-		// 	Sequelize.ValidationError,
-		// 	function(err) {
-		// 		console.error('User Exists', err.name)
-		// 	}
-		// )
-		// await Customer.create(customerSeed[6]).catch(
-		// 	Sequelize.ValidationError,
-		// 	function(err) {
-		// 		console.error('User Exists', err.name)
-		// 	}
-		// )
-		// await Customer.create(customerSeed[7]).catch(
-		// 	Sequelize.ValidationError,
-		// 	function(err) {
-		// 		console.error('User Exists', err.name)
-		// 	}
-		// )
-		// await Customer.create(customerSeed[8]).catch(
-		// 	Sequelize.ValidationError,
-		// 	function(err) {
-		// 		console.error('User Exists', err.name)
-		// 	}
-		// )
-		// await Customer.create(customerSeed[9]).catch(
-		// 	Sequelize.ValidationError,
-		// 	function(err) {
-		// 		console.error('User Exists', err.name)
-		// 	}
-		// )
-		//await Customer.bulkCreate(customerSeed)
 
-		// const forLoop = async _ => {
-		// 	for (let i = 0; i < orderSeed.length; i++) {
-		// 		await Order.create(orderSeed[i])
-		// 	}
-		// }
-		// await forLoop()
-		// await Order.create(orderSeed[0]).catch(
-		// 	Sequelize.ValidationError,
-		// 	function(err) {
-		// 		console.error('User Exists', err.name)
-		// 	}
-		// )
 		await Dealer.bulkCreate(dealerSeed)
 		await Service.bulkCreate(serviceSeed)
 		//await OrderDetails.bulkCreate(orderDetailSeed)

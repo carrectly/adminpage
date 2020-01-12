@@ -28,8 +28,6 @@ router.post('/', async (req, res, next) => {
 			})
 		})
 
-		console.log('LINE ITEMS arr', lineItems)
-
 		let singleordr = await orders.createOrder('PRV2GHZVTGW0P', {
 			idempotency_key: `${order.hash}`,
 			order: {
@@ -38,9 +36,6 @@ router.post('/', async (req, res, next) => {
 			},
 		})
 
-		console.log('single order created', singleordr)
-		console.log('SINGLE ORDER line items', singleordr.order.line_items)
-		console.log('SINGLE ORDER ID', singleordr.order.id)
 		let orderid = singleordr.order.id
 
 		let invoice = await axios({
@@ -52,7 +47,7 @@ router.post('/', async (req, res, next) => {
 					'Bearer EAAAEPC4hWEeDK2uS1SQgwBVpFuMj47M4y4DjkhLfcBdAPhrBLAwjWTqrzE7Dbm-',
 			},
 			data: {
-				idempotency_key: order.hash,
+				idempotency_key: `${order.hash}`,
 				invoice: {
 					order_id: orderid,
 					location_id: 'PRV2GHZVTGW0P',
@@ -70,7 +65,6 @@ router.post('/', async (req, res, next) => {
 				},
 			},
 		})
-		console.log('invoice data', invoice.data)
 		res.json(invoice.data)
 	} catch (err) {
 		next(err)

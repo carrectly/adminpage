@@ -11,6 +11,8 @@ module.exports = router
 const SCOPES = [
 	'https://www.googleapis.com/auth/gmail.readonly',
 	'https://www.googleapis.com/auth/gmail.send',
+	'https://www.googleapis.com/auth/gmail.modify',
+	'https://www.googleapis.com/auth/gmail.compose',
 ]
 
 const TOKEN_PATH = '/Users/abirkus/Desktop/carrectly/adminpage/tockengmail.json'
@@ -331,7 +333,7 @@ async function sendEmail(auth, msg) {
 		`Car Make: ${msg.make}<br/>`,
 		`Car Model: ${msg.model}<br/>`,
 		`Car Year: ${msg.year}<br/>`,
-		`VIN: ${msg.year}<br/>`,
+		`VIN: ${msg.vin}<br/>`,
 		'Thank you for your business,<br/>',
 		'TEAM CARRECTLY',
 	]
@@ -343,10 +345,21 @@ async function sendEmail(auth, msg) {
 		.replace(/\//g, '_')
 	//.replace(/=+$/, '')
 
-	const res = await gmail.users.messages.send({
+	//function to send the message
+	// const res = await gmail.users.messages.send({
+	// 	userId: 'me',
+	// 	requestBody: {
+	// 		raw: encodedMessage,
+	// 	},
+	// })
+
+	// create a draft
+	const res = await gmail.users.drafts.create({
 		userId: 'me',
-		requestBody: {
-			raw: encodedMessage,
+		resource: {
+			message: {
+				raw: encodedMessage,
+			},
 		},
 	})
 

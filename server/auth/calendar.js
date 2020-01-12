@@ -4,7 +4,7 @@ const {google} = require('googleapis')
 const readline = require('readline')
 module.exports = router
 
-const SCOPES = ['https://www.googleapis.com/auth/calendar.events']
+const SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 const TOKEN_PATH =
 	'/Users/abirkus/Desktop/carrectly/adminpage/tockencalendar.json'
@@ -178,6 +178,7 @@ async function createEvent(auth, evt) {
 		},
 	}
 
+	//flexible calendar id '6kllmvnusibcs0lbnh98ffiqvs@group.calendar.google.com'
 	var request = calendar.events.insert({
 		calendarId: 'primary',
 		resource: event,
@@ -193,6 +194,10 @@ async function createEvent(auth, evt) {
 async function updateEvent(auth, evt) {
 	const calendar = await google.calendar({version: 'v3', auth})
 
+	// let allcalendars = await calendar.calendarList.list()
+	// console.log('all calendar ids', allcalendars.data.items)
+
+	//flexibleid = 6kllmvnusibcs0lbnh98ffiqvs@group.calendar.google.com
 	let colorid = 11
 	if (evt.status === 'waiting on quote') {
 		colorid = 4
@@ -224,8 +229,14 @@ async function updateEvent(auth, evt) {
 		reminders: {
 			useDefault: false,
 			overrides: [
-				{method: 'email', minutes: 24 * 60},
-				{method: 'popup', minutes: 10},
+				{
+					method: 'email',
+					minutes: 24 * 60,
+				},
+				{
+					method: 'popup',
+					minutes: 10,
+				},
 			],
 		},
 	}

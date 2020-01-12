@@ -18,6 +18,7 @@ import {
 	Dealers,
 	CalendarView,
 	SingleDealer,
+	AllServices,
 } from './components'
 
 class Routes extends Component {
@@ -42,7 +43,8 @@ class Routes extends Component {
 				{show && (
 					<Switch>
 						<Route path='/allOrders' component={AllOrders} />
-						<Route path='/allcustomers' component={AllCustomers} />
+						<Route path='/allServices' component={AllServices} />
+						<Route path='/allCustomers' component={AllCustomers} />
 						<Route
 							path='/singlecustomer/:userid'
 							component={SingleCustomer}
