@@ -3,6 +3,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getOrdersStatusThunk, clearAllOrdersThunk} from '../store/orders'
 import TableOrdersByStatus from './TableOrdersByStatus'
+import {Table} from 'react-bootstrap'
 
 class BookingsByStatus extends Component {
 	async componentDidMount() {
@@ -29,33 +30,69 @@ class BookingsByStatus extends Component {
 
 		return (
 			<div>
-				<div>
-					<h5 className='status1'>
-						Newly Received - confirmation required
-					</h5>
+				<Table striped bordered hover size='sm' variant='dark'>
+					<thead>
+						<tr>
+							<th colSpan='8'>
+								<h5 className='status1'>
+									Newly Received - confirmation required
+								</h5>
+							</th>
+						</tr>
+						<tr>
+							<th>Order ID</th>
+							<th>Status</th>
+							<th>Pickup Date</th>
+							<th>Dropoff Date</th>
+							<th>Customer Name</th>
+							<th>Car Make</th>
+							<th>Car Model</th>
+							<th>Location</th>
+						</tr>
+					</thead>
 					<TableOrdersByStatus ordersArray={received} />
-				</div>
 
-				<div>
-					<h5 className='status2'>Waiting on Quote</h5>
+					<thead>
+						<tr>
+							<th colSpan='8'>
+								<h5 className='status2'>Waiting on Quote</h5>
+							</th>
+						</tr>
+					</thead>
 					<TableOrdersByStatus ordersArray={wquote} />
-				</div>
 
-				<div>
-					<h5 className='status3'>
-						Quote approved - getting serviced
-					</h5>
+					<thead>
+						<tr>
+							<th colSpan='8'>
+								<h5 className='status3'>
+									Quote approved - getting serviced
+								</h5>
+							</th>
+						</tr>
+					</thead>
 					<TableOrdersByStatus ordersArray={aquote} />
-				</div>
-				<div>
-					<h5 className='status4'>Completed - pending invoice</h5>
-					<TableOrdersByStatus ordersArray={pinvoice} />
-				</div>
 
-				<div>
-					<h5 className='status5'>Completed - invoice sent</h5>
+					<thead>
+						<tr>
+							<th colSpan='8'>
+								<h5 className='status4'>
+									Completed - pending invoice
+								</h5>
+							</th>
+						</tr>
+					</thead>
+					<TableOrdersByStatus ordersArray={pinvoice} />
+					<thead>
+						<tr>
+							<th colSpan='8'>
+								<h5 className='status5'>
+									Completed - invoice sent
+								</h5>
+							</th>
+						</tr>
+					</thead>
 					<TableOrdersByStatus ordersArray={sinvoice} />
-				</div>
+				</Table>
 			</div>
 		)
 	}

@@ -10,21 +10,21 @@ router.get('/', async (req, res, next) => {
 	}
 })
 
-router.get('/:query', async (req, res, next) => {
+router.put('/', async (req, res, next) => {
 	try {
-		let q = req.params.query
+		let q = req.body
 		console.log('special query', q)
 		let cust
-		if (q.includes('@')) {
+		if (q.email) {
 			cust = await Customer.findOne({
 				where: {
-					email: q,
+					email: q.email,
 				},
 			})
 		} else {
 			cust = await Customer.findOne({
 				where: {
-					phoneNumber: q,
+					phoneNumber: q.phone,
 				},
 			})
 		}

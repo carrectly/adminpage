@@ -5,42 +5,91 @@ import {
 	getContactsThunk,
 	createContactThunk,
 	getContactsByQueryThunk,
+	clearContactsThunk,
 } from '../store/contacts'
 import {Table} from 'react-bootstrap'
 
 class AllCustomers extends Component {
-	// componentDidMount() {
-	// 	this.props.getContacts()
-	// }
+	constructor(props) {
+		super(props)
+		this.handleChange = this.handleChange.bind(this)
+		this.handleSearchByEmail = this.handleSearchByEmail.bind(this)
+		this.handleSearchByPhone = this.handleSearchByPhone.bind(this)
+
+		this.state = {
+			email: '',
+			phone: '',
+		}
+	}
+
+	handleChange(evt) {
+		this.setState({
+			[evt.target.name]: evt.target.value,
+		})
+	}
+
+	async handleSearchByEmail(evt) {
+		evt.preventDefault()
+		let obj = {}
+		if (this.state.email) {
+			obj.email = this.state.email
+		}
+
+		try {
+			await this.props.queryContact(obj)
+		} catch (err) {
+			console.log(err)
+		}
+		this.setState({
+			email: '',
+			phone: '',
+		})
+		obj = {}
+	}
+
+	async handleSearchByPhone(evt) {
+		evt.preventDefault()
+		let obj = {}
+		if (this.state.phone) {
+			obj.phone = this.state.phone
+		}
+		try {
+			await this.props.queryContact(obj)
+		} catch (err) {
+			console.log(err)
+		}
+
+		this.setState({
+			email: '',
+			phone: '',
+		})
+
+		obj = {}
+	}
+
+	componentWillUnmount() {
+		this.props.clearContacts()
+	}
 
 	render() {
+		console.log('state', this.state)
 		const contacts = this.props.contacts || []
 		return (
 			<div>
 				<div>
 					<h1 className='center'>All Client Contacts</h1>
-					<form onSubmit={this.handleSubmit}>
-						{/* <span>
-							<input
-								type='text'
-								name='customername'
-								placeholder='customer name'
-							/>
-							<button type='submit'>
-								Search by customer name
-							</button>
-						</span> */}
+					<form>
 						<span>
 							<input
 								type='text'
 								name='email'
 								placeholder='email'
+								onChange={this.handleChange}
+								value={this.state.email}
 							/>
 							<button
 								type='submit'
-								onClick={() =>
-									this.props.queryContact(event.target.value)
-								}>
+								onClick={evt => this.handleSearchByEmail(evt)}>
 								Search by customer email
 							</button>
 						</span>
@@ -49,8 +98,12 @@ class AllCustomers extends Component {
 								type='text'
 								name='phone'
 								placeholder='phone'
+								onChange={this.handleChange}
+								value={this.state.phone}
 							/>
-							<button type='submit'>
+							<button
+								type='submit'
+								onClick={evt => this.handleSearchByPhone(evt)}>
 								Search by customer phone number
 							</button>
 						</span>
@@ -104,7 +157,8 @@ const mapDispatchToProps = dispatch => {
 	return {
 		getContacts: () => dispatch(getContactsThunk()),
 		createContact: () => dispatch(createContactThunk()),
-		queryContact: id => dispatch(getContactsByQueryThunk(id)),
+		queryContact: obj => dispatch(getContactsByQueryThunk(obj)),
+		clearContacts: () => dispatch(clearContactsThunk()),
 	}
 }
 export default withRouter(

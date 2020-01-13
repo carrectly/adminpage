@@ -34,7 +34,7 @@ class Account extends Component {
 				<div className='account'>
 					<h1>Hello, {this.props.user.email}</h1>
 					<Button
-						variant='secondary'
+						variant='primary'
 						size='sm'
 						onClick={this.handleLogout}>
 						Log Out

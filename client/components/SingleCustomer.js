@@ -7,12 +7,13 @@ import {getSingleCustomerThunk} from '../store/singlecustomer'
 import UpdateCustomer from './UpdateCustomer'
 
 class SingleCustomer extends Component {
-	componentDidMount() {
-		this.props.getOrders(this.props.match.params.userid)
-		this.props.getCustomer(this.props.match.params.userid)
+	async componentDidMount() {
+		await this.props.getCustomer(this.props.match.params.userid)
+		await this.props.getOrders(this.props.match.params.userid)
 	}
 
 	render() {
+		console.log('Phone', this.props.match.params.userid)
 		const userorders = this.props.orders || []
 		const customer = this.props.customer || {}
 		let custArr = Object.keys(customer) || []

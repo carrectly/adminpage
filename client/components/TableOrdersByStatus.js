@@ -7,47 +7,30 @@ class TableOrdersByStatus extends Component {
 	render() {
 		const array = this.props.ordersArray || []
 		return (
-			<Table striped bordered hover size='sm' variant='dark'>
-				<thead>
-					<tr>
-						<th>Order ID</th>
-						<th>Status</th>
-						<th>Pickup Date</th>
-						<th>Dropoff Date</th>
-						<th>Customer Name</th>
-						<th>Car Make</th>
-						<th>Car Model</th>
-						<th>Location</th>
+			<tbody>
+				{array.map(ord => (
+					<tr key={ord.hash}>
+						<td>
+							<Link to={`/singleorder/${ord.hash}`} id={ord.hash}>
+								Details
+							</Link>
+						</td>
+						<td>{ord.status}</td>
+						<td>{ord.pickupDate}</td>
+						<td>{ord.dropoffDate}</td>
+						<td>
+							<Link
+								to={`/singlecustomer/${ord.customerPhoneNumber}`}
+								id={ord.customerPhoneNumber}>
+								{ord.customer.firstName} {ord.customer.lastName}
+							</Link>
+						</td>
+						<td>{ord.carMake}</td>
+						<td>{ord.carModel}</td>
+						<td>{ord.pickupLocation}</td>
 					</tr>
-				</thead>
-				<tbody>
-					{array.map(ord => (
-						<tr key={ord.hash}>
-							<td>
-								<Link
-									to={`/singleorder/${ord.hash}`}
-									id={ord.hash}>
-									Details
-								</Link>
-							</td>
-							<td>{ord.status}</td>
-							<td>{ord.pickupDate}</td>
-							<td>{ord.dropoffDate}</td>
-							<td>
-								<Link
-									to={`/singleuser/${ord.customerPhoneNumber}`}
-									id={ord.customerPhoneNumber}>
-									{ord.customer.firstName}{' '}
-									{ord.customer.lastName}
-								</Link>
-							</td>
-							<td>{ord.carMake}</td>
-							<td>{ord.carModel}</td>
-							<td>{ord.pickupLocation}</td>
-						</tr>
-					))}
-				</tbody>
-			</Table>
+				))}
+			</tbody>
 		)
 	}
 }

@@ -6,7 +6,16 @@ import {
 	fetchCustomDataThunk,
 	clearAllOrdersThunk,
 } from '../store/orders'
-import {Table} from 'react-bootstrap'
+import {
+	Table,
+	Form,
+	Button,
+	Row,
+	Col,
+	ButtonToolbar,
+	OverlayTrigger,
+	Tooltip,
+} from 'react-bootstrap'
 
 class AllOrders extends Component {
 	constructor(props) {
@@ -56,44 +65,65 @@ class AllOrders extends Component {
 			<div>
 				<div>
 					<h1 className='center'>Orders View</h1>
-					<form onSubmit={this.handleSubmit}>
-						<span>
-							<input
-								type='date'
-								name='dateStart'
-								placeholder='start date'
-								onChange={this.handleChange}
-								value={this.state.dateStart}
-							/>
-							<input
-								type='date'
-								name='dateEnd'
-								placeholder='end date'
-								onChange={this.handleChange}
-								value={this.state.dateEnd}
-							/>
-							<button type='submit'>
-								{' '}
-								Search Orders by Date{' '}
-							</button>
-						</span>
-						{/* <span>
-							<input
-								type='text'
-								name='phoneNumber'
-								placeholder='phone number'
-								onChange={this.handleChange}
-							/>
-							<button type='submit'>
-								Search Orders by Customer Phone Number
-							</button>
-						</span> */}
-						<button
-							type='button'
-							onClick={() => this.props.getOrders()}>
-							View All Orders
-						</button>
-					</form>
+
+					<Form onSubmit={this.handleSubmit}>
+						<Form.Group controlId='formBasicName'>
+							<Row>
+								<Col>
+									<label>Start date </label>
+									<input
+										type='date'
+										name='dateStart'
+										placeholder='start date'
+										onChange={this.handleChange}
+										value={this.state.dateStart}
+									/>
+								</Col>
+								<Col>
+									<label>End date </label>
+									<input
+										type='date'
+										name='dateEnd'
+										placeholder='end date'
+										onChange={this.handleChange}
+										value={this.state.dateEnd}
+									/>
+								</Col>
+								<Col>
+									<ButtonToolbar>
+										<OverlayTrigger
+											key='top'
+											placement='top'
+											overlay={
+												<Tooltip id='tooltip-top'>
+													Must select start and end
+													date
+												</Tooltip>
+											}>
+											<Button
+												type='submit'
+												variant='primary'
+												disabled={
+													!this.state.dateStart ||
+													!this.state.dateEnd
+												}>
+												{' '}
+												Search Orders by Date{' '}
+											</Button>
+										</OverlayTrigger>
+									</ButtonToolbar>
+								</Col>
+								<Col>
+									<Button
+										type='button'
+										variant='primary'
+										onClick={() => this.props.getOrders()}>
+										View All Orders
+									</Button>
+								</Col>
+							</Row>
+						</Form.Group>
+					</Form>
 				</div>
 				<Table striped bordered hover size='sm' variant='dark'>
 					<thead>
@@ -122,7 +152,7 @@ class AllOrders extends Component {
 								<td>{`${ord.customer.firstName} ${ord.customer.lastName}`}</td>
 								<td>
 									<Link
-										to={`/singleuser/${ord.customerPhoneNumber}`}
+										to={`/singlecustomer/${ord.customerPhoneNumber}`}
 										id={ord.customerPhoneNumber}>
 										{ord.customerPhoneNumber}
 									</Link>

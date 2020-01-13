@@ -6,7 +6,7 @@ import axios from 'axios'
 const GET_CONTACTS = 'GET_CONTACTS'
 const CREATE_CONTACT = 'CREATE_CONTACT'
 const GET_CONTACTS_BY_QUERY = 'GET_CONTACTS_BY_QUERY'
-
+const CLEAR_CONTACTS = 'CLEAR_CONTACTS'
 /**
  * INITIAL STATE
  */
@@ -18,7 +18,7 @@ const allContacts = []
 const getContacts = contacts => ({type: GET_CONTACTS, contacts})
 const createContact = contact => ({type: CREATE_CONTACT, contact})
 const getContactsByQuery = contacts => ({type: GET_CONTACTS_BY_QUERY, contacts})
-
+const clearContacts = contacts => ({type: CLEAR_CONTACTS, contacts})
 /**
  * THUNK CREATORS
  */
@@ -31,9 +31,9 @@ export const getContactsThunk = () => async dispatch => {
 	}
 }
 
-export const getContactsByQueryThunk = search => async dispatch => {
+export const getContactsByQueryThunk = obj => async dispatch => {
 	try {
-		const res = await axios.get(`/api/customers/${search}`)
+		const res = await axios.put(`/api/customers`, obj)
 		dispatch(getContactsByQuery(res.data))
 	} catch (err) {
 		console.error(err)
@@ -59,6 +59,14 @@ export const createContactThunk = obj => async dispatch => {
 		console.error(err)
 	}
 }
+
+export const clearContactsThunk = () => async dispatch => {
+	try {
+		dispatch(clearContacts([]))
+	} catch (err) {
+		console.error(err)
+	}
+}
 /**
  * REDUCER
  */
@@ -69,6 +77,8 @@ export default function(state = allContacts, action) {
 		case CREATE_CONTACT:
 			return action.contact
 		case GET_CONTACTS_BY_QUERY:
+			return [action.contacts]
+		case CLEAR_CONTACTS:
 			return action.contacts
 		default:
 			return state
