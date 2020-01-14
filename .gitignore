@@ -4,6 +4,7 @@ bundle.js.map
 secrets.js
 secretsgmail.json
 tockencalendar.json
+tockencalendar.json
 tockengmail.json
 .DS_Store
 npm-debug.log

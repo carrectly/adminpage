@@ -106,7 +106,7 @@ class Invoice extends Component {
 				<DropdownButton
 					size='lg'
 					id='dropdown-basic-button'
-					title='Send Quote Request'
+					title='Create Email Draft Quote Request'
 					className='btn-block'>
 					{dealers.map(dlr => (
 						<Dropdown.Item

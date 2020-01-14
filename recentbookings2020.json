@@ -1,23 +1,23 @@
 ﻿[
 	{
-		"services": [{"name": "detail"}],
+		"services": [{"name": "Dog Hair"}],
 		"pickupDate": "1/30/20 15:05",
 		"dropoffDate": "2/1/20 17:30",
 		"pickupLocation": "1410 N State Pkwy",
-		"carYear": 2018,
+		"carYear": "2018",
 		"carMake": "Volvo",
 		"carModel": "XC60",
 		"customer": {
 			"firstName": "Frank",
 			"lastName": "Trager",
-			"location": 60610,
-			"phoneNumber": 7088059384,
+			"location": "60610",
+			"phoneNumber": "7088059384",
 			"email": "Ftrager@alliancesteel.net"
 		},
 		"hash": "7991565b65901bbeb9e0db918eb0379b"
 	},
 	{
-		"services": [{"name": "detail"}],
+		"services": [{"name": "Dog Hair"}],
 		"pickupDate": "2020-01-31 15:05",
 		"dropoffDate": "2020-02-02 17:30",
 		"pickupLocation": "4847 West 24th Place",
@@ -34,7 +34,7 @@
 		"hash": "b2d363e42fc60eba86e7b4891eb27e93"
 	},
 	{
-		"services": [{"name": "detail"}],
+		"services": [{"name": "Dog Hair"}],
 		"pickupDate": "2020-01-10 15:05",
 		"dropoffDate": "2020-01-11 15:05",
 		"pickupLocation": "355 East Ohio Street",
@@ -51,7 +51,7 @@
 		"hash": "551746d7cd4c03efb163447c349dd1b2"
 	},
 	{
-		"services": [{"name": "detail"}],
+		"services": [{"name": "Dog Hair"}],
 		"pickupDate": "2020-01-12 15:05",
 		"dropoffDate": "2020-01-13 15:05",
 		"pickupLocation": "1037 West Diversey Parkway",
@@ -71,7 +71,7 @@
 	{
 		"services": [
 			{
-				"name": "detail"
+				"name": "Dog Hair"
 			}
 		],
 		"pickupDate": "2/3/20 15:05",
@@ -92,7 +92,7 @@
 	{
 		"services": [
 			{
-				"name": "detail"
+				"name": "Dog Hair"
 			}
 		],
 		"pickupDate": "2020-01-12 08:05",
@@ -113,8 +113,10 @@
 	{
 		"services": [
 			{
-				"name": "detail",
-				"name": "oil change"
+				"name": "Dog Hair"
+			},
+			{
+				"name": "Fuel up"
 			}
 		],
 		"pickupDate": "2020-01-10 08:05",
@@ -133,7 +135,7 @@
 		"hash": "7bb016ba9878e9ecdc625bd9c130f1a0"
 	},
 	{
-		"services": "detail",
+		"services": "Dog Hair",
 		"pickupDate": "2/6/20 15:05",
 		"dropoffDate": "2/8/20 17:30",
 		"pickupLocation": "4847 North Winchester Avenue",
@@ -148,7 +150,7 @@
 		"hash": "969a072c65e2ba3da8840d3e3bc6aa8a"
 	},
 	{
-		"services": "detail",
+		"services": "Dog Hair",
 		"pickupDate": "2/7/20 15:05",
 		"dropoffDate": "2/9/20 17:30",
 		"pickupLocation": "629 West Cermak Road",
@@ -163,7 +165,7 @@
 		"hash": "30d4df133dc835dcd1e2e76f3eba5130"
 	},
 	{
-		"services": "detail",
+		"services": "Dog Hair",
 		"pickupDate": "2/8/20 15:05",
 		"dropoffDate": "2/10/20 17:30",
 		"pickupLocation": "833 North Clark Street",
@@ -178,7 +180,7 @@
 		"hash": "bdf0347f286cef4882bce6a20ed581ed"
 	},
 	{
-		"services": "detail",
+		"services": "Dog Hair",
 		"pickupDate": "2/9/20 15:05",
 		"dropoffDate": "2/11/20 17:30",
 		"pickupLocation": "555 West Monroe Street",
@@ -193,7 +195,7 @@
 		"hash": "0c69076d8b110967643d6ebabb89ec9e"
 	},
 	{
-		"services": "detail",
+		"services": "Dog Hair",
 		"pickupDate": "2/10/20 15:05",
 		"dropoffDate": "2/12/20 17:30",
 		"pickupLocation": "113 North May Street",

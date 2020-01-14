@@ -2,7 +2,16 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-
+import {
+	Table,
+	Form,
+	Button,
+	Row,
+	Col,
+	ButtonToolbar,
+	OverlayTrigger,
+	Tooltip,
+} from 'react-bootstrap'
 /**
  * COMPONENT
  */
@@ -10,35 +19,36 @@ const AuthForm = props => {
 	const {name, displayName, handleSubmit, handleReset, error} = props
 	return (
 		<div>
-			<form onSubmit={handleSubmit} onReset={handleReset} name={name}>
-				<div>
-					<label htmlFor='email'>
+			<Form onSubmit={handleSubmit} onReset={handleReset} name={name}>
+				<Form.Group controlId='formBasicEmail'>
+					<Form.Label htmlFor='email'>
 						<small>Email</small>
-					</label>
-					<input name='email' type='text' />
-				</div>
+					</Form.Label>
+					<Form.Control name='email' type='text' />
+				</Form.Group>
 				<br />
-				<div>
-					<label htmlFor='password'>
+				<Form.Group controlId='formBasicPassword'>
+					<Form.Label htmlFor='password'>
 						<small>Password</small>
-					</label>
-					<input name='password' type='password' />
-				</div>
+					</Form.Label>
+					<Form.Control name='password' type='password' />
+				</Form.Group>
 				<br />
 				<div>
-					<button type='submit' id='login'>
+					<Button type='submit' id='login'>
 						Login
-					</button>
-					<button type='reset' id='signup'>
+					</Button>
+					<Button type='reset' id='signup'>
 						Signup
-					</button>
+					</Button>
 				</div>
 				{error && error.response && <div> {error.response.data} </div>}
-			</form>
+			</Form>
 			<a href='/auth/google'>
-				{displayName} with Google
-				<br />
-				<img className='google' src='/google-icon.png' />
+				<Button variant='success' type='reset' id='signup'>
+					{displayName} with Google{' '}
+					<img className='google' src='/google-icon.png' />
+				</Button>
 			</a>
 		</div>
 	)

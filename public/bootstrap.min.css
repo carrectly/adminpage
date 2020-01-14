@@ -231,7 +231,7 @@ button,
 select,
 optgroup,
 textarea {
-	margin: 0;
+	margin: 5px;
 	font-family: inherit;
 	font-size: inherit;
 	line-height: inherit;
@@ -3127,7 +3127,7 @@ input[type='button'].btn-block {
 	z-index: 1000;
 	display: none;
 	float: left;
-	min-width: 10rem;
+	min-width: fit-content;
 	padding: 0.5rem 0;
 	margin: 0.125rem 0 0;
 	font-size: 0.9375rem;
@@ -3139,6 +3139,8 @@ input[type='button'].btn-block {
 	border: 1px solid #444;
 	border-radius: 0.25rem;
 	width: 100%;
+	overflow: scroll;
+	max-height: 35rem;
 }
 .dropdown-menu-left {
 	right: auto;
