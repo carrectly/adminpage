@@ -79,12 +79,12 @@ class UpdateService extends Component {
 								/>
 							</td>
 							<td>
-								<button
+								<Button
 									id={service.id}
 									type='button'
 									onClick={evt => this.handleSubmit(evt)}>
 									Update Service
-								</button>
+								</Button>
 							</td>
 						</tr>
 					</tbody>

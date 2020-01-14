@@ -14,7 +14,9 @@ class Dealers extends Component {
 		const dealers = this.props.dealers
 		return dealers.length ? (
 			<div>
-				<h1>Here you can manage all your shops and dealers</h1>
+				<h1 className='center'>
+					Here you can manage all your shops and dealers
+				</h1>
 				<div className='alldealersview'>
 					<div className='dealerscontainer'>
 						{dealers.map(dlr => (

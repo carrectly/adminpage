@@ -149,14 +149,15 @@ class SingleOrder extends Component {
 										/>
 									</td>
 									<td>
-										<button
+										<Button
 											id={service.id}
+											variant='danger'
 											type='button'
 											onClick={id =>
 												this.handleRemoveService(id)
 											}>
 											Remove from Order
-										</button>
+										</Button>
 									</td>
 								</tr>
 							))}

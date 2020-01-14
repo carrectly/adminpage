@@ -75,9 +75,9 @@ class AddService extends Component {
 					/>
 				</td>
 				<td colSpan='3'>
-					<button type='button' onClick={id => this.handleSubmit(id)}>
+					<Button type='button' onClick={id => this.handleSubmit(id)}>
 						Add New Service
-					</button>
+					</Button>
 				</td>
 			</tr>
 		)

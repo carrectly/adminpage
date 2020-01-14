@@ -29,12 +29,12 @@ class Routes extends Component {
 	render() {
 		const isLoggedIn = this.props.isLoggedIn
 		console.log('WHO IS LOGGED IN', isLoggedIn)
-		let show = false
-		if (isLoggedIn === 'birkusandre@gmail.com') {
-			show = true
-		} else {
-			show = false
-		}
+		let show = true
+		// if (isLoggedIn === 'info@carrectly.com') {
+		// 	show = true
+		// } else {
+		// 	show = false
+		// }
 		return (
 			<Switch>
 				<Route exact path='/' component={Account} />

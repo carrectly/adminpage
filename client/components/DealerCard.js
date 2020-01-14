@@ -19,7 +19,7 @@ class DealerCard extends Component {
 	render() {
 		const dealer = this.props.dealer
 		return (
-			<Card style={{width: '18rem'}} className='dlrcard'>
+			<Card className='dlrcard'>
 				<Card.Body>
 					<Card.Title>{dealer.name}</Card.Title>
 					<Card.Subtitle className='mb-2 text-muted'>

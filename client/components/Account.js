@@ -21,7 +21,7 @@ class Account extends Component {
 		if (!this.props.user.id) {
 			return (
 				<div className='login'>
-					<h3>
+					<h3 className='center'>
 						Welcome Carrectly Admin. Login with Google to access all
 						the features
 					</h3>
@@ -29,10 +29,16 @@ class Account extends Component {
 				</div>
 			)
 		}
+
+		let user = false
+
+		if (this.props.user.email === 'info@carrectly.com') {
+			user = true
+		}
 		return (
 			<React.Fragment>
 				<div className='account'>
-					<h1>Hello, {this.props.user.email}</h1>
+					<h3>Hello, {this.props.user.email}</h3>
 					<Button
 						variant='primary'
 						size='sm'
@@ -40,8 +46,8 @@ class Account extends Component {
 						Log Out
 					</Button>
 				</div>
-				<div>
-					<BookingsByStatus />
+				<div className='hometable'>
+					{user ? <BookingsByStatus /> : <div />}
 				</div>
 			</React.Fragment>
 		)

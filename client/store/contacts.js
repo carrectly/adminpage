@@ -42,18 +42,19 @@ export const getContactsByQueryThunk = obj => async dispatch => {
 
 export const createContactThunk = obj => async dispatch => {
 	try {
-		obj = {
-			emailAddresses: [{value: 'john@doe.com'}],
-			names: [
-				{
-					displayName: 'John Doe',
-					familyName: 'Doe',
-					givenName: 'John',
-				},
-			],
-		}
+		// obj = {
+		// 	emailAddresses: [{value: 'john@doe.com'}],
+		// 	names: [
+		// 		{
+		// 			displayName: 'John Doe',
+		// 			familyName: 'Doe',
+		// 			givenName: 'John',
+		// 		},
+		// 	],
+		// }
 
-		const res = await axios.post('/auth/google/contacts', obj)
+		// const res = await axios.post('/auth/google/contacts', obj)
+		const res = await axios.get('/auth/google/contacts')
 		dispatch(createContact(res.data))
 	} catch (err) {
 		console.error(err)

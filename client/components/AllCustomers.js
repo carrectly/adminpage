@@ -7,7 +7,7 @@ import {
 	getContactsByQueryThunk,
 	clearContactsThunk,
 } from '../store/contacts'
-import {Table} from 'react-bootstrap'
+import {Table, Button, Form} from 'react-bootstrap'
 
 class AllCustomers extends Component {
 	constructor(props) {
@@ -78,7 +78,7 @@ class AllCustomers extends Component {
 			<div>
 				<div>
 					<h1 className='center'>All Client Contacts</h1>
-					<form>
+					<Form className='allcustomersform'>
 						<span>
 							<input
 								type='text'
@@ -87,11 +87,11 @@ class AllCustomers extends Component {
 								onChange={this.handleChange}
 								value={this.state.email}
 							/>
-							<button
+							<Button
 								type='submit'
 								onClick={evt => this.handleSearchByEmail(evt)}>
 								Search by customer email
-							</button>
+							</Button>
 						</span>
 						<span>
 							<input
@@ -101,47 +101,49 @@ class AllCustomers extends Component {
 								onChange={this.handleChange}
 								value={this.state.phone}
 							/>
-							<button
+							<Button
 								type='submit'
 								onClick={evt => this.handleSearchByPhone(evt)}>
 								Search by customer phone number
-							</button>
+							</Button>
 						</span>
-						<button
+						<Button
 							type='button'
 							onClick={() => this.props.getContacts()}>
 							View All Customers
-						</button>
-					</form>
+						</Button>
+					</Form>
 				</div>
-				<Table striped bordered hover size='sm' variant='dark'>
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Phone number</th>
-							<th>View Order History</th>
-						</tr>
-					</thead>
-					<tbody>
-						{contacts.map((person, index) => (
-							<tr key={index}>
-								<td>
-									{person.firstName} {person.lastName}
-								</td>
-								<td>{person.email}</td>
-								<td>{person.phoneNumber}</td>
-								<td>
-									<Link
-										to={`/singlecustomer/${person.phoneNumber}`}
-										id={person.phoneNumber}>
-										View History
-									</Link>
-								</td>
+				<div className='singleordertable'>
+					<Table striped bordered hover size='sm' variant='dark'>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Phone number</th>
+								<th>View Order History</th>
 							</tr>
-						))}
-					</tbody>
-				</Table>
+						</thead>
+						<tbody>
+							{contacts.map((person, index) => (
+								<tr key={index}>
+									<td>
+										{person.firstName} {person.lastName}
+									</td>
+									<td>{person.email}</td>
+									<td>{person.phoneNumber}</td>
+									<td>
+										<Link
+											to={`/singlecustomer/${person.phoneNumber}`}
+											id={person.phoneNumber}>
+											View History
+										</Link>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</Table>
+				</div>
 			</div>
 		)
 	}

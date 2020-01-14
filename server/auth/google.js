@@ -1,6 +1,7 @@
 const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+const {google} = require('googleapis')
 const {User} = require('../db/models')
 module.exports = router
 
@@ -43,8 +44,10 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 		}
 	)
 
+	//console.log('strategy', strategy)
 	passport.use(strategy)
 
+	//console.log('passport', passport)
 	router.get('/', passport.authenticate('google', {scope: 'email'}))
 
 	router.get(

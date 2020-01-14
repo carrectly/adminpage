@@ -2,7 +2,8 @@ const fs = require('fs')
 const router = require('express').Router()
 const {google} = require('googleapis')
 const readline = require('readline')
-//var rp = require('request-promise')
+
+const passport = require('passport')
 var parseMessage = require('gmail-api-parse-message')
 var Base64 = require('js-base64').Base64
 
@@ -20,7 +21,6 @@ const TOKEN_PATH = '/Users/abirkus/Desktop/carrectly/adminpage/tockengmail.json'
 router.get('/:orderid', async (req, res, next) => {
 	try {
 		let id = req.params.orderid
-
 		let result = await fetchEmails(id)
 		res.json(result)
 	} catch (err) {
@@ -94,6 +94,7 @@ async function authorize(credentials, callback, query) {
 		redirect_uris[0]
 	)
 
+	//console.log('CREATING OATH 2 CLIENT', oAuth2Client)
 	let tkn = await fs.readFileSync(TOKEN_PATH, 'utf8')
 
 	if (!query) {

@@ -66,7 +66,7 @@ class AllOrders extends Component {
 				<div>
 					<h1 className='center'>Orders View</h1>
 
-					<Form onSubmit={this.handleSubmit}>
+					<Form className='orderfilter' onSubmit={this.handleSubmit}>
 						<Form.Group controlId='formBasicName'>
 							<Row>
 								<Col>

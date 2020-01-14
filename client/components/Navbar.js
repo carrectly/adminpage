@@ -5,8 +5,60 @@ import Menu from './Menu'
 import {Button, ButtonToolbar, OverlayTrigger, Tooltip} from 'react-bootstrap'
 
 class Navbar extends React.Component {
+	constructor() {
+		super()
+		this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this)
+		this.state = {
+			width: window.innerWidth,
+		}
+	}
+
+	componentDidMount() {
+		window.addEventListener('resize', this.handleWindowSizeChange)
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.handleWindowSizeChange)
+	}
+
+	handleWindowSizeChange = () => {
+		this.setState({width: window.innerWidth})
+	}
 	render() {
-		return (
+		const {width} = this.state
+		const isMobile = width <= 500
+		console.log('window width', width)
+		return isMobile ? (
+			<div className='dropdown'>
+				<button className='dropbtn'>
+					<div className='fa fa-bars fa-2x link' />
+				</button>
+				<div id='myDropdown' className='dropdown-content'>
+					<Link to='/account' className='link'>
+						Home
+					</Link>
+
+					<Link to='/allOrders' className='link'>
+						All Orders
+					</Link>
+
+					<Link to='/allCustomers' className='link'>
+						All Customers
+					</Link>
+
+					<Link to='/dealers' className='link'>
+						Service Shops
+					</Link>
+
+					<Link to='/calendar' className='link'>
+						Calendar
+					</Link>
+					<Link to='/allServices' className='link'>
+						Services
+					</Link>
+				</div>
+			</div>
+		) : (
 			<div className='navbar1'>
 				<a
 					className='link'
@@ -22,7 +74,10 @@ class Navbar extends React.Component {
 									client's behalf
 								</Tooltip>
 							}>
-							<img src='https://www.carrectly.com/wp-content/uploads/2016/11/logo.png' />
+							<img
+								id='logo'
+								src='https://www.carrectly.com/wp-content/uploads/2016/11/logo.png'
+							/>
 						</OverlayTrigger>
 					</ButtonToolbar>
 				</a>
