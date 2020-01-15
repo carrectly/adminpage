@@ -6,11 +6,9 @@ const session = require('express-session')
 const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const {db} = require('./db')
-const {dbMYSQL} = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 1337
 const app = express()
-const {Pup} = require('./db/models')
 module.exports = app
 
 /**
@@ -102,12 +100,10 @@ const startListening = () => {
 }
 
 const syncDb = () => db.sync()
-// const syncDb2 = () => dbMYSQL.sync()
 
 async function bootApp() {
 	await sessionStore.sync()
 	await syncDb()
-	// await syncDb2()
 	await createApp()
 	await startListening()
 }
