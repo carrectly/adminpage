@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import Menu from './Menu'
 import {Button, ButtonToolbar, OverlayTrigger, Tooltip} from 'react-bootstrap'
 
 class Navbar extends React.Component {

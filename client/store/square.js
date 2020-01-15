@@ -23,15 +23,6 @@ const clearSquare = obj => ({type: CLEAR_SQUARE, obj})
 /**
  * THUNK CREATORS
  */
-// export const getStripeCustomerThunk = obj => async dispatch => {
-// 	try {
-// 		const res = await axios.post('/stripe', obj)
-// 		dispatch(getCustomer(res.data))
-// 	} catch (err) {
-// 		console.error(err)
-// 	}
-// }
-
 export const getSquareCustomerThunk = obj => async dispatch => {
 	try {
 		const res = await axios.post('/square/customers', obj)
@@ -40,15 +31,6 @@ export const getSquareCustomerThunk = obj => async dispatch => {
 		console.error(err)
 	}
 }
-
-// export const createInvoiceThunk = (obj, id) => async dispatch => {
-// 	try {
-// 		const res = await axios.post('/stripe/invoices', {obj, id})
-// 		dispatch(createInvoice(res.data))
-// 	} catch (err) {
-// 		console.error(err)
-// 	}
-// }
 
 export const createInvoiceThunk = (obj, id) => async dispatch => {
 	try {
