@@ -27,7 +27,6 @@ class Navbar extends React.Component {
 	render() {
 		const {width} = this.state
 		const isMobile = width <= 500
-		console.log('window width', width)
 		return isMobile ? (
 			<div className='dropdown'>
 				<button className='dropbtn'>
@@ -64,22 +63,20 @@ class Navbar extends React.Component {
 					className='link'
 					href='https://www.carrectly.com/book/'
 					target='_blank'>
-					<ButtonToolbar>
-						<OverlayTrigger
-							key='bottom'
-							placement='bottom'
-							overlay={
-								<Tooltip id='tooltip-bottom'>
-									Click the logo to create a booking on
-									client's behalf
-								</Tooltip>
-							}>
-							<img
-								id='logo'
-								src='https://www.carrectly.com/wp-content/uploads/2016/11/logo.png'
-							/>
-						</OverlayTrigger>
-					</ButtonToolbar>
+					<OverlayTrigger
+						key='bottom'
+						placement='bottom'
+						overlay={
+							<Tooltip id='tooltip-bottom'>
+								Click the logo to create a booking on client's
+								behalf
+							</Tooltip>
+						}>
+						<img
+							id='logo'
+							src='https://www.carrectly.com/wp-content/uploads/2016/11/logo.png'
+						/>
+					</OverlayTrigger>
 				</a>
 
 				<Link to='/account' className='link'>
@@ -105,19 +102,17 @@ class Navbar extends React.Component {
 					Services
 				</Link>
 
-				<ButtonToolbar>
-					<OverlayTrigger
-						key='bottom'
-						placement='bottom'
-						overlay={
-							<Tooltip id='tooltip-bottom'>
-								To view Hangouts Chat press{' '}
-								<strong>"CTRL + SHIFT + 5"</strong>
-							</Tooltip>
-						}>
-						<a className='link'>Chat</a>
-					</OverlayTrigger>
-				</ButtonToolbar>
+				<OverlayTrigger
+					key='bottom'
+					placement='bottom'
+					overlay={
+						<Tooltip id='tooltip-bottom'>
+							To view Hangouts Chat press{' '}
+							<strong>"CTRL + SHIFT + 5"</strong>
+						</Tooltip>
+					}>
+					<a className='link'>Chat</a>
+				</OverlayTrigger>
 			</div>
 		)
 	}

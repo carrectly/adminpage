@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getEmailsThunk, clearEmailsThunk} from '../store/emails'
+import {getEmailsThunk} from '../store/emails'
 import SingleEmail from './SingleEmail.js'
-import {getSingleEmailThunk, clearSingleEmailThunk} from '../store/singleemail'
+import {getSingleEmailThunk} from '../store/singleemail'
 import ErrorHandler from './ErrorHandler'
 import {Button, Spinner, Image} from 'react-bootstrap'
 
@@ -22,11 +22,6 @@ class Gmail extends Component {
 		this.setState({spinner: !temp})
 		await this.props.fetchEmails()
 		this.setState({spinner: temp})
-	}
-
-	componentWillUnmount() {
-		this.props.clearEmails()
-		this.props.clearSingleEmail()
 	}
 
 	async handleClick(evt) {
@@ -133,8 +128,6 @@ const mapDispatchToProps = dispatch => {
 	return {
 		getEmails: id => dispatch(getEmailsThunk(id)),
 		getSingleEmail: id => dispatch(getSingleEmailThunk(id)),
-		clearEmails: () => dispatch(clearEmailsThunk()),
-		clearSingleEmail: () => dispatch(clearSingleEmailThunk()),
 	}
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Gmail))

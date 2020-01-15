@@ -46,7 +46,7 @@ class AddService extends Component {
 			<tr>
 				<td>
 					<input
-						className='priceupdateform'
+						className='priceupdateform2'
 						name='name'
 						type='text'
 						placeholder='name'
@@ -66,7 +66,7 @@ class AddService extends Component {
 				</td>
 				<td>
 					<input
-						className='priceupdateform'
+						className='priceupdateform2'
 						name='description'
 						type='text'
 						placeholder='description'

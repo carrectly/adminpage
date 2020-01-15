@@ -67,62 +67,59 @@ class AllOrders extends Component {
 					<h1 className='center'>Orders View</h1>
 
 					<Form className='orderfilter' onSubmit={this.handleSubmit}>
-						<Form.Group controlId='formBasicName'>
-							<Row>
-								<Col>
-									<label>Start date </label>
-									<input
+						<Row>
+							<Col>
+								<Form.Group controlId='formBasicStarDate'>
+									<Form.Label>Start date </Form.Label>
+									<Form.Control
 										type='date'
 										name='dateStart'
-										placeholder='start date'
 										onChange={this.handleChange}
 										value={this.state.dateStart}
 									/>
-								</Col>
-								<Col>
-									<label>End date </label>
-									<input
+								</Form.Group>
+							</Col>
+							<Col>
+								<Form.Group controlId='formBasicEndDate'>
+									<Form.Label>End date </Form.Label>
+									<Form.Control
 										type='date'
 										name='dateEnd'
-										placeholder='end date'
 										onChange={this.handleChange}
 										value={this.state.dateEnd}
 									/>
-								</Col>
-								<Col>
-									<ButtonToolbar>
-										<OverlayTrigger
-											key='top'
-											placement='top'
-											overlay={
-												<Tooltip id='tooltip-top'>
-													Must select start and end
-													date
-												</Tooltip>
-											}>
-											<Button
-												type='submit'
-												variant='primary'
-												disabled={
-													!this.state.dateStart ||
-													!this.state.dateEnd
-												}>
-												{' '}
-												Search Orders by Date{' '}
-											</Button>
-										</OverlayTrigger>
-									</ButtonToolbar>
-								</Col>
-								<Col>
+								</Form.Group>
+							</Col>
+							<Col>
+								<OverlayTrigger
+									key='top'
+									placement='top'
+									overlay={
+										<Tooltip id='tooltip-top'>
+											Must select start and end date
+										</Tooltip>
+									}>
 									<Button
-										type='button'
+										type='submit'
 										variant='primary'
-										onClick={() => this.props.getOrders()}>
-										View All Orders
+										disabled={
+											!this.state.dateStart ||
+											!this.state.dateEnd
+										}>
+										{' '}
+										Search Orders by Date{' '}
 									</Button>
-								</Col>
-							</Row>
-						</Form.Group>
+								</OverlayTrigger>
+							</Col>
+							<Col>
+								<Button
+									type='button'
+									variant='primary'
+									onClick={() => this.props.getOrders()}>
+									View All Orders
+								</Button>
+							</Col>
+						</Row>
 					</Form>
 				</div>
 				<Table striped bordered hover size='sm' variant='dark'>

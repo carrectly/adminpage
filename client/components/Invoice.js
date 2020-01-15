@@ -87,7 +87,7 @@ class Invoice extends Component {
 		invoice = this.props.invoice.id || null
 		let dealers = this.props.dealers || []
 		return (
-			<div>
+			<div className='invoicebuttons'>
 				<DropdownButton
 					size='lg'
 					id='dropdown-basic-button'
@@ -118,54 +118,47 @@ class Invoice extends Component {
 					))}
 				</DropdownButton>
 
-				<ButtonToolbar>
-					<OverlayTrigger
-						key='left'
-						placement='left'
-						overlay={
-							<Tooltip id='tooltip-left'>
-								If customer does not exist in{' '}
-								<strong>square</strong>, this button will create
-								a new customer. Can't create an invoice until we
-								check if the customer exists in{' '}
-								<strong>square</strong>.
-							</Tooltip>
-						}>
-						<Button
-							size='lg'
-							block
-							variant='primary'
-							onClick={() => this.handleClick(this.props.order)}>
-							Check if customer exists in Square
-						</Button>
-					</OverlayTrigger>
-				</ButtonToolbar>
+				<OverlayTrigger
+					placement='left'
+					overlay={
+						<Tooltip id='tooltip-left'>
+							If customer does not exist in{' '}
+							<strong>square</strong>, this button will create a
+							new customer. Can't create an invoice until we check
+							if the customer exists in <strong>square</strong>.
+						</Tooltip>
+					}>
+					<Button
+						size='lg'
+						block
+						variant='primary'
+						onClick={() => this.handleClick(this.props.order)}>
+						Check if customer exists in Square
+					</Button>
+				</OverlayTrigger>
 
-				<ButtonToolbar>
-					<OverlayTrigger
-						key='left'
-						placement='left'
-						overlay={
-							<Tooltip id='tooltip-left'>
-								Can't create an invoice until we check if the
-								user exists in <strong>square</strong>.
-							</Tooltip>
+				<OverlayTrigger
+					placement='left'
+					overlay={
+						<Tooltip id='tooltip-left'>
+							Can't create an invoice until we check if the user
+							exists in <strong>square</strong>.
+						</Tooltip>
+					}>
+					<Button
+						size='lg'
+						block
+						variant='primary'
+						disabled={this.state.invoice}
+						onClick={() =>
+							this.props.createInvoice(
+								this.props.order,
+								this.props.customer.id
+							)
 						}>
-						<Button
-							size='lg'
-							block
-							variant='primary'
-							disabled={this.state.invoice}
-							onClick={() =>
-								this.props.createInvoice(
-									this.props.order,
-									this.props.customer.id
-								)
-							}>
-							Create Invoice
-						</Button>
-					</OverlayTrigger>
-				</ButtonToolbar>
+						Create Invoice
+					</Button>
+				</OverlayTrigger>
 
 				<div>
 					{cust ? <div>{this.props.customer.status}</div> : <div />}

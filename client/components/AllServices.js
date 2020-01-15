@@ -26,8 +26,8 @@ class AllServices extends Component {
 					<thead>
 						<tr>
 							<th>Service Name</th>
-							<th>Service Standard Price</th>
-							<th>Service Description</th>
+							<th>Standard Price</th>
+							<th>Description</th>
 							<th>Update Form</th>
 						</tr>
 					</thead>

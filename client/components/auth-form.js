@@ -21,14 +21,14 @@ const AuthForm = props => {
 		<div>
 			<Form onSubmit={handleSubmit} onReset={handleReset} name={name}>
 				<Form.Group controlId='formBasicEmail'>
-					<Form.Label htmlFor='email'>
+					<Form.Label>
 						<small>Email</small>
 					</Form.Label>
 					<Form.Control name='email' type='text' />
 				</Form.Group>
 				<br />
 				<Form.Group controlId='formBasicPassword'>
-					<Form.Label htmlFor='password'>
+					<Form.Label>
 						<small>Password</small>
 					</Form.Label>
 					<Form.Control name='password' type='password' />

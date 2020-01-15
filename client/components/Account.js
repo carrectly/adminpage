@@ -21,9 +21,10 @@ class Account extends Component {
 		if (!this.props.user.id) {
 			return (
 				<div className='login'>
-					<h3 className='center'>
-						Welcome Carrectly Admin. Login with Google to access all
-						the features
+					<h3 className='greeting'>
+						Welcome Carrectly Admin.
+						<br />
+						Login with Google to access all the features
 					</h3>
 					<Login />
 				</div>

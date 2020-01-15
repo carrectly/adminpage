@@ -10,8 +10,9 @@ import Gmail from './Gmail'
 import Invoice from './Invoice'
 import {Table, Button} from 'react-bootstrap'
 import UpdateOrder from './UpdateOrder'
-import {getEmailsThunk} from '../store/emails'
+import {getEmailsThunk, clearEmailsThunk} from '../store/emails'
 import AddOrderServices from './AddOrderServices'
+import {clearSingleEmailThunk} from '../store/singleemail'
 
 class SingleOrder extends Component {
 	constructor(props) {
@@ -65,6 +66,11 @@ class SingleOrder extends Component {
 
 	componentDidMount() {
 		this.props.getOrder(this.props.match.params.orderid)
+	}
+
+	componentWillUnmount() {
+		this.props.clearEmails()
+		this.props.clearSingleEmail()
 	}
 
 	render() {
@@ -169,7 +175,7 @@ class SingleOrder extends Component {
 										}
 									/>
 								</td>
-								<td colSpan='2'>
+								<td colSpan='3'>
 									<Button
 										size='lg'
 										block
@@ -180,7 +186,6 @@ class SingleOrder extends Component {
 										Update prices
 									</Button>
 								</td>
-								<td></td>
 							</tr>
 						</tbody>
 					</Table>
@@ -205,6 +210,8 @@ const mapDispatchToProps = dispatch => {
 		updateServices: (id, obj) => dispatch(updateOrderDetailsThunk(id, obj)),
 		getEmails: id => dispatch(getEmailsThunk(id)),
 		removeService: (id, obj) => dispatch(removeOrderServiceThunk(id, obj)),
+		clearEmails: () => dispatch(clearEmailsThunk()),
+		clearSingleEmail: () => dispatch(clearSingleEmailThunk()),
 	}
 }
 export default withRouter(

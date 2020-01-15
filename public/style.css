@@ -318,13 +318,20 @@ input {
 	align-items: center;
 }
 
+.greeting {
+	text-align: center;
+	width: 50%;
+}
+
 .calendar {
 	width: 100vw;
 	height: 100vh;
 }
 
 .servicestable {
-	margin: 0px 10px 0px 10px;
+	width: 100%;
+	word-wrap: break-word;
+	padding: 20px;
 }
 
 .gmailheader {
@@ -389,6 +396,20 @@ input {
 .allcustomersform .col {
 	display: flex;
 	align-items: center;
+}
+
+.priceupdateform {
+	width: 50px;
+}
+
+.priceupdateform2 {
+	width: 100px;
+}
+
+.invoicebuttons {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
 }
 
 @media (max-width: 420px) {
@@ -483,6 +504,10 @@ input {
 	}
 
 	.dropbtn {
+		font-size: 10px;
+	}
+
+	.servicestable .btn-danger {
 		font-size: 10px;
 	}
 }
