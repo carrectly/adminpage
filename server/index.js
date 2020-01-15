@@ -107,7 +107,7 @@ const syncDb = () => db.sync()
 async function bootApp() {
 	await sessionStore.sync()
 	await syncDb()
-	await syncDb2()
+	// await syncDb2()
 	await createApp()
 	await startListening()
 }
