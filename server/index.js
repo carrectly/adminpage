@@ -9,8 +9,12 @@ const {db} = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 1337
 const app = express()
+const socketio = require('socket.io')
 module.exports = app
 
+if (process.env.NODE_ENV === 'test') {
+	after('close the session store', () => sessionStore.stopExpiringSessions())
+}
 /**
  * In your development environment, you can keep all of your
  * app's secret API keys in a file called `secrets.js`, in your project
@@ -34,6 +38,8 @@ passport.deserializeUser(async (id, done) => {
 })
 
 const createApp = () => {
+	console.log('session store db', db)
+	console.log('session store', sessionStore)
 	// logging middleware
 	app.use(morgan('dev'))
 
@@ -97,6 +103,8 @@ const startListening = () => {
 	const server = app.listen(PORT, () =>
 		console.log(`Mixing it up on port ${PORT}`)
 	)
+	const io = socketio(server)
+	require('./socket')(io)
 }
 
 const syncDb = () => db.sync()
