@@ -3,11 +3,16 @@ const router = require('express').Router()
 var SquareConnect = require('square-connect')
 var client = SquareConnect.ApiClient.instance
 
-const config = require('../../squareconfig.json').sandbox
+//const config = require('../../squareconfig.json').sandbox
 // Configure OAuth2 access token for authorization: oauth2
 var oauth2 = client.authentications.oauth2
 client.basePath = 'https://connect.squareupsandbox.com'
-oauth2.accessToken = config.squareAccessToken
+oauth2.accessToken = {
+	squareApplicationId: 'sq0idb-1tqa9fkMqCkzgv_8RMhJ7w',
+	squareAccessToken:
+		'EAAAEPC4hWEeDK2uS1SQgwBVpFuMj47M4y4DjkhLfcBdAPhrBLAwjWTqrzE7Dbm-',
+	squareLocationId: 'PRV2GHZVTGW0P',
+}
 
 //this is similar to PG model. use variable api to list locations
 var api = new SquareConnect.LocationsApi()
