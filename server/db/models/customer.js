@@ -32,6 +32,7 @@ Customer.beforeCreate((inst, options) => {
 		.then(function(res) {
 			inst.isInGoogle = true
 		})
+		.catch(console.log('customer hook error'))
 })
 
 module.exports = Customer

@@ -66,15 +66,17 @@ Order.beforeCreate((inst, options) => {
 	console.log('new instance', newinst)
 	return Customer.findOne({
 		where: {phoneNumber: newinst.customerPhoneNumber},
-	}).then(cus => {
-		inst.isInCalendar = true
-		newinst.customerName = `${cus.firstName} ${cus.lastName}`
-		console.log('order instance after finding the customer', newinst)
-		axios.post(
-			'http://localhost:1337/auth/google/calendar/newevent',
-			newinst
-		)
 	})
+		.then(cus => {
+			inst.isInCalendar = true
+			newinst.customerName = `${cus.firstName} ${cus.lastName}`
+			console.log('order instance after finding the customer', newinst)
+			axios.post(
+				'http://localhost:1337/auth/google/calendar/newevent',
+				newinst
+			)
+		})
+		.catch(console.log('order hook error: before create'))
 })
 
 Order.afterUpdate((inst, options) => {
@@ -82,14 +84,16 @@ Order.afterUpdate((inst, options) => {
 	console.log('updating instance', newinst)
 	return Customer.findOne({
 		where: {phoneNumber: newinst.customerPhoneNumber},
-	}).then(cus => {
-		newinst.customerName = `${cus.firstName} ${cus.lastName}`
-		console.log('order instance after finding the customer', newinst)
-		axios.post(
-			'http://localhost:1337/auth/google/calendar/newevent/update',
-			newinst
-		)
 	})
+		.then(cus => {
+			newinst.customerName = `${cus.firstName} ${cus.lastName}`
+			console.log('order instance after finding the customer', newinst)
+			axios.post(
+				'http://localhost:1337/auth/google/calendar/newevent/update',
+				newinst
+			)
+		})
+		.catch(console.log('order hook error: after create'))
 })
 
 module.exports = Order

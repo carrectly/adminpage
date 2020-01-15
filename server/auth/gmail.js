@@ -188,7 +188,7 @@ async function listMessages(auth, id) {
 					nextPage = val.data.nextPageToken || null
 				})
 				.catch(reason => {
-					console.log('Promise fail')
+					console.log('Promise fail.')
 					loopContinue = false
 				})
 		}
