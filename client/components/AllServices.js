@@ -12,7 +12,11 @@ import UpdateService from './UpdateService'
 
 class AllServices extends Component {
 	async componentDidMount() {
-		await this.props.fetchServices()
+		try {
+			await this.props.fetchServices()
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 	render() {

@@ -7,7 +7,11 @@ import {Table} from 'react-bootstrap'
 
 class BookingsByStatus extends Component {
 	async componentDidMount() {
-		await this.props.getOrders()
+		try {
+			await this.props.getOrders()
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 	componentWillUnmount() {

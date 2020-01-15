@@ -67,9 +67,14 @@ class Invoice extends Component {
 		obj.model = this.props.order.carModel
 		obj.vin = this.props.order.vin
 		obj.orderid = this.props.order.hash
-		await this.props.sendEmail(obj)
+		try {
+			await this.props.sendEmail(obj)
+			await this.props.fetchEmails()
+		} catch (err) {
+			console.log(err)
+		}
+
 		obj = {}
-		await this.props.fetchEmails()
 	}
 
 	handleStatusUpdate(evt) {

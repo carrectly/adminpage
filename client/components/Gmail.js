@@ -20,13 +20,21 @@ class Gmail extends Component {
 		console.log('inside gmail params', id)
 		let temp = this.state.spinner
 		this.setState({spinner: !temp})
-		await this.props.fetchEmails()
+		try {
+			await this.props.fetchEmails()
+		} catch (err) {
+			console.log(err)
+		}
+
 		this.setState({spinner: temp})
 	}
 
 	async handleClick(evt) {
-		console.log('event', evt.target.id)
-		await this.props.getSingleEmail(evt.target.id)
+		try {
+			await this.props.getSingleEmail(evt.target.id)
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 	render() {

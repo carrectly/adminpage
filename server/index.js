@@ -102,7 +102,7 @@ const startListening = () => {
 }
 
 const syncDb = () => db.sync()
-const syncDb2 = () => dbMYSQL.sync()
+// const syncDb2 = () => dbMYSQL.sync()
 
 async function bootApp() {
 	await sessionStore.sync()

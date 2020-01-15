@@ -41,7 +41,11 @@ class SingleOrder extends Component {
 
 	async fetchEmails() {
 		let id = this.props.match.params.orderid
-		await this.props.getEmails(id)
+		try {
+			await this.props.getEmails(id)
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 	handleServiceUpdate(evt) {

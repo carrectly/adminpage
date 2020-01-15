@@ -8,8 +8,12 @@ import UpdateCustomer from './UpdateCustomer'
 
 class SingleCustomer extends Component {
 	async componentDidMount() {
-		await this.props.getCustomer(this.props.match.params.userid)
-		await this.props.getOrders(this.props.match.params.userid)
+		try {
+			await this.props.getCustomer(this.props.match.params.userid)
+			await this.props.getOrders(this.props.match.params.userid)
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 	render() {

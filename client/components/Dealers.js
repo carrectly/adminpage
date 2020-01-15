@@ -7,7 +7,11 @@ import DealerCard from './DealerCard'
 
 class Dealers extends Component {
 	async componentDidMount() {
-		await this.props.fetchDealers()
+		try {
+			await this.props.fetchDealers()
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 	render() {
