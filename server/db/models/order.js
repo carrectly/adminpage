@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const {db} = require('../database')
+const db = require('../database')
 var axios = require('axios')
 const Customer = require('./customer')
 

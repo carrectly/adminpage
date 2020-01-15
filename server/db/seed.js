@@ -6,7 +6,7 @@ const {
 	Service,
 	Dealer,
 } = require('./models')
-const {db} = require('./database.js')
+const db = require('./database.js')
 var faker = require('faker')
 const Sequelize = require('sequelize')
 const fs = require('fs')

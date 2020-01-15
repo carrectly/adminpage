@@ -10,7 +10,7 @@ const db = new Sequelize(
 	}
 )
 
-const dbMYSQL = null
+//const dbMYSQL = null
 
 // const dbMYSQL = new Sequelize('carrectl_wp', 'carrectl_vadym', 'An;z([KBpiM3', {
 // 	host: 'us58.siteground.us',
@@ -24,7 +24,7 @@ const dbMYSQL = null
 // 	},
 // })
 
-module.exports = {db, dbMYSQL}
+module.exports = db
 
 if (process.env.NODE_ENV === 'test') {
 	after('close database connection', () => db.close())
