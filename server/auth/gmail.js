@@ -187,9 +187,10 @@ async function listMessages(auth, id) {
 					newArr = [...newArr, ...val.data.messages]
 					nextPage = val.data.nextPageToken || null
 				})
-				.catch(reason => {
-					console.log('Promise fail.')
+				.catch(err => {
+					console.log('Promise fail')
 					loopContinue = false
+					console.error(err)
 				})
 		}
 
@@ -213,8 +214,11 @@ async function listMessages(auth, id) {
 
 		return headersArray
 	}
-
-	return Managework()
+	if (initialRequest.data.resultSizeEstimate > 0) {
+		return Managework()
+	} else {
+		return []
+	}
 
 	function doWork(tkn) {
 		return new Promise((resolve, reject) => {
