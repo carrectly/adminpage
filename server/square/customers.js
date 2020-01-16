@@ -6,17 +6,13 @@ const config = require('../../squareconfig.json').sandbox
 // Configure OAuth2 access token for authorization: oauth2
 var oauth2 = client.authentications.oauth2
 client.basePath = 'https://connect.squareupsandbox.com'
-oauth2.accessToken = {
-	squareApplicationId: 'sq0idb-1tqa9fkMqCkzgv_8RMhJ7w',
-	squareAccessToken:
-		'EAAAEPC4hWEeDK2uS1SQgwBVpFuMj47M4y4DjkhLfcBdAPhrBLAwjWTqrzE7Dbm-',
-	squareLocationId: 'PRV2GHZVTGW0P',
-}
+oauth2.accessToken = process.env.SQUARE_TOKEN
 
 var customers = new SquareConnect.CustomersApi()
 
 router.post('/', async (req, res, next) => {
 	try {
+		console.log('env square', process.env.SQUARE_TOKEN)
 		let phone = req.body.customerPhoneNumber
 
 		let cust = await Customer.findOne({
