@@ -2,10 +2,15 @@ const fs = require('fs')
 const router = require('express').Router()
 const {google} = require('googleapis')
 const readline = require('readline')
-
+const {User} = require('../db/models')
 const passport = require('passport')
 var parseMessage = require('gmail-api-parse-message')
 var Base64 = require('js-base64').Base64
+const http = require('http')
+const url = require('url')
+const destroyer = require('server-destroy')
+const opn = require('open')
+const sampleClient = require('./googleclient')
 
 module.exports = router
 
@@ -18,11 +23,21 @@ const SCOPES = [
 
 const TOKEN_PATH = '/Users/abirkus/Desktop/carrectly/adminpage/tockengmail.json'
 
+const gmail = google.gmail({
+	version: 'v1',
+	auth: sampleClient.oAuth2Client,
+})
+
 router.get('/:orderid', async (req, res, next) => {
 	try {
-		let id = req.params.orderid
-		let result = await fetchEmails(id)
-		res.json(result)
+		sampleClient
+			.authenticate(SCOPES)
+			.then(runSample)
+			.catch(console.error)
+
+		// let id = req.params.orderid
+		// let result = await fetchEmails(id)
+		// res.json(result)
 	} catch (err) {
 		next(err)
 	}
@@ -95,20 +110,24 @@ async function authorize(credentials, callback, query) {
 	)
 
 	//console.log('CREATING OATH 2 CLIENT', oAuth2Client)
-	let tkn = await fs.readFileSync(TOKEN_PATH, 'utf8')
+	//let tkn = await fs.readFileSync(TOKEN_PATH, 'utf8')
 
+	let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
+	let tkn = JSON.parse(usr.dataValues.gmailToken)
+
+	console.log('TOKEN line 103', tkn)
 	if (!query) {
 		if (!tkn) {
 			return getNewToken(oAuth2Client, await callback)
 		} else {
-			tkn = JSON.parse(tkn)
+			//tkn = JSON.parse(tkn)
 			oAuth2Client.setCredentials(tkn)
 			return callback(oAuth2Client)
 		}
 	} else if (!tkn) {
 		return getNewToken(oAuth2Client, await callback, query)
 	} else {
-		tkn = JSON.parse(tkn)
+		//tkn = JSON.parse(tkn)
 		oAuth2Client.setCredentials(tkn)
 		return callback(oAuth2Client, query)
 	}
@@ -121,34 +140,71 @@ async function authorize(credentials, callback, query) {
  * @param {getEventsCallback} callback The callback for the authorized client.
  */
 function getNewToken(oAuth2Client, callback, query) {
-	const authUrl = oAuth2Client.generateAuthUrl({
-		access_type: 'offline',
-		scope: SCOPES,
-	})
-	console.log('Authorize this app by visiting this url:', authUrl)
-	const rl = readline.createInterface({
-		input: process.stdin,
-		output: process.stdout,
-	})
-	rl.question('Enter the code from that page here: ', code => {
-		rl.close()
-		oAuth2Client.getToken(code, (err, token) => {
-			if (err) return console.error('Error retrieving access token', err)
-			oAuth2Client.setCredentials(token)
-			// Store the token to disk for later program executions
-			fs.writeFile(TOKEN_PATH, JSON.stringify(token), err => {
-				if (err) return console.error(err)
-				console.log('Token stored to', TOKEN_PATH)
-			})
-			if (!query) {
-				return callback(oAuth2Client)
-			} else {
-				return callback(oAuth2Client, query)
-			}
+	// const authUrl = oAuth2Client.generateAuthUrl({
+	// 	access_type: 'offline',
+	// 	scope: SCOPES,
+	// })
+
+	return new Promise((resolve, reject) => {
+		// grab the url that will be used for authorization
+		const authorizeUrl = this.oAuth2Client.generateAuthUrl({
+			access_type: 'offline',
+			scope: SCOPES.join(' '),
 		})
+		const server = http
+			.createServer(async (req, res) => {
+				try {
+					if (req.url.indexOf('/oauth2callback') > -1) {
+						const qs = new url.URL(req.url, 'http://localhost:3000')
+							.searchParams
+						res.end(
+							'Authentication successful! Please return to the console.'
+						)
+						server.destroy()
+						const {tokens} = await this.oAuth2Client.getToken(
+							qs.get('code')
+						)
+						this.oAuth2Client.credentials = tokens
+						resolve(this.oAuth2Client)
+					}
+				} catch (e) {
+					reject(e)
+				}
+			})
+			.listen(3000, () => {
+				// open the browser to the authorize url to start the workflow
+				opn(this.authorizeUrl, {wait: false}).then(cp => cp.unref())
+			})
+		destroyer(server)
+
+		// console.log('Authorize this app by visiting this url:', authUrl)
+		// const rl = readline.createInterface({
+		// 	input: process.stdin,
+		// 	output: process.stdout,
+		// })
+		// rl.question('Enter the code from that page here: ', code => {
+		// 	rl.close()
+		// 	oAuth2Client.getToken(code, async (err, token) => {
+		// 		if (err) return console.error('Error retrieving access token', err)
+		// 		oAuth2Client.setCredentials(token)
+		// 		// Store the token to disk for later program executions
+		// 		let str = JSON.stringify(token)
+
+		// 		let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
+		// 		await usr.update({gmailToken: str})
+		// 		// fs.writeFile(TOKEN_PATH, JSON.stringify(token), err => {
+		// 		// 	if (err) return console.error(err)
+		// 		// 	console.log('Token stored to', TOKEN_PATH)
+		// 		// })
+		// 		if (!query) {
+		// 			return callback(oAuth2Client)
+		// 		} else {
+		// 			return callback(oAuth2Client, query)
+		// 		}
+		// 	})
+		//})
 	})
 }
-
 /**
  * Retrieve Messages in user's mailbox matching query.
  *
@@ -175,6 +231,7 @@ async function listMessages(auth, id) {
 		q: query,
 	})
 
+	console.log('gmail request using api key', initialRequest)
 	let nextPage = initialRequest.data.nextPageToken
 
 	var loopContinue = true
@@ -368,5 +425,12 @@ async function sendEmail(auth, msg) {
 		},
 	})
 
+	return res.data
+}
+
+async function runSample() {
+	console.log('RUNNING SAMPLE')
+	const res = await gmail.users.drafts.list({userId: 'me'})
+	console.log('DRAFTS', res.data)
 	return res.data
 }

@@ -2,6 +2,7 @@ const fs = require('fs')
 const router = require('express').Router()
 const {google} = require('googleapis')
 const readline = require('readline')
+const {User} = require('../db/models')
 module.exports = router
 
 const SCOPES = ['https://www.googleapis.com/auth/calendar']
@@ -81,20 +82,25 @@ async function authorize(credentials, callback, query) {
 		redirect_uris[0]
 	)
 
-	let tkn = await fs.readFileSync(TOKEN_PATH, 'utf8')
+	//let tkn = await fs.readFileSync(TOKEN_PATH, 'utf8')
+
+	let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
+	let tkn = JSON.parse(usr.dataValues.calendarToken)
+
+	console.log('TOKEN line 91', tkn)
 
 	if (!query) {
 		if (!tkn) {
 			return getNewToken(oAuth2Client, await callback)
 		} else {
-			tkn = JSON.parse(tkn)
+			//tkn = JSON.parse(tkn)
 			oAuth2Client.setCredentials(tkn)
 			return callback(oAuth2Client)
 		}
 	} else if (!tkn) {
 		return getNewToken(oAuth2Client, await callback, query)
 	} else {
-		tkn = JSON.parse(tkn)
+		//tkn = JSON.parse(tkn)
 		oAuth2Client.setCredentials(tkn)
 		return callback(oAuth2Client, query)
 	}
@@ -118,14 +124,20 @@ function getNewToken(oAuth2Client, callback) {
 	})
 	rl.question('Enter the code from that page here: ', code => {
 		rl.close()
-		oAuth2Client.getToken(code, (err, token) => {
+		oAuth2Client.getToken(code, async (err, token) => {
 			if (err) return console.error('Error retrieving access token', err)
 			oAuth2Client.setCredentials(token)
 			// Store the token to disk for later program executions
-			fs.writeFile(TOKEN_PATH, JSON.stringify(token), err => {
-				if (err) return console.error(err)
-				console.log('Token stored to', TOKEN_PATH)
-			})
+
+			let str = JSON.stringify(token)
+
+			let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
+			await usr.update({calendarToken: str})
+
+			// fs.writeFile(TOKEN_PATH, JSON.stringify(token), err => {
+			// 	if (err) return console.error(err)
+			// 	console.log('Token stored to', TOKEN_PATH)
+			// })
 
 			return callback(oAuth2Client)
 		})

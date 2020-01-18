@@ -1,0 +1,212 @@
+﻿[
+	{
+		"services": [{"name": "Dog Hair"}],
+		"pickupDate": "1/30/20 15:05",
+		"dropoffDate": "2/1/20 17:30",
+		"pickupLocation": "1410 N State Pkwy",
+		"carYear": "2018",
+		"carMake": "Volvo",
+		"carModel": "XC60",
+		"customer": {
+			"firstName": "Frank",
+			"lastName": "Trager",
+			"location": "60610",
+			"phoneNumber": "7088059384",
+			"email": "Ftrager@alliancesteel.net"
+		},
+		"hash": "7991565b65901bbeb9e0db918eb0379b"
+	},
+	{
+		"services": [{"name": "Dog Hair"}],
+		"pickupDate": "2020-01-31 15:05",
+		"dropoffDate": "2020-02-02 17:30",
+		"pickupLocation": "4847 West 24th Place",
+		"carYear": "2014",
+		"carMake": "Mazda",
+		"carModel": "MAZDA3",
+		"customer": {
+			"firstName": "Jason",
+			"lastName": "Stegemoller",
+			"location": "60640",
+			"phoneNumber": "217-840-5284",
+			"email": "Jasonstegemoller@gmail.com"
+		},
+		"hash": "b2d363e42fc60eba86e7b4891eb27e93"
+	},
+	{
+		"services": [{"name": "Dog Hair"}],
+		"pickupDate": "2020-01-10 15:05",
+		"dropoffDate": "2020-01-11 15:05",
+		"pickupLocation": "355 East Ohio Street",
+		"carYear": "2017",
+		"carMake": "Ford",
+		"carModel": "Explorer",
+		"customer": {
+			"firstName": "Gregory",
+			"lastName": "Ford",
+			"location": "60611",
+			"phoneNumber": "2199213312",
+			"email": "Braedentford@gmail.com"
+		},
+		"hash": "551746d7cd4c03efb163447c349dd1b2"
+	},
+	{
+		"services": [{"name": "Dog Hair"}],
+		"pickupDate": "2020-01-12 15:05",
+		"dropoffDate": "2020-01-13 15:05",
+		"pickupLocation": "1037 West Diversey Parkway",
+		"carYear": "2007",
+		"carMake": "Honda",
+		"carModel": "Accord",
+		"customer": {
+			"firstName": "Lilly",
+			"lastName": "Morgan",
+			"location": "60614",
+			"phoneNumber": "7138173134",
+			"email": "lmorgan125@gmail.com"
+		},
+
+		"hash": "a9e89c8f762a3e75becb4280c9ea3858"
+	},
+	{
+		"services": [
+			{
+				"name": "Dog Hair"
+			}
+		],
+		"pickupDate": "2/3/20 15:05",
+		"dropoffDate": "2/5/20 17:30",
+		"pickupLocation": "600 North Dearborn Street",
+		"carYear": "2003",
+		"carMake": "Infiniti",
+		"carModel": "I",
+		"customer": {
+			"firstName": "Ketan",
+			"lastName": "Shah",
+			"location": "60654",
+			"phoneNumber": "3124938811",
+			"email": "ketan.kj13@gmail.com"
+		},
+		"hash": "0be0654c802441575793730f9acff04c"
+	},
+	{
+		"services": [
+			{
+				"name": "Dog Hair"
+			}
+		],
+		"pickupDate": "2020-01-12 08:05",
+		"dropoffDate": "2020-01-12 10:05",
+		"pickupLocation": "4847 West 24th Place",
+		"carYear": "2010",
+		"carMake": "Mercedes-Benz",
+		"carModel": "E",
+		"customer": {
+			"firstName": "Daniel",
+			"lastName": "Fox",
+			"location": "60804",
+			"phoneNumber": "3126840480",
+			"email": "a.kief23@gmail.com"
+		},
+		"hash": "f2b37eb9636f386d10cb64198aa16caf"
+	},
+	{
+		"services": [
+			{
+				"name": "Dog Hair"
+			},
+			{
+				"name": "Fuel up"
+			}
+		],
+		"pickupDate": "2020-01-10 08:05",
+		"dropoffDate": "2020-01-10 14:05",
+		"pickupLocation": "801 South Wells Street",
+		"carYear": "2014",
+		"carMake": "Subaru",
+		"carModel": "XV Crosstrek",
+		"customer": {
+			"firstName": "Gregory",
+			"lastName": "Karpovics",
+			"location": "60607",
+			"phoneNumber": "5037094724",
+			"email": "gkarpovics@me.com"
+		},
+		"hash": "7bb016ba9878e9ecdc625bd9c130f1a0"
+	},
+	{
+		"services": "Dog Hair",
+		"pickupDate": "2/6/20 15:05",
+		"dropoffDate": "2/8/20 17:30",
+		"pickupLocation": "4847 North Winchester Avenue",
+		"carYear": 2013,
+		"carMake": "Toyota",
+		"carModel": "Corolla",
+		"firstName": "Erin",
+		"lastName": "Cable",
+		"location": 60640,
+		"phoneNumber": 7346492248,
+		"email": "erinjca@gmail.com",
+		"hash": "969a072c65e2ba3da8840d3e3bc6aa8a"
+	},
+	{
+		"services": "Dog Hair",
+		"pickupDate": "2/7/20 15:05",
+		"dropoffDate": "2/9/20 17:30",
+		"pickupLocation": "629 West Cermak Road",
+		"carYear": 2018,
+		"carMake": "Jeep",
+		"carModel": "Renegade",
+		"firstName": "Aron",
+		"lastName": "Fischer",
+		"location": 60640,
+		"phoneNumber": 3144893320,
+		"email": "aron@facturegoods.com",
+		"hash": "30d4df133dc835dcd1e2e76f3eba5130"
+	},
+	{
+		"services": "Dog Hair",
+		"pickupDate": "2/8/20 15:05",
+		"dropoffDate": "2/10/20 17:30",
+		"pickupLocation": "833 North Clark Street",
+		"carYear": 2014,
+		"carMake": "Subaru",
+		"carModel": "XV Crosstrek",
+		"firstName": "Abby",
+		"lastName": "Bartine",
+		"location": 60610,
+		"phoneNumber": 5153140482,
+		"email": "abby.bartine@gmail.com",
+		"hash": "bdf0347f286cef4882bce6a20ed581ed"
+	},
+	{
+		"services": "Dog Hair",
+		"pickupDate": "2/9/20 15:05",
+		"dropoffDate": "2/11/20 17:30",
+		"pickupLocation": "555 West Monroe Street",
+		"carYear": 2005,
+		"carMake": "Volvo",
+		"carModel": "S40",
+		"firstName": "Kelly",
+		"lastName": "Kennedy",
+		"location": 60616,
+		"phoneNumber": 6126556267,
+		"email": "kkennedy14@gmail.com",
+		"hash": "0c69076d8b110967643d6ebabb89ec9e"
+	},
+	{
+		"services": "Dog Hair",
+		"pickupDate": "2/10/20 15:05",
+		"dropoffDate": "2/12/20 17:30",
+		"pickupLocation": "113 North May Street",
+		"carYear": 2010,
+		"carMake": "Hyundai",
+		"carModel": "Tucson",
+		"firstName": "Jessamyn",
+		"lastName": "Trocio",
+		"location": 60607,
+		"phoneNumber": 7738186436,
+		"email": "Jessamyn.chrysty@gmail.com",
+		"hash": "be24e0d764c14d001e82da51ad2d1eb2"
+	}
+]

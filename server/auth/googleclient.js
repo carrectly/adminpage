@@ -47,11 +47,26 @@ class SampleClient {
 	constructor(options) {
 		this._options = options || {scopes: []}
 
+		// validate the redirectUri.  This is a frequent cause of confusion.
+		if (!keys.redirect_uris || keys.redirect_uris.length === 0) {
+			throw new Error(invalidRedirectUri)
+		}
+		const redirectUri = keys.redirect_uris[keys.redirect_uris.length - 1]
+		const parts = new url.URL(redirectUri)
+		if (
+			redirectUri.length === 0 ||
+			parts.port !== '3000' ||
+			parts.hostname !== 'localhost' ||
+			parts.pathname !== '/oauth2callback'
+		) {
+			throw new Error(invalidRedirectUri)
+		}
+
 		// create an oAuth client to authorize the API call
 		this.oAuth2Client = new google.auth.OAuth2(
-			process.env.GMAIL_CLIENT_ID,
-			process.env.GMAIL_CLIENT_SECRET,
-			process.env.redirect_uris
+			process.env.client_id,
+			process.env.client_secret,
+			keys.redirect_uris
 		)
 	}
 

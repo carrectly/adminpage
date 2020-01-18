@@ -38,6 +38,15 @@ const User = db.define('user', {
 		type: Sequelize.BOOLEAN,
 		defaultValue: false,
 	},
+	gmailToken: {
+		type: Sequelize.TEXT,
+	},
+	calendarToken: {
+		type: Sequelize.TEXT,
+	},
+	contactsToken: {
+		type: Sequelize.TEXT,
+	},
 })
 
 module.exports = User

@@ -160,26 +160,11 @@ for (let i = 0; i < 10; i++) {
 	})
 }
 
-// serviceSeed.push({
-// 	name: 'wash',
-// 	price: 30,
-// 	description: 'very nice car bath',
-// })
-// serviceSeed.push({
-// 	name: 'detail',
-// 	price: 90,
-// 	description: 'very nice detailing service',
-// })
-
-// serviceSeed.push({
-// 	name: 'oil change',
-// 	price: 100,
-// 	description: 'very nice oil change',
-// })
-
 const seed = async () => {
 	try {
 		await db.sync({force: true})
+		await Dealer.bulkCreate(dealerSeed)
+		await Service.bulkCreate(serviceSeed)
 		await User.create({
 			email: 'cody@email.com',
 			password: '123',
@@ -187,16 +172,12 @@ const seed = async () => {
 			shippingAddress: faker.address.streetAddress(),
 		})
 		await User.bulkCreate(userSeed)
-		await Customer.create(customerSeed[0]).catch(
-			Sequelize.ValidationError,
-			function(err) {
-				console.error('User Exists', err.name)
-			}
-		)
-
-		await Dealer.bulkCreate(dealerSeed)
-		await Service.bulkCreate(serviceSeed)
-		//await OrderDetails.bulkCreate(orderDetailSeed)
+		// await Customer.create(customerSeed[0]).catch(
+		// 	Sequelize.ValidationError,
+		// 	function(err) {
+		// 		console.error('User Exists', err.name)
+		// 	}
+		// )
 	} catch (err) {
 		console.log('Error seeding bulk file', err)
 	}
