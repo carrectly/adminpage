@@ -11,7 +11,7 @@ const {User} = require('../db/models')
 
 const keyPath = path.join(__dirname, 'oauth2.keys.json')
 let keys = {
-	redirect_uris: [process.env.redirect_uris],
+	redirect_uris: ['http://localhost:3000/oauth2callback'],
 }
 if (fs.existsSync(keyPath)) {
 	const keyFile = require(keyPath)
@@ -32,21 +32,21 @@ class SampleClient {
 		this._options = options || {scopes: []}
 
 		// validate the redirectUri.  This is a frequent cause of confusion.
-		// if (!keys.redirect_uris || keys.redirect_uris.length === 0) {
-		// 	throw new Error(invalidRedirectUri)
-		// }
+		if (!keys.redirect_uris || keys.redirect_uris.length === 0) {
+			throw new Error(invalidRedirectUri)
+		}
 		const redirectUri = keys.redirect_uris[keys.redirect_uris.length - 1]
 		const parts = new url.URL(redirectUri)
 
 		//console.log('PARTS', parts)
-		// if (
-		// 	redirectUri.length === 0 ||
-		// 	parts.port !== '3000' ||
-		// 	parts.hostname !== 'localhost' ||
-		// 	parts.pathname !== '/oauth2callback'
-		// ) {
-		// 	throw new Error(invalidRedirectUri)
-		// }
+		if (
+			redirectUri.length === 0 ||
+			parts.port !== '3000' ||
+			parts.hostname !== 'localhost' ||
+			parts.pathname !== '/oauth2callback'
+		) {
+			throw new Error(invalidRedirectUri)
+		}
 
 		// create an oAuth client to authorize the API call
 		this.oAuth2Client = new google.auth.OAuth2(
@@ -73,8 +73,6 @@ class SampleClient {
 
 		if (usr.dataValues[tokenType]) {
 			let tkn = JSON.parse(usr.dataValues[tokenType])
-			//oAuth2Client.setCredentials(token)
-			//this.oAuth2Client.setCredentials(tkn)
 			this.oAuth2Client.credentials = tkn
 			return this.oAuth2Client
 		} else {
@@ -89,9 +87,8 @@ class SampleClient {
 						try {
 							if (req.url.indexOf('/oauth2callback') > -1) {
 								const qs = new url.URL(
-									process.env.redirect_uris
-									// req.url,
-									// 'http://localhost:3000'
+									req.url,
+									'http://localhost:3000'
 								).searchParams
 								res.end(
 									'Authentication successful! Please return to the console.'
