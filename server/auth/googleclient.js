@@ -32,19 +32,21 @@ class SampleClient {
 		this._options = options || {scopes: []}
 
 		// validate the redirectUri.  This is a frequent cause of confusion.
-		if (!keys.redirect_uris || keys.redirect_uris.length === 0) {
-			throw new Error(invalidRedirectUri)
-		}
+		// if (!keys.redirect_uris || keys.redirect_uris.length === 0) {
+		// 	throw new Error(invalidRedirectUri)
+		// }
 		const redirectUri = keys.redirect_uris[keys.redirect_uris.length - 1]
 		const parts = new url.URL(redirectUri)
-		if (
-			redirectUri.length === 0 ||
-			parts.port !== '3000' ||
-			parts.hostname !== 'localhost' ||
-			parts.pathname !== '/oauth2callback'
-		) {
-			throw new Error(invalidRedirectUri)
-		}
+
+		//console.log('PARTS', parts)
+		// if (
+		// 	redirectUri.length === 0 ||
+		// 	parts.port !== '3000' ||
+		// 	parts.hostname !== 'localhost' ||
+		// 	parts.pathname !== '/oauth2callback'
+		// ) {
+		// 	throw new Error(invalidRedirectUri)
+		// }
 
 		// create an oAuth client to authorize the API call
 		this.oAuth2Client = new google.auth.OAuth2(
@@ -87,8 +89,9 @@ class SampleClient {
 						try {
 							if (req.url.indexOf('/oauth2callback') > -1) {
 								const qs = new url.URL(
-									req.url,
-									'http://localhost:3000'
+									process.env.redirect_uris
+									// req.url,
+									// 'http://localhost:3000'
 								).searchParams
 								res.end(
 									'Authentication successful! Please return to the console.'
