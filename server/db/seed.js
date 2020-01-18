@@ -1,20 +1,10 @@
-const {
-	User,
-	Customer,
-	Order,
-	OrderDetails,
-	Service,
-	Dealer,
-} = require('./models')
+const {User, Customer, Service, Dealer} = require('./models')
 const db = require('./database.js')
 var faker = require('faker')
 const Sequelize = require('sequelize')
-const fs = require('fs')
 
 let customerSeed = []
 let userSeed = []
-let orderSeed = []
-let orderDetailSeed = []
 let serviceSeed = [
 	{name: 'AC Coolant Recharge', price: 150},
 	{name: 'Alighnment', price: 140},
@@ -41,6 +31,7 @@ let serviceSeed = [
 	{name: 'Labor Cost', price: 120},
 	{name: 'Long-Haul Transit', price: 500},
 	{name: 'Long-Term Vehicle Storage', price: 70},
+	{name: 'Miscellaneous', price: 0},
 	{name: 'One Way Transport', price: 40},
 	{name: 'Paint Correction', price: 500},
 	{name: 'Paintless Dent Removal', price: 100},
@@ -91,14 +82,6 @@ const statusArray = [
 	'completed - paid',
 ]
 
-for (let i = 0; i < 10; i++) {
-	userSeed.push({
-		email: faker.internet.email(),
-		password: '123',
-		shippingAddress: faker.address.streetAddress(),
-	})
-}
-
 dealerSeed.push({
 	name: 'United Tires',
 	email: 'birkusandre@gmail.com',
@@ -125,41 +108,6 @@ customerSeed.push({
 	phoneNumber: '7739876075',
 })
 
-for (let i = 0; i < 9; i++) {
-	customerSeed.push({
-		email: faker.internet.email(),
-		location: faker.address.streetAddress(),
-		firstName: faker.name.firstName(),
-		lastName: faker.name.lastName(),
-		phoneNumber: faker.phone.phoneNumberFormat(0),
-	})
-}
-
-for (let i = 0; i < 10; i++) {
-	let num = [Math.floor(Math.random() * customerSeed.length)]
-	orderSeed.push({
-		status: statusArray[Math.floor(Math.random() * statusArray.length)],
-		customerPhoneNumber: customerSeed[num].phoneNumber,
-		pickupLocation: customerSeed[num].location,
-		pickupDate: faker.date.between('2020-01-10', '2020-01-14'),
-		dropoffDate: faker.date.between('2020-01-15', '2020-01-20'),
-		carYear: faker.random.number({min: 1990, max: 2020}),
-		carMake: faker.commerce.productName(),
-		carModel: faker.commerce.productName(),
-		comments: faker.lorem.sentence(),
-		hash: faker.random.number({min: 10000, max: 99999}),
-	})
-}
-
-for (let i = 0; i < 10; i++) {
-	orderDetailSeed.push({
-		customerPrice: faker.commerce.price(),
-		dealerPrice: faker.commerce.price(),
-		orderId: i + 1,
-		serviceId: [Math.floor(Math.random() * 2)],
-	})
-}
-
 const seed = async () => {
 	try {
 		await db.sync({force: true})
@@ -172,12 +120,12 @@ const seed = async () => {
 			shippingAddress: faker.address.streetAddress(),
 		})
 		await User.bulkCreate(userSeed)
-		// await Customer.create(customerSeed[0]).catch(
-		// 	Sequelize.ValidationError,
-		// 	function(err) {
-		// 		console.error('User Exists', err.name)
-		// 	}
-		// )
+		await Customer.create(customerSeed[0]).catch(
+			Sequelize.ValidationError,
+			function(err) {
+				console.error('User Exists', err.name)
+			}
+		)
 	} catch (err) {
 		console.log('Error seeding bulk file', err)
 	}

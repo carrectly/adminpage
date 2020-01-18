@@ -11,7 +11,7 @@ const {User} = require('../db/models')
 
 const keyPath = path.join(__dirname, 'oauth2.keys.json')
 let keys = {
-	redirect_uris: ['http://localhost:3000/oauth2callback'],
+	redirect_uris: [process.env.redirect_uris],
 }
 if (fs.existsSync(keyPath)) {
 	const keyFile = require(keyPath)

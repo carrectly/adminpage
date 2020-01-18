@@ -53,6 +53,8 @@
 		"gmail-api-parse-message": "^2.1.0",
 		"gmail-send": "^1.8.10",
 		"googleapis": "^39.2.0",
+		"open": "^7.0.0",
+		"server-destroy": "^1.0.1",
 		"history": "^4.9.0",
 		"html-react-parser": "^0.10.0",
 		"js-base64": "^2.5.1",
