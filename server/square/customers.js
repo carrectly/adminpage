@@ -2,7 +2,7 @@ const router = require('express').Router()
 var SquareConnect = require('square-connect')
 var client = SquareConnect.ApiClient.instance
 const {Order, OrderDetails, Service, Customer} = require('../db/models')
-const config = require('../../squareconfig.json').sandbox
+//const config = require('../../squareconfig.json').sandbox
 // Configure OAuth2 access token for authorization: oauth2
 var oauth2 = client.authentications.oauth2
 client.basePath = 'https://connect.squareupsandbox.com'
