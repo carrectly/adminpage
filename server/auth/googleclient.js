@@ -1,21 +1,4 @@
-// Copyright 2016 Google LLC
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 'use strict'
-
-/**
- * This is used by several samples to easily provide an oauth2 workflow.
- */
 
 const {google} = require('googleapis')
 const http = require('http')
@@ -24,6 +7,7 @@ const opn = require('open')
 const destroyer = require('server-destroy')
 const fs = require('fs')
 const path = require('path')
+const {User} = require('../db/models')
 
 const keyPath = path.join(__dirname, 'oauth2.keys.json')
 let keys = {
@@ -74,40 +58,65 @@ class SampleClient {
 	// simple example, the only request to our webserver is to
 	// /oauth2callback?code=<code>
 	async authenticate(scopes) {
-		return new Promise((resolve, reject) => {
-			// grab the url that will be used for authorization
-			this.authorizeUrl = this.oAuth2Client.generateAuthUrl({
-				access_type: 'offline',
-				scope: scopes.join(' '),
-			})
-			const server = http
-				.createServer(async (req, res) => {
-					try {
-						if (req.url.indexOf('/oauth2callback') > -1) {
-							const qs = new url.URL(
-								req.url,
-								'http://localhost:3000'
-							).searchParams
-							res.end(
-								'Authentication successful! Please return to the console.'
-							)
-							server.destroy()
-							const {tokens} = await this.oAuth2Client.getToken(
-								qs.get('code')
-							)
-							this.oAuth2Client.credentials = tokens
-							resolve(this.oAuth2Client)
+		let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
+
+		let tokenType = ''
+		if (scopes[0].includes('calendar')) {
+			tokenType = 'calendarToken'
+		} else if (scopes[0].includes('gmail')) {
+			tokenType = 'gmailToken'
+		} else if (scopes[0].includes('contacts')) {
+			tokenType = 'contactsToken'
+		}
+
+		if (usr.dataValues[tokenType]) {
+			let tkn = JSON.parse(usr.dataValues[tokenType])
+			//oAuth2Client.setCredentials(token)
+			//this.oAuth2Client.setCredentials(tkn)
+			this.oAuth2Client.credentials = tkn
+			return this.oAuth2Client
+		} else {
+			return new Promise((resolve, reject) => {
+				// grab the url that will be used for authorization
+				this.authorizeUrl = this.oAuth2Client.generateAuthUrl({
+					access_type: 'offline',
+					scope: scopes.join(' '),
+				})
+				const server = http
+					.createServer(async (req, res) => {
+						try {
+							if (req.url.indexOf('/oauth2callback') > -1) {
+								const qs = new url.URL(
+									req.url,
+									'http://localhost:3000'
+								).searchParams
+								res.end(
+									'Authentication successful! Please return to the console.'
+								)
+								server.destroy()
+								const {
+									tokens,
+								} = await this.oAuth2Client.getToken(
+									qs.get('code')
+								)
+								this.oAuth2Client.credentials = tokens
+								let str = JSON.stringify(tokens)
+								usr.update({[tokenType]: str})
+								resolve(this.oAuth2Client)
+							}
+						} catch (e) {
+							reject(e)
 						}
-					} catch (e) {
-						reject(e)
-					}
-				})
-				.listen(3000, () => {
-					// open the browser to the authorize url to start the workflow
-					opn(this.authorizeUrl, {wait: false}).then(cp => cp.unref())
-				})
-			destroyer(server)
-		})
+					})
+					.listen(3000, () => {
+						// open the browser to the authorize url to start the workflow
+						opn(this.authorizeUrl, {wait: false}).then(cp =>
+							cp.unref()
+						)
+					})
+				destroyer(server)
+			})
+		}
 	}
 }
 

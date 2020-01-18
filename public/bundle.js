@@ -843,7 +843,7 @@ function (_Component) {
       }, "Search by customer phone number")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], {
         type: "button",
         onClick: function onClick() {
-          return _this2.props.getContacts();
+          return _this2.props.createContact();
         }
       }, "View All Customers"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "singleordertable"
@@ -76731,7 +76731,7 @@ module.exports = function (styleStr) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

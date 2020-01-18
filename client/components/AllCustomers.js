@@ -109,7 +109,7 @@ class AllCustomers extends Component {
 						</span>
 						<Button
 							type='button'
-							onClick={() => this.props.getContacts()}>
+							onClick={() => this.props.createContact()}>
 							View All Customers
 						</Button>
 					</Form>
