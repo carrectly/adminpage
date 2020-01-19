@@ -49,3 +49,19 @@ router.get('/me', (req, res) => {
 })
 
 router.use('/google', require('./google'))
+
+//const {superrouter} = require('./googleclient')
+//router.use('/oauth2callback', superrouter)
+
+// router.get('/oauth2callback', async (req, res, next) => {
+// 	try {
+// 		let code = req.query.code
+// 		res.end('Authentication successful! Please return to the console.')
+// 		// const {tokens} = await this.oAuth2Client.getToken(code)
+// 		// this.oAuth2Client.credentials = tokens
+// 		// let str = JSON.stringify(tokens)
+// 		// usr.update({[tokenType]: str})
+// 	} catch (err) {
+// 		next(err)
+// 	}
+// })

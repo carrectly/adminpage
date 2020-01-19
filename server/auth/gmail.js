@@ -20,6 +20,7 @@ const gmail = google.gmail({
 
 router.get('/:orderid', async (req, res, next) => {
 	try {
+		console.log('module exports', sampleClient)
 		const id = req.params.orderid
 		await sampleClient.authenticate(SCOPES)
 		let result = await listMessages(id)

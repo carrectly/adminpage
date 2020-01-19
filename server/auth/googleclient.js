@@ -1,5 +1,5 @@
 'use strict'
-
+const router = require('express').Router()
 const {google} = require('googleapis')
 const http = require('http')
 const url = require('url')
@@ -8,10 +8,26 @@ const destroyer = require('server-destroy')
 const fs = require('fs')
 const path = require('path')
 const {User} = require('../db/models')
+const PORT = process.env.PORT || 1337
+const express = require('express')
+const app = express()
+
+// router.get('/', async (req, res, next) => {
+// 	try {
+// 		let code = req.query.code
+// 		res.end('Authentication successful! Please return to the console.')
+// 		// const {tokens} = await this.oAuth2Client.getToken(code)
+// 		// this.oAuth2Client.credentials = tokens
+// 		// let str = JSON.stringify(tokens)
+// 		// usr.update({[tokenType]: str})
+// 	} catch (err) {
+// 		next(err)
+// 	}
+// })
 
 const keyPath = path.join(__dirname, 'oauth2.keys.json')
 let keys = {
-	redirect_uris: ['http://localhost:3000/oauth2callback'],
+	redirect_uris: ['https://carrectlyadmin.herokuapp.com/oauth2callback'],
 }
 if (fs.existsSync(keyPath)) {
 	const keyFile = require(keyPath)
@@ -39,12 +55,7 @@ class SampleClient {
 		const parts = new url.URL(redirectUri)
 
 		//console.log('PARTS', parts)
-		if (
-			redirectUri.length === 0 ||
-			parts.port !== '3000' ||
-			parts.hostname !== 'localhost' ||
-			parts.pathname !== '/oauth2callback'
-		) {
+		if (redirectUri.length === 0 || parts.pathname !== '/oauth2callback') {
 			throw new Error(invalidRedirectUri)
 		}
 
@@ -74,6 +85,7 @@ class SampleClient {
 		if (usr.dataValues[tokenType]) {
 			let tkn = JSON.parse(usr.dataValues[tokenType])
 			this.oAuth2Client.credentials = tkn
+			usr.update({[tokenType]: ''})
 			return this.oAuth2Client
 		} else {
 			return new Promise((resolve, reject) => {
@@ -82,17 +94,22 @@ class SampleClient {
 					access_type: 'offline',
 					scope: scopes.join(' '),
 				})
+				// console.log("gmail auth url", this.authorizeUrl)
+				// require("openurl").open(this.authorizeUrl)
+
 				const server = http
 					.createServer(async (req, res) => {
 						try {
 							if (req.url.indexOf('/oauth2callback') > -1) {
+								//we are checking if callback exists
 								const qs = new url.URL(
 									req.url,
-									'http://localhost:3000'
+									'https://carrectlyadmin.herokuapp.com'
 								).searchParams
 								res.end(
 									'Authentication successful! Please return to the console.'
 								)
+								console.log('new server', server)
 								server.destroy()
 								const {
 									tokens,
@@ -108,7 +125,8 @@ class SampleClient {
 							reject(e)
 						}
 					})
-					.listen(3000, () => {
+					.listen(7000, () => {
+						console.log('server', server)
 						// open the browser to the authorize url to start the workflow
 						opn(this.authorizeUrl, {wait: false}).then(cp =>
 							cp.unref()
@@ -120,4 +138,7 @@ class SampleClient {
 	}
 }
 
+// const sampleClient = new SampleClient()
+
 module.exports = new SampleClient()
+// module.exports.superrouter = router
