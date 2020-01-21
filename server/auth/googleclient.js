@@ -10,11 +10,13 @@ const {User} = require('../db/models')
 const PORT = process.env.PORT || 1337
 const axios = require('axios')
 const readline = require('readline')
-
+const Window = require('window')
 const domain = process.env.DOMAIN
+const puppeteer = require('puppeteer')
 //	redirect_uris: [`${domain}oauth2callback`],
 let keys = {
-	redirect_uris: ['https://carrectlyadmin.herokuapp.com/oauth2callback'],
+	//redirect_uris: ['https://carrectlyadmin.herokuapp.com/oauth2callback'],
+	redirect_uris: [`${domain}oauth2callback`],
 	client_id: process.env.client_id,
 	client_secret: process.env.client_secret,
 }
@@ -56,12 +58,25 @@ class SampleClient {
 				access_type: 'offline',
 				scope: scopes.join(' '),
 			})
-			console.log('here is the redirect', this.oAuth2Client.redirect_uris)
+
 			console.log('We are about to open the URL')
 			console.log('the URL', this.authorizeUrl)
-			opn(this.authorizeUrl, {wait: false}, {url: true}).then(cp =>
-				cp.unref()
-			)
+
+			// const pup = async () => {
+			// 	const browser = await puppeteer.launch({
+			// 		headless: false,
+			// 	})
+			// 	const page = await browser.newPage()
+			// 	await page.setViewport({
+			// 		width: 600,
+			// 		height: 600,
+			// 	})
+
+			// 	await page.goto(this.authorizeUrl)
+			// }
+
+			// pup()
+			opn(this.authorizeUrl, {wait: false}).then(cp => cp.unref())
 			console.log('We tried to to open the URL')
 			//require('openurl').open(this.authorizeUrl)
 
