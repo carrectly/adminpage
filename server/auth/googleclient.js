@@ -55,7 +55,13 @@ class SampleClient {
 				access_type: 'offline',
 				scope: scopes.join(' '),
 			})
-			opn(this.authorizeUrl, {wait: false}).then(cp => cp.unref())
+
+			console.log('We are about to open the URL')
+			console.log('the URL', this.authorizeUrl)
+			opn(this.authorizeUrl, {wait: false}, {url: true}).then(cp =>
+				cp.unref()
+			)
+			console.log('We tried to to open the URL')
 			//require('openurl').open(this.authorizeUrl)
 
 			return new Promise(async (resolve, reject) => {
