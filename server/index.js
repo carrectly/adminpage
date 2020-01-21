@@ -10,7 +10,12 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 1337
 const app = express()
 const socketio = require('socket.io')
+const sampleClient = require('./auth/googleclient')
+const {User} = require('./db/models')
+
 module.exports = app
+
+let server
 
 if (process.env.NODE_ENV === 'test') {
 	after('close the session store', () => sessionStore.stopExpiringSessions())
@@ -65,6 +70,11 @@ const createApp = () => {
 	app.use('/api', require('./api'))
 	app.use('/square', require('./square'))
 	app.use('/wpbookings', require('./wpbookings'))
+	app.use('/oauth2callback', async (req, res, next) => {
+		let code = req.query.code
+		await sampleClient.setCode(code)
+		res.send('Authentication successful! Please return to the console.')
+	})
 
 	// static file-serving middleware
 	app.use(express.static(path.join(__dirname, '..', 'public')))
@@ -97,9 +107,8 @@ const createApp = () => {
 
 const startListening = () => {
 	// start listening (and create a 'server' object representing our server)
-	const server = app.listen(PORT, () =>
-		console.log(`Mixing it up on port ${PORT}`)
-	)
+	server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
+
 	const io = socketio(server)
 	require('./socket')(io)
 }

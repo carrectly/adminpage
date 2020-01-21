@@ -87,7 +87,8 @@
 		"socket.io": "^2.2.0",
 		"square-connect": "^2.20191120.0",
 		"stripe": "^7.9.1",
-		"uuid": "^3.3.3"
+		"uuid": "^3.3.3",
+		"xmlhttprequest": "^1.8.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.4.3",
