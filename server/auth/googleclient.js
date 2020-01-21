@@ -12,9 +12,9 @@ const axios = require('axios')
 const readline = require('readline')
 
 const domain = process.env.DOMAIN
-
+//	redirect_uris: [`${domain}oauth2callback`],
 let keys = {
-	redirect_uris: [`${domain}oauth2callback`],
+	redirect_uris: ['https://carrectlyadmin.herokuapp.com/oauth2callback'],
 	client_id: process.env.client_id,
 	client_secret: process.env.client_secret,
 }
@@ -37,6 +37,7 @@ class SampleClient {
 	}
 
 	async authenticate(scopes) {
+		console.log('here is the redirect', keys.redirect_uris)
 		let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
 		let tokenType = ''
 		if (scopes[0].includes('calendar')) {
@@ -55,7 +56,7 @@ class SampleClient {
 				access_type: 'offline',
 				scope: scopes.join(' '),
 			})
-
+			console.log('here is the redirect', this.oAuth2Client.redirect_uris)
 			console.log('We are about to open the URL')
 			console.log('the URL', this.authorizeUrl)
 			opn(this.authorizeUrl, {wait: false}, {url: true}).then(cp =>
