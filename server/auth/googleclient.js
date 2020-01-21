@@ -11,8 +11,10 @@ const PORT = process.env.PORT || 1337
 const axios = require('axios')
 const readline = require('readline')
 
+const domain = process.env.DOMAIN
+
 let keys = {
-	redirect_uris: ['http://localhost:1337/oauth2callback'],
+	redirect_uris: [`${domain}oauth2callback`],
 	client_id: process.env.client_id,
 	client_secret: process.env.client_secret,
 }
