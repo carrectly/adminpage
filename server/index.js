@@ -15,8 +15,6 @@ const {User} = require('./db/models')
 
 module.exports = app
 
-let server
-
 if (process.env.NODE_ENV === 'test') {
 	after('close the session store', () => sessionStore.stopExpiringSessions())
 }
@@ -107,7 +105,9 @@ const createApp = () => {
 
 const startListening = () => {
 	// start listening (and create a 'server' object representing our server)
-	server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
+	const server = app.listen(PORT, () =>
+		console.log(`Mixing it up on port ${PORT}`)
+	)
 
 	const io = socketio(server)
 	require('./socket')(io)

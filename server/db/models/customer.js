@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../database')
 var axios = require('axios')
+require('../../../.env')
 const domain = process.env.DOMAIN
 
 const Customer = db.define('customer', {

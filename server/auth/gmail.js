@@ -64,7 +64,6 @@ async function listMessages(id) {
 
 	var loopContinue = true
 	let newArr = []
-	newArr = [...newArr, ...initialRequest.data.messages]
 	async function Managework() {
 		while (loopContinue) {
 			await doWork(nextPage)
@@ -100,6 +99,7 @@ async function listMessages(id) {
 		return headersArray
 	}
 	if (initialRequest.data.resultSizeEstimate > 0) {
+		newArr = [...newArr, ...initialRequest.data.messages]
 		return Managework()
 	} else {
 		return []
