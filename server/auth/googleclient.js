@@ -62,22 +62,22 @@ class SampleClient {
 			console.log('We are about to open the URL')
 			console.log('the URL', this.authorizeUrl)
 
-			// const pup = async () => {
-			// 	const browser = await puppeteer.launch({
-			// 		headless: false,
-			// 	})
-			// 	const page = await browser.newPage()
-			// 	await page.setViewport({
-			// 		width: 600,
-			// 		height: 600,
-			// 	})
+			const pup = async () => {
+				const browser = await puppeteer.launch({
+					headless: false,
+				})
+				const page = await browser.newPage()
+				await page.setViewport({
+					width: 600,
+					height: 600,
+				})
 
-			// 	await page.goto(this.authorizeUrl)
-			// }
+				await page.goto(this.authorizeUrl)
+			}
 
-			// pup()
-			opn(this.authorizeUrl, {wait: false}).then(cp => cp.unref())
-			console.log('We tried to to open the URL')
+			pup()
+			// opn(this.authorizeUrl, {wait: false}).then(cp => cp.unref())
+			// console.log('We tried to to open the URL')
 			//require('openurl').open(this.authorizeUrl)
 
 			return new Promise(async (resolve, reject) => {
