@@ -1,10 +1,9 @@
-const {User, Customer, Service, Dealer} = require('./models')
+const {User, Customer, Order, Service, Dealer} = require('./models')
 const db = require('./database.js')
 var faker = require('faker')
 const Sequelize = require('sequelize')
 
 let customerSeed = []
-let userSeed = []
 let serviceSeed = [
 	{name: 'AC Coolant Recharge', price: 150},
 	{name: 'Alighnment', price: 140},
@@ -117,15 +116,41 @@ const seed = async () => {
 			email: 'cody@email.com',
 			password: '123',
 			isAdmin: true,
-			shippingAddress: faker.address.streetAddress(),
 		})
-		await User.bulkCreate(userSeed)
-		await Customer.create(customerSeed[0]).catch(
-			Sequelize.ValidationError,
-			function(err) {
-				console.error('User Exists', err.name)
-			}
-		)
+		await Customer.create({
+			email: 'vladimir.gurkot@gmail.com',
+			location: faker.address.streetAddress(),
+			firstName: 'Vladimir',
+			lastName: 'Gurkot',
+			phoneNumber: '7739876075',
+		})
+		await Customer.create({
+			firstName: 'Lilly',
+			lastName: 'Morgan',
+			location: '60614',
+			phoneNumber: '7138173134',
+			email: 'lmorgan125@gmail.com',
+		})
+		await Order.create({
+			pickupDate: '2020-01-22 15:05',
+			dropoffDate: '2020-01-23 15:05',
+			pickupLocation: '1037 West Diversey Parkway',
+			carYear: '2007',
+			carMake: 'Honda',
+			carModel: 'Accord',
+			hash: faker.random.number({min: 100000, max: 999999}), //returns 9
+			customerPhoneNumber: '7138173134',
+		})
+		await Order.create({
+			pickupDate: '2020-01-25 15:05',
+			dropoffDate: '2020-01-26 15:05',
+			pickupLocation: faker.address.streetAddress(),
+			carYear: '2010',
+			carMake: 'Infinity',
+			carModel: 'FX35',
+			hash: faker.random.number({min: 100000, max: 999999}), //returns 9
+			customerPhoneNumber: '7739876075',
+		})
 	} catch (err) {
 		console.log('Error seeding bulk file', err)
 	}

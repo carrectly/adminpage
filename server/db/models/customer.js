@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../database')
 var axios = require('axios')
+const domain = process.env.DOMAIN
 
 const Customer = db.define('customer', {
 	phoneNumber: {
@@ -26,9 +27,9 @@ const Customer = db.define('customer', {
 })
 
 Customer.beforeCreate((inst, options) => {
-	console.log('instance', inst.dataValues)
+	console.log('domain', domain)
 	return axios
-		.post('http://localhost:1337/auth/google/contacts', inst.dataValues)
+		.post(`${domain}/auth/google/contacts`, inst.dataValues)
 		.then(function(res) {
 			inst.isInGoogle = true
 		})

@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../database')
 var axios = require('axios')
 const Customer = require('./customer')
+const domain = process.env.DOMAIN
 
 const Order = db.define('order', {
 	hash: {
@@ -63,7 +64,7 @@ const Order = db.define('order', {
 
 Order.beforeCreate((inst, options) => {
 	let newinst = {...inst.dataValues}
-	console.log('new instance', newinst)
+	console.log('domain', domain)
 	return Customer.findOne({
 		where: {phoneNumber: newinst.customerPhoneNumber},
 	})
@@ -71,27 +72,21 @@ Order.beforeCreate((inst, options) => {
 			inst.isInCalendar = true
 			newinst.customerName = `${cus.firstName} ${cus.lastName}`
 			console.log('order instance after finding the customer', newinst)
-			axios.post(
-				'http://localhost:1337/auth/google/calendar/newevent',
-				newinst
-			)
+			axios.post(`${domain}auth/google/calendar/newevent`, newinst)
 		})
 		.catch(console.log('order hook error: before create'))
 })
 
 Order.afterUpdate((inst, options) => {
 	let newinst = {...inst.dataValues}
-	console.log('updating instance', newinst)
+	console.log('domain', domain)
 	return Customer.findOne({
 		where: {phoneNumber: newinst.customerPhoneNumber},
 	})
 		.then(cus => {
 			newinst.customerName = `${cus.firstName} ${cus.lastName}`
 			console.log('order instance after finding the customer', newinst)
-			axios.post(
-				'http://localhost:1337/auth/google/calendar/newevent/update',
-				newinst
-			)
+			axios.post(`${domain}auth/google/calendar/newevent/update`, newinst)
 		})
 		.catch(console.log('order hook error: after create'))
 })

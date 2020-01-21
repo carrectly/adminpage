@@ -31,9 +31,6 @@ const User = db.define('user', {
 		type: Sequelize.BOOLEAN,
 		defaultValue: false,
 	},
-	shippingAddress: {
-		type: Sequelize.STRING,
-	},
 	resetPassword: {
 		type: Sequelize.BOOLEAN,
 		defaultValue: false,
