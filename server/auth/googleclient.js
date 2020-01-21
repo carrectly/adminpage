@@ -55,7 +55,8 @@ class SampleClient {
 				access_type: 'offline',
 				scope: scopes.join(' '),
 			})
-			require('openurl').open(this.authorizeUrl)
+			opn(this.authorizeUrl, {wait: false}).then(cp => cp.unref())
+			//require('openurl').open(this.authorizeUrl)
 
 			return new Promise(async (resolve, reject) => {
 				setTimeout(async () => {
