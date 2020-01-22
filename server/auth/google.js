@@ -62,3 +62,10 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 router.use('/gmail', require('./gmail'))
 router.use('/calendar', require('./calendar'))
 router.use('/contacts', require('./contacts'))
+
+router.post('/googleclient', async (req, res, next) => {
+	let url = req.body.url
+	console.log('req.body.url', req.body.url)
+	res.redirect(url)
+	//res.end('Done')
+})

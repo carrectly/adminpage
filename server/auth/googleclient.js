@@ -13,6 +13,8 @@ const readline = require('readline')
 const Window = require('window')
 const domain = process.env.DOMAIN
 const puppeteer = require('puppeteer')
+var spawn = require('child_process').spawn
+let command = 'open'
 //	redirect_uris: [`${domain}oauth2callback`],
 let keys = {
 	//redirect_uris: ['https://carrectlyadmin.herokuapp.com/oauth2callback'],
@@ -62,20 +64,26 @@ class SampleClient {
 			console.log('We are about to open the URL')
 			console.log('the URL', this.authorizeUrl)
 
-			const pup = async () => {
-				const browser = await puppeteer.launch({
-					headless: false,
-				})
-				const page = await browser.newPage()
-				await page.setViewport({
-					width: 600,
-					height: 600,
-				})
+			await spawn(command, [this.authorizeUrl])
+			//open(this.authorizeUrl)
+			// await axios.post('http://localhost:1337/auth/google/googleclient', {
+			// 	url: this.authorizeUrl,
+			// })
 
-				await page.goto(this.authorizeUrl)
-			}
+			// const pup = async () => {
+			// 	const browser = await puppeteer.launch({
+			// 		headless: false,
+			// 	})
+			// 	const page = await browser.newPage()
+			// 	await page.setViewport({
+			// 		width: 600,
+			// 		height: 600,
+			// 	})
 
-			pup()
+			// 	await page.goto(this.authorizeUrl)
+			// }
+
+			// pup()
 			// opn(this.authorizeUrl, {wait: false}).then(cp => cp.unref())
 			// console.log('We tried to to open the URL')
 			//require('openurl').open(this.authorizeUrl)
@@ -103,3 +111,24 @@ class SampleClient {
 }
 
 module.exports = new SampleClient()
+
+// function open(urlStr, callback) {
+// 	var child = spawn(command, [url])
+// 	var errorText = ''
+// 	child.stderr.setEncoding('utf8')
+// 	child.stderr.on('data', function(data) {
+// 		errorText += data
+// 	})
+// 	child.stderr.on('end', function() {
+// 		if (errorText.length > 0) {
+// 			var error = new Error(errorText)
+// 			if (callback) {
+// 				callback(error)
+// 			} else {
+// 				throw error
+// 			}
+// 		} else if (callback) {
+// 			callback(error)
+// 		}
+// 	})
+// }
