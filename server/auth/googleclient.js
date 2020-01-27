@@ -10,11 +10,7 @@ const {User} = require('../db/models')
 const PORT = process.env.PORT || 1337
 const axios = require('axios')
 const readline = require('readline')
-const Window = require('window')
 const domain = process.env.DOMAIN
-const puppeteer = require('puppeteer')
-var spawn = require('child_process').spawn
-let command = 'open'
 //	redirect_uris: [`${domain}oauth2callback`],
 let keys = {
 	//redirect_uris: ['https://carrectlyadmin.herokuapp.com/oauth2callback'],
