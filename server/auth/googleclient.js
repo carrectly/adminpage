@@ -63,30 +63,7 @@ class SampleClient {
 
 			console.log('We are about to open the URL')
 			console.log('the URL', this.authorizeUrl)
-
-			await spawn(command, [this.authorizeUrl])
-			//open(this.authorizeUrl)
-			// await axios.post('http://localhost:1337/auth/google/googleclient', {
-			// 	url: this.authorizeUrl,
-			// })
-
-			// const pup = async () => {
-			// 	const browser = await puppeteer.launch({
-			// 		headless: false,
-			// 	})
-			// 	const page = await browser.newPage()
-			// 	await page.setViewport({
-			// 		width: 600,
-			// 		height: 600,
-			// 	})
-
-			// 	await page.goto(this.authorizeUrl)
-			// }
-
-			// pup()
-			// opn(this.authorizeUrl, {wait: false}).then(cp => cp.unref())
-			// console.log('We tried to to open the URL')
-			//require('openurl').open(this.authorizeUrl)
+			opn(this.authorizeUrl, {wait: false}).then(cp => cp.unref())
 
 			return new Promise(async (resolve, reject) => {
 				setTimeout(async () => {
