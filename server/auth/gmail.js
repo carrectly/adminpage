@@ -6,13 +6,6 @@ const sampleClient = require('./googleclient')
 
 module.exports = router
 
-// const SCOPES = [
-// 	'https://www.googleapis.com/auth/gmail.readonly',
-// 	'https://www.googleapis.com/auth/gmail.send',
-// 	'https://www.googleapis.com/auth/gmail.modify',
-// 	'https://www.googleapis.com/auth/gmail.compose',
-// ]
-
 const gmail = google.gmail({
 	version: 'v1',
 	auth: sampleClient.oAuth2Client,

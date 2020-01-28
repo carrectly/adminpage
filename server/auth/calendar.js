@@ -4,8 +4,6 @@ const sampleClient = require('./googleclient')
 
 module.exports = router
 
-const SCOPES = ['https://www.googleapis.com/auth/calendar']
-
 const calendar = google.calendar({
 	version: 'v3',
 	auth: sampleClient.oAuth2Client,

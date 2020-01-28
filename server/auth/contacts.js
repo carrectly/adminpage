@@ -4,8 +4,6 @@ const sampleClient = require('./googleclient')
 
 module.exports = router
 
-const SCOPES = ['https://www.googleapis.com/auth/contacts']
-
 const people = google.people({
 	version: 'v1',
 	auth: sampleClient.oAuth2Client,
