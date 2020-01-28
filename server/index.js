@@ -74,6 +74,12 @@ const createApp = () => {
 		res.send('Authentication successful! Please return to the console.')
 	})
 
+	app.get('/oauth2callback', async (req, res, next) => {
+		let code = req.query.code
+		await sampleClient.authenticateToken(code)
+		res.send('Authentication successful! Please return to the console.')
+	})
+
 	// static file-serving middleware
 	app.use(express.static(path.join(__dirname, '..', 'public')))
 

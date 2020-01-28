@@ -6,6 +6,7 @@ import SingleEmail from './SingleEmail.js'
 import {getSingleEmailThunk} from '../store/singleemail'
 import ErrorHandler from './ErrorHandler'
 import {Button, Spinner, Image} from 'react-bootstrap'
+import {getTokenThunk} from '../store/user'
 
 class Gmail extends Component {
 	constructor(props) {
@@ -20,11 +21,11 @@ class Gmail extends Component {
 		console.log('inside gmail params', id)
 		let temp = this.state.spinner
 		this.setState({spinner: !temp})
-		try {
-			await this.props.fetchEmails()
-		} catch (err) {
-			console.log(err)
+		if (!this.props.user.token) {
+			await this.props.getToken()
 		}
+
+		await this.props.fetchEmails()
 
 		this.setState({spinner: temp})
 	}
@@ -125,6 +126,7 @@ class Gmail extends Component {
 
 const mapStateToProps = state => {
 	return {
+		user: state.user,
 		emails: state.emails,
 		singleemail: state.singleemail.decoded,
 		attachments: state.singleemail.attachmentsArray,
@@ -136,6 +138,7 @@ const mapDispatchToProps = dispatch => {
 	return {
 		getEmails: id => dispatch(getEmailsThunk(id)),
 		getSingleEmail: id => dispatch(getSingleEmailThunk(id)),
+		getToken: () => dispatch(getTokenThunk()),
 	}
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Gmail))

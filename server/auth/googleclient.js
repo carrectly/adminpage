@@ -10,7 +10,6 @@ const {User} = require('../db/models')
 const PORT = process.env.PORT || 1337
 const axios = require('axios')
 const readline = require('readline')
-const domain = process.env.DOMAIN
 
 //	redirect_uris: [`${domain}oauth2callback`],
 let keys = {
@@ -34,31 +33,43 @@ class SampleClient {
 	}
 
 	async authenticate() {
-		let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
-		if (usr.dataValues.token) {
-			let tkn = JSON.parse(usr.dataValues.token)
-			this.oAuth2Client.credentials = tkn
-			return this.oAuth2Client
-		} else {
-			console.log('We need to tie in the thunk here somehow')
+		try {
+			let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
+			if (usr.dataValues.token) {
+				let tkn = JSON.parse(usr.dataValues.token)
+				this.oAuth2Client.credentials = tkn
+				return this.oAuth2Client
+			} else {
+				return 'No token found!!!'
+			}
+		} catch (err) {
+			console.error(err)
 		}
 	}
 
 	async getCode(scopes) {
-		this.authorizeUrl = await this.oAuth2Client.generateAuthUrl({
-			access_type: 'offline',
-			scope: scopes.join(' '),
-		})
-		return this.authorizeUrl
+		try {
+			this.authorizeUrl = await this.oAuth2Client.generateAuthUrl({
+				access_type: 'offline',
+				scope: scopes.join(' '),
+			})
+			return this.authorizeUrl
+		} catch (err) {
+			console.error(err)
+		}
 	}
 
 	async authenticateToken(code) {
-		let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
-		const {tokens} = await this.oAuth2Client.getToken(code)
-		this.oAuth2Client.credentials = tokens
-		let tkn = JSON.stringify(tokens)
-		await usr.update({token: tkn})
-		return tokens
+		try {
+			let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
+			const {tokens} = await this.oAuth2Client.getToken(code)
+			this.oAuth2Client.credentials = tokens
+			let tkn = JSON.stringify(tokens)
+			await usr.update({token: tkn})
+			return tokens
+		} catch (err) {
+			console.error(err)
+		}
 	}
 }
 
