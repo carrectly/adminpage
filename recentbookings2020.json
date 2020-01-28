@@ -1,8 +1,8 @@
 ﻿[
 	{
 		"services": [{"name": "Dog Hair"}],
-		"pickupDate": "1/30/20 15:05",
-		"dropoffDate": "2/1/20 17:30",
+		"pickupDate": "2020-01-31T20:22:00.000Z",
+		"dropoffDate": "2020-01-31T23:00:00.000Z",
 		"pickupLocation": "1410 N State Pkwy",
 		"carYear": "2018",
 		"carMake": "Volvo",
@@ -18,8 +18,8 @@
 	},
 	{
 		"services": [{"name": "Dog Hair"}],
-		"pickupDate": "2020-01-31 15:05",
-		"dropoffDate": "2020-02-02 17:30",
+		"pickupDate": "2020-01-31T20:22:00.000Z",
+		"dropoffDate": "2020-01-31T23:00:00.000Z",
 		"pickupLocation": "4847 West 24th Place",
 		"carYear": "2014",
 		"carMake": "Mazda",
@@ -35,8 +35,8 @@
 	},
 	{
 		"services": [{"name": "Dog Hair"}],
-		"pickupDate": "2020-01-10 15:05",
-		"dropoffDate": "2020-01-11 15:05",
+		"pickupDate": "2020-01-31T20:22:00.000Z",
+		"dropoffDate": "2020-01-31T23:00:00.000Z",
 		"pickupLocation": "355 East Ohio Street",
 		"carYear": "2017",
 		"carMake": "Ford",

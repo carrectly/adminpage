@@ -13,7 +13,7 @@ const people = google.people({
 
 router.get('/', async (req, res, next) => {
 	try {
-		await sampleClient.authenticate(SCOPES)
+		await sampleClient.authenticate()
 		let result = await listConnectionNames()
 		res.json(result)
 	} catch (err) {
@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
 	try {
-		await sampleClient.authenticate(SCOPES)
+		await sampleClient.authenticate()
 		let newcontact = req.body
 		let result = await addNewContact(newcontact)
 		res.json(result)

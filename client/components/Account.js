@@ -5,6 +5,7 @@ import {Login} from './auth-form'
 import {logout} from '../store'
 import BookingsByStatus from './BookingsByStatus'
 import {Button} from 'react-bootstrap'
+import Tokens from './GoogleTokens'
 
 class Account extends Component {
 	constructor() {
@@ -46,6 +47,9 @@ class Account extends Component {
 						onClick={this.handleLogout}>
 						Log Out
 					</Button>
+				</div>
+				<div>
+					<Tokens />
 				</div>
 				<div className='hometable'>
 					{user ? <BookingsByStatus /> : <div />}

@@ -13,7 +13,7 @@ const calendar = google.calendar({
 
 router.get('/', async (req, res, next) => {
 	try {
-		await sampleClient.authenticate(SCOPES)
+		await sampleClient.authenticate()
 		let result = await listEvents()
 		res.json(result)
 	} catch (err) {
@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/newevent', async (req, res, next) => {
 	try {
-		await sampleClient.authenticate(SCOPES)
+		await sampleClient.authenticate()
 		const obj = req.body
 		const result = await createEvent(obj)
 		res.json(result)
@@ -34,7 +34,7 @@ router.post('/newevent', async (req, res, next) => {
 
 router.post('/newevent/update', async (req, res, next) => {
 	try {
-		await sampleClient.authenticate(SCOPES)
+		await sampleClient.authenticate()
 		const obj = req.body
 		const result = await updateEvent(obj)
 		res.json(result)

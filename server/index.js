@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'test') {
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
  */
-//if (process.env.NODE_ENV !== 'production') require('../secrets')
+if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
@@ -68,9 +68,9 @@ const createApp = () => {
 	app.use('/api', require('./api'))
 	app.use('/square', require('./square'))
 	app.use('/wpbookings', require('./wpbookings'))
-	app.use('/oauth2callback', async (req, res, next) => {
+	app.get('/oauth2callback', async (req, res, next) => {
 		let code = req.query.code
-		await sampleClient.setCode(code)
+		await sampleClient.authenticateToken(code)
 		res.send('Authentication successful! Please return to the console.')
 	})
 

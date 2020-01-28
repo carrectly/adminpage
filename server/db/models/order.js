@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../database')
 var axios = require('axios')
 const Customer = require('./customer')
-const domain = process.env.DOMAIN
+const domain = 'http://localhost:1337'
 
 const Order = db.define('order', {
 	hash: {

@@ -11,10 +11,11 @@ const PORT = process.env.PORT || 1337
 const axios = require('axios')
 const readline = require('readline')
 const domain = process.env.DOMAIN
+
 //	redirect_uris: [`${domain}oauth2callback`],
 let keys = {
 	//redirect_uris: ['https://carrectlyadmin.herokuapp.com/oauth2callback'],
-	redirect_uris: [`${domain}oauth2callback`],
+	redirect_uris: [`http://localhost:1337/oauth2callback`],
 	client_id: process.env.client_id,
 	client_secret: process.env.client_secret,
 }
@@ -27,81 +28,38 @@ class SampleClient {
 			'hnWtAeaC5bRITH4om9s8gfGX',
 			keys.redirect_uris
 		)
-		this.setCode = this.setCode.bind(this)
 		this.authenticate = this.authenticate.bind(this)
+		this.getCode = this.getCode.bind(this)
 		this.authenticateToken = this.authenticateToken.bind(this)
 	}
 
-	setCode(str) {
-		this.code = str
-	}
-
-	async authenticate(scopes) {
-		console.log('here is the redirect', keys.redirect_uris)
+	async authenticate() {
 		let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
-		let tokenType = ''
-		if (scopes[0].includes('calendar')) {
-			tokenType = 'calendarToken'
-		} else if (scopes[0].includes('gmail')) {
-			tokenType = 'gmailToken'
-		} else if (scopes[0].includes('contacts')) {
-			tokenType = 'contactsToken'
-		}
-		if (usr.dataValues[tokenType]) {
-			let tkn = JSON.parse(usr.dataValues[tokenType])
+		if (usr.dataValues.token) {
+			let tkn = JSON.parse(usr.dataValues.token)
 			this.oAuth2Client.credentials = tkn
 			return this.oAuth2Client
 		} else {
-			this.authorizeUrl = await this.oAuth2Client.generateAuthUrl({
-				access_type: 'offline',
-				scope: scopes.join(' '),
-			})
-
-			console.log('We are about to open the URL')
-			console.log('the URL', this.authorizeUrl)
-			opn(this.authorizeUrl, {wait: false}).then(cp => cp.unref())
-
-			return new Promise(async (resolve, reject) => {
-				setTimeout(async () => {
-					try {
-						let tkn = await this.authenticateToken()
-						tkn = JSON.stringify(tkn)
-						await usr.update({[tokenType]: tkn})
-						resolve(this.oAuth2Client)
-					} catch (e) {
-						reject(e)
-					}
-				}, 10000)
-			})
+			console.log('We need to tie in the thunk here somehow')
 		}
 	}
 
-	async authenticateToken() {
-		const {tokens} = await this.oAuth2Client.getToken(this.code)
+	async getCode(scopes) {
+		this.authorizeUrl = await this.oAuth2Client.generateAuthUrl({
+			access_type: 'offline',
+			scope: scopes.join(' '),
+		})
+		return this.authorizeUrl
+	}
+
+	async authenticateToken(code) {
+		let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
+		const {tokens} = await this.oAuth2Client.getToken(code)
 		this.oAuth2Client.credentials = tokens
+		let tkn = JSON.stringify(tokens)
+		await usr.update({token: tkn})
 		return tokens
 	}
 }
 
 module.exports = new SampleClient()
-
-// function open(urlStr, callback) {
-// 	var child = spawn(command, [url])
-// 	var errorText = ''
-// 	child.stderr.setEncoding('utf8')
-// 	child.stderr.on('data', function(data) {
-// 		errorText += data
-// 	})
-// 	child.stderr.on('end', function() {
-// 		if (errorText.length > 0) {
-// 			var error = new Error(errorText)
-// 			if (callback) {
-// 				callback(error)
-// 			} else {
-// 				throw error
-// 			}
-// 		} else if (callback) {
-// 			callback(error)
-// 		}
-// 	})
-// }

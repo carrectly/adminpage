@@ -6,12 +6,12 @@ const sampleClient = require('./googleclient')
 
 module.exports = router
 
-const SCOPES = [
-	'https://www.googleapis.com/auth/gmail.readonly',
-	'https://www.googleapis.com/auth/gmail.send',
-	'https://www.googleapis.com/auth/gmail.modify',
-	'https://www.googleapis.com/auth/gmail.compose',
-]
+// const SCOPES = [
+// 	'https://www.googleapis.com/auth/gmail.readonly',
+// 	'https://www.googleapis.com/auth/gmail.send',
+// 	'https://www.googleapis.com/auth/gmail.modify',
+// 	'https://www.googleapis.com/auth/gmail.compose',
+// ]
 
 const gmail = google.gmail({
 	version: 'v1',
@@ -20,7 +20,7 @@ const gmail = google.gmail({
 
 router.get('/:orderid', async (req, res, next) => {
 	try {
-		await sampleClient.authenticate(SCOPES)
+		await sampleClient.authenticate()
 		const id = req.params.orderid
 		let result = await listMessages(id)
 		res.json(result)
@@ -32,7 +32,7 @@ router.get('/:orderid', async (req, res, next) => {
 router.get('/single/:messageid', async (req, res, next) => {
 	try {
 		const id = req.params.messageid
-		await sampleClient.authenticate(SCOPES)
+		await sampleClient.authenticate()
 		let result = await getMessage(id)
 		res.json(result)
 	} catch (err) {
@@ -43,7 +43,7 @@ router.get('/single/:messageid', async (req, res, next) => {
 router.post('/send', async (req, res, next) => {
 	try {
 		const obj = req.body
-		await sampleClient.authenticate(SCOPES)
+		await sampleClient.authenticate()
 		let result = await createDraft(obj)
 		res.json(result)
 	} catch (err) {

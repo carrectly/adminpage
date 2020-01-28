@@ -63,9 +63,16 @@ router.use('/gmail', require('./gmail'))
 router.use('/calendar', require('./calendar'))
 router.use('/contacts', require('./contacts'))
 
-router.post('/googleclient', async (req, res, next) => {
-	let url = req.body.url
-	console.log('req.body.url', req.body.url)
-	res.redirect(url)
-	//res.end('Done')
+router.get('/googleclient', async (req, res, next) => {
+	const sampleClient = require('./googleclient')
+	const SCOPES = [
+		'https://www.googleapis.com/auth/gmail.readonly',
+		'https://www.googleapis.com/auth/gmail.send',
+		'https://www.googleapis.com/auth/gmail.modify',
+		'https://www.googleapis.com/auth/gmail.compose',
+		'https://www.googleapis.com/auth/contacts',
+		'https://www.googleapis.com/auth/calendar',
+	]
+	let link = await sampleClient.getCode(SCOPES)
+	res.send(link)
 })
