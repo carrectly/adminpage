@@ -1,7 +1,6 @@
 const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-const {google} = require('googleapis')
 const {User} = require('../db/models')
 module.exports = router
 
@@ -53,8 +52,6 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 			}
 			tkn = JSON.stringify(tkn)
 
-			//console.log('TOKEN AFTER STRINGIFY', tkn)
-
 			User.findOrCreate({
 				where: {googleId},
 				defaults: {email},
@@ -67,7 +64,6 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 		}
 	)
 
-	//console.log('strategy', strategy)
 	passport.use(strategy)
 
 	const SCOPES = [
@@ -79,17 +75,8 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 		'https://www.googleapis.com/auth/contacts',
 		'https://www.googleapis.com/auth/calendar',
 	]
-	//console.log('passport', passport)
-	router.get('/', passport.authenticate('google', {scope: SCOPES}))
 
-	// router.get(
-	// 	'/googleclient',
-	// 	passport.authenticate('google', {scope: SCOPES}),
-	// 	function(req, res) {
-	// 		console.log('req inside passport callback', req)
-	// 		res.redirect('/account')
-	// 	}
-	// )
+	router.get('/', passport.authenticate('google', {scope: SCOPES}))
 
 	router.get(
 		'/callback',
@@ -98,40 +85,8 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 			res.redirect('/account')
 		}
 	)
-
-	// router.get('/callback', async (req, res, next) => {
-	// 	try {
-	// 		console.log('req inside passport callback', req.query)
-	// 		let resp = await req.passport.authenticate('google', {
-	// 			successRedirect: '/account',
-	// 			failureRedirect: '/login',
-	// 		})
-	// 		console.log('passport response', resp)
-	// 		//res.send(resp)
-	// 	} catch (err) {
-	// 		next(err)
-	// 	}
-	// })
 }
 
 router.use('/gmail', require('./gmail'))
 router.use('/calendar', require('./calendar'))
 router.use('/contacts', require('./contacts'))
-
-// router.get('/googleclient', async (req, res, next) => {
-// 	console.log('passport---', passport)
-
-// 	// const googleClient = require('./googleclient')
-
-// 	console.log('sample client', googleClient)
-// 	const SCOPES = [
-// 		'https://www.googleapis.com/auth/gmail.readonly',
-// 		'https://www.googleapis.com/auth/gmail.send',
-// 		'https://www.googleapis.com/auth/gmail.modify',
-// 		'https://www.googleapis.com/auth/gmail.compose',
-// 		'https://www.googleapis.com/auth/contacts',
-// 		'https://www.googleapis.com/auth/calendar',
-// 	]
-// 	let link = await googleClient.getCode(SCOPES)
-// 	res.send(link)
-// })
