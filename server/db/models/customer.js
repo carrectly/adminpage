@@ -30,7 +30,7 @@ const createInGoogle = async inst => {
 	try {
 		inst.isInGoogle = true
 		await axios.post(
-			'https://carrectlyadmin.herokuapp.com/auth/google/contacts',
+			'http://localhost:1337/auth/google/contacts',
 			inst.dataValues
 		)
 	} catch (err) {

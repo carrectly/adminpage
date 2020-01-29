@@ -90,10 +90,6 @@ const createApp = () => {
 
 	// sends index.html
 	app.use('*', (req, res) => {
-		console.log('node env', process.env.NODE_ENV)
-		console.log('node env redirect ', process.env.redirect_uris)
-		console.log('node env client id', process.env.client_id)
-		console.log('node env secrets', process.env.client_secret)
 		res.sendFile(path.join(__dirname, '..', 'public/index.html'))
 	})
 

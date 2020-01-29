@@ -38,32 +38,32 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
 	const strategy = new GoogleStrategy(
 		googleConfig,
-		async (token, refreshToken, profile, done) => {
+		(token, refreshToken, profile, done) => {
 			const googleId = profile.id
 			//const name = profile.displayName
 			const email = profile.emails[0].value
-			console.log('here is the token inside strategy', token)
-			console.log('here is the token inside strategy', refreshToken)
 
-			let tkn = {
-				access_token: token,
-				refresh_token: refreshToken,
+			let tkn = {}
+
+			if (token) {
+				tkn.access_token = token
+			}
+			if (refreshToken) {
+				tkn.refresh_token = refreshToken
 			}
 			tkn = JSON.stringify(tkn)
 
-			console.log('TOKEN AFTER STRINGIFY', tkn)
+			//console.log('TOKEN AFTER STRINGIFY', tkn)
 
-			try {
-				const usr = await User.findOne({
-					where: {googleId},
+			User.findOrCreate({
+				where: {googleId},
+				defaults: {email},
+			})
+				.then(([user]) => {
+					user.update({token: tkn})
+					return done(null, user)
 				})
-				let newusr = await usr.update({
-					token: tkn,
-				})
-				return done(null, newusr)
-			} catch (err) {
-				console.log('error during user set up in oath', err.message)
-			}
+				.catch(done)
 		}
 	)
 
@@ -94,13 +94,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 	router.get(
 		'/callback',
 		passport.authenticate('google', {failureRedirect: '/login'}),
-		async function(req, res) {
-			console.log('req inside passport callback', req.query.code)
-			const code = req.query.code
-			console.log('strategy', strategy._oauth2)
-			console.log('strategy keys', Object.keys(strategy))
-			//const {tokens} = await strategy.getToken(code)
-			//console.log('tokens', tokens)
+		function(req, res) {
 			res.redirect('/account')
 		}
 	)

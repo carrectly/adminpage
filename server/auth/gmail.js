@@ -3,16 +3,15 @@ const {google} = require('googleapis')
 var parseMessage = require('gmail-api-parse-message')
 var Base64 = require('js-base64').Base64
 //const sampleClient = require('./googleclient')
-const passport = require('passport')
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+
 const {User} = require('../db/models')
 
 module.exports = router
 
 const oAuth2Client = new google.auth.OAuth2(
-	process.env.client_id,
-	process.env.client_secret,
-	process.env.redirect_uris
+	process.env.GOOGLE_CLIENT_ID,
+	process.env.GOOGLE_CLIENT_SECRET,
+	process.env.GOOGLE_CALLBACK
 )
 
 const gmail = google.gmail({

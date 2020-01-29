@@ -5,9 +5,9 @@ const {User} = require('../db/models')
 module.exports = router
 
 const oAuth2Client = new google.auth.OAuth2(
-	process.env.client_id,
-	process.env.client_secret,
-	process.env.redirect_uris
+	process.env.GOOGLE_CLIENT_ID,
+	process.env.GOOGLE_CLIENT_SECRET,
+	process.env.GOOGLE_CALLBACK
 )
 
 const people = google.people({
