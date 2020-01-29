@@ -71,7 +71,7 @@ Order.beforeCreate((inst, options) => {
 			newinst.customerName = `${cus.firstName} ${cus.lastName}`
 			console.log('order instance after finding the customer', newinst)
 			axios.post(
-				'https://carrectlyadmin.herokuapp.com/auth/google/contacts',
+				'https://carrectlyadmin.herokuapp.com/auth/google/calendar/newevent',
 				newinst
 			)
 		})
@@ -87,7 +87,7 @@ Order.afterUpdate((inst, options) => {
 			newinst.customerName = `${cus.firstName} ${cus.lastName}`
 			console.log('order instance after finding the customer', newinst)
 			axios.post(
-				'https://carrectlyadmin.herokuapp.com/auth/google/contacts',
+				'https://carrectlyadmin.herokuapp.com/auth/google/calendar/newevent/update',
 				newinst
 			)
 		})
