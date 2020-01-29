@@ -1,17 +1,34 @@
 const router = require('express').Router()
 const {google} = require('googleapis')
 const sampleClient = require('./googleclient')
+const {User} = require('../db/models')
 
 module.exports = router
 
+const oAuth2Client = new google.auth.OAuth2(
+	process.env.client_id,
+	process.env.client_secret,
+	process.env.redirect_uris
+)
+
 const calendar = google.calendar({
 	version: 'v3',
-	auth: sampleClient.oAuth2Client,
+	auth: oAuth2Client,
+})
+
+router.all('*', async (req, res, next) => {
+	try {
+		let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
+		oAuth2Client.setCredentials(JSON.parse(usr.dataValues.token))
+		console.log('oAuth2Client', oAuth2Client)
+		next()
+	} catch (err) {
+		next(err)
+	}
 })
 
 router.get('/', async (req, res, next) => {
 	try {
-		await sampleClient.authenticate()
 		let result = await listEvents()
 		res.json(result)
 	} catch (err) {
@@ -21,7 +38,6 @@ router.get('/', async (req, res, next) => {
 
 router.post('/newevent', async (req, res, next) => {
 	try {
-		await sampleClient.authenticate()
 		const obj = req.body
 		const result = await createEvent(obj)
 		res.json(result)
@@ -32,7 +48,6 @@ router.post('/newevent', async (req, res, next) => {
 
 router.post('/newevent/update', async (req, res, next) => {
 	try {
-		await sampleClient.authenticate()
 		const obj = req.body
 		const result = await updateEvent(obj)
 		res.json(result)

@@ -2,18 +2,37 @@ const router = require('express').Router()
 const {google} = require('googleapis')
 var parseMessage = require('gmail-api-parse-message')
 var Base64 = require('js-base64').Base64
-const sampleClient = require('./googleclient')
+//const sampleClient = require('./googleclient')
+const passport = require('passport')
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+const {User} = require('../db/models')
 
 module.exports = router
 
+const oAuth2Client = new google.auth.OAuth2(
+	process.env.client_id,
+	process.env.client_secret,
+	process.env.redirect_uris
+)
+
 const gmail = google.gmail({
 	version: 'v1',
-	auth: sampleClient.oAuth2Client,
+	auth: oAuth2Client,
+})
+
+router.all('*', async (req, res, next) => {
+	try {
+		let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
+		oAuth2Client.setCredentials(JSON.parse(usr.dataValues.token))
+		console.log('oAuth2Client', oAuth2Client)
+		next()
+	} catch (err) {
+		next(err)
+	}
 })
 
 router.get('/:orderid', async (req, res, next) => {
 	try {
-		await sampleClient.authenticate()
 		const id = req.params.orderid
 		let result = await listMessages(id)
 		res.json(result)
@@ -25,7 +44,6 @@ router.get('/:orderid', async (req, res, next) => {
 router.get('/single/:messageid', async (req, res, next) => {
 	try {
 		const id = req.params.messageid
-		await sampleClient.authenticate()
 		let result = await getMessage(id)
 		res.json(result)
 	} catch (err) {
@@ -36,7 +54,6 @@ router.get('/single/:messageid', async (req, res, next) => {
 router.post('/send', async (req, res, next) => {
 	try {
 		const obj = req.body
-		await sampleClient.authenticate()
 		let result = await createDraft(obj)
 		res.json(result)
 	} catch (err) {

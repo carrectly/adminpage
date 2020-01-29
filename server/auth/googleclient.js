@@ -11,14 +11,6 @@ const PORT = process.env.PORT || 1337
 const axios = require('axios')
 const readline = require('readline')
 
-//	redirect_uris: [`${domain}oauth2callback`],
-// let keys = {
-// 	//redirect_uris: ['https://carrectlyadmin.herokuapp.com/oauth2callback'],
-// 	redirect_uris: [`http://localhost:1337/oauth2callback`],
-// 	client_id: process.env.client_id,
-// 	client_secret: process.env.client_secret,
-// }
-
 class SampleClient {
 	constructor() {
 		this.code = null
@@ -49,6 +41,11 @@ class SampleClient {
 
 	async getCode(scopes) {
 		try {
+			console.log(
+				process.env.client_id,
+				process.env.client_secret,
+				process.env.redirect_uris
+			)
 			this.authorizeUrl = await this.oAuth2Client.generateAuthUrl({
 				access_type: 'offline',
 				scope: scopes.join(' '),
@@ -78,4 +75,6 @@ class SampleClient {
 	}
 }
 
-module.exports = new SampleClient()
+const googleClient = new SampleClient()
+
+module.exports = googleClient

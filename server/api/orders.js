@@ -246,3 +246,12 @@ router.put('/single/removeservice/:orderid', async (req, res, next) => {
 		next(err)
 	}
 })
+
+router.post('/', async (req, res, next) => {
+	try {
+		let ordr = await Order.create(req.body)
+		res.json(ordr)
+	} catch (err) {
+		next(err)
+	}
+})

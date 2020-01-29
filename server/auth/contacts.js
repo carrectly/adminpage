@@ -1,17 +1,33 @@
 const router = require('express').Router()
 const {google} = require('googleapis')
-const sampleClient = require('./googleclient')
-
+//const sampleClient = require('./googleclient')
+const {User} = require('../db/models')
 module.exports = router
+
+const oAuth2Client = new google.auth.OAuth2(
+	process.env.client_id,
+	process.env.client_secret,
+	process.env.redirect_uris
+)
 
 const people = google.people({
 	version: 'v1',
-	auth: sampleClient.oAuth2Client,
+	auth: oAuth2Client,
+})
+
+router.all('*', async (req, res, next) => {
+	try {
+		let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
+		oAuth2Client.setCredentials(JSON.parse(usr.dataValues.token))
+		console.log('oAuth2Client', oAuth2Client)
+		next()
+	} catch (err) {
+		next(err)
+	}
 })
 
 router.get('/', async (req, res, next) => {
 	try {
-		await sampleClient.authenticate()
 		let result = await listConnectionNames()
 		res.json(result)
 	} catch (err) {
@@ -21,7 +37,6 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
 	try {
-		await sampleClient.authenticate()
 		let newcontact = req.body
 		let result = await addNewContact(newcontact)
 		res.json(result)
@@ -75,10 +90,10 @@ async function addNewContact(obj) {
 		},
 	})
 
-	console.log('AWAITING CREATION FROM GOOGLE CONTACTS')
 	if (!response) {
 		return console.log('The API returned an error: ')
 	} else {
-		return response.data.connections
+		console.log('new user created', response.data)
+		return response.data
 	}
 }
