@@ -61,37 +61,44 @@ const Order = db.define('order', {
 	},
 })
 
-Order.beforeCreate((inst, options) => {
-	let newinst = {...inst.dataValues}
-	return Customer.findOne({
-		where: {phoneNumber: newinst.customerPhoneNumber},
-	})
-		.then(cus => {
-			inst.isInCalendar = true
-			newinst.customerName = `${cus.firstName} ${cus.lastName}`
-			console.log('order instance after finding the customer', newinst)
-			axios.post(
-				'https://carrectlyadmin.herokuapp.com/auth/google/calendar/newevent',
-				newinst
-			)
-		})
-		.catch(console.log('order hook error: before create'))
-})
+//'https://carrectlyadmin.herokuapp.com/auth/google/calendar/newevent'
 
-Order.afterUpdate((inst, options) => {
-	let newinst = {...inst.dataValues}
-	return Customer.findOne({
-		where: {phoneNumber: newinst.customerPhoneNumber},
-	})
-		.then(cus => {
-			newinst.customerName = `${cus.firstName} ${cus.lastName}`
-			console.log('order instance after finding the customer', newinst)
-			axios.post(
-				'https://carrectlyadmin.herokuapp.com/auth/google/calendar/newevent/update',
-				newinst
-			)
+//'http://localhost:1337/auth/google/calendar/newevent/update'
+const createInGoogle = async inst => {
+	try {
+		let newinst = {...inst.dataValues}
+		inst.isInCalendar = true
+		let cus = await Customer.findOne({
+			where: {phoneNumber: newinst.customerPhoneNumber},
 		})
-		.catch(console.log('order hook error: after create'))
-})
+		newinst.customerName = `${cus.firstName} ${cus.lastName}`
+		await axios.post(
+			'https://carrectlyadmin.herokuapp.com/auth/google/calendar/newevent',
+			newinst
+		)
+	} catch (err) {
+		console.log(err.message)
+	}
+}
+
+const updateInGoogle = async inst => {
+	try {
+		let newinst = {...inst.dataValues}
+		inst.isInCalendar = true
+		let cus = await Customer.findOne({
+			where: {phoneNumber: newinst.customerPhoneNumber},
+		})
+		newinst.customerName = `${cus.firstName} ${cus.lastName}`
+		await axios.post(
+			'https://carrectlyadmin.herokuapp.com/auth/google/calendar/newevent/update',
+			newinst
+		)
+	} catch (err) {
+		console.log(err.message)
+	}
+}
+
+Order.beforeCreate(createInGoogle)
+Order.afterUpdate(updateInGoogle)
 
 module.exports = Order
