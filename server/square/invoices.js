@@ -43,14 +43,13 @@ router.post('/', async (req, res, next) => {
 			url: 'https://connect.squareupsandbox.com/v2/invoices',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization:
-					'Bearer EAAAEPC4hWEeDK2uS1SQgwBVpFuMj47M4y4DjkhLfcBdAPhrBLAwjWTqrzE7Dbm-',
+				Authorization: `Bearer ${oauth2.accessToken}`,
 			},
 			data: {
 				idempotency_key: `${order.hash}`,
 				invoice: {
 					order_id: orderid,
-					location_id: 'PRV2GHZVTGW0P',
+					location_id: `${process.env.SQUARE_LOCATION_ID}`,
 					primary_recipient: {
 						customer_id: customerid,
 					},

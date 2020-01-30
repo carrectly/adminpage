@@ -157,7 +157,9 @@ class AllOrders extends Component {
 								<td>{ord.carMake}</td>
 								<td>{ord.carModel}</td>
 								<td>{ord.pickupLocation}</td>
-								<td>{ord.pickupDate}</td>
+								<td>
+									{new Date(ord.pickupDate).toUTCString()}
+								</td>
 							</tr>
 						))}
 					</tbody>

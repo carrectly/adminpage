@@ -202,7 +202,7 @@ function (_Component) {
         variant: "primary",
         size: "sm",
         onClick: this.handleLogout
-      }, "Log Out")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_GoogleTokens__WEBPACK_IMPORTED_MODULE_7__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Log Out")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "hometable"
       }, user ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BookingsByStatus__WEBPACK_IMPORTED_MODULE_5__["default"], null) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null)));
     }
@@ -1070,7 +1070,7 @@ function (_Component) {
         }, "Details")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ord.status), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "".concat(ord.customer.firstName, " ").concat(ord.customer.lastName)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/singlecustomer/".concat(ord.customerPhoneNumber),
           id: ord.customerPhoneNumber
-        }, ord.customerPhoneNumber)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ord.carMake), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ord.carModel), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ord.pickupLocation), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ord.pickupDate));
+        }, ord.customerPhoneNumber)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ord.carMake), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ord.carModel), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, ord.pickupLocation), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, new Date(ord.pickupDate).toUTCString()));
       }))));
     }
   }]);
@@ -4297,11 +4297,13 @@ function (_Component) {
     value: function render() {
       var isLoggedIn = this.props.isLoggedIn;
       console.log('WHO IS LOGGED IN', isLoggedIn);
-      var show = true; // if (isLoggedIn === 'info@carrectly.com') {
-      // 	show = true
-      // } else {
-      // 	show = false
-      // }
+      var show = true;
+
+      if (isLoggedIn === 'info@carrectly.com') {
+        show = true;
+      } else {
+        show = false;
+      }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,

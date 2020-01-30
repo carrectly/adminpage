@@ -48,9 +48,9 @@ class Account extends Component {
 						Log Out
 					</Button>
 				</div>
-				<div>
+				{/* <div>
 					<Tokens />
-				</div>
+				</div> */}
 				<div className='hometable'>
 					{user ? <BookingsByStatus /> : <div />}
 				</div>
