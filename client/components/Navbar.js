@@ -101,7 +101,7 @@ class Navbar extends React.Component {
 					Services
 				</Link>
 
-				<OverlayTrigger
+				{/* <OverlayTrigger
 					key='bottom'
 					placement='bottom'
 					overlay={
@@ -111,7 +111,7 @@ class Navbar extends React.Component {
 						</Tooltip>
 					}>
 					<a className='link'>Chat</a>
-				</OverlayTrigger>
+				</OverlayTrigger> */}
 			</div>
 		)
 	}

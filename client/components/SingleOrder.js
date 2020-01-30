@@ -13,6 +13,7 @@ import UpdateOrder from './UpdateOrder'
 import {getEmailsThunk, clearEmailsThunk} from '../store/emails'
 import AddOrderServices from './AddOrderServices'
 import {clearSingleEmailThunk} from '../store/singleemail'
+import OrderComments from './OrderComments'
 
 class SingleOrder extends Component {
 	constructor(props) {
@@ -77,6 +78,7 @@ class SingleOrder extends Component {
 		this.props.clearSingleEmail()
 	}
 
+	// eslint-disable-next-line complexity
 	render() {
 		console.log('state', this.state)
 		const singleorder = this.props.order || {}
@@ -88,13 +90,25 @@ class SingleOrder extends Component {
 			if (key !== 'services') {
 				if (key === 'customer') {
 					arr.push([`${key}`, `${value.firstName} ${value.lastName}`])
+				} else if (
+					key === 'dropoffDate' ||
+					key === 'pickupDate' ||
+					key === 'createdAt' ||
+					key === 'updatedAt'
+				) {
+					let tempDate = new Date(value).toUTCString()
+					arr.push([`${key}`, `${tempDate}`])
 				} else {
 					arr.push([`${key}`, `${value}`])
 				}
 			}
 		}
+
 		return (
 			<div>
+				<div>
+					<OrderComments id={this.props.match.params.orderid} />
+				</div>
 				<div className='singleordercontainer'>
 					<div className='singleordertable'>
 						<h3>Order Details</h3>

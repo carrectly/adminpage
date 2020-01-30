@@ -7,9 +7,9 @@ class CalendarView extends Component {
 	render() {
 		return (
 			<div>
-				<button type='button' onClick={() => this.props.getEvents()}>
+				{/* <button type='button' onClick={() => this.props.getEvents()}>
 					Get Events
-				</button>
+				</button> */}
 				<div>
 					<iframe
 						className='calendar'
@@ -22,9 +22,9 @@ class CalendarView extends Component {
 	}
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		getEvents: () => dispatch(getEventsThunk()),
-	}
-}
-export default withRouter(connect(null, mapDispatchToProps)(CalendarView))
+// const mapDispatchToProps = dispatch => {
+// 	return {
+// 		getEvents: () => dispatch(getEventsThunk()),
+// 	}
+// }
+export default withRouter(connect(null, null)(CalendarView))

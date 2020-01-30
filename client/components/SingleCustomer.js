@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getUserOrdersThunk} from '../store/userorders'
-import {Table} from 'react-bootstrap'
+import {Table, Card, Button} from 'react-bootstrap'
 import {getSingleCustomerThunk} from '../store/singlecustomer'
 import UpdateCustomer from './UpdateCustomer'
 
@@ -25,14 +25,20 @@ class SingleCustomer extends Component {
 			<div>
 				<div className='customercontainer'>
 					<div className='customerinfo'>
-						<h3>Customer Info</h3>
-						{custArr.map(key => (
-							<div key={key}>
-								<span>
-									{key} {customer[key]}
-								</span>
-							</div>
-						))}
+						<Card className='clientcard'>
+							<Card.Body>
+								<Card.Title>Customer Info</Card.Title>
+								<Card.Text>
+									{custArr.map(key => (
+										<div key={key}>
+											<span>
+												{key} {customer[key]}
+											</span>
+										</div>
+									))}
+								</Card.Text>
+							</Card.Body>
+						</Card>
 					</div>
 					<div className='customerupdate'>
 						<UpdateCustomer
@@ -58,8 +64,12 @@ class SingleCustomer extends Component {
 						{userorders.map(ord => (
 							<tr key={ord.hash}>
 								<td>{ord.status}</td>
-								<td>{ord.pickupDate}</td>
-								<td>{ord.dropoffDate}</td>
+								<td>
+									{new Date(ord.pickupDate).toUTCString()}
+								</td>
+								<td>
+									{new Date(ord.dropoffDate).toUTCString()}
+								</td>
 								<td>{ord.pickupLocation}</td>
 								<td>{ord.carMake}</td>
 								<td>{ord.carModel}</td>

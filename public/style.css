@@ -312,6 +312,14 @@ input {
 	transition: transform 0.2s;
 	transform: scale(1.05);
 }
+
+.clientcard {
+	color: lightgoldenrodyellow;
+}
+.clientcard:hover {
+	transition: transform 0.2s;
+	transform: scale(1.05);
+}
 .login {
 	display: flex;
 	flex-flow: column;
@@ -410,6 +418,50 @@ input {
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: center;
+}
+
+.commentbox {
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+}
+
+.commentform {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.commentinput {
+	width: 60%;
+	border: 1px solid #303030;
+	border-radius: 0.25rem;
+}
+
+table.commentlist {
+	border: 3px solid #d60000;
+	border-collapse: collapse;
+	width: 100%;
+	box-shadow: 5px 10px #161515;
+	background: #f0beff;
+}
+
+.commentlist th {
+	font-weight: bold;
+	text-align: center;
+}
+
+.commentlist td {
+	border: 0px;
+}
+
+.commentlist td.commentDate {
+	width: 220px;
+}
+
+.commentlist td.content {
+	color: red;
+	font-weight: bold;
 }
 
 @media (max-width: 420px) {

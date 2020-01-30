@@ -15,6 +15,7 @@ import square from './square'
 import singledealer from './singledealer'
 import singlecustomer from './singlecustomer'
 import services from './services'
+import comments from './comments'
 
 const reducer = combineReducers({
 	user,
@@ -30,6 +31,7 @@ const reducer = combineReducers({
 	singledealer,
 	singlecustomer,
 	services,
+	comments,
 })
 
 const middleware = composeWithDevTools(

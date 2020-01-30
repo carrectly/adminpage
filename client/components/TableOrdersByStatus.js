@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {Table} from 'react-bootstrap'
 
 class TableOrdersByStatus extends Component {
 	render() {
@@ -16,8 +15,8 @@ class TableOrdersByStatus extends Component {
 							</Link>
 						</td>
 						<td>{ord.status}</td>
-						<td>{ord.pickupDate}</td>
-						<td>{ord.dropoffDate}</td>
+						<td>{new Date(ord.pickupDate).toUTCString()}</td>
+						<td>{new Date(ord.dropoffDate).toUTCString()}</td>
 						<td>
 							<Link
 								to={`/singlecustomer/${ord.customerPhoneNumber}`}
@@ -35,17 +34,4 @@ class TableOrdersByStatus extends Component {
 	}
 }
 
-// const mapStateToProps = state => {
-// 	return {
-// 		orders: state.userorders,
-// 		customer: state.singlecustomer,
-// 	}
-// }
-
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		getOrders: id => dispatch(getUserOrdersThunk(id)),
-// 		getCustomer: id => dispatch(getSingleCustomerThunk(id)),
-// 	}
-// }
 export default withRouter(connect(null, null)(TableOrdersByStatus))

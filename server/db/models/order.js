@@ -48,7 +48,7 @@ const Order = db.define('order', {
 		],
 		defaultValue: 'received',
 	},
-	comments: {
+	customerComments: {
 		type: Sequelize.TEXT,
 	},
 	promoCode: {
