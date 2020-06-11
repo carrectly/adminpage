@@ -39,18 +39,6 @@ class Account extends Component {
 		}
 		return (
 			<React.Fragment>
-				<div className='account'>
-					<h3>Hello, {this.props.user.email}</h3>
-					<Button
-						variant='primary'
-						size='sm'
-						onClick={this.handleLogout}>
-						Log Out
-					</Button>
-				</div>
-				{/* <div>
-					<Tokens />
-				</div> */}
 				<div className='hometable'>
 					{user ? <BookingsByStatus /> : <div />}
 				</div>

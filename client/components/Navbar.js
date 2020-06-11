@@ -2,14 +2,20 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {Button, ButtonToolbar, OverlayTrigger, Tooltip} from 'react-bootstrap'
+import {logout} from '../store'
 
 class Navbar extends React.Component {
 	constructor() {
 		super()
 		this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this)
+		this.handleLogout = this.handleLogout.bind(this)
 		this.state = {
 			width: window.innerWidth,
 		}
+	}
+
+	handleLogout() {
+		this.props.handleClick()
 	}
 
 	componentDidMount() {
@@ -100,18 +106,13 @@ class Navbar extends React.Component {
 				<Link to='/allServices' className='link'>
 					Services
 				</Link>
-
-				{/* <OverlayTrigger
-					key='bottom'
-					placement='bottom'
-					overlay={
-						<Tooltip id='tooltip-bottom'>
-							To view Hangouts Chat press{' '}
-							<strong>"CTRL + SHIFT + 5"</strong>
-						</Tooltip>
-					}>
-					<a className='link'>Chat</a>
-				</OverlayTrigger> */}
+				{this.props.isLoggedIn ? (
+					<a className='link' onClick={this.handleLogout}>
+						Log out
+					</a>
+				) : (
+					<div />
+				)}
 			</div>
 		)
 	}
@@ -123,4 +124,9 @@ const mapState = state => {
 	}
 }
 
-export default connect(mapState, null)(Navbar)
+const mapDispatch = dispatch => {
+	return {
+		handleClick: () => dispatch(logout()),
+	}
+}
+export default connect(mapState, mapDispatch)(Navbar)
