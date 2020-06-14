@@ -113,7 +113,7 @@ const seed = async () => {
 	try {
 		await db.sync({force: true})
 		// await Dealer.bulkCreate(dealerSeed)
-		await Service.bulkCreate(serviceSeed)
+		//await Service.bulkCreate(serviceSeed)
 		await User.create({
 			email: 'cody@email.com',
 			password: '123',
