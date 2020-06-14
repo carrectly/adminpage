@@ -15,9 +15,9 @@ class SampleClient {
 	constructor() {
 		this.code = null
 		this.oAuth2Client = new google.auth.OAuth2(
-			process.env.client_id,
-			process.env.client_secret,
-			process.env.redirect_uris
+			process.env.GOOGLE_CLIENT_ID,
+			process.env.GOOGLE_CLIENT_SECRET,
+			process.env.GOOGLE_CALLBACK
 		)
 		this.authenticate = this.authenticate.bind(this)
 		this.getCode = this.getCode.bind(this)
@@ -42,9 +42,9 @@ class SampleClient {
 	async getCode(scopes) {
 		try {
 			console.log(
-				process.env.client_id,
-				process.env.client_secret,
-				process.env.redirect_uris
+				process.env.GOOGLE_CLIENT_ID,
+				process.env.GOOGLE_CLIENT_SECRET,
+				process.env.GOOGLE_CALLBACK
 			)
 			this.authorizeUrl = await this.oAuth2Client.generateAuthUrl({
 				access_type: 'offline',
