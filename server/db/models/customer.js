@@ -26,18 +26,18 @@ const Customer = db.define('customer', {
 })
 
 //const route = `${process.env.DOMAIN}auth/google/contacts`
-const createInGoogle = async inst => {
-	try {
-		inst.isInGoogle = true
-		await axios.post(
-			'https://carrectlyadmin.herokuapp.com/auth/google/contacts',
-			inst.dataValues
-		)
-	} catch (err) {
-		console.log(err.message)
-	}
-}
+// const createInGoogle = async inst => {
+// 	try {
+// 		inst.isInGoogle = true
+// 		await axios.post(
+// 			'https://carrectlyadmin.herokuapp.com/auth/google/contacts',
+// 			inst.dataValues
+// 		)
+// 	} catch (err) {
+// 		console.log(err.message)
+// 	}
+// }
 
-Customer.beforeCreate(createInGoogle)
+//Customer.beforeCreate(createInGoogle)
 
 module.exports = Customer
