@@ -63,9 +63,6 @@ const createApp = () => {
 	app.use(passport.initialize())
 	app.use(passport.session())
 
-	// static file-serving middleware
-	app.use(express.static(path.join(__dirname, '..', 'public')))
-
 	// auth and api routes
 	app.use('/auth', require('./auth'))
 	app.use('/api', require('./api'))
@@ -76,6 +73,9 @@ const createApp = () => {
 		await sampleClient.authenticateToken(code)
 		res.send('Authentication successful! Please return to the console.')
 	})
+
+	// static file-serving middleware
+	app.use(express.static(path.join(__dirname, '..', 'public')))
 
 	// any remaining requests with an extension (.js, .css, etc.) send 404
 	app.use((req, res, next) => {
@@ -113,7 +113,7 @@ const startListening = () => {
 	require('./socket')(io)
 }
 
-const syncDb = () => db.sync()
+const syncDb = () => db.sync({force: true})
 
 async function bootApp() {
 	try {
