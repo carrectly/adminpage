@@ -1,0 +1,15 @@
+{
+	"development": {
+		"database": "adminpage",
+		"host": "postgres://localhost:5432/adminpage",
+		"dialect": "postgres"
+	},
+	"test": {
+		"database": "adminpage",
+		"host": "postgres://localhost:5432/adminpage",
+		"dialect": "postgres"
+	},
+	"production": {
+		"use_env_variable": "DATABASE_URL"
+	}
+}
