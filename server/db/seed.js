@@ -109,7 +109,7 @@ customerSeed.push({
 
 const seed = async () => {
 	console.log('trying to seed DB')
-	//await db.sync({force: true})
+	await db.sync({force: true})
 	//console.log('our db', db)
 	try {
 		console.log('syncing with DB')
