@@ -3,7 +3,7 @@
 	"version": "3.0.0",
 	"description": "admin page for carrectly",
 	"engines": {
-		"node": "~12.11.1",
+		"node": "~12.11.1"
 	},
 	"main": "index.js",
 	"scripts": {
