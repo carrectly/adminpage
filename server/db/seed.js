@@ -109,9 +109,8 @@ customerSeed.push({
 
 const seed = async () => {
 	console.log('trying to seed DB')
-	await db.sync({force: true})
-	//console.log('our db', db)
 	try {
+		await db.sync({force: true})
 		console.log('syncing with DB')
 		await Dealer.bulkCreate(dealerSeed)
 		console.log('dealer bulk create')

@@ -1,9 +1,9 @@
 {
 	"name": "adminpage",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"description": "admin page for carrectly",
 	"engines": {
-		"node": "7.10.0",
+		"node": "~12.11.1",
    		"npm": "4.2.0"
 	},
 	"main": "index.js",
@@ -16,7 +16,7 @@
 		"lint-fix": "npm run lint -- --fix",
 		"prepare": "if [ -d .git ]; then npm-merge-driver install; fi",
 		"prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
-		"seed": "node script/seed.js",
+		"seed": "node server/db/seed.js",
 		"start": "node server/index.js",
 		"start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
 		"start-server": "nodemon server -e html,js,scss --ignore public --ignore client"
@@ -62,7 +62,8 @@
 		"openurl": "^1.1.1",
 		"passport": "^0.4.0",
 		"passport-google-oauth": "^2.0.0",
-		"pg": "^7.4.3",
+		"pg": "^7.9.0",
+        "pg-hstore": "^2.3.2",
 		"prop-types": "^15.7.2",
 		"react": "^16.8.6",
 		"react-bootstrap": "^1.0.0-beta.16",
@@ -76,7 +77,7 @@
 		"redux": "^4.0.1",
 		"redux-logger": "^3.0.6",
 		"redux-thunk": "^2.3.0",
-		"sequelize": "^4.38.1",
+		"sequelize": "^5.3.1",
 		"server-destroy": "^1.0.1",
 		"socket.io": "^2.2.0",
 		"square-connect": "^2.20191120.0",
