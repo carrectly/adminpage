@@ -4,7 +4,7 @@ const db = require('../database')
 const Service = db.define('service', {
 	name: Sequelize.STRING,
 	price: {
-		type: Sequelize.DECIMAL(10, 2), //check if this works after seeding the file
+		type: Sequelize.DECIMAL(10, 2),
 		allowNull: false,
 	},
 	description: Sequelize.TEXT,

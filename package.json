@@ -3,7 +3,8 @@
 	"version": "2.0.0",
 	"description": "admin page for carrectly",
 	"engines": {
-		"node": ">= 7.0.0"
+		"node": "7.10.0",
+   		"npm": "4.2.0"
 	},
 	"main": "index.js",
 	"scripts": {
