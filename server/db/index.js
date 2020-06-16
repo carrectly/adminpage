@@ -2,7 +2,6 @@
 // with your models, for which you'll find some blank files in this directory:
 
 const db = require('./database.js')
-//const {dbMYSQL} = require('./database.js')
 require('./models')
 
 module.exports = db
