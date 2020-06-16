@@ -4,11 +4,10 @@
 	"description": "admin page for carrectly",
 	"engines": {
 		"node": "~12.11.1",
-		"npm": "4.2.0"
 	},
 	"main": "index.js",
 	"scripts": {
-		"build-client": "webpack -p",
+		"build-client": "webpack",
 		"build-client-watch": "webpack -w",
 		"deploy": "script/deploy",
 		"heroku-token": "script/encrypt-heroku-auth-token.js",
@@ -16,6 +15,7 @@
 		"lint-fix": "npm run lint -- --fix",
 		"prepare": "if [ -d .git ]; then npm-merge-driver install; fi",
 		"prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
+		"postinstall": "touch secrets.js",
 		"seed": "node server/db/seed.js",
 		"start": "node server/index.js",
 		"start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
