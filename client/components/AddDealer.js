@@ -4,6 +4,11 @@ import {addDealerThunk} from '../store/dealers.js'
 import {Modal} from 'react-bootstrap'
 import {Form, Button, Input} from 'antd'
 
+const layout = {
+	labelCol: {span: 8},
+	wrapperCol: {span: 16},
+}
+
 const AddDealer = props => {
 	const [form] = Form.useForm()
 	const dispatch = useDispatch()
@@ -24,8 +29,7 @@ const AddDealer = props => {
 	return (
 		<Modal
 			{...props}
-			size='lg'
-			aria-labelledby='contained-modal-title-vcenter'
+			aria-labelledby='example-custom-modal-styling-title'
 			centered>
 			<Modal.Header closeButton>
 				<Modal.Title id='contained-modal-title-vcenter'>
@@ -33,10 +37,15 @@ const AddDealer = props => {
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<Form form={form} name='control-hooks' onFinish={onFinish}>
+				<Form
+					{...layout}
+					form={form}
+					name='control-hooks'
+					size='large'
+					onFinish={onFinish}>
 					<Form.Item
 						name='name'
-						label='Service Shop Name'
+						label='Shop Name'
 						rules={[{required: true}]}>
 						<Input />
 					</Form.Item>
@@ -52,7 +61,7 @@ const AddDealer = props => {
 					<Form.Item name='specialty' label='Specialty'>
 						<Input />
 					</Form.Item>
-					<Form.Item name='location' label='Business location'>
+					<Form.Item name='location' label='Address'>
 						<Input />
 					</Form.Item>
 					<Form.Item>
