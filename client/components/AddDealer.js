@@ -1,128 +1,75 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {addDealerThunk} from '../store/dealers.js'
-import {Form, Button} from 'react-bootstrap'
+import {Modal} from 'react-bootstrap'
+import {Form, Button, Input} from 'antd'
 
-class AddDealer extends Component {
-	constructor(props) {
-		super(props)
-		this.handleSubmit = this.handleSubmit.bind(this)
-		this.handleChange = this.handleChange.bind(this)
+const AddDealer = props => {
+	const [form] = Form.useForm()
+	const dispatch = useDispatch()
 
-		this.state = {
-			name: '',
-			email: '',
-			phoneNumber: '',
-			specialty: '',
-			location: '',
-		}
+	const onFinish = values => {
+		console.log(props)
+		console.log('values inside modal', values)
+		dispatch(addDealerThunk(values))
+		form.resetFields()
+		props.onHide()
 	}
 
-	handleChange(evt) {
-		this.setState({
-			[evt.target.name]: evt.target.value,
-		})
-	}
-	handleSubmit(evt) {
-		evt.preventDefault()
-		let obj = {}
-		if (this.state.name) {
-			obj.name = this.state.name
-		}
-		if (this.state.email) {
-			obj.email = this.state.email
-		}
-		if (this.state.specialty) {
-			obj.specialty = this.state.specialty
-		}
-		if (this.state.phoneNumber) {
-			obj.phoneNumber = this.state.phoneNumber
-		}
-		if (this.state.location) {
-			obj.location = this.state.location
-		}
-		this.props.post(obj)
-		obj = {}
-		this.setState({
-			name: '',
-			email: '',
-			phoneNumber: '',
-			specialty: '',
-			location: '',
-		})
+	const onCancel = () => {
+		form.resetFields()
+		props.onHide()
 	}
 
-	render() {
-		return (
-			<div className='form'>
-				<h5>Add a new dealer</h5>
-				<Form onSubmit={this.handleSubmit}>
-					<Form.Group controlId='formBasicName'>
-						<Form.Control
-							type='text'
-							name='name'
-							value={this.state.name}
-							placeholder='Service Shop Name'
-							onChange={this.handleChange}
-						/>
-						<Form.Text className='text-muted'>*required</Form.Text>
-					</Form.Group>
-
-					<Form.Group controlId='formBasicEmail'>
-						<Form.Control
-							type='email'
-							name='email'
-							value={this.state.email}
-							placeholder='Email'
-							onChange={this.handleChange}
-						/>
-						<Form.Text className='text-muted'>*required</Form.Text>
-					</Form.Group>
-
-					<Form.Group controlId='formBasicPhoneNumber'>
-						<Form.Control
-							type='phoneNumber'
-							name='phoneNumber'
-							value={this.state.phoneNumber}
-							placeholder='Phone Number'
-							onChange={this.handleChange}
-						/>
-					</Form.Group>
-
-					<Form.Group controlId='formBasicSpecialty'>
-						<Form.Control
-							type='text'
-							name='specialty'
-							value={this.state.specialty}
-							placeholder='Specialty'
-							onChange={this.handleChange}
-						/>
-					</Form.Group>
-
-					<Form.Group controlId='formBasicPassword'>
-						<Form.Control
-							type='text'
-							name='location'
-							value={this.state.location}
-							placeholder='business location'
-							onChange={this.handleChange}
-						/>
-					</Form.Group>
-					<Button
-						variant='primary'
-						type='submit'
-						disabled={!this.state.name}>
-						Submit
-					</Button>
+	return (
+		<Modal
+			{...props}
+			size='lg'
+			aria-labelledby='contained-modal-title-vcenter'
+			centered>
+			<Modal.Header closeButton>
+				<Modal.Title id='contained-modal-title-vcenter'>
+					New Service Shop
+				</Modal.Title>
+			</Modal.Header>
+			<Modal.Body>
+				<Form form={form} name='control-hooks' onFinish={onFinish}>
+					<Form.Item
+						name='name'
+						label='Service Shop Name'
+						rules={[{required: true}]}>
+						<Input />
+					</Form.Item>
+					<Form.Item
+						name='email'
+						label='Email'
+						rules={[{required: true}]}>
+						<Input />
+					</Form.Item>
+					<Form.Item name='phoneNumber' label='Phone number'>
+						<Input />
+					</Form.Item>
+					<Form.Item name='specialty' label='Specialty'>
+						<Input />
+					</Form.Item>
+					<Form.Item name='location' label='Business location'>
+						<Input />
+					</Form.Item>
+					<Form.Item>
+						<Button
+							htmlType='button'
+							type='secondary'
+							onClick={onCancel}>
+							Cancel
+						</Button>
+						<Button type='primary' htmlType='submit'>
+							Submit
+						</Button>
+					</Form.Item>
 				</Form>
-			</div>
-		)
-	}
+			</Modal.Body>
+		</Modal>
+	)
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		post: obj => dispatch(addDealerThunk(obj)),
-	}
-}
-export default connect(null, mapDispatchToProps)(AddDealer)
+export default AddDealer

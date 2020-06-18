@@ -4,8 +4,21 @@ import {connect} from 'react-redux'
 import AddDealer from './AddDealer.js'
 import {removeDealerThunk, fetchDealersThunk} from '../store/dealers.js'
 import DealerCard from './DealerCard'
+import {Button} from 'react-bootstrap'
 
 class Dealers extends Component {
+	constructor(props) {
+		super(props)
+		this.setModalShow = this.setModalShow.bind(this)
+		this.state = {
+			modalShow: false,
+		}
+	}
+
+	setModalShow(bool) {
+		this.setState({modalShow: bool})
+	}
+
 	async componentDidMount() {
 		try {
 			await this.props.fetchDealers()
@@ -32,7 +45,15 @@ class Dealers extends Component {
 						))}
 					</div>
 					<div className='adddealersform'>
-						<AddDealer />
+						<Button
+							variant='primary'
+							onClick={() => this.setModalShow(true)}>
+							Launch vertically centered modal
+						</Button>
+						<AddDealer
+							show={this.state.modalShow}
+							onHide={() => this.setModalShow(false)}
+						/>
 					</div>
 				</div>
 			</div>
