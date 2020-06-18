@@ -276,14 +276,11 @@ input {
 
 .alldealersview {
 	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
+	flex-wrap: wrap;
 }
 
-.dealerscontainer {
-	display: flex;
-	flex-flow: row wrap;
-	flex-basis: 50%;
+.dealerCard {
+	margin: 5px;
 }
 
 .adddealersform {
@@ -564,4 +561,21 @@ table.commentlist {
 	.servicestable .btn-danger {
 		font-size: 10px;
 	}
+}
+
+.float-plus {
+	position: fixed;
+	color: darkblue;
+	bottom: 0;
+	right: 0;
+	font-size: 10rem;
+	padding: 20px;
+	z-index: 9999;
+	transition: all 0.1s ease-in-out;
+	filter: drop-shadow(6px 10px 0 #666);
+}
+
+.float-plus:hover {
+	filter: drop-shadow(6px 14px 0 #666);
+	transform: scale(1.05);
 }

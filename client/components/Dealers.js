@@ -45,15 +45,15 @@ class Dealers extends Component {
 					Here you can manage all your shops and dealers
 				</h1>
 				<div className='alldealersview'>
-					<div className='dealerscontainer'>
-						{dealers.map(dlr => (
+					{dealers.map(dlr => (
+						<div key={dlr.id} className='dealerCard'>
 							<DealerCard
+								key={dlr.id}
 								dealer={dlr}
 								delete={this.props.remove}
-								key={dlr.id}
 							/>
-						))}
-					</div>
+						</div>
+					))}
 				</div>
 				<div>
 					<OverlayTrigger
@@ -61,6 +61,7 @@ class Dealers extends Component {
 						delay={{show: 250, hide: 400}}
 						overlay={renderTooltip}>
 						<FontAwesomeIcon
+							className='float-plus'
 							onClick={() => this.setModalShow(true)}
 							icon={faPlusCircle}
 						/>
