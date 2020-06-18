@@ -4,7 +4,17 @@ import {connect} from 'react-redux'
 import AddDealer from './AddDealer.js'
 import {removeDealerThunk, fetchDealersThunk} from '../store/dealers.js'
 import DealerCard from './DealerCard'
-import {Button} from 'react-bootstrap'
+import {Button, OverlayTrigger, Tooltip} from 'react-bootstrap'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faPlusCircle} from '@fortawesome/free-solid-svg-icons'
+
+function renderTooltip(props) {
+	return (
+		<Tooltip id='button-tooltip' {...props}>
+			Click here to add a dealer
+		</Tooltip>
+	)
+}
 
 class Dealers extends Component {
 	constructor(props) {
@@ -44,23 +54,41 @@ class Dealers extends Component {
 							/>
 						))}
 					</div>
-					<div className='adddealersform'>
-						<Button
-							variant='primary'
-							onClick={() => this.setModalShow(true)}>
-							Launch vertically centered modal
-						</Button>
-						<AddDealer
-							show={this.state.modalShow}
-							onHide={() => this.setModalShow(false)}
+				</div>
+				<div>
+					<OverlayTrigger
+						placement='top'
+						delay={{show: 250, hide: 400}}
+						overlay={renderTooltip}>
+						<FontAwesomeIcon
+							onClick={() => this.setModalShow(true)}
+							icon={faPlusCircle}
 						/>
-					</div>
+					</OverlayTrigger>
+					<AddDealer
+						show={this.state.modalShow}
+						onHide={() => this.setModalShow(false)}
+					/>
 				</div>
 			</div>
 		) : (
 			<div>
 				<h1>No dealers Found</h1>
-				<AddDealer />
+				<div>
+					<OverlayTrigger
+						placement='top'
+						delay={{show: 250, hide: 400}}
+						overlay={renderTooltip}>
+						<FontAwesomeIcon
+							onClick={() => this.setModalShow(true)}
+							icon={faPlusCircle}
+						/>
+					</OverlayTrigger>
+					<AddDealer
+						show={this.state.modalShow}
+						onHide={() => this.setModalShow(false)}
+					/>
+				</div>
 			</div>
 		)
 	}
