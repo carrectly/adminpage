@@ -41,10 +41,12 @@ class AllServices extends Component {
 								<td>{service.name}</td>
 								<td>{service.price}</td>
 								<td>{service.description}</td>
-								<UpdateService
-									service={service}
-									updateService={this.props.updateService}
-								/>
+								<td>
+									<UpdateService
+										service={service}
+										updateService={this.props.updateService}
+									/>
+								</td>
 							</tr>
 						))}
 						<AddService addService={this.props.addService} />
