@@ -31,7 +31,11 @@ const UpdateService = props => {
 			<Button type='primary' onClick={() => handleShow(true)}>
 				Update
 			</Button>
-			<Modal title={`${props.service.name}`} visible={show} footer={null}>
+			<Modal
+				title={`${props.service.name}`}
+				visible={show}
+				footer={null}
+				closable={false}>
 				<Form
 					{...layout}
 					form={form}

@@ -81,6 +81,7 @@ class Dealers extends Component {
 						delay={{show: 250, hide: 400}}
 						overlay={renderTooltip}>
 						<FontAwesomeIcon
+							className='float-plus'
 							onClick={() => this.setModalShow(true)}
 							icon={faPlusCircle}
 						/>
