@@ -85,19 +85,25 @@ dealerSeed.push({
 	name: 'United Tires',
 	email: 'birkusandre@gmail.com',
 	phoneNumber: faker.phone.phoneNumberFormat(0),
-	specialty: faker.commerce.productName(),
+	specialty: 'Oil change',
 	location: faker.address.streetAddress(),
 })
 
-for (let i = 0; i < 6; i++) {
-	dealerSeed.push({
-		name: faker.commerce.productName(),
-		email: 'birkusandre@gmail.com',
-		phoneNumber: faker.phone.phoneNumberFormat(0),
-		specialty: faker.commerce.productName(),
-		location: faker.address.streetAddress(),
-	})
-}
+dealerSeed.push({
+	name: "Duran's bodyshop",
+	email: 'birkusandre@gmail.com',
+	phoneNumber: faker.phone.phoneNumberFormat(0),
+	specialty: 'Body Work',
+	location: faker.address.streetAddress(),
+})
+
+dealerSeed.push({
+	name: "Garcia's Auto Shop",
+	email: 'birkusandre@gmail.com',
+	phoneNumber: faker.phone.phoneNumberFormat(0),
+	specialty: 'Engine Work',
+	location: faker.address.streetAddress(),
+})
 
 customerSeed.push({
 	email: 'vladimir.gurkot@gmail.com',
