@@ -67,6 +67,10 @@ class AllCustomers extends Component {
 		obj = {}
 	}
 
+	componentDidMount() {
+		this.props.getContacts()
+	}
+
 	componentWillUnmount() {
 		this.props.clearContacts()
 	}
@@ -107,11 +111,11 @@ class AllCustomers extends Component {
 								Search by customer phone number
 							</Button>
 						</span>
-						<Button
+						{/* <Button
 							type='button'
 							onClick={() => this.props.getContacts()}>
 							View All Customers
-						</Button>
+						</Button> */}
 					</Form>
 				</div>
 				<div className='singleordertable'>

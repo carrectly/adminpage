@@ -35,6 +35,10 @@ class AllOrders extends Component {
 		})
 	}
 
+	componentDidMount() {
+		this.props.getOrders()
+	}
+
 	componentWillUnmount() {
 		this.props.clearOrders()
 	}
@@ -112,12 +116,12 @@ class AllOrders extends Component {
 								</OverlayTrigger>
 							</Col>
 							<Col>
-								<Button
+								{/* <Button
 									type='button'
 									variant='primary'
 									onClick={() => this.props.getOrders()}>
 									View All Orders
-								</Button>
+								</Button> */}
 							</Col>
 						</Row>
 					</Form>

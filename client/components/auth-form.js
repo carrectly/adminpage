@@ -19,7 +19,7 @@ const AuthForm = props => {
 	const {name, displayName, handleSubmit, handleReset, error} = props
 	return (
 		<div>
-			<Form onSubmit={handleSubmit} onReset={handleReset} name={name}>
+			{/* <Form onSubmit={handleSubmit} onReset={handleReset} name={name}>
 				<Form.Group controlId='formBasicEmail'>
 					<Form.Label>
 						<small>Email</small>
@@ -43,7 +43,7 @@ const AuthForm = props => {
 					</Button>
 				</div>
 				{error && error.response && <div> {error.response.data} </div>}
-			</Form>
+			</Form> */}
 			<a href='/auth/google'>
 				<Button variant='success' type='reset' id='signup'>
 					{displayName} with Google{' '}
