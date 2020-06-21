@@ -18,9 +18,12 @@ const UpdateService = props => {
 	const onFinish = values => {
 		console.log(props)
 		console.log('values inside modal', values)
-		dispatch(addDealerThunk(values))
-		form.resetFields()
-		props.onHide()
+		props.updateService(props.service.id, values)
+		handleClose()
+	}
+
+	const onFinishFailed = errorInfo => {
+		console.log('Failed:', errorInfo)
 	}
 
 	return (
@@ -28,31 +31,44 @@ const UpdateService = props => {
 			<Button type='primary' onClick={() => handleShow(true)}>
 				Update
 			</Button>
-			<Modal
-				title={`${props.service.name}`}
-				visible={show}
-				onOk={props.UpdateService}
-				onCancel={handleClose}>
+			<Modal title={`${props.service.name}`} visible={show} footer={null}>
 				<Form
 					{...layout}
 					form={form}
 					name='control-hooks'
 					size='large'
-					onFinish={onFinish}>
+					onFinish={onFinish}
+					onFinishFailed={onFinishFailed}>
 					<Form.Item
 						name='name'
 						label='Service Name'
+						initialValue={`${props.service.name}`}
 						rules={[{required: true}]}>
 						<Input />
 					</Form.Item>
 					<Form.Item
 						name='price'
 						label='Service Price'
+						initialValue={props.service.price}
 						rules={[{required: true}]}>
 						<Input />
 					</Form.Item>
-					<Form.Item name='description' label='Description'>
+					<Form.Item
+						name='description'
+						label='Description'
+						initialValue={props.service.description || ''}>
 						<Input />
+					</Form.Item>
+					<Form.Item>
+						<Button
+							htmlType='button'
+							type='secondary'
+							onClick={handleClose}>
+							Cancel
+						</Button>
+						<Button type='primary' htmlType='submit'>
+							Submit
+						</Button>
 					</Form.Item>
 				</Form>
 			</Modal>
@@ -152,4 +168,4 @@ const UpdateService = props => {
 // 	}
 // }
 
-export default connect(null, null)(UpdateService)
+export default UpdateService
