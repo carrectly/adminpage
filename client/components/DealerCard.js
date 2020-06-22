@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {Card, Button} from 'react-bootstrap'
+import UpdateDealer from './UpdateDealer'
 
 class DealerCard extends Component {
 	constructor(props) {
@@ -26,9 +27,7 @@ class DealerCard extends Component {
 						<div>{dealer.email}</div>
 						<div>{dealer.location}</div>
 					</Card.Subtitle>
-					<Link to={`/dealers/${dealer.id}`}>
-						<Button variant='primary'>View/Edit</Button>
-					</Link>
+					<UpdateDealer dealer={dealer} />
 					<Button
 						id={dealer.id}
 						onClick={this.handleClick}
