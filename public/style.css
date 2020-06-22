@@ -580,3 +580,9 @@ table.commentlist {
 .allContent {
 	padding: 0px 20px 0px 20px;
 }
+
+.dealerCardFooter {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}

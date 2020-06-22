@@ -27,13 +27,15 @@ class DealerCard extends Component {
 						<div>{dealer.email}</div>
 						<div>{dealer.location}</div>
 					</Card.Subtitle>
-					<UpdateDealer dealer={dealer} />
-					<Button
-						id={dealer.id}
-						onClick={this.handleClick}
-						variant='danger'>
-						Delete
-					</Button>
+					<div className='dealerCardFooter'>
+						<UpdateDealer dealer={dealer} />
+						<Button
+							id={dealer.id}
+							onClick={this.handleClick}
+							variant='danger'>
+							Delete
+						</Button>
+					</div>
 				</Card.Body>
 			</Card>
 		)
