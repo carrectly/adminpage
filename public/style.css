@@ -1,6 +1,5 @@
 body {
 	font-family: sans-serif;
-	padding: 0 10px 0 10px;
 	width: 100vw;
 	height: 100vh;
 	margin: 0px;
@@ -10,29 +9,13 @@ body {
 	background-size: cover;
 }
 
-a {
-	text-decoration: none;
+#app {
+	height: 100vh;
 }
 
-label {
-	display: block;
-}
-
-nav a {
-	display: inline-block;
-}
-
-table {
-	border: 2px solid black;
-}
-
-td {
-	border: 2px solid black;
-}
-
-input {
-	padding: 5px;
-	margin: 5px;
+#appInnerDiv {
+	min-height: 100vh;
+	position: relative;
 }
 
 .account {
@@ -578,4 +561,22 @@ table.commentlist {
 .float-plus:hover {
 	filter: drop-shadow(6px 14px 0 #666);
 	transform: scale(1.05);
+}
+
+.footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2.5rem;
+	background-color: black;
+	color: white;
+	text-align: center;
+}
+
+.allContent {
+	padding: 0px 20px 0px 20px;
 }

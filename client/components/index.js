@@ -1,4 +1,5 @@
 export {default as Navbar} from './Navbar'
+export {default as MainFooter} from './MainFooter'
 export {default as AllOrders} from './AllOrders'
 export {default as AllCustomers} from './AllCustomers'
 export {default as SingleOrder} from './SingleOrder'
