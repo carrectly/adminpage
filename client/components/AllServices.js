@@ -26,6 +26,7 @@ class AllServices extends Component {
 				<h1 className='center'>
 					Here you can manage all your services
 				</h1>
+				<AddService addService={this.props.addService} />
 				<Table striped bordered hover size='sm' variant='dark'>
 					<thead>
 						<tr>
@@ -41,13 +42,14 @@ class AllServices extends Component {
 								<td>{service.name}</td>
 								<td>{service.price}</td>
 								<td>{service.description}</td>
-								<UpdateService
-									service={service}
-									updateService={this.props.updateService}
-								/>
+								<td>
+									<UpdateService
+										service={service}
+										updateService={this.props.updateService}
+									/>
+								</td>
 							</tr>
 						))}
-						<AddService addService={this.props.addService} />
 					</tbody>
 				</Table>
 			</div>

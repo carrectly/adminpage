@@ -1,23 +1,9 @@
 const router = require('express').Router()
-const {dbMYSQL} = require('../db/database')
 const Sequelize = require('sequelize')
 const {Order, OrderDetails, Service, Customer} = require('../db/models')
 const Op = Sequelize.Op
 
 module.exports = router
-
-// router.get('/', async (req, res, next) => {
-// 	try {
-// 		console.log('Inside Order api route')
-// 		const orders = await dbMYSQL.query('SELECT * FROM wp_booking_data;', {
-// 			type: Sequelize.QueryTypes.SELECT,
-// 		})
-// 		//console.log('WP USERS', orders)
-// 		res.json(orders)
-// 	} catch (err) {
-// 		next(err)
-// 	}
-// })
 
 router.get('/', async (req, res, next) => {
 	try {
@@ -55,8 +41,6 @@ router.put('/', async (req, res, next) => {
 	try {
 		let start = req.body.dateStart
 		let end = req.body.dateEnd
-
-		console.log('orders by date', start, end)
 		const orders = await Order.findAll({
 			where: {
 				createdAt: {
@@ -88,27 +72,6 @@ router.put('/single/:orderid', async (req, res, next) => {
 	}
 })
 
-// router.get('/:userid', async (req, res, next) => {
-// 	try {
-// 		let phone = req.params.userid
-// 		if (phone[0] === '1') {
-// 			phone = phone.slice(1)
-// 		}
-
-// 		console.log('user phone number api request', phone)
-// 		const orders = await dbMYSQL.query(
-// 			`SELECT * FROM wp_booking_data WHERE phone_number LIKE ${phone}`,
-// 			{
-// 				type: Sequelize.QueryTypes.SELECT,
-// 			}
-// 		)
-// 		//console.log('WP USERS', orders)
-// 		res.json(orders)
-// 	} catch (err) {
-// 		next(err)
-// 	}
-// })
-
 router.get('/:userid', async (req, res, next) => {
 	try {
 		let phone = req.params.userid
@@ -122,24 +85,6 @@ router.get('/:userid', async (req, res, next) => {
 		next(err)
 	}
 })
-
-// router.get('/single/:orderid', async (req, res, next) => {
-// 	try {
-// 		let id = req.params.orderid.toString()
-
-// 		console.log('single order api request', id)
-// 		const orders = await dbMYSQL.query(
-// 			`SELECT * FROM wp_booking_data WHERE hash = '${id}'`,
-// 			{
-// 				type: Sequelize.QueryTypes.SELECT,
-// 			}
-// 		)
-// 		//console.log('WP USERS', orders)
-// 		res.json(orders)
-// 	} catch (err) {
-// 		next(err)
-// 	}
-// })
 
 router.get('/single/:orderid', async (req, res, next) => {
 	try {
@@ -158,7 +103,6 @@ router.get('/single/:orderid', async (req, res, next) => {
 
 router.put('/single/services/:orderid', async (req, res, next) => {
 	try {
-		console.log('updating services req.body', req.body)
 		let id = req.params.orderid
 
 		const details = await OrderDetails.findAll({
@@ -169,7 +113,6 @@ router.put('/single/services/:orderid', async (req, res, next) => {
 
 		let msgbody = {...req.body}
 
-		console.log('ORDER DETAILS', msgbody)
 		let services = Object.keys(msgbody)
 
 		let servc
@@ -195,7 +138,6 @@ router.put('/single/services/:orderid', async (req, res, next) => {
 
 router.post('/single/services/:orderid', async (req, res, next) => {
 	try {
-		console.log('adding service to order req.body', req.body)
 		let id = req.params.orderid
 
 		const service = await Service.findOne({
@@ -204,7 +146,6 @@ router.post('/single/services/:orderid', async (req, res, next) => {
 			},
 		})
 
-		console.log('service object', service)
 		const order = await Order.findOne({
 			where: {
 				hash: id,
@@ -215,7 +156,6 @@ router.post('/single/services/:orderid', async (req, res, next) => {
 			through: {customerPrice: service.dataValues.price},
 		})
 
-		console.log('response afer adding service', resp)
 		res.json(resp)
 	} catch (err) {
 		next(err)
@@ -224,7 +164,6 @@ router.post('/single/services/:orderid', async (req, res, next) => {
 
 router.put('/single/removeservice/:orderid', async (req, res, next) => {
 	try {
-		console.log('adding service to order req.body', req.body)
 		let id = req.params.orderid
 		let svcid = req.body.serviceid
 		const service = await Service.findOne({
@@ -233,14 +172,12 @@ router.put('/single/removeservice/:orderid', async (req, res, next) => {
 			},
 		})
 
-		console.log(service)
 		const order = await Order.findOne({
 			where: {
 				hash: id,
 			},
 		})
 		let resp = await order.removeService(service)
-		console.log('response afer adding service', resp)
 		res.json(resp)
 	} catch (err) {
 		next(err)

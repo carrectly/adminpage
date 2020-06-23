@@ -85,19 +85,25 @@ dealerSeed.push({
 	name: 'United Tires',
 	email: 'birkusandre@gmail.com',
 	phoneNumber: faker.phone.phoneNumberFormat(0),
-	specialty: faker.commerce.productName(),
+	specialty: 'Oil change',
 	location: faker.address.streetAddress(),
 })
 
-for (let i = 0; i < 6; i++) {
-	dealerSeed.push({
-		name: faker.commerce.productName(),
-		email: 'birkusandre@gmail.com',
-		phoneNumber: faker.phone.phoneNumberFormat(0),
-		specialty: faker.commerce.productName(),
-		location: faker.address.streetAddress(),
-	})
-}
+dealerSeed.push({
+	name: "Duran's bodyshop",
+	email: 'birkusandre@gmail.com',
+	phoneNumber: faker.phone.phoneNumberFormat(0),
+	specialty: 'Body Work',
+	location: faker.address.streetAddress(),
+})
+
+dealerSeed.push({
+	name: "Garcia's Auto Shop",
+	email: 'birkusandre@gmail.com',
+	phoneNumber: faker.phone.phoneNumberFormat(0),
+	specialty: 'Engine Work',
+	location: faker.address.streetAddress(),
+})
 
 customerSeed.push({
 	email: 'vladimir.gurkot@gmail.com',
@@ -108,10 +114,14 @@ customerSeed.push({
 })
 
 const seed = async () => {
+	console.log('trying to seed DB')
 	try {
 		await db.sync({force: true})
+		console.log('syncing with DB')
 		await Dealer.bulkCreate(dealerSeed)
+		console.log('dealer bulk create')
 		await Service.bulkCreate(serviceSeed)
+		console.log('serivce bulk create')
 		await User.create({
 			email: 'cody@email.com',
 			password: '123',
@@ -119,40 +129,74 @@ const seed = async () => {
 		})
 		await Customer.bulkCreate([
 			{
-				email: 'vladimir.gurkot@gmail.com',
-				location: faker.address.streetAddress(),
-				firstName: 'Vladimir',
-				lastName: 'Gurkot',
-				phoneNumber: '7739876075',
+				email: 'jpreck90@gmail.com',
+				location: '5018 S. Woodlawn ave, Chicago IL 60615',
+				firstName: 'Jennifer',
+				lastName: 'Preckwinkle',
+				phoneNumber: '7738175148',
 			},
 			{
-				firstName: 'Lilly',
-				lastName: 'Morgan',
-				location: '60614',
-				phoneNumber: '7138173134',
-				email: 'lmorgan125@gmail.com',
+				firstName: 'Anthony',
+				lastName: 'Di Silvestro',
+				location: '536 w grant place',
+				phoneNumber: '8479170734',
+				email: 'adisilvestro7994@gmail.com',
+			},
+			{
+				firstName: 'Michael',
+				lastName: 'Walus',
+				location: '1445 W Augusta Blvd Chicago IL 60642',
+				phoneNumber: '6308631745',
+				email: 'michael.walus@gmail.com',
+			},
+			{
+				firstName: 'Murad',
+				lastName: 'Kajani',
+				location: '2331 N. Sheffield Ave, Chicago, IL 60614',
+				phoneNumber: '6308856453',
+				email: 'mkajani@gmail.com',
 			},
 		])
 		await Order.bulkCreate([
 			{
-				pickupDate: '2020-01-22 15:05',
-				dropoffDate: '2020-01-23 15:05',
-				pickupLocation: '1037 West Diversey Parkway',
-				carYear: '2007',
-				carMake: 'Honda',
-				carModel: 'Accord',
+				pickupDate: '2020-06-20 15:05',
+				dropoffDate: '2020-06-20 16:05',
+				pickupLocation: '5018 S. Woodlawn ave, Chicago IL 60615',
+				carYear: '2016',
+				carMake: 'Nissan',
+				carModel: 'Rogue',
 				hash: faker.random.number({min: 100000, max: 999999}), //returns 9
-				customerPhoneNumber: '7138173134',
+				customerPhoneNumber: '7738175148',
 			},
 			{
-				pickupDate: '2020-01-25 15:05',
-				dropoffDate: '2020-01-26 15:05',
-				pickupLocation: faker.address.streetAddress(),
-				carYear: '2010',
-				carMake: 'Infinity',
-				carModel: 'FX35',
+				pickupDate: '2020-06-21 15:05',
+				dropoffDate: '2020-06-21 16:05',
+				pickupLocation: '536 w grant place',
+				carYear: '2014',
+				carMake: 'Dodge',
+				carModel: 'Journey',
 				hash: faker.random.number({min: 100000, max: 999999}), //returns 9
-				customerPhoneNumber: '7739876075',
+				customerPhoneNumber: '8479170734',
+			},
+			{
+				pickupDate: '2020-06-22 15:05',
+				dropoffDate: '2020-06-22 16:05',
+				pickupLocation: '1445 W Augusta Blvd Chicago IL 60642',
+				carYear: '2014',
+				carMake: 'Lincoln',
+				carModel: 'MKX',
+				hash: faker.random.number({min: 100000, max: 999999}), //returns 9
+				customerPhoneNumber: '6308631745',
+			},
+			{
+				pickupDate: '2020-06-25 15:05',
+				dropoffDate: '2020-06-26 15:05',
+				pickupLocation: '1445 W Augusta Blvd Chicago IL 60642',
+				carYear: '2016',
+				carMake: 'Mazda',
+				carModel: 'CX-5',
+				hash: faker.random.number({min: 100000, max: 999999}), //returns 9
+				customerPhoneNumber: '6308856453',
 			},
 		])
 	} catch (err) {

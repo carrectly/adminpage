@@ -29,10 +29,13 @@ class AllOrders extends Component {
 	}
 
 	handleChange(evt) {
-		console.log('event value', evt.target.value)
 		this.setState({
 			[evt.target.name]: evt.target.value,
 		})
+	}
+
+	componentDidMount() {
+		this.props.getOrders()
 	}
 
 	componentWillUnmount() {
@@ -60,7 +63,6 @@ class AllOrders extends Component {
 
 	render() {
 		const orders = this.props.orders || []
-		console.log('state', this.state)
 		return (
 			<div>
 				<div>
@@ -112,12 +114,12 @@ class AllOrders extends Component {
 								</OverlayTrigger>
 							</Col>
 							<Col>
-								<Button
+								{/* <Button
 									type='button'
 									variant='primary'
 									onClick={() => this.props.getOrders()}>
 									View All Orders
-								</Button>
+								</Button> */}
 							</Col>
 						</Row>
 					</Form>

@@ -28,6 +28,13 @@ export const removeDealer = id => {
 	}
 }
 
+export const updateDealer = dealer => {
+	return {
+		type: UPDATE_DEALER,
+		dealer,
+	}
+}
+
 //thunk creators
 
 export const fetchDealersThunk = () => {
@@ -63,6 +70,17 @@ export const removeDealerThunk = id => {
 	}
 }
 
+export const updateDealerThunk = (id, dealer) => {
+	return async dispatch => {
+		try {
+			const {data} = await axios.put(`/api/dealers/${id}`, dealer)
+			dispatch(updateDealer(data))
+		} catch (err) {
+			console.log('Error', err)
+		}
+	}
+}
+
 const initialState = []
 
 //reducer
@@ -76,6 +94,15 @@ export default (state = initialState, action) => {
 		}
 		case REMOVE_DEALER: {
 			return state.filter(bot => bot.id !== Number(action.id))
+		}
+		case UPDATE_DEALER: {
+			return state.map(el => {
+				if (el.id === action.dealer.id) {
+					return action.dealer
+				} else {
+					return el
+				}
+			})
 		}
 		default: {
 			return state

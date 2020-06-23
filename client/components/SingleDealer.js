@@ -8,8 +8,6 @@ class SingleDealer extends Component {
 	componentDidMount() {
 		try {
 			const dealerid = this.props.match.params.dealerid
-			console.log('dealer id ', dealerid)
-			console.log('params', this.props.match.params)
 			this.props.getDealer(dealerid)
 		} catch (error) {
 			console.error(error)

@@ -1,128 +1,94 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {updateDealerThunk, fetchSingleDealerThunk} from '../store/singledealer'
-import {Form, Button} from 'react-bootstrap'
+import React, {useState} from 'react'
+import {useDispatch} from 'react-redux'
+import {updateDealerThunk} from '../store/dealers.js'
+import {Modal, Button, Form, Input} from 'antd'
 
-class UpdateDealer extends Component {
-	constructor(props) {
-		super(props)
-		this.handleSubmit = this.handleSubmit.bind(this)
-		this.handleChange = this.handleChange.bind(this)
+const layout = {
+	labelCol: {span: 8},
+	wrapperCol: {span: 16},
+}
 
-		this.state = {
-			name: '',
-			email: '',
-			phoneNumber: '',
-			specialty: '',
-			location: '',
-		}
+const UpdateDealer = props => {
+	const [form] = Form.useForm()
+	const [show, setShow] = useState(false)
+	const dispatch = useDispatch()
+
+	const handleClose = () => setShow(false)
+	const handleShow = () => setShow(true)
+
+	const onFinish = values => {
+		dispatch(updateDealerThunk(props.dealer.id, values))
+		handleClose()
 	}
 
-	handleChange(evt) {
-		this.setState({
-			[evt.target.name]: evt.target.value,
-		})
-	}
-	handleSubmit(evt) {
-		evt.preventDefault()
-		let obj = {}
-		if (this.state.name) {
-			obj.name = this.state.name
-		}
-		if (this.state.email) {
-			obj.email = this.state.email
-		}
-		if (this.state.phoneNumber) {
-			obj.phoneNumber = this.state.phoneNumber
-		}
-		if (this.state.specialty) {
-			obj.specialty = this.state.specialty
-		}
-		if (this.state.location) {
-			obj.location = this.state.location
-		}
-		let id = this.props.id
-		console.log('inside update form', id)
-		this.props.update(id, obj)
-		obj = {}
-		this.setState({
-			name: '',
-			email: '',
-			phoneNumber: '',
-			specialty: '',
-			location: '',
-		})
+	const onFinishFailed = errorInfo => {
+		console.log('Failed:', errorInfo)
 	}
 
-	render() {
-		return (
-			<div className='form'>
-				<h3>Update service shop info</h3>
-				<Form onSubmit={this.handleSubmit}>
-					<Form.Group controlId='formBasicName'>
-						<Form.Control
-							type='text'
-							name='name'
-							value={this.state.name}
-							placeholder='Service Shop Name'
-							onChange={this.handleChange}
-						/>
-						<Form.Text className='text-muted'>*required</Form.Text>
-					</Form.Group>
-
-					<Form.Group controlId='formBasicEmail'>
-						<Form.Control
-							type='email'
-							name='email'
-							value={this.state.email}
-							placeholder='Email'
-							onChange={this.handleChange}
-						/>
-						<Form.Text className='text-muted'>*required</Form.Text>
-					</Form.Group>
-
-					<Form.Group controlId='formBasicPhoneNumber'>
-						<Form.Control
-							type='text'
-							name='phoneNumber'
-							value={this.state.phoneNumber}
-							placeholder='phoneNumber'
-							onChange={this.handleChange}
-						/>
-					</Form.Group>
-
-					<Form.Group controlId='formBasicSpecialty'>
-						<Form.Control
-							type='text'
-							name='specialty'
-							value={this.state.specialty}
-							placeholder='Specialty'
-							onChange={this.handleChange}
-						/>
-					</Form.Group>
-
-					<Form.Group controlId='formBasicLocation'>
-						<Form.Control
-							type='text'
-							name='location'
-							value={this.state.location}
-							placeholder='business location'
-							onChange={this.handleChange}
-						/>
-					</Form.Group>
-					<Button variant='primary' type='submit'>
-						Update
-					</Button>
+	return (
+		<div>
+			<Button type='primary' onClick={() => handleShow(true)}>
+				Edit
+			</Button>
+			<Modal
+				title={`${props.dealer.name}`}
+				visible={show}
+				footer={null}
+				closable={false}>
+				<Form
+					{...layout}
+					form={form}
+					name='control-hooks'
+					size='large'
+					onFinish={onFinish}
+					onFinishFailed={onFinishFailed}>
+					<Form.Item
+						name='name'
+						label='Dealer Name'
+						initialValue={`${props.dealer.name}`}
+						rules={[{required: true}]}>
+						<Input />
+					</Form.Item>
+					<Form.Item
+						name='price'
+						label='Service Price'
+						initialValue={props.dealer.email}
+						rules={[{required: true}]}>
+						<Input />
+					</Form.Item>
+					<Form.Item
+						name='phoneNumber'
+						label='Phone number'
+						initialValue={props.dealer.phoneNumber}>
+						<Input />
+					</Form.Item>
+					<Form.Item
+						name='specialty'
+						label='Specialty'
+						initialValue={props.dealer.specialty || ''}>
+						<Input />
+					</Form.Item>
+					<Form.Item
+						name='location'
+						label='Address'
+						initialValue={props.dealer.location || ''}>
+						<Input />
+					</Form.Item>
+					<Form.Item>
+						<Button
+							htmlType='button'
+							type='secondary'
+							onClick={handleClose}>
+							Cancel
+						</Button>
+						<Button type='primary' htmlType='submit'>
+							Submit
+						</Button>
+					</Form.Item>
 				</Form>
-			</div>
-		)
-	}
+			</Modal>
+		</div>
+	)
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		update: (id, obj) => dispatch(updateDealerThunk(id, obj)),
-		getDealer: id => dispatch(fetchSingleDealerThunk(id)),
-	}
-}
-export default connect(null, mapDispatchToProps)(UpdateDealer)
+export default UpdateDealer

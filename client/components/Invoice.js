@@ -78,7 +78,6 @@ class Invoice extends Component {
 	}
 
 	handleStatusUpdate(evt) {
-		console.log('evt', evt.target)
 		let obj = {
 			status: evt.target.name,
 		}

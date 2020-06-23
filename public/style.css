@@ -9,29 +9,13 @@ body {
 	background-size: cover;
 }
 
-a {
-	text-decoration: none;
+#app {
+	height: 100vh;
 }
 
-label {
-	display: block;
-}
-
-nav a {
-	display: inline-block;
-}
-
-table {
-	border: 2px solid black;
-}
-
-td {
-	border: 2px solid black;
-}
-
-input {
-	padding: 5px;
-	margin: 5px;
+#appInnerDiv {
+	min-height: 100vh;
+	position: relative;
 }
 
 .account {
@@ -180,6 +164,7 @@ input {
 	display: flex;
 	flex-direction: row;
 	align-content: stretch;
+	padding: 0 0 10px 0;
 }
 
 .emailsubject {
@@ -274,14 +259,11 @@ input {
 
 .alldealersview {
 	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
+	flex-wrap: wrap;
 }
 
-.dealerscontainer {
-	display: flex;
-	flex-flow: row wrap;
-	flex-basis: 50%;
+.dealerCard {
+	margin: 5px;
 }
 
 .adddealersform {
@@ -562,4 +544,45 @@ table.commentlist {
 	.servicestable .btn-danger {
 		font-size: 10px;
 	}
+}
+
+.float-plus {
+	position: fixed;
+	color: darkblue;
+	bottom: 0;
+	right: 0;
+	font-size: 10rem;
+	padding: 20px;
+	z-index: 9999;
+	transition: all 0.1s ease-in-out;
+	filter: drop-shadow(6px 10px 0 #666);
+}
+
+.float-plus:hover {
+	filter: drop-shadow(6px 14px 0 #666);
+	transform: scale(1.05);
+}
+
+.footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2.5rem;
+	background-color: black;
+	color: white;
+	text-align: center;
+}
+
+.allContent {
+	padding: 0px 20px 0px 20px;
+}
+
+.dealerCardFooter {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
 }

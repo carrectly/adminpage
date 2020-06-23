@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../database')
 var axios = require('axios')
 const Customer = require('./customer')
+if (process.env.NODE_ENV !== 'production') require('../../../secrets.js')
 
 const Order = db.define('order', {
 	hash: {
@@ -61,9 +62,6 @@ const Order = db.define('order', {
 	},
 })
 
-//'https://carrectlyadmin.herokuapp.com/auth/google/calendar/newevent'
-
-//'http://localhost:1337/auth/google/calendar/newevent/update'
 const createInGoogle = async inst => {
 	try {
 		let newinst = {...inst.dataValues}
@@ -73,7 +71,7 @@ const createInGoogle = async inst => {
 		})
 		newinst.customerName = `${cus.firstName} ${cus.lastName}`
 		await axios.post(
-			'https://carrectlyadmin.herokuapp.com/auth/google/calendar/newevent',
+			`${process.env.DOMAIN}/auth/google/calendar/newevent`,
 			newinst
 		)
 	} catch (err) {
@@ -90,7 +88,7 @@ const updateInGoogle = async inst => {
 		})
 		newinst.customerName = `${cus.firstName} ${cus.lastName}`
 		await axios.post(
-			'https://carrectlyadmin.herokuapp.com/auth/google/calendar/newevent/update',
+			`${process.env.DOMAIN}/auth/google/calendar/newevent/update`,
 			newinst
 		)
 	} catch (err) {

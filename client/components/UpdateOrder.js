@@ -50,7 +50,6 @@ class UpdateOrder extends Component {
 			obj.vin = this.state.vin
 		}
 		let id = this.props.id
-		console.log('inside update form', id)
 		this.props.update(id, obj)
 		obj = {}
 		this.setState({

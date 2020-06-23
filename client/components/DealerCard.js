@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {Card, Button} from 'react-bootstrap'
+import UpdateDealer from './UpdateDealer'
 
 class DealerCard extends Component {
 	constructor(props) {
@@ -10,7 +11,6 @@ class DealerCard extends Component {
 	}
 
 	handleClick = evt => {
-		console.log('card event', evt)
 		evt.preventDefault()
 		if (evt.target.id) {
 			this.props.delete(evt.target.id)
@@ -26,15 +26,15 @@ class DealerCard extends Component {
 						<div>{dealer.email}</div>
 						<div>{dealer.location}</div>
 					</Card.Subtitle>
-					<Link to={`/dealers/${dealer.id}`}>
-						<Button variant='primary'>View/Edit</Button>
-					</Link>
-					<Button
-						id={dealer.id}
-						onClick={this.handleClick}
-						variant='danger'>
-						Delete
-					</Button>
+					<div className='dealerCardFooter'>
+						<UpdateDealer dealer={dealer} />
+						<Button
+							id={dealer.id}
+							onClick={this.handleClick}
+							variant='danger'>
+							Delete
+						</Button>
+					</div>
 				</Card.Body>
 			</Card>
 		)

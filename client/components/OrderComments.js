@@ -30,7 +30,6 @@ class OrderComments extends Component {
 	handleSubmit(evt) {
 		evt.preventDefault()
 		let id = this.props.id
-		console.log('inside update form', id)
 		this.props.addComment(id, this.state)
 		this.setState({
 			content: '',

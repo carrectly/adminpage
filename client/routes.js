@@ -22,7 +22,6 @@ class Routes extends Component {
 
 	render() {
 		const isLoggedIn = this.props.isLoggedIn
-		console.log('WHO IS LOGGED IN', isLoggedIn)
 		let show = true
 		if (isLoggedIn === 'info@carrectly.com') {
 			show = true

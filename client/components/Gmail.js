@@ -17,7 +17,6 @@ class Gmail extends Component {
 
 	async componentDidMount() {
 		let id = this.props.match.params.orderid
-		console.log('inside gmail params', id)
 		let temp = this.state.spinner
 		this.setState({spinner: !temp})
 		await this.props.fetchEmails()
@@ -36,7 +35,6 @@ class Gmail extends Component {
 		const emails = this.props.emails || []
 		const single = this.props.singleemail || {}
 		let attachments = this.props.attachments || []
-		console.log('attachment IN REACT', attachments)
 		let modalArray = []
 		if (attachments.length >= 1) {
 			modalArray = attachments.map(attch => {

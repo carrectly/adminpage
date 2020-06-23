@@ -12,7 +12,6 @@ import userorders from './userorders'
 import singleorder from './singleorder'
 import dealers from './dealers'
 import square from './square'
-import singledealer from './singledealer'
 import singlecustomer from './singlecustomer'
 import services from './services'
 import comments from './comments'
@@ -28,7 +27,6 @@ const reducer = combineReducers({
 	singleorder,
 	dealers,
 	square,
-	singledealer,
 	singlecustomer,
 	services,
 	comments,

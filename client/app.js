@@ -1,15 +1,16 @@
 import React from 'react'
-
-import {Navbar} from './components'
+import {Navbar, MainFooter} from './components'
 import Routes from './routes'
 import history from './history'
 
 const App = () => {
-	console.log('history', history)
 	return (
-		<div>
+		<div id='appInnerDiv'>
 			<Navbar />
-			<Routes />
+			<div className='allContent'>
+				<Routes />
+			</div>
+			<MainFooter />
 		</div>
 	)
 }
