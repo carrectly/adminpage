@@ -37,6 +37,7 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
 	try {
 		let newcontact = req.body
+		console.log(oAuth2Client)
 		let result = await addNewContact(newcontact)
 		res.json(result)
 	} catch (err) {

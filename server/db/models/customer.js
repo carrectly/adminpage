@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../database')
 var axios = require('axios')
+if (process.env.NODE_ENV !== 'production') require('../../../secrets.js')
 
 const Customer = db.define('customer', {
 	phoneNumber: {
@@ -25,19 +26,19 @@ const Customer = db.define('customer', {
 	},
 })
 
-//const route = `${process.env.DOMAIN}auth/google/contacts`
-// const createInGoogle = async inst => {
-// 	try {
-// 		inst.isInGoogle = true
-// 		await axios.post(
-// 			'https://carrectlyadmin.herokuapp.com/auth/google/contacts',
-// 			inst.dataValues
-// 		)
-// 	} catch (err) {
-// 		console.log(err.message)
-// 	}
-// }
+const createInGoogle = async inst => {
+	console.log('contacts route', process.env.DOMAIN)
+	try {
+		inst.isInGoogle = true
+		await axios.post(
+			`${process.env.DOMAIN}/auth/google/contacts`,
+			inst.dataValues
+		)
+	} catch (err) {
+		console.log(err.message)
+	}
+}
 
-//Customer.beforeCreate(createInGoogle)
+Customer.beforeCreate(createInGoogle)
 
 module.exports = Customer

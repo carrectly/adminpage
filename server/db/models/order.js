@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../database')
 var axios = require('axios')
 const Customer = require('./customer')
+if (process.env.NODE_ENV !== 'production') require('../../../secrets.js')
 
 const Order = db.define('order', {
 	hash: {
@@ -61,44 +62,41 @@ const Order = db.define('order', {
 	},
 })
 
-//'https://carrectlyadmin.herokuapp.com/auth/google/calendar/newevent'
+const createInGoogle = async inst => {
+	try {
+		let newinst = {...inst.dataValues}
+		inst.isInCalendar = true
+		let cus = await Customer.findOne({
+			where: {phoneNumber: newinst.customerPhoneNumber},
+		})
+		newinst.customerName = `${cus.firstName} ${cus.lastName}`
+		await axios.post(
+			`${process.env.DOMAIN}/auth/google/calendar/newevent`,
+			newinst
+		)
+	} catch (err) {
+		console.log(err.message)
+	}
+}
 
-//'http://localhost:1337/auth/google/calendar/newevent/update'
-// const createInGoogle = async inst => {
-// 	try {
-// 		let newinst = {...inst.dataValues}
-// 		inst.isInCalendar = true
-// 		let cus = await Customer.findOne({
-// 			where: {phoneNumber: newinst.customerPhoneNumber},
-// 		})
-// 		newinst.customerName = `${cus.firstName} ${cus.lastName}`
-// 		await axios.post(
-// 			'https://carrectlyadmin.herokuapp.com/auth/google/calendar/newevent',
-// 			newinst
-// 		)
-// 	} catch (err) {
-// 		console.log(err.message)
-// 	}
-// }
+const updateInGoogle = async inst => {
+	try {
+		let newinst = {...inst.dataValues}
+		inst.isInCalendar = true
+		let cus = await Customer.findOne({
+			where: {phoneNumber: newinst.customerPhoneNumber},
+		})
+		newinst.customerName = `${cus.firstName} ${cus.lastName}`
+		await axios.post(
+			`${process.env.DOMAIN}/auth/google/calendar/newevent/update`,
+			newinst
+		)
+	} catch (err) {
+		console.log(err.message)
+	}
+}
 
-// const updateInGoogle = async inst => {
-// 	try {
-// 		let newinst = {...inst.dataValues}
-// 		inst.isInCalendar = true
-// 		let cus = await Customer.findOne({
-// 			where: {phoneNumber: newinst.customerPhoneNumber},
-// 		})
-// 		newinst.customerName = `${cus.firstName} ${cus.lastName}`
-// 		await axios.post(
-// 			'https://carrectlyadmin.herokuapp.com/auth/google/calendar/newevent/update',
-// 			newinst
-// 		)
-// 	} catch (err) {
-// 		console.log(err.message)
-// 	}
-// }
-
-// Order.beforeCreate(createInGoogle)
-// Order.afterUpdate(updateInGoogle)
+Order.beforeCreate(createInGoogle)
+Order.afterUpdate(updateInGoogle)
 
 module.exports = Order
