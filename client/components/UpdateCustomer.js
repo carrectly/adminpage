@@ -38,7 +38,6 @@ class UpdateCustomer extends Component {
 			obj.lastName = this.state.lastName
 		}
 		let phone = this.props.phone
-		console.log('inside update form', phone)
 		this.props.update(phone, obj)
 		obj = {}
 		this.setState({

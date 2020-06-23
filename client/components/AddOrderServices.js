@@ -23,7 +23,6 @@ class AddOrderServices extends Component {
 
 	render() {
 		const servicesDropDown = this.props.services || []
-		console.log('state', this.state)
 		return (
 			<DropdownButton
 				size='lg'

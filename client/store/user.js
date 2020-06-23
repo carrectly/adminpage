@@ -24,8 +24,6 @@ const getToken = user => ({type: GET_TOKEN, user})
 export const me = () => async dispatch => {
 	try {
 		const res = await axios.get('/auth/me')
-		console.log('INSIDE ME THUNK')
-		console.log(res.data)
 		dispatch(getUser(res.data))
 		history.push('/account')
 	} catch (err) {
@@ -36,7 +34,6 @@ export const me = () => async dispatch => {
 export const getTokenThunk = () => async dispatch => {
 	try {
 		const res = await axios.get('/auth/google/googleclient')
-		console.log('link received from server', res.data)
 		window.open(res.data)
 		dispatch(getToken())
 	} catch (err) {
@@ -47,7 +44,6 @@ export const getTokenThunk = () => async dispatch => {
 export const auth = (email, password, method) => async dispatch => {
 	try {
 		const res = await axios.post(`/auth/${method}`, {email, password})
-		console.log('INSIDE AUTH', res.data.user)
 		dispatch(getUser(res.data.user))
 		history.push('/account')
 	} catch (dispatchOrHistoryErr) {

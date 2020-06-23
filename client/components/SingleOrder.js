@@ -59,7 +59,6 @@ class SingleOrder extends Component {
 	}
 
 	handleRemoveService(evt) {
-		console.log('event target', evt.target)
 		let obj = {
 			serviceid: evt.target.id,
 		}
@@ -80,7 +79,6 @@ class SingleOrder extends Component {
 
 	// eslint-disable-next-line complexity
 	render() {
-		console.log('state', this.state)
 		const singleorder = this.props.order || {}
 		const services = this.props.order.services || []
 

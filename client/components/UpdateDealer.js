@@ -17,8 +17,6 @@ const UpdateDealer = props => {
 	const handleShow = () => setShow(true)
 
 	const onFinish = values => {
-		console.log(props)
-		console.log('values inside modal', values)
 		dispatch(updateDealerThunk(props.dealer.id, values))
 		handleClose()
 	}

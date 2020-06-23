@@ -20,7 +20,6 @@ router.all('*', async (req, res, next) => {
 	try {
 		let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
 		oAuth2Client.setCredentials(JSON.parse(usr.dataValues.token))
-		console.log('oAuth2Client', oAuth2Client)
 		next()
 	} catch (err) {
 		next(err)

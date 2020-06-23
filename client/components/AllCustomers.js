@@ -76,7 +76,6 @@ class AllCustomers extends Component {
 	}
 
 	render() {
-		console.log('state', this.state)
 		const contacts = this.props.contacts || []
 		return (
 			<div>

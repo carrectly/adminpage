@@ -25,8 +25,6 @@ const AddService = props => {
 	const handleShow = () => setShow(true)
 
 	const onFinish = values => {
-		console.log(props)
-		console.log('values inside modal', values)
 		props.addService(values)
 		handleClose()
 	}

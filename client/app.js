@@ -4,7 +4,6 @@ import Routes from './routes'
 import history from './history'
 
 const App = () => {
-	console.log('history', history)
 	return (
 		<div id='appInnerDiv'>
 			<Navbar />

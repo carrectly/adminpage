@@ -29,7 +29,6 @@ class AllOrders extends Component {
 	}
 
 	handleChange(evt) {
-		console.log('event value', evt.target.value)
 		this.setState({
 			[evt.target.name]: evt.target.value,
 		})
@@ -64,7 +63,6 @@ class AllOrders extends Component {
 
 	render() {
 		const orders = this.props.orders || []
-		console.log('state', this.state)
 		return (
 			<div>
 				<div>

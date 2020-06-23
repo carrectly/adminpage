@@ -13,7 +13,6 @@ router.get('/', async (req, res, next) => {
 router.put('/', async (req, res, next) => {
 	try {
 		let q = req.body
-		console.log('special query', q)
 		let cust
 		if (q.email) {
 			cust = await Customer.findOne({
@@ -37,7 +36,6 @@ router.put('/', async (req, res, next) => {
 router.get('/single/:id', async (req, res, next) => {
 	try {
 		let id = req.params.id
-		console.log('inside api', id)
 		const oneCust = await Customer.findOne({
 			where: {
 				phoneNumber: id,

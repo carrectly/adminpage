@@ -41,8 +41,6 @@ router.put('/', async (req, res, next) => {
 	try {
 		let start = req.body.dateStart
 		let end = req.body.dateEnd
-
-		console.log('orders by date', start, end)
 		const orders = await Order.findAll({
 			where: {
 				createdAt: {
@@ -105,7 +103,6 @@ router.get('/single/:orderid', async (req, res, next) => {
 
 router.put('/single/services/:orderid', async (req, res, next) => {
 	try {
-		console.log('updating services req.body', req.body)
 		let id = req.params.orderid
 
 		const details = await OrderDetails.findAll({
@@ -116,7 +113,6 @@ router.put('/single/services/:orderid', async (req, res, next) => {
 
 		let msgbody = {...req.body}
 
-		console.log('ORDER DETAILS', msgbody)
 		let services = Object.keys(msgbody)
 
 		let servc
@@ -142,7 +138,6 @@ router.put('/single/services/:orderid', async (req, res, next) => {
 
 router.post('/single/services/:orderid', async (req, res, next) => {
 	try {
-		console.log('adding service to order req.body', req.body)
 		let id = req.params.orderid
 
 		const service = await Service.findOne({
@@ -151,7 +146,6 @@ router.post('/single/services/:orderid', async (req, res, next) => {
 			},
 		})
 
-		console.log('service object', service)
 		const order = await Order.findOne({
 			where: {
 				hash: id,
@@ -162,7 +156,6 @@ router.post('/single/services/:orderid', async (req, res, next) => {
 			through: {customerPrice: service.dataValues.price},
 		})
 
-		console.log('response afer adding service', resp)
 		res.json(resp)
 	} catch (err) {
 		next(err)
@@ -171,7 +164,6 @@ router.post('/single/services/:orderid', async (req, res, next) => {
 
 router.put('/single/removeservice/:orderid', async (req, res, next) => {
 	try {
-		console.log('adding service to order req.body', req.body)
 		let id = req.params.orderid
 		let svcid = req.body.serviceid
 		const service = await Service.findOne({
@@ -180,14 +172,12 @@ router.put('/single/removeservice/:orderid', async (req, res, next) => {
 			},
 		})
 
-		console.log(service)
 		const order = await Order.findOne({
 			where: {
 				hash: id,
 			},
 		})
 		let resp = await order.removeService(service)
-		console.log('response afer adding service', resp)
 		res.json(resp)
 	} catch (err) {
 		next(err)

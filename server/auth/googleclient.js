@@ -59,15 +59,10 @@ class SampleClient {
 	async authenticateToken(code) {
 		try {
 			let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
-			console.log('what is going on here - user found', usr)
 			const {tokens} = await this.oAuth2Client.getToken(code)
-
-			console.log('tokens received', tokens)
 			this.oAuth2Client.credentials = tokens
 			let tkn = JSON.stringify(tokens)
 			let resp = await usr.update({token: tkn})
-
-			console.log('updated user', resp)
 			return tokens
 		} catch (err) {
 			console.error(err)

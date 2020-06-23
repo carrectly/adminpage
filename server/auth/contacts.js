@@ -19,7 +19,6 @@ router.all('*', async (req, res, next) => {
 	try {
 		let usr = await User.findOne({where: {email: 'info@carrectly.com'}})
 		oAuth2Client.setCredentials(JSON.parse(usr.dataValues.token))
-		console.log('oAuth2Client', oAuth2Client)
 		next()
 	} catch (err) {
 		next(err)
@@ -93,7 +92,6 @@ async function addNewContact(obj) {
 	if (!response) {
 		return console.log('The API returned an error: ')
 	} else {
-		console.log('new user created', response.data)
 		return response.data
 	}
 }

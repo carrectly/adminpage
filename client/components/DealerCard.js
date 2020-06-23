@@ -11,7 +11,6 @@ class DealerCard extends Component {
 	}
 
 	handleClick = evt => {
-		console.log('card event', evt)
 		evt.preventDefault()
 		if (evt.target.id) {
 			this.props.delete(evt.target.id)

@@ -14,8 +14,6 @@ const UpdateService = props => {
 	const handleShow = () => setShow(true)
 
 	const onFinish = values => {
-		console.log(props)
-		console.log('values inside modal', values)
 		props.updateService(props.service.id, values)
 		handleClose()
 	}

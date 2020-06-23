@@ -17,7 +17,6 @@ class SingleCustomer extends Component {
 	}
 
 	render() {
-		console.log('Phone', this.props.match.params.userid)
 		const userorders = this.props.orders || []
 		const customer = this.props.customer || {}
 		let custArr = Object.keys(customer) || []

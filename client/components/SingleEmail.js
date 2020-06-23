@@ -8,16 +8,12 @@ import renderHTML from 'react-render-html'
 import nl2br from 'react-newline-to-break'
 
 class SingleEmail extends Component {
-	// console.log('props', props.single.length)
-
 	render() {
 		let message = 'Nothing to Preview'
 		if (this.props.single.length) {
 			message = this.props.single
 		}
 		return <div>{renderHTML(message)}</div>
-
-		//return <div>{nl2br(message)}</div>
 	}
 }
 
