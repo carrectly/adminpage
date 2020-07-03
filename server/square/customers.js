@@ -12,7 +12,7 @@ var customers = new SquareConnect.CustomersApi()
 
 router.post('/', async (req, res, next) => {
 	try {
-		console.log('env square', process.env.SQUARE_TOKEN)
+		//console.log('env square', process.env.SQUARE_TOKEN)
 		let phone = req.body.customerPhoneNumber
 
 		let cust = await Customer.findOne({
@@ -23,12 +23,12 @@ router.post('/', async (req, res, next) => {
 
 		let email = cust.dataValues.email
 		const cstmr = await customers.listCustomers()
-		console.log('cstmr', cstmr.customers)
+		//console.log('cstmr', cstmr.customers)
 		let singlecstmr = cstmr.customers.filter(
 			el => el.email_address === email
 		)
 
-		console.log('SINGLE CUSTOMER FOUND', singlecstmr)
+		//console.log('SINGLE CUSTOMER FOUND', singlecstmr)
 		if (singlecstmr.length !== 1) {
 			singlecstmr = await customers.createCustomer({
 				given_name: cust.dataValues.firstName,

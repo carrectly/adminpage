@@ -60,6 +60,18 @@ const Order = db.define('order', {
 		type: Sequelize.BOOLEAN,
 		defaultValue: false,
 	},
+	discount: {
+		type: Sequelize.DECIMAL(10, 2),
+		allowNull: true,
+	},
+	squareOrderId: {
+		type: Sequelize.STRING,
+		allowNull: true,
+	},
+	squareInvoiceId: {
+		type: Sequelize.STRING,
+		allowNull: true,
+	},
 })
 
 const createInGoogle = async inst => {
