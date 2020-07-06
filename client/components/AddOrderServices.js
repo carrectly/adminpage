@@ -24,10 +24,7 @@ class AddOrderServices extends Component {
 	render() {
 		const servicesDropDown = this.props.services || []
 		return (
-			<DropdownButton
-				size='lg'
-				id='dropdown-basic-button'
-				title='Add Services'>
+			<DropdownButton size='lg' id='dropdown-basic-button' title=' + '>
 				{servicesDropDown.map(svc => (
 					<Dropdown.Item
 						key={svc.id}
