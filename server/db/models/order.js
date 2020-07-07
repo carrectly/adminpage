@@ -9,6 +9,21 @@ const Order = db.define('order', {
 		type: Sequelize.STRING,
 		primaryKey: true,
 	},
+	status: {
+		type: Sequelize.STRING,
+		values: [
+			'received',
+			'waiting on quote',
+			'quote approved - getting serviced',
+			'completed - pending invoice',
+			'completed - invoice sent',
+			'completed - paid',
+		],
+		defaultValue: 'received',
+	},
+	customerComments: {
+		type: Sequelize.TEXT,
+	},
 	pickupDate: {
 		type: Sequelize.DATE,
 		validate: {
@@ -37,23 +52,12 @@ const Order = db.define('order', {
 		type: Sequelize.STRING,
 		allowNull: true,
 	},
-	status: {
-		type: Sequelize.STRING,
-		values: [
-			'received',
-			'waiting on quote',
-			'quote approved - getting serviced',
-			'completed - pending invoice',
-			'completed - invoice sent',
-			'completed - paid',
-		],
-		defaultValue: 'received',
-	},
-	customerComments: {
-		type: Sequelize.TEXT,
-	},
 	promoCode: {
 		type: Sequelize.STRING,
+		allowNull: true,
+	},
+	discount: {
+		type: Sequelize.DECIMAL(10, 2),
 		allowNull: true,
 	},
 	isInCalendar: {
