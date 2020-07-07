@@ -3,6 +3,8 @@ var SquareConnect = require('square-connect')
 var client = SquareConnect.ApiClient.instance
 const axios = require('axios')
 const {Order} = require('../db/models')
+const moment = require('moment')
+
 //const config = require('../../squareconfig.json').sandbox
 // Configure OAuth2 access token for authorization: oauth2
 var oauth2 = client.authentications.oauth2
@@ -10,6 +12,9 @@ client.basePath = 'https://connect.squareupsandbox.com'
 oauth2.accessToken = process.env.SQUARE_TOKEN
 
 var orders = new SquareConnect.OrdersApi()
+var dueDate = moment()
+	.add(7, 'days')
+	.format('YYYY-MM-DD')
 
 router.post('/', async (req, res, next) => {
 	try {
@@ -86,7 +91,7 @@ router.post('/', async (req, res, next) => {
 						{
 							request_method: 'EMAIL',
 							request_type: 'BALANCE',
-							due_date: '2030-01-01',
+							due_date: `${dueDate}`,
 							tipping_enabled: true,
 						},
 					],

@@ -105,30 +105,16 @@ router.put('/single/services/:orderid', async (req, res, next) => {
 	try {
 		let id = req.params.orderid
 
-		const details = await OrderDetails.findAll({
+		let msgbody = {...req.body}
+		let services = Object.keys(msgbody)
+		let servc = await OrderDetails.findOne({
 			where: {
 				orderHash: id,
+				serviceId: services[0],
 			},
 		})
 
-		let msgbody = {...req.body}
-
-		let services = Object.keys(msgbody)
-
-		let servc
-		const forLoop = async _ => {
-			for (let i = 0; i < services.length; i++) {
-				servc = await OrderDetails.findOne({
-					where: {
-						orderHash: id,
-						serviceId: services[i],
-					},
-				})
-				await servc.update(msgbody[services[i]])
-			}
-		}
-
-		await forLoop()
+		await servc.update(msgbody[services[0]])
 
 		res.json(servc)
 	} catch (err) {

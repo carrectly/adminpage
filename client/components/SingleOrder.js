@@ -14,6 +14,7 @@ import {getEmailsThunk, clearEmailsThunk} from '../store/emails'
 import AddOrderServices from './AddOrderServices'
 import {clearSingleEmailThunk} from '../store/singleemail'
 import OrderComments from './OrderComments'
+import SingleOrderServices from './SingleOrderServices'
 import moment from 'moment'
 
 class SingleOrder extends Component {
@@ -128,88 +129,7 @@ class SingleOrder extends Component {
 							fetchEmails={this.fetchEmails}
 							id={this.props.match.params.orderid}
 						/>
-						<Table striped bordered hover size='sm' variant='dark'>
-							<thead>
-								<tr>
-									<th>Service</th>
-									<th>Customer Price</th>
-									<th>Dealer Price</th>
-									<th>Update Customer Price</th>
-									<th>Update Dealer Price</th>
-									<th>Remove from order</th>
-								</tr>
-							</thead>
-							<tbody>
-								{services.map(service => (
-									<tr key={service.id} id={service.id}>
-										<td
-											style={{
-												width: '30px',
-												overflow: 'hidden',
-											}}>
-											{service.name}
-										</td>
-										<td>
-											{service.orderdetails.customerPrice}
-										</td>
-										<td>
-											{service.orderdetails.dealerPrice}
-										</td>
-										<td>
-											<input
-												className='priceupdateform'
-												id={service.id}
-												name='customerPrice'
-												type='text'
-												placeholder='$$$'
-												onChange={this.handleChange}
-											/>
-										</td>
-										<td>
-											<input
-												id={service.id}
-												className='priceupdateform'
-												name='dealerPrice'
-												type='text'
-												placeholder='$$$'
-												onChange={this.handleChange}
-											/>
-										</td>
-										<td>
-											<Button
-												id={service.id}
-												variant='danger'
-												type='button'
-												onClick={id =>
-													this.handleRemoveService(id)
-												}>
-												X
-											</Button>
-										</td>
-									</tr>
-								))}
-								<tr>
-									<td colSpan='3'>
-										<AddOrderServices
-											orderid={
-												this.props.match.params.orderid
-											}
-										/>
-									</td>
-									<td colSpan='3'>
-										<Button
-											size='lg'
-											block
-											variant='primary'
-											onClick={id =>
-												this.handleServiceUpdate(id)
-											}>
-											Update prices
-										</Button>
-									</td>
-								</tr>
-							</tbody>
-						</Table>
+						<SingleOrderServices services={services} />
 					</div>
 				</div>
 				<br />

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Modal, DatePicker, Form, Input} from 'antd'
 import {updateSingleOrderThunk} from '../store/singleorder'
@@ -13,6 +13,7 @@ const layout = {
 const UpdateOrder = props => {
 	const [form] = Form.useForm()
 	const [show, setShow] = useState(false)
+	const [checkPromo, setCheckPromo] = useState(false)
 	const order = useSelector(state => state.singleorder)
 	const dispatch = useDispatch()
 
@@ -21,13 +22,28 @@ const UpdateOrder = props => {
 	const handleClose = () => setShow(false)
 	const handleShow = () => setShow(true)
 
+	useEffect(() => {
+		form.validateFields(['promoCode'])
+	}, [checkPromo])
+
+	const onDiscountChange = e => {
+		setCheckPromo(!!e.target.value)
+	}
+
 	const onFinish = values => {
+		const temp = form.getFieldValue('promoCode')
+		console.log('form', !!temp)
 		dispatch(updateSingleOrderThunk(id, values))
 		handleClose()
 	}
 
 	const onFinishFailed = errorInfo => {
 		console.log('Failed:', errorInfo)
+	}
+
+	const onCancel = () => {
+		form.resetFields()
+		handleClose()
 	}
 
 	return (
@@ -44,7 +60,7 @@ const UpdateOrder = props => {
 				title={`Update order ${order.hash}`}
 				visible={show}
 				footer={null}
-				onCancel={handleClose}>
+				onCancel={onCancel}>
 				<Form
 					{...layout}
 					form={form}
@@ -91,20 +107,27 @@ const UpdateOrder = props => {
 					<Form.Item
 						name='promoCode'
 						label='Promo Code'
+						rules={[
+							{
+								required: checkPromo,
+								message:
+									'Please add promo code before adding discount amount',
+							},
+						]}
 						initialValue={order.promoCode || ''}>
 						<Input />
 					</Form.Item>
 					<Form.Item
 						name='discount'
 						label='Discount amount'
-						initialValue={order.discount || 0}>
-						<Input />
+						initialValue={order.discount || ''}>
+						<Input onChange={onDiscountChange} />
 					</Form.Item>
 					<Form.Item>
 						<Button
 							type='button'
 							variant='light'
-							onClick={handleClose}>
+							onClick={onCancel}>
 							Cancel
 						</Button>
 						<Button variant='primary' type='submit'>
