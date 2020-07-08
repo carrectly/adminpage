@@ -111,7 +111,7 @@ class SingleOrder extends Component {
 				</div>
 				<div className='singleordercontainer'>
 					<div className='singleordertable'>
-						<h3>Order Details</h3>
+						<h3 className='center'>Order Details</h3>
 						<Table striped bordered hover variant='dark'>
 							<tbody>
 								{arr.map((details, index) => (

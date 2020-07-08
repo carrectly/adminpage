@@ -48,7 +48,7 @@ const UpdateOrder = props => {
 
 	return (
 		<div>
-			<h3>Order Actions</h3>
+			<h3 className='center'>Order Actions</h3>
 			<Button
 				size='lg'
 				block
