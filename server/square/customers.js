@@ -5,7 +5,7 @@ const {Order, OrderDetails, Service, Customer} = require('../db/models')
 //const config = require('../../squareconfig.json').sandbox
 // Configure OAuth2 access token for authorization: oauth2
 var oauth2 = client.authentications.oauth2
-client.basePath = 'https://connect.squareupsandbox.com'
+client.basePath = process.env.squareBasePath
 oauth2.accessToken = process.env.SQUARE_TOKEN
 
 var customers = new SquareConnect.CustomersApi()
@@ -21,15 +21,18 @@ router.post('/', async (req, res, next) => {
 			},
 		})
 
-		let email = cust.dataValues.email
-		const cstmr = await customers.listCustomers()
-		//console.log('cstmr', cstmr.customers)
-		let singlecstmr = cstmr.customers.filter(
-			el => el.email_address === email
-		)
+		let singlecstmr = await customers.searchCustomers({
+			query: {
+				filter: {
+					email_address: {
+						exact: cust.dataValues.email,
+					},
+				},
+			},
+		})
 
 		//console.log('SINGLE CUSTOMER FOUND', singlecstmr)
-		if (singlecstmr.length !== 1) {
+		if (!singlecstmr.customers) {
 			singlecstmr = await customers.createCustomer({
 				given_name: cust.dataValues.firstName,
 				family_name: cust.dataValues.lastName,
@@ -39,10 +42,10 @@ router.post('/', async (req, res, next) => {
 			singlecstmr = singlecstmr.customer
 			singlecstmr.status = 'NEW CUSTOMER ADDED IN SQUARE'
 		} else {
-			singlecstmr = singlecstmr[0]
+			singlecstmr = singlecstmr.customers[0]
 			singlecstmr.status = 'CUSTOMER EXISTS IN SQUARE'
 		}
-
+		//console.log('customer obj', singlecstmr)
 		res.json(singlecstmr)
 	} catch (err) {
 		next(err)
