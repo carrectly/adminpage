@@ -20,10 +20,12 @@ router.post('/', async (req, res, next) => {
 	try {
 		let order = req.body.obj
 		let customerid = req.body.id
+		//console.log('square customer id', customerid)
 		let services = req.body.obj.services
 		let idempKey = `${order.hash}${Math.floor(Math.random() * 1000)}`
 
-		console.log('here is our idempotency key', idempKey)
+		// console.log('here is our idempotency key', idempKey)
+		// console.log('here are the services', services)
 		let lineItems = []
 		services.forEach(service => {
 			let amt = Number(service.orderdetails.customerPrice) * 100
@@ -51,13 +53,13 @@ router.post('/', async (req, res, next) => {
 			  ]
 			: null
 
-		console.log('order discount', orderDiscount)
+		//console.log('order discount', orderDiscount)
 		let singleordr = await orders.createOrder(
-			`${process.env.SQUARE_LOCATION_ID}`,
+			process.env.SQUARE_LOCATION_ID,
 			{
 				idempotency_key: idempKey,
 				order: {
-					location_id: `${process.env.SQUARE_LOCATION_ID}`,
+					location_id: process.env.SQUARE_LOCATION_ID,
 					reference_id: `${order.hash}`,
 					line_items: lineItems,
 					customer_id: customerid,
@@ -66,13 +68,13 @@ router.post('/', async (req, res, next) => {
 			}
 		)
 
-		console.log('created new order in square', singleordr)
+		//console.log('created new order in square', singleordr)
 
 		let orderid = singleordr.order.id
 
 		let invoice = await axios({
 			method: 'post',
-			url: 'https://connect.squareupsandbox.com/v2/invoices',
+			url: `${process.env.squareBasePath}/v2/invoices`,
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: `Bearer ${oauth2.accessToken}`,
@@ -99,7 +101,7 @@ router.post('/', async (req, res, next) => {
 			},
 		})
 
-		console.log('invoice .........', invoice.data.invoice)
+		// console.log('invoice .........', invoice.data.invoice)
 		res.json(invoice.data)
 	} catch (err) {
 		next(err)

@@ -31,9 +31,8 @@ router.post('/', async (req, res, next) => {
 			},
 		})
 
-		singlecstmr = singlecstmr.customers
-		// console.log('SINGLE CUSTOMER FOUND', singlecstmr)
-		if (singlecstmr.length < 1) {
+		//console.log('SINGLE CUSTOMER FOUND', singlecstmr)
+		if (!singlecstmr.customers) {
 			singlecstmr = await customers.createCustomer({
 				given_name: cust.dataValues.firstName,
 				family_name: cust.dataValues.lastName,
@@ -43,9 +42,10 @@ router.post('/', async (req, res, next) => {
 			singlecstmr = singlecstmr.customer
 			singlecstmr.status = 'NEW CUSTOMER ADDED IN SQUARE'
 		} else {
-			singlecstmr = singlecstmr[0]
+			singlecstmr = singlecstmr.customers[0]
 			singlecstmr.status = 'CUSTOMER EXISTS IN SQUARE'
 		}
+		//console.log('customer obj', singlecstmr)
 		res.json(singlecstmr)
 	} catch (err) {
 		next(err)
