@@ -14,13 +14,29 @@ router.post('/newbooking', async (req, res, next) => {
 			},
 			defaults: newcust,
 		})
+
+		let detailedResponse = {}
+
+		if (cust === null) {
+			detailedResponse.customer = 'failed to created customer'
+		} else {
+			detailedResponse.customer = 'success'
+		}
+
 		msgbody.customerPhoneNumber = req.body.customer.phoneNumber
 		delete msgbody.customer
 		delete msgbody.services
 
 		let ordr = await Order.create(msgbody)
 
+		if (ordr === null) {
+			detailedResponse.order = 'failed to create order'
+		} else {
+			detailedResponse.order = 'success'
+		}
+
 		let servicesFromDb = []
+		let failedServices = []
 		const forLoop = async _ => {
 			for (let i = 0; i < services.length; i++) {
 				let servc = await Service.findOne({
@@ -28,7 +44,14 @@ router.post('/newbooking', async (req, res, next) => {
 						name: services[i].name,
 					},
 				})
-				servicesFromDb.push(servc)
+				if (servc === null) {
+					console.log('service name not found')
+					failedServices.push({
+						'service name not found': services[i].name,
+					})
+				} else {
+					servicesFromDb.push(servc)
+				}
 			}
 		}
 		await forLoop()
@@ -43,10 +66,15 @@ router.post('/newbooking', async (req, res, next) => {
 			}
 		}
 
-		await forLoop3()
+		if (failedServices.length > 0) {
+			detailedResponse.services = failedServices
+		} else {
+			detailedResponse.services = 'success'
+		}
 
-		res.json(msgbody)
+		await forLoop3()
+		res.status(200).json(detailedResponse)
 	} catch (err) {
-		next(err)
+		res.status(400).send(err.errors[0].message)
 	}
 })
