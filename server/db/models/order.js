@@ -64,6 +64,14 @@ const Order = db.define('order', {
 		type: Sequelize.BOOLEAN,
 		defaultValue: false,
 	},
+	stickShift: {
+		type: Sequelize.BOOLEAN,
+		defaultValue: false,
+	},
+	flexibleOnTime: {
+		type: Sequelize.BOOLEAN,
+		defaultValue: false,
+	},
 })
 
 const createInGoogle = async inst => {
