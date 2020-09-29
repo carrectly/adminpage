@@ -20,7 +20,11 @@ router.post('/newbooking', async (req, res, next) => {
 		if (cust === null) {
 			detailedResponse.customer = 'failed to created customer'
 		} else {
-			detailedResponse.customer = 'success'
+			console.log('customer', cust)
+			detailedResponse.customer = {
+				status: 'success',
+				data: cust,
+			}
 		}
 
 		msgbody.customerPhoneNumber = req.body.customer.phoneNumber
@@ -32,7 +36,10 @@ router.post('/newbooking', async (req, res, next) => {
 		if (ordr === null) {
 			detailedResponse.order = 'failed to create order'
 		} else {
-			detailedResponse.order = 'success'
+			detailedResponse.order = {
+				status: 'success',
+				data: ordr,
+			}
 		}
 
 		let servicesFromDb = []
