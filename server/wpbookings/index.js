@@ -20,7 +20,6 @@ router.post('/newbooking', async (req, res, next) => {
 		if (cust === null) {
 			detailedResponse.customer = 'failed to created customer'
 		} else {
-			console.log('customer', cust)
 			detailedResponse.customer = {
 				status: 'success',
 				data: cust,
