@@ -12,3 +12,5 @@ yarn-error.log
 squareconfig.json
 samplejson.json
 .env
+customers.csv
+orders.csv
