@@ -29,5 +29,4 @@ deploy: # see README for details on these keys
     api_key:
         secure: ObVDJpMEnNky5ppt9L94yICrRj8IUinBRn37+NzkTqs7k31hEYGnUmLJvSRWAggjHDx0C3yBFAhKKPGfphgO5Hufdzt0e/+eSgpwS0iJYM/zcoUo0NBuM6cfffHcoufjXSrti9EuafX/FnAYkB/jOsbUn2XczrGxwLjs5u73gLtwe9Br6pHvmSabthFkqwLbzZH7bjEItR1wC8JhjI3vcwBhgVe+UHbbLFukvH9a71trdaend+McBYU0iRI2zznI1k5oMK7vuTupUQYpfAgSzh2n6kEKnP1hpC2DtuA+jzzLFx3zoq7MWYQ9wBqjdhfkMBYgMG4Y9eS5gtEI9Kb+MCYPdutdJDUOZOuJlxC7OgzD17YNA97wIh2R/FKXNu53ojeRM7Tzp2mdPamnOnGPTIZ6lpFEHSxeV8JoMvWvVU0i6ge+QgG2/vAa2wcCOdSzFJQhGrdsbevD9kko16mxfUlG0lEjjI/UMPY20w9pP0DcuBRJe3U7zohD65U1KS6XFuWWDznRGvE+7j3Lw3XSQXWfrt5WMDUwJq9O8xcuRuPsYeSJqNqFGet0QagFx7GGJ2e0ep4gqrpEI7VymQL1E3ppbyOBhks2oz7Cz14/eJUQi/QsoSjDF5gdEm2SHmUHisi3AuTyOjV+hWQpFmMY2wC8Y+qtK3K1WgD/lLrSETc=
 after_deploy:
-    - npm run seed
     - rm -rf seedData
