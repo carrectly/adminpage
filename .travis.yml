@@ -1,30 +1,32 @@
 language: node_js
 node_js:
-  - 12 # uses version 12
+    - 12 # uses version 12
 services:
-  - postgresql # starts up postgres
+    - postgresql # starts up postgres
 addons:
-  postgresql: '10' # recent postgres version on Travis
+    postgresql: '10' # recent postgres version on Travis
 dist: xenial # uses xenial environment
 notifications:
-  email:
-    on_success: change # default: change (only when going from broken to fixed)
-    on_failure: always # default: always (which is annoying, as it should be)
+    email:
+        on_success: change # default: change (only when going from broken to fixed)
+        on_failure: always # default: always (which is annoying, as it should be)
 install:
-  - npm ci # faster, goes only from package-lock
+    - npm ci # faster, goes only from package-lock
 before_script:
-  - psql -c 'create database "adminpage";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+    - psql -c 'create database "adminpage";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
-  - npm test # test the code
-  - npm run build-client # make the bundle
+    - npm run build-client # make the bundle
 before_deploy: # omit node_modules, since we set skip_cleanup below
-  - rm -rf node_modules
+    - rm -rf node_modules
 deploy: # see README for details on these keys
-  # prevents travis from deleting the build
-  skip_cleanup: true
-  provider: heroku
-  # app should be your heroku app name; see README
-  app: carrectlyadminofficial
-  # the secure key indicates an encrypted value; see README
-  api_key:
-    secure: ObVDJpMEnNky5ppt9L94yICrRj8IUinBRn37+NzkTqs7k31hEYGnUmLJvSRWAggjHDx0C3yBFAhKKPGfphgO5Hufdzt0e/+eSgpwS0iJYM/zcoUo0NBuM6cfffHcoufjXSrti9EuafX/FnAYkB/jOsbUn2XczrGxwLjs5u73gLtwe9Br6pHvmSabthFkqwLbzZH7bjEItR1wC8JhjI3vcwBhgVe+UHbbLFukvH9a71trdaend+McBYU0iRI2zznI1k5oMK7vuTupUQYpfAgSzh2n6kEKnP1hpC2DtuA+jzzLFx3zoq7MWYQ9wBqjdhfkMBYgMG4Y9eS5gtEI9Kb+MCYPdutdJDUOZOuJlxC7OgzD17YNA97wIh2R/FKXNu53ojeRM7Tzp2mdPamnOnGPTIZ6lpFEHSxeV8JoMvWvVU0i6ge+QgG2/vAa2wcCOdSzFJQhGrdsbevD9kko16mxfUlG0lEjjI/UMPY20w9pP0DcuBRJe3U7zohD65U1KS6XFuWWDznRGvE+7j3Lw3XSQXWfrt5WMDUwJq9O8xcuRuPsYeSJqNqFGet0QagFx7GGJ2e0ep4gqrpEI7VymQL1E3ppbyOBhks2oz7Cz14/eJUQi/QsoSjDF5gdEm2SHmUHisi3AuTyOjV+hWQpFmMY2wC8Y+qtK3K1WgD/lLrSETc=
+    # prevents travis from deleting the build
+    skip_cleanup: true
+    provider: heroku
+    # app should be your heroku app name; see README
+    app: carrectlyadminofficial
+    # the secure key indicates an encrypted value; see README
+    api_key:
+        secure: ObVDJpMEnNky5ppt9L94yICrRj8IUinBRn37+NzkTqs7k31hEYGnUmLJvSRWAggjHDx0C3yBFAhKKPGfphgO5Hufdzt0e/+eSgpwS0iJYM/zcoUo0NBuM6cfffHcoufjXSrti9EuafX/FnAYkB/jOsbUn2XczrGxwLjs5u73gLtwe9Br6pHvmSabthFkqwLbzZH7bjEItR1wC8JhjI3vcwBhgVe+UHbbLFukvH9a71trdaend+McBYU0iRI2zznI1k5oMK7vuTupUQYpfAgSzh2n6kEKnP1hpC2DtuA+jzzLFx3zoq7MWYQ9wBqjdhfkMBYgMG4Y9eS5gtEI9Kb+MCYPdutdJDUOZOuJlxC7OgzD17YNA97wIh2R/FKXNu53ojeRM7Tzp2mdPamnOnGPTIZ6lpFEHSxeV8JoMvWvVU0i6ge+QgG2/vAa2wcCOdSzFJQhGrdsbevD9kko16mxfUlG0lEjjI/UMPY20w9pP0DcuBRJe3U7zohD65U1KS6XFuWWDznRGvE+7j3Lw3XSQXWfrt5WMDUwJq9O8xcuRuPsYeSJqNqFGet0QagFx7GGJ2e0ep4gqrpEI7VymQL1E3ppbyOBhks2oz7Cz14/eJUQi/QsoSjDF5gdEm2SHmUHisi3AuTyOjV+hWQpFmMY2wC8Y+qtK3K1WgD/lLrSETc=
+after_deploy:
+    - npm run seed
+    - rm -rf seedData

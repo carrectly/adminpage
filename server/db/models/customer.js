@@ -5,11 +5,12 @@ if (process.env.NODE_ENV !== 'production') require('../../../secrets.js')
 
 const Customer = db.define('customer', {
 	phoneNumber: {
-		type: Sequelize.STRING,
+		type: Sequelize.BIGINT,
 		primaryKey: true,
 	},
 	location: {
 		type: Sequelize.STRING,
+		allowNull: true,
 	},
 	firstName: {
 		type: Sequelize.STRING,
