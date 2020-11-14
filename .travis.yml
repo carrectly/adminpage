@@ -16,6 +16,7 @@ before_script:
     - psql -c 'create database "adminpage";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
     - npm run build-client # make the bundle
+    - npm run seed
 before_deploy: # omit node_modules, since we set skip_cleanup below
     - rm -rf node_modules
 deploy: # see README for details on these keys
