@@ -26,6 +26,18 @@ const statusArray = [
 	'completed - paid',
 ]
 
+// @todo: updates statuses to the following
+// const statusArray = [
+// 	'booked',
+// 	'in process',
+// 	'done',
+// 	'returned',
+// 	'invoiced',
+// 	'quote',
+//  'quoted',
+//  'cancelled'
+// ]
+
 dealerSeed.push({
 	name: 'United Tires',
 	email: 'birkusandre@gmail.com',
@@ -64,16 +76,18 @@ const seed = async () => {
 		await db.sync({force: true})
 		console.log('syncing with DB')
 		await Dealer.bulkCreate(dealerSeed)
-		console.log('dealer bulk create')
+		console.log('dealer bulk created')
 		await Service.bulkCreate(servicesSeed)
-		console.log('serivce bulk create')
+		console.log('serivce bulk created')
 		await User.create({
 			email: 'cody@email.com',
 			password: '123',
 			isAdmin: true,
 		})
 		await Customer.bulkCreate(legacyCustomers)
+		console.log('Customer bulk created')
 		await Order.bulkCreate(legacyOrders)
+		console.log('Order bulk created')
 		// const forLoop = async _ => {
 		// 	console.log('Start seed')
 
