@@ -334,34 +334,58 @@ body {
 	border-width: 5px 5px 0px 5px;
 }
 
+.status0 {
+	text-align: center;
+	margin: 0px;
+	font-size: large;
+	font-family: 'Times New Roman', Times, serif;
+	font-weight: bold;
+	background-color: #f83434 !important;
+}
+
 .status1 {
 	text-align: center;
 	margin: 0px;
-	background-color: #d60000;
+	font-size: large;
+	font-family: 'Times New Roman', Times, serif;
+	font-weight: bold;
+	background-color: #e67c73 !important;
 }
 
 .status2 {
 	text-align: center;
 	margin: 0px;
-	background-color: #e67c73;
+	font-size: large;
+	font-family: 'Times New Roman', Times, serif;
+	font-weight: bold;
+	background-color: #f6c026 !important;
 }
 
 .status3 {
 	text-align: center;
 	margin: 0px;
-	background-color: #f6c026;
+	font-size: large;
+	font-family: 'Times New Roman', Times, serif;
+	font-weight: bold;
+	background-color: #00ee73 !important;
 }
 
 .status4 {
 	text-align: center;
 	margin: 0px;
-	background-color: #0b8043;
+	font-size: large;
+	font-family: 'Times New Roman', Times, serif;
+	font-weight: bold;
+	background-color: #108f54 !important;
 }
 
 .status5 {
 	text-align: center;
 	margin: 0px;
-	background-color: #33b679;
+	font-size: large;
+	font-family: 'Times New Roman', Times, serif;
+	font-weight: bold;
+	background-color: #919e98 !important;
 }
 
 .orderfilter {

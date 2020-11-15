@@ -7,7 +7,8 @@ import emails from './emails'
 import calendar from './calendar'
 import contacts from './contacts'
 import singleemail from './singleemail'
-import orders from './orders'
+import archivedOrders from './archivedOrders'
+import activeOrders from './activeOrders'
 import userorders from './userorders'
 import singleorder from './singleorder'
 import dealers from './dealers'
@@ -22,7 +23,8 @@ const reducer = combineReducers({
 	calendar,
 	contacts,
 	singleemail,
-	orders,
+	archivedOrders,
+	activeOrders,
 	userorders,
 	singleorder,
 	dealers,

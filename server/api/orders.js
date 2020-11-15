@@ -8,11 +8,11 @@ module.exports = router
 router.get('/', async (req, res, next) => {
 	try {
 		const orders = await Order.findAll({
-			include: [
-				{
-					model: Customer,
-				},
-			],
+			where: {
+				status: ['done', 'cancelled'],
+			},
+			order: [['status', 'ASC']],
+			include: [{model: Customer}],
 		})
 		res.json(orders)
 	} catch (err) {
@@ -20,12 +20,12 @@ router.get('/', async (req, res, next) => {
 	}
 })
 
-router.get('/bystatus', async (req, res, next) => {
+router.get('/active', async (req, res, next) => {
 	try {
 		const orders = await Order.findAll({
 			where: {
 				status: {
-					[Op.not]: ['completed - paid'],
+					[Op.not]: ['done', 'cancelled'],
 				},
 			},
 			order: [['status', 'ASC']],

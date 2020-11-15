@@ -1,102 +1,39 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getOrdersStatusThunk, clearAllOrdersThunk} from '../store/orders'
+import {getActiveOrdersThunk} from '../store/activeOrders'
 import TableOrdersByStatus from './TableOrdersByStatus'
-import {Table} from 'react-bootstrap'
+import {getActiveStatusArray} from './util'
 
 class BookingsByStatus extends Component {
 	async componentDidMount() {
 		try {
-			await this.props.getOrders()
+			await this.props.getActiveOrders()
 		} catch (err) {
 			console.log(err)
 		}
 	}
 
-	componentWillUnmount() {
-		this.props.clearOrders()
-	}
-
 	render() {
+		const statusArray = getActiveStatusArray()
 		const orders = this.props.orders || []
-		const received = orders.filter(el => el.status === 'received')
-		const wquote = orders.filter(el => el.status === 'waiting on quote')
-		const aquote = orders.filter(
-			el => el.status === 'quote approved - getting serviced'
-		)
-		const pinvoice = orders.filter(
-			el => el.status === 'completed - pending invoice'
-		)
-		const sinvoice = orders.filter(
-			el => el.status === 'completed - invoice sent'
-		)
+		const nestedArr = statusArray.map(status => {
+			return {
+				status: status,
+				orders: orders.filter(el => el.status === status),
+			}
+		})
 
 		return (
 			<div>
-				<Table striped bordered hover size='sm' variant='dark'>
-					<thead>
-						<tr>
-							<th colSpan='8'>
-								<h5 className='status1'>
-									Newly Received - confirmation required
-								</h5>
-							</th>
-						</tr>
-						<tr>
-							<th>Order ID</th>
-							<th>Status</th>
-							<th>Pickup Date</th>
-							<th>Dropoff Date</th>
-							<th>Customer Name</th>
-							<th>Car Make</th>
-							<th>Car Model</th>
-							<th>Location</th>
-						</tr>
-					</thead>
-					<TableOrdersByStatus ordersArray={received} />
-
-					<thead>
-						<tr>
-							<th colSpan='8'>
-								<h5 className='status2'>Waiting on Quote</h5>
-							</th>
-						</tr>
-					</thead>
-					<TableOrdersByStatus ordersArray={wquote} />
-
-					<thead>
-						<tr>
-							<th colSpan='8'>
-								<h5 className='status3'>
-									Quote approved - getting serviced
-								</h5>
-							</th>
-						</tr>
-					</thead>
-					<TableOrdersByStatus ordersArray={aquote} />
-
-					<thead>
-						<tr>
-							<th colSpan='8'>
-								<h5 className='status4'>
-									Completed - pending invoice
-								</h5>
-							</th>
-						</tr>
-					</thead>
-					<TableOrdersByStatus ordersArray={pinvoice} />
-					<thead>
-						<tr>
-							<th colSpan='8'>
-								<h5 className='status5'>
-									Completed - invoice sent
-								</h5>
-							</th>
-						</tr>
-					</thead>
-					<TableOrdersByStatus ordersArray={sinvoice} />
-				</Table>
+				{nestedArr.map((arr, index) => (
+					<TableOrdersByStatus
+						ordersArray={arr.orders}
+						status={arr.status}
+						key={index}
+						index={index}
+					/>
+				))}
 			</div>
 		)
 	}
@@ -104,14 +41,13 @@ class BookingsByStatus extends Component {
 
 const mapStateToProps = state => {
 	return {
-		orders: state.orders,
+		orders: state.activeOrders,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getOrders: () => dispatch(getOrdersStatusThunk()),
-		clearOrders: () => dispatch(clearAllOrdersThunk()),
+		getActiveOrders: () => dispatch(getActiveOrdersThunk()),
 	}
 }
 export default withRouter(

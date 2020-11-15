@@ -1,11 +1,7 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {
-	getAllOrdersThunk,
-	fetchCustomDataThunk,
-	clearAllOrdersThunk,
-} from '../store/orders'
+import {getAllOrdersThunk, fetchCustomDataThunk} from '../store/archivedOrders'
 import {
 	Table,
 	Form,
@@ -16,6 +12,7 @@ import {
 	OverlayTrigger,
 	Tooltip,
 } from 'react-bootstrap'
+import moment from 'moment'
 
 class AllOrders extends Component {
 	constructor(props) {
@@ -35,11 +32,8 @@ class AllOrders extends Component {
 	}
 
 	componentDidMount() {
+		console.log('component did mount')
 		this.props.getOrders()
-	}
-
-	componentWillUnmount() {
-		this.props.clearOrders()
 	}
 
 	async handleSubmit(evt) {
@@ -113,14 +107,6 @@ class AllOrders extends Component {
 									</Button>
 								</OverlayTrigger>
 							</Col>
-							<Col>
-								{/* <Button
-									type='button'
-									variant='primary'
-									onClick={() => this.props.getOrders()}>
-									View All Orders
-								</Button> */}
-							</Col>
 						</Row>
 					</Form>
 				</div>
@@ -160,7 +146,9 @@ class AllOrders extends Component {
 								<td>{ord.carModel}</td>
 								<td>{ord.pickupLocation}</td>
 								<td>
-									{new Date(ord.pickupDate).toUTCString()}
+									{moment(ord.pickupDate).format(
+										'M/D/YY hh:mm A'
+									)}
 								</td>
 							</tr>
 						))}
@@ -173,7 +161,7 @@ class AllOrders extends Component {
 
 const mapStateToProps = state => {
 	return {
-		orders: state.orders,
+		orders: state.archivedOrders,
 	}
 }
 
@@ -181,7 +169,6 @@ const mapDispatchToProps = dispatch => {
 	return {
 		getOrders: () => dispatch(getAllOrdersThunk()),
 		fetchCustom: obj => dispatch(fetchCustomDataThunk(obj)),
-		clearOrders: () => dispatch(clearAllOrdersThunk()),
 	}
 }
 export default withRouter(
