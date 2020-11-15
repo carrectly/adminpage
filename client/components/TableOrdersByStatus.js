@@ -8,18 +8,18 @@ import moment from 'moment'
 class TableOrdersByStatus extends Component {
 	render() {
 		const array = this.props.ordersArray || []
-		const header = this.props.status || ''
 		const index = this.props.index || 0
 		return (
 			<Accordion defaultActiveKey='0'>
-				<Card bg='danger'>
+				<Card>
 					<Card.Header>
 						<Accordion.Toggle
-							color='red'
 							as={Card.Header}
 							eventKey={index}
-							className='center'>
-							{header}
+							className={`status${index}`}>
+							{`${this.props.status.toUpperCase()} ${
+								array.length
+							}`}
 						</Accordion.Toggle>
 					</Card.Header>
 					<Accordion.Collapse eventKey={index}>

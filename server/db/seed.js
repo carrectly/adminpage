@@ -18,17 +18,6 @@ const servicesSeed = JSON.parse(
 let customerSeed = []
 let dealerSeed = []
 
-const statusArray = [
-	'booked',
-	'in process',
-	'returned',
-	'invoiced',
-	'quote',
-	'quoted',
-	'done',
-	'cancelled',
-]
-
 dealerSeed.push({
 	name: 'United Tires',
 	email: 'birkusandre@gmail.com',

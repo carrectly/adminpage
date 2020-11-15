@@ -5,7 +5,7 @@ import {
 	getAllOrdersThunk,
 	fetchCustomDataThunk,
 	clearAllOrdersThunk,
-} from '../store/orders'
+} from '../store/archivedOrders'
 import {
 	Table,
 	Form,
@@ -37,10 +37,6 @@ class AllOrders extends Component {
 	componentDidMount() {
 		this.props.getOrders()
 	}
-
-	// componentWillUnmount() {
-	// 	this.props.clearOrders()
-	// }
 
 	async handleSubmit(evt) {
 		evt.preventDefault()

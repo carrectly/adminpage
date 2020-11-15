@@ -1,46 +1,39 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getOrdersStatusThunk, clearAllOrdersThunk} from '../store/orders'
+import {getActiveOrdersThunk} from '../store/activeOrders'
 import TableOrdersByStatus from './TableOrdersByStatus'
-import {Accordion, Card, Button} from 'react-bootstrap'
+import {getActiveStatusArray} from './util'
 
 class BookingsByStatus extends Component {
 	async componentDidMount() {
 		try {
-			await this.props.getOrders()
+			await this.props.getActiveOrders()
 		} catch (err) {
 			console.log(err)
 		}
 	}
 
-	// componentWillUnmount() {
-	// 	this.props.clearOrders()
-	// }
-
 	render() {
+		const statusArray = getActiveStatusArray()
 		const orders = this.props.orders || []
-		const booked = orders.filter(el => el.status === 'booked')
-		const in_process = orders.filter(el => el.status === 'in process')
-		const sinvoice = orders.filter(el => el.status === 'cancelled')
+		const nestedArr = statusArray.map(status => {
+			return {
+				status: status,
+				orders: orders.filter(el => el.status === status),
+			}
+		})
 
 		return (
 			<div>
-				<TableOrdersByStatus
-					ordersArray={booked}
-					status="booked"
-					index={0}
-				/>
-				<TableOrdersByStatus
-					ordersArray={in_process}
-					status="in_process"
-					index={1}
-				/>
-				<TableOrdersByStatus
-					ordersArray={sinvoice}
-					status="cancelled"
-					index={2}
-				/>
+				{nestedArr.map((arr, index) => (
+					<TableOrdersByStatus
+						ordersArray={arr.orders}
+						status={arr.status}
+						key={index}
+						index={index}
+					/>
+				))}
 			</div>
 		)
 	}
@@ -48,14 +41,13 @@ class BookingsByStatus extends Component {
 
 const mapStateToProps = state => {
 	return {
-		orders: state.orders,
+		orders: state.activeOrders,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getOrders: () => dispatch(getOrdersStatusThunk()),
-		clearOrders: () => dispatch(clearAllOrdersThunk()),
+		getActiveOrders: () => dispatch(getActiveOrdersThunk()),
 	}
 }
 export default withRouter(
