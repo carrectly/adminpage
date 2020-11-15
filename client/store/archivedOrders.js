@@ -5,8 +5,6 @@ import axios from 'axios'
  */
 const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
 const GET_CUSTOM_DATA = 'GET_CUSTOM_DATA'
-const GET_ORDERS_STATUS = 'GET_ORDERS_STATUS'
-const CLEAR_ALL_ORDERS = 'CLEAR_ALL_ORDERS'
 
 /**
  * INITIAL STATE
@@ -24,10 +22,6 @@ export const getCustomData = orders => {
 		orders,
 	}
 }
-
-const getOrdersStatus = orders => ({type: GET_ORDERS_STATUS, orders})
-const clearAllOrders = orders => ({type: CLEAR_ALL_ORDERS, orders})
-
 /**
  * THUNK CREATORS
  */
@@ -51,23 +45,6 @@ export const fetchCustomDataThunk = obj => {
 	}
 }
 
-export const getOrdersStatusThunk = () => async dispatch => {
-	try {
-		const res = await axios.get('/api/orders/bystatus')
-		dispatch(getOrdersStatus(res.data))
-	} catch (err) {
-		console.error(err)
-	}
-}
-
-export const clearAllOrdersThunk = () => dispatch => {
-	try {
-		dispatch(clearAllOrders([]))
-	} catch (err) {
-		console.error(err)
-	}
-}
-
 /**
  * REDUCER
  */
@@ -76,10 +53,6 @@ export default function(state = allOrders, action) {
 		case GET_ALL_ORDERS:
 			return action.orders
 		case GET_CUSTOM_DATA:
-			return action.orders
-		case GET_ORDERS_STATUS:
-			return action.orders
-		case CLEAR_ALL_ORDERS:
 			return action.orders
 		default:
 			return state

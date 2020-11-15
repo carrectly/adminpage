@@ -8,11 +8,11 @@ module.exports = router
 router.get('/', async (req, res, next) => {
 	try {
 		const orders = await Order.findAll({
-			include: [
-				{
-					model: Customer,
-				},
-			],
+			where: {
+				status: ['done', 'cancelled'],
+			},
+			order: [['status', 'ASC']],
+			include: [{model: Customer}],
 		})
 		res.json(orders)
 	} catch (err) {
