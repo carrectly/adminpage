@@ -337,7 +337,7 @@ body {
 .status1 {
 	text-align: center;
 	margin: 0px;
-	background-color: #d60000;
+	background-color: #d60000 !important;
 }
 
 .status2 {

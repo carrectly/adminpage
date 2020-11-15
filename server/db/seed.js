@@ -17,26 +17,17 @@ const servicesSeed = JSON.parse(
 
 let customerSeed = []
 let dealerSeed = []
-const statusArray = [
-	'received',
-	'waiting on quote',
-	'quote approved - getting serviced',
-	'completed - pending invoice',
-	'completed - invoice sent',
-	'completed - paid',
-]
 
-// @todo: updates statuses to the following
-// const statusArray = [
-// 	'booked',
-// 	'in process',
-// 	'done',
-// 	'returned',
-// 	'invoiced',
-// 	'quote',
-//  'quoted',
-//  'cancelled'
-// ]
+const statusArray = [
+	'booked',
+	'in process',
+	'returned',
+	'invoiced',
+	'quote',
+	'quoted',
+	'done',
+	'cancelled',
+]
 
 dealerSeed.push({
 	name: 'United Tires',

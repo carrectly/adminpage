@@ -12,14 +12,16 @@ const Order = db.define('order', {
 	status: {
 		type: Sequelize.STRING,
 		values: [
-			'received',
-			'waiting on quote',
-			'quote approved - getting serviced',
-			'completed - pending invoice',
-			'completed - invoice sent',
-			'completed - paid',
+			'booked',
+			'in process',
+			'done',
+			'returned',
+			'invoiced',
+			'quote',
+			'quoted',
+			'cancelled',
 		],
-		defaultValue: 'received',
+		defaultValue: 'booked',
 	},
 	customerComments: {
 		type: Sequelize.TEXT,

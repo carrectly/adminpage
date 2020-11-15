@@ -38,9 +38,9 @@ class AllOrders extends Component {
 		this.props.getOrders()
 	}
 
-	componentWillUnmount() {
-		this.props.clearOrders()
-	}
+	// componentWillUnmount() {
+	// 	this.props.clearOrders()
+	// }
 
 	async handleSubmit(evt) {
 		evt.preventDefault()

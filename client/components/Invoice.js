@@ -22,12 +22,14 @@ import {updateSingleOrderThunk} from '../store/singleorder'
 let cust
 let invoice
 const statusArray = [
-	'received',
-	'waiting on quote',
-	'quote approved - getting serviced',
-	'completed - pending invoice',
-	'completed - invoice sent',
-	'completed - paid',
+	'booked',
+	'in process',
+	'returned',
+	'invoiced',
+	'quote',
+	'quoted',
+	'done',
+	'cancelled',
 ]
 
 class Invoice extends Component {
