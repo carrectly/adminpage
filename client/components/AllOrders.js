@@ -1,17 +1,15 @@
 import React, {useState, useEffect} from 'react'
-import {useDispatch, useSelector, connect} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {getAllOrdersThunk} from '../store/archivedOrders'
 import {Table} from 'react-bootstrap'
 import AllOrdersTable from './AllOrdersTable'
 import OrdersTableHeader from './OrdersTableHeader'
-import Pagination from './Pagination'
-import {withRouter} from 'react-router-dom'
+import {Pagination} from 'antd'
 
 const AllOrders = () => {
-	//const [orders, setOrders] = useState([])
 	const [loading, setLoading] = useState(false)
 	const [currentPage, setCurrentPage] = useState(1)
-	const [ordersPerPage] = useState(25)
+	const [ordersPerPage, setOrdersPerPage] = useState(25)
 	const dispatch = useDispatch()
 	const ordersArr = useSelector(state => state.archivedOrders)
 
@@ -35,9 +33,20 @@ const AllOrders = () => {
 				<h1 className='center'>Orders View</h1>
 			</div>
 			<Pagination
-				postsPerPage={ordersPerPage}
-				totalPosts={ordersArr.length}
-				paginate={paginate}
+				defaultCurrent={1}
+				defaultPageSize={20}
+				current={currentPage}
+				total={ordersArr.length}
+				pageSize={ordersPerPage}
+				onChange={(page, pageSize) => {
+					paginate(page)
+					setOrdersPerPage(pageSize)
+				}}
+				onShowSizeChange={(current, size) => {
+					paginate(1)
+					setOrdersPerPage(size)
+				}}
+				responsive={true}
 			/>
 			<Table striped bordered hover size='sm' variant='dark'>
 				<OrdersTableHeader />
@@ -46,19 +55,5 @@ const AllOrders = () => {
 		</div>
 	)
 }
-
-// const mapStateToProps = state => {
-// 	return {
-// 		orders: state.archivedOrders,
-// 	}
-// }
-
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		getOrders: () => dispatch(getAllOrdersThunk()),
-// 		fetchCustom: obj => dispatch(fetchCustomDataThunk(obj)),
-// 	}
-// }
-//export default withRouter(connect()(AllOrders))
 
 export default AllOrders
