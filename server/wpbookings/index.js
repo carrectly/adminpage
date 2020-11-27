@@ -1,7 +1,6 @@
 const router = require('express').Router()
-const fs = require('fs')
 module.exports = router
-const {Customer, Order, OrderDetails, Service} = require('../db/models')
+const {Customer, Order, Service} = require('../db/models')
 
 router.post('/newbooking', async (req, res, next) => {
 	try {
