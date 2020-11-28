@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
 			where: {
 				status: ['done', 'cancelled'],
 			},
-			order: [['status', 'ASC']],
+			order: [['pickupDate', 'DESC']],
 			include: [{model: Customer}],
 		})
 		res.json(orders)

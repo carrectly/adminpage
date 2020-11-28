@@ -5,6 +5,7 @@ import {Table} from 'react-bootstrap'
 import AllOrdersTable from './AllOrdersTable'
 import OrdersTableHeader from './OrdersTableHeader'
 import {Pagination} from 'antd'
+import FilterComponent from './FilterComponent'
 
 const AllOrders = () => {
 	const [loading, setLoading] = useState(false)
@@ -24,9 +25,6 @@ const AllOrders = () => {
 	const indexOfFirstPost = indexOfLastPost - ordersPerPage
 	const currentOrders = ordersArr.slice(indexOfFirstPost, indexOfLastPost)
 
-	// Change page
-	const paginate = pageNumber => setCurrentPage(pageNumber)
-
 	return (
 		<div>
 			<div>
@@ -39,17 +37,18 @@ const AllOrders = () => {
 				total={ordersArr.length}
 				pageSize={ordersPerPage}
 				onChange={(page, pageSize) => {
-					paginate(page)
+					setCurrentPage(page)
 					setOrdersPerPage(pageSize)
 				}}
 				onShowSizeChange={(current, size) => {
-					paginate(1)
+					setCurrentPage(1)
 					setOrdersPerPage(size)
 				}}
 				responsive={true}
 			/>
 			<Table striped bordered hover size='sm' variant='dark'>
 				<OrdersTableHeader />
+				<FilterComponent />
 				<AllOrdersTable orders={currentOrders} loading={loading} />
 			</Table>
 		</div>
