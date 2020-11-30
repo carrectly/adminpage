@@ -1,70 +1,57 @@
 import React from 'react'
-import {InputGroup, FormControl, Form} from 'react-bootstrap'
+import {InputGroup, Form, Button} from 'react-bootstrap'
 
-const FilterComponent = () => {
+const FilterComponent = ({
+	filterByDate,
+	filterByName,
+	filterByPhone,
+	filterByCarMake,
+	filterByCarModel,
+	filterByLocation,
+}) => {
 	return (
 		<thead>
 			<tr>
 				<th>
+					<Button variant='primary'>Apply Filter</Button>
+				</th>
+				<th>
+					<Button variant='danger'>Reset Filter</Button>
+				</th>
+				<th>
 					<InputGroup className='mb-3'>
-						<FormControl
-							placeholder='reset'
-							aria-label='reset'
-							aria-describedby='basic-addon1'
+						<Form.Control type='input' onChange={filterByName} />
+					</InputGroup>
+				</th>
+				<th>
+					<InputGroup className='mb-3'>
+						<Form.Control
+							type='input'
+							name='phone'
+							onChange={filterByPhone}
 						/>
 					</InputGroup>
 				</th>
 				<th>
 					<InputGroup className='mb-3'>
-						<FormControl
-							placeholder='Username'
-							aria-label='Username'
-							aria-describedby='basic-addon1'
+						<Form.Control type='input' onChange={filterByCarMake} />
+					</InputGroup>
+				</th>
+				<th>
+					<InputGroup className='mb-3'>
+						<Form.Control
+							type='input'
+							name='dateStart'
+							onChange={filterByCarModel}
 						/>
 					</InputGroup>
 				</th>
 				<th>
 					<InputGroup className='mb-3'>
-						<FormControl
-							placeholder='Username'
-							aria-label='Username'
-							aria-describedby='basic-addon1'
-						/>
-					</InputGroup>
-				</th>
-				<th>
-					<InputGroup className='mb-3'>
-						<FormControl
-							placeholder='Username'
-							aria-label='Username'
-							aria-describedby='basic-addon1'
-						/>
-					</InputGroup>
-				</th>
-				<th>
-					<InputGroup className='mb-3'>
-						<FormControl
-							placeholder='Username'
-							aria-label='Username'
-							aria-describedby='basic-addon1'
-						/>
-					</InputGroup>
-				</th>
-				<th>
-					<InputGroup className='mb-3'>
-						<FormControl
-							placeholder='Username'
-							aria-label='Username'
-							aria-describedby='basic-addon1'
-						/>
-					</InputGroup>
-				</th>
-				<th>
-					<InputGroup className='mb-3'>
-						<FormControl
-							placeholder='Username'
-							aria-label='Username'
-							aria-describedby='basic-addon1'
+						<Form.Control
+							type='input'
+							name='dateStart'
+							onChange={filterByLocation}
 						/>
 					</InputGroup>
 				</th>
@@ -73,8 +60,7 @@ const FilterComponent = () => {
 						<Form.Control
 							type='date'
 							name='dateStart'
-							// onChange={this.handleChange}
-							// value={this.state.dateStart}
+							onChange={filterByDate}
 						/>
 					</Form.Group>
 				</th>
