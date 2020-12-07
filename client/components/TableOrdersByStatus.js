@@ -3,6 +3,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {Table, Card, Accordion, Button} from 'react-bootstrap'
 import moment from 'moment'
+import OrdersTableHeader from './OrdersTableHeader'
 
 //					let tempDate = moment(value).format('M/D/YY hh:mm A')
 class TableOrdersByStatus extends Component {
@@ -30,18 +31,7 @@ class TableOrdersByStatus extends Component {
 								hover
 								size='sm'
 								variant='dark'>
-								<thead>
-									<tr>
-										<th>Order ID</th>
-										<th>Status</th>
-										<th>Pickup Date</th>
-										<th>Dropoff Date</th>
-										<th>Customer Name</th>
-										<th>Car Make</th>
-										<th>Car Model</th>
-										<th>Location</th>
-									</tr>
-								</thead>
+								<OrdersTableHeader />
 								<tbody>
 									{array.map(ord => (
 										<tr key={ord.hash}>

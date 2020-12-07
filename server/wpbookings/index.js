@@ -1,7 +1,6 @@
 const router = require('express').Router()
-const fs = require('fs')
 module.exports = router
-const {Customer, Order, OrderDetails, Service} = require('../db/models')
+const {Customer, Order, Service} = require('../db/models')
 
 router.post('/newbooking', async (req, res, next) => {
 	try {
@@ -80,6 +79,26 @@ router.post('/newbooking', async (req, res, next) => {
 
 		await forLoop3()
 		res.status(200).json(detailedResponse)
+	} catch (err) {
+		res.status(400).send(err.errors[0].message)
+	}
+})
+
+router.post('/bulkorders', async (req, res, next) => {
+	try {
+		let msgbody = req.body
+		await Order.bulkCreate(msgbody)
+		res.status(200)
+	} catch (err) {
+		res.status(400).send(err.errors[0].message)
+	}
+})
+
+router.post('/bulkcustomers', async (req, res, next) => {
+	try {
+		let msgbody = req.body
+		await Customer.bulkCreate(msgbody)
+		res.status(200)
 	} catch (err) {
 		res.status(400).send(err.errors[0].message)
 	}
