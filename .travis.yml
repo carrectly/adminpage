@@ -16,7 +16,6 @@ before_script:
     - psql -c 'create database "adminpage";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
     - npm run build-client # make the bundle
-    - npm run seed
 before_deploy: # omit node_modules, since we set skip_cleanup below
     - rm -rf node_modules
 deploy: # see README for details on these keys
@@ -28,5 +27,4 @@ deploy: # see README for details on these keys
     # the secure key indicates an encrypted value; see README
     api_key:
         secure: Tao561VlBzrmf7Lk+bPILgLTJ3fPe6SttwTyAgV9rkgSNRG+76vtrJnU89iCRuDvT9++NISS3DrRSS5gnniUyU4Z9QCcuVx8yLEakdm4UHrWW/tTGx7YtR9uruw7qSP4UU2rvqBjNgCEdUeVqyHohdLT0CSePY6HD6c8tU4nnbCFf8XTCUPOQQGmN7rklVtojgEGsGaIs/MW6iYS2tNVrwNegx1MGPNB2awH/PIOLmhCeBxd5m5x4XdehMbByinkCvQgq2h1vxQlt8TgqG0GKRNBhrRO/nbdRlK/5JjDABUc1qLGs9r1AYgtQzDceXdLEJfcANMQ11YHvpiPhWOQeolN8p9K8WlS+QIPCZGWr1u2uQFaHKHINo0BgX3vAc/4zV+rNtY2Qf7nt/zhjN3ghMgJBZS3Oykmnq7rbhcaCrsfGkqaQtg1ZpHkqF4tV8lWKXVb/WdCjyZsICs0mn36Umk7BaMIPCzKtKjyXbpY4IauzfuvoHRzHXotrlqWZ9ct9ShhLAGTycGkWmb9urLV/iPPvo5V75MOAo9vXNfgFmlw5lXuH62ITRC9K7dfcyGHxcI0MTWndE0IyW9zWv/O7x7rNTq8XC+wcEhlRnK8Bfut0Ef6TeUDY8wdiL6gTZBlAO5F9EGjU0pjoOYZvoaVne6PlbWRmWUDB+I9Q5fBOEo=
-after_deploy:
-    - rm -rf seedData
+
