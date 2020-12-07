@@ -4,15 +4,13 @@ import Highlighter from 'react-highlight-words'
 import {SearchOutlined} from '@ant-design/icons'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
-import moment from 'moment'
-import {DateCell, CustomerInfoCell, OrderDetailsCell} from './util'
 
-const AntDOrdersTable = props => {
+const AntDCustomersTable = props => {
 	const [searchText, setSearchText] = useState('')
 	const [searchedColumn, setSearchedColumn] = useState('')
 	let searchInput = useRef(null)
 
-	const ordersArr = useSelector(state => state.archivedOrders)
+	const customersArray = useSelector(state => state.contacts)
 
 	const getColumnSearchProps = dataIndex => ({
 		filterDropdown: ({
@@ -99,69 +97,52 @@ const AntDOrdersTable = props => {
 
 	const columns = [
 		{
-			title: 'Order Link',
-			dataIndex: 'hash',
-			key: 'hash',
+			title: 'First Name',
+			dataIndex: 'firstName',
+			key: 'firstName',
 			width: '10%',
-			render: value => <OrderDetailsCell value={value} />,
+			...getColumnSearchProps('firstName'),
+		},
+		{
+			title: 'Last Name',
+			dataIndex: 'lastName',
+			key: 'lastName',
+			width: '10%',
+			...getColumnSearchProps('lastName'),
+		},
+		{
+			title: 'Email',
+			dataIndex: 'email',
+			key: 'email',
+			width: '10%',
+			...getColumnSearchProps('email'),
+		},
+		{
+			title: 'Phone #',
+			dataIndex: 'phoneNumber',
+			key: 'phoneNumber',
+			width: '10%',
+			...getColumnSearchProps('phoneNumber'),
 		},
 		{
 			title: 'Customer Info',
-			dataIndex: 'customerPhoneNumber',
-			key: 'customerPhoneNumber',
+			dataIndex: 'phoneNumber',
+			key: 'phoneNumber',
 			width: '10%',
-			render: value => <CustomerInfoCell value={value} />,
-		},
-		{
-			title: 'status',
-			dataIndex: 'status',
-			key: 'name',
-			width: '10%',
-			...getColumnSearchProps('status'),
-		},
-		{
-			title: 'carMake',
-			dataIndex: 'carMake',
-			key: 'age',
-			width: '10%',
-			...getColumnSearchProps('carMake'),
-		},
-		{
-			title: 'carModel',
-			dataIndex: 'carModel',
-			key: 'carModel',
-			width: '10%',
-			...getColumnSearchProps('carModel'),
-		},
-		{
-			title: 'Customer Phone #',
-			dataIndex: 'customerPhoneNumber',
-			key: 'customerPhoneNumber',
-			width: '20%',
-			...getColumnSearchProps('customerPhoneNumber'),
-		},
-		{
-			title: 'pickupLocation',
-			dataIndex: 'pickupLocation',
-			key: 'pickupLocation',
-			...getColumnSearchProps('pickupLocation'),
-		},
-		{
-			title: 'pickupDate',
-			dataIndex: 'pickupDate',
-			key: 'pickupDate',
-			render: value => <DateCell value={value} />,
+			render: value => (
+				<Link to={`/singlecustomer/${value}`}>Customer Info</Link>
+			),
 		},
 	]
 
 	return (
 		<Table
 			columns={columns}
-			dataSource={ordersArr}
+			dataSource={customersArray}
 			pagination={{position: ['topCenter']}}
 			loading={props.loading}
 		/>
 	)
 }
 
-export default AntDOrdersTable
+export default AntDCustomersTable

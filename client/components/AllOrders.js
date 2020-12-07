@@ -71,7 +71,7 @@ const AllOrders = () => {
 			<div>
 				<h1 className='center'>Orders View</h1>
 			</div>
-			<div className='center'>
+			{/* <div className='center'>
 				<Pagination
 					size='small'
 					defaultCurrent={1}
@@ -88,9 +88,9 @@ const AllOrders = () => {
 						setOrdersPerPage(size)
 					}}
 				/>
-			</div>
+			</div> */}
 			<Table striped bordered hover size='sm' variant='dark'>
-				<OrdersTableHeader />
+				{/* <OrdersTableHeader /> */}
 				{/* <FilterComponent
 					filterByDate={filterByDate}
 					filterByName={filterByName}
@@ -100,9 +100,9 @@ const AllOrders = () => {
 					filterByLocation={filterByLocation}
 				/> */}
 
-				<AllOrdersTable orders={currentOrders} loading={loading} />
+				{/* <AllOrdersTable orders={currentOrders} loading={loading} /> */}
 			</Table>
-			<AntDOrdersTable />
+			<AntDOrdersTable loading={loading} />
 		</div>
 	)
 }
