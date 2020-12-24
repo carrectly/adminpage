@@ -29,11 +29,10 @@ class SingleCustomer extends Component {
 								<Card.Title>Customer Info</Card.Title>
 								<Card.Text>
 									{custArr.map(key => (
-										<div key={key}>
-											<span>
-												{key} {customer[key]}
-											</span>
-										</div>
+										<span key={key}>
+											{key} {customer[key]}
+											<br />
+										</span>
 									))}
 								</Card.Text>
 							</Card.Body>
