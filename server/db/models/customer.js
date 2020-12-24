@@ -28,7 +28,6 @@ const Customer = db.define('customer', {
 })
 
 const createInGoogle = async inst => {
-	console.log('contacts route', process.env.DOMAIN)
 	try {
 		inst.isInGoogle = true
 		await axios.post(

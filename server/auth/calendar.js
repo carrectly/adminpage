@@ -2,7 +2,6 @@ const router = require('express').Router()
 const {google} = require('googleapis')
 const sampleClient = require('./googleclient')
 const {User} = require('../db/models')
-
 module.exports = router
 
 const oAuth2Client = new google.auth.OAuth2(
@@ -48,6 +47,7 @@ router.post('/newevent', async (req, res, next) => {
 router.post('/newevent/update', async (req, res, next) => {
 	try {
 		const obj = req.body
+		console.log('calendarr api req', req.body)
 		const result = await updateEvent(obj)
 		res.json(result)
 	} catch (err) {
@@ -110,23 +110,22 @@ async function createEvent(evt) {
 	}
 }
 
-async function updateEvent(auth, evt) {
+async function updateEvent(evt) {
 	// let allcalendars = await calendar.calendarList.list()
 	// console.log('all calendar ids', allcalendars.data.items)
-
+	const statuses = [
+		'booked',
+		'quote',
+		'quoted',
+		'in process',
+		'returned',
+		'invoiced',
+		'done',
+		'cancelled',
+	]
 	//flexibleid = 6kllmvnusibcs0lbnh98ffiqvs@group.calendar.google.com
-	let colorid = 11
-	if (evt.status === 'waiting on quote') {
-		colorid = 4
-	} else if (evt.status === 'quote approved - getting serviced') {
-		colorid = 5
-	} else if (evt.status === 'completed - pending invoice') {
-		colorid = 10
-	} else if (evt.status === 'completed - invoice sent') {
-		colorid = 2
-	} else if (evt.status === 'completed - paid') {
-		colorid = 8
-	}
+
+	let colorId = evt.status === statuses[0] ? 11 : statuses.indexOf(evt.status)
 
 	console.log('event received from new booking', evt)
 	var event = {
@@ -142,7 +141,7 @@ async function updateEvent(auth, evt) {
 			dateTime: `${evt.dropoffDate}`,
 			timeZone: 'America/Chicago',
 		},
-		colorId: `${colorid}`,
+		colorId: `${colorId}`,
 		reminders: {
 			useDefault: false,
 			overrides: [

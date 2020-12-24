@@ -4,6 +4,19 @@ import {Modal, DatePicker, Form, Input} from 'antd'
 import {updateSingleOrderThunk} from '../store/singleorder'
 import {Button} from 'react-bootstrap'
 import {useParams} from 'react-router-dom'
+import moment from 'moment'
+
+function clean(obj) {
+	for (var propName in obj) {
+		if (
+			obj[propName] === null ||
+			obj[propName] === undefined ||
+			obj[propName] === ''
+		) {
+			delete obj[propName]
+		}
+	}
+}
 
 const layout = {
 	labelCol: {span: 8},
@@ -31,8 +44,15 @@ const UpdateOrder = props => {
 	}
 
 	const onFinish = values => {
-		const temp = form.getFieldValue('promoCode')
-		console.log('form', !!temp)
+		console.log('update order values', values)
+		if (values.dropoffDate) {
+			values.dropoffDate = moment.utc(values.dropoffDate).valueOf()
+		}
+		if (values.pickupDate) {
+			values.pickupDate = moment.utc(values.pickupDate).valueOf()
+		}
+		clean(values)
+		console.log('update order values', values)
 		dispatch(updateSingleOrderThunk(id, values))
 		handleClose()
 	}

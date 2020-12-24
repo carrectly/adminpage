@@ -96,6 +96,7 @@ const createInGoogle = async inst => {
 const updateInGoogle = async inst => {
 	try {
 		let newinst = {...inst.dataValues}
+		console.log('updating event ---------- ', newinst)
 		inst.isInCalendar = true
 		let cus = await Customer.findOne({
 			where: {phoneNumber: newinst.customerPhoneNumber},
