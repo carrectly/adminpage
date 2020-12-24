@@ -2,7 +2,7 @@ const router = require('express').Router()
 const Sequelize = require('sequelize')
 const {Order, OrderDetails, Service, Customer} = require('../db/models')
 const Op = Sequelize.Op
-
+const moment = require('moment')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -65,6 +65,7 @@ router.put('/single/:orderid', async (req, res, next) => {
 			},
 			include: [{model: Service}],
 		})
+		console.log('api received order to update', req.body)
 		const neword = await ord.update(req.body)
 		res.json(neword)
 	} catch (err) {
