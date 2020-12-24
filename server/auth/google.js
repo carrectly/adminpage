@@ -56,9 +56,9 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 				where: {googleId},
 				defaults: {email},
 			})
-				.then(([user]) => {
-					user.update({token: tkn})
-					return done(null, user)
+				.then(user => {
+					user[0].update({token: tkn})
+					return done(null, user[0])
 				})
 				.catch(done)
 		}
