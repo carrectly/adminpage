@@ -1,6 +1,8 @@
+/* eslint-disable max-statements */
 const router = require('express').Router()
 module.exports = router
 const {Customer, Order, Service} = require('../db/models')
+const moment = require('moment')
 
 router.post('/newbooking', async (req, res, next) => {
 	try {
@@ -28,6 +30,12 @@ router.post('/newbooking', async (req, res, next) => {
 		msgbody.customerPhoneNumber = req.body.customer.phoneNumber
 		delete msgbody.customer
 		delete msgbody.services
+		if (!msgbody.pickupDate) {
+			msgbody.pickupDate = moment()
+		}
+		if (!msgbody.dropoffDate) {
+			msgbody.dropoffDate = moment(msgbody.pickupDate).add(6, 'hours')
+		}
 
 		let ordr = await Order.create(msgbody)
 
