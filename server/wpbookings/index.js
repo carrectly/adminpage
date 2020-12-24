@@ -87,8 +87,9 @@ router.post('/newbooking', async (req, res, next) => {
 router.post('/bulkorders', async (req, res, next) => {
 	try {
 		let msgbody = req.body
+		console.log('request received', msgbody)
 		await Order.bulkCreate(msgbody)
-		res.status(200)
+		res.status(200).json({status: 'success'})
 	} catch (err) {
 		res.status(400).send(err.errors[0].message)
 	}
