@@ -43,7 +43,9 @@ export const deleteContactThunk = phone => async dispatch => {
 		await axios.delete(`/api/customers/${phone}`)
 		dispatch(deleteSingleContact(phone))
 	} catch (err) {
-		console.error(err)
+		window.alert(
+			'Customer has more than one order. Please delete orders before deleting the customer!'
+		)
 	}
 }
 

@@ -97,14 +97,6 @@ const createApp = () => {
 	app.use((err, req, res, next) => {
 		console.error(err)
 		console.error(err.stack)
-		if (
-			err.message ===
-			'Customer has more than one order. Please delete orders before deleting the customer!'
-		) {
-			alert(
-				'Customer has more than one order. Please delete orders before deleting the customer!'
-			)
-		}
 		res.status(err.status || 500).send(
 			err.message || 'Internal server error.'
 		)
