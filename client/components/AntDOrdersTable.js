@@ -5,7 +5,12 @@ import {SearchOutlined} from '@ant-design/icons'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import moment from 'moment'
-import {DateCell, CustomerInfoCell, OrderDetailsCell} from './util'
+import {
+	DateCell,
+	CustomerInfoCell,
+	OrderDetailsCell,
+	DeleteOrderCell,
+} from './util'
 
 const AntDOrdersTable = props => {
 	const [searchText, setSearchText] = useState('')
@@ -151,6 +156,13 @@ const AntDOrdersTable = props => {
 			dataIndex: 'pickupDate',
 			key: 'pickupDate',
 			render: value => <DateCell value={value} />,
+		},
+		{
+			title: 'Delete Order',
+			dataIndex: 'hash',
+			key: 'hash',
+			width: '10%',
+			render: value => <DeleteOrderCell value={value} />,
 		},
 	]
 

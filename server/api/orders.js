@@ -179,3 +179,15 @@ router.post('/', async (req, res, next) => {
 		next(err)
 	}
 })
+
+router.delete('/:id', async (req, res, next) => {
+	try {
+		const hash = req.params.id
+		await Order.destroy({
+			where: {hash},
+		})
+		res.status(204).end()
+	} catch (err) {
+		next(err)
+	}
+})

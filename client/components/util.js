@@ -1,6 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {Button} from 'react-bootstrap'
 import moment from 'moment'
+import {useDispatch} from 'react-redux'
+import {deleteOrderThunk} from '../store/archivedOrders'
+import {deleteContactThunk} from '../store/contacts'
 
 export const getStatusArray = () => {
 	return [
@@ -32,5 +36,35 @@ export const CustomerInfoCell = ({value}) => (
 )
 
 export const OrderDetailsCell = ({value}) => (
-	<Link to={`/singleorder/${value}`}>View Details</Link>
+	<Link to={`/singleorder/${value}`}>{value}</Link>
 )
+
+export const DeleteOrderCell = ({value}) => {
+	const dispatch = useDispatch()
+	const handleClick = evt => {
+		evt.preventDefault()
+		if (evt.target.id) {
+			dispatch(deleteOrderThunk(evt.target.id))
+		}
+	}
+	return (
+		<Button id={value} onClick={handleClick} variant='danger'>
+			Delete
+		</Button>
+	)
+}
+
+export const DeleteCustomerCell = ({value}) => {
+	const dispatch = useDispatch()
+	const handleClick = evt => {
+		evt.preventDefault()
+		if (evt.target.id) {
+			dispatch(deleteContactThunk(evt.target.id))
+		}
+	}
+	return (
+		<Button id={value} onClick={handleClick} variant='danger'>
+			Delete
+		</Button>
+	)
+}
