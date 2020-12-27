@@ -56,7 +56,6 @@ router.delete('/:id', async (req, res, next) => {
 				customerPhoneNumber: phoneNumber,
 			},
 		})
-		console.log('orders belonging to user', orders.length)
 		if (orders.length > 0) {
 			throw new Error(
 				'Customer has more than one order. Please delete orders before deleting the customer!'
