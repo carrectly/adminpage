@@ -4,7 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_ALL_ORDERS = 'GET_ALL_ORDERS'
-const GET_CUSTOM_DATA = 'GET_CUSTOM_DATA'
+const DELETE_ORDER = 'DELETE_ORDER'
 
 /**
  * INITIAL STATE
@@ -15,13 +15,8 @@ const allOrders = []
  * ACTION CREATORS
  */
 const getAllOrders = orders => ({type: GET_ALL_ORDERS, orders})
+const deleteSingleOrder = hash => ({type: DELETE_ORDER, hash})
 
-export const getCustomData = orders => {
-	return {
-		type: GET_CUSTOM_DATA,
-		orders,
-	}
-}
 /**
  * THUNK CREATORS
  */
@@ -34,14 +29,12 @@ export const getAllOrdersThunk = () => async dispatch => {
 	}
 }
 
-export const fetchCustomDataThunk = obj => {
-	return async dispatch => {
-		try {
-			const {data} = await axios.put('/api/orders/', obj)
-			dispatch(getCustomData(data))
-		} catch (err) {
-			console.log('Error', err)
-		}
+export const deleteOrderThunk = hash => async dispatch => {
+	try {
+		await axios.delete(`/api/orders/${hash}`)
+		dispatch(deleteSingleOrder(hash))
+	} catch (err) {
+		console.error(err)
 	}
 }
 
@@ -52,8 +45,8 @@ export default function(state = allOrders, action) {
 	switch (action.type) {
 		case GET_ALL_ORDERS:
 			return action.orders
-		case GET_CUSTOM_DATA:
-			return action.orders
+		case DELETE_ORDER:
+			return state.filter(order => order.hash !== action.hash)
 		default:
 			return state
 	}

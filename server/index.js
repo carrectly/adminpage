@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 1337
 const app = express()
 const socketio = require('socket.io')
 const sampleClient = require('./auth/googleclient')
+let alert = require('alert')
 const {User} = require('./db/models')
 
 module.exports = app
@@ -96,6 +97,14 @@ const createApp = () => {
 	app.use((err, req, res, next) => {
 		console.error(err)
 		console.error(err.stack)
+		if (
+			err.message ===
+			'Customer has more than one order. Please delete orders before deleting the customer!'
+		) {
+			alert(
+				'Customer has more than one order. Please delete orders before deleting the customer!'
+			)
+		}
 		res.status(err.status || 500).send(
 			err.message || 'Internal server error.'
 		)
