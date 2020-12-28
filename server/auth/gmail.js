@@ -48,10 +48,21 @@ router.get('/single/:messageid', async (req, res, next) => {
 	}
 })
 
-router.post('/send', async (req, res, next) => {
+router.post('/createdraft', async (req, res, next) => {
 	try {
 		const obj = req.body
 		let result = await createDraft(obj)
+		res.json(result)
+	} catch (err) {
+		next(err)
+	}
+})
+
+router.post('/sendconfirmation', async (req, res, next) => {
+	try {
+		const obj = req.body
+		console.log('reqest to send an email', req.body)
+		let result = await sendEmailConfirmation(obj)
 		res.json(result)
 	} catch (err) {
 		next(err)
@@ -200,8 +211,9 @@ async function createDraft(msg) {
 	const subject = `${msg.orderid} - SERVICE QUOTE REQUEST FOR CARRECTLY`
 	//const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
 	const messageParts = [
-		'From: Andre Birkus <birkusandre@gmail.com>',
+		'From: <info@carrectly.com>',
 		`To: ${msg.email}`,
+		'Cc: <info@carrectly.com>',
 		'Content-Type: text/html; charset=utf-8',
 		'MIME-Version: 1.0',
 		`Subject: ${subject}`,
@@ -240,6 +252,50 @@ async function createDraft(msg) {
 			message: {
 				raw: encodedMessage,
 			},
+		},
+	})
+
+	return res.data
+}
+
+async function sendEmailConfirmation(msg) {
+	// You can use UTF-8 encoding for the subject using the method below.
+	// You can also just use a plain string if you don't need anything fancy.
+	const subject = `${msg.orderid} - SERVICE REQUEST WITH CARRECTLY`
+	//const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
+	const messageParts = [
+		'From: <info@carrectly.com>',
+		'Cc: <info@carrectly.com>',
+		`To: ${msg.email}`,
+		'Content-Type: text/html; charset=utf-8',
+		'MIME-Version: 1.0',
+		`Subject: ${subject}`,
+		'',
+		'Thank you for requesting your auto service with us. <br/>',
+		'* We will email or send you a text message to answer all your questions, confirm the timing, and coordinate the service. <br/>',
+		'* Prices are not final and the total may vary based on size of the vehicle, potential repairs, extra services, or promotions and discounts - we will walk you through everything to keep it simple and transparent. <br/>',
+		'* You can always change your mind, upgrade or downgrade any service, or reschedule to the date and time that works best for you. <br/>',
+		'* With any questions, email us at  info@carrectly.com or send a text to 773.800.9085. <br/>',
+		'Our team is looking forward to working with you and to be of help.<br/>',
+
+		`Car Make: ${msg.make}<br/>`,
+		`Car Model: ${msg.model}<br/>`,
+		`Car Year: ${msg.year}<br/>`,
+
+		'Thank you for your business,<br/>',
+		'TEAM CARRECTLY',
+	]
+	const message = messageParts.join('\n')
+
+	const encodedMessage = Buffer.from(message)
+		.toString('base64')
+		.replace(/\+/g, '-')
+		.replace(/\//g, '_')
+
+	const res = await gmail.users.messages.send({
+		userId: 'me',
+		requestBody: {
+			raw: encodedMessage,
 		},
 	})
 
