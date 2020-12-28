@@ -31,7 +31,7 @@ export const getSingleEmailThunk = id => async dispatch => {
 
 export const sendSingleEmailThunk = obj => async dispatch => {
 	try {
-		const res = await axios.post(`/auth/google/gmail/send`, obj)
+		const res = await axios.post(`/auth/google/gmail/createdraft`, obj)
 		dispatch(sendSingleEmail(res.data))
 	} catch (err) {
 		console.error(err)

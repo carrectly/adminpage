@@ -1,6 +1,7 @@
 /* eslint-disable max-statements */
 const router = require('express').Router()
 module.exports = router
+var axios = require('axios')
 const {Customer, Order, Service} = require('../db/models')
 const moment = require('moment')
 
@@ -34,7 +35,7 @@ router.post('/newbooking', async (req, res, next) => {
 			msgbody.pickupDate = moment()
 		}
 		if (!msgbody.dropoffDate) {
-			msgbody.dropoffDate = moment(msgbody.pickupDate).add(6, 'hours')
+			msgbody.dropoffDate = moment(msgbody.pickupDate).add(9, 'hours')
 		}
 
 		let ordr = await Order.create(msgbody)
@@ -45,6 +46,25 @@ router.post('/newbooking', async (req, res, next) => {
 			detailedResponse.order = {
 				status: 'success',
 				data: ordr,
+			}
+			const email = cust[0].email
+			const orderid = ordr.hash
+			const make = ordr.carMake
+			const model = ordr.carModel
+			const year = ordr.carYear
+			try {
+				await axios.post(
+					`${process.env.DOMAIN}/auth/google/gmail/sendconfirmation`,
+					{
+						email,
+						orderid,
+						make,
+						model,
+						year,
+					}
+				)
+			} catch (err) {
+				console.error(err)
 			}
 		}
 
