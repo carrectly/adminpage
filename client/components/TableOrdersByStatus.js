@@ -39,20 +39,10 @@ class TableOrdersByStatus extends Component {
 												<Link
 													to={`/singleorder/${ord.hash}`}
 													id={ord.hash}>
-													Details
+													{ord.hash}
 												</Link>
 											</td>
-											<td>{ord.status}</td>
-											<td>
-												{moment(ord.pickupDate).format(
-													'M/D/YY hh:mm A'
-												)}
-											</td>
-											<td>
-												{moment(ord.dropoffDate).format(
-													'M/D/YY hh:mm A'
-												)}
-											</td>
+											<td>{ord.customerPhoneNumber}</td>
 											<td>
 												<Link
 													to={`/singlecustomer/${ord.customerPhoneNumber}`}
@@ -66,6 +56,21 @@ class TableOrdersByStatus extends Component {
 											<td>{ord.carMake}</td>
 											<td>{ord.carModel}</td>
 											<td>{ord.pickupLocation}</td>
+											<td>
+												{moment(ord.createdAt).format(
+													'M/D/YY hh:mm A'
+												)}
+											</td>
+											<td>
+												{moment(ord.pickupDate).format(
+													'M/D/YY hh:mm A'
+												)}
+											</td>
+											<td>
+												{moment(ord.dropoffDate).format(
+													'M/D/YY hh:mm A'
+												)}
+											</td>
 										</tr>
 									))}
 								</tbody>

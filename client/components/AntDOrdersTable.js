@@ -10,6 +10,7 @@ import {
 	CustomerInfoCell,
 	OrderDetailsCell,
 	DeleteOrderCell,
+	CustomerNameCell,
 } from './util'
 
 const AntDOrdersTable = props => {
@@ -144,6 +145,13 @@ const AntDOrdersTable = props => {
 			key: 'customerPhoneNumber',
 			width: '20%',
 			...getColumnSearchProps('customerPhoneNumber'),
+		},
+		{
+			title: 'Customer Name',
+			dataIndex: 'customer',
+			key: 'customer',
+			width: '20%',
+			render: value => <CustomerNameCell value={value} />,
 		},
 		{
 			title: 'pickupLocation',

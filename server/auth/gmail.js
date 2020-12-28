@@ -2,7 +2,6 @@ const router = require('express').Router()
 const {google} = require('googleapis')
 var parseMessage = require('gmail-api-parse-message')
 var Base64 = require('js-base64').Base64
-
 const {User} = require('../db/models')
 
 module.exports = router
@@ -261,29 +260,48 @@ async function createDraft(msg) {
 async function sendEmailConfirmation(msg) {
 	// You can use UTF-8 encoding for the subject using the method below.
 	// You can also just use a plain string if you don't need anything fancy.
-	const subject = `${msg.orderid} - SERVICE REQUEST WITH CARRECTLY`
+	const subject = `${msg.orderid} - Thank you for requesting your auto service - Carrectly Auto Care. `
 	//const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
 	const messageParts = [
 		'From: <info@carrectly.com>',
 		'Cc: <info@carrectly.com>',
 		`To: ${msg.email}`,
-		'Content-Type: text/html; charset=utf-8',
+		'Content-Type: text/plain; charset=utf-8',
 		'MIME-Version: 1.0',
 		`Subject: ${subject}`,
 		'',
-		'Thank you for requesting your auto service with us. <br/>',
-		'* We will email or send you a text message to answer all your questions, confirm the timing, and coordinate the service. <br/>',
-		'* Prices are not final and the total may vary based on size of the vehicle, potential repairs, extra services, or promotions and discounts - we will walk you through everything to keep it simple and transparent. <br/>',
-		'* You can always change your mind, upgrade or downgrade any service, or reschedule to the date and time that works best for you. <br/>',
-		'* With any questions, email us at  info@carrectly.com or send a text to 773.800.9085. <br/>',
-		'Our team is looking forward to working with you and to be of help.<br/>',
+		`Hi there!
+Thank you for requesting your car maintenance with Carrectly.Please allow us to answer some most common questions, plan & coordinate everything.Here is what you should expect:
 
-		`Car Make: ${msg.make}<br/>`,
-		`Car Model: ${msg.model}<br/>`,
-		`Car Year: ${msg.year}<br/>`,
+PICK - UP & RETURN
 
-		'Thank you for your business,<br/>',
-		'TEAM CARRECTLY',
+- All of our services include free concierge vehicle pick - up and return in most parts of Chicago.If we don't currently serve your area, we will let you know. 
+- Our customer service will send you a message from our 773 - 800 - 9085 number to confirm the appointment and coordinate the pick - up.Expect the text either on the evening before or the morning of the scheduled service.Feel free to text or call us for an update as well.
+
+PRICES & SERVICES
+
+- We do all types of auto services(Detailing, Mechanical Repairs, Body Work, Paint Protection Films and Tints, Upholstery, etc) so depending on what you are looking for, the process and prices may vary. 
+- DETAILING: the price you see on the website is what you pay.Any requested additional work, tough stains, or excessive pet hair may be extra - we will always give you heads up, explain the process, and ask for your approval.
+Remember, there will always be some moisture trapped inside of the cabin for a day or two after interior detailing - no matter how much we dry it.So try to run your air on high when you drive it, don’t put your mats back until carpets breathe a little, and try cracking your windows open if you can - all to air out the car as much as possible and avoid any funky smell. 
+- REPAIRS: the prices on small common repairs are pre - fixed and are listed on the website - parts, labor, logistics, all fees and even sales tax is already included.Many other repairs require initial diagnostics to determine the problem and estimate the price correctly. 
+- FREE ONLINE QUOTES: We can put together any estimate for you - just tell us what work needs to be done.For auto body repair please email us the photos of the damage + VIN to info@carrectly.com and we’ll work on a quote.
+
+COMMUNICATION, TIME & SCHEDULING
+
+- We try to work around your schedule and availability as much as possible.However, due to unpredictability of some auto services we do ask you for some wiggle room on both pick - up and completion times. 
+- Most work starts shortly after we have your car in our facilities, but it’s suggested to schedule more time - consuming services for the earlier part of the day.Major repairs and detailing cannot be done on Sundays.
+- Our team can always provide you with updates on appointment times, estimates, and expected completion - just send us a text.
+
+KEYS & PAYMENT
+
+- You can meet our concierges in person during the pick - up or return, but you don’t have to.Many people now leave us keys with someone, with parking attendants, in lockboxes, or with their home / office front desks.Instruction on where to get the key and where the car is located is all we need - we'll do the rest.
+- Yes, we take current COVID19 pandemic very seriously: all our staff and concierges are wearing PPE and we disinfect your vehicle upon delivery. 
+- We’ll send you an invoice to your email once your car is returned, and you can pay online with any credit card upon receipt.
+
+That is all. Let us know if you have any questions and we will help with anything we can!
+Thank you!
+
+- Carrectly Team`,
 	]
 	const message = messageParts.join('\n')
 
@@ -301,3 +319,19 @@ async function sendEmailConfirmation(msg) {
 
 	return res.data
 }
+
+// 'Hi there! <br/>'
+// 'Thank you for requesting your car maintenance with Carrectly. Please allow us to answer some most common questions, plan & coordinate everything. Here is what you should expect:<br/>',
+// '<br/>',
+// '* We will email or send you a text message to answer all your questions, confirm the timing, and coordinate the service. <br/>',
+// '* Prices are not final and the total may vary based on size of the vehicle, potential repairs, extra services, or promotions and discounts - we will walk you through everything to keep it simple and transparent. <br/>',
+// '* You can always change your mind, upgrade or downgrade any service, or reschedule to the date and time that works best for you. <br/>',
+// '* With any questions, email us at  info@carrectly.com or send a text to 773.800.9085. <br/>',
+// 'Our team is looking forward to working with you and to be of help.<br/>',
+
+// `Car Make: ${msg.make}<br/>`,
+// `Car Model: ${msg.model}<br/>`,
+// `Car Year: ${msg.year}<br/>`,
+
+// 'Thank you for your business,<br/>',
+// 'TEAM CARRECTLY',

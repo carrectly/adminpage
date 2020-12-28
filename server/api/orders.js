@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
 			where: {
 				status: ['done', 'cancelled'],
 			},
-			order: [['pickupDate', 'DESC']],
+			order: [['createdAt', 'DESC']],
 			include: [{model: Customer}],
 		})
 		res.json(orders)
@@ -28,7 +28,7 @@ router.get('/active', async (req, res, next) => {
 					[Op.not]: ['done', 'cancelled'],
 				},
 			},
-			order: [['status', 'ASC']],
+			order: [['createdAt', 'DESC']],
 			include: [{model: Customer}],
 		})
 		res.json(orders)

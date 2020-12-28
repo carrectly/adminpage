@@ -35,6 +35,12 @@ export const CustomerInfoCell = ({value}) => (
 	<Link to={`/singlecustomer/${value}`}>Customer Info</Link>
 )
 
+export const CustomerNameCell = ({value}) => (
+	<span>
+		{value.firstName} {value.lastName}
+	</span>
+)
+
 export const OrderDetailsCell = ({value}) => (
 	<Link to={`/singleorder/${value}`}>{value}</Link>
 )

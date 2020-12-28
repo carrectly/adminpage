@@ -35,7 +35,7 @@ router.post('/newbooking', async (req, res, next) => {
 			msgbody.pickupDate = moment()
 		}
 		if (!msgbody.dropoffDate) {
-			msgbody.dropoffDate = moment(msgbody.pickupDate).add(6, 'hours')
+			msgbody.dropoffDate = moment(msgbody.pickupDate).add(9, 'hours')
 		}
 
 		let ordr = await Order.create(msgbody)
