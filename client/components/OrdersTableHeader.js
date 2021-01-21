@@ -10,7 +10,7 @@ const OrdersTableHeader = () => {
 				<th>Car Make</th>
 				<th>Car Model</th>
 				<th>Location</th>
-				<th>Created At</th>
+				<th>Status</th>
 				<th>Pickup Date</th>
 				<th>Dropoff Date</th>
 			</tr>

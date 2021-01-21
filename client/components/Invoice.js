@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {notification} from 'antd'
 import {
 	getSquareCustomerThunk,
 	createInvoiceThunk,
@@ -18,19 +19,20 @@ import {fetchDealersThunk} from '../store/dealers.js'
 import {sendSingleEmailThunk} from '../store/singleemail'
 import {getEmailsThunk} from '../store/emails'
 import {updateSingleOrderThunk} from '../store/singleorder'
-
+import {getStatusArray} from './util'
 let cust
 let invoice
-const statusArray = [
-	'booked',
-	'in process',
-	'returned',
-	'invoiced',
-	'quote',
-	'quoted',
-	'done',
-	'cancelled',
-]
+const statusArray = getStatusArray()
+
+const openNotification = () => {
+	const args = {
+		message: 'Notification Title',
+		description:
+			'I will never close automatically. This is a purposely very very long description that has many many characters and words.',
+		duration: 6,
+	}
+	notification.open(args)
+}
 
 class Invoice extends Component {
 	constructor(props) {
@@ -55,10 +57,11 @@ class Invoice extends Component {
 	}
 
 	handleClick(obj) {
-		this.props.getSquareCustomer(obj)
-		this.setState({
-			invoice: false,
-		})
+		openNotification()
+		// this.props.getSquareCustomer(obj)
+		// this.setState({
+		// 	invoice: false,
+		// })
 	}
 
 	async handleSend(evt) {
