@@ -16,6 +16,7 @@ import {clearSingleEmailThunk} from '../store/singleemail'
 import OrderComments from './OrderComments'
 import SingleOrderServices from './SingleOrderServices'
 import moment from 'moment'
+import {Descriptions, Badge} from 'antd'
 
 class SingleOrder extends Component {
 	constructor(props) {
@@ -82,8 +83,12 @@ class SingleOrder extends Component {
 	// eslint-disable-next-line complexity
 	render() {
 		const singleorder = this.props.order || {}
+		console.log('....single order', singleorder)
 		const services = this.props.order.services || []
-
+		const customer = singleorder.customer || {}
+		// const phoneNumber = singleorder.customer.phoneNumber || ''
+		// const firstName = singleorder.customer.firstName || ''
+		// const lastName = singleorder.customer.lastName || ''
 		let arr = []
 
 		for (let [key, value] of Object.entries(singleorder)) {
@@ -106,24 +111,81 @@ class SingleOrder extends Component {
 
 		return (
 			<div>
-				<div>
-					<OrderComments id={this.props.match.params.orderid} />
-				</div>
 				<div className='singleordercontainer'>
 					<div className='singleordertable'>
-						<h3 className='center'>Order Details</h3>
-						<Table striped bordered hover variant='dark'>
-							<tbody>
-								{arr.map((details, index) => (
-									<tr key={index}>
-										<th>{details[0]}</th>
-										<td>{details[1]}</td>
-									</tr>
-								))}
-							</tbody>
-						</Table>
+						<Descriptions title='Order Info' bordered size='small'>
+							<Descriptions.Item label='Order ID'>
+								{singleorder.hash}
+							</Descriptions.Item>
+							<Descriptions.Item label='Status' span={2}>
+								{singleorder.status}
+							</Descriptions.Item>
+							<Descriptions.Item label='Customer Phone Number'>
+								{customer.phoneNumber}
+							</Descriptions.Item>
+							<Descriptions.Item label='Customer Name' span={2}>
+								<Link
+									to={`/singlecustomer/${customer.phoneNumber}`}>
+									{customer.firstName} {customer.lastName}
+								</Link>
+							</Descriptions.Item>
+							<Descriptions.Item label='Pickup Date'>
+								{moment(singleorder.pickupDate).format(
+									'M/D/YY hh:mm A'
+								)}
+							</Descriptions.Item>
+							<Descriptions.Item label='Drop Off Date'>
+								{moment(singleorder.dropoffDate).format(
+									'M/D/YY hh:mm A'
+								)}
+							</Descriptions.Item>
+							<Descriptions.Item label='Pickup Location' span={3}>
+								{singleorder.pickupLocation}
+							</Descriptions.Item>
+							<Descriptions.Item label='Car Make'>
+								{singleorder.carMake}
+							</Descriptions.Item>
+							<Descriptions.Item label='Car Model'>
+								{singleorder.carModel}
+							</Descriptions.Item>
+							<Descriptions.Item label='Car Year'>
+								{singleorder.carYear}
+							</Descriptions.Item>
+							<Descriptions.Item label='VIN'>
+								{singleorder.vin}
+							</Descriptions.Item>
+							<Descriptions.Item label='PROMO CODE'>
+								{singleorder.promoCode}
+							</Descriptions.Item>
+							<Descriptions.Item label='Discount'>
+								{singleorder.discount}
+							</Descriptions.Item>
+							<Descriptions.Item label='Stick shift'>
+								{singleorder.stickShift}
+							</Descriptions.Item>
+							<Descriptions.Item label='Flexible on Time'>
+								{singleorder.flexibleOnTime}
+							</Descriptions.Item>
+							<Descriptions.Item label='Created at'>
+								{moment(singleorder.createAt).format(
+									'M/D/YY hh:mm A'
+								)}
+							</Descriptions.Item>
+							<Descriptions.Item label='Updated at'>
+								{moment(singleorder.updatedAt).format(
+									'M/D/YY hh:mm A'
+								)}
+							</Descriptions.Item>
+
+							<Descriptions.Item
+								label='Customer Comments'
+								span={3}>
+								{singleorder.customerComments}
+							</Descriptions.Item>
+						</Descriptions>
 					</div>
 					<div className='invoiceform'>
+						<OrderComments id={this.props.match.params.orderid} />
 						<UpdateOrder id={this.props.match.params.orderid} />
 						<Invoice
 							fetchEmails={this.fetchEmails}

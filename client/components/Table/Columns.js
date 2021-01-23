@@ -11,6 +11,7 @@ const columns = [
 		title: 'Order Link',
 		dataIndex: 'hash',
 		key: 'hash',
+		width: 50,
 		render: (value, row) => <OrderDetailsCell value={value} row={row} />,
 	},
 	{
