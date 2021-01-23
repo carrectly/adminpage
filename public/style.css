@@ -336,56 +336,104 @@ body {
 
 .status0 {
 	text-align: center;
-	margin: 0px;
-	font-size: large;
-	font-family: 'Times New Roman', Times, serif;
 	font-weight: bold;
-	background-color: #f83434 !important;
+	background-color: #fefbd7;
 }
 
 .status1 {
 	text-align: center;
-	margin: 0px;
-	font-size: large;
-	font-family: 'Times New Roman', Times, serif;
 	font-weight: bold;
-	background-color: #7986cb !important;
+	background-color: #f9ef71;
 }
 
 .status2 {
 	text-align: center;
-	margin: 0px;
-	font-size: large;
-	font-family: 'Times New Roman', Times, serif;
 	font-weight: bold;
-	background-color: #33b679 !important;
+	background-color: #e1fcc3;
 }
 
 .status3 {
 	text-align: center;
-	margin: 0px;
-	font-size: large;
-	font-family: 'Times New Roman', Times, serif;
 	font-weight: bold;
-	background-color: #8e24aa !important;
+	background-color: #c0f08b;
 }
 
 .status4 {
 	text-align: center;
-	margin: 0px;
-	font-size: large;
-	font-family: 'Times New Roman', Times, serif;
 	font-weight: bold;
-	background-color: #e67c73 !important;
+	background-color: #89b654;
 }
 
 .status5 {
 	text-align: center;
-	margin: 0px;
-	font-size: large;
-	font-family: 'Times New Roman', Times, serif;
 	font-weight: bold;
-	background-color: #f6c026 !important;
+	background-color: #f74c1e;
+}
+
+.status6 {
+	text-align: center;
+	font-weight: bold;
+	background-color: #ffffff;
+}
+
+.status7 {
+	text-align: center;
+	font-weight: bold;
+	background-color: #ecdffb;
+}
+
+.status8 {
+	text-align: center;
+	font-weight: bold;
+	background-color: #9570de;
+}
+
+.status9 {
+	text-align: center;
+	font-weight: bold;
+	background-color: #cec12d;
+}
+
+.status10 {
+	text-align: center;
+	font-weight: bold;
+	background-color: #d7e7eb;
+}
+
+.status11 {
+	text-align: center;
+	font-weight: bold;
+	background-color: #feeaf7;
+}
+
+.status12 {
+	text-align: center;
+	font-weight: bold;
+	background-color: #fedb5a;
+}
+
+.status13 {
+	text-align: center;
+	font-weight: bold;
+	background-color: #f7941e;
+}
+
+.status14 {
+	text-align: center;
+	font-weight: bold;
+	background-color: #8eeaf9;
+}
+
+.status15 {
+	text-align: center;
+	font-weight: bold;
+	background-color: #4595fd;
+}
+
+.status16 {
+	text-align: center;
+	font-weight: bold;
+	background-color: #da61d8;
 }
 
 .orderfilter {

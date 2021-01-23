@@ -11,58 +11,7 @@ import {
 	OrderDetailsCell,
 	CustomerNameCell,
 } from './util'
-
-const columns = [
-	{
-		title: 'Order Link',
-		dataIndex: 'hash',
-		key: 'hash',
-		render: value => <OrderDetailsCell value={value} />,
-	},
-	{
-		title: 'Customer Phone #',
-		dataIndex: 'customerPhoneNumber',
-		key: 'customerPhoneNumber',
-	},
-	{
-		title: 'Customer Info',
-		dataIndex: 'customerPhoneNumber',
-		key: 'customerPhoneNumber',
-		render: value => <CustomerInfoCell value={value} />,
-	},
-	{
-		title: 'status',
-		dataIndex: 'status',
-		key: 'name',
-	},
-	{
-		title: 'carMake',
-		dataIndex: 'carMake',
-		key: 'age',
-	},
-	{
-		title: 'carModel',
-		dataIndex: 'carModel',
-		key: 'carModel',
-	},
-	{
-		title: 'Customer Name',
-		dataIndex: 'customer',
-		key: 'customer',
-		render: value => <CustomerNameCell value={value} />,
-	},
-	{
-		title: 'pickupLocation',
-		dataIndex: 'pickupLocation',
-		key: 'pickupLocation',
-	},
-	{
-		title: 'pickupDate',
-		dataIndex: 'pickupDate',
-		key: 'pickupDate',
-		render: value => <DateCell value={value} />,
-	},
-]
+import columns from './Table/Columns'
 
 class TableOrdersByStatus extends Component {
 	render() {
