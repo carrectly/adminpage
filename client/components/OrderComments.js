@@ -38,7 +38,7 @@ const OrderComments = () => {
 				<thead>
 					<tr>
 						<th>Created</th>
-						<th>Special Comments</th>
+						<th>Internal Comments & Conversation</th>
 					</tr>
 				</thead>
 				<tbody>
