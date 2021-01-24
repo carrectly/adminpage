@@ -518,6 +518,10 @@ table.commentlist {
 	font-weight: bold;
 }
 
+.descriptionsAntd {
+	background-color: whitesmoke;
+}
+
 @media (max-width: 420px) {
 	/* more CSS for that specific screen size*/
 

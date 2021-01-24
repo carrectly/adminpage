@@ -113,7 +113,11 @@ class SingleOrder extends Component {
 			<div>
 				<div className='singleordercontainer'>
 					<div className='singleordertable'>
-						<Descriptions title='Order Info' bordered size='small'>
+						<Descriptions
+							title='Order Info'
+							bordered
+							size='small'
+							className='descriptionsAntd'>
 							<Descriptions.Item label='Order ID'>
 								{singleorder.hash}
 							</Descriptions.Item>
@@ -183,9 +187,10 @@ class SingleOrder extends Component {
 								{singleorder.customerComments}
 							</Descriptions.Item>
 						</Descriptions>
+						<OrderComments id={this.props.match.params.orderid} />
 					</div>
 					<div className='invoiceform'>
-						<OrderComments id={this.props.match.params.orderid} />
+						{/* <OrderComments id={this.props.match.params.orderid} /> */}
 						<UpdateOrder id={this.props.match.params.orderid} />
 						<Invoice
 							fetchEmails={this.fetchEmails}
