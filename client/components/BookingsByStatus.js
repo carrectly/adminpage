@@ -3,7 +3,16 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getActiveOrdersThunk} from '../store/activeOrders'
 import TableOrdersByStatus from './TableOrdersByStatus'
-import {getActiveStatusArray} from './util'
+import {
+	getTakeActionStatusArray,
+	getWorkZoneStatusArray,
+	getInvoicesStatusArray,
+	getQuotesStatusArray,
+	getPotentialLeadsStatusArray,
+} from './util'
+
+import {Collapse} from 'antd'
+const {Panel} = Collapse
 
 class BookingsByStatus extends Component {
 	async componentDidMount() {
@@ -15,25 +24,51 @@ class BookingsByStatus extends Component {
 	}
 
 	render() {
-		const statusArray = getActiveStatusArray()
 		const orders = this.props.orders || []
-		const nestedArr = statusArray.map(status => {
-			return {
-				status: status,
-				orders: orders.filter(el => el.status === status),
-			}
-		})
+
+		const actionStatusArr = getTakeActionStatusArray()
+		const workZoneStatusArr = getWorkZoneStatusArray()
+		const invoiceStatusArr = getInvoicesStatusArray()
+		const quoteStatusArr = getQuotesStatusArray()
+		const leadsStatusArr = getPotentialLeadsStatusArray()
+
+		const actionArr = orders.filter(el =>
+			actionStatusArr.includes(el.status)
+		)
+
+		const workZoneArr = orders.filter(el =>
+			workZoneStatusArr.includes(el.status)
+		)
+
+		const invoiceArr = orders.filter(el =>
+			invoiceStatusArr.includes(el.status)
+		)
+
+		const quotesArr = orders.filter(el =>
+			quoteStatusArr.includes(el.status)
+		)
+
+		const leadsArr = orders.filter(el => leadsStatusArr.includes(el.status))
 
 		return (
 			<div>
-				{nestedArr.map((arr, index) => (
-					<TableOrdersByStatus
-						ordersArray={arr.orders}
-						status={arr.status}
-						key={index}
-						index={index}
-					/>
-				))}
+				<Collapse defaultActiveKey={['1', '2']}>
+					<Panel header='TO TAKE ACTION' key='1'>
+						<TableOrdersByStatus ordersArray={actionArr} />
+					</Panel>
+					<Panel header='WORK ZONE' key='2'>
+						<TableOrdersByStatus ordersArray={workZoneArr} />
+					</Panel>
+					<Panel header='INVOICES' key='3'>
+						<TableOrdersByStatus ordersArray={invoiceArr} />
+					</Panel>
+					<Panel header='QUOTES' key='4'>
+						<TableOrdersByStatus ordersArray={quotesArr} />
+					</Panel>
+					<Panel header='POTENTIAL LEADS' key='5'>
+						<TableOrdersByStatus ordersArray={leadsArr} />
+					</Panel>
+				</Collapse>
 			</div>
 		)
 	}

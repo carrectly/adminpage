@@ -3,6 +3,9 @@ import {connect} from 'react-redux'
 import {fetchServicesThunk} from '../store/services'
 import {addOrderServiceThunk} from '../store/singleorder'
 import {DropdownButton, Dropdown, Button} from 'react-bootstrap'
+import {Select} from 'antd'
+
+const {Option} = Select
 
 class AddOrderServices extends Component {
 	constructor(props) {
@@ -14,9 +17,8 @@ class AddOrderServices extends Component {
 		this.props.getServices()
 	}
 
-	handleAddService(evt) {
-		evt.preventDefault()
-		let obj = {service: evt.target.name}
+	handleAddService(value) {
+		let obj = {service: value}
 		let id = this.props.orderid
 		this.props.addService(id, obj)
 	}
@@ -24,17 +26,32 @@ class AddOrderServices extends Component {
 	render() {
 		const servicesDropDown = this.props.services || []
 		return (
-			<DropdownButton size='lg' id='dropdown-basic-button' title=' + '>
+			<Select
+				showSearch
+				style={{width: 200}}
+				placeholder='Search to add service'
+				optionFilterProp='children'
+				onChange={this.handleAddService}
+				filterOption={(input, option) =>
+					option.children
+						.toLowerCase()
+						.indexOf(input.toLowerCase()) >= 0
+				}
+				filterSort={(optionA, optionB) =>
+					optionA.children
+						.toLowerCase()
+						.localeCompare(optionB.children.toLowerCase())
+				}>
 				{servicesDropDown.map(svc => (
-					<Dropdown.Item
+					<Option
+						value={svc.name}
 						key={svc.id}
-						id={svc.id}
 						name={svc.name}
-						onClick={evt => this.handleAddService(evt)}>
+						id={svc.id}>
 						{svc.name}
-					</Dropdown.Item>
+					</Option>
 				))}
-			</DropdownButton>
+			</Select>
 		)
 	}
 }

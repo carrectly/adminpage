@@ -264,7 +264,7 @@ async function sendEmailConfirmation(msg) {
 	//const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
 	const messageParts = [
 		'From: <info@carrectly.com>',
-		'Cc: <info@carrectly.com>',
+		// 'Cc: <info@carrectly.com>',
 		`To: ${msg.email}`,
 		'Content-Type: text/plain; charset=utf-8',
 		'MIME-Version: 1.0',

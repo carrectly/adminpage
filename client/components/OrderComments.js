@@ -1,103 +1,79 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, {useEffect} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {useParams} from 'react-router-dom'
 import {
 	fetchCommentsThunk,
 	addCommentThunk,
 	clearCommentsThunk,
 } from '../store/comments'
-import {Form, Button, Table} from 'react-bootstrap'
+import {Form, Input, Button} from 'antd'
+import moment from 'moment'
 
-class OrderComments extends Component {
-	constructor(props) {
-		super(props)
-		this.handleSubmit = this.handleSubmit.bind(this)
-		this.handleChange = this.handleChange.bind(this)
+const OrderComments = () => {
+	const [form] = Form.useForm()
 
-		this.state = {
-			content: '',
+	const params = useParams()
+	const id = params.orderid
+	const orderComments = useSelector(state => state.comments)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(fetchCommentsThunk(id))
+		return function cleanup() {
+			dispatch(clearCommentsThunk())
 		}
+	}, [])
+
+	const onFinish = values => {
+		dispatch(addCommentThunk(id, values))
 	}
 
-	async componentDidMount() {
-		await this.props.getComments(this.props.id)
+	const onFinishFailed = errorInfo => {
+		console.log('Failed:', errorInfo)
 	}
 
-	handleChange(evt) {
-		this.setState({
-			[evt.target.name]: evt.target.value,
-		})
-	}
-	handleSubmit(evt) {
-		evt.preventDefault()
-		let id = this.props.id
-		this.props.addComment(id, this.state)
-		this.setState({
-			content: '',
-		})
-	}
-
-	componentWillUnmount() {
-		this.props.clearComments()
-	}
-
-	render() {
-		const comments = this.props.comments || []
-		return (
-			<div className='commentbox'>
-				<table className='commentlist'>
-					<thead>
-						<tr>
-							<th>Date Created</th>
-							<th>Special Comments</th>
-						</tr>
-					</thead>
-					<tbody>
-						{comments.map((comment, index) => (
-							<tr key={index}>
-								<td className='commentDate'>
-									{new Date(comment.createdAt).toUTCString()}
-								</td>
-								<td className='content'>{comment.content}</td>
-							</tr>
-						))}
-
-						<tr>
-							<td colSpan='2'>
-								<form
-									className='commentform'
-									onSubmit={this.handleSubmit}>
-									<Button variant='primary' type='submit'>
-										Add Comment
-									</Button>
-									<input
-										className='commentinput'
-										type='text'
-										name='content'
-										value={this.state.content}
-										placeholder='Notes or comments related to this order'
-										onChange={this.handleChange}
-									/>
-								</form>
+	return (
+		<div className='commentbox'>
+			<table className='commentlist'>
+				<thead>
+					<tr>
+						<th>Created</th>
+						<th>Internal Comments & Conversation</th>
+					</tr>
+				</thead>
+				<tbody>
+					{orderComments.map((comment, index) => (
+						<tr key={index}>
+							<td className='commentDate'>
+								{moment(comment.createdAt).format(
+									'M/D/YY hh:mm A'
+								)}
 							</td>
+							<td className='content'>{comment.content}</td>
 						</tr>
-					</tbody>
-				</table>
-			</div>
-		)
-	}
+					))}
+					<tr>
+						<td colSpan='2'>
+							<Form
+								form={form}
+								name='control-hooks'
+								onFinish={onFinish}
+								onFinishFailed={onFinishFailed}>
+								<Form.Item label='New comment' name='content'>
+									<Input />
+								</Form.Item>
+								<Form.Item>
+									<Button type='primary' htmlType='submit'>
+										Add Comments
+									</Button>
+								</Form.Item>
+							</Form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	)
 }
 
-const mapStateToProps = state => {
-	return {
-		comments: state.comments,
-	}
-}
-
-const mapDispatchToProps = dispatch => {
-	return {
-		getComments: id => dispatch(fetchCommentsThunk(id)),
-		addComment: (id, obj) => dispatch(addCommentThunk(id, obj)),
-		clearComments: () => dispatch(clearCommentsThunk()),
-	}
-}
-export default connect(mapStateToProps, mapDispatchToProps)(OrderComments)
+export default OrderComments

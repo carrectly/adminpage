@@ -85,18 +85,34 @@ router.post('/', async (req, res, next) => {
 					order_id: orderid,
 					location_id: `${process.env.SQUARE_LOCATION_ID}`,
 					invoice_number: `${idempKey}`,
-					title: `${order.carMake} ${order.carModel} ${order.carYear}`,
+					title: `Thank you for servicing you car with us - Carrectly - ${orderid}`,
 					primary_recipient: {
 						customer_id: customerid,
 					},
 					payment_requests: [
 						{
-							request_method: 'EMAIL',
+							delivery_method: 'EMAIL',
 							request_type: 'BALANCE',
 							due_date: `${dueDate}`,
 							tipping_enabled: true,
 						},
 					],
+					description: `Hi there! 
+
+We appreciate your business and glad we were able to help. 
+Hope you liked the quality, simplicity, and convenience of our service. 
+The concierge should have walked you through everything when the car was delivered, but please call or text us if you have any questions. 
+__________
+
+Feedback:
+We are working on building a service that is easy to use and helpful to more Chicagoans, so if you've experienced any glitches, confusion, or have any suggestions for us  - please let us know so we can improve.
+If you are happy with the service, take a moment to write a review. As a small start-up, we are trying to gain visibility these are tremendously helpful to small businesses. 
+Also, if you refer a friend, we will provide both of you with some discount. All they have to do is to mention you during the booking request. 
+
+YELP: https://www.yelp.com/biz/carrectly-auto-care-chicago
+GOOGLE: http://bit.ly/2vloaPl
+
+Have a fantastic rest of the week! Thank you for servicing your car - Carrectly!`,
 				},
 			},
 		})

@@ -9,9 +9,27 @@ router.get('/', async (req, res, next) => {
 	try {
 		const orders = await Order.findAll({
 			where: {
-				status: ['done', 'cancelled'],
+				status: {
+					[Op.not]: [
+						'booked new',
+						'booked us',
+						'followed up - text',
+						'followed up - call',
+						'followed up - email',
+						'confirmed',
+						'in process',
+						'pending work approvals',
+						'ready to be returned',
+						'returned',
+						'quote inquired by customer',
+						'quote sent to a shop',
+						'quote sent to a customer',
+						'invoiced',
+						'postponed',
+					],
+				},
 			},
-			order: [['createdAt', 'DESC']],
+			order: [['updatedAt', 'DESC']],
 			include: [{model: Customer}],
 		})
 		res.json(orders)
@@ -24,11 +42,25 @@ router.get('/active', async (req, res, next) => {
 	try {
 		const orders = await Order.findAll({
 			where: {
-				status: {
-					[Op.not]: ['done', 'cancelled'],
-				},
+				status: [
+					'booked new',
+					'booked us',
+					'followed up - text',
+					'followed up - call',
+					'followed up - email',
+					'confirmed',
+					'in process',
+					'pending work approvals',
+					'ready to be returned',
+					'returned',
+					'quote inquired by customer',
+					'quote sent to a shop',
+					'quote sent to a customer',
+					'invoiced',
+					'postponed',
+				],
 			},
-			order: [['createdAt', 'DESC']],
+			order: [['updatedAt', 'DESC']],
 			include: [{model: Customer}],
 		})
 		res.json(orders)
@@ -63,7 +95,7 @@ router.put('/single/:orderid', async (req, res, next) => {
 			where: {
 				hash: id,
 			},
-			include: [{model: Service}],
+			include: [{model: Service}, {model: Customer}],
 		})
 		console.log('api received order to update', req.body)
 		const neword = await ord.update(req.body)

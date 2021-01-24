@@ -4,7 +4,7 @@ import Highlighter from 'react-highlight-words'
 import {SearchOutlined} from '@ant-design/icons'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {DeleteCustomerCell} from './util'
+import {DeleteCustomerCell, CustomerPhoneCell} from './Table/Cells'
 
 const AntDCustomersTable = props => {
 	const [searchText, setSearchText] = useState('')
@@ -126,13 +126,11 @@ const AntDCustomersTable = props => {
 			...getColumnSearchProps('phoneNumber'),
 		},
 		{
-			title: 'Customer Info',
+			title: 'Link to customer',
 			dataIndex: 'phoneNumber',
 			key: 'phoneNumber',
 			width: '10%',
-			render: value => (
-				<Link to={`/singlecustomer/${value}`}>Customer Info</Link>
-			),
+			render: value => <CustomerPhoneCell value={value} />,
 		},
 		{
 			title: 'Delete Customer',
@@ -146,6 +144,7 @@ const AntDCustomersTable = props => {
 	return (
 		<Table
 			columns={columns}
+			scroll={{x: 1500}}
 			dataSource={customersArray}
 			pagination={{position: ['topCenter']}}
 			loading={props.loading}

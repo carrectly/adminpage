@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {notification} from 'antd'
 import {
 	getSquareCustomerThunk,
 	createInvoiceThunk,
@@ -18,19 +19,10 @@ import {fetchDealersThunk} from '../store/dealers.js'
 import {sendSingleEmailThunk} from '../store/singleemail'
 import {getEmailsThunk} from '../store/emails'
 import {updateSingleOrderThunk} from '../store/singleorder'
-
+import {getStatusArray} from './util'
 let cust
 let invoice
-const statusArray = [
-	'booked',
-	'in process',
-	'returned',
-	'invoiced',
-	'quote',
-	'quoted',
-	'done',
-	'cancelled',
-]
+const statusArray = getStatusArray()
 
 class Invoice extends Component {
 	constructor(props) {
@@ -38,6 +30,9 @@ class Invoice extends Component {
 		this.handleClick = this.handleClick.bind(this)
 		this.handleSend = this.handleSend.bind(this)
 		this.handleStatusUpdate = this.handleStatusUpdate.bind(this)
+		this.handleCreateInvoice = this.handleCreateInvoice.bind(this)
+		this.openNotification1 = this.openNotification1.bind(this)
+		this.openNotification2 = this.openNotification2.bind(this)
 		this.state = {
 			invoice: true,
 		}
@@ -54,11 +49,41 @@ class Invoice extends Component {
 		this.props.clearSquare()
 	}
 
-	handleClick(obj) {
-		this.props.getSquareCustomer(obj)
+	async handleClick(obj) {
+		await this.props.getSquareCustomer(obj)
 		this.setState({
 			invoice: false,
 		})
+		this.openNotification1()
+	}
+
+	async handleCreateInvoice(order, customerId) {
+		await this.props.createInvoice(order, customerId)
+		this.openNotification2()
+	}
+
+	openNotification1 = () => {
+		const args = {
+			message: this.props.customer.status,
+			description: this.props.customer.status,
+			duration: 6,
+		}
+		notification.open(args)
+	}
+
+	openNotification2 = () => {
+		let description
+		if (this.props.invoice.id) {
+			description = 'Invoice created succesfully'
+		} else {
+			description = 'Failed to create invoice'
+		}
+		const args = {
+			message: this.props.invoice.id,
+			description: description,
+			duration: 6,
+		}
+		notification.open(args)
 	}
 
 	async handleSend(evt) {
@@ -84,8 +109,29 @@ class Invoice extends Component {
 			status: evt.target.name,
 		}
 		let id = this.props.id
-		this.props.updateStatus(id, obj)
-		obj = {}
+		if (evt.target.name === 'cancelled') {
+			if (
+				window.confirm(
+					'Changing the status to cancelled will remove the order from the home page and will move it to archives. Do you want to proceed?'
+				)
+			) {
+				this.props.updateStatus(id, obj)
+			} else {
+				console.log('changed my mind')
+			}
+		} else if (evt.target.name === 'paid') {
+			if (
+				window.confirm(
+					'Changing the status to paid will remove the order from the home page and will move it to archives. Do you want to proceed?'
+				)
+			) {
+				this.props.updateStatus(id, obj)
+			} else {
+				console.log('changed my mind')
+			}
+		} else {
+			this.props.updateStatus(id, obj)
+		}
 	}
 
 	render() {
@@ -157,7 +203,7 @@ class Invoice extends Component {
 						variant='primary'
 						disabled={this.state.invoice}
 						onClick={() =>
-							this.props.createInvoice(
+							this.handleCreateInvoice(
 								this.props.order,
 								this.props.customer.id
 							)
@@ -165,11 +211,6 @@ class Invoice extends Component {
 						Create Invoice
 					</Button>
 				</OverlayTrigger>
-
-				<div>
-					{cust ? <div>{this.props.customer.status}</div> : <div />}
-					{invoice ? <div>Invoice created succesfully</div> : <div />}
-				</div>
 			</div>
 		)
 	}

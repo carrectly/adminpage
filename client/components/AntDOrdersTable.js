@@ -7,11 +7,10 @@ import {Link} from 'react-router-dom'
 import moment from 'moment'
 import {
 	DateCell,
-	CustomerInfoCell,
 	OrderDetailsCell,
 	DeleteOrderCell,
 	CustomerNameCell,
-} from './util'
+} from './Table/Cells'
 
 const AntDOrdersTable = props => {
 	const [searchText, setSearchText] = useState('')
@@ -112,13 +111,6 @@ const AntDOrdersTable = props => {
 			render: value => <OrderDetailsCell value={value} />,
 		},
 		{
-			title: 'Customer Info',
-			dataIndex: 'customerPhoneNumber',
-			key: 'customerPhoneNumber',
-			width: '10%',
-			render: value => <CustomerInfoCell value={value} />,
-		},
-		{
 			title: 'status',
 			dataIndex: 'status',
 			key: 'name',
@@ -151,7 +143,9 @@ const AntDOrdersTable = props => {
 			dataIndex: 'customer',
 			key: 'customer',
 			width: '20%',
-			render: value => <CustomerNameCell value={value} />,
+			render: (value, row) => (
+				<CustomerNameCell value={value} row={row} />
+			),
 		},
 		{
 			title: 'pickupLocation',
@@ -166,6 +160,12 @@ const AntDOrdersTable = props => {
 			render: value => <DateCell value={value} />,
 		},
 		{
+			title: 'updatedAt',
+			dataIndex: 'updatedAt',
+			key: 'updatedAt',
+			render: value => <DateCell value={value} />,
+		},
+		{
 			title: 'Delete Order',
 			dataIndex: 'hash',
 			key: 'hash',
@@ -177,6 +177,8 @@ const AntDOrdersTable = props => {
 	return (
 		<Table
 			columns={columns}
+			scroll={{x: 1500}}
+			size='small'
 			dataSource={ordersArr}
 			pagination={{position: ['topCenter']}}
 			loading={props.loading}
