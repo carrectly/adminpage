@@ -44,7 +44,6 @@ const UpdateOrder = props => {
 	}
 
 	const onFinish = values => {
-		console.log('update order values', values)
 		if (values.dropoffDate) {
 			values.dropoffDate = moment.utc(values.dropoffDate).valueOf()
 		}
@@ -52,7 +51,6 @@ const UpdateOrder = props => {
 			values.pickupDate = moment.utc(values.pickupDate).valueOf()
 		}
 		clean(values)
-		console.log('update order values', values)
 		dispatch(updateSingleOrderThunk(id, values))
 		handleClose()
 	}
