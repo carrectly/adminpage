@@ -15,7 +15,6 @@ import {
 	OverlayTrigger,
 	Tooltip,
 } from 'react-bootstrap'
-import {Popconfirm} from 'antd'
 import {fetchDealersThunk} from '../store/dealers.js'
 import {sendSingleEmailThunk} from '../store/singleemail'
 import {getEmailsThunk} from '../store/emails'
@@ -25,22 +24,15 @@ let cust
 let invoice
 const statusArray = getStatusArray()
 
-const openNotification = () => {
-	const args = {
-		message: 'Notification Title',
-		description:
-			'I will never close automatically. This is a purposely very very long description that has many many characters and words.',
-		duration: 6,
-	}
-	notification.open(args)
-}
-
 class Invoice extends Component {
 	constructor(props) {
 		super(props)
 		this.handleClick = this.handleClick.bind(this)
 		this.handleSend = this.handleSend.bind(this)
 		this.handleStatusUpdate = this.handleStatusUpdate.bind(this)
+		this.handleCreateInvoice = this.handleCreateInvoice.bind(this)
+		this.openNotification1 = this.openNotification1.bind(this)
+		this.openNotification2 = this.openNotification2.bind(this)
 		this.state = {
 			invoice: true,
 		}
@@ -57,12 +49,41 @@ class Invoice extends Component {
 		this.props.clearSquare()
 	}
 
-	handleClick(obj) {
-		openNotification()
-		// this.props.getSquareCustomer(obj)
-		// this.setState({
-		// 	invoice: false,
-		// })
+	async handleClick(obj) {
+		await this.props.getSquareCustomer(obj)
+		this.setState({
+			invoice: false,
+		})
+		this.openNotification1()
+	}
+
+	async handleCreateInvoice(order, customerId) {
+		await this.props.createInvoice(order, customerId)
+		this.openNotification2()
+	}
+
+	openNotification1 = () => {
+		const args = {
+			message: this.props.customer.status,
+			description: this.props.customer.status,
+			duration: 6,
+		}
+		notification.open(args)
+	}
+
+	openNotification2 = () => {
+		let description
+		if (this.props.invoice.id) {
+			description = 'Invoice created succesfully'
+		} else {
+			description = 'Failed to create invoice'
+		}
+		const args = {
+			message: this.props.invoice.id,
+			description: description,
+			duration: 6,
+		}
+		notification.open(args)
 	}
 
 	async handleSend(evt) {
@@ -133,18 +154,6 @@ class Invoice extends Component {
 							{status}
 						</Dropdown.Item>
 					))}
-					{status === 'cancelled' ? (
-						<Popconfirm
-							title='Are you sure to delete this task?'
-							// onConfirm={confirm}
-							// onCancel={cancel}
-							okText='Yes'
-							cancelText='No'>
-							<a href='#'>Delete</a>
-						</Popconfirm>
-					) : (
-						''
-					)}
 				</DropdownButton>
 				<DropdownButton
 					size='lg'
@@ -194,7 +203,7 @@ class Invoice extends Component {
 						variant='primary'
 						disabled={this.state.invoice}
 						onClick={() =>
-							this.props.createInvoice(
+							this.handleCreateInvoice(
 								this.props.order,
 								this.props.customer.id
 							)
@@ -202,11 +211,6 @@ class Invoice extends Component {
 						Create Invoice
 					</Button>
 				</OverlayTrigger>
-
-				<div>
-					{cust ? <div>{this.props.customer.status}</div> : <div />}
-					{invoice ? <div>Invoice created succesfully</div> : <div />}
-				</div>
 			</div>
 		)
 	}

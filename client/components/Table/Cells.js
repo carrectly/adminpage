@@ -11,10 +11,6 @@ export const DateCell = ({value}) => (
 	<span>{moment(value).format('M/D/YY hh:mm A')}</span>
 )
 
-export const CustomerInfoCell = ({value}) => (
-	<Link to={`/singlecustomer/${value}`}>Customer Info</Link>
-)
-
 export const CustomerNameCell = ({value, row}) => (
 	<Link to={`/singlecustomer/${row.customerPhoneNumber}`}>
 		{value.firstName} {value.lastName}
@@ -29,10 +25,19 @@ export const DeleteOrderCell = ({value}) => {
 	const dispatch = useDispatch()
 	const handleClick = evt => {
 		evt.preventDefault()
-		if (evt.target.id) {
-			dispatch(deleteOrderThunk(evt.target.id))
+		if (
+			window.confirm(
+				'Are you sure you want to delete this order from the database?'
+			)
+		) {
+			if (evt.target.id) {
+				dispatch(deleteOrderThunk(evt.target.id))
+			}
+		} else {
+			console.log('changed my mind')
 		}
 	}
+
 	return (
 		<Button id={value} onClick={handleClick} variant='danger'>
 			Delete
@@ -44,10 +49,19 @@ export const DeleteCustomerCell = ({value}) => {
 	const dispatch = useDispatch()
 	const handleClick = evt => {
 		evt.preventDefault()
-		if (evt.target.id) {
-			dispatch(deleteContactThunk(evt.target.id))
+		if (
+			window.confirm(
+				'Are you sure you want to delete this customer from the database?'
+			)
+		) {
+			if (evt.target.id) {
+				dispatch(deleteContactThunk(evt.target.id))
+			}
+		} else {
+			console.log('changed my mind')
 		}
 	}
+
 	return (
 		<Button id={value} onClick={handleClick} variant='danger'>
 			Delete

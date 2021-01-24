@@ -5,12 +5,6 @@ import {connect} from 'react-redux'
 import {Table, Input, Button, Space} from 'antd'
 import moment from 'moment'
 import OrdersTableHeader from './OrdersTableHeader'
-import {
-	DateCell,
-	CustomerInfoCell,
-	OrderDetailsCell,
-	CustomerNameCell,
-} from './util'
 import columns from './Table/Columns'
 
 class TableOrdersByStatus extends Component {
