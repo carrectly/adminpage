@@ -63,7 +63,7 @@ router.put('/single/:orderid', async (req, res, next) => {
 			where: {
 				hash: id,
 			},
-			include: [{model: Service}],
+			include: [{model: Service}, {model: Customer}],
 		})
 		console.log('api received order to update', req.body)
 		const neword = await ord.update(req.body)
