@@ -26,7 +26,6 @@ router.post('/', async (req, res, next) => {
 			isAdmin: true,
 			shippingAddress: faker.address.streetAddress(),
 		})
-		console.log('Inside api route')
 		res.json(users)
 	} catch (err) {
 		next(err)
