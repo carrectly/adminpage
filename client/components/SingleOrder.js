@@ -83,12 +83,8 @@ class SingleOrder extends Component {
 	// eslint-disable-next-line complexity
 	render() {
 		const singleorder = this.props.order || {}
-		console.log('....single order', singleorder)
 		const services = this.props.order.services || []
 		const customer = singleorder.customer || {}
-		// const phoneNumber = singleorder.customer.phoneNumber || ''
-		// const firstName = singleorder.customer.firstName || ''
-		// const lastName = singleorder.customer.lastName || ''
 		let arr = []
 
 		for (let [key, value] of Object.entries(singleorder)) {
@@ -190,7 +186,6 @@ class SingleOrder extends Component {
 						<OrderComments id={this.props.match.params.orderid} />
 					</div>
 					<div className='invoiceform'>
-						{/* <OrderComments id={this.props.match.params.orderid} /> */}
 						<UpdateOrder id={this.props.match.params.orderid} />
 						<Invoice
 							fetchEmails={this.fetchEmails}

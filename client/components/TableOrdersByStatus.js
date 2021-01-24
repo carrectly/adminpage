@@ -13,6 +13,7 @@ class TableOrdersByStatus extends Component {
 
 		return (
 			<Table
+				scroll={{x: 1500}}
 				columns={columns}
 				dataSource={array}
 				pagination={false}

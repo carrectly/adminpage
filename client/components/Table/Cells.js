@@ -7,14 +7,22 @@ import {deleteOrderThunk} from '../../store/archivedOrders'
 import {deleteContactThunk} from '../../store/contacts'
 import {getStatusArray} from '../util'
 
-export const DateCell = ({value}) => (
-	<span>{moment(value).format('M/D/YY hh:mm A')}</span>
-)
+export const DateCell = ({value}) => {
+	if (value) {
+		return <span>{moment(value).format('M/D/YY hh:mm A')}</span>
+	} else {
+		return <div />
+	}
+}
 
 export const CustomerNameCell = ({value, row}) => (
 	<Link to={`/singlecustomer/${row.customerPhoneNumber}`}>
 		{value.firstName} {value.lastName}
 	</Link>
+)
+
+export const CustomerPhoneCell = ({value}) => (
+	<Link to={`/singlecustomer/${value}`}>{value}</Link>
 )
 
 export const OrderDetailsCell = ({value}) => (

@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getAllOrdersThunk} from '../store/archivedOrders'
 import {Table} from 'react-bootstrap'
-import AllOrdersTable from './AllOrdersTable'
 import OrdersTableHeader from './OrdersTableHeader'
 import {Pagination} from 'antd'
 import FilterComponent from './FilterComponent'
@@ -21,9 +20,6 @@ const AllOrders = () => {
 
 	return (
 		<div>
-			<div>
-				<h1 className='center'>Orders View</h1>
-			</div>
 			<AntDOrdersTable loading={loading} />
 		</div>
 	)

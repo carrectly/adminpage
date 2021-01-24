@@ -23,8 +23,7 @@ const columns = [
 		title: 'status',
 		dataIndex: 'status',
 		align: 'center',
-		width: 130,
-		key: 'name',
+		key: 'status',
 		render: value => <StatusCell value={value} />,
 	},
 	{
@@ -52,6 +51,12 @@ const columns = [
 		title: 'pickupDate',
 		dataIndex: 'pickupDate',
 		key: 'pickupDate',
+		render: value => <DateCell value={value} />,
+	},
+	{
+		title: 'dropoffDate',
+		dataIndex: 'dropoffDate',
+		key: 'dropoffDate',
 		render: value => <DateCell value={value} />,
 	},
 ]

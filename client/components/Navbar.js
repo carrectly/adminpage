@@ -43,10 +43,7 @@ class Navbar extends React.Component {
 					</Link>
 
 					<Link to='/allOrders' className='link'>
-						All Orders
-					</Link>
-					<Link to='/cancelledOrders' className='link'>
-						Cancelled Orders
+						Archived Orders
 					</Link>
 					<Link to='/allCustomers' className='link'>
 						All Customers
@@ -91,11 +88,7 @@ class Navbar extends React.Component {
 				</Link>
 
 				<Link to='/allOrders' className='link'>
-					All Orders
-				</Link>
-
-				<Link to='/cancelledOrders' className='link'>
-					Cancelled Orders
+					Archived Orders
 				</Link>
 
 				<Link to='/allCustomers' className='link'>
