@@ -15,6 +15,7 @@ import {
 	OverlayTrigger,
 	Tooltip,
 } from 'react-bootstrap'
+import {Popconfirm} from 'antd'
 import {fetchDealersThunk} from '../store/dealers.js'
 import {sendSingleEmailThunk} from '../store/singleemail'
 import {getEmailsThunk} from '../store/emails'
@@ -87,8 +88,29 @@ class Invoice extends Component {
 			status: evt.target.name,
 		}
 		let id = this.props.id
-		this.props.updateStatus(id, obj)
-		obj = {}
+		if (evt.target.name === 'cancelled') {
+			if (
+				window.confirm(
+					'Changing the status to cancelled will remove the order from the home page and will move it to archives. Do you want to proceed?'
+				)
+			) {
+				this.props.updateStatus(id, obj)
+			} else {
+				console.log('changed my mind')
+			}
+		} else if (evt.target.name === 'paid') {
+			if (
+				window.confirm(
+					'Changing the status to paid will remove the order from the home page and will move it to archives. Do you want to proceed?'
+				)
+			) {
+				this.props.updateStatus(id, obj)
+			} else {
+				console.log('changed my mind')
+			}
+		} else {
+			this.props.updateStatus(id, obj)
+		}
 	}
 
 	render() {
@@ -111,6 +133,18 @@ class Invoice extends Component {
 							{status}
 						</Dropdown.Item>
 					))}
+					{status === 'cancelled' ? (
+						<Popconfirm
+							title='Are you sure to delete this task?'
+							// onConfirm={confirm}
+							// onCancel={cancel}
+							okText='Yes'
+							cancelText='No'>
+							<a href='#'>Delete</a>
+						</Popconfirm>
+					) : (
+						''
+					)}
 				</DropdownButton>
 				<DropdownButton
 					size='lg'
