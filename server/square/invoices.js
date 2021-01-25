@@ -91,7 +91,7 @@ router.post('/', async (req, res, next) => {
 					},
 					payment_requests: [
 						{
-							delivery_method: 'EMAIL',
+							request_method: 'EMAIL',
 							request_type: 'BALANCE',
 							due_date: `${dueDate}`,
 							tipping_enabled: true,
