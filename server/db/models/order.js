@@ -68,42 +68,42 @@ const Order = db.define('order', {
 	},
 })
 
-// const createInGoogle = async inst => {
-// 	try {
-// 		let newinst = {...inst.dataValues}
-// 		inst.isInCalendar = true
-// 		let cus = await Customer.findOne({
-// 			where: {phoneNumber: newinst.customerPhoneNumber},
-// 		})
-// 		newinst.customerName = `${cus.firstName} ${cus.lastName}`
-// 		await axios.post(
-// 			`${process.env.DOMAIN}/auth/google/calendar/newevent`,
-// 			newinst
-// 		)
-// 	} catch (err) {
-// 		console.log(err.message)
-// 	}
-// }
+const createInGoogle = async inst => {
+	try {
+		let newinst = {...inst.dataValues}
+		inst.isInCalendar = true
+		let cus = await Customer.findOne({
+			where: {phoneNumber: newinst.customerPhoneNumber},
+		})
+		newinst.customerName = `${cus.firstName} ${cus.lastName}`
+		await axios.post(
+			`${process.env.DOMAIN}/auth/google/calendar/newevent`,
+			newinst
+		)
+	} catch (err) {
+		console.log(err.message)
+	}
+}
 
-// const updateInGoogle = async inst => {
-// 	try {
-// 		let newinst = {...inst.dataValues}
-// 		console.log('updating event ---------- ', newinst)
-// 		inst.isInCalendar = true
-// 		let cus = await Customer.findOne({
-// 			where: {phoneNumber: newinst.customerPhoneNumber},
-// 		})
-// 		newinst.customerName = `${cus.firstName} ${cus.lastName}`
-// 		await axios.post(
-// 			`${process.env.DOMAIN}/auth/google/calendar/newevent/update`,
-// 			newinst
-// 		)
-// 	} catch (err) {
-// 		console.log(err.message)
-// 	}
-// }
+const updateInGoogle = async inst => {
+	try {
+		let newinst = {...inst.dataValues}
+		console.log('updating event ---------- ', newinst)
+		inst.isInCalendar = true
+		let cus = await Customer.findOne({
+			where: {phoneNumber: newinst.customerPhoneNumber},
+		})
+		newinst.customerName = `${cus.firstName} ${cus.lastName}`
+		await axios.post(
+			`${process.env.DOMAIN}/auth/google/calendar/newevent/update`,
+			newinst
+		)
+	} catch (err) {
+		console.log(err.message)
+	}
+}
 
-// Order.beforeCreate(createInGoogle)
-// Order.afterUpdate(updateInGoogle)
+Order.beforeCreate(createInGoogle)
+Order.afterUpdate(updateInGoogle)
 
 module.exports = Order

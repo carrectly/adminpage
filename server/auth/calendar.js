@@ -2,6 +2,7 @@ const router = require('express').Router()
 const {google} = require('googleapis')
 const sampleClient = require('./googleclient')
 const {User} = require('../db/models')
+const moment = require('moment')
 module.exports = router
 
 const oAuth2Client = new google.auth.OAuth2(
@@ -74,6 +75,8 @@ async function listEvents() {
 }
 
 async function createEvent(evt) {
+	const endTime = moment(evt.pickupDate).add(1, 'hour')
+	const endTimeISO = endTime.toISOString()
 	var event = {
 		summary: `${evt.carYear} ${evt.carMake} ${evt.carModel} ${evt.customerName}`,
 		location: `${evt.pickupLocation}`,
@@ -84,7 +87,7 @@ async function createEvent(evt) {
 			timeZone: 'America/Chicago',
 		},
 		end: {
-			dateTime: `${evt.dropoffDate}`,
+			dateTime: `${endTimeISO}`,
 			timeZone: 'America/Chicago',
 		},
 		colorId: '11',
@@ -111,6 +114,8 @@ async function createEvent(evt) {
 }
 
 async function updateEvent(evt) {
+	const endTime = moment(evt.pickupDate).add(1, 'hour')
+	const endTimeISO = endTime.toISOString()
 	// let allcalendars = await calendar.calendarList.list()
 	// console.log('all calendar ids', allcalendars.data.items)
 	const statuses = [
@@ -138,7 +143,7 @@ async function updateEvent(evt) {
 			timeZone: 'America/Chicago',
 		},
 		end: {
-			dateTime: `${evt.dropoffDate}`,
+			dateTime: `${endTimeISO}`,
 			timeZone: 'America/Chicago',
 		},
 		colorId: `${colorId}`,
