@@ -12,9 +12,7 @@ client.basePath = process.env.squareBasePath
 oauth2.accessToken = process.env.SQUARE_TOKEN
 
 var orders = new SquareConnect.OrdersApi()
-var dueDate = moment()
-	.add(7, 'days')
-	.format('YYYY-MM-DD')
+var dueDate = moment().format('YYYY-MM-DD')
 
 router.post('/', async (req, res, next) => {
 	try {

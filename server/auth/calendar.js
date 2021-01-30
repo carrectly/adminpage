@@ -75,7 +75,9 @@ async function createEvent(evt) {
 		summary: `${evt.carYear} ${evt.carMake} ${evt.carModel} ${evt.customerName}`,
 		location: `${evt.pickupLocation}`,
 		id: `${evt.hash}`,
-		description: `Customer phone number: ${evt.customerPhoneNumber} \n ${evt.comments}`,
+		description: `Customer phone number: ${evt.customerPhoneNumber} 
+		OrderID: ${evt.hash}
+		${evt.comments ? evt.comments : ''}`,
 		start: {
 			dateTime: `${evt.pickupDate}`,
 			timeZone: 'America/Chicago',
