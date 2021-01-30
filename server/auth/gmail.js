@@ -3,14 +3,9 @@ const {google} = require('googleapis')
 var parseMessage = require('gmail-api-parse-message')
 var Base64 = require('js-base64').Base64
 const {User} = require('../db/models')
+const oAuth2Client = require('./oAuth2Client')
 
 module.exports = router
-
-const oAuth2Client = new google.auth.OAuth2(
-	process.env.GOOGLE_CLIENT_ID,
-	process.env.GOOGLE_CLIENT_SECRET,
-	process.env.GOOGLE_CALLBACK
-)
 
 const gmail = google.gmail({
 	version: 'v1',
