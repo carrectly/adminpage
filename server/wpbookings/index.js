@@ -4,6 +4,7 @@ module.exports = router
 var axios = require('axios')
 const {Customer, Order, Service} = require('../db/models')
 const moment = require('moment')
+// const timezone = require('moment-timezone')
 
 router.post('/newbooking', async (req, res, next) => {
 	try {
@@ -29,14 +30,12 @@ router.post('/newbooking', async (req, res, next) => {
 		}
 
 		msgbody.customerPhoneNumber = req.body.customer.phoneNumber
+		msgbody.pickupDate = moment(msgbody.pickupDate)
+			.utcOffset(6)
+			.format('YYYY-MM-DD HH:mm:ss')
+		console.log('updated date', msgbody.pickupDate)
 		delete msgbody.customer
 		delete msgbody.services
-		// if (!msgbody.pickupDate) {
-		// 	msgbody.pickupDate = moment()
-		// }
-		// if (!msgbody.dropoffDate) {
-		// 	msgbody.dropoffDate = moment(msgbody.pickupDate).add(9, 'hours')
-		// }
 
 		let ordr = await Order.create(msgbody)
 
@@ -108,7 +107,7 @@ router.post('/newbooking', async (req, res, next) => {
 		await forLoop3()
 		res.status(200).json(detailedResponse)
 	} catch (err) {
-		res.status(400).send(err.errors[0].message)
+		res.status(400).send(err)
 	}
 })
 
