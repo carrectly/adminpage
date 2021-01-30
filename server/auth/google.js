@@ -39,25 +39,26 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 		googleConfig,
 		(token, refreshToken, profile, done) => {
 			const googleId = profile.id
-			//const name = profile.displayName
 			const email = profile.emails[0].value
 
-			let tkn = {}
+			// let tkn = {}
 
-			if (token) {
-				tkn.access_token = token
-			}
-			if (refreshToken) {
-				tkn.refresh_token = refreshToken
-			}
-			tkn = JSON.stringify(tkn)
+			// if (token) {
+			// 	tkn.access_token = token
+			// }
+			// if (refreshToken) {
+			// 	tkn.refresh_token = refreshToken
+			// }
+			// tkn = JSON.stringify(tkn)
 
 			User.findOrCreate({
 				where: {googleId},
 				defaults: {email},
 			})
 				.then(user => {
-					user[0].update({token: tkn})
+					// if (user[0]._options.isNewRecord) {
+					// 	user[0].update({token: tkn})
+					// }
 					return done(null, user[0])
 				})
 				.catch(done)
@@ -76,7 +77,15 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 		'https://www.googleapis.com/auth/calendar',
 	]
 
-	router.get('/', passport.authenticate('google', {scope: SCOPES}))
+	// accessType will need to be enabled if we are trying to obtain new refresh token
+	router.get(
+		'/',
+		passport.authenticate('google', {
+			scope: SCOPES,
+			// accessType: 'offline',
+			// prompt: 'consent',
+		})
+	)
 
 	router.get(
 		'/callback',

@@ -1,15 +1,9 @@
 const router = require('express').Router()
 const {google} = require('googleapis')
-const sampleClient = require('./googleclient')
 const {User} = require('../db/models')
 const moment = require('moment')
+const oAuth2Client = require('./oAuth2Client')
 module.exports = router
-
-const oAuth2Client = new google.auth.OAuth2(
-	process.env.GOOGLE_CLIENT_ID,
-	process.env.GOOGLE_CLIENT_SECRET,
-	process.env.GOOGLE_CALLBACK
-)
 
 const calendar = google.calendar({
 	version: 'v3',
@@ -137,7 +131,9 @@ async function updateEvent(evt) {
 		summary: `${evt.carYear} ${evt.carMake} ${evt.carModel} ${evt.customerName}`,
 		location: `${evt.pickupLocation}`,
 		id: `${evt.hash}`,
-		description: `Customer phone number: ${evt.customerPhoneNumber} \n ${evt.comments}`,
+		description: `Customer phone number: ${evt.customerPhoneNumber} 
+		OrderID: ${evt.hash}
+		${evt.comments ? evt.comments : ''}`,
 		start: {
 			dateTime: `${evt.pickupDate}`,
 			timeZone: 'America/Chicago',
