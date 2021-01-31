@@ -8,6 +8,7 @@ const moment = require('moment')
 
 router.post('/newbooking', async (req, res, next) => {
 	try {
+		console.log('newbooking request from ukraine', req.body)
 		let msgbody = req.body
 		let services = req.body.services //array
 		let newcust = req.body.customer
