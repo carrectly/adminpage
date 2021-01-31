@@ -31,9 +31,13 @@ router.post('/newbooking', async (req, res, next) => {
 		}
 
 		msgbody.customerPhoneNumber = req.body.customer.phoneNumber
-		msgbody.pickupDate = moment(msgbody.pickupDate)
-			.utcOffset(6)
-			.format('YYYY-MM-DD HH:mm:ss')
+		msgbody.pickupDate = moment(msgbody.pickupDate).format(
+			'YYYY-MM-DD HH:mm:ss'
+		)
+
+		// msgbody.pickupDate = moment(msgbody.pickupDate)
+		// 	.utcOffset(6)
+		// 	.format('YYYY-MM-DD HH:mm:ss')
 		console.log('updated date', msgbody.pickupDate)
 		delete msgbody.customer
 		delete msgbody.services
