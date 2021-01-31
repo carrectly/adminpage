@@ -69,7 +69,7 @@ export default (state = initialState, action) => {
 			return action.comments
 		}
 		case ADD_COMMENT: {
-			return [...state, action.comment]
+			return [action.comment, ...state]
 		}
 		case CLEAR_COMMENTS: {
 			return initialState
