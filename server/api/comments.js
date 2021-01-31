@@ -24,6 +24,7 @@ router.post('/:orderid', async (req, res, next) => {
 		let id = req.params.orderid
 		let cmt = await Comment.create({
 			content: req.body.content,
+			author: req.body.author,
 			orderHash: id,
 		})
 		res.json(cmt)

@@ -493,7 +493,7 @@ body {
 }
 
 table.commentlist {
-	border: 3px solid #d60000;
+	border-radius: 5px;
 	border-collapse: collapse;
 	width: 100%;
 	box-shadow: 5px 10px #161515;
