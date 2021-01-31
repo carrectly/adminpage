@@ -1,10 +1,13 @@
 import React from 'react'
+import m from 'moment'
 import {
 	DateCell,
 	OrderDetailsCell,
 	CustomerNameCell,
 	StatusCell,
 } from './Cells.js'
+
+const defaultStringCompareOptions = {sensitivity: 'base'}
 
 const columns = [
 	{
@@ -24,6 +27,9 @@ const columns = [
 		dataIndex: 'status',
 		align: 'center',
 		key: 'status',
+		sorter: (a, b) =>
+			a.status.localeCompare(b.status, defaultStringCompareOptions),
+		sortDirections: ['descend', 'ascend'],
 		render: value => <StatusCell value={value} />,
 	},
 	{
@@ -51,12 +57,17 @@ const columns = [
 		title: 'pickupDate',
 		dataIndex: 'pickupDate',
 		key: 'pickupDate',
+		defaultSortOrder: 'descend',
+		sorter: (a, b) => m(a.pickupDate).diff(m(b.pickupDate)),
+		sortDirections: ['descend', 'ascend'],
 		render: value => <DateCell value={value} />,
 	},
 	{
 		title: 'dropoffDate',
 		dataIndex: 'dropoffDate',
 		key: 'dropoffDate',
+		sorter: (a, b) => m(a.pickupDate).diff(m(b.pickupDate)),
+		sortDirections: ['descend', 'ascend'],
 		render: value => <DateCell value={value} />,
 	},
 ]

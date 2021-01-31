@@ -96,12 +96,19 @@ const AntDCustomersTable = props => {
 		setSearchText('')
 	}
 
+	const defaultStringCompareOptions = {sensitivity: 'base'}
+
 	const columns = [
 		{
 			title: 'First Name',
 			dataIndex: 'firstName',
 			key: 'firstName',
 			width: '10%',
+			sorter: (a, b) =>
+				a.firstName.localeCompare(
+					b.firstName,
+					defaultStringCompareOptions
+				),
 			...getColumnSearchProps('firstName'),
 		},
 		{
@@ -109,6 +116,11 @@ const AntDCustomersTable = props => {
 			dataIndex: 'lastName',
 			key: 'lastName',
 			width: '10%',
+			sorter: (a, b) =>
+				a.lastName.localeCompare(
+					b.lastName,
+					defaultStringCompareOptions
+				),
 			...getColumnSearchProps('lastName'),
 		},
 		{
@@ -116,6 +128,8 @@ const AntDCustomersTable = props => {
 			dataIndex: 'email',
 			key: 'email',
 			width: '10%',
+			sorter: (a, b) =>
+				a.email.localeCompare(b.email, defaultStringCompareOptions),
 			...getColumnSearchProps('email'),
 		},
 		{
