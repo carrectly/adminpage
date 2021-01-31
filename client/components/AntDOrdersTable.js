@@ -4,7 +4,7 @@ import Highlighter from 'react-highlight-words'
 import {SearchOutlined} from '@ant-design/icons'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
-import moment from 'moment'
+import m from 'moment'
 import {
 	DateCell,
 	OrderDetailsCell,
@@ -102,6 +102,8 @@ const AntDOrdersTable = props => {
 		setSearchText('')
 	}
 
+	const defaultStringCompareOptions = {sensitivity: 'base'}
+
 	const columns = [
 		{
 			title: 'Order Link',
@@ -115,6 +117,8 @@ const AntDOrdersTable = props => {
 			dataIndex: 'status',
 			key: 'name',
 			width: '10%',
+			sorter: (a, b) =>
+				a.status.localeCompare(b.status, defaultStringCompareOptions),
 			...getColumnSearchProps('status'),
 		},
 		{
@@ -143,6 +147,11 @@ const AntDOrdersTable = props => {
 			dataIndex: 'customer',
 			key: 'customer',
 			width: '20%',
+			sorter: (a, b) =>
+				a.customer.localeCompare(
+					b.customer,
+					defaultStringCompareOptions
+				),
 			render: (value, row) => (
 				<CustomerNameCell value={value} row={row} />
 			),
@@ -157,12 +166,14 @@ const AntDOrdersTable = props => {
 			title: 'pickupDate',
 			dataIndex: 'pickupDate',
 			key: 'pickupDate',
+			sorter: (a, b) => m(a.pickupDate).diff(m(b.pickupDate)),
 			render: value => <DateCell value={value} />,
 		},
 		{
 			title: 'updatedAt',
 			dataIndex: 'updatedAt',
 			key: 'updatedAt',
+			sorter: (a, b) => m(a.updatedAt).diff(m(b.updatedAt)),
 			render: value => <DateCell value={value} />,
 		},
 		{
