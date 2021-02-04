@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getActiveOrdersThunk} from '../store/activeOrders'
+import {getActiveOrdersThunk} from '../../store/activeOrders'
 import TableOrdersByStatus from './TableOrdersByStatus'
 import {
 	getTakeActionStatusArray,
@@ -9,7 +9,7 @@ import {
 	getInvoicesStatusArray,
 	getQuotesStatusArray,
 	getPotentialLeadsStatusArray,
-} from './util'
+} from '../util'
 
 import {Collapse} from 'antd'
 const {Panel} = Collapse

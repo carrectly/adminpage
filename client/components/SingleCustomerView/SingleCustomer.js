@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getUserOrdersThunk} from '../store/userorders'
+import {getUserOrdersThunk} from '../../store/userorders'
 import {Table, Card, Button} from 'react-bootstrap'
-import {getSingleCustomerThunk} from '../store/singlecustomer'
+import {getSingleCustomerThunk} from '../../store/singlecustomer'
 import UpdateCustomer from './UpdateCustomer'
 
 class SingleCustomer extends Component {

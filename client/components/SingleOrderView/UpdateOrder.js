@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Modal, DatePicker, Form, Input} from 'antd'
-import {updateSingleOrderThunk} from '../store/singleorder'
+import {updateSingleOrderThunk} from '../../store/singleorder'
 import {Button} from 'react-bootstrap'
 import {useParams} from 'react-router-dom'
 import moment from 'moment'

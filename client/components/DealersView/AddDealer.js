@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
-import {addDealerThunk} from '../store/dealers.js'
+import {addDealerThunk} from '../../store/dealers.js'
 import {Modal} from 'react-bootstrap'
 import {Form, Button, Input} from 'antd'
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {useDispatch} from 'react-redux'
-import {removeOrderServiceThunk} from '../store/singleorder'
+import {removeOrderServiceThunk} from '../../store/singleorder'
 import {Table, Button} from 'react-bootstrap'
 import AddOrderServices from './AddOrderServices'
 import {useParams} from 'react-router-dom'

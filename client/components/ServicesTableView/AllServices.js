@@ -5,7 +5,7 @@ import {
 	fetchServicesThunk,
 	addServiceThunk,
 	updateServiceThunk,
-} from '../store/services'
+} from '../../store/services'
 import {Table, Button} from 'react-bootstrap'
 import AddService from './AddService'
 import UpdateService from './UpdateService'

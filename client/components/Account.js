@@ -3,9 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {Login} from './auth-form'
 import {logout} from '../store'
-import BookingsByStatus from './BookingsByStatus'
-import {Button} from 'react-bootstrap'
-import Tokens from './GoogleTokens'
+import BookingsByStatus from './HomePageView/BookingsByStatus'
 
 class Account extends Component {
 	constructor() {

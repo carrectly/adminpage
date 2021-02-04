@@ -4,20 +4,14 @@ import Highlighter from 'react-highlight-words'
 import {SearchOutlined} from '@ant-design/icons'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
-import m from 'moment'
-import {
-	DateCell,
-	OrderDetailsCell,
-	DeleteOrderCell,
-	CustomerNameCell,
-} from './Table/Cells'
+import {DeleteCustomerCell, CustomerPhoneCell} from '../Table/Cells'
 
-const AntDOrdersTable = props => {
+const AntDCustomersTable = props => {
 	const [searchText, setSearchText] = useState('')
 	const [searchedColumn, setSearchedColumn] = useState('')
 	let searchInput = useRef(null)
 
-	const ordersArr = useSelector(state => state.archivedOrders)
+	const customersArray = useSelector(state => state.contacts)
 
 	const getColumnSearchProps = dataIndex => ({
 		filterDropdown: ({
@@ -106,82 +100,58 @@ const AntDOrdersTable = props => {
 
 	const columns = [
 		{
-			title: 'Order Link',
-			dataIndex: 'hash',
-			key: 'hash',
-			width: '10%',
-			render: value => <OrderDetailsCell value={value} />,
-		},
-		{
-			title: 'status',
-			dataIndex: 'status',
-			key: 'name',
+			title: 'First Name',
+			dataIndex: 'firstName',
+			key: 'firstName',
 			width: '10%',
 			sorter: (a, b) =>
-				a.status.localeCompare(b.status, defaultStringCompareOptions),
-			...getColumnSearchProps('status'),
-		},
-		{
-			title: 'carMake',
-			dataIndex: 'carMake',
-			key: 'age',
-			width: '10%',
-			...getColumnSearchProps('carMake'),
-		},
-		{
-			title: 'carModel',
-			dataIndex: 'carModel',
-			key: 'carModel',
-			width: '10%',
-			...getColumnSearchProps('carModel'),
-		},
-		{
-			title: 'Customer Phone #',
-			dataIndex: 'customerPhoneNumber',
-			key: 'customerPhoneNumber',
-			width: '20%',
-			...getColumnSearchProps('customerPhoneNumber'),
-		},
-		{
-			title: 'Customer Name',
-			dataIndex: 'customer',
-			key: 'customer',
-			width: '20%',
-			sorter: (a, b) =>
-				a.customer.localeCompare(
-					b.customer,
+				a.firstName.localeCompare(
+					b.firstName,
 					defaultStringCompareOptions
 				),
-			render: (value, row) => (
-				<CustomerNameCell value={value} row={row} />
-			),
+			...getColumnSearchProps('firstName'),
 		},
 		{
-			title: 'pickupLocation',
-			dataIndex: 'pickupLocation',
-			key: 'pickupLocation',
-			...getColumnSearchProps('pickupLocation'),
-		},
-		{
-			title: 'pickupDate',
-			dataIndex: 'pickupDate',
-			key: 'pickupDate',
-			sorter: (a, b) => m(a.pickupDate).diff(m(b.pickupDate)),
-			render: value => <DateCell value={value} />,
-		},
-		{
-			title: 'updatedAt',
-			dataIndex: 'updatedAt',
-			key: 'updatedAt',
-			sorter: (a, b) => m(a.updatedAt).diff(m(b.updatedAt)),
-			render: value => <DateCell value={value} />,
-		},
-		{
-			title: 'Delete Order',
-			dataIndex: 'hash',
-			key: 'hash',
+			title: 'Last Name',
+			dataIndex: 'lastName',
+			key: 'lastName',
 			width: '10%',
-			render: value => <DeleteOrderCell value={value} />,
+			sorter: (a, b) =>
+				a.lastName.localeCompare(
+					b.lastName,
+					defaultStringCompareOptions
+				),
+			...getColumnSearchProps('lastName'),
+		},
+		{
+			title: 'Email',
+			dataIndex: 'email',
+			key: 'email',
+			width: '10%',
+			sorter: (a, b) =>
+				a.email.localeCompare(b.email, defaultStringCompareOptions),
+			...getColumnSearchProps('email'),
+		},
+		{
+			title: 'Phone #',
+			dataIndex: 'phoneNumber',
+			key: 'phoneNumber',
+			width: '10%',
+			...getColumnSearchProps('phoneNumber'),
+		},
+		{
+			title: 'Link to customer',
+			dataIndex: 'phoneNumber',
+			key: 'phoneNumber',
+			width: '10%',
+			render: value => <CustomerPhoneCell value={value} />,
+		},
+		{
+			title: 'Delete Customer',
+			dataIndex: 'phoneNumber',
+			key: 'phoneNumber',
+			width: '10%',
+			render: value => <DeleteCustomerCell value={value} />,
 		},
 	]
 
@@ -189,12 +159,11 @@ const AntDOrdersTable = props => {
 		<Table
 			columns={columns}
 			scroll={{x: 1500}}
-			size='small'
-			dataSource={ordersArr}
+			dataSource={customersArray}
 			pagination={{position: ['topCenter']}}
 			loading={props.loading}
 		/>
 	)
 }
 
-export default AntDOrdersTable
+export default AntDCustomersTable

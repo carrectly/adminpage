@@ -5,14 +5,14 @@ import {
 	getSingleOrderThunk,
 	updateOrderDetailsThunk,
 	removeOrderServiceThunk,
-} from '../store/singleorder'
+} from '../../store/singleorder'
 import Gmail from './Gmail'
 import Invoice from './Invoice'
 import {Table, Button} from 'react-bootstrap'
 import UpdateOrder from './UpdateOrder'
-import {getEmailsThunk, clearEmailsThunk} from '../store/emails'
+import {getEmailsThunk, clearEmailsThunk} from '../../store/emails'
 import AddOrderServices from './AddOrderServices'
-import {clearSingleEmailThunk} from '../store/singleemail'
+import {clearSingleEmailThunk} from '../../store/singleemail'
 import OrderComments from './OrderComments'
 import SingleOrderServices from './SingleOrderServices'
 import moment from 'moment'
