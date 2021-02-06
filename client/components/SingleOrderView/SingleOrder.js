@@ -5,14 +5,15 @@ import {
 	getSingleOrderThunk,
 	updateOrderDetailsThunk,
 	removeOrderServiceThunk,
-} from '../store/singleorder'
+} from '../../store/singleorder'
+import {LocationCell} from '../Table/Cells.js'
 import Gmail from './Gmail'
 import Invoice from './Invoice'
 import {Table, Button} from 'react-bootstrap'
 import UpdateOrder from './UpdateOrder'
-import {getEmailsThunk, clearEmailsThunk} from '../store/emails'
+import {getEmailsThunk, clearEmailsThunk} from '../../store/emails'
 import AddOrderServices from './AddOrderServices'
-import {clearSingleEmailThunk} from '../store/singleemail'
+import {clearSingleEmailThunk} from '../../store/singleemail'
 import OrderComments from './OrderComments'
 import SingleOrderServices from './SingleOrderServices'
 import moment from 'moment'
@@ -140,7 +141,9 @@ class SingleOrder extends Component {
 								)}
 							</Descriptions.Item>
 							<Descriptions.Item label='Pickup Location' span={3}>
-								{singleorder.pickupLocation}
+								<LocationCell
+									value={singleorder.pickupLocation}
+								/>
 							</Descriptions.Item>
 							<Descriptions.Item label='Car Make'>
 								{singleorder.carMake}

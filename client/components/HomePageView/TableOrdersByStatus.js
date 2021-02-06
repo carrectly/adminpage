@@ -1,11 +1,8 @@
 import React, {Component} from 'react'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-// import {Table, Card, Accordion, Button} from 'react-bootstrap'
-import {Table, Input, Button, Space} from 'antd'
-import moment from 'moment'
-import OrdersTableHeader from './OrdersTableHeader'
-import columns from './Table/Columns'
+import {Table} from 'antd'
+import columns from '../Table/Columns'
 
 class TableOrdersByStatus extends Component {
 	render() {

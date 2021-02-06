@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Modal, Button, Form, Input} from 'antd'
+import {Modal, Button, Form, Input, InputNumber} from 'antd'
 
 const layout = {
 	labelCol: {span: 8},
@@ -22,6 +22,13 @@ const UpdateService = props => {
 		console.log('Failed:', errorInfo)
 	}
 
+	const validateMessages = {
+		required: '${label} is required!',
+		types: {
+			number: '${label} is not a valid number!',
+		},
+	}
+
 	return (
 		<div>
 			<Button type='primary' onClick={() => handleShow(true)}>
@@ -38,6 +45,7 @@ const UpdateService = props => {
 					name='control-hooks'
 					size='large'
 					onFinish={onFinish}
+					validateMessages={validateMessages}
 					onFinishFailed={onFinishFailed}>
 					<Form.Item
 						name='name'
@@ -50,8 +58,8 @@ const UpdateService = props => {
 						name='price'
 						label='Service Price'
 						initialValue={props.service.price}
-						rules={[{required: true}]}>
-						<Input />
+						rules={[{required: true}, {type: 'number'}]}>
+						<InputNumber />
 					</Form.Item>
 					<Form.Item
 						name='description'

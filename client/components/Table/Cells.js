@@ -53,6 +53,17 @@ export const DeleteOrderCell = ({value}) => {
 	)
 }
 
+export const LocationCell = ({value}) => {
+	return (
+		<Link
+			onClick={() =>
+				window.open(`https://maps.google.com/?q=${value}`, '_blank')
+			}>
+			{value}
+		</Link>
+	)
+}
+
 export const DeleteCustomerCell = ({value}) => {
 	const dispatch = useDispatch()
 	const handleClick = evt => {

@@ -5,7 +5,7 @@ import {
 	fetchCommentsThunk,
 	addCommentThunk,
 	clearCommentsThunk,
-} from '../store/comments'
+} from '../../store/comments'
 import {Form, Input, Button, Select} from 'antd'
 const {Option} = Select
 import moment from 'moment'

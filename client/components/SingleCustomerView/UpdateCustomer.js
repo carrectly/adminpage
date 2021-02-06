@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {updateSingleCustomerThunk} from '../store/singlecustomer'
+import {updateSingleCustomerThunk} from '../../store/singlecustomer'
 import {Form, Button} from 'react-bootstrap'
 
 class UpdateCustomer extends Component {

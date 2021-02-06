@@ -5,7 +5,7 @@ import {
 	fetchServicesThunk,
 	addServiceThunk,
 	updateServiceThunk,
-} from '../store/services'
+} from '../../store/services'
 import {Table, Button} from 'react-bootstrap'
 import AddService from './AddService'
 import UpdateService from './UpdateService'
@@ -23,9 +23,6 @@ class AllServices extends Component {
 		const services = this.props.services
 		return (
 			<div>
-				<h1 className='center'>
-					Here you can manage all your services
-				</h1>
 				<AddService addService={this.props.addService} />
 				<Table striped bordered hover size='sm' variant='dark'>
 					<thead>

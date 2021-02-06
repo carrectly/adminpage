@@ -5,6 +5,7 @@ import {
 	OrderDetailsCell,
 	CustomerNameCell,
 	StatusCell,
+	LocationCell,
 } from './Cells.js'
 
 const defaultStringCompareOptions = {sensitivity: 'base'}
@@ -52,6 +53,7 @@ const columns = [
 		title: 'pickupLocation',
 		dataIndex: 'pickupLocation',
 		key: 'pickupLocation',
+		render: value => <LocationCell value={value} />,
 	},
 	{
 		title: 'pickupDate',

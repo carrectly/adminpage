@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getEmailsThunk} from '../store/emails'
+import {getEmailsThunk} from '../../store/emails'
 import SingleEmail from './SingleEmail.js'
-import {getSingleEmailThunk} from '../store/singleemail'
+import {getSingleEmailThunk} from '../../store/singleemail'
 import ErrorHandler from './ErrorHandler'
 import {Button, Spinner, Image} from 'react-bootstrap'
 

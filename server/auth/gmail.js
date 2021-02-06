@@ -314,19 +314,3 @@ Thank you!
 
 	return res.data
 }
-
-// 'Hi there! <br/>'
-// 'Thank you for requesting your car maintenance with Carrectly. Please allow us to answer some most common questions, plan & coordinate everything. Here is what you should expect:<br/>',
-// '<br/>',
-// '* We will email or send you a text message to answer all your questions, confirm the timing, and coordinate the service. <br/>',
-// '* Prices are not final and the total may vary based on size of the vehicle, potential repairs, extra services, or promotions and discounts - we will walk you through everything to keep it simple and transparent. <br/>',
-// '* You can always change your mind, upgrade or downgrade any service, or reschedule to the date and time that works best for you. <br/>',
-// '* With any questions, email us at  info@carrectly.com or send a text to 773.800.9085. <br/>',
-// 'Our team is looking forward to working with you and to be of help.<br/>',
-
-// `Car Make: ${msg.make}<br/>`,
-// `Car Model: ${msg.model}<br/>`,
-// `Car Year: ${msg.year}<br/>`,
-
-// 'Thank you for your business,<br/>',
-// 'TEAM CARRECTLY',

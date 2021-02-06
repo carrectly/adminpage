@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {fetchSingleDealerThunk} from '../store/singledealer'
+import {fetchSingleDealerThunk} from '../../store/singledealer'
 import UpdateDealer from './UpdateDealer'
 
 class SingleDealer extends Component {

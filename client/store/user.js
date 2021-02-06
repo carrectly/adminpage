@@ -6,7 +6,6 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-const GET_TOKEN = 'GET_TOKEN'
 /**
  * INITIAL STATE
  */
@@ -17,7 +16,6 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-const getToken = user => ({type: GET_TOKEN, user})
 /**
  * THUNK CREATORS
  */
@@ -26,16 +24,6 @@ export const me = () => async dispatch => {
 		const res = await axios.get('/auth/me')
 		dispatch(getUser(res.data))
 		history.push('/account')
-	} catch (err) {
-		console.error(err)
-	}
-}
-
-export const getTokenThunk = () => async dispatch => {
-	try {
-		const res = await axios.get('/auth/google/googleclient')
-		window.open(res.data)
-		dispatch(getToken())
 	} catch (err) {
 		console.error(err)
 	}

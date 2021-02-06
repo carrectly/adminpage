@@ -6,7 +6,7 @@ import {
 	getSquareCustomerThunk,
 	createInvoiceThunk,
 	clearSquareThunk,
-} from '../store/square'
+} from '../../store/square'
 import {
 	DropdownButton,
 	Dropdown,
@@ -15,11 +15,11 @@ import {
 	OverlayTrigger,
 	Tooltip,
 } from 'react-bootstrap'
-import {fetchDealersThunk} from '../store/dealers.js'
-import {sendSingleEmailThunk} from '../store/singleemail'
-import {getEmailsThunk} from '../store/emails'
-import {updateSingleOrderThunk} from '../store/singleorder'
-import {getStatusArray} from './util'
+import {fetchDealersThunk} from '../../store/dealers.js'
+import {sendSingleEmailThunk} from '../../store/singleemail'
+import {getEmailsThunk} from '../../store/emails'
+import {updateSingleOrderThunk} from '../../store/singleorder'
+import {getStatusArray} from '../util'
 let cust
 let invoice
 const statusArray = getStatusArray()

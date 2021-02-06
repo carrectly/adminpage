@@ -3,7 +3,9 @@ const {Service} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
 	try {
-		const result = await Service.findAll()
+		const result = await Service.findAll({
+			order: [['name', 'ASC']],
+		})
 		res.json(result)
 	} catch (err) {
 		next(err)

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Modal, Button, Form, Input} from 'antd'
+import {Modal, Button, Form, Input, InputNumber} from 'antd'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons'
 import {OverlayTrigger, Tooltip} from 'react-bootstrap'
@@ -33,6 +33,13 @@ const AddService = props => {
 		console.log('Failed:', errorInfo)
 	}
 
+	const validateMessages = {
+		required: '${label} is required!',
+		types: {
+			number: '${label} is not a valid number!',
+		},
+	}
+
 	return (
 		<div>
 			<OverlayTrigger
@@ -55,6 +62,7 @@ const AddService = props => {
 					form={form}
 					name='control-hooks'
 					size='large'
+					validateMessages={validateMessages}
 					onFinish={onFinish}
 					onFinishFailed={onFinishFailed}>
 					<Form.Item
@@ -66,8 +74,8 @@ const AddService = props => {
 					<Form.Item
 						name='price'
 						label='Service Price'
-						rules={[{required: true}]}>
-						<Input />
+						rules={[{required: true}, {type: 'number'}]}>
+						<InputNumber />
 					</Form.Item>
 					<Form.Item name='description' label='Description'>
 						<Input />
