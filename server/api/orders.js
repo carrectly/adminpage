@@ -2,7 +2,6 @@ const router = require('express').Router()
 const Sequelize = require('sequelize')
 const {Order, OrderDetails, Service, Customer} = require('../db/models')
 const Op = Sequelize.Op
-const moment = require('moment')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
