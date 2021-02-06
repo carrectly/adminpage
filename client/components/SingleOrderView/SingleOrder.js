@@ -6,6 +6,7 @@ import {
 	updateOrderDetailsThunk,
 	removeOrderServiceThunk,
 } from '../../store/singleorder'
+import {LocationCell} from '../Table/Cells.js'
 import Gmail from './Gmail'
 import Invoice from './Invoice'
 import {Table, Button} from 'react-bootstrap'
@@ -140,7 +141,9 @@ class SingleOrder extends Component {
 								)}
 							</Descriptions.Item>
 							<Descriptions.Item label='Pickup Location' span={3}>
-								{singleorder.pickupLocation}
+								<LocationCell
+									value={singleorder.pickupLocation}
+								/>
 							</Descriptions.Item>
 							<Descriptions.Item label='Car Make'>
 								{singleorder.carMake}
