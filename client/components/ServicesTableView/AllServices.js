@@ -1,73 +1,58 @@
-import {withRouter, Link} from 'react-router-dom'
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {
-	fetchServicesThunk,
-	addServiceThunk,
-	updateServiceThunk,
-} from '../../store/services'
-import {Table, Button} from 'react-bootstrap'
+import React, {useState, useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {fetchServicesThunk} from '../../store/services'
+import {Table} from 'antd'
 import AddService from './AddService'
 import UpdateService from './UpdateService'
 
-class AllServices extends Component {
-	async componentDidMount() {
-		try {
-			await this.props.fetchServices()
-		} catch (err) {
-			console.log(err)
-		}
-	}
+const columns = [
+	{
+		title: 'Service Name',
+		dataIndex: 'name',
+		key: 'name',
+	},
+	{
+		title: 'Standard Price',
+		dataIndex: 'price',
+		key: 'price',
+	},
+	{
+		title: 'Description',
+		dataIndex: 'description',
+		key: 'description',
+	},
+	{
+		title: 'Update Form',
+		dataIndex: 'name',
+		key: 'updateservice',
+		render: (value, row) => <UpdateService value={value} row={row} />,
+	},
+]
 
-	render() {
-		const services = this.props.services
-		return (
-			<div>
-				<AddService addService={this.props.addService} />
-				<Table striped bordered hover size='sm' variant='dark'>
-					<thead>
-						<tr>
-							<th>Service Name</th>
-							<th>Standard Price</th>
-							<th>Description</th>
-							<th>Update Form</th>
-						</tr>
-					</thead>
-					<tbody>
-						{services.map(service => (
-							<tr key={service.id}>
-								<td>{service.name}</td>
-								<td>{service.price}</td>
-								<td>{service.description}</td>
-								<td>
-									<UpdateService
-										service={service}
-										updateService={this.props.updateService}
-									/>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</Table>
-			</div>
-		)
-	}
+const AllServices = () => {
+	const [loading, setLoading] = useState(false)
+	const dispatch = useDispatch()
+
+	const services = useSelector(state => state.services)
+
+	useEffect(() => {
+		setLoading(true)
+		dispatch(fetchServicesThunk())
+		setLoading(false)
+	}, [])
+
+	return (
+		<div>
+			<AddService />
+			<Table
+				columns={columns}
+				dataSource={services}
+				pagination={false}
+				size='small'
+				loading={loading}
+			/>
+		</div>
+	)
 }
 
-const mapStateToProps = state => {
-	return {
-		services: state.services,
-	}
-}
-
-const mapDispatchToProps = dispatch => {
-	return {
-		fetchServices: () => dispatch(fetchServicesThunk()),
-		addService: obj => dispatch(addServiceThunk(obj)),
-		updateService: (id, obj) => dispatch(updateServiceThunk(id, obj)),
-	}
-}
-
-export default withRouter(
-	connect(mapStateToProps, mapDispatchToProps)(AllServices)
-)
+export default AllServices

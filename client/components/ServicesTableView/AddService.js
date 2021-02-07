@@ -3,6 +3,8 @@ import {Modal, Button, Form, Input, InputNumber} from 'antd'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons'
 import {OverlayTrigger, Tooltip} from 'react-bootstrap'
+import {useDispatch} from 'react-redux'
+import {addServiceThunk} from '../../store/services'
 
 function renderTooltip(props) {
 	return (
@@ -17,15 +19,16 @@ const layout = {
 	wrapperCol: {span: 16},
 }
 
-const AddService = props => {
+const AddService = () => {
 	const [form] = Form.useForm()
 	const [show, setShow] = useState(false)
+	const dispatch = useDispatch()
 
 	const handleClose = () => setShow(false)
 	const handleShow = () => setShow(true)
 
 	const onFinish = values => {
-		props.addService(values)
+		dispatch(addServiceThunk(values))
 		handleClose()
 	}
 
