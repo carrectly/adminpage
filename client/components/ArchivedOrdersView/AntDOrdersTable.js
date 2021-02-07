@@ -1,17 +1,7 @@
-import React, {useState, useEffect, useRef} from 'react'
-import {Table, Input, Button, Space} from 'antd'
-import Highlighter from 'react-highlight-words'
-import {SearchOutlined} from '@ant-design/icons'
-import {useDispatch, useSelector} from 'react-redux'
-import {Link} from 'react-router-dom'
-import m from 'moment'
-import {
-	DateCell,
-	OrderDetailsCell,
-	DeleteOrderCell,
-	CustomerNameCell,
-	LocationCell,
-} from '../Table/Cells'
+import React, {useState, useRef} from 'react'
+import {Table} from 'antd'
+import {useSelector} from 'react-redux'
+import ArchivedOrdersColumns from '../Table/ArchivedOrdersColumns'
 
 const AntDOrdersTable = props => {
 	const [searchText, setSearchText] = useState('')
@@ -19,78 +9,6 @@ const AntDOrdersTable = props => {
 	let searchInput = useRef(null)
 
 	const ordersArr = useSelector(state => state.archivedOrders)
-
-	const getColumnSearchProps = dataIndex => ({
-		filterDropdown: ({
-			setSelectedKeys,
-			selectedKeys,
-			confirm,
-			clearFilters,
-		}) => {
-			return (
-				<div style={{padding: 8}}>
-					<Input
-						ref={searchInput}
-						placeholder={`Search ${dataIndex}`}
-						value={selectedKeys[0]}
-						onChange={e =>
-							setSelectedKeys(
-								e.target.value ? [e.target.value] : []
-							)
-						}
-						onPressEnter={() =>
-							handleSearch(selectedKeys, confirm, dataIndex)
-						}
-						style={{width: 188, marginBottom: 8, display: 'block'}}
-					/>
-					<Space>
-						<Button
-							type='primary'
-							onClick={() =>
-								handleSearch(selectedKeys, confirm, dataIndex)
-							}
-							icon={<SearchOutlined />}
-							size='small'
-							style={{width: 90}}>
-							Search
-						</Button>
-						<Button
-							onClick={() => handleReset(clearFilters)}
-							size='small'
-							style={{width: 90}}>
-							Reset
-						</Button>
-					</Space>
-				</div>
-			)
-		},
-		filterIcon: filtered => (
-			<SearchOutlined style={{color: filtered ? '#1890ff' : undefined}} />
-		),
-		onFilter: (value, record) =>
-			record[dataIndex]
-				? record[dataIndex]
-						.toString()
-						.toLowerCase()
-						.includes(value.toLowerCase())
-				: '',
-		onFilterDropdownVisibleChange: visible => {
-			if (visible) {
-				setTimeout(() => searchInput.current.select(), 100)
-			}
-		},
-		render: text =>
-			searchedColumn === dataIndex ? (
-				<Highlighter
-					highlightStyle={{backgroundColor: '#ffc069', padding: 0}}
-					searchWords={[searchText]}
-					autoEscape
-					textToHighlight={text ? text.toString() : ''}
-				/>
-			) : (
-				text
-			),
-	})
 
 	const handleSearch = (selectedKeys, confirm, dataIndex) => {
 		confirm()
@@ -103,89 +21,13 @@ const AntDOrdersTable = props => {
 		setSearchText('')
 	}
 
-	const defaultStringCompareOptions = {sensitivity: 'base'}
-
-	const columns = [
-		{
-			title: 'Order Link',
-			dataIndex: 'hash',
-			key: 'hash',
-			width: '10%',
-			render: value => <OrderDetailsCell value={value} />,
-		},
-		{
-			title: 'status',
-			dataIndex: 'status',
-			key: 'name',
-			width: '10%',
-			sorter: (a, b) =>
-				a.status.localeCompare(b.status, defaultStringCompareOptions),
-			...getColumnSearchProps('status'),
-		},
-		{
-			title: 'carMake',
-			dataIndex: 'carMake',
-			key: 'age',
-			width: '10%',
-			...getColumnSearchProps('carMake'),
-		},
-		{
-			title: 'carModel',
-			dataIndex: 'carModel',
-			key: 'carModel',
-			width: '10%',
-			...getColumnSearchProps('carModel'),
-		},
-		{
-			title: 'Customer Phone #',
-			dataIndex: 'customerPhoneNumber',
-			key: 'customerPhoneNumber',
-			width: '20%',
-			...getColumnSearchProps('customerPhoneNumber'),
-		},
-		{
-			title: 'Customer Name',
-			dataIndex: 'customer',
-			key: 'customer',
-			width: '20%',
-			sorter: (a, b) =>
-				a.customer.localeCompare(
-					b.customer,
-					defaultStringCompareOptions
-				),
-			render: (value, row) => (
-				<CustomerNameCell value={value} row={row} />
-			),
-		},
-		{
-			title: 'pickupLocation',
-			dataIndex: 'pickupLocation',
-			key: 'pickupLocation',
-			...getColumnSearchProps('pickupLocation'),
-			render: value => <LocationCell value={value} />,
-		},
-		{
-			title: 'pickupDate',
-			dataIndex: 'pickupDate',
-			key: 'pickupDate',
-			sorter: (a, b) => m(a.pickupDate).diff(m(b.pickupDate)),
-			render: value => <DateCell value={value} />,
-		},
-		{
-			title: 'updatedAt',
-			dataIndex: 'updatedAt',
-			key: 'updatedAt',
-			sorter: (a, b) => m(a.updatedAt).diff(m(b.updatedAt)),
-			render: value => <DateCell value={value} />,
-		},
-		{
-			title: 'Delete Order',
-			dataIndex: 'hash',
-			key: 'hash',
-			width: '10%',
-			render: value => <DeleteOrderCell value={value} />,
-		},
-	]
+	const columns = ArchivedOrdersColumns(
+		searchInput,
+		searchText,
+		searchedColumn,
+		handleSearch,
+		handleReset
+	)
 
 	return (
 		<Table

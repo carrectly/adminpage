@@ -56,6 +56,7 @@ export const DeleteOrderCell = ({value}) => {
 export const LocationCell = ({value}) => {
 	return (
 		<Link
+			to={`https://maps.google.com/?q=${value}`}
 			onClick={() =>
 				window.open(`https://maps.google.com/?q=${value}`, '_blank')
 			}>

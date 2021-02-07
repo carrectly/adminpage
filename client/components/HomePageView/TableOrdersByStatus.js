@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {Table} from 'antd'
-import columns from '../Table/Columns'
+import columns from '../Table/HomeTableColumns'
 
 class TableOrdersByStatus extends Component {
 	render() {

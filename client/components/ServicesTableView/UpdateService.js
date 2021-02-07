@@ -1,20 +1,23 @@
 import React, {useState} from 'react'
+import {useDispatch} from 'react-redux'
 import {Modal, Button, Form, Input, InputNumber} from 'antd'
+import {updateServiceThunk} from '../../store/services'
 
 const layout = {
 	labelCol: {span: 8},
 	wrapperCol: {span: 16},
 }
 
-const UpdateService = props => {
+const UpdateService = ({value, row}) => {
 	const [form] = Form.useForm()
 	const [show, setShow] = useState(false)
+	const dispatch = useDispatch()
 
 	const handleClose = () => setShow(false)
 	const handleShow = () => setShow(true)
 
 	const onFinish = values => {
-		props.updateService(props.service.id, values)
+		dispatch(updateServiceThunk(row.id, values))
 		handleClose()
 	}
 
@@ -35,7 +38,7 @@ const UpdateService = props => {
 				Update
 			</Button>
 			<Modal
-				title={`${props.service.name}`}
+				title={`${row.name}`}
 				visible={show}
 				footer={null}
 				closable={false}>
@@ -50,21 +53,21 @@ const UpdateService = props => {
 					<Form.Item
 						name='name'
 						label='Service Name'
-						initialValue={`${props.service.name}`}
+						initialValue={`${row.name}`}
 						rules={[{required: true}]}>
 						<Input />
 					</Form.Item>
 					<Form.Item
 						name='price'
 						label='Service Price'
-						initialValue={props.service.price}
+						initialValue={row.price}
 						rules={[{required: true}, {type: 'number'}]}>
 						<InputNumber />
 					</Form.Item>
 					<Form.Item
 						name='description'
 						label='Description'
-						initialValue={props.service.description || ''}>
+						initialValue={row.description || ''}>
 						<Input />
 					</Form.Item>
 					<Form.Item>

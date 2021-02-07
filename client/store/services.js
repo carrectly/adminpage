@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
 		case GET_SERVICES:
 			return action.services
 		case ADD_SERVICE:
-			return [...state, action.service]
+			return [action.service, ...state]
 		case UPDATE_SERVICE:
 			return state.map(service => {
 				if (service.id === action.service.id) {
