@@ -1,38 +1,35 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {fetchServicesThunk} from '../../store/services'
 import {Table} from 'antd'
 import AddService from './AddService'
-import UpdateService from './UpdateService'
-
-const columns = [
-	{
-		title: 'Service Name',
-		dataIndex: 'name',
-		key: 'name',
-	},
-	{
-		title: 'Standard Price',
-		dataIndex: 'price',
-		key: 'price',
-	},
-	{
-		title: 'Description',
-		dataIndex: 'description',
-		key: 'description',
-	},
-	{
-		title: 'Update Form',
-		dataIndex: 'name',
-		key: 'updateservice',
-		render: (value, row) => <UpdateService value={value} row={row} />,
-	},
-]
+import ServicesColumns from '../Table/ServicesColumns'
 
 const AllServices = () => {
+	const [searchText, setSearchText] = useState('')
+	const [searchedColumn, setSearchedColumn] = useState('')
 	const [loading, setLoading] = useState(false)
+	let searchInput = useRef(null)
 	const dispatch = useDispatch()
 
+	const handleSearch = (selectedKeys, confirm, dataIndex) => {
+		confirm()
+		setSearchText(selectedKeys[0])
+		setSearchedColumn(dataIndex)
+	}
+
+	const handleReset = clearFilters => {
+		clearFilters()
+		setSearchText('')
+	}
+
+	const columns = ServicesColumns(
+		searchInput,
+		searchText,
+		searchedColumn,
+		handleSearch,
+		handleReset
+	)
 	const services = useSelector(state => state.services)
 
 	useEffect(() => {
