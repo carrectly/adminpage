@@ -116,8 +116,9 @@ Have a fantastic rest of the week! Thank you for servicing your car - Carrectly!
 		})
 
 		// console.log('invoice .........', invoice.data.invoice)
-		res.json(invoice.data)
+		res.json(invoice)
 	} catch (err) {
+		res.json(err)
 		next(err)
 	}
 })
