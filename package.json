@@ -88,7 +88,7 @@
 		"sequelize": "^5.3.1",
 		"server-destroy": "^1.0.1",
 		"socket.io": "^2.4.0",
-		"square-connect": "^2.20191120.0",
+		"square": "^8.1.1",
 		"travis-cli": "^1.0.9",
 		"uuid": "^3.3.3",
 		"window": "^4.2.6",
