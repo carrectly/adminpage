@@ -83,9 +83,13 @@ const createApp = () => {
 	app.use((err, req, res, next) => {
 		console.error(err)
 		console.error(err.stack)
-		res.status(err.status || 500).send(
-			err.message || 'Internal server error.'
-		)
+		if (err.errors) {
+			res.status(err.statusCode).send(err.errors)
+		} else {
+			res.status(err.status || 500).send(
+				err.message || 'Internal server error.'
+			)
+		}
 	})
 }
 

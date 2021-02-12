@@ -1,7 +1,5 @@
 const router = require('express').Router()
 const {ApiError, Client, Environment} = require('square')
-const axios = require('axios')
-const {Order} = require('../db/models')
 const moment = require('moment')
 
 const client = new Client({
@@ -12,7 +10,28 @@ const client = new Client({
 
 const {ordersApi} = client
 
-var dueDate = moment().format('YYYY-MM-DD')
+const {invoicesApi} = client
+
+var dueDate = moment()
+	.add(1, 'days')
+	.format('YYYY-MM-DD')
+
+const invoiceDescription = `Hi there!
+
+		We appreciate your business and glad we were able to help.
+		Hope you liked the quality, simplicity, and convenience of our service.
+		The concierge should have walked you through everything when the car was delivered, but please call or text us if you have any questions.
+		__________
+
+		Feedback:
+		We are working on building a service that is easy to use and helpful to more Chicagoans, so if you've experienced any glitches, confusion, or have any suggestions for us  - please let us know so we can improve.
+		If you are happy with the service, take a moment to write a review. As a small start-up, we are trying to gain visibility these are tremendously helpful to small businesses.
+		Also, if you refer a friend, we will provide both of you with some discount. All they have to do is to mention you during the booking request.
+
+		YELP: https://www.yelp.com/biz/carrectly-auto-care-chicago
+		GOOGLE: http://bit.ly/2vloaPl
+
+		Have a fantastic rest of the week! Thank you for servicing your car - Carrectly!`
 
 router.post('/', async (req, res, next) => {
 	try {
@@ -34,88 +53,67 @@ router.post('/', async (req, res, next) => {
 			})
 		})
 
+		let orderBody = {
+			locationId: process.env.SQUARE_LOCATION_ID,
+			referenceId: order.hash,
+			lineItems: lineItems,
+			customerId: customerid,
+		}
+
 		let discountAmt = Number(order.discount) * 100
-
-		let orderDiscount = discountAmt
-			? [
-					{
-						amountMoney: {
-							amount: discountAmt,
-							currency: 'USD',
-						},
-						name: `${order.promoCode}`,
+		if (discountAmt) {
+			const orderDiscount = [
+				{
+					amountMoney: {
+						amount: discountAmt,
+						currency: 'USD',
 					},
-			  ]
-			: null
+					name: `${order.promoCode}`,
+				},
+			]
+			orderBody.discounts = orderDiscount
+		}
 
-		//console.log('order discount', orderDiscount)
 		let singleordr = await ordersApi.createOrder({
 			idempotencyKey: idempKey,
 			locationId: process.env.SQUARE_LOCATION_ID,
-			order: {
-				locationId: process.env.SQUARE_LOCATION_ID,
-				referenceId: `${order.hash}`,
-				lineItems: lineItems,
-				customerId: customerid,
-				discounts: orderDiscount,
-			},
+			order: orderBody,
 		})
 
 		console.log('created new order in square', singleordr)
 
-		// let orderid = singleordr.order.id
+		const invoiceBody = {
+			idempotencyKey: idempKey,
+			invoice: {
+				deliveryMethod: 'EMAIL',
+				description: invoiceDescription,
+				orderId: singleordr.result.order.id,
+				locationId: process.env.SQUARE_LOCATION_ID,
+				invoiceNumber: idempKey,
+				title: `Thank you for servicing you car with us - Carrectly - ${order.hash}`,
+				primaryRecipient: {
+					customerId: customerid,
+				},
+				paymentRequests: [
+					{
+						requestType: 'BALANCE',
+						dueDate: dueDate,
+						tippingEnabled: true,
+					},
+				],
+			},
+		}
 
-		// 		let invoice = await axios({
-		// 			method: 'post',
-		// 			url: `${process.env.squareBasePath}/v2/invoices`,
-		// 			headers: {
-		// 				'Content-Type': 'application/json',
-		// 				Authorization: `Bearer ${oauth2.accessToken}`,
-		// 			},
-		// 			data: {
-		// 				idempotency_key: idempKey,
-		// 				invoice: {
-		// 					order_id: orderid,
-		// 					delivery_method: 'EMAIL',
-		// 					location_id: `${process.env.SQUARE_LOCATION_ID}`,
-		// 					invoice_number: `${idempKey}`,
-		// 					title: `Thank you for servicing you car with us - Carrectly - ${orderid}`,
-		// 					primary_recipient: {
-		// 						customer_id: customerid,
-		// 					},
-		// 					payment_requests: [
-		// 						{
-		// 							request_type: 'BALANCE',
-		// 							due_date: `${dueDate}`,
-		// 							tipping_enabled: true,
-		// 						},
-		// 					],
-		// 					description: `Hi there!
-
-		// We appreciate your business and glad we were able to help.
-		// Hope you liked the quality, simplicity, and convenience of our service.
-		// The concierge should have walked you through everything when the car was delivered, but please call or text us if you have any questions.
-		// __________
-
-		// Feedback:
-		// We are working on building a service that is easy to use and helpful to more Chicagoans, so if you've experienced any glitches, confusion, or have any suggestions for us  - please let us know so we can improve.
-		// If you are happy with the service, take a moment to write a review. As a small start-up, we are trying to gain visibility these are tremendously helpful to small businesses.
-		// Also, if you refer a friend, we will provide both of you with some discount. All they have to do is to mention you during the booking request.
-
-		// YELP: https://www.yelp.com/biz/carrectly-auto-care-chicago
-		// GOOGLE: http://bit.ly/2vloaPl
-
-		// Have a fantastic rest of the week! Thank you for servicing your car - Carrectly!`,
-		// 				},
-		// 			},
-		// 		})
-
-		// 		// console.log('invoice .........', invoice.data.invoice)
-		// 		console.log('success------', invoice)
-		// 		res.json(invoice.data)
-	} catch (err) {
-		console.log('error', err)
-		next(err)
+		const {result} = await invoicesApi.createInvoice(invoiceBody)
+		console.log('Invoice API called successfully. Returned data: ', result)
+		res.json(result)
+	} catch (error) {
+		if (error instanceof ApiError) {
+			console.log('Errors: ', error.errors)
+		} else {
+			console.log('Unexpected Error: ', error)
+		}
+		next(error)
 	}
 })
 

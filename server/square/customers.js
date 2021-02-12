@@ -21,7 +21,7 @@ router.post('/', async (req, res, next) => {
 		})
 
 		let singlecstmr = await customersApi.searchCustomers({
-			limit: 2,
+			limit: 1,
 			query: {
 				filter: {
 					emailAddress: {
@@ -32,33 +32,31 @@ router.post('/', async (req, res, next) => {
 		})
 
 		if (!singlecstmr.result.customers) {
-			try {
-				let {result} = await customersApi.createCustomer({
-					givenName: cust.dataValues.firstName,
-					familyName: cust.dataValues.lastName,
-					emailAddress: cust.dataValues.email,
-					phoneNumber: cust.dataValues.phoneNumber,
-				})
-				console.log('API called successfully. Returned data: ', result)
-				singlecstmr = result.customer
-				singlecstmr.status = 'NEW CUSTOMER ADDED IN SQUARE'
-			} catch (error) {
-				if (error instanceof ApiError) {
-					console.log('Errors: ', error.errors)
-					singlecstmr.status = error.errors
-				} else {
-					console.log('Unexpected Error: ', error)
-					singlecstmr.status = error
-				}
-			}
+			let {result} = await customersApi.createCustomer({
+				givenName: cust.dataValues.firstName,
+				familyName: cust.dataValues.lastName,
+				emailAddress: cust.dataValues.email,
+				phoneNumber: cust.dataValues.phoneNumber,
+			})
+			console.log(
+				'Customer API called successfully. Returned data: ',
+				result
+			)
+			singlecstmr = result.customer
+			singlecstmr.status = 'NEW CUSTOMER ADDED IN SQUARE'
 		} else {
 			singlecstmr = singlecstmr.result.customers[0]
 			singlecstmr.status = 'CUSTOMER EXISTS IN SQUARE'
 		}
 
 		res.json(singlecstmr)
-	} catch (err) {
-		next(err)
+	} catch (error) {
+		if (error instanceof ApiError) {
+			console.log('Errors: ', error.errors)
+		} else {
+			console.log('Unexpected Error: ', error)
+		}
+		next(error)
 	}
 })
 
