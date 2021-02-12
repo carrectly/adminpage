@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const {google} = require('googleapis')
 var parseMessage = require('gmail-api-parse-message')
-var Base64 = require('js-base64').Base64
 const {User} = require('../db/models')
 const oAuth2Client = require('./oAuth2Client')
 
