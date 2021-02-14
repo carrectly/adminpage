@@ -4,7 +4,6 @@ module.exports = router
 var axios = require('axios')
 const {Customer, Order, Service} = require('../db/models')
 const moment = require('moment')
-// const timezone = require('moment-timezone')
 
 router.post('/newbooking', async (req, res, next) => {
 	try {
