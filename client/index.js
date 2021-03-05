@@ -6,6 +6,7 @@ import App from './app'
 import store from './store'
 import history from './history'
 import '../node_modules/antd/dist/antd.css'
+import './components/styles/styles.scss'
 
 ReactDOM.render(
 	<Provider store={store}>
