@@ -28,7 +28,7 @@ const ArchivedOrdersColumns = (
 	{
 		title: 'status',
 		dataIndex: 'status',
-		key: 'name',
+		key: 'status',
 		width: '10%',
 		sorter: (a, b) =>
 			a.status.localeCompare(b.status, defaultStringCompareOptions),
@@ -44,7 +44,7 @@ const ArchivedOrdersColumns = (
 	{
 		title: 'carMake',
 		dataIndex: 'carMake',
-		key: 'age',
+		key: 'carMake',
 		width: '10%',
 		...getColumnSearchProps(
 			'carMake',

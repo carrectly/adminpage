@@ -15,6 +15,7 @@ class TableOrdersByStatus extends Component {
 				dataSource={array}
 				pagination={false}
 				size='small'
+				rowKey='hash'
 			/>
 		)
 	}

@@ -36,7 +36,7 @@ const columns = [
 	{
 		title: 'carMake',
 		dataIndex: 'carMake',
-		key: 'age',
+		key: 'carMake',
 	},
 	{
 		title: 'carModel',

@@ -37,6 +37,7 @@ const AntDCustomersTable = props => {
 			dataSource={customersArray}
 			pagination={{position: ['topCenter']}}
 			loading={props.loading}
+			rowKey='phoneNumber'
 		/>
 	)
 }

@@ -37,6 +37,7 @@ const AntDOrdersTable = props => {
 			dataSource={ordersArr}
 			pagination={{position: ['topCenter']}}
 			loading={props.loading}
+			rowKey='hash'
 		/>
 	)
 }

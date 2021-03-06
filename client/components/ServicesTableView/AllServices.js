@@ -47,6 +47,7 @@ const AllServices = () => {
 				pagination={false}
 				size='small'
 				loading={loading}
+				rowKey='id'
 			/>
 		</div>
 	)

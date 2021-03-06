@@ -55,12 +55,12 @@ export const DeleteOrderCell = ({value}) => {
 
 export const LocationCell = ({value}) => {
 	return (
-		<Link
+		<a
 			onClick={() =>
 				window.open(`https://maps.google.com/?q=${value}`, '_blank')
 			}>
 			{value}
-		</Link>
+		</a>
 	)
 }
 
