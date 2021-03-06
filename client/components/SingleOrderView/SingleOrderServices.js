@@ -18,7 +18,7 @@ const SingleOrderServices = props => {
 	}
 
 	return (
-		<table striped bordered hover size='sm' variant='dark'>
+		<table>
 			<thead>
 				<tr>
 					<th>

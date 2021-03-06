@@ -16,7 +16,7 @@ import {clearSingleEmailThunk} from '../../store/singleemail'
 import OrderComments from './OrderComments'
 import SingleOrderServices from './SingleOrderServices'
 import moment from 'moment'
-import {Descriptions, Badge} from 'antd'
+import {Descriptions} from 'antd'
 
 class SingleOrder extends Component {
 	constructor(props) {

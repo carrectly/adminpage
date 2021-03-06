@@ -50,7 +50,7 @@ class SingleCustomer extends Component {
 					</div>
 				</div>
 				<h3>Order History</h3>
-				<table striped bordered hover size='sm' variant='dark'>
+				<table>
 					<thead>
 						<tr>
 							<th>Status</th>
