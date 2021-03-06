@@ -13,7 +13,8 @@ import {sendSingleEmailThunk} from '../../store/singleemail'
 import {getEmailsThunk} from '../../store/emails'
 import {updateSingleOrderThunk} from '../../store/singleorder'
 import {getStatusArray} from '../util'
-
+let cust
+let invoice
 const statusArray = getStatusArray()
 
 const menuList = fn => {

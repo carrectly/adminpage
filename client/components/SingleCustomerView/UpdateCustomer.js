@@ -1,113 +1,79 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React from 'react'
+import {useDispatch} from 'react-redux'
 import {updateSingleCustomerThunk} from '../../store/singlecustomer'
-import {Form, Button} from 'react-bootstrap'
+import {Form, Button, Input} from 'antd'
+import {useParams} from 'react-router-dom'
 
-class UpdateCustomer extends Component {
-	constructor(props) {
-		super(props)
-		this.handleSubmit = this.handleSubmit.bind(this)
-		this.handleChange = this.handleChange.bind(this)
+const layout = {
+	labelCol: {span: 8},
+	wrapperCol: {span: 16},
+}
 
-		this.state = {
-			location: '',
-			firstName: '',
-			lastName: '',
-			email: '',
+function clean(obj) {
+	for (var propName in obj) {
+		if (
+			obj[propName] === null ||
+			obj[propName] === undefined ||
+			obj[propName] === ''
+		) {
+			delete obj[propName]
 		}
 	}
+}
 
-	handleChange(evt) {
-		this.setState({
-			[evt.target.name]: evt.target.value,
-		})
-	}
-	handleSubmit(evt) {
-		evt.preventDefault()
-		let obj = {}
-		if (this.state.location) {
-			obj.location = this.state.location
-		}
-		if (this.state.email) {
-			obj.email = this.state.email
-		}
-		if (this.state.firstName) {
-			obj.firstName = this.state.firstName
-		}
-		if (this.state.lastName) {
-			obj.lastName = this.state.lastName
-		}
-		let phone = this.props.phone
-		this.props.update(phone, obj)
-		obj = {}
-		this.setState({
-			location: '',
-			firstName: '',
-			lastName: '',
-			email: '',
-		})
+const UpdateCustomer = () => {
+	const [form] = Form.useForm()
+	const dispatch = useDispatch()
+
+	const params = useParams()
+	const userid = params.userid
+
+	const onFinish = values => {
+		clean(values)
+		dispatch(updateSingleCustomerThunk(userid, values))
+		form.resetFields()
 	}
 
-	render() {
-		return (
-			<div className='form'>
-				<h3>Update Customer info</h3>
-				<Form onSubmit={this.handleSubmit}>
-					<Form.Group controlId='formBasicName'>
-						{/* <Form.Label>Location</Form.Label> */}
-						<Form.Control
-							type='text'
-							name='location'
-							value={this.state.location}
-							placeholder='Location'
-							onChange={this.handleChange}
-						/>
-					</Form.Group>
+	const onFinishFailed = errorInfo => {
+		console.log('Failed:', errorInfo)
+	}
 
-					<Form.Group controlId='formBasicEmail'>
-						{/* <Form.Label>First Name</Form.Label> */}
-						<Form.Control
-							type='text'
-							name='firstName'
-							placeholder='First Name'
-							value={this.state.firstName}
-							onChange={this.handleChange}
-						/>
-					</Form.Group>
+	const onCancel = () => {
+		form.resetFields()
+	}
 
-					<Form.Group controlId='formBasicSpecialty'>
-						{/* <Form.Label>Last Name</Form.Label> */}
-						<Form.Control
-							type='text'
-							name='lastName'
-							placeholder='Last Name'
-							value={this.state.lastName}
-							onChange={this.handleChange}
-						/>
-					</Form.Group>
-
-					<Form.Group controlId='formBasicPassword'>
-						{/* <Form.Label>Email</Form.Label> */}
-						<Form.Control
-							type='email'
-							name='email'
-							value={this.state.email}
-							placeholder='Email'
-							onChange={this.handleChange}
-						/>
-					</Form.Group>
-					<Button variant='primary' type='submit'>
-						Update
+	return (
+		<div>
+			<Form
+				{...layout}
+				form={form}
+				name='control-hooks'
+				size='large'
+				onFinish={onFinish}
+				onFinishFailed={onFinishFailed}>
+				<Form.Item name='firstName' label='First Name'>
+					<Input />
+				</Form.Item>
+				<Form.Item name='lastName' label='Last Name'>
+					<Input />
+				</Form.Item>
+				<Form.Item name='email' label='Email'>
+					<Input />
+				</Form.Item>
+				<Form.Item name='phoneNumber' label='Phone number'>
+					<Input />
+				</Form.Item>
+				<Form.Item>
+					<Button onClick={onCancel} type='secondary'>
+						Cancel
 					</Button>
-				</Form>
-			</div>
-		)
-	}
+					<Button type='primary' htmlType='submit'>
+						Submit
+					</Button>
+				</Form.Item>
+			</Form>
+		</div>
+	)
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		update: (id, obj) => dispatch(updateSingleCustomerThunk(id, obj)),
-	}
-}
-export default connect(null, mapDispatchToProps)(UpdateCustomer)
+export default UpdateCustomer
