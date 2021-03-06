@@ -9,7 +9,6 @@ import {
 import {LocationCell} from '../Table/Cells.js'
 import Gmail from './Gmail'
 import Invoice from './Invoice'
-import {Table, Button} from 'react-bootstrap'
 import UpdateOrder from './UpdateOrder'
 import {getEmailsThunk, clearEmailsThunk} from '../../store/emails'
 import AddOrderServices from './AddOrderServices'

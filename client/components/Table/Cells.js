@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {Button} from 'react-bootstrap'
+import {Button} from 'antd'
 import moment from 'moment'
 import {useDispatch} from 'react-redux'
 import {deleteOrderThunk} from '../../store/archivedOrders'
@@ -47,7 +47,7 @@ export const DeleteOrderCell = ({value}) => {
 	}
 
 	return (
-		<Button id={value} onClick={handleClick} variant='danger'>
+		<Button id={value} onClick={handleClick} type='primary' danger>
 			Delete
 		</Button>
 	)
@@ -82,7 +82,7 @@ export const DeleteCustomerCell = ({value}) => {
 	}
 
 	return (
-		<Button id={value} onClick={handleClick} variant='danger'>
+		<Button id={value} onClick={handleClick} type='primary' danger>
 			Delete
 		</Button>
 	)

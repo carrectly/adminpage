@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {Button, ButtonToolbar, OverlayTrigger, Tooltip} from 'react-bootstrap'
+import {Popover} from 'antd'
 import {logout} from '../store'
 
 class Navbar extends React.Component {
@@ -63,26 +63,18 @@ class Navbar extends React.Component {
 			</div>
 		) : (
 			<div className='navbar1'>
-				<a
-					className='link'
-					href='https://www.carrectly.com/book/'
-					target='_blank'>
-					<OverlayTrigger
-						key='bottom'
-						placement='bottom'
-						overlay={
-							<Tooltip id='tooltip-bottom'>
-								Click the logo to create a booking on client's
-								behalf
-							</Tooltip>
-						}>
+				<Popover content='Click here to book for client'>
+					<a
+						className='link'
+						href='https://www.carrectly.com/book/'
+						rel='noreferrer'
+						target='_blank'>
 						<img
 							id='logo'
 							src='https://www.carrectly.com/wp-content/uploads/2016/11/logo.png'
 						/>
-					</OverlayTrigger>
-				</a>
-
+					</a>
+				</Popover>
 				<Link to='/account' className='link'>
 					Home
 				</Link>

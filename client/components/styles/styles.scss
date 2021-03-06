@@ -1,4 +1,6 @@
-$color: yellow;
+@import '~bootstrap/scss/bootstrap.scss';
+
+$color: black;
 
 * {
 	color: $color;

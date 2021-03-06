@@ -5,7 +5,7 @@ import {getEmailsThunk} from '../../store/emails'
 import SingleEmail from './SingleEmail.js'
 import {getSingleEmailThunk} from '../../store/singleemail'
 import ErrorHandler from './ErrorHandler'
-import {Button, Spinner, Image} from 'react-bootstrap'
+import {Spin, Space} from 'antd'
 
 class Gmail extends Component {
 	constructor(props) {
@@ -16,6 +16,7 @@ class Gmail extends Component {
 	}
 
 	async componentDidMount() {
+		// TODO: fix the spinner and email fetching
 		let id = this.props.match.params.orderid
 		let temp = this.state.spinner
 		this.setState({spinner: !temp})
@@ -34,16 +35,6 @@ class Gmail extends Component {
 	render() {
 		const emails = this.props.emails || []
 		const single = this.props.singleemail || {}
-		let attachments = this.props.attachments || []
-		let modalArray = []
-		if (attachments.length >= 1) {
-			modalArray = attachments.map(attch => {
-				attch.attachment = attch.attachment
-					.replace(/-/g, '+')
-					.replace(/_/g, '/')
-				return attch
-			})
-		}
 
 		return (
 			<div>
@@ -51,11 +42,9 @@ class Gmail extends Component {
 					<div className='emailsubject'>
 						<h3 className='eheader'>Email Subject</h3>
 						{this.state.spinner ? (
-							<Spinner animation='border' role='status'>
-								<span className='align-self-center sr-only'>
-									Loading...
-								</span>
-							</Spinner>
+							<Space size='middle'>
+								<Spin size='large' />
+							</Space>
 						) : (
 							emails.map(email => (
 								<div
@@ -79,32 +68,6 @@ class Gmail extends Component {
 								<ErrorHandler>
 									<SingleEmail single={single} />
 								</ErrorHandler>
-								<div className='attachments'>
-									{modalArray.length ? (
-										modalArray.map((item, index) =>
-											item.type.slice(0, 5) ===
-											'image' ? (
-												<Image
-													key={index}
-													src={`data:image/png;base64,${item.attachment}`}
-													fluid
-												/>
-											) : (
-												<Button
-													variant='dark'
-													key={index}>
-													<a
-														href={`data:${item.type};base64,${item.attachment}`}
-														download={`${item.filename}`}>
-														{item.filename}
-													</a>
-												</Button>
-											)
-										)
-									) : (
-										<div />
-									)}
-								</div>
 							</div>
 						) : (
 							<div />
@@ -121,7 +84,6 @@ const mapStateToProps = state => {
 		user: state.user,
 		emails: state.emails,
 		singleemail: state.singleemail.decoded,
-		attachments: state.singleemail.attachmentsArray,
 		order: state.singleorder,
 	}
 }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {Card, Button} from 'react-bootstrap'
+import {Card, Button} from 'antd'
 import UpdateDealer from './UpdateDealer'
 
 class DealerCard extends Component {
@@ -19,23 +19,17 @@ class DealerCard extends Component {
 	render() {
 		const dealer = this.props.dealer
 		return (
-			<Card className='dlrcard'>
-				<Card.Body>
-					<Card.Title>{dealer.name}</Card.Title>
-					<Card.Subtitle className='mb-2 text-muted'>
-						<div>{dealer.email}</div>
-						<div>{dealer.location}</div>
-					</Card.Subtitle>
-					<div className='dealerCardFooter'>
-						<UpdateDealer dealer={dealer} />
-						<Button
-							id={dealer.id}
-							onClick={this.handleClick}
-							variant='danger'>
-							Delete
-						</Button>
-					</div>
-				</Card.Body>
+			<Card className='dlrcard' title={dealer.name}>
+				<div>{dealer.email}</div>
+				<div>{dealer.location}</div>
+				<UpdateDealer dealer={dealer} />
+				<Button
+					id={dealer.id}
+					onClick={this.handleClick}
+					type='primary'
+					danger>
+					Delete
+				</Button>
 			</Card>
 		)
 	}

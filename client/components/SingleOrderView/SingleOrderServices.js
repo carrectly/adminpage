@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {useDispatch} from 'react-redux'
 import {removeOrderServiceThunk} from '../../store/singleorder'
-import {Table, Button} from 'react-bootstrap'
+import {Button} from 'antd'
 import AddOrderServices from './AddOrderServices'
 import {useParams} from 'react-router-dom'
 import UpdateOrderCharges from './UpdateOrderCharges'
@@ -18,7 +18,7 @@ const SingleOrderServices = props => {
 	}
 
 	return (
-		<Table striped bordered hover size='sm' variant='dark'>
+		<table striped bordered hover size='sm' variant='dark'>
 			<thead>
 				<tr>
 					<th>
@@ -54,8 +54,8 @@ const SingleOrderServices = props => {
 							}}>
 							<Button
 								id={service.id}
-								variant='danger'
-								type='button'
+								type='primary'
+								danger
 								onClick={evt => handleRemoveService(evt)}>
 								X
 							</Button>
@@ -63,7 +63,7 @@ const SingleOrderServices = props => {
 					</tr>
 				))}
 			</tbody>
-		</Table>
+		</table>
 	)
 }
 
