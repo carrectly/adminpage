@@ -5,7 +5,6 @@ const {Panel} = Collapse
 import moment from 'moment'
 
 const CollapseByDate = props => {
-	console.log('props', props)
 	const dateColumn = props.dateColumn
 	const orders = props.orders || []
 	const hashTable = {}
@@ -13,11 +12,11 @@ const CollapseByDate = props => {
 
 	if (orders.length) {
 		orders.forEach(element => {
-			let keyName = element[dateColumn]
-			if (hashTable.hasOwnProperty(keyName)) {
-				hashTable[keyName].push(element)
+			let date = moment(element[dateColumn]).format('M/D/YY')
+			if (hashTable.hasOwnProperty(date)) {
+				hashTable[date].push(element)
 			} else {
-				hashTable[keyName] = [element]
+				hashTable[date] = [element]
 			}
 		})
 		groupedArr = Object.entries(hashTable)

@@ -45,10 +45,14 @@ const UpdateOrder = props => {
 
 	const onFinish = values => {
 		if (values.dropoffDate) {
-			values.dropoffDate = moment.utc(values.dropoffDate).valueOf()
+			values.dropoffDate = moment(values.dropoffDate).format(
+				'M/D/YY hh:mm A'
+			)
 		}
 		if (values.pickupDate) {
-			values.pickupDate = moment.utc(values.pickupDate).valueOf()
+			values.pickupDate = moment(values.pickupDate).format(
+				'M/D/YY hh:mm A'
+			)
 		}
 		clean(values)
 		dispatch(updateSingleOrderThunk(id, values))
