@@ -63,7 +63,7 @@ class BookingsByStatus extends Component {
 					<Panel header='WORK ZONE' key='2'>
 						<CollapseByDate
 							orders={workZoneArr}
-							dateColumn='dropoffDate'
+							dateColumn='pickupDate'
 						/>
 					</Panel>
 					<Panel header='INVOICES' key='3'>
