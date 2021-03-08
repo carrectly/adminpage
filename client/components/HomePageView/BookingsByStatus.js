@@ -3,6 +3,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getActiveOrdersThunk} from '../../store/activeOrders'
 import TableOrdersByStatus from './TableOrdersByStatus'
+import CollapseByDate from './CollapseByDate'
 import {
 	getTakeActionStatusArray,
 	getWorkZoneStatusArray,
@@ -54,10 +55,16 @@ class BookingsByStatus extends Component {
 			<div>
 				<Collapse defaultActiveKey={['1', '2']}>
 					<Panel header='TO TAKE ACTION' key='1'>
-						<TableOrdersByStatus ordersArray={actionArr} />
+						<CollapseByDate
+							orders={actionArr}
+							dateColumn='pickupDate'
+						/>
 					</Panel>
 					<Panel header='WORK ZONE' key='2'>
-						<TableOrdersByStatus ordersArray={workZoneArr} />
+						<CollapseByDate
+							orders={workZoneArr}
+							dateColumn='dropoffDate'
+						/>
 					</Panel>
 					<Panel header='INVOICES' key='3'>
 						<TableOrdersByStatus ordersArray={invoiceArr} />
