@@ -6,6 +6,7 @@ import {
 	CustomerNameCell,
 	StatusCell,
 	LocationCell,
+	ServicesCell,
 } from './Cells.js'
 
 const defaultStringCompareOptions = {sensitivity: 'base'}
@@ -32,6 +33,13 @@ const columns = [
 			a.status.localeCompare(b.status, defaultStringCompareOptions),
 		sortDirections: ['descend', 'ascend'],
 		render: value => <StatusCell value={value} />,
+	},
+	{
+		title: 'Services',
+		dataIndex: 'services',
+		align: 'center',
+		width: 50,
+		render: (value, row) => <ServicesCell value={value} row={row} />,
 	},
 	{
 		title: 'carMake',

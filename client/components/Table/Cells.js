@@ -6,6 +6,7 @@ import {useDispatch} from 'react-redux'
 import {deleteOrderThunk} from '../../store/archivedOrders'
 import {deleteContactThunk} from '../../store/contacts'
 import {getStatusArray} from '../util'
+import {Tag} from 'antd'
 
 export const DateCell = ({value}) => {
 	if (value) {
@@ -20,6 +21,14 @@ export const CustomerNameCell = ({value, row}) => (
 		{value.firstName} {value.lastName}
 	</Link>
 )
+
+export const ServicesCell = ({value, row}) => {
+	return value.map(el => (
+		<Tag color='magenta' key={el.id}>
+			{el.name}
+		</Tag>
+	))
+}
 
 export const CustomerPhoneCell = ({value}) => (
 	<Link to={`/singlecustomer/${value}`}>{value}</Link>
