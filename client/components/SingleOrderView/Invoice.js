@@ -24,6 +24,8 @@ let cust
 let invoice
 const statusArray = getStatusArray()
 
+const driversArray = ['Stas', 'Mike', 'Taras', 'Ben', 'Kyle', 'Other']
+
 class Invoice extends Component {
 	constructor(props) {
 		super(props)
@@ -33,6 +35,7 @@ class Invoice extends Component {
 		this.handleCreateInvoice = this.handleCreateInvoice.bind(this)
 		this.openNotification1 = this.openNotification1.bind(this)
 		this.openNotification2 = this.openNotification2.bind(this)
+		this.handleDriverUpdate = this.handleDriverUpdate.bind(this)
 		this.state = {
 			invoice: true,
 		}
@@ -134,6 +137,14 @@ class Invoice extends Component {
 		}
 	}
 
+	handleDriverUpdate(evt) {
+		let obj = {
+			concierge: evt.target.name,
+		}
+		let id = this.props.id
+		this.props.updateStatus(id, obj)
+	}
+
 	render() {
 		cust = this.props.customer.id || null
 		invoice = this.props.invoice.id || null
@@ -152,6 +163,21 @@ class Invoice extends Component {
 							name={status}
 							onClick={this.handleStatusUpdate}>
 							{status}
+						</Dropdown.Item>
+					))}
+				</DropdownButton>
+				<DropdownButton
+					size='lg'
+					id='dropdown-basic-button'
+					title='Assign Concierge'
+					className='btn-block'>
+					{driversArray.map((name, index) => (
+						<Dropdown.Item
+							key={index}
+							id={index}
+							name={name}
+							onClick={this.handleDriverUpdate}>
+							{name}
 						</Dropdown.Item>
 					))}
 				</DropdownButton>
