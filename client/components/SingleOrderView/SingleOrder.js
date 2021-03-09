@@ -135,17 +135,17 @@ class SingleOrder extends Component {
 									'M/D/YY hh:mm A'
 								)}
 							</Descriptions.Item>
-							<Descriptions.Item label='Drop Off Date'>
+							<Descriptions.Item label='Drop Off Date' span={2}>
 								{moment(singleorder.dropoffDate).format(
 									'M/D/YY hh:mm A'
 								)}
 							</Descriptions.Item>
-							<Descriptions.Item label='Pickup Location' span={3}>
+							<Descriptions.Item label='Pickup Location'>
 								<LocationCell
 									value={singleorder.pickupLocation}
 								/>
 							</Descriptions.Item>
-							<Descriptions.Item label='Car Make'>
+							<Descriptions.Item label='Car Make' span={2}>
 								{singleorder.carMake}
 							</Descriptions.Item>
 							<Descriptions.Item label='Car Model'>
@@ -182,7 +182,7 @@ class SingleOrder extends Component {
 
 							<Descriptions.Item
 								label='Customer Comments'
-								span={3}>
+								span={4}>
 								{singleorder.customerComments}
 							</Descriptions.Item>
 							<Descriptions.Item
