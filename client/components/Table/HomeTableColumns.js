@@ -7,6 +7,7 @@ import {
 	StatusCell,
 	LocationCell,
 	ServicesCell,
+	ConciergeCell,
 } from './Cells.js'
 
 const defaultStringCompareOptions = {sensitivity: 'base'}
@@ -33,6 +34,16 @@ const columns = [
 			a.status.localeCompare(b.status, defaultStringCompareOptions),
 		sortDirections: ['descend', 'ascend'],
 		render: value => <StatusCell value={value} />,
+	},
+	{
+		title: 'Concierge',
+		dataIndex: 'concierge',
+		align: 'center',
+		key: 'concierge',
+		sorter: (a, b) =>
+			a.status.localeCompare(b.status, defaultStringCompareOptions),
+		sortDirections: ['descend', 'ascend'],
+		render: value => <ConciergeCell value={value} />,
 	},
 	{
 		title: 'Services',

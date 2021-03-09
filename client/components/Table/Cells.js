@@ -105,3 +105,22 @@ export const StatusCell = ({value}) => {
 
 	return <div className={classname}>{value}</div>
 }
+
+export const ConciergeCell = ({value}) => {
+	const arr = ['Stas', 'Mike', 'Taras', 'Ben', 'Kyle', 'Other']
+	const i = arr.indexOf(value)
+	const colors = [
+		'#FF1493',
+		'#0000FF',
+		'#DAA520',
+		'#228B22',
+		'#FF6347',
+		'#008080',
+	]
+
+	return (
+		<Tag color={colors[i]} key={value}>
+			{value}
+		</Tag>
+	)
+}

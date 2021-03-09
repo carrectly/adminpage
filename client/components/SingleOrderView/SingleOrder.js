@@ -185,6 +185,11 @@ class SingleOrder extends Component {
 								span={3}>
 								{singleorder.customerComments}
 							</Descriptions.Item>
+							<Descriptions.Item
+								label='Assigned to concierge'
+								span={4}>
+								{singleorder.concierge}
+							</Descriptions.Item>
 						</Descriptions>
 						<OrderComments id={this.props.match.params.orderid} />
 					</div>
