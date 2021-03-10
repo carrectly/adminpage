@@ -3,6 +3,16 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {Popover} from 'antd'
 import {logout} from '../store'
+import {
+	FolderOutlined,
+	TeamOutlined,
+	ToolOutlined,
+	CalendarOutlined,
+	TableOutlined,
+	FireOutlined,
+	LogoutOutlined,
+} from '@ant-design/icons'
+import './styles/navbar.scss'
 
 class Navbar extends React.Component {
 	constructor() {
@@ -43,20 +53,24 @@ class Navbar extends React.Component {
 					</Link>
 
 					<Link to='/allOrders' className='link'>
-						Archived Orders
+						<FolderOutlined />
+						<span>Archived Orders</span>
 					</Link>
 					<Link to='/allCustomers' className='link'>
+						<TeamOutlined />
 						All Customers
 					</Link>
-
 					<Link to='/dealers' className='link'>
+						<ToolOutlined />
 						Service Shops
 					</Link>
 
 					<Link to='/calendar' className='link'>
+						<CalendarOutlined />
 						Calendar
 					</Link>
 					<Link to='/allServices' className='link'>
+						<TableOutlined />
 						Services
 					</Link>
 				</div>
@@ -76,29 +90,36 @@ class Navbar extends React.Component {
 					</a>
 				</Popover>
 				<Link to='/account' className='link'>
-					Home
+					<FireOutlined className='icon' />
+					<span>Archived Orders</span>
 				</Link>
 
 				<Link to='/allOrders' className='link'>
+					<FolderOutlined className='icon' />
 					Archived Orders
 				</Link>
 
 				<Link to='/allCustomers' className='link'>
+					<TeamOutlined className='icon' />
 					All Customers
 				</Link>
 
 				<Link to='/dealers' className='link'>
+					<ToolOutlined className='icon' />
 					Service Shops
 				</Link>
 
 				<Link to='/calendar' className='link'>
+					<CalendarOutlined className='icon' />
 					Calendar
 				</Link>
 				<Link to='/allServices' className='link'>
+					<TableOutlined className='icon' />
 					Services
 				</Link>
 				{this.props.isLoggedIn ? (
 					<a className='link' onClick={this.handleLogout}>
+						<LogoutOutlined className='icon' />
 						Log out
 					</a>
 				) : (
