@@ -6,7 +6,7 @@ import {
 	updateOrderDetailsThunk,
 	removeOrderServiceThunk,
 } from '../../store/singleorder'
-import {LocationCell} from '../Table/Cells.js'
+import {LocationCell, StatusCell} from '../Table/Cells.js'
 import SingleOrderEmails from './SingleOrderEmails'
 import Invoice from './Invoice'
 import UpdateOrder from './UpdateOrder'
@@ -135,7 +135,9 @@ class SingleOrder extends Component {
 												{singleorder.hash}
 											</Descriptions.Item>
 											<Descriptions.Item label='Status'>
-												{singleorder.status}
+												<StatusCell
+													value={singleorder.status}
+												/>
 											</Descriptions.Item>
 											<Descriptions.Item label='Pickup Date'>
 												{moment(

@@ -15,3 +15,58 @@
 		flex-grow: 2;
 	}
 }
+
+.google {
+	width: 50px;
+	margin-top: 10px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.eheader {
+	height: 10%;
+	margin: 0;
+	color: #743794;
+}
+
+.emailboard {
+	display: flex;
+	flex-direction: row;
+	align-content: stretch;
+	min-height: 20vh;
+	padding: 0;
+}
+
+.emailsubject {
+	-webkit-flex: 1;
+	flex: 1;
+	min-width: 200px;
+	background: white;
+	min-height: 100%;
+	overflow: scroll;
+}
+
+.emailcontent {
+	background: white;
+	min-height: 100%;
+	flex-grow: 5;
+}
+
+.emailcontentdetails {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	height: 90%;
+	overflow: scroll;
+	font-size: 13px;
+}
+
+.attachements {
+	height: 10%;
+	width: inherit;
+	border: 1px black solid;
+}
+
+.emailSummary {
+	font-size: 13px;
+}

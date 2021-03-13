@@ -8,6 +8,7 @@ body {
 	color: black;
 	background-color: $main-background;
 	background-size: cover;
+	font-family: Roboto;
 }
 
 .account {
@@ -34,8 +35,15 @@ body {
 	border-radius: 10px 10px 10px 10px;
 }
 
-.ant-tabs {
-	background: #ffffff;
+.ant-tabs-content-holder {
+	background-color: #ffffff;
+}
+
+.ant-tabs > .ant-tabs-nav {
+	margin: 0;
+}
+.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
+	border: 0;
 }
 
 #comment-input-form {
@@ -131,65 +139,6 @@ body {
 	background: inherit;
 	width: 25vw;
 	padding-top: 0px;
-}
-
-.google {
-	width: 50px;
-	margin-top: 10px;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-.eheader {
-	height: 10%;
-	margin: 0;
-	color: white;
-	background-color: #743794;
-}
-
-.emailboard {
-	display: flex;
-	flex-direction: row;
-	align-content: stretch;
-	padding: 0 0 10px 0;
-}
-
-.emailsubject {
-	-webkit-flex: 1;
-	flex: 1;
-	min-width: 200px;
-	max-width: 400px;
-	background: rgb(4, 176, 252, 0.5);
-	height: 80vh;
-	overflow: scroll;
-	border-color: black;
-	border-style: solid;
-	border-width: 5px 2.5px 5px 5px;
-	margin: 0px 0px 0px 10px;
-}
-.emailcontent {
-	background: rgb(9, 205, 207, 0.5);
-	height: 80vh;
-	flex-grow: 5;
-	border-color: black;
-	border-style: solid;
-	border-width: 5px 5px 5px 2.5px;
-	margin: 0px 10px 0px 0px;
-}
-
-.emailcontentdetails {
-	display: flex;
-	justify-content: space-between;
-	flex-direction: column;
-	height: 90%;
-	overflow: scroll;
-	font-size: large;
-}
-
-.attachements {
-	height: 10%;
-	width: inherit;
-	border: 1px black solid;
 }
 
 .form {
