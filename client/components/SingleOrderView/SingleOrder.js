@@ -17,6 +17,7 @@ import OrderComments from './OrderComments'
 import SingleOrderServices from './SingleOrderServices'
 import moment from 'moment'
 import {Descriptions} from 'antd'
+import './styles.scss'
 
 class SingleOrder extends Component {
 	constructor(props) {
@@ -110,6 +111,99 @@ class SingleOrder extends Component {
 				<div className='singleordercontainer'>
 					<div className='singleordertable'>
 						<Descriptions
+							title='Order Details'
+							layout='vertical'
+							column={{
+								xxl: 3,
+								xl: 2,
+								lg: 2,
+								md: 2,
+								sm: 1,
+								xs: 1,
+							}}>
+							<Descriptions.Item>
+								<Descriptions
+									title='Order'
+									layout='horizontal'
+									bordered={false}
+									column={1}
+									size='small'
+									className='descriptionsAntd'>
+									<Descriptions.Item label='Order ID'>
+										{singleorder.hash}
+									</Descriptions.Item>
+									<Descriptions.Item label='Status'>
+										{singleorder.status}
+									</Descriptions.Item>
+									<Descriptions.Item label='Pickup Date'>
+										{moment(singleorder.pickupDate).format(
+											'M/D/YY hh:mm A'
+										)}
+									</Descriptions.Item>
+									<Descriptions.Item label='Drop Off Date'>
+										{moment(singleorder.dropoffDate).format(
+											'M/D/YY hh:mm A'
+										)}
+									</Descriptions.Item>
+									<Descriptions.Item label='Pickup Location'>
+										<LocationCell
+											value={singleorder.pickupLocation}
+										/>
+									</Descriptions.Item>
+								</Descriptions>
+							</Descriptions.Item>
+
+							<Descriptions.Item>
+								<Descriptions
+									title='Car'
+									layout='horizontal'
+									bordered={false}
+									size='small'
+									column={1}
+									className='descriptionsAntd'>
+									<Descriptions.Item label='Car Make'>
+										{singleorder.carMake}
+									</Descriptions.Item>
+									<Descriptions.Item label='Car Model'>
+										{singleorder.carModel}
+									</Descriptions.Item>
+									<Descriptions.Item label='Car Year'>
+										{singleorder.carYear}
+									</Descriptions.Item>
+									<Descriptions.Item label='VIN'>
+										{singleorder.vin}
+									</Descriptions.Item>
+									<Descriptions.Item label='Stick shift'>
+										{singleorder.stickShift}
+									</Descriptions.Item>
+								</Descriptions>
+							</Descriptions.Item>
+
+							<Descriptions.Item>
+								<Descriptions
+									title='Customer'
+									layout='horizontal'
+									bordered={false}
+									size='small'
+									column={1}
+									className='descriptionsAntd'>
+									<Descriptions.Item label='Customer Phone Number'>
+										{customer.phoneNumber}
+									</Descriptions.Item>
+									<Descriptions.Item label='Customer Name'>
+										<Link
+											to={`/singlecustomer/${customer.phoneNumber}`}>
+											{customer.firstName}{' '}
+											{customer.lastName}
+										</Link>
+									</Descriptions.Item>
+									<Descriptions.Item label='Customer Comments'>
+										{singleorder.customerComments}
+									</Descriptions.Item>
+								</Descriptions>
+							</Descriptions.Item>
+						</Descriptions>
+						{/* <Descriptions
 							title='Order Info'
 							bordered
 							size='small'
@@ -184,7 +278,7 @@ class SingleOrder extends Component {
 								span={3}>
 								{singleorder.customerComments}
 							</Descriptions.Item>
-						</Descriptions>
+						</Descriptions> */}
 						<OrderComments id={this.props.match.params.orderid} />
 					</div>
 					<div className='invoiceform'>
@@ -197,8 +291,6 @@ class SingleOrder extends Component {
 					</div>
 				</div>
 				<br />
-
-				<h3 className='gmailheader'>Order Email History</h3>
 				<Gmail fetchEmails={this.fetchEmails} />
 			</div>
 		)

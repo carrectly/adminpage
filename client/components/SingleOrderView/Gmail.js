@@ -38,6 +38,7 @@ class Gmail extends Component {
 
 		return (
 			<div>
+				<h3 className='gmailheader'>Order Email History</h3>
 				<div className='emailboard'>
 					<div className='emailsubject'>
 						<h3 className='eheader'>Email Subject</h3>

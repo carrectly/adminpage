@@ -184,25 +184,6 @@ body {
 	flex-direction: column;
 }
 
-.singleordercontainer {
-	display: flex;
-	flex-direction: row;
-}
-
-.singleordertable {
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-}
-
-.invoiceform {
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	flex-grow: 2;
-}
-
 .chat {
 	font-size: 1rem;
 	color: purple;
