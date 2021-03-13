@@ -34,6 +34,19 @@ body {
 	border-radius: 10px 10px 10px 10px;
 }
 
+.ant-tabs {
+	background: #ffffff;
+}
+
+#comment-input-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.ant-comment-inner {
+	padding: 0;
+}
+
 .dropdown {
 	position: relative;
 	display: inline-block;
@@ -431,8 +444,10 @@ body {
 
 .commentbox {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	padding: 20px;
+	background: white;
 }
 
 .commentform {
@@ -474,7 +489,7 @@ table.commentlist {
 }
 
 .descriptionsAntd {
-	background-color: whitesmoke;
+	background-color: #ffffff;
 }
 
 @media (max-width: 420px) {

@@ -6,6 +6,7 @@ import {useDispatch} from 'react-redux'
 import {deleteOrderThunk} from '../../store/archivedOrders'
 import {deleteContactThunk} from '../../store/contacts'
 import {getStatusArray} from '../util'
+import {EnvironmentFilled} from '@ant-design/icons'
 
 export const DateCell = ({value}) => {
 	if (value) {
@@ -59,6 +60,7 @@ export const LocationCell = ({value}) => {
 			onClick={() =>
 				window.open(`https://maps.google.com/?q=${value}`, '_blank')
 			}>
+			<EnvironmentFilled />
 			{value}
 		</a>
 	)

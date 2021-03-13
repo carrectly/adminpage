@@ -7,7 +7,7 @@ import {getSingleEmailThunk} from '../../store/singleemail'
 import ErrorHandler from './ErrorHandler'
 import {Spin, Space} from 'antd'
 
-class Gmail extends Component {
+class SingleOrderEmails extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {spinner: false}
@@ -95,4 +95,6 @@ const mapDispatchToProps = dispatch => {
 		getSingleEmail: id => dispatch(getSingleEmailThunk(id)),
 	}
 }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Gmail))
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(SingleOrderEmails)
+)
