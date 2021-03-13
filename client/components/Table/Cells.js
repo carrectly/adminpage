@@ -26,7 +26,7 @@ export const CustomerPhoneCell = ({value}) => (
 )
 
 export const OrderDetailsCell = ({value}) => (
-	<Link to={`/singleorder/${value}`}>{value}</Link>
+	<Link to={`/singleorder/${value}`}>Details</Link>
 )
 
 export const DeleteOrderCell = ({value}) => {

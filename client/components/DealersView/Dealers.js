@@ -36,9 +36,6 @@ class Dealers extends Component {
 				<div>
 					{dealers.length ? (
 						<div>
-							<h1 className='center'>
-								Here you can manage all your shops and dealers
-							</h1>
 							<div className='alldealersview'>
 								{dealers.map(dlr => (
 									<div key={dlr.id} className='dealerCard'>

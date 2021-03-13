@@ -91,7 +91,7 @@ class Navbar extends React.Component {
 				</Popover>
 				<Link to='/account' className='link'>
 					<FireOutlined className='icon' />
-					<span>Archived Orders</span>
+					<span>Active Orders</span>
 				</Link>
 
 				<Link to='/allOrders' className='link'>
