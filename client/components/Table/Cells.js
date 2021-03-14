@@ -5,8 +5,9 @@ import moment from 'moment'
 import {useDispatch} from 'react-redux'
 import {deleteOrderThunk} from '../../store/archivedOrders'
 import {deleteContactThunk} from '../../store/contacts'
+import {removeOrderServiceThunk} from '../../store/singleorder'
 import {getStatusArray} from '../util'
-import {EnvironmentFilled} from '@ant-design/icons'
+import {EnvironmentFilled, DeleteFilled} from '@ant-design/icons'
 
 export const DateCell = ({value}) => {
 	if (value) {
@@ -48,8 +49,8 @@ export const DeleteOrderCell = ({value}) => {
 	}
 
 	return (
-		<Button id={value} onClick={handleClick} type='primary' danger>
-			Delete
+		<Button id={value} onClick={handleClick} type='primary'>
+			<DeleteFilled style={{color: 'red'}} />
 		</Button>
 	)
 }
@@ -84,8 +85,26 @@ export const DeleteCustomerCell = ({value}) => {
 	}
 
 	return (
-		<Button id={value} onClick={handleClick} type='primary' danger>
-			Delete
+		<Button id={value} onClick={handleClick} type='primary'>
+			<DeleteFilled style={{color: 'red'}} />
+		</Button>
+	)
+}
+
+export const DeleteOrderServiceCell = ({row}) => {
+	const dispatch = useDispatch()
+
+	const handleRemoveService = () => {
+		dispatch(
+			removeOrderServiceThunk(row.orderdetails.orderHash, {
+				serviceid: row.id,
+			})
+		)
+	}
+
+	return (
+		<Button id={row.id} onClick={handleRemoveService} type='text'>
+			<DeleteFilled style={{color: 'red'}} />
 		</Button>
 	)
 }

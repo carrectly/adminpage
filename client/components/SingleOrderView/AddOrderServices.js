@@ -27,7 +27,7 @@ class AddOrderServices extends Component {
 		return (
 			<Select
 				showSearch
-				style={{width: 200}}
+				style={{width: '100%'}}
 				placeholder='Search to add service'
 				optionFilterProp='children'
 				onChange={this.handleAddService}
