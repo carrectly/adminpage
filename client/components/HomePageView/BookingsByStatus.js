@@ -67,9 +67,9 @@ const BookingsByStatus = () => {
 			<Layout
 				className='site-layout-background'
 				style={{padding: '24px 0'}}>
-				<Sider className='site-layout-background' width={200}>
+				<Sider className='site-layout-background' width={150}>
 					<Menu
-						mode='inline'
+						mode='vertical'
 						defaultSelectedKeys='1'
 						defaultOpenKeys='1'
 						onClick={handleMenuClick}
