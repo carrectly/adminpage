@@ -32,7 +32,7 @@ const AntDCustomersTable = props => {
 	return (
 		<Table
 			columns={columns}
-			scroll={{x: 1500}}
+			scroll={{x: 'max-content'}}
 			size='small'
 			dataSource={customersArray}
 			pagination={{position: ['topCenter']}}

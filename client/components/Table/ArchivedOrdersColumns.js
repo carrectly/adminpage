@@ -22,14 +22,12 @@ const ArchivedOrdersColumns = (
 		title: 'Order Link',
 		dataIndex: 'hash',
 		key: 'hash',
-		width: '10%',
 		render: value => <OrderDetailsCell value={value} />,
 	},
 	{
 		title: 'status',
 		dataIndex: 'status',
 		key: 'status',
-		width: '10%',
 		sorter: (a, b) =>
 			a.status.localeCompare(b.status, defaultStringCompareOptions),
 		...getColumnSearchProps(
@@ -45,7 +43,6 @@ const ArchivedOrdersColumns = (
 		title: 'carMake',
 		dataIndex: 'carMake',
 		key: 'carMake',
-		width: '10%',
 		...getColumnSearchProps(
 			'carMake',
 			searchInput,
@@ -59,7 +56,6 @@ const ArchivedOrdersColumns = (
 		title: 'carModel',
 		dataIndex: 'carModel',
 		key: 'carModel',
-		width: '10%',
 		...getColumnSearchProps(
 			'carModel',
 			searchInput,
@@ -73,7 +69,6 @@ const ArchivedOrdersColumns = (
 		title: 'Customer Phone #',
 		dataIndex: 'customerPhoneNumber',
 		key: 'customerPhoneNumber',
-		width: '20%',
 		...getColumnSearchProps(
 			'customerPhoneNumber',
 			searchInput,
@@ -87,7 +82,6 @@ const ArchivedOrdersColumns = (
 		title: 'Customer Name',
 		dataIndex: 'customer',
 		key: 'customer',
-		width: '20%',
 		sorter: (a, b) =>
 			a.customer.localeCompare(b.customer, defaultStringCompareOptions),
 		render: (value, row) => <CustomerNameCell value={value} row={row} />,
@@ -124,7 +118,6 @@ const ArchivedOrdersColumns = (
 		title: 'Delete Order',
 		dataIndex: 'hash',
 		key: 'hash',
-		width: '10%',
 		render: value => <DeleteOrderCell value={value} />,
 	},
 ]

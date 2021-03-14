@@ -10,7 +10,7 @@ class TableOrdersByStatus extends Component {
 
 		return (
 			<Table
-				scroll={{x: 1500}}
+				scroll={{x: 'max-content'}}
 				columns={columns}
 				dataSource={array}
 				pagination={false}
