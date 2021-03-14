@@ -9,8 +9,10 @@ import {
 	getQuotesStatusArray,
 	getPotentialLeadsStatusArray,
 } from '../util'
+import axios from 'axios'
+import history from '../../history'
 
-import {Layout, Menu} from 'antd'
+import {Layout, Menu, Input} from 'antd'
 import {
 	NotificationOutlined,
 	ToolOutlined,
@@ -18,7 +20,7 @@ import {
 	PhoneOutlined,
 	HourglassOutlined,
 } from '@ant-design/icons'
-
+const {Search} = Input
 const {Content, Sider} = Layout
 
 const BookingsByStatus = () => {
@@ -60,10 +62,32 @@ const BookingsByStatus = () => {
 		5: <TableOrdersByStatus ordersArray={leadsArr} />,
 	}
 
-	// TODO: fix padding for menu item set to 0
+	const onSearch = async value => {
+		let strValue = value.trim()
+		let singleorder
+		try {
+			singleorder = await axios.get(`/api/orders/single/${strValue}`)
+		} catch (e) {
+			console.log('order not found', e)
+		}
+
+		if (singleorder.data) {
+			console.log('order found', singleorder)
+			await history.push(`/singleorder/${strValue}`)
+		} else {
+			window.alert('Order not found')
+		}
+	}
 
 	return (
 		<div>
+			<div>
+				<Search
+					placeholder='search for orders by order id ... '
+					onSearch={onSearch}
+					enterButton
+				/>
+			</div>
 			<Layout
 				className='site-layout-background'
 				style={{padding: '24px 0'}}>
