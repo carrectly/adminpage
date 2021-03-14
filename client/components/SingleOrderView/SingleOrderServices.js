@@ -17,7 +17,7 @@ const SingleOrderServices = props => {
 				dataSource={services}
 				pagination={false}
 				size='small'
-				rowKey='hash'
+				rowKey='id'
 			/>
 		</div>
 	)

@@ -23,7 +23,7 @@ const SingleOrderEmails = () => {
 
 	return (
 		<div>
-			<h3>Order Email History</h3>
+			<h3 className='sectionHeader'>Order Email History</h3>
 			<div className='emailboard'>
 				<div className='emailsubject'>
 					<h3 className='eheader'>Email Subject</h3>

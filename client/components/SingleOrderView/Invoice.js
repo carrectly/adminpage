@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {notification, Button, Dropdown, Popover, Menu} from 'antd'
 import {
@@ -13,6 +13,8 @@ import {sendSingleEmailThunk} from '../../store/singleemail'
 import {getEmailsThunk} from '../../store/emails'
 import {updateSingleOrderThunk} from '../../store/singleorder'
 import {getStatusArray} from '../util'
+import UpdateOrder from './UpdateOrder'
+
 let cust
 let invoice
 const statusArray = getStatusArray()
@@ -158,17 +160,19 @@ class Invoice extends Component {
 		let dealers = this.props.dealers || []
 		return (
 			<div className='invoicebuttons'>
+				<UpdateOrder id={this.props.order.hash} />
 				<Dropdown overlay={() => menuList(this.handleStatusUpdate)}>
-					<Button>
+					<Button shape='round'>
 						Change status <DownOutlined />
 					</Button>
 				</Dropdown>
 				<Dropdown overlay={() => dealerList(dealers, this.handleSend)}>
-					<Button>
+					<Button shape='round'>
 						Create draft email for shops <DownOutlined />
 					</Button>
 				</Dropdown>
 				<Popover
+					placement='bottom'
 					content="If customer does not exist in
 							square, this button will create a
 							new customer. Can't create an invoice until we check
@@ -176,18 +180,19 @@ class Invoice extends Component {
 					<Button
 						size='large'
 						block
-						type='primary'
+						shape='round'
 						onClick={() => this.handleClick(this.props.order)}>
 						Check if customer exists in Square
 					</Button>
 				</Popover>
 				<Popover
+					placement='bottom'
 					content="Can't create an invoice until we check if the user
 							exists in square.">
 					<Button
 						size='large'
 						block
-						type='primary'
+						shape='round'
 						disabled={this.state.invoice}
 						onClick={() =>
 							this.handleCreateInvoice(

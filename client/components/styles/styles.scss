@@ -212,9 +212,6 @@ body {
 	transform: scale(1.05);
 }
 
-.clientcard {
-	color: lightgoldenrodyellow;
-}
 .clientcard:hover {
 	transition: transform 0.2s;
 	transform: scale(1.05);
@@ -383,32 +380,6 @@ body {
 
 .priceupdateform2 {
 	width: 100px;
-}
-
-.invoicebuttons {
-	display: flex;
-	flex-flow: column nowrap;
-	justify-content: center;
-}
-
-.commentbox {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 20px;
-	background: white;
-}
-
-.commentform {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-}
-
-.commentinput {
-	width: 60%;
-	border: 1px solid #303030;
-	border-radius: 0.25rem;
 }
 
 table.commentlist {

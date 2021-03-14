@@ -45,7 +45,6 @@ const OrderComments = () => {
 		<div className='commentbox'>
 			<List
 				className='comment-list'
-				header='Internal Comments'
 				itemLayout='horizontal'
 				dataSource={orderComments}
 				renderItem={item => (

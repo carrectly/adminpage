@@ -8,7 +8,7 @@ import {
 } from '../../store/singleorder'
 import SingleOrderEmails from './SingleOrderEmails'
 import Invoice from './Invoice'
-import UpdateOrder from './UpdateOrder'
+
 import {getEmailsThunk, clearEmailsThunk} from '../../store/emails'
 import {clearSingleEmailThunk} from '../../store/singleemail'
 import SingleOrderServices from './SingleOrderServices'
@@ -95,12 +95,16 @@ class SingleOrder extends Component {
 						<SingleOrderEmails fetchEmails={this.fetchEmails} />
 					</div>
 					<div className='invoiceform'>
-						<UpdateOrder id={this.props.match.params.orderid} />
+						<h3 className='sectionHeader'>Manage Order</h3>
 						<Invoice
 							fetchEmails={this.fetchEmails}
 							id={this.props.match.params.orderid}
 						/>
-						<SingleOrderServices services={services} />
+						<h3 className='sectionHeader'>Add Services</h3>
+						<div className='singleOrderServices'>
+							<SingleOrderServices services={services} />
+						</div>
+						<h3 className='sectionHeader'>Internal Comments</h3>
 						<OrderComments id={this.props.match.params.orderid} />
 					</div>
 				</div>

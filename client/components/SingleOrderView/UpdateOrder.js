@@ -68,7 +68,8 @@ const UpdateOrder = props => {
 			<Button
 				size='large'
 				block
-				type='primary'
+				shape='round'
+				style={{backgroundColor: '#6AEB6F'}}
 				onClick={() => handleShow(true)}>
 				Update Order Details
 			</Button>

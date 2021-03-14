@@ -33,7 +33,7 @@
 	display: flex;
 	flex-direction: row;
 	align-content: stretch;
-	min-height: 20vh;
+	height: 400px;
 	padding: 0;
 }
 
@@ -69,4 +69,47 @@
 
 .emailSummary {
 	font-size: 13px;
+}
+
+.invoicebuttons {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+	min-height: 30vh;
+	padding: 10px;
+	background-color: white;
+}
+
+.singleOrderServices {
+	padding: 10px;
+	background-color: white;
+}
+
+.commentbox {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 10px;
+	background: white;
+}
+
+.commentform {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.commentinput {
+	width: 60%;
+	border: 1px solid #303030;
+	border-radius: 0.25rem;
+}
+
+.sectionHeader {
+	font-size: 20px;
+	font-weight: bold;
+	font-style: normal;
+	padding: 0;
+	height: 37px;
+	margin: 0;
 }
