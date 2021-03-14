@@ -6,6 +6,8 @@ import SingleEmail from './SingleEmail.js'
 import {getSingleEmailThunk} from '../../store/singleemail'
 import ErrorHandler from './ErrorHandler'
 import {Spin, Space} from 'antd'
+import EmailSummaryCard from '../Email/EmailSummaryCard'
+
 import './styles.scss'
 
 class SingleOrderEmails extends Component {
@@ -44,38 +46,21 @@ class SingleOrderEmails extends Component {
 					<div className='emailsubject'>
 						<h3 className='eheader'>Email Subject</h3>
 						<div className='emailSummary'>
-							{this.state.spinner ? (
-								<Space size='middle'>
-									<Spin size='large' />
-								</Space>
-							) : (
-								emails.map(email => (
-									<div
-										key={email.id}
-										id={email.id}
-										onClick={id => this.handleClick(id)}>
-										Subject: {email.Subject}
-										<br />
-										From: {email.From}
-										<br />
-										Date: {email.Date}
-										<hr />
-									</div>
-								))
-							)}
+							{emails.map(email => (
+								<EmailSummaryCard
+									email={email}
+									key={email.id}
+								/>
+							))}
 						</div>
 					</div>
 					<div className='emailcontent'>
 						<h3 className='eheader'>Message Preview</h3>
-						{single ? (
-							<div className='emailcontentdetails'>
-								<ErrorHandler>
-									<SingleEmail single={single} />
-								</ErrorHandler>
-							</div>
-						) : (
-							<div />
-						)}
+						<div className='emailcontentdetails'>
+							<ErrorHandler>
+								<SingleEmail />
+							</ErrorHandler>
+						</div>
 					</div>
 				</div>
 			</div>
