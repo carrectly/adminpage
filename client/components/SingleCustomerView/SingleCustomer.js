@@ -2,9 +2,10 @@ import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getUserOrdersThunk} from '../../store/userorders'
-import {Table, Card, Button} from 'react-bootstrap'
+import {Card} from 'antd'
 import {getSingleCustomerThunk} from '../../store/singlecustomer'
 import UpdateCustomer from './UpdateCustomer'
+import moment from 'moment'
 
 class SingleCustomer extends Component {
 	async componentDidMount() {
@@ -19,33 +20,37 @@ class SingleCustomer extends Component {
 	render() {
 		const userorders = this.props.orders || []
 		const customer = this.props.customer || {}
-		let custArr = Object.keys(customer) || []
 		return (
 			<div>
 				<div className='customercontainer'>
 					<div className='customerinfo'>
-						<Card className='clientcard'>
-							<Card.Body>
-								<Card.Title>Customer Info</Card.Title>
-								<Card.Text>
-									{custArr.map(key => (
-										<span key={key}>
-											{key} {customer[key]}
-											<br />
-										</span>
-									))}
-								</Card.Text>
-							</Card.Body>
+						<Card
+							className='clientcard'
+							title={`${customer.firstName} ${customer.lastName}`}>
+							<div>{customer.email}</div>
+							<div>{customer.location}</div>
+							<div>{customer.phoneNumber}</div>
+							<div>{customer.location}</div>
+							<div>
+								<span>Created on </span>
+								{moment(customer.createdAt).format(
+									'M/D/YY hh:mm A'
+								)}
+							</div>
+							<div>
+								<span>Updated on </span>
+								{moment(customer.updatedAt).format(
+									'M/D/YY hh:mm A'
+								)}
+							</div>
 						</Card>
 					</div>
 					<div className='customerupdate'>
-						<UpdateCustomer
-							phone={this.props.match.params.userid}
-						/>
+						<UpdateCustomer />
 					</div>
 				</div>
 				<h3>Order History</h3>
-				<Table striped bordered hover size='sm' variant='dark'>
+				<table>
 					<thead>
 						<tr>
 							<th>Status</th>
@@ -82,7 +87,7 @@ class SingleCustomer extends Component {
 							</tr>
 						))}
 					</tbody>
-				</Table>
+				</table>
 			</div>
 		)
 	}

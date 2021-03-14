@@ -96,7 +96,7 @@ async function listMessages(id) {
 				userId: userId,
 				id: msg.id,
 				format: 'metadata',
-				metadataHeaders: ['Subject', 'From', 'Date'],
+				metadataHeaders: ['Subject', 'From', 'To', 'Date'],
 			})
 			let obj = {
 				id: msg.id,
@@ -188,7 +188,7 @@ async function getMessage(messageId) {
 			'The API returned an error inside single message fetch'
 		)
 	} else {
-		return {decoded, attachmentsArray}
+		return decoded
 	}
 
 	async function asyncForEach(array, callback) {

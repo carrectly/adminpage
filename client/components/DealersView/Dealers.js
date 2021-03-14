@@ -4,17 +4,9 @@ import {connect} from 'react-redux'
 import AddDealer from './AddDealer.js'
 import {removeDealerThunk, fetchDealersThunk} from '../../store/dealers.js'
 import DealerCard from './DealerCard'
-import {Button, OverlayTrigger, Tooltip} from 'react-bootstrap'
+import {Popover} from 'antd'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons'
-
-function renderTooltip(props) {
-	return (
-		<Tooltip id='button-tooltip' {...props}>
-			Click here to add a dealer
-		</Tooltip>
-	)
-}
 
 class Dealers extends Component {
 	constructor(props) {
@@ -39,53 +31,35 @@ class Dealers extends Component {
 
 	render() {
 		const dealers = this.props.dealers
-		return dealers.length ? (
+		return (
 			<div>
-				<h1 className='center'>
-					Here you can manage all your shops and dealers
-				</h1>
-				<div className='alldealersview'>
-					{dealers.map(dlr => (
-						<div key={dlr.id} className='dealerCard'>
-							<DealerCard
-								key={dlr.id}
-								dealer={dlr}
-								delete={this.props.remove}
-							/>
+				<div>
+					{dealers.length ? (
+						<div>
+							<div className='alldealersview'>
+								{dealers.map(dlr => (
+									<div key={dlr.id} className='dealerCard'>
+										<DealerCard
+											key={dlr.id}
+											dealer={dlr}
+											delete={this.props.remove}
+										/>
+									</div>
+								))}
+							</div>
 						</div>
-					))}
+					) : (
+						<h1>No dealers Found</h1>
+					)}
 				</div>
 				<div>
-					<OverlayTrigger
-						placement='top'
-						delay={{show: 250, hide: 400}}
-						overlay={renderTooltip}>
+					<Popover content='Click here to add a dealer'>
 						<FontAwesomeIcon
 							className='float-plus'
 							onClick={() => this.setModalShow(true)}
 							icon={faPlusCircle}
 						/>
-					</OverlayTrigger>
-					<AddDealer
-						show={this.state.modalShow}
-						onHide={() => this.setModalShow(false)}
-					/>
-				</div>
-			</div>
-		) : (
-			<div>
-				<h1>No dealers Found</h1>
-				<div>
-					<OverlayTrigger
-						placement='top'
-						delay={{show: 250, hide: 400}}
-						overlay={renderTooltip}>
-						<FontAwesomeIcon
-							className='float-plus'
-							onClick={() => this.setModalShow(true)}
-							icon={faPlusCircle}
-						/>
-					</OverlayTrigger>
+					</Popover>
 					<AddDealer
 						show={this.state.modalShow}
 						onHide={() => this.setModalShow(false)}

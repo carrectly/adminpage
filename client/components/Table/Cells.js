@@ -1,12 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {Button} from 'react-bootstrap'
+import {Button, Tag} from 'antd'
 import moment from 'moment'
 import {useDispatch} from 'react-redux'
 import {deleteOrderThunk} from '../../store/archivedOrders'
 import {deleteContactThunk} from '../../store/contacts'
+import {removeOrderServiceThunk} from '../../store/singleorder'
 import {getStatusArray} from '../util'
-import {Tag} from 'antd'
+import {EnvironmentFilled, DeleteFilled} from '@ant-design/icons'
 
 export const DateCell = ({value}) => {
 	if (value) {
@@ -35,7 +36,7 @@ export const CustomerPhoneCell = ({value}) => (
 )
 
 export const OrderDetailsCell = ({value}) => (
-	<Link to={`/singleorder/${value}`}>{value}</Link>
+	<Link to={`/singleorder/${value}`}>Details</Link>
 )
 
 export const DeleteOrderCell = ({value}) => {
@@ -56,20 +57,21 @@ export const DeleteOrderCell = ({value}) => {
 	}
 
 	return (
-		<Button id={value} onClick={handleClick} variant='danger'>
-			Delete
+		<Button id={value} onClick={handleClick} type='text'>
+			<DeleteFilled style={{color: 'red'}} />
 		</Button>
 	)
 }
 
 export const LocationCell = ({value}) => {
 	return (
-		<Link
+		<a
 			onClick={() =>
 				window.open(`https://maps.google.com/?q=${value}`, '_blank')
 			}>
+			<EnvironmentFilled />
 			{value}
-		</Link>
+		</a>
 	)
 }
 
@@ -91,8 +93,26 @@ export const DeleteCustomerCell = ({value}) => {
 	}
 
 	return (
-		<Button id={value} onClick={handleClick} variant='danger'>
-			Delete
+		<Button id={value} onClick={handleClick} type='text'>
+			<DeleteFilled style={{color: 'red'}} />
+		</Button>
+	)
+}
+
+export const DeleteOrderServiceCell = ({row}) => {
+	const dispatch = useDispatch()
+
+	const handleRemoveService = () => {
+		dispatch(
+			removeOrderServiceThunk(row.orderdetails.orderHash, {
+				serviceid: row.id,
+			})
+		)
+	}
+
+	return (
+		<Button id={row.id} onClick={handleRemoveService} type='text'>
+			<DeleteFilled style={{color: 'red'}} />
 		</Button>
 	)
 }

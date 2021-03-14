@@ -32,11 +32,12 @@ const AntDOrdersTable = props => {
 	return (
 		<Table
 			columns={columns}
-			scroll={{x: 1500}}
+			scroll={{x: 'max-content'}}
 			size='small'
 			dataSource={ordersArr}
 			pagination={{position: ['topCenter']}}
 			loading={props.loading}
+			rowKey='hash'
 		/>
 	)
 }

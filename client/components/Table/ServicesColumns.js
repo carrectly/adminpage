@@ -35,7 +35,7 @@ const ServicesColumns = (
 	{
 		title: 'Update Form',
 		dataIndex: 'name',
-		key: 'updateservice',
+		key: 'id',
 		render: (value, row) => <UpdateService value={value} row={row} />,
 	},
 ]

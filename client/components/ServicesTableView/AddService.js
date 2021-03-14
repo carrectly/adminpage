@@ -1,18 +1,9 @@
 import React, {useState} from 'react'
-import {Modal, Button, Form, Input, InputNumber} from 'antd'
+import {Modal, Button, Form, Input, InputNumber, Popover} from 'antd'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons'
-import {OverlayTrigger, Tooltip} from 'react-bootstrap'
 import {useDispatch} from 'react-redux'
 import {addServiceThunk} from '../../store/services'
-
-function renderTooltip(props) {
-	return (
-		<Tooltip id='button-tooltip' {...props}>
-			Click here to add a new service
-		</Tooltip>
-	)
-}
 
 const layout = {
 	labelCol: {span: 8},
@@ -49,16 +40,13 @@ const AddService = () => {
 
 	return (
 		<div>
-			<OverlayTrigger
-				placement='top'
-				delay={{show: 250, hide: 400}}
-				overlay={renderTooltip}>
+			<Popover content='Click here to add a new service'>
 				<FontAwesomeIcon
 					className='float-plus'
 					onClick={() => handleShow(true)}
 					icon={faPlusCircle}
 				/>
-			</OverlayTrigger>
+			</Popover>
 			<Modal
 				title='Add Service'
 				visible={show}

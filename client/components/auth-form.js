@@ -2,16 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import {
-	Table,
-	Form,
-	Button,
-	Row,
-	Col,
-	ButtonToolbar,
-	OverlayTrigger,
-	Tooltip,
-} from 'react-bootstrap'
+import {Button} from 'antd'
 /**
  * COMPONENT
  */
@@ -45,7 +36,7 @@ const AuthForm = props => {
 				{error && error.response && <div> {error.response.data} </div>}
 			</Form> */}
 			<a href='/auth/google'>
-				<Button variant='success' type='reset' id='signup'>
+				<Button type='primary' id='signup'>
 					{displayName} with Google{' '}
 					<img className='google' src='/google-icon.png' />
 				</Button>

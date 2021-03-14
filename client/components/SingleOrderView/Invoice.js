@@ -1,30 +1,61 @@
 import React, {Component} from 'react'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {notification} from 'antd'
+import {notification, Button, Dropdown, Popover, Menu} from 'antd'
 import {
 	getSquareCustomerThunk,
 	createInvoiceThunk,
 	clearSquareThunk,
 } from '../../store/square'
-import {
-	DropdownButton,
-	Dropdown,
-	Button,
-	ButtonToolbar,
-	OverlayTrigger,
-	Tooltip,
-} from 'react-bootstrap'
+import {DownOutlined} from '@ant-design/icons'
 import {fetchDealersThunk} from '../../store/dealers.js'
 import {sendSingleEmailThunk} from '../../store/singleemail'
 import {getEmailsThunk} from '../../store/emails'
 import {updateSingleOrderThunk} from '../../store/singleorder'
 import {getStatusArray} from '../util'
+import UpdateOrder from './UpdateOrder'
+
 let cust
 let invoice
 const statusArray = getStatusArray()
 
 const driversArray = ['Stas', 'Mike', 'Taras', 'Ben', 'Kyle', 'Other']
+
+const menuList = fn => {
+	return (
+		<Menu onClick={fn}>
+			{statusArray.map((status, index) => (
+				<Menu.Item key={status} id={index}>
+					{status}
+				</Menu.Item>
+			))}
+		</Menu>
+	)
+}
+
+const driversList = fn => {
+	return (
+		<Menu onClick={fn}>
+			{driversArray.map((driver, index) => (
+				<Menu.Item key={driver} id={index}>
+					{driver}
+				</Menu.Item>
+			))}
+		</Menu>
+	)
+}
+
+const dealerList = (arr, fn) => {
+	return (
+		<Menu onClick={fn}>
+			{arr.map((dlr, index) => (
+				<Menu.Item key={dlr.email} id={index}>
+					{dlr.name}
+				</Menu.Item>
+			))}
+		</Menu>
+	)
+}
 
 class Invoice extends Component {
 	constructor(props) {
@@ -89,9 +120,9 @@ class Invoice extends Component {
 		notification.open(args)
 	}
 
-	async handleSend(evt) {
+	async handleSend(e) {
 		let obj = {}
-		obj.email = evt.target.id
+		obj.email = e.key
 		obj.year = this.props.order.carYear
 		obj.make = this.props.order.carMake
 		obj.model = this.props.order.carModel
@@ -107,12 +138,13 @@ class Invoice extends Component {
 		obj = {}
 	}
 
-	handleStatusUpdate(evt) {
+	handleStatusUpdate(e) {
+		console.log('changing status evt', e.key)
 		let obj = {
-			status: evt.target.name,
+			status: e.key,
 		}
 		let id = this.props.id
-		if (evt.target.name === 'cancelled') {
+		if (e.key === 'cancelled') {
 			if (
 				window.confirm(
 					'Changing the status to cancelled will remove the order from the home page and will move it to archives. Do you want to proceed?'
@@ -122,7 +154,7 @@ class Invoice extends Component {
 			} else {
 				console.log('changed my mind')
 			}
-		} else if (evt.target.name === 'paid') {
+		} else if (e.key === 'paid') {
 			if (
 				window.confirm(
 					'Changing the status to paid will remove the order from the home page and will move it to archives. Do you want to proceed?'
@@ -151,82 +183,43 @@ class Invoice extends Component {
 		let dealers = this.props.dealers || []
 		return (
 			<div className='invoicebuttons'>
-				<DropdownButton
-					size='lg'
-					id='dropdown-basic-button'
-					title='Change Status'
-					className='btn-block'>
-					{statusArray.map((status, index) => (
-						<Dropdown.Item
-							key={index}
-							id={index}
-							name={status}
-							onClick={this.handleStatusUpdate}>
-							{status}
-						</Dropdown.Item>
-					))}
-				</DropdownButton>
-				<DropdownButton
-					size='lg'
-					id='dropdown-basic-button'
-					title='Assign Concierge'
-					className='btn-block'>
-					{driversArray.map((name, index) => (
-						<Dropdown.Item
-							key={index}
-							id={index}
-							name={name}
-							onClick={this.handleDriverUpdate}>
-							{name}
-						</Dropdown.Item>
-					))}
-				</DropdownButton>
-				<DropdownButton
-					size='lg'
-					id='dropdown-basic-button'
-					title='Create Email Draft Quote Request'
-					className='btn-block'>
-					{dealers.map(dlr => (
-						<Dropdown.Item
-							key={dlr.id}
-							id={dlr.email}
-							onClick={this.handleSend}>
-							{dlr.name}
-						</Dropdown.Item>
-					))}
-				</DropdownButton>
-
-				<OverlayTrigger
-					placement='left'
-					overlay={
-						<Tooltip id='tooltip-left'>
-							If customer does not exist in{' '}
-							<strong>square</strong>, this button will create a
-							new customer. Can't create an invoice until we check
-							if the customer exists in <strong>square</strong>.
-						</Tooltip>
-					}>
+				<UpdateOrder id={this.props.order.hash} />
+				<Dropdown overlay={() => menuList(this.handleStatusUpdate)}>
+					<Button shape='round'>
+						Change status <DownOutlined />
+					</Button>
+				</Dropdown>
+				<Dropdown overlay={() => dealerList(dealers, this.handleSend)}>
+					<Button shape='round'>
+						Create draft email for shops <DownOutlined />
+					</Button>
+				</Dropdown>
+				<Dropdown overlay={() => driversList(this.handleDriverUpdate)}>
+					<Button shape='round'>
+						Assign Concierge <DownOutlined />
+					</Button>
+				</Dropdown>
+				<Popover
+					placement='bottom'
+					content="If customer does not exist in
+							square, this button will create a new customer. Can't create an invoice until we check
+							if the customer exists in square">
 					<Button
-						size='lg'
+						size='large'
 						block
-						variant='primary'
+						shape='round'
 						onClick={() => this.handleClick(this.props.order)}>
 						Check if customer exists in Square
 					</Button>
-				</OverlayTrigger>
-
-				<OverlayTrigger
-					placement='left'
-					overlay={
-						<Tooltip id='tooltip-left'>
-							Can't create an invoice until we check if the user
-							exists in <strong>square</strong>.
-						</Tooltip>
-					}>
+				</Popover>
+				<Popover
+					placement='bottom'
+					content="Can't create an invoice until we check if the user
+							exists in square.">
 					<Button
-						size='lg'
+						size='large'
 						block
-						variant='primary'
+						shape='round'
 						disabled={this.state.invoice}
 						onClick={() =>
 							this.handleCreateInvoice(
@@ -236,7 +229,7 @@ class Invoice extends Component {
 						}>
 						Create Invoice
 					</Button>
-				</OverlayTrigger>
+				</Popover>
 			</div>
 		)
 	}

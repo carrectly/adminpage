@@ -6,18 +6,15 @@ import {
 	updateOrderDetailsThunk,
 	removeOrderServiceThunk,
 } from '../../store/singleorder'
-import {LocationCell} from '../Table/Cells.js'
-import Gmail from './Gmail'
+import SingleOrderEmails from './SingleOrderEmails'
 import Invoice from './Invoice'
-import {Table, Button} from 'react-bootstrap'
-import UpdateOrder from './UpdateOrder'
+
 import {getEmailsThunk, clearEmailsThunk} from '../../store/emails'
-import AddOrderServices from './AddOrderServices'
 import {clearSingleEmailThunk} from '../../store/singleemail'
-import OrderComments from './OrderComments'
 import SingleOrderServices from './SingleOrderServices'
-import moment from 'moment'
-import {Descriptions, Badge} from 'antd'
+import SingleOrderDetails from './SingleOrderDetails'
+import OrderComments from './OrderComments'
+import './styles.scss'
 
 class SingleOrder extends Component {
 	constructor(props) {
@@ -86,126 +83,32 @@ class SingleOrder extends Component {
 		const singleorder = this.props.order || {}
 		const services = this.props.order.services || []
 		const customer = singleorder.customer || {}
-		let arr = []
-
-		for (let [key, value] of Object.entries(singleorder)) {
-			if (key !== 'services') {
-				if (key === 'customer') {
-					arr.push([`${key}`, `${value.firstName} ${value.lastName}`])
-				} else if (
-					key === 'dropoffDate' ||
-					key === 'pickupDate' ||
-					key === 'createdAt' ||
-					key === 'updatedAt'
-				) {
-					let tempDate = moment(value).format('M/D/YY hh:mm A')
-					arr.push([`${key}`, `${tempDate}`])
-				} else {
-					arr.push([`${key}`, `${value}`])
-				}
-			}
-		}
 
 		return (
 			<div>
 				<div className='singleordercontainer'>
 					<div className='singleordertable'>
-						<Descriptions
-							title='Order Info'
-							bordered
-							size='small'
-							className='descriptionsAntd'>
-							<Descriptions.Item label='Order ID'>
-								{singleorder.hash}
-							</Descriptions.Item>
-							<Descriptions.Item label='Status' span={2}>
-								{singleorder.status}
-							</Descriptions.Item>
-							<Descriptions.Item label='Customer Phone Number'>
-								{customer.phoneNumber}
-							</Descriptions.Item>
-							<Descriptions.Item label='Customer Name' span={2}>
-								<Link
-									to={`/singlecustomer/${customer.phoneNumber}`}>
-									{customer.firstName} {customer.lastName}
-								</Link>
-							</Descriptions.Item>
-							<Descriptions.Item label='Pickup Date'>
-								{moment(singleorder.pickupDate).format(
-									'M/D/YY hh:mm A'
-								)}
-							</Descriptions.Item>
-							<Descriptions.Item label='Drop Off Date' span={2}>
-								{moment(singleorder.dropoffDate).format(
-									'M/D/YY hh:mm A'
-								)}
-							</Descriptions.Item>
-							<Descriptions.Item label='Pickup Location'>
-								<LocationCell
-									value={singleorder.pickupLocation}
-								/>
-							</Descriptions.Item>
-							<Descriptions.Item label='Car Make' span={2}>
-								{singleorder.carMake}
-							</Descriptions.Item>
-							<Descriptions.Item label='Car Model'>
-								{singleorder.carModel}
-							</Descriptions.Item>
-							<Descriptions.Item label='Car Year'>
-								{singleorder.carYear}
-							</Descriptions.Item>
-							<Descriptions.Item label='VIN'>
-								{singleorder.vin}
-							</Descriptions.Item>
-							<Descriptions.Item label='PROMO CODE'>
-								{singleorder.promoCode}
-							</Descriptions.Item>
-							<Descriptions.Item label='Discount'>
-								{singleorder.discount}
-							</Descriptions.Item>
-							<Descriptions.Item label='Stick shift'>
-								{singleorder.stickShift}
-							</Descriptions.Item>
-							<Descriptions.Item label='Flexible on Time'>
-								{singleorder.flexibleOnTime}
-							</Descriptions.Item>
-							<Descriptions.Item label='Created at'>
-								{moment(singleorder.createAt).format(
-									'M/D/YY hh:mm A'
-								)}
-							</Descriptions.Item>
-							<Descriptions.Item label='Updated at'>
-								{moment(singleorder.updatedAt).format(
-									'M/D/YY hh:mm A'
-								)}
-							</Descriptions.Item>
-
-							<Descriptions.Item
-								label='Customer Comments'
-								span={4}>
-								{singleorder.customerComments}
-							</Descriptions.Item>
-							<Descriptions.Item
-								label='Assigned to concierge'
-								span={4}>
-								{singleorder.concierge}
-							</Descriptions.Item>
-						</Descriptions>
-						<OrderComments id={this.props.match.params.orderid} />
+						<SingleOrderDetails
+							order={singleorder}
+							customer={customer}
+						/>
+						<SingleOrderEmails fetchEmails={this.fetchEmails} />
 					</div>
 					<div className='invoiceform'>
-						<UpdateOrder id={this.props.match.params.orderid} />
+						<h3 className='sectionHeader'>Manage Order</h3>
 						<Invoice
 							fetchEmails={this.fetchEmails}
 							id={this.props.match.params.orderid}
 						/>
-						<SingleOrderServices services={services} />
+						<h3 className='sectionHeader'>Add Services</h3>
+						<div className='singleOrderServices'>
+							<SingleOrderServices services={services} />
+						</div>
+						<h3 className='sectionHeader'>Internal Comments</h3>
+						<OrderComments id={this.props.match.params.orderid} />
 					</div>
 				</div>
 				<br />
-
-				<h3 className='gmailheader'>Order Email History</h3>
-				<Gmail fetchEmails={this.fetchEmails} />
 			</div>
 		)
 	}

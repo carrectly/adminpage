@@ -17,7 +17,6 @@ const columns = [
 		title: 'Order Link',
 		dataIndex: 'hash',
 		key: 'hash',
-		width: 50,
 		render: (value, row) => <OrderDetailsCell value={value} row={row} />,
 	},
 	{
@@ -55,7 +54,7 @@ const columns = [
 	{
 		title: 'carMake',
 		dataIndex: 'carMake',
-		key: 'age',
+		key: 'carMake',
 	},
 	{
 		title: 'carModel',

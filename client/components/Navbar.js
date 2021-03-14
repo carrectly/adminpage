@@ -1,8 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {Button, ButtonToolbar, OverlayTrigger, Tooltip} from 'react-bootstrap'
+import {Popover} from 'antd'
 import {logout} from '../store'
+import {
+	FolderOutlined,
+	TeamOutlined,
+	ToolOutlined,
+	CalendarOutlined,
+	TableOutlined,
+	FireOutlined,
+	LogoutOutlined,
+} from '@ant-design/icons'
+import './styles/navbar.scss'
 
 class Navbar extends React.Component {
 	constructor() {
@@ -43,70 +53,73 @@ class Navbar extends React.Component {
 					</Link>
 
 					<Link to='/allOrders' className='link'>
-						Archived Orders
+						<FolderOutlined />
+						<span>Archived Orders</span>
 					</Link>
 					<Link to='/allCustomers' className='link'>
+						<TeamOutlined />
 						All Customers
 					</Link>
-
 					<Link to='/dealers' className='link'>
+						<ToolOutlined />
 						Service Shops
 					</Link>
 
 					<Link to='/calendar' className='link'>
+						<CalendarOutlined />
 						Calendar
 					</Link>
 					<Link to='/allServices' className='link'>
+						<TableOutlined />
 						Services
 					</Link>
 				</div>
 			</div>
 		) : (
 			<div className='navbar1'>
-				<a
-					className='link'
-					href='https://www.carrectly.com/book/'
-					target='_blank'>
-					<OverlayTrigger
-						key='bottom'
-						placement='bottom'
-						overlay={
-							<Tooltip id='tooltip-bottom'>
-								Click the logo to create a booking on client's
-								behalf
-							</Tooltip>
-						}>
+				<Popover content='Click here to book for client'>
+					<a
+						className='link'
+						href='https://www.carrectly.com/book/'
+						rel='noreferrer'
+						target='_blank'>
 						<img
 							id='logo'
 							src='https://www.carrectly.com/wp-content/uploads/2016/11/logo.png'
 						/>
-					</OverlayTrigger>
-				</a>
-
+					</a>
+				</Popover>
 				<Link to='/account' className='link'>
-					Home
+					<FireOutlined className='icon' />
+					<span>Active Orders</span>
 				</Link>
 
 				<Link to='/allOrders' className='link'>
+					<FolderOutlined className='icon' />
 					Archived Orders
 				</Link>
 
 				<Link to='/allCustomers' className='link'>
+					<TeamOutlined className='icon' />
 					All Customers
 				</Link>
 
 				<Link to='/dealers' className='link'>
+					<ToolOutlined className='icon' />
 					Service Shops
 				</Link>
 
 				<Link to='/calendar' className='link'>
+					<CalendarOutlined className='icon' />
 					Calendar
 				</Link>
 				<Link to='/allServices' className='link'>
+					<TableOutlined className='icon' />
 					Services
 				</Link>
 				{this.props.isLoggedIn ? (
 					<a className='link' onClick={this.handleLogout}>
+						<LogoutOutlined className='icon' />
 						Log out
 					</a>
 				) : (

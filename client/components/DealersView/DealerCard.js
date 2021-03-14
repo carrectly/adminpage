@@ -1,44 +1,27 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
-import {Card, Button} from 'react-bootstrap'
+import React from 'react'
+import {Card, Button} from 'antd'
 import UpdateDealer from './UpdateDealer'
 
-class DealerCard extends Component {
-	constructor(props) {
-		super(props)
-		this.handleClick = this.handleClick.bind(this)
-	}
-
-	handleClick = evt => {
+const DealerCard = props => {
+	const handleClick = evt => {
+		console.log(evt)
 		evt.preventDefault()
 		if (evt.target.id) {
-			this.props.delete(evt.target.id)
+			props.delete(evt.target.id)
 		}
 	}
-	render() {
-		const dealer = this.props.dealer
-		return (
-			<Card className='dlrcard'>
-				<Card.Body>
-					<Card.Title>{dealer.name}</Card.Title>
-					<Card.Subtitle className='mb-2 text-muted'>
-						<div>{dealer.email}</div>
-						<div>{dealer.location}</div>
-					</Card.Subtitle>
-					<div className='dealerCardFooter'>
-						<UpdateDealer dealer={dealer} />
-						<Button
-							id={dealer.id}
-							onClick={this.handleClick}
-							variant='danger'>
-							Delete
-						</Button>
-					</div>
-				</Card.Body>
-			</Card>
-		)
-	}
+	const dealer = props.dealer
+
+	return (
+		<Card className='dlrcard' title={dealer.name}>
+			<div>{dealer.email}</div>
+			<div>{dealer.location}</div>
+			<UpdateDealer dealer={dealer} />
+			<Button id={dealer.id} onClick={handleClick} type='primary' danger>
+				Delete
+			</Button>
+		</Card>
+	)
 }
 
-export default withRouter(connect(null, null)(DealerCard))
+export default DealerCard

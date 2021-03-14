@@ -3,7 +3,7 @@ import {Modal, Button, Form, InputNumber} from 'antd'
 import {updateOrderDetailsThunk} from '../../store/singleorder'
 import {useParams} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
-import {number} from 'prop-types'
+import {EditFilled} from '@ant-design/icons'
 
 const layout = {
 	labelCol: {span: 8},
@@ -15,7 +15,7 @@ const UpdateOrderCharges = props => {
 	const [show, setShow] = useState(false)
 	const params = useParams()
 	const id = params.orderid
-	const serviceId = props.service.id
+	const serviceId = props.row.id
 	const handleClose = () => setShow(false)
 	const handleShow = () => setShow(true)
 
@@ -33,11 +33,11 @@ const UpdateOrderCharges = props => {
 
 	return (
 		<div>
-			<Button type='primary' onClick={() => handleShow(true)}>
-				Edit
+			<Button type='text' onClick={() => handleShow(true)}>
+				<EditFilled style={{color: '#7CFC00'}} />
 			</Button>
 			<Modal
-				title={`${props.service.name}`}
+				title={`${props.row.name}`}
 				visible={show}
 				footer={null}
 				closable={false}>
@@ -51,14 +51,14 @@ const UpdateOrderCharges = props => {
 					<Form.Item
 						name='customerPrice'
 						label='Customer Price'
-						initialValue={props.service.orderdetails.customerPrice}
+						initialValue={props.row.orderdetails.customerPrice}
 						rules={[{required: true}]}>
 						<InputNumber step={0.01} />
 					</Form.Item>
 					<Form.Item
 						name='dealerPrice'
 						label='Dealer Price'
-						initialValue={props.service.orderdetails.dealerPrice}>
+						initialValue={props.row.orderdetails.dealerPrice}>
 						<InputNumber step={0.01} />
 					</Form.Item>
 					<Form.Item>

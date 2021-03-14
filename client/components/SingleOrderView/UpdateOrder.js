@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {Modal, DatePicker, Form, Input} from 'antd'
+import {Modal, DatePicker, Form, Input, Button} from 'antd'
 import {updateSingleOrderThunk} from '../../store/singleorder'
-import {Button} from 'react-bootstrap'
 import {useParams} from 'react-router-dom'
 import moment from 'moment'
 
@@ -71,9 +70,10 @@ const UpdateOrder = props => {
 	return (
 		<div>
 			<Button
-				size='lg'
+				size='large'
 				block
-				variant='primary'
+				shape='round'
+				style={{backgroundColor: '#6AEB6F'}}
 				onClick={() => handleShow(true)}>
 				Update Order Details
 			</Button>
@@ -145,15 +145,9 @@ const UpdateOrder = props => {
 						<Input onChange={onDiscountChange} />
 					</Form.Item>
 					<Form.Item>
-						<Button
-							type='button'
-							variant='light'
-							onClick={onCancel}>
-							Cancel
-						</Button>
-						<Button variant='primary' type='submit'>
-							Submit
-						</Button>
+						<Button onClick={onCancel}>Cancel</Button>
+						{/* TODO: make sure this button works */}
+						<Button type='primary'>Submit</Button>
 					</Form.Item>
 				</Form>
 			</Modal>

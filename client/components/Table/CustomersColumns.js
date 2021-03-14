@@ -15,7 +15,6 @@ const CustomersColumns = (
 		title: 'First Name',
 		dataIndex: 'firstName',
 		key: 'firstName',
-		width: '10%',
 		sorter: (a, b) =>
 			a.firstName.localeCompare(b.firstName, defaultStringCompareOptions),
 		...getColumnSearchProps(
@@ -31,7 +30,6 @@ const CustomersColumns = (
 		title: 'Last Name',
 		dataIndex: 'lastName',
 		key: 'lastName',
-		width: '10%',
 		sorter: (a, b) =>
 			a.lastName.localeCompare(b.lastName, defaultStringCompareOptions),
 		...getColumnSearchProps(
@@ -47,7 +45,6 @@ const CustomersColumns = (
 		title: 'Email',
 		dataIndex: 'email',
 		key: 'email',
-		width: '10%',
 		sorter: (a, b) =>
 			a.email.localeCompare(b.email, defaultStringCompareOptions),
 		...getColumnSearchProps(
@@ -63,7 +60,6 @@ const CustomersColumns = (
 		title: 'Phone #',
 		dataIndex: 'phoneNumber',
 		key: 'phoneNumber',
-		width: '10%',
 		...getColumnSearchProps(
 			'phoneNumber',
 			searchInput,
@@ -77,14 +73,12 @@ const CustomersColumns = (
 		title: 'Link to customer',
 		dataIndex: 'phoneNumber',
 		key: 'phoneNumber',
-		width: '10%',
 		render: value => <CustomerPhoneCell value={value} />,
 	},
 	{
 		title: 'Delete Customer',
 		dataIndex: 'phoneNumber',
 		key: 'phoneNumber',
-		width: '10%',
 		render: value => <DeleteCustomerCell value={value} />,
 	},
 ]
