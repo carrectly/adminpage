@@ -49,7 +49,7 @@ export const DeleteOrderCell = ({value}) => {
 	}
 
 	return (
-		<Button id={value} onClick={handleClick} type='primary'>
+		<Button id={value} onClick={handleClick} type='text'>
 			<DeleteFilled style={{color: 'red'}} />
 		</Button>
 	)
@@ -85,7 +85,7 @@ export const DeleteCustomerCell = ({value}) => {
 	}
 
 	return (
-		<Button id={value} onClick={handleClick} type='primary'>
+		<Button id={value} onClick={handleClick} type='text'>
 			<DeleteFilled style={{color: 'red'}} />
 		</Button>
 	)
