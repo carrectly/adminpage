@@ -60,7 +60,7 @@ router.get('/active', async (req, res, next) => {
 				],
 			},
 			order: [['updatedAt', 'DESC']],
-			include: [{model: Customer}],
+			include: [{model: Service}, {model: Customer}],
 		})
 		res.json(orders)
 	} catch (err) {

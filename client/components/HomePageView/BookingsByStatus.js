@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getActiveOrdersThunk} from '../../store/activeOrders'
 import TableOrdersByStatus from './TableOrdersByStatus'
+import CollapseByDate from './CollapseByDate'
 import {
 	getTakeActionStatusArray,
 	getWorkZoneStatusArray,
@@ -55,8 +56,8 @@ const BookingsByStatus = () => {
 	const leadsArr = orders.filter(el => leadsStatusArr.includes(el.status))
 
 	const components = {
-		1: <TableOrdersByStatus ordersArray={actionArr} />,
-		2: <TableOrdersByStatus ordersArray={workZoneArr} />,
+		1: <CollapseByDate orders={actionArr} dateColumn='pickupDate' />,
+		2: <CollapseByDate orders={workZoneArr} dateColumn='pickupDate' />,
 		3: <TableOrdersByStatus ordersArray={invoiceArr} />,
 		4: <TableOrdersByStatus ordersArray={quotesArr} />,
 		5: <TableOrdersByStatus ordersArray={leadsArr} />,

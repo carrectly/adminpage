@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {Button} from 'antd'
+import {Button, Tag} from 'antd'
 import moment from 'moment'
 import {useDispatch} from 'react-redux'
 import {deleteOrderThunk} from '../../store/archivedOrders'
@@ -22,6 +22,14 @@ export const CustomerNameCell = ({value, row}) => (
 		{value.firstName} {value.lastName}
 	</Link>
 )
+
+export const ServicesCell = ({value, row}) => {
+	return value.map(el => (
+		<Tag color='magenta' key={el.id}>
+			{el.name}
+		</Tag>
+	))
+}
 
 export const CustomerPhoneCell = ({value}) => (
 	<Link to={`/singlecustomer/${value}`}>{value}</Link>
@@ -116,4 +124,23 @@ export const StatusCell = ({value}) => {
 	let classname = `status${index}`
 
 	return <div className={classname}>{value}</div>
+}
+
+export const ConciergeCell = ({value}) => {
+	const arr = ['Stas', 'Mike', 'Taras', 'Ben', 'Kyle', 'Other']
+	const i = arr.indexOf(value)
+	const colors = [
+		'#FF1493',
+		'#0000FF',
+		'#DAA520',
+		'#228B22',
+		'#FF6347',
+		'#008080',
+	]
+
+	return (
+		<Tag color={colors[i]} key={value}>
+			{value}
+		</Tag>
+	)
 }

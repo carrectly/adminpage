@@ -19,12 +19,26 @@ let cust
 let invoice
 const statusArray = getStatusArray()
 
+const driversArray = ['Stas', 'Mike', 'Taras', 'Ben', 'Kyle', 'Other']
+
 const menuList = fn => {
 	return (
 		<Menu onClick={fn}>
 			{statusArray.map((status, index) => (
 				<Menu.Item key={status} id={index}>
 					{status}
+				</Menu.Item>
+			))}
+		</Menu>
+	)
+}
+
+const driversList = fn => {
+	return (
+		<Menu onClick={fn}>
+			{driversArray.map((driver, index) => (
+				<Menu.Item key={driver} id={index}>
+					{driver}
 				</Menu.Item>
 			))}
 		</Menu>
@@ -52,6 +66,7 @@ class Invoice extends Component {
 		this.handleCreateInvoice = this.handleCreateInvoice.bind(this)
 		this.openNotification1 = this.openNotification1.bind(this)
 		this.openNotification2 = this.openNotification2.bind(this)
+		this.handleDriverUpdate = this.handleDriverUpdate.bind(this)
 		this.state = {
 			invoice: true,
 		}
@@ -154,6 +169,14 @@ class Invoice extends Component {
 		}
 	}
 
+	handleDriverUpdate(evt) {
+		let obj = {
+			concierge: evt.target.name,
+		}
+		let id = this.props.id
+		this.props.updateStatus(id, obj)
+	}
+
 	render() {
 		cust = this.props.customer.id || null
 		invoice = this.props.invoice.id || null
@@ -171,11 +194,15 @@ class Invoice extends Component {
 						Create draft email for shops <DownOutlined />
 					</Button>
 				</Dropdown>
+				<Dropdown overlay={() => driversList(this.handleDriverUpdate)}>
+					<Button shape='round'>
+						Assign Concierge <DownOutlined />
+					</Button>
+				</Dropdown>
 				<Popover
 					placement='bottom'
 					content="If customer does not exist in
-							square, this button will create a
-							new customer. Can't create an invoice until we check
+							square, this button will create a new customer. Can't create an invoice until we check
 							if the customer exists in square">
 					<Button
 						size='large'

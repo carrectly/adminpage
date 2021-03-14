@@ -15,12 +15,16 @@ const AddService = () => {
 	const [show, setShow] = useState(false)
 	const dispatch = useDispatch()
 
-	const handleClose = () => setShow(false)
+	const handleClose = () => {
+		form.resetFields()
+		setShow(false)
+	}
 	const handleShow = () => setShow(true)
 
 	const onFinish = values => {
 		dispatch(addServiceThunk(values))
 		handleClose()
+		form.resetFields()
 	}
 
 	const onFinishFailed = errorInfo => {
