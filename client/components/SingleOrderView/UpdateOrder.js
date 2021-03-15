@@ -146,8 +146,9 @@ const UpdateOrder = props => {
 					</Form.Item>
 					<Form.Item>
 						<Button onClick={onCancel}>Cancel</Button>
-						{/* TODO: make sure this button works */}
-						<Button type='primary'>Submit</Button>
+						<Button type='primary' htmlType='submit'>
+							Submit
+						</Button>
 					</Form.Item>
 				</Form>
 			</Modal>
