@@ -170,11 +170,8 @@ class Invoice extends Component {
 	}
 
 	handleDriverUpdate(evt) {
-		let obj = {
-			concierge: evt.target.name,
-		}
 		let id = this.props.id
-		this.props.updateStatus(id, obj)
+		this.props.updateStatus(id, {concierge: evt.key})
 	}
 
 	render() {

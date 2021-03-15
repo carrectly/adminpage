@@ -3,7 +3,7 @@ import {Descriptions, Tabs} from 'antd'
 import {Link} from 'react-router-dom'
 const {TabPane} = Tabs
 import moment from 'moment'
-import {LocationCell, StatusCell} from '../Table/Cells.js'
+import {LocationCell, StatusCell, ConciergeCell} from '../Table/Cells.js'
 
 const SingleOrderDetails = props => {
 	const singleorder = props.order
@@ -94,6 +94,9 @@ const SingleOrderDetails = props => {
 							</Descriptions.Item>
 							<Descriptions.Item label='Stick shift'>
 								{singleorder.stickShift}
+							</Descriptions.Item>
+							<Descriptions.Item label='Concierge'>
+								<ConciergeCell value={singleorder.concierge} />
 							</Descriptions.Item>
 						</Descriptions>
 					</Descriptions.Item>
