@@ -20,6 +20,7 @@ import {
 	DollarOutlined,
 	PhoneOutlined,
 	HourglassOutlined,
+	MenuOutlined,
 } from '@ant-design/icons'
 const {Search} = Input
 const {Content, Sider} = Layout
@@ -92,9 +93,32 @@ const BookingsByStatus = () => {
 			<Layout
 				className='site-layout-background'
 				style={{padding: '24px 0'}}>
-				<Sider className='site-layout-background' width={150}>
+				<Menu
+					mode='horizontal'
+					defaultSelectedKeys='1'
+					overflowedIndicator={<MenuOutlined />}
+					defaultOpenKeys='1'
+					onClick={handleMenuClick}
+					style={{height: '100%', padding: '0'}}>
+					<Menu.Item key='1' icon={<NotificationOutlined />}>
+						To take action
+					</Menu.Item>
+					<Menu.Item key='2' icon={<ToolOutlined />}>
+						Work Zone
+					</Menu.Item>
+					<Menu.Item key='3' icon={<DollarOutlined />}>
+						Invoices
+					</Menu.Item>
+					<Menu.Item key='4' icon={<HourglassOutlined />}>
+						Quotes
+					</Menu.Item>
+					<Menu.Item key='5' icon={<PhoneOutlined />}>
+						Potential Leads
+					</Menu.Item>
+				</Menu>
+				{/* <Sider className='site-layout-background' width={150}>
 					<Menu
-						mode='vertical'
+						mode='horizontal'
 						defaultSelectedKeys='1'
 						defaultOpenKeys='1'
 						onClick={handleMenuClick}
@@ -115,7 +139,7 @@ const BookingsByStatus = () => {
 							Potential Leads
 						</Menu.Item>
 					</Menu>
-				</Sider>
+				</Sider> */}
 				<Content style={{padding: '0', minHeight: 280}}>
 					{components[render]}
 				</Content>
