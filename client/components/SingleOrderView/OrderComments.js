@@ -67,7 +67,7 @@ const OrderComments = () => {
 						layout='inline'
 						onFinish={onFinish}
 						onFinishFailed={onFinishFailed}>
-						<Form.Item name='content'>
+						<Form.Item name='content' style={{width: '100%'}}>
 							{/* <Input placeholder='... enter new comment' /> */}
 							<TextArea
 								style={{width: '100%'}}
@@ -75,25 +75,28 @@ const OrderComments = () => {
 								placeholder='... enter new comment'
 							/>
 						</Form.Item>
-						<Form.Item name='author'>
-							<Select
-								placeholder='Select a person'
-								onChange={onChange}>
-								<Option value='Vladimir'>Vladimir</Option>
-								<Option value='Dragana'>Dragana</Option>
-								<Option value='Taras'>Taras</Option>
-								<Option value='Michael'>Michael</Option>
-								<Option value='Stasik'>Stasik</Option>
-							</Select>
-						</Form.Item>
-						<Form.Item>
+						<div className='select-and-button'>
+							<Form.Item name='author' style={{width: '50%'}}>
+								<Select
+									placeholder='Select a person'
+									onChange={onChange}>
+									<Option value='Vladimir'>Vladimir</Option>
+									<Option value='Dragana'>Dragana</Option>
+									<Option value='Taras'>Taras</Option>
+									<Option value='Michael'>Michael</Option>
+									<Option value='Stasik'>Stasik</Option>
+								</Select>
+							</Form.Item>
 							<Button
-								type='primary'
+								style={{
+									backgroundColor: '#6AEB6F',
+								}}
+								size='middle'
 								htmlType='submit'
 								disabled={!author}>
-								Add Comments
+								Post Comment
 							</Button>
-						</Form.Item>
+						</div>
 					</Form>
 				}
 			/>
