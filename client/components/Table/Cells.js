@@ -11,7 +11,15 @@ import {EnvironmentFilled, DeleteFilled} from '@ant-design/icons'
 
 export const DateCell = ({value}) => {
 	if (value) {
-		return <span>{moment(value).format('M/D/YY hh:mm A')}</span>
+		return (
+			<div>
+				<span>{moment(value).format('M/D/YY')}</span>
+				<br />
+				<span className='subtext'>
+					{moment(value).format('hh:mm A')}
+				</span>
+			</div>
+		)
 	} else {
 		return <div />
 	}

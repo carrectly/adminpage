@@ -78,7 +78,6 @@ class SingleOrder extends Component {
 		this.props.clearSingleEmail()
 	}
 
-	// eslint-disable-next-line complexity
 	render() {
 		const singleorder = this.props.order || {}
 		const services = this.props.order.services || []
