@@ -67,7 +67,9 @@ const OrderComments = () => {
 						layout='inline'
 						onFinish={onFinish}
 						onFinishFailed={onFinishFailed}>
-						<Form.Item name='content' style={{width: '100%'}}>
+						<Form.Item
+							name='content'
+							style={{width: '100%', padding: '5px'}}>
 							{/* <Input placeholder='... enter new comment' /> */}
 							<TextArea
 								style={{width: '100%'}}

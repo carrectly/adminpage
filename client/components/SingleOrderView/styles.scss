@@ -27,9 +27,11 @@ $main-purple: #743794;
 }
 
 .eheader {
-	height: 10%;
-	margin: 0;
-	color: #743794;
+	background: #fbfbfb;
+	font-weight: bold;
+	color: $main-purple;
+	height: 31px;
+	padding: 5px;
 }
 
 .emailboard {
@@ -72,6 +74,10 @@ $main-purple: #743794;
 
 .emailSummary {
 	font-size: 13px;
+
+	.subheader {
+		font-weight: bold;
+	}
 }
 
 .invoicebuttons {
@@ -81,11 +87,13 @@ $main-purple: #743794;
 	min-height: 30vh;
 	padding: 10px;
 	background-color: white;
+	margin: 0px 0px 10px 0px;
 }
 
 .singleOrderServices {
 	padding: 10px;
 	background-color: white;
+	margin: 0px 0px 10px 0px;
 }
 
 .commentbox {
@@ -94,6 +102,11 @@ $main-purple: #743794;
 	justify-content: center;
 	padding: 10px;
 	background: white;
+
+	.ant-comment-content-author-name {
+		color: $main-purple;
+		font-weight: bold;
+	}
 }
 
 .commentform {
@@ -129,4 +142,5 @@ $main-purple: #743794;
 .select-and-button {
 	display: flex;
 	flex-direction: row;
+	padding: 0px 10px;
 }
