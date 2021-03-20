@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {updateDealerThunk} from '../../store/dealers.js'
 import {Modal, Button, Form, Input} from 'antd'
-import {EditOutlined} from '@ant-design/icons'
+import {EditFilled} from '@ant-design/icons'
 
 const layout = {
 	labelCol: {span: 8},
@@ -29,7 +29,7 @@ const UpdateDealer = props => {
 	return (
 		<div>
 			<Button type='text' onClick={() => handleShow(true)}>
-				<EditOutlined />
+				<EditFilled style={{color: '#7CFC00'}} />
 			</Button>
 			<Modal
 				title={`${props.dealer.name}`}
@@ -73,6 +73,12 @@ const UpdateDealer = props => {
 						name='location'
 						label='Address'
 						initialValue={props.dealer.location || ''}>
+						<Input />
+					</Form.Item>
+					<Form.Item
+						name='imageUrl'
+						label='Image URL'
+						initialValue={props.dealer.imageUrl || ''}>
 						<Input />
 					</Form.Item>
 					<Form.Item>

@@ -17,7 +17,7 @@ const DealerCard = props => {
 		<Card
 			hoverable
 			className='dlrcard'
-			style={{width: 300}}
+			style={{width: 200}}
 			actions={[
 				<UpdateDealer key='update' dealer={dealer} />,
 				<Button
@@ -25,13 +25,15 @@ const DealerCard = props => {
 					type='text'
 					id={dealer.id}
 					onClick={handleClick}>
-					<DeleteFilled key='edit' />
+					<DeleteFilled key='edit' style={{color: '#ff1212'}} />
 				</Button>,
 			]}
 			cover={
 				<img
-					alt={dealer.name}
-					src='https://www.autoserviceworld.com/wp-content/uploads/2020/01/team-labor-model-auto-repair-worker-png-and-vector-for-free-automotive-repair-png-650_400.png.jpeg'
+					src={
+						dealer.imageUrl ||
+						'https://www.autoserviceworld.com/wp-content/uploads/2020/01/team-labor-model-auto-repair-worker-png-and-vector-for-free-automotive-repair-png-650_400.png.jpeg'
+					}
 				/>
 			}
 			title={dealer.name}>

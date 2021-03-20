@@ -2,6 +2,7 @@
 
 $main-background: #e5e5e5;
 $subtext: #aaaaaa;
+$main-purple: #743794;
 
 body {
 	width: 100vw;
@@ -25,6 +26,12 @@ body {
 }
 
 .center {
+	text-align: center;
+}
+
+.ant-card-head-title {
+	font-weight: bold;
+	color: $main-purple;
 	text-align: center;
 }
 
