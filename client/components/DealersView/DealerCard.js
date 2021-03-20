@@ -37,8 +37,41 @@ const DealerCard = props => {
 				/>
 			}
 			title={dealer.name}>
-			<div>{dealer.email}</div>
-			<div>{dealer.location}</div>
+			<div className='emailSummary'>
+				{dealer.email ? (
+					<div>
+						<div className='subheader'>Email:</div>
+						<div>{dealer.email}</div>
+					</div>
+				) : (
+					<div />
+				)}
+
+				{dealer.location ? (
+					<div>
+						<div className='subheader'>Location:</div>
+						<div>{dealer.location}</div>
+					</div>
+				) : (
+					<div />
+				)}
+				{dealer.phoneNumber ? (
+					<div>
+						<div className='subheader'>Phone Number:</div>
+						<div>{dealer.phoneNumber}</div>
+					</div>
+				) : (
+					<div />
+				)}
+				{dealer.specialty ? (
+					<div>
+						<div className='subheader'>Specialty:</div>
+						<div>{dealer.specialty}</div>
+					</div>
+				) : (
+					<div />
+				)}
+			</div>
 		</Card>
 	)
 }
