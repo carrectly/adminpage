@@ -182,17 +182,17 @@ class Invoice extends Component {
 			<div className='invoicebuttons'>
 				<UpdateOrder id={this.props.order.hash} />
 				<Dropdown overlay={() => menuList(this.handleStatusUpdate)}>
-					<Button shape='round'>
+					<Button shape='round' size='large'>
 						Change status <DownOutlined />
 					</Button>
 				</Dropdown>
 				<Dropdown overlay={() => dealerList(dealers, this.handleSend)}>
-					<Button shape='round'>
+					<Button shape='round' size='large'>
 						Create draft email for shops <DownOutlined />
 					</Button>
 				</Dropdown>
 				<Dropdown overlay={() => driversList(this.handleDriverUpdate)}>
-					<Button shape='round'>
+					<Button shape='round' size='large'>
 						Assign Concierge <DownOutlined />
 					</Button>
 				</Dropdown>

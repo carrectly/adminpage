@@ -22,6 +22,10 @@ const Dealer = db.define('dealer', {
 		type: Sequelize.TEXT,
 		allowNull: true,
 	},
+	imageUrl: {
+		type: Sequelize.STRING,
+		allowNull: true,
+	},
 })
 
 module.exports = Dealer

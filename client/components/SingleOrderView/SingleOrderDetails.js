@@ -4,14 +4,16 @@ import {Link} from 'react-router-dom'
 const {TabPane} = Tabs
 import moment from 'moment'
 import {LocationCell, StatusCell, ConciergeCell} from '../Table/Cells.js'
+import './styles.scss'
 
 const SingleOrderDetails = props => {
 	const singleorder = props.order
 	const customer = props.customer
 	return (
-		<Tabs type='card'>
+		<Tabs type='card' style={{margin: '0px 0px 10px 0px'}}>
 			<TabPane tab='Order Details' key='1'>
 				<Descriptions
+					className='order-descriptions'
 					layout='vertical'
 					column={{
 						xxl: 3,
@@ -27,8 +29,7 @@ const SingleOrderDetails = props => {
 							layout='horizontal'
 							bordered={false}
 							column={1}
-							size='small'
-							className='descriptionsAntd'>
+							size='small'>
 							<Descriptions.Item label='Order ID'>
 								{singleorder.hash}
 							</Descriptions.Item>
