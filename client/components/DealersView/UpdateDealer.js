@@ -51,8 +51,8 @@ const UpdateDealer = props => {
 						<Input />
 					</Form.Item>
 					<Form.Item
-						name='price'
-						label='Service Price'
+						name='email'
+						label='Email'
 						initialValue={props.dealer.email}
 						rules={[{required: true}]}>
 						<Input />
