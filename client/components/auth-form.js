@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 import {Button} from 'antd'
+import {GoogleOutlined} from '@ant-design/icons'
+
 /**
  * COMPONENT
  */
@@ -37,8 +39,7 @@ const AuthForm = props => {
 			</Form> */}
 			<a href='/auth/google'>
 				<Button type='primary' id='signup'>
-					{displayName} with Google{' '}
-					<img className='google' src='/google-icon.png' />
+					{displayName} with Google <GoogleOutlined />
 				</Button>
 			</a>
 		</div>

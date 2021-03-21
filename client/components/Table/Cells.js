@@ -1,13 +1,17 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {Button, Tag} from 'antd'
+import {Button, Tag, Popover} from 'antd'
 import moment from 'moment'
 import {useDispatch} from 'react-redux'
 import {deleteOrderThunk} from '../../store/archivedOrders'
 import {deleteContactThunk} from '../../store/contacts'
 import {removeOrderServiceThunk} from '../../store/singleorder'
 import {getStatusArray} from '../util'
-import {EnvironmentFilled, DeleteFilled} from '@ant-design/icons'
+import {
+	EnvironmentFilled,
+	DeleteFilled,
+	GooglePlusCircleFilled,
+} from '@ant-design/icons'
 
 export const DateCell = ({value}) => {
 	if (value) {
@@ -152,3 +156,21 @@ export const ConciergeCell = ({value}) => {
 		</Tag>
 	)
 }
+
+export const GoogleVoiceLinkCell = ({value}) => (
+	<Popover
+		placement='bottom'
+		content='Click to view google voice conversation'
+		trigger='hover'>
+		<a
+			onClick={() =>
+				window.open(
+					`https://voice.google.com/u/1/messages?itemId=t.%2B${value}`,
+					'_blank'
+				)
+			}>
+			{value}
+			<GooglePlusCircleFilled />
+		</a>
+	</Popover>
+)
