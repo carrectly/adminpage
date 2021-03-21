@@ -5,7 +5,7 @@ const {Panel} = Collapse
 import moment from 'moment'
 
 const alertHelper = (el1, el2) => {
-	if (!el1) {
+	if (el1 === 'Invalid date') {
 		return (
 			<Alert
 				message='Invalid dates. Please update order drop off dates'
