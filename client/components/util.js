@@ -31,12 +31,7 @@ export const getTakeActionStatusArray = () => {
 }
 
 export const getWorkZoneStatusArray = () => {
-	return [
-		'confirmed',
-		'in process',
-		'pending work approvals',
-		'ready to be returned',
-	]
+	return ['in process', 'pending work approvals']
 }
 
 export const getInvoicesStatusArray = () => {
@@ -53,4 +48,12 @@ export const getQuotesStatusArray = () => {
 
 export const getPotentialLeadsStatusArray = () => {
 	return ['postponed']
+}
+
+export const getConfirmedTripsArray = () => {
+	return ['confirmed', 'ready to be returned']
+}
+
+export const getPotentialTripsArray = () => {
+	return ['booked new', 'in process']
 }
