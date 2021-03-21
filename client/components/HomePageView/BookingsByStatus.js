@@ -3,12 +3,15 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getActiveOrdersThunk} from '../../store/activeOrders'
 import TableOrdersByStatus from './TableOrdersByStatus'
 import CollapseByDate from './CollapseByDate'
+import CollapseByBothDates from './CollapseByBothDates'
 import {
 	getTakeActionStatusArray,
 	getWorkZoneStatusArray,
 	getInvoicesStatusArray,
 	getQuotesStatusArray,
 	getPotentialLeadsStatusArray,
+	getConfirmedTripsArray,
+	getPotentialTripsArray,
 } from '../util'
 import axios from 'axios'
 import history from '../../history'
@@ -21,6 +24,7 @@ import {
 	PhoneOutlined,
 	HourglassOutlined,
 	MenuOutlined,
+	CarOutlined,
 } from '@ant-design/icons'
 const {Search} = Input
 const {Content, Sider} = Layout
@@ -43,6 +47,8 @@ const BookingsByStatus = () => {
 	const invoiceStatusArr = getInvoicesStatusArray()
 	const quoteStatusArr = getQuotesStatusArray()
 	const leadsStatusArr = getPotentialLeadsStatusArray()
+	const confirmedTripsStatusArr = getConfirmedTripsArray()
+	const potentialTripsStatusArr = getPotentialTripsArray()
 
 	const actionArr = orders.filter(el => actionStatusArr.includes(el.status))
 
@@ -56,12 +62,27 @@ const BookingsByStatus = () => {
 
 	const leadsArr = orders.filter(el => leadsStatusArr.includes(el.status))
 
+	const confirmedTrips = orders.filter(el =>
+		confirmedTripsStatusArr.includes(el.status)
+	)
+
+	const potentialTrips = orders.filter(el =>
+		potentialTripsStatusArr.includes(el.status)
+	)
+
 	const components = {
 		1: <CollapseByDate orders={actionArr} dateColumn='pickupDate' />,
-		2: <CollapseByDate orders={workZoneArr} dateColumn='pickupDate' />,
-		3: <TableOrdersByStatus ordersArray={invoiceArr} />,
-		4: <TableOrdersByStatus ordersArray={quotesArr} />,
-		5: <TableOrdersByStatus ordersArray={leadsArr} />,
+		// 2: <CollapseByDate orders={workZoneArr} dateColumn='pickupDate' />,
+		2: <TableOrdersByStatus ordersArray={workZoneArr} />,
+		3: (
+			<CollapseByBothDates
+				confirmedTrips={confirmedTrips}
+				potentialTrips={potentialTrips}
+			/>
+		),
+		4: <TableOrdersByStatus ordersArray={invoiceArr} />,
+		5: <TableOrdersByStatus ordersArray={quotesArr} />,
+		6: <TableOrdersByStatus ordersArray={leadsArr} />,
 	}
 
 	const onSearch = async value => {
@@ -104,42 +125,21 @@ const BookingsByStatus = () => {
 						To take action
 					</Menu.Item>
 					<Menu.Item key='2' icon={<ToolOutlined />}>
-						Work Zone
+						Garage
 					</Menu.Item>
-					<Menu.Item key='3' icon={<DollarOutlined />}>
+					<Menu.Item key='3' icon={<CarOutlined />}>
+						Trips
+					</Menu.Item>
+					<Menu.Item key='4' icon={<DollarOutlined />}>
 						Invoices
 					</Menu.Item>
-					<Menu.Item key='4' icon={<HourglassOutlined />}>
+					<Menu.Item key='5' icon={<HourglassOutlined />}>
 						Quotes
 					</Menu.Item>
-					<Menu.Item key='5' icon={<PhoneOutlined />}>
+					<Menu.Item key='6' icon={<PhoneOutlined />}>
 						Potential Leads
 					</Menu.Item>
 				</Menu>
-				{/* <Sider className='site-layout-background' width={150}>
-					<Menu
-						mode='horizontal'
-						defaultSelectedKeys='1'
-						defaultOpenKeys='1'
-						onClick={handleMenuClick}
-						style={{height: '100%', padding: '0'}}>
-						<Menu.Item key='1' icon={<NotificationOutlined />}>
-							To take action
-						</Menu.Item>
-						<Menu.Item key='2' icon={<ToolOutlined />}>
-							Work Zone
-						</Menu.Item>
-						<Menu.Item key='3' icon={<DollarOutlined />}>
-							Invoices
-						</Menu.Item>
-						<Menu.Item key='4' icon={<HourglassOutlined />}>
-							Quotes
-						</Menu.Item>
-						<Menu.Item key='5' icon={<PhoneOutlined />}>
-							Potential Leads
-						</Menu.Item>
-					</Menu>
-				</Sider> */}
 				<Content style={{padding: '0', minHeight: 280}}>
 					{components[render]}
 				</Content>

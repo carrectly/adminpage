@@ -3,7 +3,12 @@ import {Descriptions, Tabs} from 'antd'
 import {Link} from 'react-router-dom'
 const {TabPane} = Tabs
 import moment from 'moment'
-import {LocationCell, StatusCell, ConciergeCell} from '../Table/Cells.js'
+import {
+	LocationCell,
+	StatusCell,
+	ConciergeCell,
+	GoogleVoiceLinkCell,
+} from '../Table/Cells.js'
 import './styles.scss'
 
 const SingleOrderDetails = props => {
@@ -111,7 +116,9 @@ const SingleOrderDetails = props => {
 							column={1}
 							className='descriptionsAntd'>
 							<Descriptions.Item label='Customer Phone Number'>
-								{customer.phoneNumber}
+								<GoogleVoiceLinkCell
+									value={customer.phoneNumber}
+								/>
 							</Descriptions.Item>
 							<Descriptions.Item label='Customer Name'>
 								<Link
