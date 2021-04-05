@@ -10,7 +10,6 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 1337
 const app = express()
 const socketio = require('socket.io')
-const {User} = require('./db/models')
 
 module.exports = app
 

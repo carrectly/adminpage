@@ -10,8 +10,12 @@ const Comment = require('./comment')
 Customer.hasMany(Order)
 Order.belongsTo(Customer)
 
-Driver.hasMany(Order)
-Order.belongsTo(Driver)
+Driver.hasMany(Order, {
+	foreignKey: 'driverPickUp',
+})
+Driver.hasMany(Order, {
+	foreignKey: 'driverDropOff',
+})
 
 Order.belongsToMany(Service, {through: 'orderdetails'})
 Service.belongsToMany(Order, {through: 'orderdetails'})

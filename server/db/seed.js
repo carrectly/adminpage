@@ -1,19 +1,19 @@
-const {User, Customer, Order, Service, Dealer} = require('./models')
+const {User, Customer, Order, Service, Dealer, Driver} = require('./models')
 const db = require('./database.js')
 var faker = require('faker')
 const Sequelize = require('sequelize')
 const fs = require('fs')
 
-const legacyOrders = JSON.parse(
-	fs.readFileSync('./seedData/orders.json', 'utf-8')
-)
-console.log('legacy orders', legacyOrders[0])
-const legacyCustomers = JSON.parse(
-	fs.readFileSync('./seedData/customers.json', 'utf-8')
-)
-const servicesSeed = JSON.parse(
-	fs.readFileSync('./seedData/services.json', 'utf-8')
-)
+// const legacyOrders = JSON.parse(
+// 	fs.readFileSync('./seedData/orders.json', 'utf-8')
+// )
+// console.log('legacy orders', legacyOrders[0])
+// const legacyCustomers = JSON.parse(
+// 	fs.readFileSync('./seedData/customers.json', 'utf-8')
+// )
+// const servicesSeed = JSON.parse(
+// 	fs.readFileSync('./seedData/services.json', 'utf-8')
+// )
 
 let customerSeed = []
 let dealerSeed = []
@@ -50,6 +50,65 @@ customerSeed.push({
 	phoneNumber: '7739876075',
 })
 
+const legacyOrders = [
+	{
+		hash: '073fe68ab073ac9c59a8d497c8d35227',
+		customerComments: null,
+		pickupDate: null,
+		dropoffDate: null,
+		pickupLocation: null,
+		carYear: 2019,
+		carMake: 'AUDI',
+		carModel: 'A',
+		customerPhoneNumber: 3144893320,
+		status: 'cancelled',
+	},
+	{
+		hash: '137a33b02af9d37db66e99e51ecb2b8f',
+		customerComments: 'DELUX WASH',
+		pickupDate: null,
+		dropoffDate: null,
+		pickupLocation: null,
+		carYear: 2016,
+		carMake: 'MERCEDES-BENZ',
+		carModel: 'GL',
+		customerPhoneNumber: 6303373753,
+		status: 'cancelled',
+	},
+]
+
+const legacyCustomers = [
+	{
+		firstName: 'Aamer',
+		lastName: 'Qidwai',
+		location: 60659,
+		phoneNumber: 6303373753,
+		email: 'AAMERINVEGAS@HOTMAIL.COM',
+	},
+	{
+		firstName: 'Aaron',
+		lastName: 'Fischer',
+		location: 60616,
+		phoneNumber: 3144893320,
+		email: 'ARON@FACTUREGOODS.COM',
+	},
+]
+
+const driversSeed = [
+	{
+		name: 'kyle',
+		email: 'birkusandre@gmail.com',
+		phoneNumber: faker.phone.phoneNumberFormat(0),
+	},
+]
+
+const servicesSeed = [
+	{name: 'AC Coolant Recharge', price: 150},
+	{name: 'Alighnment', price: 145},
+	{name: 'Auto Leather Repair', price: 100},
+	{name: 'Battery Jump, Test & Swap', price: 70},
+]
+
 const seed = async () => {
 	console.log('trying to seed DB')
 	try {
@@ -59,6 +118,8 @@ const seed = async () => {
 		console.log('dealer bulk created')
 		await Service.bulkCreate(servicesSeed)
 		console.log('serivce bulk created')
+		await Driver.bulkCreate(driversSeed)
+		console.log('drivers bulk created')
 		await User.create({
 			email: 'cody@email.com',
 			password: '123',
@@ -68,89 +129,6 @@ const seed = async () => {
 		console.log('Customer bulk created')
 		await Order.bulkCreate(legacyOrders)
 		console.log('Order bulk created')
-		// const forLoop = async _ => {
-		// 	console.log('Start seed')
-
-		// 	for (let index = 0; index < legacyOrders.length; index++) {
-		// 		await Order.create(legacyOrders[index])
-		// 		console.log('done seeding', index)
-		// 	}
-		// }
-
-		// await forLoop()
-
-		// await Customer.bulkCreate([
-		// 	{
-		// 		email: 'jpreck90@gmail.com',
-		// 		location: '5018 S. Woodlawn ave, Chicago IL 60615',
-		// 		firstName: 'Jennifer',
-		// 		lastName: 'Preckwinkle',
-		// 		phoneNumber: '7738175148',
-		// 	},
-		// 	{
-		// 		firstName: 'Anthony',
-		// 		lastName: 'Di Silvestro',
-		// 		location: '536 w grant place',
-		// 		phoneNumber: '8479170734',
-		// 		email: 'adisilvestro7994@gmail.com',
-		// 	},
-		// 	{
-		// 		firstName: 'Michael',
-		// 		lastName: 'Walus',
-		// 		location: '1445 W Augusta Blvd Chicago IL 60642',
-		// 		phoneNumber: '6308631745',
-		// 		email: 'michael.walus@gmail.com',
-		// 	},
-		// 	{
-		// 		firstName: 'Murad',
-		// 		lastName: 'Kajani',
-		// 		location: '2331 N. Sheffield Ave, Chicago, IL 60614',
-		// 		phoneNumber: '6308856453',
-		// 		email: 'mkajani@gmail.com',
-		// 	},
-		// ])
-		// await Order.bulkCreate([
-		// 	{
-		// 		pickupDate: '2020-06-20 15:05',
-		// 		dropoffDate: '2020-06-20 16:05',
-		// 		pickupLocation: '5018 S. Woodlawn ave, Chicago IL 60615',
-		// 		carYear: '2016',
-		// 		carMake: 'Nissan',
-		// 		carModel: 'Rogue',
-		// 		hash: faker.random.number({min: 100000, max: 999999}), //returns 9
-		// 		customerPhoneNumber: '7738175148',
-		// 	},
-		// 	{
-		// 		pickupDate: '2020-06-21 15:05',
-		// 		dropoffDate: '2020-06-21 16:05',
-		// 		pickupLocation: '536 w grant place',
-		// 		carYear: '2014',
-		// 		carMake: 'Dodge',
-		// 		carModel: 'Journey',
-		// 		hash: faker.random.number({min: 100000, max: 999999}), //returns 9
-		// 		customerPhoneNumber: '8479170734',
-		// 	},
-		// 	{
-		// 		pickupDate: '2020-06-22 15:05',
-		// 		dropoffDate: '2020-06-22 16:05',
-		// 		pickupLocation: '1445 W Augusta Blvd Chicago IL 60642',
-		// 		carYear: '2014',
-		// 		carMake: 'Lincoln',
-		// 		carModel: 'MKX',
-		// 		hash: faker.random.number({min: 100000, max: 999999}), //returns 9
-		// 		customerPhoneNumber: '6308631745',
-		// 	},
-		// 	{
-		// 		pickupDate: '2020-06-25 15:05',
-		// 		dropoffDate: '2020-06-26 15:05',
-		// 		pickupLocation: '1445 W Augusta Blvd Chicago IL 60642',
-		// 		carYear: '2016',
-		// 		carMake: 'Mazda',
-		// 		carModel: 'CX-5',
-		// 		hash: faker.random.number({min: 100000, max: 999999}), //returns 9
-		// 		customerPhoneNumber: '6308856453',
-		// 	},
-		// ])
 	} catch (err) {
 		console.log('Error seeding bulk file', err)
 	}
