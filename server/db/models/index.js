@@ -1,5 +1,6 @@
 const User = require('./user')
 const Dealer = require('./dealer')
+const Driver = require('./driver')
 const Service = require('./service')
 const Order = require('./order')
 const OrderDetails = require('./orderDetails')
@@ -8,6 +9,9 @@ const Comment = require('./comment')
 
 Customer.hasMany(Order)
 Order.belongsTo(Customer)
+
+Driver.hasMany(Order)
+Order.belongsTo(Driver)
 
 Order.belongsToMany(Service, {through: 'orderdetails'})
 Service.belongsToMany(Order, {through: 'orderdetails'})
@@ -22,4 +26,5 @@ module.exports = {
 	OrderDetails,
 	Customer,
 	Comment,
+	Driver,
 }
