@@ -11,6 +11,7 @@ import {
 	TableOutlined,
 	FireOutlined,
 	LogoutOutlined,
+	CarOutlined,
 } from '@ant-design/icons'
 import './styles/navbar.scss'
 
@@ -107,6 +108,11 @@ class Navbar extends React.Component {
 				<Link to='/dealers' className='link'>
 					<ToolOutlined className='icon' />
 					Service Shops
+				</Link>
+
+				<Link to='/drivers' className='link'>
+					<CarOutlined className='icon' />
+					Drivers
 				</Link>
 
 				<Link to='/calendar' className='link'>
