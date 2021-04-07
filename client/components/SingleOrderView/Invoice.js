@@ -193,7 +193,12 @@ class Invoice extends Component {
 				</Dropdown>
 				<Dropdown overlay={() => driversList(this.handleDriverUpdate)}>
 					<Button shape='round' size='large'>
-						Assign Concierge <DownOutlined />
+						Assign pick up Driver <DownOutlined />
+					</Button>
+				</Dropdown>
+				<Dropdown overlay={() => driversList(this.handleDriverUpdate)}>
+					<Button shape='round' size='large'>
+						Assign drop off Driver <DownOutlined />
 					</Button>
 				</Dropdown>
 				<Popover
