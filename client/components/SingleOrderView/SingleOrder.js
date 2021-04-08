@@ -95,10 +95,7 @@ class SingleOrder extends Component {
 					</div>
 					<div className='invoiceform'>
 						<h3 className='sectionHeader'>Manage Order</h3>
-						<Invoice
-							fetchEmails={this.fetchEmails}
-							id={this.props.match.params.orderid}
-						/>
+						<Invoice />
 						<h3 className='sectionHeader'>Add Services</h3>
 						<div className='singleOrderServices'>
 							<SingleOrderServices services={services} />

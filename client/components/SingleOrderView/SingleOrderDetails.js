@@ -1,4 +1,5 @@
 import React from 'react'
+import {useSelector} from 'react-redux'
 import {Descriptions, Tabs} from 'antd'
 import {Link} from 'react-router-dom'
 const {TabPane} = Tabs
@@ -14,6 +15,7 @@ import './styles.scss'
 const SingleOrderDetails = props => {
 	const singleorder = props.order
 	const customer = props.customer
+	const drivers = useSelector(state => state.drivers)
 	return (
 		<Tabs type='card' style={{margin: '0px 0px 10px 0px'}}>
 			<TabPane tab='Order Details' key='1'>
@@ -106,12 +108,34 @@ const SingleOrderDetails = props => {
 							</Descriptions.Item>
 							<Descriptions.Item label='Driver picking up'>
 								<ConciergeCell
-									value={singleorder.driverPickUp}
+									driverId={singleorder.driverPickUp}
+									driverArray={drivers}
+									// value={() =>
+									// 	drivers.filter(el => {
+									// 		if (
+									// 			el.id ===
+									// 			singleorder.driverPickUp
+									// 		) {
+									// 			return el.name
+									// 		}
+									// 	})
+									// }
 								/>
 							</Descriptions.Item>
 							<Descriptions.Item label='Driver dropping off'>
 								<ConciergeCell
-									value={singleorder.driverDropOff}
+									driverId={singleorder.driverDropOff}
+									driverArray={drivers}
+									// value={() =>
+									// 	drivers.filter(el => {
+									// 		if (
+									// 			el.id ===
+									// 			singleorder.driverDropOff
+									// 		) {
+									// 			return el.name
+									// 		}
+									// 	})
+									// }
 								/>
 							</Descriptions.Item>
 						</Descriptions>

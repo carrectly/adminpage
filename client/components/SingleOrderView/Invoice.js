@@ -12,6 +12,7 @@ import {fetchDealersThunk} from '../../store/dealers.js'
 import {sendSingleEmailThunk} from '../../store/singleemail'
 import {getEmailsThunk} from '../../store/emails'
 import {updateSingleOrderThunk} from '../../store/singleorder'
+import {fetchDriversThunk} from '../../store/drivers.js'
 import {getStatusArray} from '../util'
 import UpdateOrder from './UpdateOrder'
 
@@ -31,13 +32,11 @@ const menuList = fn => {
 	)
 }
 
-const driversList = fn => {
+const driversList = (arr, fn) => {
 	return (
 		<Menu onClick={fn}>
-			{driversArray.map((driver, index) => (
-				<Menu.Item key={driver} id={index}>
-					{driver}
-				</Menu.Item>
+			{arr.map(driver => (
+				<Menu.Item key={driver.id}>{driver.name}</Menu.Item>
 			))}
 		</Menu>
 	)
@@ -65,9 +64,11 @@ const Invoice = () => {
 	const invoice = useSelector(state => state.square.invoice)
 	const order = useSelector(state => state.singleorder)
 	const dealers = useSelector(state => state.dealers)
+	const drivers = useSelector(state => state.drivers)
 
 	useEffect(() => {
 		dispatch(fetchDealersThunk())
+		dispatch(fetchDriversThunk())
 		return function cleanup() {
 			dispatch(clearSquareThunk())
 		}
@@ -163,8 +164,12 @@ const Invoice = () => {
 		}
 	}
 
-	const handleDriverUpdate = evt => {
-		dispatch(updateSingleOrderThunk(orderId, {concierge: evt.key}))
+	const changePickUpDriver = evt => {
+		dispatch(updateSingleOrderThunk(orderId, {driverPickUp: evt.key}))
+	}
+
+	const changeDropOffDriver = evt => {
+		dispatch(updateSingleOrderThunk(orderId, {driverDropOff: evt.key}))
 	}
 
 	return (
@@ -180,12 +185,12 @@ const Invoice = () => {
 					Create draft email for shops <DownOutlined />
 				</Button>
 			</Dropdown>
-			<Dropdown overlay={() => driversList(handleDriverUpdate)}>
+			<Dropdown overlay={() => driversList(drivers, changePickUpDriver)}>
 				<Button shape='round' size='large'>
 					Assign pick up Driver <DownOutlined />
 				</Button>
 			</Dropdown>
-			<Dropdown overlay={() => driversList(handleDriverUpdate)}>
+			<Dropdown overlay={() => driversList(drivers, changeDropOffDriver)}>
 				<Button shape='round' size='large'>
 					Assign drop off Driver <DownOutlined />
 				</Button>
