@@ -15,7 +15,7 @@ const columns = [
 		render: value => <div>{value.customerPrice}</div>,
 	},
 	{
-		title: 'Dealer Price',
+		title: 'Our Cost',
 		dataIndex: 'orderdetails',
 		render: value => <div>{value.dealerPrice}</div>,
 	},

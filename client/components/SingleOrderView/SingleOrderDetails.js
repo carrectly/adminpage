@@ -104,6 +104,16 @@ const SingleOrderDetails = props => {
 							<Descriptions.Item label='Concierge'>
 								<ConciergeCell value={singleorder.concierge} />
 							</Descriptions.Item>
+							<Descriptions.Item label='Driver picking up'>
+								<ConciergeCell
+									value={singleorder.driverPickUp}
+								/>
+							</Descriptions.Item>
+							<Descriptions.Item label='Driver dropping off'>
+								<ConciergeCell
+									value={singleorder.driverDropOff}
+								/>
+							</Descriptions.Item>
 						</Descriptions>
 					</Descriptions.Item>
 
