@@ -10,9 +10,9 @@ const client = new Client({
 
 const {customersApi} = client
 
-router.post('/', async (req, res, next) => {
+router.get('/:customerPhone', async (req, res, next) => {
 	try {
-		let phone = req.body.customerPhoneNumber
+		const phone = req.params.customerPhone
 
 		let cust = await Customer.findOne({
 			where: {
