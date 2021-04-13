@@ -107,36 +107,10 @@ const SingleOrderDetails = props => {
 								<ConciergeCell value={singleorder.concierge} />
 							</Descriptions.Item>
 							<Descriptions.Item label='Driver picking up'>
-								<ConciergeCell
-									driverId={singleorder.driverPickUp}
-									driverArray={drivers}
-									// value={() =>
-									// 	drivers.filter(el => {
-									// 		if (
-									// 			el.id ===
-									// 			singleorder.driverPickUp
-									// 		) {
-									// 			return el.name
-									// 		}
-									// 	})
-									// }
-								/>
+								{/* <ConciergeCell value={singleorder.drivers} /> */}
 							</Descriptions.Item>
 							<Descriptions.Item label='Driver dropping off'>
-								<ConciergeCell
-									driverId={singleorder.driverDropOff}
-									driverArray={drivers}
-									// value={() =>
-									// 	drivers.filter(el => {
-									// 		if (
-									// 			el.id ===
-									// 			singleorder.driverDropOff
-									// 		) {
-									// 			return el.name
-									// 		}
-									// 	})
-									// }
-								/>
+								{/* <ConciergeCell value={singleorder.drivers} /> */}
 							</Descriptions.Item>
 						</Descriptions>
 					</Descriptions.Item>

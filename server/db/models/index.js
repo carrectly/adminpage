@@ -6,16 +6,13 @@ const Order = require('./order')
 const OrderDetails = require('./orderDetails')
 const Customer = require('./customer')
 const Comment = require('./comment')
+const OrderDrivers = require('./orderDrivers')
 
 Customer.hasMany(Order)
 Order.belongsTo(Customer)
 
-Driver.hasMany(Order, {
-	foreignKey: 'driverPickUp',
-})
-Driver.hasMany(Order, {
-	foreignKey: 'driverDropOff',
-})
+Order.belongsToMany(Driver, {through: 'orderdrivers'})
+Driver.belongsToMany(Order, {through: 'orderdrivers'})
 
 Order.belongsToMany(Service, {through: 'orderdetails'})
 Service.belongsToMany(Order, {through: 'orderdetails'})
@@ -31,4 +28,5 @@ module.exports = {
 	Customer,
 	Comment,
 	Driver,
+	OrderDrivers,
 }

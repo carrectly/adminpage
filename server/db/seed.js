@@ -62,6 +62,7 @@ const legacyOrders = [
 		carModel: 'A',
 		customerPhoneNumber: 3144893320,
 		status: 'cancelled',
+		// driverPickUp: 1,
 	},
 	{
 		hash: '137a33b02af9d37db66e99e51ecb2b8f',
@@ -73,7 +74,8 @@ const legacyOrders = [
 		carMake: 'MERCEDES-BENZ',
 		carModel: 'GL',
 		customerPhoneNumber: 6303373753,
-		status: 'cancelled',
+		status: 'booked new',
+		// driverDropOff: 1,
 	},
 ]
 

@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const Sequelize = require('sequelize')
-const {Order, OrderDetails, Service, Customer} = require('../db/models')
+const {Order, OrderDetails, Service, Customer, Driver} = require('../db/models')
 const Op = Sequelize.Op
 module.exports = router
 
@@ -60,7 +60,7 @@ router.get('/active', async (req, res, next) => {
 				],
 			},
 			order: [['updatedAt', 'DESC']],
-			include: [{model: Service}, {model: Customer}],
+			include: [{model: Service}, {model: Customer}, {model: Driver}],
 		})
 		res.json(orders)
 	} catch (err) {
@@ -94,7 +94,7 @@ router.put('/single/:orderid', async (req, res, next) => {
 			where: {
 				hash: id,
 			},
-			include: [{model: Service}, {model: Customer}],
+			include: [{model: Service}, {model: Customer}, {model: Driver}],
 		})
 		console.log('api received order to update', req.body)
 		const neword = await ord.update(req.body)
@@ -125,7 +125,7 @@ router.get('/single/:orderid', async (req, res, next) => {
 			where: {
 				hash: id,
 			},
-			include: [{model: Service}, {model: Customer}],
+			include: [{model: Service}, {model: Customer}, {model: Driver}],
 		})
 		res.json(orders)
 	} catch (err) {
@@ -134,6 +134,27 @@ router.get('/single/:orderid', async (req, res, next) => {
 })
 
 router.put('/single/services/:orderid', async (req, res, next) => {
+	try {
+		let id = req.params.orderid
+
+		let msgbody = {...req.body}
+		let services = Object.keys(msgbody)
+		let servc = await OrderDetails.findOne({
+			where: {
+				orderHash: id,
+				serviceId: services[0],
+			},
+		})
+
+		await servc.update(msgbody[services[0]])
+
+		res.json(servc)
+	} catch (err) {
+		next(err)
+	}
+})
+
+router.put('/single/driver/:orderid', async (req, res, next) => {
 	try {
 		let id = req.params.orderid
 
@@ -172,6 +193,34 @@ router.post('/single/services/:orderid', async (req, res, next) => {
 
 		let resp = await order.addService(service, {
 			through: {customerPrice: service.dataValues.price},
+		})
+
+		res.json(resp)
+	} catch (err) {
+		next(err)
+	}
+})
+
+router.post('/single/driver/:orderid', async (req, res, next) => {
+	try {
+		let id = req.params.orderid
+
+		const driver = await Driver.findOne({
+			where: {
+				id: req.body.driverId,
+			},
+		})
+
+		const order = await Order.findOne({
+			where: {
+				hash: id,
+			},
+		})
+
+		let resp = await order.addDriver(driver, {
+			through: {
+				tripType: req.body.tripType,
+			},
 		})
 
 		res.json(resp)

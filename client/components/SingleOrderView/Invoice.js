@@ -11,7 +11,10 @@ import {DownOutlined} from '@ant-design/icons'
 import {fetchDealersThunk} from '../../store/dealers.js'
 import {sendSingleEmailThunk} from '../../store/singleemail'
 import {getEmailsThunk} from '../../store/emails'
-import {updateSingleOrderThunk} from '../../store/singleorder'
+import {
+	updateSingleOrderThunk,
+	addOrderDriverThunk,
+} from '../../store/singleorder'
 import {fetchDriversThunk} from '../../store/drivers.js'
 import {getStatusArray} from '../util'
 import UpdateOrder from './UpdateOrder'
@@ -165,11 +168,21 @@ const Invoice = () => {
 	}
 
 	const changePickUpDriver = evt => {
-		dispatch(updateSingleOrderThunk(orderId, {driverPickUp: evt.key}))
+		dispatch(
+			addOrderDriverThunk(orderId, {
+				driverId: evt.key,
+				tripType: 'pickUp',
+			})
+		)
 	}
 
 	const changeDropOffDriver = evt => {
-		dispatch(updateSingleOrderThunk(orderId, {driverDropOff: evt.key}))
+		dispatch(
+			addOrderDriverThunk(orderId, {
+				driverId: evt.key,
+				tripType: 'return',
+			})
+		)
 	}
 
 	return (

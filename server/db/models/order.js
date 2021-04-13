@@ -42,12 +42,6 @@ const Order = db.define('order', {
 	carModel: {
 		type: Sequelize.STRING,
 	},
-	driverPickUp: {
-		type: Sequelize.INTEGER,
-	},
-	driverDropOff: {
-		type: Sequelize.INTEGER,
-	},
 	vin: {
 		type: Sequelize.STRING,
 		allowNull: true,
