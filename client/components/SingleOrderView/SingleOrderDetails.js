@@ -167,15 +167,6 @@ const SingleOrderDetails = props => {
 							<Descriptions.Item label='Stick shift'>
 								{singleorder.stickShift}
 							</Descriptions.Item>
-							<Descriptions.Item label='Concierge'>
-								<ConciergeCell value={singleorder.concierge} />
-							</Descriptions.Item>
-							<Descriptions.Item label='Driver picking up'>
-								<ConciergeCell value={pickUpDriver} />
-							</Descriptions.Item>
-							<Descriptions.Item label='Driver dropping off'>
-								<ConciergeCell value={returnDriver} />
-							</Descriptions.Item>
 						</Descriptions>
 					</Descriptions.Item>
 
@@ -200,6 +191,26 @@ const SingleOrderDetails = props => {
 							</Descriptions.Item>
 							<Descriptions.Item label='Customer Comments'>
 								{singleorder.customerComments}
+							</Descriptions.Item>
+						</Descriptions>
+					</Descriptions.Item>
+
+					<Descriptions.Item>
+						<Descriptions
+							title='Driver'
+							layout='horizontal'
+							bordered={false}
+							size='small'
+							column={1}
+							className='descriptionsAntd'>
+							<Descriptions.Item label='Concierge'>
+								<ConciergeCell value={singleorder.concierge} />
+							</Descriptions.Item>
+							<Descriptions.Item label='Driver picking up'>
+								<ConciergeCell value={pickUpDriver} />
+							</Descriptions.Item>
+							<Descriptions.Item label='Driver dropping off'>
+								<ConciergeCell value={returnDriver} />
 							</Descriptions.Item>
 						</Descriptions>
 					</Descriptions.Item>
