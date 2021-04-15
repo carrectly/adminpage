@@ -1,11 +1,20 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useDispatch} from 'react-redux'
-import {getSingleEmailThunk} from '../../store/singleemail'
+import {
+	getSingleEmailThunk,
+	clearSingleEmailThunk,
+} from '../../store/singleemail'
 import moment from 'moment'
 
 const EmailSummaryCard = props => {
 	const dispatch = useDispatch()
 	const email = props.email
+
+	useEffect(() => {
+		return function cleanup() {
+			dispatch(clearSingleEmailThunk())
+		}
+	}, [])
 
 	const handleClick = () => {
 		dispatch(getSingleEmailThunk(email.id))

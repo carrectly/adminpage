@@ -14,6 +14,8 @@ import './styles.scss'
 
 const SingleOrderDetails = props => {
 	const singleorder = props.order
+	// const pickUpDriver = singleorder.pickUpDriver.name || ''
+	// const returnDriver = singleorder.returnDriver.name || ''
 	const customer = props.customer
 	const drivers = useSelector(state => state.drivers)
 	return (
@@ -107,10 +109,10 @@ const SingleOrderDetails = props => {
 								<ConciergeCell value={singleorder.concierge} />
 							</Descriptions.Item>
 							<Descriptions.Item label='Driver picking up'>
-								{/* <ConciergeCell value={singleorder.drivers} /> */}
+								{/* <ConciergeCell value={pickUpDriver} /> */}
 							</Descriptions.Item>
 							<Descriptions.Item label='Driver dropping off'>
-								{/* <ConciergeCell value={singleorder.drivers} /> */}
+								{/* <ConciergeCell value={returnDriver} /> */}
 							</Descriptions.Item>
 						</Descriptions>
 					</Descriptions.Item>

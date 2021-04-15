@@ -60,7 +60,12 @@ router.get('/active', async (req, res, next) => {
 				],
 			},
 			order: [['updatedAt', 'DESC']],
-			include: [{model: Service}, {model: Customer}, {model: Driver}],
+			include: [
+				{model: Service},
+				{model: Customer},
+				{model: Driver, as: 'pickUpDriver'},
+				{model: Driver, as: 'returnDriver'},
+			],
 		})
 		res.json(orders)
 	} catch (err) {
@@ -94,7 +99,12 @@ router.put('/single/:orderid', async (req, res, next) => {
 			where: {
 				hash: id,
 			},
-			include: [{model: Service}, {model: Customer}, {model: Driver}],
+			include: [
+				{model: Service},
+				{model: Customer},
+				{model: Driver, as: 'pickUpDriver'},
+				{model: Driver, as: 'returnDriver'},
+			],
 		})
 		console.log('api received order to update', req.body)
 		const neword = await ord.update(req.body)
@@ -125,7 +135,12 @@ router.get('/single/:orderid', async (req, res, next) => {
 			where: {
 				hash: id,
 			},
-			include: [{model: Service}, {model: Customer}, {model: Driver}],
+			include: [
+				{model: Service},
+				{model: Customer},
+				{model: Driver, as: 'pickUpDriver'},
+				{model: Driver, as: 'returnDriver'},
+			],
 		})
 		res.json(orders)
 	} catch (err) {

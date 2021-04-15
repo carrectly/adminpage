@@ -40,7 +40,7 @@ export const sendSingleEmailThunk = obj => async dispatch => {
 
 export const clearSingleEmailThunk = () => dispatch => {
 	try {
-		dispatch(clearSingleEmail({}))
+		dispatch(clearSingleEmail())
 	} catch (err) {
 		console.error(err)
 	}
@@ -55,7 +55,7 @@ export default function(state = singleEmail, action) {
 		case SEND_SINGLE_EMAIL:
 			return action.email
 		case CLEAR_SINGLE_EMAIL:
-			return action.email
+			return {}
 		default:
 			return state
 	}
