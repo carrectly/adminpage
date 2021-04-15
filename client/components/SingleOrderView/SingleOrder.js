@@ -1,16 +1,9 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {
-	getSingleOrderThunk,
-	updateOrderDetailsThunk,
-	removeOrderServiceThunk,
-} from '../../store/singleorder'
+import {getSingleOrderThunk} from '../../store/singleorder'
 import SingleOrderEmails from './SingleOrderEmails'
 import Invoice from './Invoice'
-
-import {getEmailsThunk, clearEmailsThunk} from '../../store/emails'
-import {clearSingleEmailThunk} from '../../store/singleemail'
 import SingleOrderServices from './SingleOrderServices'
 import SingleOrderDetails from './SingleOrderDetails'
 import OrderComments from './OrderComments'
@@ -30,6 +23,8 @@ class SingleOrder extends Component {
 		const singleorder = this.props.order || {}
 		const services = this.props.order.services || []
 		const customer = singleorder.customer || {}
+		const pickUpDriver = singleorder.pickUpDriver || {}
+		const returnDriver = singleorder.returnDriver || {}
 
 		return (
 			<div>
@@ -38,6 +33,8 @@ class SingleOrder extends Component {
 						<SingleOrderDetails
 							order={singleorder}
 							customer={customer}
+							pickUpDriver={pickUpDriver}
+							returnDriver={returnDriver}
 						/>
 						<SingleOrderEmails />
 					</div>
