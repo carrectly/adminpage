@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react'
-import {useSelector} from 'react-redux'
-import {Descriptions, Tabs} from 'antd'
-import {Link} from 'react-router-dom'
+import React from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {Descriptions, Tabs, Button, Dropdown, Menu} from 'antd'
+import {Link, useParams} from 'react-router-dom'
 const {TabPane} = Tabs
 import moment from 'moment'
 import {
@@ -10,14 +10,64 @@ import {
 	ConciergeCell,
 	GoogleVoiceLinkCell,
 } from '../Table/Cells.js'
+import {getStatusArray} from '../util'
+import {updateSingleOrderThunk} from '../../store/singleorder'
 import './styles.scss'
 
+const statusArray = getStatusArray()
+
+const menuList = fn => {
+	return (
+		<Menu onClick={fn}>
+			{statusArray.map((status, index) => (
+				<Menu.Item key={status} id={index}>
+					{status}
+				</Menu.Item>
+			))}
+		</Menu>
+	)
+}
+
 const SingleOrderDetails = props => {
+	const dispatch = useDispatch()
+	const params = useParams()
+	const orderId = params.orderid
 	const singleorder = props.order
 	const pickUpDriver = props.pickUpDriver.name
 	const returnDriver = props.returnDriver.name
 	const customer = props.customer
 	const drivers = useSelector(state => state.drivers)
+
+	const handleStatusUpdate = e => {
+		console.log('changing status evt', e.key)
+		let obj = {
+			status: e.key,
+		}
+		if (e.key === 'cancelled') {
+			if (
+				window.confirm(
+					'Changing the status to cancelled will remove the order from the home page and will move it to archives. Do you want to proceed?'
+				)
+			) {
+				dispatch(updateSingleOrderThunk(orderId, obj))
+			} else {
+				console.log('changed my mind')
+			}
+		} else if (e.key === 'paid') {
+			if (
+				window.confirm(
+					'Changing the status to paid will remove the order from the home page and will move it to archives. Do you want to proceed?'
+				)
+			) {
+				dispatch(updateSingleOrderThunk(orderId, obj))
+			} else {
+				console.log('changed my mind')
+			}
+		} else {
+			dispatch(updateSingleOrderThunk(orderId, obj))
+		}
+	}
+
 	return (
 		<Tabs type='card' style={{margin: '0px 0px 10px 0px'}}>
 			<TabPane tab='Order Details' key='1'>
@@ -43,7 +93,17 @@ const SingleOrderDetails = props => {
 								{singleorder.hash}
 							</Descriptions.Item>
 							<Descriptions.Item label='Status'>
-								<StatusCell value={singleorder.status} />
+								<Dropdown
+									overlay={() =>
+										menuList(handleStatusUpdate)
+									}>
+									<Button size='small'>
+										<StatusCell
+											value={singleorder.status}
+											dropDown={true}
+										/>
+									</Button>
+								</Dropdown>
 							</Descriptions.Item>
 							<Descriptions.Item label='Pickup Date'>
 								{moment(singleorder.pickupDate).format(

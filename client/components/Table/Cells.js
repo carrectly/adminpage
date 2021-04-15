@@ -11,6 +11,7 @@ import {
 	EnvironmentFilled,
 	DeleteFilled,
 	GooglePlusCircleFilled,
+	DownOutlined,
 } from '@ant-design/icons'
 
 export const DateCell = ({value}) => {
@@ -129,13 +130,17 @@ export const DeleteOrderServiceCell = ({row}) => {
 	)
 }
 
-export const StatusCell = ({value}) => {
+export const StatusCell = ({value, dropDown = false}) => {
 	const statusArray = getStatusArray()
 	const index = statusArray.indexOf(value)
 
 	let classname = `status${index}`
 
-	return <div className={classname}>{value}</div>
+	return (
+		<div className={classname}>
+			{value} {dropDown ? <DownOutlined /> : <div />}
+		</div>
+	)
 }
 
 export const ConciergeCell = ({value}) => {
