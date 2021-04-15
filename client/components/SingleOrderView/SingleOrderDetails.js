@@ -97,7 +97,9 @@ const SingleOrderDetails = props => {
 									overlay={() =>
 										menuList(handleStatusUpdate)
 									}>
-									<Button size='small'>
+									<Button
+										size='small'
+										style={{padding: '0px'}}>
 										<StatusCell
 											value={singleorder.status}
 											dropDown={true}

@@ -11,29 +11,11 @@ import {DownOutlined} from '@ant-design/icons'
 import {fetchDealersThunk} from '../../store/dealers.js'
 import {sendSingleEmailThunk} from '../../store/singleemail'
 import {getEmailsThunk} from '../../store/emails'
-import {
-	updateSingleOrderThunk,
-	addOrderDriverThunk,
-} from '../../store/singleorder'
+import {addOrderDriverThunk} from '../../store/singleorder'
 import {fetchDriversThunk} from '../../store/drivers.js'
-import {getStatusArray} from '../util'
 import UpdateOrder from './UpdateOrder'
 
-const statusArray = getStatusArray()
-
 const driversArray = ['Stas', 'Mike', 'Taras', 'Ben', 'Kyle', 'Other']
-
-const menuList = fn => {
-	return (
-		<Menu onClick={fn}>
-			{statusArray.map((status, index) => (
-				<Menu.Item key={status} id={index}>
-					{status}
-				</Menu.Item>
-			))}
-		</Menu>
-	)
-}
 
 const driversList = (arr, fn) => {
 	return (
@@ -137,36 +119,6 @@ const Invoice = () => {
 		obj = {}
 	}
 
-	const handleStatusUpdate = e => {
-		console.log('changing status evt', e.key)
-		let obj = {
-			status: e.key,
-		}
-		if (e.key === 'cancelled') {
-			if (
-				window.confirm(
-					'Changing the status to cancelled will remove the order from the home page and will move it to archives. Do you want to proceed?'
-				)
-			) {
-				dispatch(updateSingleOrderThunk(orderId, obj))
-			} else {
-				console.log('changed my mind')
-			}
-		} else if (e.key === 'paid') {
-			if (
-				window.confirm(
-					'Changing the status to paid will remove the order from the home page and will move it to archives. Do you want to proceed?'
-				)
-			) {
-				dispatch(updateSingleOrderThunk(orderId, obj))
-			} else {
-				console.log('changed my mind')
-			}
-		} else {
-			dispatch(updateSingleOrderThunk(orderId, obj))
-		}
-	}
-
 	const changePickUpDriver = evt => {
 		dispatch(
 			addOrderDriverThunk(orderId, {
@@ -188,11 +140,6 @@ const Invoice = () => {
 	return (
 		<div className='invoicebuttons'>
 			<UpdateOrder id={orderId} />
-			<Dropdown overlay={() => menuList(handleStatusUpdate)}>
-				<Button shape='round' size='large'>
-					Change status <DownOutlined />
-				</Button>
-			</Dropdown>
 			<Dropdown overlay={() => dealerList(dealers, handleSend)}>
 				<Button shape='round' size='large'>
 					Create draft email for shops <DownOutlined />
