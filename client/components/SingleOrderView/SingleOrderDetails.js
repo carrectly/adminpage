@@ -11,7 +11,10 @@ import {
 	GoogleVoiceLinkCell,
 } from '../Table/Cells.js'
 import {getStatusArray} from '../util'
-import {updateSingleOrderThunk} from '../../store/singleorder'
+import {
+	updateSingleOrderThunk,
+	addOrderDriverThunk,
+} from '../../store/singleorder'
 import './styles.scss'
 
 const statusArray = getStatusArray()
@@ -28,13 +31,25 @@ const menuList = fn => {
 	)
 }
 
+const driversList = (arr, fn, tripType) => {
+	return (
+		<Menu onClick={fn}>
+			{arr.map(driver => (
+				<Menu.Item key={driver.id} id={tripType}>
+					{driver.name}
+				</Menu.Item>
+			))}
+		</Menu>
+	)
+}
+
 const SingleOrderDetails = props => {
 	const dispatch = useDispatch()
 	const params = useParams()
 	const orderId = params.orderid
 	const singleorder = props.order
-	const pickUpDriver = props.pickUpDriver.name
-	const returnDriver = props.returnDriver.name
+	const pickUpDriver = props.pickUpDriver
+	const returnDriver = props.returnDriver
 	const customer = props.customer
 	const drivers = useSelector(state => state.drivers)
 
@@ -66,6 +81,16 @@ const SingleOrderDetails = props => {
 		} else {
 			dispatch(updateSingleOrderThunk(orderId, obj))
 		}
+	}
+
+	const changeDriver = evt => {
+		console.log('event', evt.item.props.id)
+		dispatch(
+			addOrderDriverThunk(orderId, {
+				driverId: evt.key,
+				tripType: evt.item.props.id,
+			})
+		)
 	}
 
 	return (
@@ -207,10 +232,42 @@ const SingleOrderDetails = props => {
 								<ConciergeCell value={singleorder.concierge} />
 							</Descriptions.Item>
 							<Descriptions.Item label='Driver picking up'>
-								<ConciergeCell value={pickUpDriver} />
+								<Dropdown
+									overlay={() =>
+										driversList(
+											drivers,
+											changeDriver,
+											'pickUp'
+										)
+									}>
+									<Button
+										size='small'
+										style={{padding: '0px', border: '0px'}}>
+										<ConciergeCell
+											value={pickUpDriver}
+											dropDown={true}
+										/>
+									</Button>
+								</Dropdown>
 							</Descriptions.Item>
 							<Descriptions.Item label='Driver dropping off'>
-								<ConciergeCell value={returnDriver} />
+								<Dropdown
+									overlay={() =>
+										driversList(
+											drivers,
+											changeDriver,
+											'return'
+										)
+									}>
+									<Button
+										size='small'
+										style={{padding: '0px', border: '0px'}}>
+										<ConciergeCell
+											value={returnDriver}
+											dropDown={true}
+										/>
+									</Button>
+								</Dropdown>
 							</Descriptions.Item>
 						</Descriptions>
 					</Descriptions.Item>

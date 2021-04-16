@@ -11,21 +11,10 @@ import {DownOutlined} from '@ant-design/icons'
 import {fetchDealersThunk} from '../../store/dealers.js'
 import {sendSingleEmailThunk} from '../../store/singleemail'
 import {getEmailsThunk} from '../../store/emails'
-import {addOrderDriverThunk} from '../../store/singleorder'
 import {fetchDriversThunk} from '../../store/drivers.js'
 import UpdateOrder from './UpdateOrder'
 
 const driversArray = ['Stas', 'Mike', 'Taras', 'Ben', 'Kyle', 'Other']
-
-const driversList = (arr, fn) => {
-	return (
-		<Menu onClick={fn}>
-			{arr.map(driver => (
-				<Menu.Item key={driver.id}>{driver.name}</Menu.Item>
-			))}
-		</Menu>
-	)
-}
 
 const dealerList = (arr, fn) => {
 	return (
@@ -49,7 +38,6 @@ const Invoice = () => {
 	const invoice = useSelector(state => state.square.invoice)
 	const order = useSelector(state => state.singleorder)
 	const dealers = useSelector(state => state.dealers)
-	const drivers = useSelector(state => state.drivers)
 
 	useEffect(() => {
 		dispatch(fetchDealersThunk())
@@ -119,24 +107,6 @@ const Invoice = () => {
 		obj = {}
 	}
 
-	const changePickUpDriver = evt => {
-		dispatch(
-			addOrderDriverThunk(orderId, {
-				driverId: evt.key,
-				tripType: 'pickUp',
-			})
-		)
-	}
-
-	const changeDropOffDriver = evt => {
-		dispatch(
-			addOrderDriverThunk(orderId, {
-				driverId: evt.key,
-				tripType: 'return',
-			})
-		)
-	}
-
 	return (
 		<div className='invoicebuttons'>
 			<UpdateOrder id={orderId} />
@@ -145,16 +115,7 @@ const Invoice = () => {
 					Create draft email for shops <DownOutlined />
 				</Button>
 			</Dropdown>
-			<Dropdown overlay={() => driversList(drivers, changePickUpDriver)}>
-				<Button shape='round' size='large'>
-					Assign pick up Driver <DownOutlined />
-				</Button>
-			</Dropdown>
-			<Dropdown overlay={() => driversList(drivers, changeDropOffDriver)}>
-				<Button shape='round' size='large'>
-					Assign drop off Driver <DownOutlined />
-				</Button>
-			</Dropdown>
+
 			<Popover
 				placement='bottom'
 				content="If customer does not exist in

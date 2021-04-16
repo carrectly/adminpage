@@ -143,7 +143,7 @@ export const StatusCell = ({value, dropDown = false}) => {
 	)
 }
 
-export const ConciergeCell = ({value}) => {
+export const ConciergeCell = ({value, dropDown = false}) => {
 	const arr = ['Stas', 'Mike', 'Taras', 'Ben', 'Kyle', 'Other']
 	const i = arr.indexOf(value)
 	const colors = [
@@ -155,9 +155,20 @@ export const ConciergeCell = ({value}) => {
 		'#008080',
 	]
 
+	if (dropDown) {
+		return (
+			<Tag
+				color={colors[value.id]}
+				key={value.id}
+				style={{margin: '0px', border: '0px'}}>
+				{value.name} {dropDown ? <DownOutlined /> : <div />}
+			</Tag>
+		)
+	}
+
 	return (
 		<Tag color={colors[i]} key={value}>
-			{value}
+			{value} {dropDown ? <DownOutlined /> : <div />}
 		</Tag>
 	)
 }

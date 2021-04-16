@@ -169,27 +169,6 @@ router.put('/single/services/:orderid', async (req, res, next) => {
 	}
 })
 
-router.put('/single/driver/:orderid', async (req, res, next) => {
-	try {
-		let id = req.params.orderid
-
-		let msgbody = {...req.body}
-		let services = Object.keys(msgbody)
-		let servc = await OrderDetails.findOne({
-			where: {
-				orderHash: id,
-				serviceId: services[0],
-			},
-		})
-
-		await servc.update(msgbody[services[0]])
-
-		res.json(servc)
-	} catch (err) {
-		next(err)
-	}
-})
-
 router.post('/single/services/:orderid', async (req, res, next) => {
 	try {
 		let id = req.params.orderid
@@ -232,13 +211,13 @@ router.post('/single/driver/:orderid', async (req, res, next) => {
 			},
 		})
 
-		let resp = await order.addDriver(driver, {
-			through: {
-				tripType: req.body.tripType,
-			},
-		})
+		if (req.body.tripType === 'pickUp') {
+			await order.setPickUpDriver(driver)
+		} else {
+			await order.setReturnDriver(driver)
+		}
 
-		res.json(resp)
+		res.json(order.dataValues)
 	} catch (err) {
 		next(err)
 	}
