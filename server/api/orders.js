@@ -106,7 +106,6 @@ router.put('/single/:orderid', async (req, res, next) => {
 				{model: Driver, as: 'returnDriver'},
 			],
 		})
-		console.log('api received order to update', req.body)
 		const neword = await ord.update(req.body)
 		res.json(neword)
 	} catch (err) {

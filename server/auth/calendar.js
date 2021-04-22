@@ -94,6 +94,7 @@ async function createEvent(evt) {
 				{method: 'popup', minutes: 10},
 			],
 		},
+		attendees: [{email: 'birkusandre@gmail.com'}],
 	}
 
 	//flexible calendar id '6kllmvnusibcs0lbnh98ffiqvs@group.calendar.google.com'
