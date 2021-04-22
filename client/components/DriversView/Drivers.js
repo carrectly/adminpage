@@ -1,4 +1,4 @@
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import AddDriver from './AddDriver.js'
@@ -23,21 +23,21 @@ class Drivers extends Component {
 
 	async componentDidMount() {
 		try {
-			await this.props.fetchDealers()
+			await this.props.fetchDrivers()
 		} catch (err) {
 			console.log(err)
 		}
 	}
 
 	render() {
-		const dealers = this.props.dealers
+		const drivers = this.props.drivers
 		return (
 			<div>
 				<div>
-					{dealers.length ? (
+					{drivers.length ? (
 						<div>
 							<div className='alldealersview'>
-								{dealers.map(dlr => (
+								{drivers.map(dlr => (
 									<div key={dlr.id} className='dealerCard'>
 										<DriverCard
 											key={dlr.id}
@@ -72,14 +72,14 @@ class Drivers extends Component {
 
 const mapStateToProps = state => {
 	return {
-		dealers: state.drivers,
+		drivers: state.drivers,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
 		remove: id => dispatch(removeDriverThunk(id)),
-		fetchDealers: () => dispatch(fetchDriversThunk()),
+		fetchDrivers: () => dispatch(fetchDriversThunk()),
 	}
 }
 

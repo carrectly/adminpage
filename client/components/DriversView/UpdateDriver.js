@@ -45,7 +45,7 @@ const UpdateDriver = props => {
 					onFinishFailed={onFinishFailed}>
 					<Form.Item
 						name='name'
-						label='Dealer Name'
+						label='Driver Name'
 						initialValue={`${props.driver.name}`}
 						rules={[{required: true}]}>
 						<Input />
