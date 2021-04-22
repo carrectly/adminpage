@@ -70,23 +70,25 @@ const Order = db.define('order', {
 
 const createInGoogle = async inst => {
 	try {
-		const customer = inst.customer.dataValues
+		// const customer = inst.customer.dataValues
 		let newinst = {...inst.dataValues}
-		newinst.customerName = `${customer.firstName} ${customer.lastName}`
+		// newinst.customerName = `${customer.firstName} ${customer.lastName}`
 		if (inst._changed.pickUpDriverId) {
-			const pickUpDriverEmail = inst.pickUpDriver.dataValues.email
-			newinst.pickUpDriverEmail = pickUpDriverEmail
-			await axios.post(
-				`${process.env.DOMAIN}/auth/google/calendar/newevent`,
-				newinst
-			)
+			// const pickUpDriverEmail = inst.pickUpDriver.dataValues.email
+			// newinst.pickUpDriverEmail = pickUpDriverEmail
+			// await axios.post(
+			// 	`${process.env.DOMAIN}/auth/google/calendar/newevent`,
+			// 	newinst
+			// )
+			console.log('creating event for pickup driver')
 		} else if (inst._changed.returnDriverId) {
-			const returnDriverEmail = inst.returnDriver.dataValues.email
-			newinst.returnDriverEmail = returnDriverEmail
-			await axios.post(
-				`${process.env.DOMAIN}/auth/google/calendar/newevent`,
-				newinst
-			)
+			// const returnDriverEmail = inst.returnDriver.dataValues.email
+			// newinst.returnDriverEmail = returnDriverEmail
+			// await axios.post(
+			// 	`${process.env.DOMAIN}/auth/google/calendar/newevent`,
+			// 	newinst
+			// )
+			console.log('creating event for return driver')
 		}
 	} catch (err) {
 		console.log(err.message)
