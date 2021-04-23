@@ -69,24 +69,34 @@ async function listEvents() {
 }
 
 async function createEvent(evt) {
-	const endTime = moment(evt.pickupDate).add(1, 'hour')
+	let attendeeEmail = evt.pickUpDriverEmail
+	let color = 11
+	let startTime = evt.pickupDate
+
+	if (evt.hasOwnProperty('returnDriverEmail')) {
+		attendeeEmail = evt.returnDriverEmail
+		color = 10
+		startTime = evt.dropoffDate
+	}
+
+	const endTime = moment(startTime).add(1, 'hour')
 	const endTimeISO = endTime.toISOString()
+
 	var event = {
 		summary: `${evt.carYear} ${evt.carMake} ${evt.carModel} ${evt.customerName}`,
 		location: `${evt.pickupLocation}`,
-		id: `${evt.hash}`,
 		description: `Customer phone number: ${evt.customerPhoneNumber} 
 		OrderID: ${evt.hash}
 		${evt.comments ? evt.comments : ''}`,
 		start: {
-			dateTime: `${evt.pickupDate}`,
+			dateTime: `${startTime}`,
 			timeZone: 'America/Chicago',
 		},
 		end: {
 			dateTime: `${endTimeISO}`,
 			timeZone: 'America/Chicago',
 		},
-		colorId: '11',
+		colorId: color,
 		reminders: {
 			useDefault: false,
 			overrides: [
@@ -94,7 +104,7 @@ async function createEvent(evt) {
 				{method: 'popup', minutes: 10},
 			],
 		},
-		attendees: [{email: 'birkusandre@gmail.com'}],
+		attendees: [{email: attendeeEmail}],
 	}
 
 	//flexible calendar id '6kllmvnusibcs0lbnh98ffiqvs@group.calendar.google.com'

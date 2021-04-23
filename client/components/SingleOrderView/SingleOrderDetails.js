@@ -251,23 +251,35 @@ const SingleOrderDetails = props => {
 								</Dropdown>
 							</Descriptions.Item>
 							<Descriptions.Item label='Driver dropping off'>
-								<Dropdown
-									overlay={() =>
-										driversList(
-											drivers,
-											changeDriver,
-											'return'
-										)
-									}>
-									<Button
-										size='small'
-										style={{padding: '0px', border: '0px'}}>
-										<ConciergeCell
-											value={returnDriver}
-											dropDown={true}
-										/>
-									</Button>
-								</Dropdown>
+								{moment(singleorder.dropoffDate).diff(
+									moment(singleorder.pickupDate)
+								) > 0 ? (
+									<Dropdown
+										overlay={() =>
+											driversList(
+												drivers,
+												changeDriver,
+												'return'
+											)
+										}>
+										<Button
+											size='small'
+											style={{
+												padding: '0px',
+												border: '0px',
+											}}>
+											<ConciergeCell
+												value={returnDriver}
+												dropDown={true}
+											/>
+										</Button>
+									</Dropdown>
+								) : (
+									<div>
+										Please enter a valid drop off date in
+										order to assign a driver
+									</div>
+								)}
 							</Descriptions.Item>
 						</Descriptions>
 					</Descriptions.Item>

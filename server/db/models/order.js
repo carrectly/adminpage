@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../database')
 var axios = require('axios')
-const Customer = require('./customer')
+const Driver = require('./driver')
 if (process.env.NODE_ENV !== 'production') require('../../../secrets.js')
 
 const Order = db.define('order', {
@@ -70,25 +70,23 @@ const Order = db.define('order', {
 
 const createInGoogle = async inst => {
 	try {
-		// const customer = inst.customer.dataValues
+		const customer = inst.customer.dataValues
 		let newinst = {...inst.dataValues}
-		// newinst.customerName = `${customer.firstName} ${customer.lastName}`
+		newinst.customerName = `${customer.firstName} ${customer.lastName}`
 		if (inst._changed.pickUpDriverId) {
-			// const pickUpDriverEmail = inst.pickUpDriver.dataValues.email
-			// newinst.pickUpDriverEmail = pickUpDriverEmail
-			// await axios.post(
-			// 	`${process.env.DOMAIN}/auth/google/calendar/newevent`,
-			// 	newinst
-			// )
-			console.log('creating event for pickup driver')
+			const driver = await Driver.findByPk(newinst.pickUpDriverId)
+			newinst.pickUpDriverEmail = driver.email
+			await axios.post(
+				`${process.env.DOMAIN}/auth/google/calendar/newevent`,
+				newinst
+			)
 		} else if (inst._changed.returnDriverId) {
-			// const returnDriverEmail = inst.returnDriver.dataValues.email
-			// newinst.returnDriverEmail = returnDriverEmail
-			// await axios.post(
-			// 	`${process.env.DOMAIN}/auth/google/calendar/newevent`,
-			// 	newinst
-			// )
-			console.log('creating event for return driver')
+			const driver = await Driver.findByPk(newinst.returnDriverId)
+			newinst.returnDriverEmail = driver.email
+			await axios.post(
+				`${process.env.DOMAIN}/auth/google/calendar/newevent`,
+				newinst
+			)
 		}
 	} catch (err) {
 		console.log(err.message)

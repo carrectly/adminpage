@@ -204,10 +204,8 @@ router.post('/single/driver/:orderid', async (req, res, next) => {
 			},
 		})
 
-		const order = await Order.findOne({
-			where: {
-				hash: id,
-			},
+		const order = await Order.findByPk(id, {
+			include: [{model: Customer}],
 		})
 
 		if (req.body.tripType === 'pickUp') {
@@ -216,7 +214,7 @@ router.post('/single/driver/:orderid', async (req, res, next) => {
 			await order.setReturnDriver(driver)
 		}
 
-		res.json(order.dataValues)
+		res.json(order)
 	} catch (err) {
 		next(err)
 	}
