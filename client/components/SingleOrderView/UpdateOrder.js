@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {Modal, DatePicker, Form, Input, Button} from 'antd'
+import {Modal, DatePicker, Form, Input, Button, TimePicker} from 'antd'
 import {updateSingleOrderThunk} from '../../store/singleorder'
 import {useParams} from 'react-router-dom'
 import moment from 'moment'
@@ -91,10 +91,16 @@ const UpdateOrder = props => {
 					onFinish={onFinish}
 					onFinishFailed={onFinishFailed}>
 					<Form.Item name='pickupDate' label='Pick Up Date'>
-						<DatePicker showTime format='YYYY-MM-DD HH:mm' />
+						<DatePicker
+							showTime={{minuteStep: 15}}
+							format='YYYY-MM-DD HH:mm'
+						/>
 					</Form.Item>
 					<Form.Item name='dropoffDate' label='Drop Off Date'>
-						<DatePicker showTime format='YYYY-MM-DD HH:mm' />
+						<DatePicker
+							showTime={{minuteStep: 15}}
+							format='YYYY-MM-DD HH:mm'
+						/>
 					</Form.Item>
 					<Form.Item
 						name='pickupLocation'
