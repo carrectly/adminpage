@@ -144,7 +144,8 @@ async function updateEvent(evt) {
 		summary: `${evt.carYear} ${evt.carMake} ${evt.carModel} ${evt.customerName}`,
 		location: `${evt.pickupLocation}`,
 		id: `${evt.hash}`,
-		description: `Customer phone number: ${evt.customerPhoneNumber} 
+		description: `Customer phone number: ${evt.customerPhoneNumber}
+		Customer name: ${evt.customerName}
 		OrderID: ${evt.hash}
 		${evt.comments ? evt.comments : ''}`,
 		start: {

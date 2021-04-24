@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {Modal, DatePicker, Form, Input, Button, TimePicker} from 'antd'
+import {Modal, DatePicker, Form, Input, Button} from 'antd'
 import {updateSingleOrderThunk} from '../../store/singleorder'
 import {useParams} from 'react-router-dom'
 import moment from 'moment'
@@ -94,12 +94,18 @@ const UpdateOrder = props => {
 						<DatePicker
 							showTime={{minuteStep: 15}}
 							format='YYYY-MM-DD HH:mm'
+							placeholder={moment(order.pickupDate).format(
+								'YYYY-MM-DD HH:mm'
+							)}
 						/>
 					</Form.Item>
 					<Form.Item name='dropoffDate' label='Drop Off Date'>
 						<DatePicker
 							showTime={{minuteStep: 15}}
 							format='YYYY-MM-DD HH:mm'
+							placeholder={moment(order.dropoffDate).format(
+								'YYYY-MM-DD HH:mm'
+							)}
 						/>
 					</Form.Item>
 					<Form.Item
@@ -124,6 +130,12 @@ const UpdateOrder = props => {
 						name='carModel'
 						label='Car Model'
 						initialValue={order.carModel}>
+						<Input />
+					</Form.Item>
+					<Form.Item
+						name='carColor'
+						label='Car color'
+						initialValue={order.carColor}>
 						<Input />
 					</Form.Item>
 					<Form.Item

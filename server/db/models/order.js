@@ -42,6 +42,9 @@ const Order = db.define('order', {
 	carModel: {
 		type: Sequelize.STRING,
 	},
+	carColor: {
+		type: Sequelize.STRING,
+	},
 	vin: {
 		type: Sequelize.STRING,
 		allowNull: true,

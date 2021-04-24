@@ -54,7 +54,6 @@ const SingleOrderDetails = props => {
 	const drivers = useSelector(state => state.drivers)
 
 	const handleStatusUpdate = e => {
-		console.log('changing status evt', e.key)
 		let obj = {
 			status: e.key,
 		}
@@ -78,13 +77,23 @@ const SingleOrderDetails = props => {
 			} else {
 				console.log('changed my mind')
 			}
+		} else if (e.key === 'confirmed') {
+			const diff = moment(singleorder.dropoffDate).diff(
+				moment(singleorder.pickupDate)
+			)
+			if (diff < 0 || !diff) {
+				window.alert(
+					'Please enter a valid drop off date before marking the order as confirmed. Drop off date must be after pick up date'
+				)
+			} else {
+				dispatch(updateSingleOrderThunk(orderId, obj))
+			}
 		} else {
 			dispatch(updateSingleOrderThunk(orderId, obj))
 		}
 	}
 
 	const changeDriver = evt => {
-		console.log('event', evt.item.props.id)
 		dispatch(
 			addOrderDriverThunk(orderId, {
 				driverId: evt.key,
@@ -185,6 +194,9 @@ const SingleOrderDetails = props => {
 							</Descriptions.Item>
 							<Descriptions.Item label='Car Year'>
 								{singleorder.carYear}
+							</Descriptions.Item>
+							<Descriptions.Item label='Car Color'>
+								{singleorder.carColor}
 							</Descriptions.Item>
 							<Descriptions.Item label='VIN'>
 								{singleorder.vin}
