@@ -11,8 +11,8 @@ import {
 	Login,
 	Dealers,
 	CalendarView,
-	SingleDealer,
 	AllServices,
+	Drivers,
 } from './components'
 
 class Routes extends Component {
@@ -46,11 +46,8 @@ class Routes extends Component {
 							path='/singleorder/:orderid'
 							component={SingleOrder}
 						/>
-						<Route
-							path='/dealers/:dealerid'
-							component={SingleDealer}
-						/>
 						<Route path='/dealers' component={Dealers} />
+						<Route path='/drivers' component={Drivers} />
 						<Route path='/calendar' component={CalendarView} />
 					</Switch>
 				)}

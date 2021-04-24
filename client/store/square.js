@@ -23,9 +23,9 @@ const clearSquare = obj => ({type: CLEAR_SQUARE, obj})
 /**
  * THUNK CREATORS
  */
-export const getSquareCustomerThunk = obj => async dispatch => {
+export const getSquareCustomerThunk = phone => async dispatch => {
 	try {
-		const res = await axios.post('/square/customers', obj)
+		const res = await axios.get(`/square/customers/${phone}`)
 		dispatch(getCustomer(res.data))
 	} catch (err) {
 		console.error(err)

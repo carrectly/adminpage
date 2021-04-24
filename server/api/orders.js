@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const Sequelize = require('sequelize')
-const {Order, OrderDetails, Service, Customer} = require('../db/models')
+const {Order, OrderDetails, Service, Customer, Driver} = require('../db/models')
 const Op = Sequelize.Op
 module.exports = router
 
@@ -60,7 +60,12 @@ router.get('/active', async (req, res, next) => {
 				],
 			},
 			order: [['updatedAt', 'DESC']],
-			include: [{model: Service}, {model: Customer}],
+			include: [
+				{model: Service},
+				{model: Customer},
+				{model: Driver, as: 'pickUpDriver'},
+				{model: Driver, as: 'returnDriver'},
+			],
 		})
 		res.json(orders)
 	} catch (err) {
@@ -94,9 +99,13 @@ router.put('/single/:orderid', async (req, res, next) => {
 			where: {
 				hash: id,
 			},
-			include: [{model: Service}, {model: Customer}],
+			include: [
+				{model: Service},
+				{model: Customer},
+				{model: Driver, as: 'pickUpDriver'},
+				{model: Driver, as: 'returnDriver'},
+			],
 		})
-		console.log('api received order to update', req.body)
 		const neword = await ord.update(req.body)
 		res.json(neword)
 	} catch (err) {
@@ -125,7 +134,12 @@ router.get('/single/:orderid', async (req, res, next) => {
 			where: {
 				hash: id,
 			},
-			include: [{model: Service}, {model: Customer}],
+			include: [
+				{model: Service},
+				{model: Customer},
+				{model: Driver, as: 'pickUpDriver'},
+				{model: Driver, as: 'returnDriver'},
+			],
 		})
 		res.json(orders)
 	} catch (err) {
@@ -175,6 +189,32 @@ router.post('/single/services/:orderid', async (req, res, next) => {
 		})
 
 		res.json(resp)
+	} catch (err) {
+		next(err)
+	}
+})
+
+router.post('/single/driver/:orderid', async (req, res, next) => {
+	try {
+		let id = req.params.orderid
+
+		const driver = await Driver.findOne({
+			where: {
+				id: req.body.driverId,
+			},
+		})
+
+		const order = await Order.findByPk(id, {
+			include: [{model: Customer}],
+		})
+
+		if (req.body.tripType === 'pickUp') {
+			await order.setPickUpDriver(driver)
+		} else {
+			await order.setReturnDriver(driver)
+		}
+
+		res.json(order)
 	} catch (err) {
 		next(err)
 	}

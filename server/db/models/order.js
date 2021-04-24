@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../database')
 var axios = require('axios')
-const Customer = require('./customer')
+const Driver = require('./driver')
 if (process.env.NODE_ENV !== 'production') require('../../../secrets.js')
 
 const Order = db.define('order', {
@@ -42,7 +42,7 @@ const Order = db.define('order', {
 	carModel: {
 		type: Sequelize.STRING,
 	},
-	concierge: {
+	carColor: {
 		type: Sequelize.STRING,
 	},
 	vin: {
@@ -73,13 +73,19 @@ const Order = db.define('order', {
 
 const createInGoogle = async inst => {
 	try {
-		if (inst.dataValues.status === 'confirmed') {
-			let newinst = {...inst.dataValues}
-			inst.isInCalendar = true
-			let cus = await Customer.findOne({
-				where: {phoneNumber: newinst.customerPhoneNumber},
-			})
-			newinst.customerName = `${cus.firstName} ${cus.lastName}`
+		const customer = inst.customer.dataValues
+		let newinst = {...inst.dataValues}
+		newinst.customerName = `${customer.firstName} ${customer.lastName}`
+		if (inst._changed.pickUpDriverId) {
+			const driver = await Driver.findByPk(newinst.pickUpDriverId)
+			newinst.pickUpDriverEmail = driver.email
+			await axios.post(
+				`${process.env.DOMAIN}/auth/google/calendar/newevent`,
+				newinst
+			)
+		} else if (inst._changed.returnDriverId) {
+			const driver = await Driver.findByPk(newinst.returnDriverId)
+			newinst.returnDriverEmail = driver.email
 			await axios.post(
 				`${process.env.DOMAIN}/auth/google/calendar/newevent`,
 				newinst

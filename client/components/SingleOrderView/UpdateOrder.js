@@ -91,10 +91,22 @@ const UpdateOrder = props => {
 					onFinish={onFinish}
 					onFinishFailed={onFinishFailed}>
 					<Form.Item name='pickupDate' label='Pick Up Date'>
-						<DatePicker showTime format='YYYY-MM-DD HH:mm' />
+						<DatePicker
+							showTime={{minuteStep: 15}}
+							format='YYYY-MM-DD HH:mm'
+							placeholder={moment(order.pickupDate).format(
+								'YYYY-MM-DD HH:mm'
+							)}
+						/>
 					</Form.Item>
 					<Form.Item name='dropoffDate' label='Drop Off Date'>
-						<DatePicker showTime format='YYYY-MM-DD HH:mm' />
+						<DatePicker
+							showTime={{minuteStep: 15}}
+							format='YYYY-MM-DD HH:mm'
+							placeholder={moment(order.dropoffDate).format(
+								'YYYY-MM-DD HH:mm'
+							)}
+						/>
 					</Form.Item>
 					<Form.Item
 						name='pickupLocation'
@@ -118,6 +130,12 @@ const UpdateOrder = props => {
 						name='carModel'
 						label='Car Model'
 						initialValue={order.carModel}>
+						<Input />
+					</Form.Item>
+					<Form.Item
+						name='carColor'
+						label='Car color'
+						initialValue={order.carColor}>
 						<Input />
 					</Form.Item>
 					<Form.Item
