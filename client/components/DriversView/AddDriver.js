@@ -1,12 +1,15 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {addDriverThunk} from '../../store/drivers.js'
-import {Form, Button, Input, Modal} from 'antd'
+import {Form, Button, Input, Modal, Select} from 'antd'
+import {tagColorsArray} from '../util'
 
 const layout = {
 	labelCol: {span: 8},
 	wrapperCol: {span: 16},
 }
+
+const colors = tagColorsArray()
 
 const AddDriver = props => {
 	const [form] = Form.useForm()
@@ -68,6 +71,23 @@ const AddDriver = props => {
 				</Form.Item>
 				<Form.Item name='phoneNumber' label='Phone number'>
 					<Input />
+				</Form.Item>
+				<Form.Item name='imageUrl' label='Image URL'>
+					<Input />
+				</Form.Item>
+				<Form.Item
+					name='tagColor'
+					label='Tag Color'
+					rules={[{required: true}]}>
+					<Select placeholder="Select a color for driver's tag in the table">
+						{colors.map(color => (
+							<Option value={color} key={color}>
+								<div style={{backgroundColor: `${color}`}}>
+									{color}
+								</div>
+							</Option>
+						))}
+					</Select>
 				</Form.Item>
 				<Form.Item>
 					<Button

@@ -18,6 +18,9 @@ const Driver = db.define('driver', {
 		type: Sequelize.STRING,
 		allowNull: true,
 	},
+	tagColor: {
+		type: Sequelize.STRING,
+	},
 })
 
 module.exports = Driver
