@@ -30,9 +30,10 @@ const UpdateDriver = props => {
 
 	return (
 		<div>
-			<Button type='text' onClick={() => handleShow(true)}>
-				<EditFilled style={{color: '#7CFC00'}} />
-			</Button>
+			<Button
+				type='text'
+				onClick={() => handleShow(true)}
+				icon={<EditFilled style={{color: '#7CFC00'}} />}></Button>
 			<Modal
 				title={`${props.driver.name}`}
 				visible={show}
@@ -74,7 +75,7 @@ const UpdateDriver = props => {
 					<Form.Item name='tagColor' label='Tag Color'>
 						<Select
 							placeholder="Select a color for driver's tag in the table"
-							defaultValue={props.driver.tagColor}>
+							initialValue={props.driver.tagColor}>
 							{colors.map(color => (
 								<Option value={color} key={color}>
 									<div style={{backgroundColor: `${color}`}}>

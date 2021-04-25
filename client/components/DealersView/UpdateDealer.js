@@ -28,9 +28,10 @@ const UpdateDealer = props => {
 
 	return (
 		<div>
-			<Button type='text' onClick={() => handleShow(true)}>
-				<EditFilled style={{color: '#7CFC00'}} />
-			</Button>
+			<Button
+				type='text'
+				onClick={() => handleShow(true)}
+				icon={<EditFilled style={{color: '#7CFC00'}} />}></Button>
 			<Modal
 				title={`${props.dealer.name}`}
 				visible={show}
