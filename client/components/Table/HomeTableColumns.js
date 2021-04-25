@@ -35,13 +35,17 @@ const columns = [
 		render: value => <StatusCell value={value} />,
 	},
 	{
-		title: 'Concierge',
-		dataIndex: 'concierge',
+		title: 'Pick up driver',
+		dataIndex: 'pickUpDriver',
 		align: 'center',
-		key: 'concierge',
-		sorter: (a, b) =>
-			a.status.localeCompare(b.status, defaultStringCompareOptions),
-		sortDirections: ['descend', 'ascend'],
+		key: 'pickUpDriver',
+		render: value => <ConciergeCell value={value} />,
+	},
+	{
+		title: 'Return driver',
+		dataIndex: 'returnDriver',
+		align: 'center',
+		key: 'returnDriver',
 		render: value => <ConciergeCell value={value} />,
 	},
 	{

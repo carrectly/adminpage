@@ -241,7 +241,7 @@ const SingleOrderDetails = props => {
 							column={1}
 							className='descriptionsAntd'>
 							<Descriptions.Item label='Concierge'>
-								<ConciergeCell value={singleorder.concierge} />
+								<div>{singleorder.concierge}</div>
 							</Descriptions.Item>
 							<Descriptions.Item label='Driver picking up'>
 								<Dropdown

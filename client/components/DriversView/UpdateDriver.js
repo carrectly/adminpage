@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {updateDriverThunk} from '../../store/drivers.js'
-import {Modal, Button, Form, Input} from 'antd'
+import {Modal, Button, Form, Input, Select} from 'antd'
 import {EditFilled} from '@ant-design/icons'
+import {tagColorsArray} from '../util'
+const colors = tagColorsArray()
 
 const layout = {
 	labelCol: {span: 8},
@@ -68,6 +70,19 @@ const UpdateDriver = props => {
 						label='Image URL'
 						initialValue={props.driver.imageUrl || ''}>
 						<Input />
+					</Form.Item>
+					<Form.Item name='tagColor' label='Tag Color'>
+						<Select
+							placeholder="Select a color for driver's tag in the table"
+							defaultValue={props.driver.tagColor}>
+							{colors.map(color => (
+								<Option value={color} key={color}>
+									<div style={{backgroundColor: `${color}`}}>
+										{color}
+									</div>
+								</Option>
+							))}
+						</Select>
 					</Form.Item>
 					<Form.Item>
 						<Button

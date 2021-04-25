@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Button} from 'antd'
+import {Card, Button, Tag} from 'antd'
 import UpdateDriver from './UpdateDriver'
 import {DeleteFilled} from '@ant-design/icons'
 
@@ -51,6 +51,16 @@ const DriverCard = props => {
 					<div>
 						<div className='subheader'>Phone Number:</div>
 						<div>{driver.phoneNumber}</div>
+					</div>
+				) : (
+					<div />
+				)}
+				{driver.tagColor ? (
+					<div>
+						<div className='subheader'>Tag Color:</div>
+						<div>
+							<Tag color={driver.tagColor}>{driver.name}</Tag>
+						</div>
 					</div>
 				) : (
 					<div />

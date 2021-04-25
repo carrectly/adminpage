@@ -144,21 +144,13 @@ export const StatusCell = ({value, dropDown = false}) => {
 }
 
 export const ConciergeCell = ({value, dropDown = false}) => {
-	const arr = ['Stas', 'Mike', 'Taras', 'Ben', 'Kyle', 'Other']
-	const i = arr.indexOf(value)
-	const colors = [
-		'#FF1493',
-		'#0000FF',
-		'#DAA520',
-		'#228B22',
-		'#FF6347',
-		'#008080',
-	]
+	console.log('value passed to concierge cell', value)
+	const driverObj = value || {}
 
 	if (dropDown) {
 		return (
 			<Tag
-				color={colors[value.id]}
+				color={value.tagColor}
 				key={value.id}
 				style={{margin: '0px', border: '0px'}}>
 				{value.name} {dropDown ? <DownOutlined /> : <div />}
@@ -167,8 +159,8 @@ export const ConciergeCell = ({value, dropDown = false}) => {
 	}
 
 	return (
-		<Tag color={colors[i]} key={value}>
-			{value} {dropDown ? <DownOutlined /> : <div />}
+		<Tag color={driverObj.tagColor} key={driverObj.name}>
+			{driverObj.name}
 		</Tag>
 	)
 }
