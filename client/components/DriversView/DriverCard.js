@@ -2,15 +2,17 @@ import React from 'react'
 import {Card, Button, Tag} from 'antd'
 import UpdateDriver from './UpdateDriver'
 import {DeleteFilled} from '@ant-design/icons'
+import {removeDriverThunk} from '../../store/drivers.js'
+import {useDispatch} from 'react-redux'
 
 const DriverCard = props => {
-	const handleClick = evt => {
-		console.log(evt)
-		evt.preventDefault()
-		if (evt.target.id) {
-			props.delete(evt.target.id)
-		}
+	const dispatch = useDispatch()
+
+	const handleClick = id => {
+		console.log(id)
+		dispatch(removeDriverThunk(id))
 	}
+
 	const driver = props.driver
 
 	return (
@@ -21,12 +23,14 @@ const DriverCard = props => {
 			actions={[
 				<UpdateDriver key='update' driver={driver} />,
 				<Button
+					style={{padding: '0px', width: '100%'}}
+					onClick={() => handleClick(driver.id)}
 					key='delete'
 					type='text'
 					id={driver.id}
-					onClick={handleClick}>
-					<DeleteFilled key='edit' style={{color: '#ff1212'}} />
-				</Button>,
+					icon={
+						<DeleteFilled style={{color: '#ff1212'}} />
+					}></Button>,
 			]}
 			cover={
 				<img
