@@ -1,6 +1,13 @@
 const router = require('express').Router()
 const Sequelize = require('sequelize')
-const {Order, OrderDetails, Service, Customer, Driver} = require('../db/models')
+const {
+	Order,
+	OrderDetails,
+	Service,
+	Customer,
+	Driver,
+	Dealer,
+} = require('../db/models')
 const Op = Sequelize.Op
 module.exports = router
 
@@ -136,6 +143,7 @@ router.get('/single/:orderid', async (req, res, next) => {
 			},
 			include: [
 				{model: Service},
+				{model: Dealer},
 				{model: Customer},
 				{model: Driver, as: 'pickUpDriver'},
 				{model: Driver, as: 'returnDriver'},
@@ -168,32 +176,6 @@ router.put('/single/services/:orderid', async (req, res, next) => {
 	}
 })
 
-router.post('/single/services/:orderid', async (req, res, next) => {
-	try {
-		let id = req.params.orderid
-
-		const service = await Service.findOne({
-			where: {
-				name: req.body.service,
-			},
-		})
-
-		const order = await Order.findOne({
-			where: {
-				hash: id,
-			},
-		})
-
-		let resp = await order.addService(service, {
-			through: {customerPrice: service.dataValues.price},
-		})
-
-		res.json(resp)
-	} catch (err) {
-		next(err)
-	}
-})
-
 router.post('/single/driver/:orderid', async (req, res, next) => {
 	try {
 		let id = req.params.orderid
@@ -220,6 +202,32 @@ router.post('/single/driver/:orderid', async (req, res, next) => {
 	}
 })
 
+router.post('/single/services/:orderid', async (req, res, next) => {
+	try {
+		let id = req.params.orderid
+
+		const service = await Service.findOne({
+			where: {
+				name: req.body.service,
+			},
+		})
+
+		const order = await Order.findOne({
+			where: {
+				hash: id,
+			},
+		})
+
+		let resp = await order.addService(service, {
+			through: {customerPrice: service.dataValues.price},
+		})
+
+		res.json(resp)
+	} catch (err) {
+		next(err)
+	}
+})
+
 router.put('/single/removeservice/:orderid', async (req, res, next) => {
 	try {
 		let id = req.params.orderid
@@ -236,6 +244,33 @@ router.put('/single/removeservice/:orderid', async (req, res, next) => {
 			},
 		})
 		let resp = await order.removeService(service)
+		res.json(resp)
+	} catch (err) {
+		next(err)
+	}
+})
+
+router.post('/single/dealers/:orderid', async (req, res, next) => {
+	try {
+		let id = req.params.orderid
+		let dealerName = req.body.dealerName
+		const dealer = await Dealer.findOne({where: {name: dealerName}})
+		const order = await Order.findByPk(id)
+		let resp = await order.addDealer(dealer)
+
+		res.json(resp)
+	} catch (err) {
+		next(err)
+	}
+})
+
+router.put('/single/dealers/:orderid', async (req, res, next) => {
+	try {
+		let id = req.params.orderid
+		let dealerName = req.body.dealerName
+		const dealer = await Dealer.findOne({where: {name: dealerName}})
+		const order = await Order.findByPk(id)
+		let resp = await order.removeDealer(dealer)
 		res.json(resp)
 	} catch (err) {
 		next(err)
