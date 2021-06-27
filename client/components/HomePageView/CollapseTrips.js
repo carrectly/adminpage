@@ -13,6 +13,8 @@ const alertHelper = (el1, el2) => {
 				showIcon
 			/>
 		)
+	} else if (moment(el1).isSame(moment(), 'day')) {
+		return <Alert message="Today's trips" type='warning' showIcon />
 	} else if (moment(el1).isBefore(moment())) {
 		return (
 			<Alert
