@@ -69,6 +69,7 @@ router.get('/active', async (req, res, next) => {
 			order: [['updatedAt', 'DESC']],
 			include: [
 				{model: Service},
+				{model: Dealer},
 				{model: Customer},
 				{model: Driver, as: 'pickUpDriver'},
 				{model: Driver, as: 'returnDriver'},

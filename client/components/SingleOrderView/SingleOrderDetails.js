@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Descriptions, Tabs, Button, Dropdown, Menu, Select} from 'antd'
 import {Link, useParams} from 'react-router-dom'
@@ -67,12 +67,14 @@ const SingleOrderDetails = props => {
 	const singleorder = props.order
 	const pickUpDriver = props.pickUpDriver
 	const returnDriver = props.returnDriver
-	const orderDealers = props.orderDealers
 	const customer = props.customer
+	const orderDealers = props.orderDealers
 	const drivers = useSelector(state => state.drivers)
 	const shops = useSelector(state => state.dealers)
-
-	let selectedDealers = flattenDealersArray2(orderDealers)
+	const [orderDealersArr, setOrderDealersArr] = useState([])
+	useEffect(() => {
+		setOrderDealersArr(flattenDealersArray2(orderDealers))
+	}, [])
 
 	const handleStatusUpdate = e => {
 		let obj = {
@@ -131,10 +133,6 @@ const SingleOrderDetails = props => {
 			})
 		)
 	}
-
-	useEffect(() => {
-		selectedDealers = flattenDealersArray2(orderDealers)
-	}, [])
 
 	return (
 		<Tabs type='card' style={{margin: '0px 0px 10px 0px'}}>
@@ -282,7 +280,7 @@ const SingleOrderDetails = props => {
 									placeholder='Please select'
 									onSelect={handleAddDealer}
 									onDeselect={handleRemoveDealer}
-									defaultValue={selectedDealers}>
+									defaultValue={orderDealersArr}>
 									{flattenDealersArray1(shops)}
 								</Select>
 							</Descriptions.Item>
