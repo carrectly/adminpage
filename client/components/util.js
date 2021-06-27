@@ -51,11 +51,7 @@ export const getPotentialLeadsStatusArray = () => {
 }
 
 export const getConfirmedTripsArray = () => {
-	return ['confirmed', 'ready to be returned']
-}
-
-export const getPotentialTripsArray = () => {
-	return ['booked new', 'in process']
+	return ['confirmed', 'ready to be returned', 'booked new', 'in process']
 }
 
 export const tagColorsArray = () => {

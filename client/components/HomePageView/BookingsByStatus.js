@@ -11,7 +11,6 @@ import {
 	getQuotesStatusArray,
 	getPotentialLeadsStatusArray,
 	getConfirmedTripsArray,
-	getPotentialTripsArray,
 } from '../util'
 import axios from 'axios'
 import history from '../../history'
@@ -48,7 +47,6 @@ const BookingsByStatus = () => {
 	const quoteStatusArr = getQuotesStatusArray()
 	const leadsStatusArr = getPotentialLeadsStatusArray()
 	const confirmedTripsStatusArr = getConfirmedTripsArray()
-	const potentialTripsStatusArr = getPotentialTripsArray()
 
 	const actionArr = orders.filter(el => actionStatusArr.includes(el.status))
 
@@ -66,20 +64,11 @@ const BookingsByStatus = () => {
 		confirmedTripsStatusArr.includes(el.status)
 	)
 
-	const potentialTrips = orders.filter(el =>
-		potentialTripsStatusArr.includes(el.status)
-	)
-
 	const components = {
 		1: <CollapseByDate orders={actionArr} dateColumn='pickupDate' />,
 		// 2: <CollapseByDate orders={workZoneArr} dateColumn='pickupDate' />,
 		2: <TableOrdersByStatus ordersArray={workZoneArr} />,
-		3: (
-			<CollapseByBothDates
-				confirmedTrips={confirmedTrips}
-				potentialTrips={potentialTrips}
-			/>
-		),
+		3: <CollapseByBothDates confirmedTrips={confirmedTrips} />,
 		4: <TableOrdersByStatus ordersArray={invoiceArr} />,
 		5: <TableOrdersByStatus ordersArray={quotesArr} />,
 		6: <TableOrdersByStatus ordersArray={leadsArr} />,
