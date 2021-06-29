@@ -80,8 +80,6 @@ router.post('/', async (req, res, next) => {
 			order: orderBody,
 		})
 
-		console.log('created new order in square', singleordr)
-
 		const invoiceBody = {
 			idempotencyKey: idempKey,
 			invoice: {
@@ -105,7 +103,6 @@ router.post('/', async (req, res, next) => {
 		}
 
 		const {result} = await invoicesApi.createInvoice(invoiceBody)
-		console.log('Invoice API called successfully. Returned data: ', result)
 		res.json(result)
 	} catch (error) {
 		if (error instanceof ApiError) {

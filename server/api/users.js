@@ -10,7 +10,6 @@ router.get('/', async (req, res, next) => {
 			// send everything to anyone who asks!
 			attributes: ['id', 'email', 'isAdmin'],
 		})
-		console.log('Inside api route')
 		res.json(users)
 	} catch (err) {
 		next(err)

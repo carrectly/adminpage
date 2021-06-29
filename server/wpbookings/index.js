@@ -7,7 +7,6 @@ const moment = require('moment')
 
 router.post('/newbooking', async (req, res, next) => {
 	try {
-		console.log('newbooking request from ukraine', req.body)
 		let msgbody = req.body
 		let services = req.body.services //array
 		let newcust = req.body.customer
@@ -37,7 +36,6 @@ router.post('/newbooking', async (req, res, next) => {
 		// msgbody.pickupDate = moment(msgbody.pickupDate)
 		// 	.utcOffset(6)
 		// 	.format('YYYY-MM-DD HH:mm:ss')
-		console.log('updated date', msgbody.pickupDate)
 		delete msgbody.customer
 		delete msgbody.services
 
@@ -81,7 +79,6 @@ router.post('/newbooking', async (req, res, next) => {
 					},
 				})
 				if (servc === null) {
-					console.log('service name not found')
 					failedServices.push({
 						'service name not found': services[i].name,
 					})

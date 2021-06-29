@@ -68,13 +68,9 @@ const SingleOrderDetails = props => {
 	const pickUpDriver = props.pickUpDriver
 	const returnDriver = props.returnDriver
 	const customer = props.customer
-	const orderDealers = props.orderDealers
+	const orderDealers = flattenDealersArray2(props.orderDealers)
 	const drivers = useSelector(state => state.drivers)
 	const shops = useSelector(state => state.dealers)
-	const [orderDealersArr, setOrderDealersArr] = useState([])
-	useEffect(() => {
-		setOrderDealersArr(flattenDealersArray2(orderDealers))
-	}, [])
 
 	const handleStatusUpdate = e => {
 		let obj = {
@@ -121,7 +117,6 @@ const SingleOrderDetails = props => {
 	}
 
 	const handleRemoveDealer = dealerName => {
-		console.log('removing dealer', dealerName)
 		dispatch(removeOrderDealerThunk(orderId, dealerName))
 	}
 
@@ -280,7 +275,7 @@ const SingleOrderDetails = props => {
 									placeholder='Please select'
 									onSelect={handleAddDealer}
 									onDeselect={handleRemoveDealer}
-									defaultValue={orderDealersArr}>
+									value={orderDealers}>
 									{flattenDealersArray1(shops)}
 								</Select>
 							</Descriptions.Item>
