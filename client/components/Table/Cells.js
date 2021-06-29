@@ -44,6 +44,14 @@ export const ServicesCell = ({value, row}) => {
 	))
 }
 
+export const DealersCell = ({value}) => {
+	return value.map(el => (
+		<Tag color='geekblue' key={el.id}>
+			{el.name}
+		</Tag>
+	))
+}
+
 export const CustomerPhoneCell = ({value}) => (
 	<Link to={`/singlecustomer/${value}`}>{value}</Link>
 )
@@ -144,7 +152,6 @@ export const StatusCell = ({value, dropDown = false}) => {
 }
 
 export const ConciergeCell = ({value, dropDown = false}) => {
-	console.log('value passed to concierge cell', value)
 	const driverObj = value || {}
 
 	if (dropDown) {

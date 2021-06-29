@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {Descriptions, Tabs, Button, Dropdown, Menu} from 'antd'
+import {Descriptions, Tabs, Button, Dropdown, Menu, Select} from 'antd'
 import {Link, useParams} from 'react-router-dom'
 const {TabPane} = Tabs
 import moment from 'moment'
@@ -14,10 +14,13 @@ import {getStatusArray} from '../util'
 import {
 	updateSingleOrderThunk,
 	addOrderDriverThunk,
+	addOrderDealerThunk,
+	removeOrderDealerThunk,
 } from '../../store/singleorder'
 import './styles.scss'
 
 const statusArray = getStatusArray()
+const {Option} = Select
 
 const menuList = fn => {
 	return (
@@ -43,6 +46,20 @@ const driversList = (arr, fn, tripType) => {
 	)
 }
 
+const flattenDealersArray1 = arr => {
+	return arr.map(el => {
+		return (
+			<Option value={el.name} key={el.id}>
+				{el.name}
+			</Option>
+		)
+	})
+}
+
+const flattenDealersArray2 = arr => {
+	return arr.map(el => el.name)
+}
+
 const SingleOrderDetails = props => {
 	const dispatch = useDispatch()
 	const params = useParams()
@@ -51,7 +68,9 @@ const SingleOrderDetails = props => {
 	const pickUpDriver = props.pickUpDriver
 	const returnDriver = props.returnDriver
 	const customer = props.customer
+	const orderDealers = flattenDealersArray2(props.orderDealers)
 	const drivers = useSelector(state => state.drivers)
+	const shops = useSelector(state => state.dealers)
 
 	const handleStatusUpdate = e => {
 		let obj = {
@@ -91,6 +110,14 @@ const SingleOrderDetails = props => {
 		} else {
 			dispatch(updateSingleOrderThunk(orderId, obj))
 		}
+	}
+
+	const handleAddDealer = dealerName => {
+		dispatch(addOrderDealerThunk(orderId, dealerName))
+	}
+
+	const handleRemoveDealer = dealerName => {
+		dispatch(removeOrderDealerThunk(orderId, dealerName))
 	}
 
 	const changeDriver = evt => {
@@ -240,6 +267,18 @@ const SingleOrderDetails = props => {
 							size='small'
 							column={1}
 							className='descriptionsAntd'>
+							<Descriptions.Item label='Shops servicing'>
+								<Select
+									mode='multiple'
+									allowClear={false}
+									style={{width: '50%'}}
+									placeholder='Please select'
+									onSelect={handleAddDealer}
+									onDeselect={handleRemoveDealer}
+									value={orderDealers}>
+									{flattenDealersArray1(shops)}
+								</Select>
+							</Descriptions.Item>
 							<Descriptions.Item label='Concierge'>
 								<div>{singleorder.concierge}</div>
 							</Descriptions.Item>

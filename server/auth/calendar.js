@@ -42,7 +42,6 @@ router.post('/newevent', async (req, res, next) => {
 router.post('/newevent/update', async (req, res, next) => {
 	try {
 		const obj = req.body
-		console.log('calendarr api req', req.body)
 		const result = await updateEvent(obj)
 		res.json(result)
 	} catch (err) {
@@ -139,7 +138,6 @@ async function updateEvent(evt) {
 
 	let colorId = evt.status === statuses[0] ? 11 : statuses.indexOf(evt.status)
 
-	console.log('event received from new booking', evt)
 	var event = {
 		summary: `${evt.carYear} ${evt.carMake} ${evt.carModel} ${evt.customerName}`,
 		location: `${evt.pickupLocation}`,

@@ -18,6 +18,9 @@ Order.belongsTo(Driver, {as: 'returnDriver', foreignKey: 'returnDriverId'})
 Order.belongsToMany(Service, {through: 'orderdetails'})
 Service.belongsToMany(Order, {through: 'orderdetails'})
 
+Order.belongsToMany(Dealer, {through: 'ordershops'})
+Dealer.belongsToMany(Order, {through: 'ordershops'})
+
 Order.hasMany(Comment)
 
 module.exports = {
