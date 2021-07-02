@@ -18,6 +18,8 @@ const OrderComments = () => {
 	const params = useParams()
 	const id = params.orderid
 	const orderComments = useSelector(state => state.comments)
+	const drivers = useSelector(state => state.drivers)
+
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -82,11 +84,11 @@ const OrderComments = () => {
 								<Select
 									placeholder='Select a person'
 									onChange={onChange}>
-									<Option value='Vladimir'>Vladimir</Option>
-									<Option value='Dragana'>Dragana</Option>
-									<Option value='Taras'>Taras</Option>
-									<Option value='Michael'>Michael</Option>
-									<Option value='Stasik'>Stasik</Option>
+									{drivers.map(el => (
+										<Option value={el.name} key={el.id}>
+											{el.name}
+										</Option>
+									))}
 								</Select>
 							</Form.Item>
 							<Button
