@@ -1,42 +1,83 @@
-import React, {Component} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import {Button} from 'antd'
+import {Button, Form, Input} from 'antd'
 import {GoogleOutlined} from '@ant-design/icons'
 
 /**
  * COMPONENT
  */
 const AuthForm = props => {
-	const {name, displayName, handleSubmit, handleReset, error} = props
+	const {name, displayName, handleSubmit, error} = props
+	const [form] = Form.useForm()
+	const [isValid, Validate] = useState(false)
+
+	const onFinish = values => {
+		dispatch(addDealerThunk(values))
+		form.resetFields()
+	}
+	const onFinishFailed = errorInfo => {
+		console.log('Failed:', errorInfo)
+	}
+
+	const onCancel = () => {
+		form.resetFields()
+	}
+
+	const onChange = () => {
+		const {password, email} = form.getFieldValue()
+		if (password && email) {
+			if (
+				password.length > 6 &&
+				email.length > 1 &&
+				email.includes('@')
+			) {
+				Validate(true)
+			} else {
+				Validate(false)
+			}
+		} else {
+			Validate(false)
+		}
+	}
+
 	return (
-		<div>
-			{/* <Form onSubmit={handleSubmit} onReset={handleReset} name={name}>
-				<Form.Group controlId='formBasicEmail'>
-					<Form.Label>
-						<small>Email</small>
-					</Form.Label>
-					<Form.Control name='email' type='text' />
-				</Form.Group>
-				<br />
-				<Form.Group controlId='formBasicPassword'>
-					<Form.Label>
-						<small>Password</small>
-					</Form.Label>
-					<Form.Control name='password' type='password' />
-				</Form.Group>
-				<br />
-				<div>
-					<Button type='submit' id='login'>
-						Login
+		<div className='loginForm'>
+			<Form
+				onSubmit={handleSubmit}
+				name={name}
+				onFinish={onFinish}
+				onFinishFailed={onFinishFailed}
+				onChange={onChange}>
+				<Form.Item
+					name='email'
+					label='Email'
+					rules={[{required: true}]}>
+					<Input />
+				</Form.Item>
+				<Form.Item
+					name='password'
+					label='Password'
+					rules={[{required: true}]}>
+					<Input />
+				</Form.Item>
+				<Form.Item>
+					<Button
+						type='primary'
+						htmlType='submit'
+						disabled={!isValid}>
+						{displayName}
 					</Button>
-					<Button type='reset' id='signup'>
-						Signup
+					<Button
+						htmlType='button'
+						type='secondary'
+						onClick={onCancel}>
+						Reset
 					</Button>
-				</div>
+				</Form.Item>
 				{error && error.response && <div> {error.response.data} </div>}
-			</Form> */}
+			</Form>
 			<a href='/auth/google'>
 				<Button type='primary' id='signup'>
 					{displayName} with Google <GoogleOutlined />
@@ -74,14 +115,7 @@ const mapDispatch = dispatch => {
 	return {
 		handleSubmit(evt) {
 			evt.preventDefault()
-			const formName = 'login'
-			const email = evt.target.email.value
-			const password = evt.target.password.value
-			dispatch(auth(email, password, formName))
-		},
-		handleReset(evt) {
-			evt.preventDefault()
-			const formName = 'signup'
+			const formName = evt.target.name
 			const email = evt.target.email.value
 			const password = evt.target.password.value
 			dispatch(auth(email, password, formName))

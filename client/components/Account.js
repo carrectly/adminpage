@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {Login} from './auth-form'
+import {Login, Signup} from './auth-form'
 import {logout} from '../store'
 import BookingsByStatus from './HomePageView/BookingsByStatus'
 
@@ -26,6 +26,7 @@ class Account extends Component {
 						Login with Google to access all the features
 					</h3>
 					<Login />
+					<Signup />
 				</div>
 			)
 		}
