@@ -41,7 +41,7 @@ class Account extends Component {
 					)}
 				</div>
 				<div className='hometable'>
-					{this.props.user.role === 'driver' ? (
+					{this.props.user.role === 'unconfirmed' ? (
 						<div>
 							Welcome. Your account needs to be appoved by the
 							admin!

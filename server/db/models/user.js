@@ -33,6 +33,7 @@ const User = db.define('user', {
 	},
 	role: {
 		type: Sequelize.STRING,
+		defaultValue: 'unconfirmed',
 	},
 	resetPassword: {
 		type: Sequelize.BOOLEAN,
