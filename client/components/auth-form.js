@@ -1,22 +1,31 @@
 import React, {useState} from 'react'
-import {connect} from 'react-redux'
+import {connect, useDispatch} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 import {Button, Form, Input} from 'antd'
-import {GoogleOutlined} from '@ant-design/icons'
+import {GoogleOutlined, UserOutlined, LockOutlined} from '@ant-design/icons'
 
 /**
  * COMPONENT
  */
 const AuthForm = props => {
-	const {name, displayName, handleSubmit, error} = props
+	const {name, displayName, error} = props
+	const dispatch = useDispatch()
 	const [form] = Form.useForm()
 	const [isValid, Validate] = useState(false)
 
 	const onFinish = values => {
-		dispatch(addDealerThunk(values))
-		form.resetFields()
+		console.log('values', values.hasOwnProperty('signup'))
+		const {email, password} = values
+		if (values.hasOwnProperty('signup')) {
+			dispatch(auth(email, password, 'signup'))
+			form.resetFields()
+		} else {
+			dispatch(auth(email, password, 'login'))
+			form.resetFields()
+		}
 	}
+
 	const onFinishFailed = errorInfo => {
 		console.log('Failed:', errorInfo)
 	}
@@ -27,6 +36,7 @@ const AuthForm = props => {
 
 	const onChange = () => {
 		const {password, email} = form.getFieldValue()
+
 		if (password && email) {
 			if (
 				password.length > 6 &&
@@ -45,31 +55,52 @@ const AuthForm = props => {
 	return (
 		<div className='loginForm'>
 			<Form
-				onSubmit={handleSubmit}
+				form={form}
 				name={name}
 				onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
 				onChange={onChange}>
 				<Form.Item
 					name='email'
-					label='Email'
-					rules={[{required: true}]}>
-					<Input />
+					rules={[
+						{
+							required: true,
+							message: 'Please input your email!',
+						},
+					]}>
+					<Input
+						prefix={
+							<UserOutlined className='site-form-item-icon' />
+						}
+						placeholder='Email'
+					/>
 				</Form.Item>
 				<Form.Item
 					name='password'
-					label='Password'
-					rules={[{required: true}]}>
-					<Input />
+					rules={[
+						{
+							required: true,
+							message: 'Please input your Password!',
+						},
+					]}>
+					<Input
+						prefix={
+							<LockOutlined className='site-form-item-icon' />
+						}
+						type='password'
+						placeholder='Password'
+					/>
 				</Form.Item>
-				<Form.Item>
+				<Form.Item name={name}>
 					<Button
+						style={{width: '50%'}}
 						type='primary'
 						htmlType='submit'
 						disabled={!isValid}>
 						{displayName}
 					</Button>
 					<Button
+						style={{width: '50%'}}
 						htmlType='button'
 						type='secondary'
 						onClick={onCancel}>
@@ -79,7 +110,7 @@ const AuthForm = props => {
 				{error && error.response && <div> {error.response.data} </div>}
 			</Form>
 			<a href='/auth/google'>
-				<Button type='primary' id='signup'>
+				<Button type='primary' style={{width: '100%'}}>
 					{displayName} with Google <GoogleOutlined />
 				</Button>
 			</a>
@@ -111,20 +142,20 @@ const mapSignup = state => {
 	}
 }
 
-const mapDispatch = dispatch => {
-	return {
-		handleSubmit(evt) {
-			evt.preventDefault()
-			const formName = evt.target.name
-			const email = evt.target.email.value
-			const password = evt.target.password.value
-			dispatch(auth(email, password, formName))
-		},
-	}
-}
+// const mapDispatch = dispatch => {
+// 	return {
+// 		handleSubmit(evt) {
+// 			evt.preventDefault()
+// 			const formName = evt.target.name
+// 			const email = evt.target.email.value
+// 			const password = evt.target.password.value
+// 			dispatch(auth(email, password, formName))
+// 		},
+// 	}
+// }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const Login = connect(mapLogin, null)(AuthForm)
+export const Signup = connect(mapSignup, null)(AuthForm)
 
 /**
  * PROP TYPES

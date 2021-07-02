@@ -14,8 +14,6 @@ import {getEmailsThunk} from '../../store/emails'
 import {fetchDriversThunk} from '../../store/drivers.js'
 import UpdateOrder from './UpdateOrder'
 
-const driversArray = ['Stas', 'Mike', 'Taras', 'Ben', 'Kyle', 'Other']
-
 const dealerList = (arr, fn) => {
 	return (
 		<Menu onClick={fn}>
