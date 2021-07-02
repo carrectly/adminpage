@@ -144,7 +144,6 @@ export const StatusCell = ({value, dropDown = false}) => {
 }
 
 export const ConciergeCell = ({value, dropDown = false}) => {
-	console.log('value passed to concierge cell', value)
 	const driverObj = value || {}
 
 	if (dropDown) {

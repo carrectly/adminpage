@@ -31,15 +31,24 @@ class Account extends Component {
 			)
 		}
 
-		let user = false
-
-		if (this.props.user.email === 'info@carrectly.com') {
-			user = true
-		}
 		return (
 			<React.Fragment>
 				<div className='hometable'>
-					{user ? <BookingsByStatus /> : <div />}
+					{this.props.user.email === 'info@carrectly.com' ? (
+						<BookingsByStatus />
+					) : (
+						<div />
+					)}
+				</div>
+				<div className='hometable'>
+					{this.props.user.role === 'driver' ? (
+						<div>
+							Welcome. Your account needs to be appoved by the
+							admin!
+						</div>
+					) : (
+						<div />
+					)}
 				</div>
 			</React.Fragment>
 		)
