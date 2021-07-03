@@ -4,6 +4,9 @@ import {withRouter, Link} from 'react-router-dom'
 import {Login, Signup} from './auth-form'
 import {logout} from '../store'
 import BookingsByStatus from './HomePageView/BookingsByStatus'
+import {Tabs} from 'antd'
+const {TabPane} = Tabs
+import {UnlockFilled, EditFilled} from '@ant-design/icons'
 
 class Account extends Component {
 	constructor() {
@@ -25,8 +28,32 @@ class Account extends Component {
 						<br />
 						Login with Google to access all the features
 					</h3>
-					<Login />
-					<Signup />
+					<Tabs
+						type='card'
+						defaultActiveKey='1'
+						style={{margin: '0px 0px 10px 0px'}}
+						centered={true}>
+						<TabPane
+							key='1'
+							tab={
+								<span>
+									<UnlockFilled />
+									Login
+								</span>
+							}>
+							<Login />
+						</TabPane>
+						<TabPane
+							key='2'
+							tab={
+								<span>
+									<EditFilled />
+									Register
+								</span>
+							}>
+							<Signup />
+						</TabPane>
+					</Tabs>
 				</div>
 			)
 		}

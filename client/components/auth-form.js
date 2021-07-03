@@ -91,6 +91,28 @@ const AuthForm = props => {
 						placeholder='Password'
 					/>
 				</Form.Item>
+				{name === 'signup' ? (
+					<div>
+						<Form.Item name='firstName'>
+							<Input
+								prefix={
+									<UserOutlined className='site-form-item-icon' />
+								}
+								placeholder='First Name'
+							/>
+						</Form.Item>
+						<Form.Item name='lastName'>
+							<Input
+								prefix={
+									<UserOutlined className='site-form-item-icon' />
+								}
+								placeholder='Last Name'
+							/>
+						</Form.Item>
+					</div>
+				) : (
+					<div />
+				)}
 				<Form.Item name={name}>
 					<Button
 						style={{width: '50%'}}
@@ -118,13 +140,6 @@ const AuthForm = props => {
 	)
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 const mapLogin = state => {
 	return {
 		name: 'login',
@@ -136,23 +151,11 @@ const mapLogin = state => {
 const mapSignup = state => {
 	return {
 		name: 'signup',
-		displayName: 'Sign Up',
+		displayName: 'Register',
 		error: state.user.error,
 		user: state.user,
 	}
 }
-
-// const mapDispatch = dispatch => {
-// 	return {
-// 		handleSubmit(evt) {
-// 			evt.preventDefault()
-// 			const formName = evt.target.name
-// 			const email = evt.target.email.value
-// 			const password = evt.target.password.value
-// 			dispatch(auth(email, password, formName))
-// 		},
-// 	}
-// }
 
 export const Login = connect(mapLogin, null)(AuthForm)
 export const Signup = connect(mapSignup, null)(AuthForm)
