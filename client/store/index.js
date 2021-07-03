@@ -17,6 +17,7 @@ import singlecustomer from './singlecustomer'
 import services from './services'
 import comments from './comments'
 import drivers from './drivers'
+import users from './users'
 
 const reducer = combineReducers({
 	user,
@@ -34,6 +35,7 @@ const reducer = combineReducers({
 	services,
 	comments,
 	drivers,
+	users,
 })
 
 const middleware = composeWithDevTools(

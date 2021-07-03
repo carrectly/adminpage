@@ -119,6 +119,10 @@ class Navbar extends React.Component {
 					<CalendarOutlined className='icon' />
 					Calendar
 				</Link>
+				<Link to='/users' className='link'>
+					<CalendarOutlined className='icon' />
+					Users
+				</Link>
 				<Link to='/allServices' className='link'>
 					<TableOutlined className='icon' />
 					Services

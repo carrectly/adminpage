@@ -15,13 +15,11 @@ const AuthForm = props => {
 	const [isValid, Validate] = useState(false)
 
 	const onFinish = values => {
-		console.log('values', values.hasOwnProperty('signup'))
-		const {email, password} = values
 		if (values.hasOwnProperty('signup')) {
-			dispatch(auth(email, password, 'signup'))
+			dispatch(auth(values, 'signup'))
 			form.resetFields()
 		} else {
-			dispatch(auth(email, password, 'login'))
+			dispatch(auth(values, 'login'))
 			form.resetFields()
 		}
 	}

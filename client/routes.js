@@ -13,6 +13,7 @@ import {
 	CalendarView,
 	AllServices,
 	Drivers,
+	Users,
 } from './components'
 
 class Routes extends Component {
@@ -47,6 +48,7 @@ class Routes extends Component {
 							component={SingleOrder}
 						/>
 						<Route path='/dealers' component={Dealers} />
+						<Route path='/users' component={Users} />
 						<Route path='/drivers' component={Drivers} />
 						<Route path='/calendar' component={CalendarView} />
 					</Switch>
