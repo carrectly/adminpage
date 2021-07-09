@@ -35,12 +35,28 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 		callbackURL: process.env.GOOGLE_CALLBACK,
 	}
 
+	let SCOPES = ['email', 'profile']
+
 	const strategy = new GoogleStrategy(
 		googleConfig,
 		(token, refreshToken, profile, done) => {
 			const googleId = profile.id
 			const email = profile.emails[0].value
+			const firstName = profile.name.givenName
+			const lastName = profile.name.familyName
+			console.log('user profile', profile, firstName, lastName)
 
+			if (email === 'info@carrectly.com') {
+				SCOPES = [
+					...SCOPES,
+					'https://www.googleapis.com/auth/gmail.readonly',
+					'https://www.googleapis.com/auth/gmail.send',
+					'https://www.googleapis.com/auth/gmail.modify',
+					'https://www.googleapis.com/auth/gmail.compose',
+					'https://www.googleapis.com/auth/contacts',
+					'https://www.googleapis.com/auth/calendar',
+				]
+			}
 			// let tkn = {}
 
 			// if (token) {
@@ -53,7 +69,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
 			User.findOrCreate({
 				where: {googleId},
-				defaults: {email},
+				defaults: {email, firstName, lastName},
 			})
 				.then(user => {
 					// if (user[0]._options.isNewRecord) {
@@ -66,16 +82,6 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 	)
 
 	passport.use(strategy)
-
-	const SCOPES = [
-		'email',
-		'https://www.googleapis.com/auth/gmail.readonly',
-		'https://www.googleapis.com/auth/gmail.send',
-		'https://www.googleapis.com/auth/gmail.modify',
-		'https://www.googleapis.com/auth/gmail.compose',
-		'https://www.googleapis.com/auth/contacts',
-		'https://www.googleapis.com/auth/calendar',
-	]
 
 	// accessType will need to be enabled if we are trying to obtain new refresh token
 	router.get(
