@@ -1,5 +1,5 @@
 import React from 'react'
-import UpdateService from '../ServicesTableView/UpdateService.js'
+import UserRole from '../UsersView/UserRole'
 
 const UserTableColumns = () => [
 	{
@@ -18,11 +18,17 @@ const UserTableColumns = () => [
 		key: 'email',
 	},
 	{
-		title: 'Update Form',
-		dataIndex: 'name',
-		key: 'id',
-		render: (value, row) => <UpdateService value={value} row={row} />,
+		title: 'Business Role',
+		dataIndex: 'role',
+		key: 'role',
+		render: (value, row) => <UserRole value={value} row={row} />,
 	},
+	// {
+	// 	title: 'Update Form',
+	// 	dataIndex: 'name',
+	// 	key: 'id',
+	// 	render: (value, row) => <UpdateUser value={value} row={row} />,
+	// },
 ]
 
 export default UserTableColumns
