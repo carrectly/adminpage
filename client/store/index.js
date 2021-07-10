@@ -10,6 +10,7 @@ import singleemail from './singleemail'
 import archivedOrders from './archivedOrders'
 import activeOrders from './activeOrders'
 import userorders from './userorders'
+import customerorders from './customerorders'
 import singleorder from './singleorder'
 import dealers from './dealers'
 import square from './square'
@@ -36,6 +37,7 @@ const reducer = combineReducers({
 	comments,
 	drivers,
 	users,
+	customerorders,
 })
 
 const middleware = composeWithDevTools(

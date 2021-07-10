@@ -32,7 +32,11 @@ export const DateCell = ({value}) => {
 
 export const CustomerNameCell = ({value, row}) => (
 	<Link to={`/singlecustomer/${row.customerPhoneNumber}`}>
-		{value.firstName} {value.lastName}
+		<span>
+			{value.firstName} {value.lastName}
+		</span>
+		<br />
+		<span className='subtext'>{row.customerPhoneNumber}</span>
 	</Link>
 )
 
@@ -161,6 +165,17 @@ export const ConciergeCell = ({value, dropDown = false}) => {
 		<Tag color={driverObj.tagColor} key={driverObj.name}>
 			{driverObj.name}
 		</Tag>
+	)
+}
+
+export const CarMakeCell = ({value, row}) => {
+	console.log('inside carmake cell', row)
+	return (
+		<div>
+			<span>{row.carMake}</span>
+			<br />
+			<span className='subtext'>{row.carModel}</span>
+		</div>
 	)
 }
 

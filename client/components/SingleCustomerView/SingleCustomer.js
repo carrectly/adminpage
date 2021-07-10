@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getUserOrdersThunk} from '../../store/userorders'
+import {getCustomerOrdersThunk} from '../../store/customerorders'
 import {Card} from 'antd'
 import {getSingleCustomerThunk} from '../../store/singlecustomer'
 import UpdateCustomer from './UpdateCustomer'
@@ -102,7 +102,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getOrders: id => dispatch(getUserOrdersThunk(id)),
+		getOrders: id => dispatch(getCustomerOrdersThunk(id)),
 		getCustomer: id => dispatch(getSingleCustomerThunk(id)),
 	}
 }
