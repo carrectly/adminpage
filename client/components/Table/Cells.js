@@ -169,7 +169,6 @@ export const ConciergeCell = ({value, dropDown = false}) => {
 }
 
 export const CarMakeCell = ({value, row}) => {
-	console.log('inside carmake cell', row)
 	return (
 		<div>
 			<span>{row.carMake}</span>

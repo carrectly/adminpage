@@ -9,7 +9,6 @@ const TableByDriver = props => {
 	const dispatch = useDispatch()
 	const orders = useSelector(state => state.userorders)
 
-	//dispatch orders assigned to a driver
 	useEffect(() => {
 		dispatch(getUserOrdersThunk(email))
 	}, [])
