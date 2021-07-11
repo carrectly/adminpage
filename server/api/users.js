@@ -39,17 +39,16 @@ router.post('/', async (req, res, next) => {
 })
 
 router.put('/:userid', async (req, res, next) => {
-	if (!req.params.userid === req.user.id && !req.user.isAdmin)
-		if (req.body.email) {
-			try {
-				User.findByPk(req.params.userid)
-					.then(user => user.update({email: req.body.email}))
-					.then(user => res.json(user))
-					.catch(next)
-			} catch (err) {
-				next(err)
-			}
-		}
+	// if (req.body.email) {
+	// 	try {
+	// 		User.findByPk(req.params.userid)
+	// 			.then(user => user.update({email: req.body.email}))
+	// 			.then(user => res.json(user))
+	// 			.catch(next)
+	// 	} catch (err) {
+	// 		next(err)
+	// 	}
+	// }
 	if (req.body.password) {
 		try {
 			User.findByPk(req.params.userid)
@@ -64,12 +63,10 @@ router.put('/:userid', async (req, res, next) => {
 		} catch (err) {
 			next(err)
 		}
-	} else if (req.body.shippingAddress) {
+	} else if (req.body.role) {
 		try {
 			User.findByPk(req.params.userid)
-				.then(user =>
-					user.update({shippingAddress: req.body.shippingAddress})
-				)
+				.then(user => user.update({role: req.body.role}))
 				.then(user => res.json(user))
 				.catch(next)
 		} catch (err) {

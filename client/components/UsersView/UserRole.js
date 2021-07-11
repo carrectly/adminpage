@@ -1,16 +1,17 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {Modal, Button, Form, Input, InputNumber, Dropdown, Menu} from 'antd'
-import {updateServiceThunk} from '../../store/services'
+import {updateSingleUserThunk} from '../../store/users'
+import {DownOutlined} from '@ant-design/icons'
 
 const roles = ['unconfirmed', 'admin', 'driver', 'cosmetics']
 
 const menuList = fn => {
 	return (
 		<Menu onClick={fn}>
-			{roles.map((status, index) => (
-				<Menu.Item key={status} id={index}>
-					{status}
+			{roles.map((role, index) => (
+				<Menu.Item key={role} id={index}>
+					{role}
 				</Menu.Item>
 			))}
 		</Menu>
@@ -18,12 +19,17 @@ const menuList = fn => {
 }
 
 const UserRole = ({value, row}) => {
-	const handleStatusUpdate = e => {}
+	const dispatch = useDispatch()
+
+	const handleStatusUpdate = e => {
+		dispatch(updateSingleUserThunk(row.id, {role: e.key}))
+	}
+
 	return (
 		<div>
 			<Dropdown overlay={() => menuList(handleStatusUpdate)}>
-				<Button size='small' style={{padding: '0px'}}>
-					{value}
+				<Button size='small' style={{padding: '0px', width: '100%'}}>
+					{value} <DownOutlined />
 				</Button>
 			</Dropdown>
 		</div>
