@@ -22,9 +22,9 @@ class Routes extends Component {
 	}
 
 	render() {
-		const isLoggedIn = this.props.isLoggedIn
+		const role = this.props.isLoggedIn
 		let show = true
-		if (isLoggedIn === 'info@carrectly.com') {
+		if (role !== 'unconfirmed') {
 			show = true
 		} else {
 			show = false
@@ -60,7 +60,7 @@ class Routes extends Component {
 
 const mapState = state => {
 	return {
-		isLoggedIn: state.user.email,
+		isLoggedIn: state.user.role,
 	}
 }
 

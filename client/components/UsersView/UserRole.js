@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
-import {Modal, Button, Form, Input, InputNumber, Dropdown, Menu} from 'antd'
+import {Button, Dropdown, Menu} from 'antd'
 import {updateSingleUserThunk} from '../../store/users'
 import {DownOutlined} from '@ant-design/icons'
 
