@@ -22,9 +22,8 @@ class Routes extends Component {
 	}
 
 	render() {
-		const role = this.props.isLoggedIn
 		let show = true
-		if (role !== 'unconfirmed') {
+		if (this.props.userRole !== 'unconfirmed' && this.props.isLoggedIn) {
 			show = true
 		} else {
 			show = false
@@ -60,7 +59,8 @@ class Routes extends Component {
 
 const mapState = state => {
 	return {
-		isLoggedIn: state.user.role,
+		isLoggedIn: state.user.id,
+		userRole: state.user.role,
 	}
 }
 
