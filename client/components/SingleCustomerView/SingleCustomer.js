@@ -95,7 +95,7 @@ class SingleCustomer extends Component {
 
 const mapStateToProps = state => {
 	return {
-		orders: state.userorders,
+		orders: state.customerorders,
 		customer: state.singlecustomer,
 	}
 }
