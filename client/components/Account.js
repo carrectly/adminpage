@@ -1,46 +1,72 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
-import {Login} from './auth-form'
+import {Login, Signup} from './auth-form'
 import {logout} from '../store'
 import BookingsByStatus from './HomePageView/BookingsByStatus'
+import TableByDriver from './HomePageView/TableByDriver'
+import {Tabs} from 'antd'
+const {TabPane} = Tabs
+import {UnlockFilled, EditFilled} from '@ant-design/icons'
 
-class Account extends Component {
-	constructor() {
-		super()
-
-		this.handleLogout = this.handleLogout.bind(this)
-	}
-
-	handleLogout() {
-		this.props.handleClick()
-	}
-
-	render() {
-		if (!this.props.user.id) {
+const Account = props => {
+	if (props.user.id) {
+		if (props.user.role === 'unconfirmed') {
 			return (
-				<div className='login'>
-					<h3 className='greeting'>
-						Welcome Carrectly Admin.
-						<br />
-						Login with Google to access all the features
-					</h3>
-					<Login />
-				</div>
+				<React.Fragment>
+					<div>
+						Welcome. Your account needs to be appoved by the admin!
+					</div>
+				</React.Fragment>
+			)
+		} else if (props.user.role === 'driver') {
+			return (
+				<React.Fragment>
+					<TableByDriver email={props.user.email} />
+				</React.Fragment>
+			)
+		} else {
+			return (
+				<React.Fragment>
+					<BookingsByStatus />
+				</React.Fragment>
 			)
 		}
-
-		let user = false
-
-		if (this.props.user.email === 'info@carrectly.com') {
-			user = true
-		}
+	} else {
 		return (
-			<React.Fragment>
-				<div className='hometable'>
-					{user ? <BookingsByStatus /> : <div />}
-				</div>
-			</React.Fragment>
+			<div className='login'>
+				<h3 className='greeting'>
+					Welcome Carrectly Admin.
+					<br />
+					Login with Google to access all the features
+				</h3>
+				<Tabs
+					type='card'
+					defaultActiveKey='1'
+					style={{margin: '0px 0px 10px 0px'}}
+					centered={true}>
+					<TabPane
+						key='1'
+						tab={
+							<span>
+								<UnlockFilled />
+								Login
+							</span>
+						}>
+						<Login />
+					</TabPane>
+					<TabPane
+						key='2'
+						tab={
+							<span>
+								<EditFilled />
+								Register
+							</span>
+						}>
+						<Signup />
+					</TabPane>
+				</Tabs>
+			</div>
 		)
 	}
 }
@@ -51,10 +77,4 @@ const mapStateToProps = state => {
 	}
 }
 
-const mapDispatch = dispatch => {
-	return {
-		handleClick: () => dispatch(logout()),
-	}
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatch)(Account))
+export default withRouter(connect(mapStateToProps, null)(Account))

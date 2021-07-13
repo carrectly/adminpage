@@ -10,6 +10,7 @@ import singleemail from './singleemail'
 import archivedOrders from './archivedOrders'
 import activeOrders from './activeOrders'
 import userorders from './userorders'
+import customerorders from './customerorders'
 import singleorder from './singleorder'
 import dealers from './dealers'
 import square from './square'
@@ -17,6 +18,7 @@ import singlecustomer from './singlecustomer'
 import services from './services'
 import comments from './comments'
 import drivers from './drivers'
+import users from './users'
 
 const reducer = combineReducers({
 	user,
@@ -34,6 +36,8 @@ const reducer = combineReducers({
 	services,
 	comments,
 	drivers,
+	users,
+	customerorders,
 })
 
 const middleware = composeWithDevTools(

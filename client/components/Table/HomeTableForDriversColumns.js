@@ -6,7 +6,6 @@ import {
 	CustomerNameCell,
 	StatusCell,
 	LocationCell,
-	ServicesCell,
 	ConciergeCell,
 	CarMakeCell,
 } from './Cells.js'
@@ -43,20 +42,6 @@ const columns = [
 		align: 'center',
 		key: 'returnDriver',
 		render: value => <ConciergeCell value={value} />,
-	},
-	{
-		title: 'Repair Shop',
-		dataIndex: 'dealers',
-		align: 'center',
-		key: 'dealers',
-		render: value => <DealersCell value={value} />,
-	},
-	{
-		title: 'Services',
-		dataIndex: 'services',
-		align: 'center',
-		width: 50,
-		render: (value, row) => <ServicesCell value={value} row={row} />,
 	},
 	{
 		title: 'Car',

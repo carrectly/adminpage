@@ -18,9 +18,9 @@ const getUserOrders = orders => ({type: GET_USER_ORDERS, orders})
 /**
  * THUNK CREATORS
  */
-export const getUserOrdersThunk = userid => async dispatch => {
+export const getUserOrdersThunk = email => async dispatch => {
 	try {
-		const res = await axios.get(`/api/orders/${userid}`)
+		const res = await axios.get(`/api/orders/driver/${email}`)
 		dispatch(getUserOrders(res.data))
 	} catch (err) {
 		console.error(err)

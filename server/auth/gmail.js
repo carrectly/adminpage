@@ -201,7 +201,7 @@ async function getMessage(messageId) {
 async function createDraft(msg) {
 	// You can use UTF-8 encoding for the subject using the method below.
 	// You can also just use a plain string if you don't need anything fancy.
-	const subject = `${msg.orderid} - SERVICE QUOTE REQUEST FOR CARRECTLY`
+	const subject = `SERVICE QUOTE REQUEST FOR CARRECTLY - ${msg.orderid}`
 	//const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
 	const messageParts = [
 		'From: <info@carrectly.com>',
@@ -254,7 +254,7 @@ async function createDraft(msg) {
 async function sendEmailConfirmation(msg) {
 	// You can use UTF-8 encoding for the subject using the method below.
 	// You can also just use a plain string if you don't need anything fancy.
-	const subject = `${msg.orderid} - Thank you for requesting your auto service - Carrectly Auto Care. `
+	const subject = `Thank you for requesting your auto service - Carrectly Auto Care - ${msg.orderid}`
 	//const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
 	const messageParts = [
 		'From: <info@carrectly.com>',

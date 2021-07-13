@@ -81,6 +81,47 @@ router.get('/active', async (req, res, next) => {
 	}
 })
 
+router.get('/driver/:email', async (req, res, next) => {
+	const email = req.params.email
+	try {
+		const driver = await Driver.findOne({
+			where: {
+				email,
+			},
+		})
+		console.log('inside the api route for driver', driver)
+
+		const orders = await Order.findAll({
+			where: {
+				[Op.or]: [
+					{pickUpDriverId: driver.dataValues.id},
+					{returnDriverId: driver.dataValues.id},
+				],
+				[Op.and]: [
+					{
+						status: {
+							[Op.not]: [
+								'cancelled',
+								'postponed',
+								'invoiced',
+								'returned',
+							],
+						},
+					},
+				],
+			},
+			include: [
+				{model: Customer},
+				{model: Driver, as: 'pickUpDriver'},
+				{model: Driver, as: 'returnDriver'},
+			],
+		})
+		res.json(orders)
+	} catch (err) {
+		next(err)
+	}
+})
+
 router.put('/', async (req, res, next) => {
 	try {
 		let start = req.body.dateStart

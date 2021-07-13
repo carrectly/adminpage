@@ -13,6 +13,8 @@ import {
 	CalendarView,
 	AllServices,
 	Drivers,
+	Users,
+	AllTripsView,
 } from './components'
 
 class Routes extends Component {
@@ -21,9 +23,8 @@ class Routes extends Component {
 	}
 
 	render() {
-		const isLoggedIn = this.props.isLoggedIn
 		let show = true
-		if (isLoggedIn === 'info@carrectly.com') {
+		if (this.props.userRole !== 'unconfirmed' && this.props.isLoggedIn) {
 			show = true
 		} else {
 			show = false
@@ -38,6 +39,9 @@ class Routes extends Component {
 						<Route path='/allOrders' component={AllOrders} />
 						<Route path='/allServices' component={AllServices} />
 						<Route path='/allCustomers' component={AllCustomers} />
+						{this.props.userRole === 'driver' && (
+							<Route path='/alltrips' component={AllTripsView} />
+						)}
 						<Route
 							path='/singlecustomer/:userid'
 							component={SingleCustomer}
@@ -47,6 +51,7 @@ class Routes extends Component {
 							component={SingleOrder}
 						/>
 						<Route path='/dealers' component={Dealers} />
+						<Route path='/users' component={Users} />
 						<Route path='/drivers' component={Drivers} />
 						<Route path='/calendar' component={CalendarView} />
 					</Switch>
@@ -58,7 +63,8 @@ class Routes extends Component {
 
 const mapState = state => {
 	return {
-		isLoggedIn: state.user.email,
+		isLoggedIn: state.user.id,
+		userRole: state.user.role,
 	}
 }
 

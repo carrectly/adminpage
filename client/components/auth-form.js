@@ -1,44 +1,136 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, {useState} from 'react'
+import {connect, useDispatch} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import {Button} from 'antd'
-import {GoogleOutlined} from '@ant-design/icons'
+import {Button, Form, Input} from 'antd'
+import {GoogleOutlined, UserOutlined, LockOutlined} from '@ant-design/icons'
 
 /**
  * COMPONENT
  */
 const AuthForm = props => {
-	const {name, displayName, handleSubmit, handleReset, error} = props
+	const {name, displayName, error} = props
+	const dispatch = useDispatch()
+	const [form] = Form.useForm()
+	const [isValid, Validate] = useState(false)
+
+	const onFinish = values => {
+		if (values.hasOwnProperty('signup')) {
+			dispatch(auth(values, 'signup'))
+			form.resetFields()
+		} else {
+			dispatch(auth(values, 'login'))
+			form.resetFields()
+		}
+	}
+
+	const onFinishFailed = errorInfo => {
+		console.log('Failed:', errorInfo)
+	}
+
+	const onCancel = () => {
+		form.resetFields()
+	}
+
+	const onChange = () => {
+		const {password, email} = form.getFieldValue()
+
+		if (password && email) {
+			if (
+				password.length > 3 &&
+				email.length > 1 &&
+				email.includes('@')
+			) {
+				Validate(true)
+			} else {
+				Validate(false)
+			}
+		} else {
+			Validate(false)
+		}
+	}
+
 	return (
-		<div>
-			{/* <Form onSubmit={handleSubmit} onReset={handleReset} name={name}>
-				<Form.Group controlId='formBasicEmail'>
-					<Form.Label>
-						<small>Email</small>
-					</Form.Label>
-					<Form.Control name='email' type='text' />
-				</Form.Group>
-				<br />
-				<Form.Group controlId='formBasicPassword'>
-					<Form.Label>
-						<small>Password</small>
-					</Form.Label>
-					<Form.Control name='password' type='password' />
-				</Form.Group>
-				<br />
-				<div>
-					<Button type='submit' id='login'>
-						Login
+		<div className='loginForm'>
+			<Form
+				form={form}
+				name={name}
+				onFinish={onFinish}
+				onFinishFailed={onFinishFailed}
+				onChange={onChange}>
+				<Form.Item
+					name='email'
+					rules={[
+						{
+							required: true,
+							message: 'Please input your email!',
+						},
+					]}>
+					<Input
+						prefix={
+							<UserOutlined className='site-form-item-icon' />
+						}
+						placeholder='Email'
+					/>
+				</Form.Item>
+				<Form.Item
+					name='password'
+					rules={[
+						{
+							required: true,
+							message: 'Please input your Password!',
+						},
+					]}>
+					<Input
+						prefix={
+							<LockOutlined className='site-form-item-icon' />
+						}
+						type='password'
+						placeholder='Password'
+					/>
+				</Form.Item>
+				{name === 'signup' ? (
+					<div>
+						<Form.Item name='firstName'>
+							<Input
+								prefix={
+									<UserOutlined className='site-form-item-icon' />
+								}
+								placeholder='First Name'
+							/>
+						</Form.Item>
+						<Form.Item name='lastName'>
+							<Input
+								prefix={
+									<UserOutlined className='site-form-item-icon' />
+								}
+								placeholder='Last Name'
+							/>
+						</Form.Item>
+					</div>
+				) : (
+					<div />
+				)}
+				<Form.Item name={name}>
+					<Button
+						style={{width: '50%'}}
+						type='primary'
+						htmlType='submit'
+						disabled={!isValid}>
+						{displayName}
 					</Button>
-					<Button type='reset' id='signup'>
-						Signup
+					<Button
+						style={{width: '50%'}}
+						htmlType='button'
+						type='secondary'
+						onClick={onCancel}>
+						Reset
 					</Button>
-				</div>
+				</Form.Item>
 				{error && error.response && <div> {error.response.data} </div>}
-			</Form> */}
+			</Form>
 			<a href='/auth/google'>
-				<Button type='primary' id='signup'>
+				<Button type='primary' style={{width: '100%'}}>
 					{displayName} with Google <GoogleOutlined />
 				</Button>
 			</a>
@@ -46,13 +138,6 @@ const AuthForm = props => {
 	)
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 const mapLogin = state => {
 	return {
 		name: 'login',
@@ -64,33 +149,14 @@ const mapLogin = state => {
 const mapSignup = state => {
 	return {
 		name: 'signup',
-		displayName: 'Sign Up',
+		displayName: 'Register',
 		error: state.user.error,
 		user: state.user,
 	}
 }
 
-const mapDispatch = dispatch => {
-	return {
-		handleSubmit(evt) {
-			evt.preventDefault()
-			const formName = 'login'
-			const email = evt.target.email.value
-			const password = evt.target.password.value
-			dispatch(auth(email, password, formName))
-		},
-		handleReset(evt) {
-			evt.preventDefault()
-			const formName = 'signup'
-			const email = evt.target.email.value
-			const password = evt.target.password.value
-			dispatch(auth(email, password, formName))
-		},
-	}
-}
-
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const Login = connect(mapLogin, null)(AuthForm)
+export const Signup = connect(mapSignup, null)(AuthForm)
 
 /**
  * PROP TYPES

@@ -19,6 +19,10 @@ body {
 	font-size: 12px;
 }
 
+.loginForm {
+	padding: 20px;
+}
+
 .account {
 	display: flex;
 	flex-direction: row;
@@ -448,26 +452,6 @@ table.commentlist {
 
 	.adddealersform {
 		font-size: 1rem;
-	}
-
-	.navbar1 {
-		display: flex;
-		flex-flow: row wrap;
-		justify-content: space-around;
-		background-color: #743794;
-		color: white;
-		align-items: center;
-		z-index: 2;
-		margin: 0;
-		width: 100vw;
-		border-radius: 0 0 20px 20px;
-		transform: translateY(-4em);
-		transition: transform 0.5s;
-	}
-
-	.navbar1:hover {
-		transform: translateY(0);
-		min-height: 80px;
 	}
 
 	.dlrcard {
