@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -60,8 +61,19 @@ class Navbar extends React.Component {
 				</Popover>
 				<Link to='/account' className='link'>
 					<FireOutlined className='icon' />
-					<span>Active Orders</span>
+					{this.props.userRole === 'driver' ? (
+						<span>My Trips</span>
+					) : (
+						<span>Active Orders</span>
+					)}
 				</Link>
+				{this.props.userRole === 'driver' && (
+					<Link to='/alltrips' className='link'>
+						<CarOutlined className='icon' />
+						All Trips
+					</Link>
+				)}
+
 				<Link to='/allOrders' className='link'>
 					<FolderOutlined className='icon' />
 					Archived Orders

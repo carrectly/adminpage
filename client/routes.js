@@ -14,6 +14,7 @@ import {
 	AllServices,
 	Drivers,
 	Users,
+	AllTripsView,
 } from './components'
 
 class Routes extends Component {
@@ -38,6 +39,9 @@ class Routes extends Component {
 						<Route path='/allOrders' component={AllOrders} />
 						<Route path='/allServices' component={AllServices} />
 						<Route path='/allCustomers' component={AllCustomers} />
+						{this.props.userRole === 'driver' && (
+							<Route path='/alltrips' component={AllTripsView} />
+						)}
 						<Route
 							path='/singlecustomer/:userid'
 							component={SingleCustomer}
