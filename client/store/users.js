@@ -6,7 +6,7 @@ import history from '../history'
  */
 const GET_USERS = 'GET_USERS'
 const UPDATE_SINGLE_USER = 'UPDATE_SINGLE_USER'
-
+const DELETE_USER = 'DELETE_USER'
 /**
  * INITIAL STATE
  */
@@ -17,6 +17,7 @@ const defaultUsers = []
  */
 const getUsers = users => ({type: GET_USERS, users})
 const updateSingleUser = user => ({type: UPDATE_SINGLE_USER, user})
+const deleteSingleUser = id => ({type: DELETE_USER, id})
 
 /**
  * THUNK CREATORS
@@ -40,6 +41,15 @@ export const updateSingleUserThunk = (userid, obj) => async dispatch => {
 	}
 }
 
+export const deleteUserThunk = id => async dispatch => {
+	try {
+		await axios.delete(`/api/users/${id}`)
+		dispatch(deleteSingleUser(id))
+	} catch (err) {
+		console.error(err)
+	}
+}
+
 /**
  * REDUCER
  */
@@ -54,6 +64,8 @@ export default function(state = defaultUsers, action) {
 				}
 				return user
 			})
+		case DELETE_USER:
+			return state.filter(user => user.id !== action.id)
 		default:
 			return state
 	}

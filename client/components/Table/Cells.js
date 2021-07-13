@@ -5,6 +5,7 @@ import moment from 'moment'
 import {useDispatch} from 'react-redux'
 import {deleteOrderThunk} from '../../store/archivedOrders'
 import {deleteContactThunk} from '../../store/contacts'
+import {deleteUserThunk} from '../../store/users'
 import {removeOrderServiceThunk} from '../../store/singleorder'
 import {getStatusArray} from '../util'
 import {
@@ -114,6 +115,32 @@ export const DeleteCustomerCell = ({value}) => {
 			<DeleteFilled style={{color: 'red'}} />
 		</Button>
 	)
+}
+
+export const DeleteUserCell = ({value, row}) => {
+	const dispatch = useDispatch()
+	const handleClick = evt => {
+		evt.preventDefault()
+		if (
+			window.confirm(
+				'Are you sure you want to delete this customer from the database?'
+			)
+		) {
+			dispatch(deleteUserThunk(value))
+		} else {
+			console.log('changed my mind')
+		}
+	}
+
+	if (row.isAdmin) {
+		return <div></div>
+	} else {
+		return (
+			<Button id={value} onClick={handleClick} type='text'>
+				<DeleteFilled style={{color: 'red'}} />
+			</Button>
+		)
+	}
 }
 
 export const DeleteOrderServiceCell = ({row}) => {

@@ -1,5 +1,6 @@
 import React from 'react'
 import UserRole from '../UsersView/UserRole'
+import {DeleteUserCell} from './Cells'
 
 const UserTableColumns = () => [
 	{
@@ -23,12 +24,12 @@ const UserTableColumns = () => [
 		key: 'role',
 		render: (value, row) => <UserRole value={value} row={row} />,
 	},
-	// {
-	// 	title: 'Update Form',
-	// 	dataIndex: 'name',
-	// 	key: 'id',
-	// 	render: (value, row) => <UpdateUser value={value} row={row} />,
-	// },
+	{
+		title: 'Delete User',
+		dataIndex: 'id',
+		key: 'id',
+		render: (value, row) => <DeleteUserCell value={value} row={row} />,
+	},
 ]
 
 export default UserTableColumns
