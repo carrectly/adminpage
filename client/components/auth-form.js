@@ -37,7 +37,7 @@ const AuthForm = props => {
 
 		if (password && email) {
 			if (
-				password.length > 6 &&
+				password.length > 3 &&
 				email.length > 1 &&
 				email.includes('@')
 			) {

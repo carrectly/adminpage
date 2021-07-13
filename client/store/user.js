@@ -29,9 +29,9 @@ export const me = () => async dispatch => {
 	}
 }
 
-export const auth = (email, password, method) => async dispatch => {
+export const auth = (userObj, method) => async dispatch => {
 	try {
-		const res = await axios.post(`/auth/${method}`, {email, password})
+		const res = await axios.post(`/auth/${method}`, userObj)
 		dispatch(getUser(res.data.user))
 		history.push('/account')
 	} catch (dispatchOrHistoryErr) {
