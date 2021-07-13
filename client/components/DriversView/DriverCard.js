@@ -9,7 +9,6 @@ const DriverCard = props => {
 	const dispatch = useDispatch()
 
 	const handleClick = id => {
-		console.log(id)
 		dispatch(removeDriverThunk(id))
 	}
 

@@ -49,6 +49,14 @@ export const ServicesCell = ({value, row}) => {
 	))
 }
 
+export const DealersCell = ({value}) => {
+	return value.map(el => (
+		<Tag color='geekblue' key={el.id}>
+			{el.name}
+		</Tag>
+	))
+}
+
 export const CustomerPhoneCell = ({value}) => (
 	<Link to={`/singlecustomer/${value}`}>{value}</Link>
 )

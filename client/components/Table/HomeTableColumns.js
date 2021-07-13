@@ -45,6 +45,13 @@ const columns = [
 		render: value => <ConciergeCell value={value} />,
 	},
 	{
+		title: 'Repair Shop',
+		dataIndex: 'dealers',
+		align: 'center',
+		key: 'dealers',
+		render: value => <DealersCell value={value} />,
+	},
+	{
 		title: 'Services',
 		dataIndex: 'services',
 		align: 'center',

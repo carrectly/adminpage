@@ -25,6 +25,7 @@ class SingleOrder extends Component {
 		const customer = singleorder.customer || {}
 		const pickUpDriver = singleorder.pickUpDriver || {}
 		const returnDriver = singleorder.returnDriver || {}
+		const orderDealers = singleorder.dealers || []
 
 		return (
 			<div>
@@ -35,6 +36,7 @@ class SingleOrder extends Component {
 							customer={customer}
 							pickUpDriver={pickUpDriver}
 							returnDriver={returnDriver}
+							orderDealers={orderDealers}
 						/>
 						<SingleOrderEmails />
 					</div>

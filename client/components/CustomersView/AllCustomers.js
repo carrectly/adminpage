@@ -8,7 +8,6 @@ const AllCustomers = () => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		console.log('use effect')
 		setLoading(true)
 		dispatch(getContactsThunk())
 		setLoading(false)
