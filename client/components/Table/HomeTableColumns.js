@@ -9,6 +9,7 @@ import {
 	ServicesCell,
 	ConciergeCell,
 	CarMakeCell,
+	DealersCell,
 } from './Cells.js'
 
 const defaultStringCompareOptions = {sensitivity: 'base'}
