@@ -22,22 +22,6 @@
 		"start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
 		"start-server": "nodemon server -e html,js,scss --ignore public --ignore client"
 	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	},
-	"lint-staged": {
-		"*.{js,jsx}": [
-			"prettier --write",
-			"npm run lint-fix",
-			"git add"
-		],
-		"*.{css,scss,json,md}": [
-			"prettier --write",
-			"git add"
-		]
-	},
 	"author": "Andre Birkus",
 	"license": "MIT",
 	"dependencies": {
@@ -91,7 +75,6 @@
 		"eslint": "^8.4.1",
 		"file-loader": "^6.2.0",
 		"git-url-parse": "^11.6.0",
-		"husky": "^7.0.4",
 		"lint-staged": "^12.1.2",
 		"node-sass": "^7.0.0",
 		"nodemon": "^2.0.15",
