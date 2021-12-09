@@ -1,6 +1,10 @@
 {
 	"root": true,
-	"extends": ["prettier", "prettier/react"],
+  "extends": [
+    "react-app",
+    "eslint:recommended",
+    "plugin:react/recommended"
+],
 	"rules": {
 		"semi": 0
 	}

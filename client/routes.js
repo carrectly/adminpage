@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Route, Routes} from 'react-router-dom'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import {me} from './store'
 import {
 	AllCustomers,
@@ -31,29 +31,29 @@ class AppRoutes extends Component {
 		}
 		return (
 			<Routes>
-				<Route exact path='/' component={Account} />
-				<Route path='/login' component={Login} />
-				<Route path='/account' component={Account} />
+				<Route exact path='/' element={<Account />} />
+				<Route path='/login' element={<Login />} />
+				<Route path='/account' element={<Account />} />
 				{show && (
 					<Routes>
-						<Route path='/allOrders' component={AllOrders} />
-						<Route path='/allServices' component={AllServices} />
-						<Route path='/allCustomers' component={AllCustomers} />
+						<Route path='/allOrders' element={<AllOrders />} />
+						<Route path='/allServices' element={<AllServices />} />
+						<Route path='/allCustomers' element={<AllCustomers />} />
 						{this.props.userRole === 'driver' && (
-							<Route path='/alltrips' component={AllTripsView} />
+							<Route path='/alltrips' element={<AllTripsView/>} />
 						)}
 						<Route
 							path='/singlecustomer/:userid'
-							component={SingleCustomer}
+							element={SingleCustomer}
 						/>
 						<Route
 							path='/singleorder/:orderid'
-							component={SingleOrder}
+							element={SingleOrder}
 						/>
-						<Route path='/dealers' component={Dealers} />
-						<Route path='/users' component={Users} />
-						<Route path='/drivers' component={Drivers} />
-						<Route path='/calendar' component={CalendarView} />
+						<Route path='/dealers' element={<Dealers/>} />
+						<Route path='/users' element={<Users/>} />
+						<Route path='/drivers' element={<Drivers/>} />
+						<Route path='/calendar' element={<CalendarView/>} />
 					</Routes>
 				)}
 			</Routes>
