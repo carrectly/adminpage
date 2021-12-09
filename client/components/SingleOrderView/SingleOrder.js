@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {withRouter, Link} from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getSingleOrderThunk} from '../../store/singleorder'
 import SingleOrderEmails from './SingleOrderEmails'
@@ -68,6 +68,4 @@ const mapDispatchToProps = dispatch => {
 		getOrder: id => dispatch(getSingleOrderThunk(id)),
 	}
 }
-export default withRouter(
-	connect(mapStateToProps, mapDispatchToProps)(SingleOrder)
-)
+export default connect(mapStateToProps, mapDispatchToProps)(SingleOrder)

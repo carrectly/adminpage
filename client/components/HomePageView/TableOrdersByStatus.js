@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {Table} from 'antd'
 import columns from '../Table/HomeTableColumns'
@@ -21,4 +20,4 @@ class TableOrdersByStatus extends Component {
 	}
 }
 
-export default withRouter(connect(null, null)(TableOrdersByStatus))
+export default TableOrdersByStatus

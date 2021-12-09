@@ -1,15 +1,18 @@
 const isDev = process.env.NODE_ENV === 'development'
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
 	mode: isDev ? 'development' : 'production',
-	entry: [
-		'@babel/polyfill', // enables async-await
-		'./client/index.js',
-	],
+	entry: './client/index.js',
 	output: {
-		path: __dirname,
-		filename: './public/bundle.js',
+    filename: 'bundle.js',
+    path: path.join(__dirname, 'public')
 	},
+  devServer: {
+    port: 1337,
+    watchContentBase: true
+  },
 	resolve: {
 		extensions: ['.js', '.jsx'],
 	},
@@ -20,9 +23,19 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.jsx?$/,
+				test: /\.(jsx|js)$/,
 				exclude: /node_modules/,
-				loader: 'babel-loader',
+				use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', {
+                "targets": "defaults"
+              }],
+              '@babel/preset-react'
+            ]
+          }
+        }]
 			},
 			{
 				test: /\.css$/,
@@ -38,13 +51,11 @@ module.exports = {
 						options: {
 							// Prefer `dart-sass`
 							implementation: require('sass'),
-							sassOptions: {
-								fiber: require('fibers'),
-							},
 						},
 					},
 				],
 			},
 		],
 	},
+  plugins: [new HtmlWebpackPlugin({ template: './public/index.html' })],
 }

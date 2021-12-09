@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import {Login, Signup} from './auth-form'
 import {logout} from '../store'
 import BookingsByStatus from './HomePageView/BookingsByStatus'
@@ -77,4 +77,4 @@ const mapStateToProps = state => {
 	}
 }
 
-export default withRouter(connect(mapStateToProps, null)(Account))
+export default connect(mapStateToProps, null)(Account)

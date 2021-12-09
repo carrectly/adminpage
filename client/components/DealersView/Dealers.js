@@ -1,4 +1,4 @@
-import {withRouter, Link} from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import AddDealer from './AddDealer.js'
@@ -83,4 +83,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dealers))
+export default connect(mapStateToProps, mapDispatchToProps)(Dealers)

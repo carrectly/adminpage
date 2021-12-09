@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {withRouter, Link} from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getEventsThunk} from '../store/calendar'
 
@@ -22,9 +22,4 @@ class CalendarView extends Component {
 	}
 }
 
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		getEvents: () => dispatch(getEventsThunk()),
-// 	}
-// }
-export default withRouter(connect(null, null)(CalendarView))
+export default CalendarView

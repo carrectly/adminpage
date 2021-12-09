@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {withRouter, Link} from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getCustomerOrdersThunk} from '../../store/customerorders'
 import {Card} from 'antd'
@@ -106,6 +106,4 @@ const mapDispatchToProps = dispatch => {
 		getCustomer: id => dispatch(getSingleCustomerThunk(id)),
 	}
 }
-export default withRouter(
-	connect(mapStateToProps, mapDispatchToProps)(SingleCustomer)
-)
+export default connect(mapStateToProps, mapDispatchToProps)(SingleCustomer)

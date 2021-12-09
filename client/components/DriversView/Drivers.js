@@ -1,4 +1,4 @@
-import {withRouter} from 'react-router-dom'
+
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import AddDriver from './AddDriver.js'
@@ -83,4 +83,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Drivers))
+export default connect(mapStateToProps, mapDispatchToProps)(Drivers)

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Navbar, MainFooter} from './components'
-import Routes from './routes'
+import AppRoutes from './routes'
 import history from './history'
 import {Layout, Breadcrumb} from 'antd'
 import {useLocation} from 'react-router-dom'
@@ -22,7 +22,7 @@ const App = () => {
 					))}
 				</Breadcrumb> */}
 				<div className='allContent'>
-					<Routes />
+					<AppRoutes />
 				</div>
 			</Content>
 			<Footer style={{padding: '0'}}>

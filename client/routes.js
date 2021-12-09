@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import {me} from './store'
 import {
 	AllCustomers,
@@ -17,7 +17,7 @@ import {
 	AllTripsView,
 } from './components'
 
-class Routes extends Component {
+class AppRoutes extends Component {
 	componentDidMount() {
 		this.props.loadInitialData()
 	}
@@ -30,12 +30,12 @@ class Routes extends Component {
 			show = false
 		}
 		return (
-			<Switch>
+			<Routes>
 				<Route exact path='/' component={Account} />
 				<Route path='/login' component={Login} />
 				<Route path='/account' component={Account} />
 				{show && (
-					<Switch>
+					<Routes>
 						<Route path='/allOrders' component={AllOrders} />
 						<Route path='/allServices' component={AllServices} />
 						<Route path='/allCustomers' component={AllCustomers} />
@@ -54,9 +54,9 @@ class Routes extends Component {
 						<Route path='/users' component={Users} />
 						<Route path='/drivers' component={Drivers} />
 						<Route path='/calendar' component={CalendarView} />
-					</Switch>
+					</Routes>
 				)}
-			</Switch>
+			</Routes>
 		)
 	}
 }
@@ -76,4 +76,4 @@ const mapDispatch = dispatch => {
 	}
 }
 
-export default withRouter(connect(mapState, mapDispatch)(Routes))
+export default connect(mapState, mapDispatch)(AppRoutes)
