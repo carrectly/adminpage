@@ -1,10 +1,6 @@
-import React, {Component} from 'react'
-import { Link} from 'react-router-dom'
-import {connect} from 'react-redux'
-import {getEventsThunk} from '../store/calendar'
+import React from 'react'
 
-class CalendarView extends Component {
-	render() {
+const CalendarView = () => {
 		return (
 			<div>
 				{/* <button type='button' onClick={() => this.props.getEvents()}>
@@ -19,7 +15,7 @@ class CalendarView extends Component {
 				</div>
 			</div>
 		)
-	}
+
 }
 
 export default CalendarView

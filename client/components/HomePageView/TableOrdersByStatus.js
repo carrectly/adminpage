@@ -3,9 +3,8 @@ import {connect} from 'react-redux'
 import {Table} from 'antd'
 import columns from '../Table/HomeTableColumns'
 
-class TableOrdersByStatus extends Component {
-	render() {
-		const array = this.props.ordersArray || []
+const TableOrdersByStatus = (props) => {
+		const array = props.ordersArray || []
 
 		return (
 			<Table
@@ -17,7 +16,7 @@ class TableOrdersByStatus extends Component {
 				rowKey='hash'
 			/>
 		)
-	}
+
 }
 
 export default TableOrdersByStatus

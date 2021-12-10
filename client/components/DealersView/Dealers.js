@@ -1,5 +1,5 @@
 import { Link} from 'react-router-dom'
-import React, {Component} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import AddDealer from './AddDealer.js'
 import {removeDealerThunk, fetchDealersThunk} from '../../store/dealers.js'
@@ -8,29 +8,16 @@ import {Popover} from 'antd'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons'
 
-class Dealers extends Component {
-	constructor(props) {
-		super(props)
-		this.setModalShow = this.setModalShow.bind(this)
-		this.state = {
-			modalShow: false,
-		}
-	}
+const Dealers = (props) => {
 
-	setModalShow(bool) {
-		this.setState({modalShow: bool})
-	}
+  const [show, setShow] = useState(false)
 
-	async componentDidMount() {
-		try {
-			await this.props.fetchDealers()
-		} catch (err) {
-			console.log(err)
-		}
-	}
+  useEffect(() => {
+			props.fetchDealers()
+  }, [])
 
-	render() {
-		const dealers = this.props.dealers
+
+		const dealers = props.dealers
 		return (
 			<div>
 				<div>
@@ -42,7 +29,7 @@ class Dealers extends Component {
 										<DealerCard
 											key={dlr.id}
 											dealer={dlr}
-											delete={this.props.remove}
+											delete={props.remove}
 										/>
 									</div>
 								))}
@@ -56,18 +43,17 @@ class Dealers extends Component {
 					<Popover content='Click here to add a dealer'>
 						<FontAwesomeIcon
 							className='float-plus'
-							onClick={() => this.setModalShow(true)}
+							onClick={() => setShow(true)}
 							icon={faPlusCircle}
 						/>
 					</Popover>
 					<AddDealer
-						show={this.state.modalShow}
-						onHide={() => this.setModalShow(false)}
+						show={show}
+						onHide={() => setShow(false)}
 					/>
 				</div>
 			</div>
 		)
-	}
 }
 
 const mapStateToProps = state => {

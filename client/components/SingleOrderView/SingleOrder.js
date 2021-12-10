@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {useEffect} from 'react'
 import { Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getSingleOrderThunk} from '../../store/singleorder'
@@ -9,17 +9,15 @@ import SingleOrderDetails from './SingleOrderDetails'
 import OrderComments from './OrderComments'
 import './styles.scss'
 
-class SingleOrder extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {}
-	}
+const SingleOrder = (props) => {
 
-	componentDidMount() {
-		this.props.getOrder(this.props.match.params.orderid)
-	}
+  useEffect(() => {
+    props.getOrder(props.match.params.orderid)
+  }, [])
 
-	render() {
+
+
+
 		const singleorder = this.props.order || {}
 		const services = this.props.order.services || []
 		const customer = singleorder.customer || {}
@@ -48,13 +46,13 @@ class SingleOrder extends Component {
 							<SingleOrderServices services={services} />
 						</div>
 						<h3 className='sectionHeader'>Internal Comments</h3>
-						<OrderComments id={this.props.match.params.orderid} />
+						<OrderComments id={props.match.params.orderid} />
 					</div>
 				</div>
 				<br />
 			</div>
 		)
-	}
+
 }
 
 const mapStateToProps = state => {

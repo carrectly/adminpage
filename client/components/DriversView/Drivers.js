@@ -1,5 +1,5 @@
 
-import React, {Component} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import AddDriver from './AddDriver.js'
 import {removeDriverThunk, fetchDriversThunk} from '../../store/drivers.js'
@@ -8,29 +8,15 @@ import {Popover} from 'antd'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlusCircle} from '@fortawesome/free-solid-svg-icons'
 
-class Drivers extends Component {
-	constructor(props) {
-		super(props)
-		this.setModalShow = this.setModalShow.bind(this)
-		this.state = {
-			modalShow: false,
-		}
-	}
+const Drivers = (props) => {
+  const [show, setShow] = useState(false)
 
-	setModalShow(bool) {
-		this.setState({modalShow: bool})
-	}
+  useEffect(() => {
+    props.fetchDrivers()
+  }, [])
 
-	async componentDidMount() {
-		try {
-			await this.props.fetchDrivers()
-		} catch (err) {
-			console.log(err)
-		}
-	}
 
-	render() {
-		const drivers = this.props.drivers
+		const drivers = props.drivers
 		return (
 			<div>
 				<div>
@@ -42,7 +28,7 @@ class Drivers extends Component {
 										<DriverCard
 											key={dlr.id}
 											driver={dlr}
-											delete={this.props.remove}
+											delete={props.remove}
 										/>
 									</div>
 								))}
@@ -56,18 +42,17 @@ class Drivers extends Component {
 					<Popover content='Click here to add a new driver'>
 						<FontAwesomeIcon
 							className='float-plus'
-							onClick={() => this.setModalShow(true)}
+							onClick={() => setShow(true)}
 							icon={faPlusCircle}
 						/>
 					</Popover>
 					<AddDriver
-						show={this.state.modalShow}
-						onHide={() => this.setModalShow(false)}
+						show={show}
+						onHide={() => setShow(false)}
 					/>
 				</div>
 			</div>
 		)
-	}
 }
 
 const mapStateToProps = state => {
