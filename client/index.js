@@ -4,7 +4,6 @@ import {Provider} from 'react-redux'
 import { BrowserRouter } from "react-router-dom";
 import App from './app'
 import store from './store'
-import history from './history'
 import 'antd/dist/antd.css'
 import './components/styles/styles.scss'
 
