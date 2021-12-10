@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getSingleOrderThunk } from '../../store/singleorder'
 import SingleOrderEmails from './SingleOrderEmails'
@@ -9,12 +10,16 @@ import OrderComments from './OrderComments'
 import './styles.scss'
 
 const SingleOrder = (props) => {
+  const params = useParams()
+
   useEffect(() => {
-    props.getOrder(props.match.params.orderid)
+    console.log('all props', props)
+    console.log('order id props', params.orderid)
+    props.getOrder(params.orderid)
   }, [])
 
-  const singleorder = this.props.order || {}
-  const services = this.props.order.services || []
+  const singleorder = props.order || {}
+  const services = props.order.services || []
   const customer = singleorder.customer || {}
   const pickUpDriver = singleorder.pickUpDriver || {}
   const returnDriver = singleorder.returnDriver || {}
@@ -41,7 +46,7 @@ const SingleOrder = (props) => {
             <SingleOrderServices services={services} />
           </div>
           <h3 className="sectionHeader">Internal Comments</h3>
-          <OrderComments id={props.match.params.orderid} />
+          <OrderComments id={params.orderid} />
         </div>
       </div>
       <br />

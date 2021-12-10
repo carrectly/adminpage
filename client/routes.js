@@ -42,8 +42,11 @@ class AppRoutes extends Component {
             {this.props.userRole === 'driver' && (
               <Route path="/alltrips" element={<AllTripsView />} />
             )}
-            <Route path="/singlecustomer/:userid" element={SingleCustomer} />
-            <Route path="/singleorder/:orderid" element={SingleOrder} />
+            <Route
+              path="/singlecustomer/:userid"
+              element={<SingleCustomer />}
+            />
+            <Route path="/singleorder/:orderid" element={<SingleOrder />} />
             <Route path="/dealers" element={<Dealers />} />
             <Route path="/users" element={<Users />} />
             <Route path="/drivers" element={<Drivers />} />

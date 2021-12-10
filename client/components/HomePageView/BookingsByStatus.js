@@ -14,7 +14,7 @@ import {
 } from '../util'
 import axios from 'axios'
 import history from '../../history'
-
+import { useNavigate } from 'react-router-dom'
 import { Layout, Menu, Input } from 'antd'
 import {
   NotificationOutlined,
@@ -31,7 +31,7 @@ const { Content } = Layout
 const BookingsByStatus = () => {
   const dispatch = useDispatch()
   const [render, updateRender] = useState(1)
-
+  let navigate = useNavigate()
   useEffect(() => {
     dispatch(getActiveOrdersThunk())
   }, [])
@@ -85,7 +85,7 @@ const BookingsByStatus = () => {
 
     if (singleorder.data) {
       console.log('order found', singleorder)
-      await history.push(`/singleorder/${strValue}`)
+      navigate(`/singleorder/${strValue}`)
     } else {
       window.alert('Order not found')
     }

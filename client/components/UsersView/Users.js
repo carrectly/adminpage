@@ -11,7 +11,6 @@ const Users = () => {
   useEffect(() => {
     dispatch(getUsersThunk())
   }, [])
-
   return (
     <Table
       columns={columns}
