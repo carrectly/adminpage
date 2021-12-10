@@ -35,7 +35,7 @@ class AppRoutes extends Component {
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Account />} />
         {show && (
-          <Routes>
+          <React.Fragment>
             <Route path="/allOrders" element={<AllOrders />} />
             <Route path="/allServices" element={<AllServices />} />
             <Route path="/allCustomers" element={<AllCustomers />} />
@@ -48,7 +48,7 @@ class AppRoutes extends Component {
             <Route path="/users" element={<Users />} />
             <Route path="/drivers" element={<Drivers />} />
             <Route path="/calendar" element={<CalendarView />} />
-          </Routes>
+          </React.Fragment>
         )}
       </Routes>
     )
