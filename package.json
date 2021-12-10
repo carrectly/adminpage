@@ -65,6 +65,7 @@
     "window": "^4.2.7"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
     "@webpack-cli/generators": "^2.4.1",
