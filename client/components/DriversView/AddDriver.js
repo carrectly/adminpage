@@ -61,30 +61,36 @@ const AddDriver = (props) => {
         onFinishFailed={onFinishFailed}
         onChange={onChange}
       >
-        <Form.Item name="name" label="Driver name" rules={[{ required: true }]}>
-          <Input />
+        <Form.Item label="Driver name">
+          <Form.Item name="name" noStyle rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
         </Form.Item>
-        <Form.Item name="email" label="Email" rules={[{ required: true }]}>
-          <Input />
+        <Form.Item label="Email">
+          <Form.Item name="email" noStyle rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
         </Form.Item>
-        <Form.Item name="phoneNumber" label="Phone number">
-          <Input />
+        <Form.Item label="Phone number">
+          <Form.Item noStyle name="phoneNumber">
+            <Input />
+          </Form.Item>
         </Form.Item>
-        <Form.Item name="imageUrl" label="Image URL">
-          <Input />
+        <Form.Item label="Image URL">
+          <Form.Item noStyle name="imageUrl">
+            <Input />
+          </Form.Item>
         </Form.Item>
-        <Form.Item
-          name="tagColor"
-          label="Tag Color"
-          rules={[{ required: true }]}
-        >
-          <Select placeholder="Select a color for driver's tag in the table">
-            {colors.map((color) => (
-              <Option value={color} key={color}>
-                <div style={{ backgroundColor: `${color}` }}>{color}</div>
-              </Option>
-            ))}
-          </Select>
+        <Form.Item label="Tag Color">
+          <Form.Item noStyle name="tagColor" rules={[{ required: true }]}>
+            <Select placeholder="Select a color for driver's tag in the table">
+              {colors.map((color) => (
+                <Option value={color} key={color}>
+                  <div style={{ backgroundColor: `${color}` }}>{color}</div>
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
         </Form.Item>
         <Form.Item>
           <Button htmlType="button" type="secondary" onClick={onCancel}>

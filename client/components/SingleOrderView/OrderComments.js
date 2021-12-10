@@ -68,23 +68,29 @@ const OrderComments = () => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
           >
-            <Form.Item name="content" style={{ width: '100%', padding: '5px' }}>
-              {/* <Input placeholder='... enter new comment' /> */}
-              <TextArea
-                style={{ width: '100%' }}
-                rows={3}
-                placeholder="... enter new comment"
-              />
+            <Form.Item>
+              <Form.Item
+                name="content"
+                style={{ width: '100%', padding: '5px' }}
+              >
+                <TextArea
+                  style={{ width: '100%' }}
+                  rows={3}
+                  placeholder="... enter new comment"
+                />
+              </Form.Item>
             </Form.Item>
             <div className="select-and-button">
-              <Form.Item name="author" style={{ width: '50%' }}>
-                <Select placeholder="Select a person" onChange={onChange}>
-                  {drivers.map((el) => (
-                    <Option value={el.name} key={el.id}>
-                      {el.name}
-                    </Option>
-                  ))}
-                </Select>
+              <Form.Item>
+                <Form.Item name="author" style={{ width: '50%' }}>
+                  <Select placeholder="Select a person" onChange={onChange}>
+                    {drivers.map((el) => (
+                      <Option value={el.name} key={el.id}>
+                        {el.name}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
               </Form.Item>
               <Button
                 style={{

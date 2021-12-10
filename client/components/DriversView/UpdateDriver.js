@@ -50,47 +50,57 @@ const UpdateDriver = (props) => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
-          <Form.Item
-            name="name"
-            label="Driver Name"
-            initialValue={`${props.driver.name}`}
-            rules={[{ required: true }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="email"
-            label="Email"
-            initialValue={props.driver.email}
-            rules={[{ required: true }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="phoneNumber"
-            label="Phone number"
-            initialValue={props.driver.phoneNumber}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="imageUrl"
-            label="Image URL"
-            initialValue={props.driver.imageUrl || ''}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item name="tagColor" label="Tag Color">
-            <Select
-              placeholder="Select a color for driver's tag in the table"
-              initialValue={props.driver.tagColor}
+          <Form.Item label="Driver Name">
+            <Form.Item
+              name="name"
+              noStyle
+              initialValue={`${props.driver.name}`}
+              rules={[{ required: true }]}
             >
-              {colors.map((color) => (
-                <Option value={color} key={color}>
-                  <div style={{ backgroundColor: `${color}` }}>{color}</div>
-                </Option>
-              ))}
-            </Select>
+              <Input />
+            </Form.Item>
+          </Form.Item>
+          <Form.Item label="Email">
+            <Form.Item
+              name="email"
+              noStyle
+              initialValue={props.driver.email}
+              rules={[{ required: true }]}
+            >
+              <Input />
+            </Form.Item>
+          </Form.Item>
+          <Form.Item label="Phone number">
+            <Form.Item
+              name="phoneNumber"
+              noStyle
+              initialValue={props.driver.phoneNumber}
+            >
+              <Input />
+            </Form.Item>
+          </Form.Item>
+          <Form.Item label="Image URL">
+            <Form.Item
+              name="imageUrl"
+              noStyle
+              initialValue={props.driver.imageUrl || ''}
+            >
+              <Input />
+            </Form.Item>
+          </Form.Item>
+          <Form.Item label="Tag Color">
+            <Form.Item noStyle name="tagColor">
+              <Select
+                placeholder="Select a color for driver's tag in the table"
+                initialValue={props.driver.tagColor}
+              >
+                {colors.map((color) => (
+                  <Option value={color} key={color}>
+                    <div style={{ backgroundColor: `${color}` }}>{color}</div>
+                  </Option>
+                ))}
+              </Select>
+            </Form.Item>
           </Form.Item>
           <Form.Item>
             <Button htmlType="button" type="secondary" onClick={handleClose}>

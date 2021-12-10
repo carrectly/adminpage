@@ -55,9 +55,10 @@ const AuthForm = (props) => {
         onFinishFailed={onFinishFailed}
         onChange={onChange}
       >
-        <Form.Item>
+        <Form.Item label="">
           <Form.Item
             name="email"
+            noStyle
             rules={[
               {
                 required: true,
@@ -71,9 +72,10 @@ const AuthForm = (props) => {
             />
           </Form.Item>
         </Form.Item>
-        <Form.Item>
+        <Form.Item label="">
           <Form.Item
             name="password"
+            noStyle
             rules={[
               {
                 required: true,
@@ -90,39 +92,45 @@ const AuthForm = (props) => {
         </Form.Item>
         {name === 'signup' ? (
           <div>
-            <Form.Item name="firstName">
-              <Input
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="First Name"
-              />
+            <Form.Item label="">
+              <Form.Item name="firstName" noStyle>
+                <Input
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="First Name"
+                />
+              </Form.Item>
             </Form.Item>
-            <Form.Item name="lastName">
-              <Input
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Last Name"
-              />
+            <Form.Item label="">
+              <Form.Item name="lastName" noStyle>
+                <Input
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="Last Name"
+                />
+              </Form.Item>
             </Form.Item>
           </div>
         ) : (
           <div />
         )}
-        <Form.Item name={name}>
-          <Button
-            style={{ width: '50%' }}
-            type="primary"
-            htmlType="submit"
-            disabled={!isValid}
-          >
-            {displayName}
-          </Button>
-          <Button
-            style={{ width: '50%' }}
-            htmlType="button"
-            type="secondary"
-            onClick={onCancel}
-          >
-            Reset
-          </Button>
+        <Form.Item label="">
+          <Form.Item name={name}>
+            <Button
+              style={{ width: '50%' }}
+              type="primary"
+              htmlType="submit"
+              disabled={!isValid}
+            >
+              {displayName}
+            </Button>
+            <Button
+              style={{ width: '50%' }}
+              htmlType="button"
+              type="secondary"
+              onClick={onCancel}
+            >
+              Reset
+            </Button>
+          </Form.Item>
         </Form.Item>
         {error && error.response && <div> {error.response.data} </div>}
       </Form>

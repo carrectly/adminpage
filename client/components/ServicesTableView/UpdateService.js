@@ -52,28 +52,34 @@ const UpdateService = ({ value, row }) => {
           validateMessages={validateMessages}
           onFinishFailed={onFinishFailed}
         >
-          <Form.Item
-            name="name"
-            label="Service Name"
-            initialValue={`${row.name}`}
-            rules={[{ required: true }]}
-          >
-            <Input />
+          <Form.Item label="Service Name">
+            <Form.Item
+              name="name"
+              noStyle
+              initialValue={`${row.name}`}
+              rules={[{ required: true }]}
+            >
+              <Input />
+            </Form.Item>
           </Form.Item>
-          <Form.Item
-            name="price"
-            label="Service Price"
-            initialValue={row.price}
-            rules={[{ required: true }, { type: 'number' }]}
-          >
-            <InputNumber />
+          <Form.Item label="Service Price">
+            <Form.Item
+              name="price"
+              noStyle
+              initialValue={row.price}
+              rules={[{ required: true }, { type: 'number' }]}
+            >
+              <InputNumber />
+            </Form.Item>
           </Form.Item>
-          <Form.Item
-            name="description"
-            label="Description"
-            initialValue={row.description || ''}
-          >
-            <Input />
+          <Form.Item label="Description">
+            <Form.Item
+              name="description"
+              noStyle
+              initialValue={row.description || ''}
+            >
+              <Input />
+            </Form.Item>
           </Form.Item>
           <Form.Item>
             <Button htmlType="button" type="secondary" onClick={handleClose}>

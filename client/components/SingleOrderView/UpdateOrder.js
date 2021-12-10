@@ -89,77 +89,86 @@ const UpdateOrder = () => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
-          <Form.Item name="pickupDate" label="Pick Up Date">
-            <DatePicker
-              showTime={{ minuteStep: 15 }}
-              format="YYYY-MM-DD HH:mm"
-              placeholder={moment(order.pickupDate).format('YYYY-MM-DD HH:mm')}
-            />
+          <Form.Item label="Pick Up Date">
+            <Form.Item name="pickupDate">
+              <DatePicker
+                showTime={{ minuteStep: 15 }}
+                format="YYYY-MM-DD HH:mm"
+                placeholder={moment(order.pickupDate).format(
+                  'YYYY-MM-DD HH:mm'
+                )}
+              />
+            </Form.Item>
           </Form.Item>
-          <Form.Item name="dropoffDate" label="Drop Off Date">
-            <DatePicker
-              showTime={{ minuteStep: 15 }}
-              format="YYYY-MM-DD HH:mm"
-              placeholder={moment(order.dropoffDate).format('YYYY-MM-DD HH:mm')}
-            />
+          <Form.Item label="Drop Off Date">
+            <Form.Item name="dropoffDate" noStyle>
+              <DatePicker
+                showTime={{ minuteStep: 15 }}
+                format="YYYY-MM-DD HH:mm"
+                placeholder={moment(order.dropoffDate).format(
+                  'YYYY-MM-DD HH:mm'
+                )}
+              />
+            </Form.Item>
           </Form.Item>
-          <Form.Item
-            name="pickupLocation"
-            label="Pickup Location"
-            initialValue={order.pickupLocation}
-          >
-            <Input />
+          <Form.Item label="Pickup Location">
+            <Form.Item
+              name="pickupLocation"
+              noStyle
+              initialValue={order.pickupLocation}
+            >
+              <Input />
+            </Form.Item>
           </Form.Item>
-          <Form.Item
-            name="carYear"
-            label="Car Year"
-            initialValue={order.carYear}
-          >
-            <Input />
+          <Form.Item label="Car Year">
+            <Form.Item name="carYear" noStyle initialValue={order.carYear}>
+              <Input />
+            </Form.Item>
           </Form.Item>
-          <Form.Item
-            name="carMake"
-            label="Car Make"
-            initialValue={order.carMake}
-          >
-            <Input />
+          <Form.Item label="Car Make">
+            <Form.Item name="carMake" noStyle initialValue={order.carMake}>
+              <Input />
+            </Form.Item>
           </Form.Item>
-          <Form.Item
-            name="carModel"
-            label="Car Model"
-            initialValue={order.carModel}
-          >
-            <Input />
+          <Form.Item label="Car Model">
+            <Form.Item name="carModel" noStyle initialValue={order.carModel}>
+              <Input />
+            </Form.Item>
           </Form.Item>
-          <Form.Item
-            name="carColor"
-            label="Car color"
-            initialValue={order.carColor}
-          >
-            <Input />
+          <Form.Item label="Car color">
+            <Form.Item name="carColor" noStyle initialValue={order.carColor}>
+              <Input />
+            </Form.Item>
           </Form.Item>
-          <Form.Item name="vin" label="Vin #" initialValue={order.vin || ''}>
-            <Input />
+          <Form.Item label="Vin #">
+            <Form.Item name="vin" noStyle initialValue={order.vin || ''}>
+              <Input />
+            </Form.Item>
           </Form.Item>
-          <Form.Item
-            name="promoCode"
-            label="Promo Code"
-            rules={[
-              {
-                required: checkPromo,
-                message: 'Please add promo code before adding discount amount',
-              },
-            ]}
-            initialValue={order.promoCode || ''}
-          >
-            <Input />
+          <Form.Item label="Promo Code">
+            <Form.Item
+              name="promoCode"
+              noStyle
+              rules={[
+                {
+                  required: checkPromo,
+                  message:
+                    'Please add promo code before adding discount amount',
+                },
+              ]}
+              initialValue={order.promoCode || ''}
+            >
+              <Input />
+            </Form.Item>
           </Form.Item>
-          <Form.Item
-            name="discount"
-            label="Discount amount"
-            initialValue={order.discount || ''}
-          >
-            <Input onChange={onDiscountChange} />
+          <Form.Item label="Discount amount">
+            <Form.Item
+              name="discount"
+              noStyle
+              initialValue={order.discount || ''}
+            >
+              <Input onChange={onDiscountChange} />
+            </Form.Item>
           </Form.Item>
           <Form.Item>
             <Button onClick={onCancel}>Cancel</Button>
