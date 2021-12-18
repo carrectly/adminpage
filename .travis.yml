@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - 12 # uses version 12
+  - 16 # uses version 12
 services:
   - postgresql # starts up postgres
 addons:
