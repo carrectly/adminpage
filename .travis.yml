@@ -4,7 +4,7 @@ node_js:
 services:
   - postgresql # starts up postgres
 addons:
-  postgresql: '13.5' # recent postgres version on Travis
+  postgresql: '10' # recent postgres version on Travis
 dist: xenial # uses xenial environment
 notifications:
   email:
