@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {fetchServicesThunk} from '../../store/services'
 import {addOrderServiceThunk} from '../../store/singleorder'
@@ -6,32 +6,25 @@ import {Select, Button} from 'antd'
 
 const {Option} = Select
 
-class AddOrderServices extends Component {
-	constructor(props) {
-		super(props)
-		this.handleAddService = this.handleAddService.bind(this)
-		this.handleChange = this.handleChange.bind(this)
-		this.state = {service: null}
+const AddOrderServices = (props) =>  {
+  const [service, setService] = useState(null)
+
+  useEffect(() => {
+    props.getServices()
+  }, [])
+
+	const handleAddService = () => {
+		let id = props.orderid
+		props.addService(id, service)
+		setService(null)
 	}
 
-	componentDidMount() {
-		this.props.getServices()
+	const handleChange = (value) => {
+    setService(value)
 	}
 
-	handleAddService() {
-		let id = this.props.orderid
-		this.props.addService(id, this.state)
-		this.setState({service: null})
-	}
 
-	handleChange(value) {
-		this.setState({
-			service: value,
-		})
-	}
-
-	render() {
-		const servicesDropDown = this.props.services || []
+		const servicesDropDown = props.services || []
 		return (
 			<div className='select-and-button'>
 				<Select
@@ -39,16 +32,16 @@ class AddOrderServices extends Component {
 					style={{width: '80%'}}
 					placeholder='Search to add service'
 					optionFilterProp='children'
-					onChange={this.handleChange}
+					onChange={handleChange}
 					filterOption={(input, option) =>
-						option.children
+						option
 							.toLowerCase()
 							.indexOf(input.toLowerCase()) >= 0
 					}
 					filterSort={(optionA, optionB) =>
-						optionA.children
+						optionA
 							.toLowerCase()
-							.localeCompare(optionB.children.toLowerCase())
+							.localeCompare(optionB.toLowerCase())
 					}>
 					{servicesDropDown.map(svc => (
 						<Option
@@ -64,13 +57,12 @@ class AddOrderServices extends Component {
 					style={{backgroundColor: '#6AEB6F'}}
 					size='middle'
 					shape='round'
-					disabled={!this.state.service}
-					onClick={this.handleAddService}>
+					disabled={!service}
+					onClick={handleAddService}>
 					Add
 				</Button>
 			</div>
 		)
-	}
 }
 
 const mapStateToProps = state => {
