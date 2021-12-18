@@ -2,6 +2,7 @@
 
 const { spawn } = require('child_process')
 const fs = require('fs')
+if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 const axios = require('axios')
 const GitUrlParse = require('git-url-parse')
@@ -69,8 +70,9 @@ const getNamesFromGit = () =>
     simpleGit.getRemotes(true, (err, res) => {
       if (err) throw new Error(reject(err))
       resolve({
-        fullName: GitUrlParse(getRemoteURL('origin', res)).full_name,
+        fullName: GitUrlParse(getRemoteURL('origin', res)).name,
         appName: GitUrlParse(getRemoteURL('heroku', res)).name,
+        owner: GitUrlParse(getRemoteURL('origin', res)).owner,
       })
     })
   )
@@ -124,7 +126,7 @@ const updateTravisYAML = (app, key) => {
 
 const main = async () => {
   const verbose = process.argv.hasOwnProperty(2)
-  const { fullName, appName } = await getNamesFromGit()
+  const { fullName, appName, owner } = await getNamesFromGit()
 
   /* Get Heroku authentication token from the Heroku CLI. */
   const herokuTokenOut = await getOutputFromCommand('heroku', ['auth:token'])
@@ -133,11 +135,11 @@ const main = async () => {
   if (verbose) console.log('Received Heroku token', herokuToken.toString())
 
   /* Download the repo's public key supplied by Travis. */
-  const travisURL = `https://api.travis-ci.com/repo/abirkus/22142315/key_pair/generated`
+  const travisURL = `https://api.travis-ci.com/repo/${owner}%2F${fullName}/key_pair/generated`
   const travisResponse = await axios.get(travisURL, {
     headers: {
       'Travis-API-Version': 3,
-      Authorization: 'token h7wT6reeuPjpA7M-mWe1Mw',
+      Authorization: `token ${process.env.travisApiToken}`,
     },
   })
   const key = travisResponse.data.public_key
