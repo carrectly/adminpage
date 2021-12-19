@@ -1,7 +1,7 @@
 const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-const {User} = require('../db/models')
+const { User } = require('../db/models')
 module.exports = router
 
 /**
@@ -27,78 +27,81 @@ module.exports = router
 // callbackURL: process.env.GOOGLE_CALLBACK,
 
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
-	console.log('Google client ID / secret not found. Skipping Google OAuth.')
+  console.log('Google client ID / secret not found. Skipping Google OAuth.')
 } else {
-	const googleConfig = {
-		clientID: process.env.GOOGLE_CLIENT_ID,
-		clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-		callbackURL: process.env.GOOGLE_CALLBACK,
-	}
+  const googleConfig = {
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK,
+  }
 
-	let SCOPES = ['email', 'profile']
+  let SCOPES = ['email', 'profile']
 
-	const strategy = new GoogleStrategy(
-		googleConfig,
-		(token, refreshToken, profile, done) => {
-			const googleId = profile.id
-			const email = profile.emails[0].value
-			const firstName = profile.name.givenName
-			const lastName = profile.name.familyName
+  const strategy = new GoogleStrategy(
+    googleConfig,
+    (token, refreshToken, profile, done) => {
+      const googleId = profile.id
+      const email = profile.emails[0].value
+      const firstName = profile.name.givenName
+      const lastName = profile.name.familyName
 
-			if (email === 'info@carrectly.com') {
-				SCOPES = [
-					...SCOPES,
-					'https://www.googleapis.com/auth/gmail.readonly',
-					'https://www.googleapis.com/auth/gmail.send',
-					'https://www.googleapis.com/auth/gmail.modify',
-					'https://www.googleapis.com/auth/gmail.compose',
-					'https://www.googleapis.com/auth/contacts',
-					'https://www.googleapis.com/auth/calendar',
-				]
-			}
-			// let tkn = {}
+      let role = 'unconfirmed'
 
-			// if (token) {
-			// 	tkn.access_token = token
-			// }
-			// if (refreshToken) {
-			// 	tkn.refresh_token = refreshToken
-			// }
-			// tkn = JSON.stringify(tkn)
+      if (email === 'info@carrectly.com') {
+        SCOPES = [
+          ...SCOPES,
+          'https://www.googleapis.com/auth/gmail.readonly',
+          'https://www.googleapis.com/auth/gmail.send',
+          'https://www.googleapis.com/auth/gmail.modify',
+          'https://www.googleapis.com/auth/gmail.compose',
+          'https://www.googleapis.com/auth/contacts',
+          'https://www.googleapis.com/auth/calendar',
+        ]
+        role = 'admin'
+      }
+      // let tkn = {}
 
-			User.findOrCreate({
-				where: {googleId},
-				defaults: {email, firstName, lastName},
-			})
-				.then(user => {
-					// if (user[0]._options.isNewRecord) {
-					// 	user[0].update({token: tkn})
-					// }
-					return done(null, user[0])
-				})
-				.catch(done)
-		}
-	)
+      // if (token) {
+      // 	tkn.access_token = token
+      // }
+      // if (refreshToken) {
+      // 	tkn.refresh_token = refreshToken
+      // }
+      // tkn = JSON.stringify(tkn)
 
-	passport.use(strategy)
+      User.findOrCreate({
+        where: { googleId },
+        defaults: { email, firstName, lastName, role },
+      })
+        .then((user) => {
+          // if (user[0]._options.isNewRecord) {
+          // 	user[0].update({token: tkn})
+          // }
+          return done(null, user[0])
+        })
+        .catch(done)
+    }
+  )
 
-	// accessType will need to be enabled if we are trying to obtain new refresh token
-	router.get(
-		'/',
-		passport.authenticate('google', {
-			scope: SCOPES,
-			// accessType: 'offline',
-			// prompt: 'consent',
-		})
-	)
+  passport.use(strategy)
 
-	router.get(
-		'/callback',
-		passport.authenticate('google', {failureRedirect: '/login'}),
-		function(req, res) {
-			res.redirect('/account')
-		}
-	)
+  // accessType will need to be enabled if we are trying to obtain new refresh token
+  router.get(
+    '/',
+    passport.authenticate('google', {
+      scope: SCOPES,
+      // accessType: 'offline',
+      // prompt: 'consent',
+    })
+  )
+
+  router.get(
+    '/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function (req, res) {
+      res.redirect('/account')
+    }
+  )
 }
 
 router.use('/gmail', require('./gmail'))
