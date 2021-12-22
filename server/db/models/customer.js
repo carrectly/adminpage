@@ -4,41 +4,41 @@ var axios = require('axios')
 if (process.env.NODE_ENV !== 'production') require('../../../secrets.js')
 
 const Customer = db.define('customer', {
-	phoneNumber: {
-		type: Sequelize.BIGINT,
-		primaryKey: true,
-	},
-	location: {
-		type: Sequelize.STRING,
-		allowNull: true,
-	},
-	firstName: {
-		type: Sequelize.STRING,
-	},
-	lastName: {
-		type: Sequelize.STRING,
-	},
-	email: {
-		type: Sequelize.STRING,
-	},
-	isInGoogle: {
-		type: Sequelize.BOOLEAN,
-		defaultValue: false,
-	},
+  phoneNumber: {
+    type: Sequelize.BIGINT,
+    primaryKey: true,
+  },
+  location: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  firstName: {
+    type: Sequelize.STRING,
+  },
+  lastName: {
+    type: Sequelize.STRING,
+  },
+  email: {
+    type: Sequelize.STRING,
+  },
+  isInGoogle: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
 })
 
-const createInGoogle = async inst => {
-	try {
-		inst.isInGoogle = true
-		await axios.post(
-			`${process.env.DOMAIN}/auth/google/contacts`,
-			inst.dataValues
-		)
-	} catch (err) {
-		console.log(err.message)
-	}
+const createInGoogle = async (inst) => {
+  try {
+    inst.isInGoogle = true
+    await axios.post(
+      `${process.env.DOMAIN}/auth/google/contacts`,
+      inst.dataValues
+    )
+  } catch (err) {
+    console.log('Failed to create a contact in google', err.message)
+  }
 }
 
-Customer.beforeCreate(createInGoogle)
+Customer.afterCreate(createInGoogle)
 
 module.exports = Customer

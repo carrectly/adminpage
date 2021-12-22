@@ -33,9 +33,6 @@ router.post('/newbooking', async (req, res, next) => {
       'YYYY-MM-DD HH:mm:ss'
     )
 
-    // msgbody.pickupDate = moment(msgbody.pickupDate)
-    // 	.utcOffset(6)
-    // 	.format('YYYY-MM-DD HH:mm:ss')
     delete msgbody.customer
     delete msgbody.services
 
@@ -106,6 +103,84 @@ router.post('/newbooking', async (req, res, next) => {
     }
 
     await forLoop3()
+    res.status(200).json(detailedResponse)
+  } catch (err) {
+    res.status(400).send(err)
+  }
+})
+
+router.post('/neworder', async (req, res, next) => {
+  try {
+    // console.log('post request received', req.body)
+    let services = req.body.services //array
+    let newcust = req.body.customer
+    let phonenum = newcust.phoneNumber.replace(/\D/g, '')
+    newcust.phoneNumber = phonenum
+    // console.log('clean phone', phonenum)
+    let order = req.body.order
+    order.customerPhoneNumber = phonenum
+    let cust = await Customer.findOrCreate({
+      where: {
+        phoneNumber: phonenum,
+      },
+      defaults: newcust,
+    })
+
+    let detailedResponse = {}
+
+    if (cust === null) {
+      detailedResponse.customer = 'failed to created customer'
+    } else {
+      detailedResponse.customer = {
+        status: 'success',
+        data: cust,
+      }
+    }
+
+    let ordr = await Order.create(order)
+
+    // if (ordr === null) {
+    //   detailedResponse.order = 'failed to create order'
+    // } else {
+    //   detailedResponse.order = {
+    //     status: 'success',
+    //     data: ordr,
+    //   }
+
+    //   const email = cust[0].email
+    //   const orderid = ordr.hash
+    //   const make = ordr.carMake
+    //   const model = ordr.carModel
+    //   const year = ordr.carYear
+    //   try {
+    //     await axios.post(
+    //       `${process.env.DOMAIN}/auth/google/gmail/sendconfirmation`,
+    //       {
+    //         email,
+    //         orderid,
+    //         make,
+    //         model,
+    //         year,
+    //       }
+    //     )
+    //   } catch (err) {
+    //     console.error(err)
+    //   }
+    // }
+
+    // const forLoop3 = async (_) => {
+    //   for (let i = 0; i < services.length; i++) {
+    //     // addServices - multiple is an option
+    //     await ordr.addService(services[i].id, {
+    //       through: {
+    //         customerPrice: services[i].dataValues.price,
+    //       },
+    //     })
+    //   }
+    // }
+
+    // await forLoop3()
+
     res.status(200).json(detailedResponse)
   } catch (err) {
     res.status(400).send(err)
