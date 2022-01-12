@@ -9,6 +9,7 @@ const db = require('./db')
 const sessionStore = new SequelizeStore({ db })
 const PORT = process.env.PORT || 1337
 const app = express()
+const cors = require('cors')
 const socketio = require('socket.io')
 
 module.exports = app
@@ -30,6 +31,8 @@ passport.deserializeUser(async (id, done) => {
 const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
+
+  app.use(cors())
 
   // body parsing middleware
   app.use(express.json())
