@@ -11,9 +11,7 @@ const fs = require('fs')
 // const legacyCustomers = JSON.parse(
 // 	fs.readFileSync('./seedData/customers.json', 'utf-8')
 // )
-const servicesSeed = JSON.parse(
-  fs.readFileSync('./server/db/services.json', 'utf-8')
-)
+const servicesSeed = JSON.parse(fs.readFileSync('./services.json', 'utf-8'))
 
 let customerSeed = []
 let dealerSeed = []
