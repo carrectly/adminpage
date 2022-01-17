@@ -2,7 +2,7 @@ const { User, Customer, Order, Service, Dealer, Driver } = require('./models')
 const db = require('./database.js')
 var faker = require('faker')
 // const Sequelize = require('sequelize')
-// const fs = require('fs')
+const fs = require('fs')
 
 // const legacyOrders = JSON.parse(
 // 	fs.readFileSync('./seedData/orders.json', 'utf-8')
@@ -11,9 +11,9 @@ var faker = require('faker')
 // const legacyCustomers = JSON.parse(
 // 	fs.readFileSync('./seedData/customers.json', 'utf-8')
 // )
-// const servicesSeed = JSON.parse(
-// 	fs.readFileSync('./seedData/services.json', 'utf-8')
-// )
+const servicesSeed = JSON.parse(
+  fs.readFileSync('./server/db/services.json', 'utf-8')
+)
 
 let customerSeed = []
 let dealerSeed = []
@@ -104,12 +104,12 @@ const driversSeed = [
   },
 ]
 
-const servicesSeed = [
-  { name: 'AC Coolant Recharge', price: 150 },
-  { name: 'Alighnment', price: 145 },
-  { name: 'Auto Leather Repair', price: 100 },
-  { name: 'Battery Jump, Test & Swap', price: 70 },
-]
+// const servicesSeed = [
+//   { name: 'AC Coolant Recharge', price: 150 },
+//   { name: 'Alighnment', price: 145 },
+//   { name: 'Auto Leather Repair', price: 100 },
+//   { name: 'Battery Jump, Test & Swap', price: 70 },
+// ]
 
 const seed = async () => {
   console.log('trying to seed DB')

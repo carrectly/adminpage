@@ -111,13 +111,14 @@ router.post('/newbooking', async (req, res, next) => {
 
 router.post('/neworder', async (req, res, next) => {
   try {
+    console.log('new booking request', req.body.param)
     // console.log('post request received', req.body)
-    let services = req.body.services //array
-    let newcust = req.body.customer
+    let services = req.body.param.services //array
+    let newcust = req.body.param.customer
     let phonenum = newcust.phoneNumber.replace(/\D/g, '')
     newcust.phoneNumber = phonenum
     // console.log('clean phone', phonenum)
-    let order = req.body.order
+    let order = req.body.param.order
     order.customerPhoneNumber = phonenum
     let cust = await Customer.findOrCreate({
       where: {
@@ -139,14 +140,14 @@ router.post('/neworder', async (req, res, next) => {
 
     let ordr = await Order.create(order)
 
-    // if (ordr === null) {
-    //   detailedResponse.order = 'failed to create order'
-    // } else {
-    //   detailedResponse.order = {
-    //     status: 'success',
-    //     data: ordr,
-    //   }
-
+    if (ordr === null) {
+      detailedResponse.order = 'failed to create order'
+    } else {
+      detailedResponse.order = {
+        status: 'success',
+        data: ordr,
+      }
+    }
     //   const email = cust[0].email
     //   const orderid = ordr.hash
     //   const make = ordr.carMake
@@ -168,21 +169,17 @@ router.post('/neworder', async (req, res, next) => {
     //   }
     // }
 
-    // const forLoop3 = async (_) => {
-    //   for (let i = 0; i < services.length; i++) {
-    //     // addServices - multiple is an option
-    //     await ordr.addService(services[i].id, {
-    //       through: {
-    //         customerPrice: services[i].dataValues.price,
-    //       },
-    //     })
-    //   }
-    // }
+    const forLoop3 = async (_) => {
+      for (let i = 0; i < services.length; i++) {
+        // addServices - multiple is an option
+        await ordr.addService(services[i].id)
+      }
+    }
 
-    // await forLoop3()
-
+    await forLoop3()
     res.status(200).json(detailedResponse)
   } catch (err) {
+    console.log('error', err)
     res.status(400).send(err)
   }
 })
