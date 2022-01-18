@@ -1,0 +1,26 @@
+.navbar1 {
+	display: flex;
+	flex-flow: row;
+	justify-content: space-around;
+	height: 100%;
+	background-color: #743794;
+	color: white;
+	align-items: center;
+	padding: 0px;
+
+	.link {
+		display: flex;
+		flex-flow: row;
+		justify-content: space-between;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 12px;
+		line-height: 14px;
+		text-transform: uppercase;
+
+		.icon {
+			padding-right: 4px;
+		}
+	}
+}
