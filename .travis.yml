@@ -17,7 +17,7 @@ before_script:
 script:
   - npm run build:prod # make the bundle
 before_deploy: # omit node_modules, since we set skip_cleanup below
-  - rm -rf node_modules
+  - rvm $(travis_internal_ruby) --fuzzy do ruby -S gem install faraday -v 1.9.3
 deploy: # see README for details on these keys
   # prevents travis from deleting the build
   skip_cleanup: true
