@@ -99,7 +99,10 @@ const updateTravisYAML = (app, key) => {
   if (doc.has('before_deploy')) {
     return console.log(idempotenceMessage)
   }
-  doc.set('before_deploy', ['rm -rf node_modules'])
+  doc.set('before_deploy', [
+    'rvm $(travis_internal_ruby) --fuzzy do ruby -S gem install faraday -v 1.9.3',
+    'rm -rf node_modules',
+  ])
   doc.set(
     'deploy',
     YAML.createNode({
