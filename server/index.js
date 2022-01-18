@@ -51,12 +51,17 @@ const createApp = () => {
   app.use(passport.session())
 
   // static file-serving middleware
-  app.use(express.static(path.join(__dirname, '..', 'public')))
+  app.use(express.static(path.join(__dirname, '..', 'dist')))
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
   app.use('/square', require('./square'))
   app.use('/wpbookings', require('./wpbookings'))
+
+  // sends index.html
+  app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'dist/index.html'))
+  })
 
   // any remaining requests with an extension (.js, .css, etc.) send 404
   app.use((req, res, next) => {
@@ -67,11 +72,6 @@ const createApp = () => {
     } else {
       next()
     }
-  })
-
-  // sends index.html
-  app.use('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public/index.html'))
   })
 
   // error handling endware
