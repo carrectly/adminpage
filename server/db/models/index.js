@@ -6,30 +6,32 @@ const Order = require('./order')
 const OrderDetails = require('./orderDetails')
 const Customer = require('./customer')
 const Comment = require('./comment')
+const CarMakes = require('./carMakes')
 
 Customer.hasMany(Order)
 Order.belongsTo(Customer)
 
-Driver.hasOne(Order, {as: 'pickUpDriver', foreignKey: 'pickUpDriverId'})
-Driver.hasOne(Order, {as: 'returnDriver', foreignKey: 'returnDriverId'})
-Order.belongsTo(Driver, {as: 'pickUpDriver', foreignKey: 'pickUpDriverId'})
-Order.belongsTo(Driver, {as: 'returnDriver', foreignKey: 'returnDriverId'})
+Driver.hasOne(Order, { as: 'pickUpDriver', foreignKey: 'pickUpDriverId' })
+Driver.hasOne(Order, { as: 'returnDriver', foreignKey: 'returnDriverId' })
+Order.belongsTo(Driver, { as: 'pickUpDriver', foreignKey: 'pickUpDriverId' })
+Order.belongsTo(Driver, { as: 'returnDriver', foreignKey: 'returnDriverId' })
 
-Order.belongsToMany(Service, {through: 'orderdetails'})
-Service.belongsToMany(Order, {through: 'orderdetails'})
+Order.belongsToMany(Service, { through: 'orderdetails' })
+Service.belongsToMany(Order, { through: 'orderdetails' })
 
-Order.belongsToMany(Dealer, {through: 'ordershops'})
-Dealer.belongsToMany(Order, {through: 'ordershops'})
+Order.belongsToMany(Dealer, { through: 'ordershops' })
+Dealer.belongsToMany(Order, { through: 'ordershops' })
 
 Order.hasMany(Comment)
 
 module.exports = {
-	User,
-	Dealer,
-	Service,
-	Order,
-	OrderDetails,
-	Customer,
-	Comment,
-	Driver,
+  User,
+  Dealer,
+  Service,
+  Order,
+  OrderDetails,
+  Customer,
+  Comment,
+  Driver,
+  CarMakes,
 }

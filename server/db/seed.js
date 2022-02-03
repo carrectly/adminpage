@@ -1,4 +1,12 @@
-const { User, Customer, Order, Service, Dealer, Driver } = require('./models')
+const {
+  User,
+  Customer,
+  Order,
+  Service,
+  Dealer,
+  Driver,
+  CarMakes,
+} = require('./models')
 const db = require('./database.js')
 var faker = require('faker')
 // const Sequelize = require('sequelize')
@@ -12,6 +20,7 @@ const fs = require('fs')
 // 	fs.readFileSync('./seedData/customers.json', 'utf-8')
 // )
 const servicesSeed = JSON.parse(fs.readFileSync('./services.json', 'utf-8'))
+const carMakesSeed = JSON.parse(fs.readFileSync('./carMakesList.json', 'utf-8'))
 
 let customerSeed = []
 let dealerSeed = []
@@ -118,6 +127,8 @@ const seed = async () => {
     console.log('dealer bulk created')
     await Service.bulkCreate(servicesSeed)
     console.log('serivce bulk created')
+    await CarMakes.bulkCreate(carMakesSeed)
+    console.log('car makes bulk created')
     await Driver.bulkCreate(driversSeed)
     console.log('drivers bulk created')
     await User.create({
