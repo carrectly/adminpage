@@ -14,6 +14,7 @@
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
     "seed": "node server/db/seed.js",
+    "seed:cars": "node server/db/seedCarTable.js",
     "start": "node server/index.js",
     "start-dev": "NODE_ENV='development' npm run build:dev & NODE_ENV='development' npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
