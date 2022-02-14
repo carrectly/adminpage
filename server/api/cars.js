@@ -30,7 +30,7 @@ router.get('/getModelsByYearMake/:make/:year', async (req, res, next) => {
   try {
     const models = await CarMakes.findAll({
       where: {
-        [Op.and]: [{ Year: 2020 }, { Make: 'active' }],
+        [Op.and]: [{ Year: req.params.year }, { Make: req.params.make }],
       },
     })
     res.json(models)
