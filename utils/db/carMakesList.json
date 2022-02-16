@@ -175,7 +175,7 @@
         "Year": 2020,
         "Make": "INFINITI",
         "Model": "QX80",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:17.666Z",
         "updatedAt": "2020-01-27T20:44:17.666Z"
     },
@@ -355,7 +355,7 @@
         "Year": 2020,
         "Make": "BMW",
         "Model": "X7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:17.665Z",
         "updatedAt": "2020-01-27T20:44:17.665Z"
     },
@@ -400,7 +400,7 @@
         "Year": 2020,
         "Make": "Chevrolet",
         "Model": "Suburban",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:17.665Z",
         "updatedAt": "2020-01-27T20:44:17.665Z"
     },
@@ -427,7 +427,7 @@
         "Year": 2020,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:17.665Z",
         "updatedAt": "2020-01-27T20:44:17.665Z"
     },
@@ -553,7 +553,7 @@
         "Year": 2020,
         "Make": "GMC",
         "Model": "Yukon XL",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:17.665Z",
         "updatedAt": "2020-01-27T20:44:17.665Z"
     },
@@ -571,7 +571,7 @@
         "Year": 2020,
         "Make": "Ford",
         "Model": "Expedition MAX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:17.665Z",
         "updatedAt": "2020-01-27T20:44:17.665Z"
     },
@@ -607,7 +607,7 @@
         "Year": 2020,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:17.665Z",
         "updatedAt": "2020-01-27T20:44:17.665Z"
     },
@@ -616,7 +616,7 @@
         "Year": 2020,
         "Make": "Hyundai",
         "Model": "Palisade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:17.665Z",
         "updatedAt": "2020-01-27T20:44:17.665Z"
     },
@@ -652,7 +652,7 @@
         "Year": 2020,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:17.665Z",
         "updatedAt": "2020-01-27T20:44:17.665Z"
     },
@@ -733,7 +733,7 @@
         "Year": 2020,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:17.665Z",
         "updatedAt": "2020-01-27T20:44:17.665Z"
     },
@@ -1003,7 +1003,7 @@
         "Year": 2020,
         "Make": "Kia",
         "Model": "Telluride",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.006Z",
         "updatedAt": "2020-01-27T20:44:18.006Z"
     },
@@ -1048,7 +1048,7 @@
         "Year": 2020,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.006Z",
         "updatedAt": "2020-01-27T20:44:18.006Z"
     },
@@ -1102,7 +1102,7 @@
         "Year": 2020,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.006Z",
         "updatedAt": "2020-01-27T20:44:18.006Z"
     },
@@ -1120,7 +1120,7 @@
         "Year": 2020,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.006Z",
         "updatedAt": "2020-01-27T20:44:18.006Z"
     },
@@ -1165,7 +1165,7 @@
         "Year": 2020,
         "Make": "Mercedes-Benz",
         "Model": "GLS",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.006Z",
         "updatedAt": "2020-01-27T20:44:18.006Z"
     },
@@ -1201,7 +1201,7 @@
         "Year": 2020,
         "Make": "Lincoln",
         "Model": "Aviator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.006Z",
         "updatedAt": "2020-01-27T20:44:18.006Z"
     },
@@ -1255,7 +1255,7 @@
         "Year": 2020,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.006Z",
         "updatedAt": "2020-01-27T20:44:18.006Z"
     },
@@ -1264,7 +1264,7 @@
         "Year": 2020,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.006Z",
         "updatedAt": "2020-01-27T20:44:18.006Z"
     },
@@ -1300,7 +1300,7 @@
         "Year": 2020,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.006Z",
         "updatedAt": "2020-01-27T20:44:18.006Z"
     },
@@ -1525,7 +1525,7 @@
         "Year": 2020,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.006Z",
         "updatedAt": "2020-01-27T20:44:18.006Z"
     },
@@ -1867,7 +1867,7 @@
         "Year": 2020,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.039Z",
         "updatedAt": "2020-01-27T20:44:18.039Z"
     },
@@ -1903,7 +1903,7 @@
         "Year": 2020,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.039Z",
         "updatedAt": "2020-01-27T20:44:18.039Z"
     },
@@ -2011,7 +2011,7 @@
         "Year": 2019,
         "Make": "Audi",
         "Model": "Q7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.045Z",
         "updatedAt": "2020-01-27T20:44:18.045Z"
     },
@@ -2101,7 +2101,7 @@
         "Year": 2020,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV1992",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.044Z",
         "updatedAt": "2020-01-27T20:44:18.044Z"
     },
@@ -2389,7 +2389,7 @@
         "Year": 2019,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.045Z",
         "updatedAt": "2020-01-27T20:44:18.045Z"
     },
@@ -2551,7 +2551,7 @@
         "Year": 2019,
         "Make": "BMW",
         "Model": "X7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.045Z",
         "updatedAt": "2020-01-27T20:44:18.045Z"
     },
@@ -2875,7 +2875,7 @@
         "Year": 2019,
         "Make": "Chevrolet",
         "Model": "Suburban",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.077Z",
         "updatedAt": "2020-01-27T20:44:18.077Z"
     },
@@ -2902,7 +2902,7 @@
         "Year": 2019,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.077Z",
         "updatedAt": "2020-01-27T20:44:18.077Z"
     },
@@ -3019,7 +3019,7 @@
         "Year": 2019,
         "Make": "Ford",
         "Model": "Expedition MAX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.077Z",
         "updatedAt": "2020-01-27T20:44:18.077Z"
     },
@@ -3064,7 +3064,7 @@
         "Year": 2019,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.077Z",
         "updatedAt": "2020-01-27T20:44:18.077Z"
     },
@@ -3370,7 +3370,7 @@
         "Year": 2019,
         "Make": "GMC",
         "Model": "Yukon XL",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.078Z",
         "updatedAt": "2020-01-27T20:44:18.078Z"
     },
@@ -3478,7 +3478,7 @@
         "Year": 2019,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.078Z",
         "updatedAt": "2020-01-27T20:44:18.078Z"
     },
@@ -3775,7 +3775,7 @@
         "Year": 2019,
         "Make": "INFINITI",
         "Model": "QX80",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.113Z",
         "updatedAt": "2020-01-27T20:44:18.113Z"
     },
@@ -4072,7 +4072,7 @@
         "Year": 2019,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.114Z",
         "updatedAt": "2020-01-27T20:44:18.114Z"
     },
@@ -4180,7 +4180,7 @@
         "Year": 2019,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.114Z",
         "updatedAt": "2020-01-27T20:44:18.114Z"
     },
@@ -4216,7 +4216,7 @@
         "Year": 2019,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.114Z",
         "updatedAt": "2020-01-27T20:44:18.114Z"
     },
@@ -4405,7 +4405,7 @@
         "Year": 2019,
         "Make": "Mercedes-Benz",
         "Model": "GLS",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.114Z",
         "updatedAt": "2020-01-27T20:44:18.114Z"
     },
@@ -4414,7 +4414,7 @@
         "Year": 2019,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.114Z",
         "updatedAt": "2020-01-27T20:44:18.114Z"
     },
@@ -4423,7 +4423,7 @@
         "Year": 2019,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.114Z",
         "updatedAt": "2020-01-27T20:44:18.114Z"
     },
@@ -4522,7 +4522,7 @@
         "Year": 2019,
         "Make": "Mercedes-Benz",
         "Model": "Mercedes-AMG G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.151Z",
         "updatedAt": "2020-01-27T20:44:18.151Z"
     },
@@ -4756,7 +4756,7 @@
         "Year": 2019,
         "Make": "Mercedes-Benz",
         "Model": "Mercedes-AMG GLS",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.151Z",
         "updatedAt": "2020-01-27T20:44:18.151Z"
     },
@@ -4774,7 +4774,7 @@
         "Year": 2019,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.151Z",
         "updatedAt": "2020-01-27T20:44:18.151Z"
     },
@@ -4882,7 +4882,7 @@
         "Year": 2019,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.151Z",
         "updatedAt": "2020-01-27T20:44:18.151Z"
     },
@@ -5242,7 +5242,7 @@
         "Year": 2019,
         "Make": "Tesla",
         "Model": "Model X",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.152Z",
         "updatedAt": "2020-01-27T20:44:18.152Z"
     },
@@ -5305,7 +5305,7 @@
         "Year": 2019,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.152Z",
         "updatedAt": "2020-01-27T20:44:18.152Z"
     },
@@ -5458,7 +5458,7 @@
         "Year": 2019,
         "Make": "Volkswagen",
         "Model": "Atlas",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.189Z",
         "updatedAt": "2020-01-27T20:44:18.189Z"
     },
@@ -5476,7 +5476,7 @@
         "Year": 2019,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.189Z",
         "updatedAt": "2020-01-27T20:44:18.189Z"
     },
@@ -5674,7 +5674,7 @@
         "Year": 2019,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV2020",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.190Z",
         "updatedAt": "2020-01-27T20:44:18.190Z"
     },
@@ -5935,7 +5935,7 @@
         "Year": 2018,
         "Make": "Audi",
         "Model": "Q7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.190Z",
         "updatedAt": "2020-01-27T20:44:18.190Z"
     },
@@ -6439,7 +6439,7 @@
         "Year": 2018,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.223Z",
         "updatedAt": "2020-01-27T20:44:18.223Z"
     },
@@ -6673,7 +6673,7 @@
         "Year": 2018,
         "Make": "Chevrolet",
         "Model": "Suburban",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.224Z",
         "updatedAt": "2020-01-27T20:44:18.224Z"
     },
@@ -6763,7 +6763,7 @@
         "Year": 2018,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.224Z",
         "updatedAt": "2020-01-27T20:44:18.224Z"
     },
@@ -6889,7 +6889,7 @@
         "Year": 2018,
         "Make": "Ford",
         "Model": "Expedition MAX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.224Z",
         "updatedAt": "2020-01-27T20:44:18.224Z"
     },
@@ -6943,7 +6943,7 @@
         "Year": 2018,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.224Z",
         "updatedAt": "2020-01-27T20:44:18.224Z"
     },
@@ -7366,7 +7366,7 @@
         "Year": 2018,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.262Z",
         "updatedAt": "2020-01-27T20:44:18.262Z"
     },
@@ -7465,7 +7465,7 @@
         "Year": 2018,
         "Make": "GMC",
         "Model": "Yukon XL",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.262Z",
         "updatedAt": "2020-01-27T20:44:18.262Z"
     },
@@ -7672,7 +7672,7 @@
         "Year": 2018,
         "Make": "INFINITI",
         "Model": "QX80",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.263Z",
         "updatedAt": "2020-01-27T20:44:18.263Z"
     },
@@ -7843,7 +7843,7 @@
         "Year": 2018,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.263Z",
         "updatedAt": "2020-01-27T20:44:18.263Z"
     },
@@ -7933,7 +7933,7 @@
         "Year": 2018,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.263Z",
         "updatedAt": "2020-01-27T20:44:18.263Z"
     },
@@ -8104,7 +8104,7 @@
         "Year": 2018,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.263Z",
         "updatedAt": "2020-01-27T20:44:18.263Z"
     },
@@ -8149,7 +8149,7 @@
         "Year": 2018,
         "Make": "Mercedes-Benz",
         "Model": "GLS",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.296Z",
         "updatedAt": "2020-01-27T20:44:18.296Z"
     },
@@ -8185,7 +8185,7 @@
         "Year": 2018,
         "Make": "Mercedes-Benz",
         "Model": "Mercedes-AMG G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.296Z",
         "updatedAt": "2020-01-27T20:44:18.296Z"
     },
@@ -8221,7 +8221,7 @@
         "Year": 2018,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.296Z",
         "updatedAt": "2020-01-27T20:44:18.296Z"
     },
@@ -8293,7 +8293,7 @@
         "Year": 2018,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.296Z",
         "updatedAt": "2020-01-27T20:44:18.296Z"
     },
@@ -8527,7 +8527,7 @@
         "Year": 2018,
         "Make": "Mercedes-Benz",
         "Model": "Mercedes-AMG GLS",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.296Z",
         "updatedAt": "2020-01-27T20:44:18.296Z"
     },
@@ -8608,7 +8608,7 @@
         "Year": 2018,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.297Z",
         "updatedAt": "2020-01-27T20:44:18.297Z"
     },
@@ -8986,7 +8986,7 @@
         "Year": 2018,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.297Z",
         "updatedAt": "2020-01-27T20:44:18.297Z"
     },
@@ -9391,7 +9391,7 @@
         "Year": 2018,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.331Z",
         "updatedAt": "2020-01-27T20:44:18.331Z"
     },
@@ -9418,7 +9418,7 @@
         "Year": 2018,
         "Make": "Tesla",
         "Model": "Model X",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.330Z",
         "updatedAt": "2020-01-27T20:44:18.330Z"
     },
@@ -9445,7 +9445,7 @@
         "Year": 2018,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.331Z",
         "updatedAt": "2020-01-27T20:44:18.331Z"
     },
@@ -9562,7 +9562,7 @@
         "Year": 2018,
         "Make": "Volkswagen",
         "Model": "Atlas",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.331Z",
         "updatedAt": "2020-01-27T20:44:18.331Z"
     },
@@ -9724,7 +9724,7 @@
         "Year": 2018,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.331Z",
         "updatedAt": "2020-01-27T20:44:18.331Z"
     },
@@ -9841,7 +9841,7 @@
         "Year": 2017,
         "Make": "Audi",
         "Model": "Q7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.331Z",
         "updatedAt": "2020-01-27T20:44:18.331Z"
     },
@@ -10327,7 +10327,7 @@
         "Year": 2017,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.370Z",
         "updatedAt": "2020-01-27T20:44:18.370Z"
     },
@@ -10651,7 +10651,7 @@
         "Year": 2017,
         "Make": "Chevrolet",
         "Model": "Suburban",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.370Z",
         "updatedAt": "2020-01-27T20:44:18.370Z"
     },
@@ -10660,7 +10660,7 @@
         "Year": 2017,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.370Z",
         "updatedAt": "2020-01-27T20:44:18.370Z"
     },
@@ -10849,7 +10849,7 @@
         "Year": 2017,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.406Z",
         "updatedAt": "2020-01-27T20:44:18.406Z"
     },
@@ -11380,7 +11380,7 @@
         "Year": 2017,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.407Z",
         "updatedAt": "2020-01-27T20:44:18.407Z"
     },
@@ -11452,7 +11452,7 @@
         "Year": 2017,
         "Make": "GMC",
         "Model": "Yukon XL",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.407Z",
         "updatedAt": "2020-01-27T20:44:18.407Z"
     },
@@ -11632,7 +11632,7 @@
         "Year": 2017,
         "Make": "INFINITI",
         "Model": "QX80",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.407Z",
         "updatedAt": "2020-01-27T20:44:18.407Z"
     },
@@ -11884,7 +11884,7 @@
         "Year": 2017,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.441Z",
         "updatedAt": "2020-01-27T20:44:18.441Z"
     },
@@ -11983,7 +11983,7 @@
         "Year": 2017,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.441Z",
         "updatedAt": "2020-01-27T20:44:18.441Z"
     },
@@ -12028,7 +12028,7 @@
         "Year": 2017,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.441Z",
         "updatedAt": "2020-01-27T20:44:18.441Z"
     },
@@ -12046,7 +12046,7 @@
         "Year": 2017,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.441Z",
         "updatedAt": "2020-01-27T20:44:18.441Z"
     },
@@ -12352,7 +12352,7 @@
         "Year": 2017,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.441Z",
         "updatedAt": "2020-01-27T20:44:18.441Z"
     },
@@ -12388,7 +12388,7 @@
         "Year": 2017,
         "Make": "Mercedes-Benz",
         "Model": "Mercedes-AMG GLS",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.441Z",
         "updatedAt": "2020-01-27T20:44:18.441Z"
     },
@@ -12460,7 +12460,7 @@
         "Year": 2017,
         "Make": "Mercedes-Benz",
         "Model": "GLS",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.441Z",
         "updatedAt": "2020-01-27T20:44:18.441Z"
     },
@@ -12478,7 +12478,7 @@
         "Year": 2017,
         "Make": "Mercedes-Benz",
         "Model": "Mercedes-AMG G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.441Z",
         "updatedAt": "2020-01-27T20:44:18.441Z"
     },
@@ -12766,7 +12766,7 @@
         "Year": 2017,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.476Z",
         "updatedAt": "2020-01-27T20:44:18.476Z"
     },
@@ -12856,7 +12856,7 @@
         "Year": 2017,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.476Z",
         "updatedAt": "2020-01-27T20:44:18.476Z"
     },
@@ -13198,7 +13198,7 @@
         "Year": 2017,
         "Make": "Tesla",
         "Model": "Model X",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.477Z",
         "updatedAt": "2020-01-27T20:44:18.477Z"
     },
@@ -13450,7 +13450,7 @@
         "Year": 2017,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.477Z",
         "updatedAt": "2020-01-27T20:44:18.477Z"
     },
@@ -13468,7 +13468,7 @@
         "Year": 2017,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.477Z",
         "updatedAt": "2020-01-27T20:44:18.477Z"
     },
@@ -13666,7 +13666,7 @@
         "Year": 2017,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.511Z",
         "updatedAt": "2020-01-27T20:44:18.511Z"
     },
@@ -14359,7 +14359,7 @@
         "Year": 2016,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.512Z",
         "updatedAt": "2020-01-27T20:44:18.512Z"
     },
@@ -14674,7 +14674,7 @@
         "Year": 2016,
         "Make": "Chevrolet",
         "Model": "Suburban",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.550Z",
         "updatedAt": "2020-01-27T20:44:18.550Z"
     },
@@ -14710,7 +14710,7 @@
         "Year": 2016,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.550Z",
         "updatedAt": "2020-01-27T20:44:18.550Z"
     },
@@ -14908,7 +14908,7 @@
         "Year": 2016,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.551Z",
         "updatedAt": "2020-01-27T20:44:18.551Z"
     },
@@ -15331,7 +15331,7 @@
         "Year": 2016,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.581Z",
         "updatedAt": "2020-01-27T20:44:18.581Z"
     },
@@ -15367,7 +15367,7 @@
         "Year": 2016,
         "Make": "GMC",
         "Model": "Yukon XL",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.581Z",
         "updatedAt": "2020-01-27T20:44:18.581Z"
     },
@@ -15619,7 +15619,7 @@
         "Year": 2016,
         "Make": "INFINITI",
         "Model": "QX80",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.582Z",
         "updatedAt": "2020-01-27T20:44:18.582Z"
     },
@@ -15799,7 +15799,7 @@
         "Year": 2016,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.582Z",
         "updatedAt": "2020-01-27T20:44:18.582Z"
     },
@@ -15916,7 +15916,7 @@
         "Year": 2016,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.582Z",
         "updatedAt": "2020-01-27T20:44:18.582Z"
     },
@@ -16042,7 +16042,7 @@
         "Year": 2016,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.582Z",
         "updatedAt": "2020-01-27T20:44:18.582Z"
     },
@@ -16087,7 +16087,7 @@
         "Year": 2016,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.583Z",
         "updatedAt": "2020-01-27T20:44:18.583Z"
     },
@@ -16096,7 +16096,7 @@
         "Year": 2016,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.582Z",
         "updatedAt": "2020-01-27T20:44:18.582Z"
     },
@@ -16123,7 +16123,7 @@
         "Year": 2016,
         "Make": "Mercedes-Benz",
         "Model": "GL-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.583Z",
         "updatedAt": "2020-01-27T20:44:18.583Z"
     },
@@ -16564,7 +16564,7 @@
         "Year": 2016,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.614Z",
         "updatedAt": "2020-01-27T20:44:18.614Z"
     },
@@ -16987,7 +16987,7 @@
         "Year": 2016,
         "Make": "Tesla",
         "Model": "Model X",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.615Z",
         "updatedAt": "2020-01-27T20:44:18.615Z"
     },
@@ -17050,7 +17050,7 @@
         "Year": 2016,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.615Z",
         "updatedAt": "2020-01-27T20:44:18.615Z"
     },
@@ -17095,7 +17095,7 @@
         "Year": 2016,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.615Z",
         "updatedAt": "2020-01-27T20:44:18.615Z"
     },
@@ -17284,7 +17284,7 @@
         "Year": 2016,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.649Z",
         "updatedAt": "2020-01-27T20:44:18.649Z"
     },
@@ -17617,7 +17617,7 @@
         "Year": 2015,
         "Make": "Audi",
         "Model": "Q7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.649Z",
         "updatedAt": "2020-01-27T20:44:18.649Z"
     },
@@ -17824,7 +17824,7 @@
         "Year": 2015,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.650Z",
         "updatedAt": "2020-01-27T20:44:18.650Z"
     },
@@ -18202,7 +18202,7 @@
         "Year": 2015,
         "Make": "Chevrolet",
         "Model": "Suburban",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.684Z",
         "updatedAt": "2020-01-27T20:44:18.684Z"
     },
@@ -18256,7 +18256,7 @@
         "Year": 2015,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.684Z",
         "updatedAt": "2020-01-27T20:44:18.684Z"
     },
@@ -18373,7 +18373,7 @@
         "Year": 2015,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.684Z",
         "updatedAt": "2020-01-27T20:44:18.684Z"
     },
@@ -18805,7 +18805,7 @@
         "Year": 2015,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.685Z",
         "updatedAt": "2020-01-27T20:44:18.685Z"
     },
@@ -18922,7 +18922,7 @@
         "Year": 2015,
         "Make": "GMC",
         "Model": "Yukon XL",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.718Z",
         "updatedAt": "2020-01-27T20:44:18.718Z"
     },
@@ -19210,7 +19210,7 @@
         "Year": 2015,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.719Z",
         "updatedAt": "2020-01-27T20:44:18.719Z"
     },
@@ -19363,7 +19363,7 @@
         "Year": 2015,
         "Make": "INFINITI",
         "Model": "QX80",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.719Z",
         "updatedAt": "2020-01-27T20:44:18.719Z"
     },
@@ -19453,7 +19453,7 @@
         "Year": 2015,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.720Z",
         "updatedAt": "2020-01-27T20:44:18.720Z"
     },
@@ -19507,7 +19507,7 @@
         "Year": 2015,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.719Z",
         "updatedAt": "2020-01-27T20:44:18.719Z"
     },
@@ -19543,7 +19543,7 @@
         "Year": 2015,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.719Z",
         "updatedAt": "2020-01-27T20:44:18.719Z"
     },
@@ -19642,7 +19642,7 @@
         "Year": 2015,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.719Z",
         "updatedAt": "2020-01-27T20:44:18.719Z"
     },
@@ -19705,7 +19705,7 @@
         "Year": 2015,
         "Make": "Mercedes-Benz",
         "Model": "GL-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.720Z",
         "updatedAt": "2020-01-27T20:44:18.720Z"
     },
@@ -20038,7 +20038,7 @@
         "Year": 2015,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.755Z",
         "updatedAt": "2020-01-27T20:44:18.755Z"
     },
@@ -20146,7 +20146,7 @@
         "Year": 2015,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.756Z",
         "updatedAt": "2020-01-27T20:44:18.756Z"
     },
@@ -20380,7 +20380,7 @@
         "Year": 2015,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.756Z",
         "updatedAt": "2020-01-27T20:44:18.756Z"
     },
@@ -20407,7 +20407,7 @@
         "Year": 2015,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.756Z",
         "updatedAt": "2020-01-27T20:44:18.756Z"
     },
@@ -21019,7 +21019,7 @@
         "Year": 2014,
         "Make": "Audi",
         "Model": "Q7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.791Z",
         "updatedAt": "2020-01-27T20:44:18.791Z"
     },
@@ -21469,7 +21469,7 @@
         "Year": 2014,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.791Z",
         "updatedAt": "2020-01-27T20:44:18.791Z"
     },
@@ -21649,7 +21649,7 @@
         "Year": 2014,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.825Z",
         "updatedAt": "2020-01-27T20:44:18.825Z"
     },
@@ -21865,7 +21865,7 @@
         "Year": 2014,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.825Z",
         "updatedAt": "2020-01-27T20:44:18.825Z"
     },
@@ -22414,7 +22414,7 @@
         "Year": 2014,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.825Z",
         "updatedAt": "2020-01-27T20:44:18.825Z"
     },
@@ -22585,7 +22585,7 @@
         "Year": 2014,
         "Make": "INFINITI",
         "Model": "QX80",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.858Z",
         "updatedAt": "2020-01-27T20:44:18.858Z"
     },
@@ -22693,7 +22693,7 @@
         "Year": 2014,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.861Z",
         "updatedAt": "2020-01-27T20:44:18.861Z"
     },
@@ -22729,7 +22729,7 @@
         "Year": 2014,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.861Z",
         "updatedAt": "2020-01-27T20:44:18.861Z"
     },
@@ -22882,7 +22882,7 @@
         "Year": 2014,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.858Z",
         "updatedAt": "2020-01-27T20:44:18.858Z"
     },
@@ -22900,7 +22900,7 @@
         "Year": 2014,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.862Z",
         "updatedAt": "2020-01-27T20:44:18.862Z"
     },
@@ -23044,7 +23044,7 @@
         "Year": 2014,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.862Z",
         "updatedAt": "2020-01-27T20:44:18.862Z"
     },
@@ -23107,7 +23107,7 @@
         "Year": 2014,
         "Make": "Mercedes-Benz",
         "Model": "GL-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.862Z",
         "updatedAt": "2020-01-27T20:44:18.862Z"
     },
@@ -23341,7 +23341,7 @@
         "Year": 2014,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.862Z",
         "updatedAt": "2020-01-27T20:44:18.862Z"
     },
@@ -23476,7 +23476,7 @@
         "Year": 2014,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.897Z",
         "updatedAt": "2020-01-27T20:44:18.897Z"
     },
@@ -23926,7 +23926,7 @@
         "Year": 2014,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.900Z",
         "updatedAt": "2020-01-27T20:44:18.900Z"
     },
@@ -23980,7 +23980,7 @@
         "Year": 2014,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.900Z",
         "updatedAt": "2020-01-27T20:44:18.900Z"
     },
@@ -24178,7 +24178,7 @@
         "Year": 2014,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.900Z",
         "updatedAt": "2020-01-27T20:44:18.900Z"
     },
@@ -24394,7 +24394,7 @@
         "Year": 2013,
         "Make": "Audi",
         "Model": "Q7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.930Z",
         "updatedAt": "2020-01-27T20:44:18.930Z"
     },
@@ -24538,7 +24538,7 @@
         "Year": 2013,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.931Z",
         "updatedAt": "2020-01-27T20:44:18.931Z"
     },
@@ -24943,7 +24943,7 @@
         "Year": 2013,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.931Z",
         "updatedAt": "2020-01-27T20:44:18.931Z"
     },
@@ -25195,7 +25195,7 @@
         "Year": 2013,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.931Z",
         "updatedAt": "2020-01-27T20:44:18.931Z"
     },
@@ -25501,7 +25501,7 @@
         "Year": 2013,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.971Z",
         "updatedAt": "2020-01-27T20:44:18.971Z"
     },
@@ -26005,7 +26005,7 @@
         "Year": 2013,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.972Z",
         "updatedAt": "2020-01-27T20:44:18.972Z"
     },
@@ -26059,7 +26059,7 @@
         "Year": 2013,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.972Z",
         "updatedAt": "2020-01-27T20:44:18.972Z"
     },
@@ -26068,7 +26068,7 @@
         "Year": 2013,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:18.972Z",
         "updatedAt": "2020-01-27T20:44:18.972Z"
     },
@@ -26185,7 +26185,7 @@
         "Year": 2013,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.008Z",
         "updatedAt": "2020-01-27T20:44:19.008Z"
     },
@@ -26248,7 +26248,7 @@
         "Year": 2013,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.008Z",
         "updatedAt": "2020-01-27T20:44:19.008Z"
     },
@@ -26311,7 +26311,7 @@
         "Year": 2013,
         "Make": "Mercedes-Benz",
         "Model": "GL-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.008Z",
         "updatedAt": "2020-01-27T20:44:19.008Z"
     },
@@ -26455,7 +26455,7 @@
         "Year": 2013,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.009Z",
         "updatedAt": "2020-01-27T20:44:19.009Z"
     },
@@ -26527,7 +26527,7 @@
         "Year": 2013,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.009Z",
         "updatedAt": "2020-01-27T20:44:19.009Z"
     },
@@ -27022,7 +27022,7 @@
         "Year": 2013,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.042Z",
         "updatedAt": "2020-01-27T20:44:19.042Z"
     },
@@ -27085,7 +27085,7 @@
         "Year": 2013,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.042Z",
         "updatedAt": "2020-01-27T20:44:19.042Z"
     },
@@ -27319,7 +27319,7 @@
         "Year": 2013,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.042Z",
         "updatedAt": "2020-01-27T20:44:19.042Z"
     },
@@ -27544,7 +27544,7 @@
         "Year": 2012,
         "Make": "Audi",
         "Model": "Q7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.042Z",
         "updatedAt": "2020-01-27T20:44:19.042Z"
     },
@@ -27670,7 +27670,7 @@
         "Year": 2012,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.043Z",
         "updatedAt": "2020-01-27T20:44:19.043Z"
     },
@@ -28093,7 +28093,7 @@
         "Year": 2012,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.074Z",
         "updatedAt": "2020-01-27T20:44:19.074Z"
     },
@@ -28327,7 +28327,7 @@
         "Year": 2012,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.074Z",
         "updatedAt": "2020-01-27T20:44:19.074Z"
     },
@@ -28732,7 +28732,7 @@
         "Year": 2012,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.075Z",
         "updatedAt": "2020-01-27T20:44:19.075Z"
     },
@@ -29029,7 +29029,7 @@
         "Year": 2012,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.121Z",
         "updatedAt": "2020-01-27T20:44:19.121Z"
     },
@@ -29173,7 +29173,7 @@
         "Year": 2012,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.121Z",
         "updatedAt": "2020-01-27T20:44:19.121Z"
     },
@@ -29236,7 +29236,7 @@
         "Year": 2012,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.121Z",
         "updatedAt": "2020-01-27T20:44:19.121Z"
     },
@@ -29479,7 +29479,7 @@
         "Year": 2012,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.122Z",
         "updatedAt": "2020-01-27T20:44:19.122Z"
     },
@@ -29488,7 +29488,7 @@
         "Year": 2012,
         "Make": "Mercedes-Benz",
         "Model": "GL-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.122Z",
         "updatedAt": "2020-01-27T20:44:19.122Z"
     },
@@ -29560,7 +29560,7 @@
         "Year": 2012,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.122Z",
         "updatedAt": "2020-01-27T20:44:19.122Z"
     },
@@ -29785,7 +29785,7 @@
         "Year": 2012,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.155Z",
         "updatedAt": "2020-01-27T20:44:19.155Z"
     },
@@ -29992,7 +29992,7 @@
         "Year": 2012,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.155Z",
         "updatedAt": "2020-01-27T20:44:19.155Z"
     },
@@ -30199,7 +30199,7 @@
         "Year": 2012,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.156Z",
         "updatedAt": "2020-01-27T20:44:19.156Z"
     },
@@ -30640,7 +30640,7 @@
         "Year": 2011,
         "Make": "Audi",
         "Model": "Q7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.197Z",
         "updatedAt": "2020-01-27T20:44:19.197Z"
     },
@@ -30793,7 +30793,7 @@
         "Year": 2011,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.198Z",
         "updatedAt": "2020-01-27T20:44:19.198Z"
     },
@@ -31225,7 +31225,7 @@
         "Year": 2011,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.198Z",
         "updatedAt": "2020-01-27T20:44:19.198Z"
     },
@@ -31414,7 +31414,7 @@
         "Year": 2011,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.198Z",
         "updatedAt": "2020-01-27T20:44:19.198Z"
     },
@@ -31828,7 +31828,7 @@
         "Year": 2011,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.228Z",
         "updatedAt": "2020-01-27T20:44:19.228Z"
     },
@@ -32071,7 +32071,7 @@
         "Year": 2011,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.228Z",
         "updatedAt": "2020-01-27T20:44:19.228Z"
     },
@@ -32152,7 +32152,7 @@
         "Year": 2011,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.228Z",
         "updatedAt": "2020-01-27T20:44:19.228Z"
     },
@@ -32161,7 +32161,7 @@
         "Year": 2011,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.228Z",
         "updatedAt": "2020-01-27T20:44:19.228Z"
     },
@@ -32404,7 +32404,7 @@
         "Year": 2011,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.228Z",
         "updatedAt": "2020-01-27T20:44:19.228Z"
     },
@@ -32530,7 +32530,7 @@
         "Year": 2011,
         "Make": "Mercedes-Benz",
         "Model": "GL-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.265Z",
         "updatedAt": "2020-01-27T20:44:19.265Z"
     },
@@ -32557,7 +32557,7 @@
         "Year": 2011,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.265Z",
         "updatedAt": "2020-01-27T20:44:19.265Z"
     },
@@ -32818,7 +32818,7 @@
         "Year": 2011,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.265Z",
         "updatedAt": "2020-01-27T20:44:19.265Z"
     },
@@ -32935,7 +32935,7 @@
         "Year": 2011,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.265Z",
         "updatedAt": "2020-01-27T20:44:19.265Z"
     },
@@ -33322,7 +33322,7 @@
         "Year": 2011,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.297Z",
         "updatedAt": "2020-01-27T20:44:19.297Z"
     },
@@ -33403,7 +33403,7 @@
         "Year": 2011,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.297Z",
         "updatedAt": "2020-01-27T20:44:19.297Z"
     },
@@ -33646,7 +33646,7 @@
         "Year": 2011,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.297Z",
         "updatedAt": "2020-01-27T20:44:19.297Z"
     },
@@ -33727,7 +33727,7 @@
         "Year": 2010,
         "Make": "Audi",
         "Model": "Q7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.298Z",
         "updatedAt": "2020-01-27T20:44:19.298Z"
     },
@@ -34006,7 +34006,7 @@
         "Year": 2010,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.298Z",
         "updatedAt": "2020-01-27T20:44:19.298Z"
     },
@@ -34348,7 +34348,7 @@
         "Year": 2010,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.331Z",
         "updatedAt": "2020-01-27T20:44:19.331Z"
     },
@@ -34618,7 +34618,7 @@
         "Year": 2010,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.331Z",
         "updatedAt": "2020-01-27T20:44:19.331Z"
     },
@@ -34798,7 +34798,7 @@
         "Year": 2010,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.332Z",
         "updatedAt": "2020-01-27T20:44:19.332Z"
     },
@@ -35536,7 +35536,7 @@
         "Year": 2010,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.363Z",
         "updatedAt": "2020-01-27T20:44:19.363Z"
     },
@@ -35563,7 +35563,7 @@
         "Year": 2010,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.363Z",
         "updatedAt": "2020-01-27T20:44:19.363Z"
     },
@@ -35590,7 +35590,7 @@
         "Year": 2010,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.363Z",
         "updatedAt": "2020-01-27T20:44:19.363Z"
     },
@@ -35617,7 +35617,7 @@
         "Year": 2010,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.363Z",
         "updatedAt": "2020-01-27T20:44:19.363Z"
     },
@@ -35797,7 +35797,7 @@
         "Year": 2010,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.364Z",
         "updatedAt": "2020-01-27T20:44:19.364Z"
     },
@@ -35932,7 +35932,7 @@
         "Year": 2010,
         "Make": "Mercedes-Benz",
         "Model": "GL-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.364Z",
         "updatedAt": "2020-01-27T20:44:19.364Z"
     },
@@ -36013,7 +36013,7 @@
         "Year": 2010,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.397Z",
         "updatedAt": "2020-01-27T20:44:19.397Z"
     },
@@ -36031,7 +36031,7 @@
         "Year": 2010,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.397Z",
         "updatedAt": "2020-01-27T20:44:19.397Z"
     },
@@ -36373,7 +36373,7 @@
         "Year": 2010,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.398Z",
         "updatedAt": "2020-01-27T20:44:19.398Z"
     },
@@ -36562,7 +36562,7 @@
         "Year": 2010,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.398Z",
         "updatedAt": "2020-01-27T20:44:19.398Z"
     },
@@ -36742,7 +36742,7 @@
         "Year": 2010,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.401Z",
         "updatedAt": "2020-01-27T20:44:19.401Z"
     },
@@ -36859,7 +36859,7 @@
         "Year": 2009,
         "Make": "Audi",
         "Model": "Q7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.401Z",
         "updatedAt": "2020-01-27T20:44:19.401Z"
     },
@@ -37093,7 +37093,7 @@
         "Year": 2009,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.433Z",
         "updatedAt": "2020-01-27T20:44:19.433Z"
     },
@@ -37408,7 +37408,7 @@
         "Year": 2009,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.433Z",
         "updatedAt": "2020-01-27T20:44:19.433Z"
     },
@@ -37831,7 +37831,7 @@
         "Year": 2009,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.471Z",
         "updatedAt": "2020-01-27T20:44:19.471Z"
     },
@@ -38020,7 +38020,7 @@
         "Year": 2009,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.472Z",
         "updatedAt": "2020-01-27T20:44:19.472Z"
     },
@@ -38524,7 +38524,7 @@
         "Year": 2009,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.472Z",
         "updatedAt": "2020-01-27T20:44:19.472Z"
     },
@@ -38677,7 +38677,7 @@
         "Year": 2009,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.472Z",
         "updatedAt": "2020-01-27T20:44:19.472Z"
     },
@@ -38812,7 +38812,7 @@
         "Year": 2009,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.510Z",
         "updatedAt": "2020-01-27T20:44:19.510Z"
     },
@@ -38875,7 +38875,7 @@
         "Year": 2009,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.510Z",
         "updatedAt": "2020-01-27T20:44:19.510Z"
     },
@@ -38974,7 +38974,7 @@
         "Year": 2009,
         "Make": "Mercedes-Benz",
         "Model": "GL-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.510Z",
         "updatedAt": "2020-01-27T20:44:19.510Z"
     },
@@ -39109,7 +39109,7 @@
         "Year": 2009,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.510Z",
         "updatedAt": "2020-01-27T20:44:19.510Z"
     },
@@ -39289,7 +39289,7 @@
         "Year": 2009,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.511Z",
         "updatedAt": "2020-01-27T20:44:19.511Z"
     },
@@ -39307,7 +39307,7 @@
         "Year": 2009,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.510Z",
         "updatedAt": "2020-01-27T20:44:19.510Z"
     },
@@ -39640,7 +39640,7 @@
         "Year": 2009,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.543Z",
         "updatedAt": "2020-01-27T20:44:19.543Z"
     },
@@ -39658,7 +39658,7 @@
         "Year": 2009,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.543Z",
         "updatedAt": "2020-01-27T20:44:19.543Z"
     },
@@ -39856,7 +39856,7 @@
         "Year": 2009,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.543Z",
         "updatedAt": "2020-01-27T20:44:19.543Z"
     },
@@ -40045,7 +40045,7 @@
         "Year": 2008,
         "Make": "Audi",
         "Model": "Q7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.544Z",
         "updatedAt": "2020-01-27T20:44:19.544Z"
     },
@@ -40351,7 +40351,7 @@
         "Year": 2008,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.544Z",
         "updatedAt": "2020-01-27T20:44:19.544Z"
     },
@@ -40675,7 +40675,7 @@
         "Year": 2008,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.578Z",
         "updatedAt": "2020-01-27T20:44:19.578Z"
     },
@@ -41089,7 +41089,7 @@
         "Year": 2008,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.579Z",
         "updatedAt": "2020-01-27T20:44:19.579Z"
     },
@@ -41566,7 +41566,7 @@
         "Year": 2008,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.613Z",
         "updatedAt": "2020-01-27T20:44:19.613Z"
     },
@@ -41926,7 +41926,7 @@
         "Year": 2008,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.614Z",
         "updatedAt": "2020-01-27T20:44:19.614Z"
     },
@@ -42061,7 +42061,7 @@
         "Year": 2008,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.614Z",
         "updatedAt": "2020-01-27T20:44:19.614Z"
     },
@@ -42106,7 +42106,7 @@
         "Year": 2008,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.614Z",
         "updatedAt": "2020-01-27T20:44:19.614Z"
     },
@@ -42304,7 +42304,7 @@
         "Year": 2008,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.614Z",
         "updatedAt": "2020-01-27T20:44:19.614Z"
     },
@@ -42412,7 +42412,7 @@
         "Year": 2008,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.665Z",
         "updatedAt": "2020-01-27T20:44:19.665Z"
     },
@@ -42466,7 +42466,7 @@
         "Year": 2008,
         "Make": "Mercedes-Benz",
         "Model": "GL-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.665Z",
         "updatedAt": "2020-01-27T20:44:19.665Z"
     },
@@ -42529,7 +42529,7 @@
         "Year": 2008,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.666Z",
         "updatedAt": "2020-01-27T20:44:19.666Z"
     },
@@ -42538,7 +42538,7 @@
         "Year": 2008,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.666Z",
         "updatedAt": "2020-01-27T20:44:19.666Z"
     },
@@ -43006,7 +43006,7 @@
         "Year": 2008,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.666Z",
         "updatedAt": "2020-01-27T20:44:19.666Z"
     },
@@ -43186,7 +43186,7 @@
         "Year": 2008,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.666Z",
         "updatedAt": "2020-01-27T20:44:19.666Z"
     },
@@ -43231,7 +43231,7 @@
         "Year": 2008,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.699Z",
         "updatedAt": "2020-01-27T20:44:19.699Z"
     },
@@ -43429,7 +43429,7 @@
         "Year": 2007,
         "Make": "Audi",
         "Model": "Q7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.700Z",
         "updatedAt": "2020-01-27T20:44:19.700Z"
     },
@@ -43582,7 +43582,7 @@
         "Year": 2007,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.703Z",
         "updatedAt": "2020-01-27T20:44:19.703Z"
     },
@@ -44068,7 +44068,7 @@
         "Year": 2007,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.703Z",
         "updatedAt": "2020-01-27T20:44:19.703Z"
     },
@@ -44320,7 +44320,7 @@
         "Year": 2007,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.740Z",
         "updatedAt": "2020-01-27T20:44:19.740Z"
     },
@@ -44860,7 +44860,7 @@
         "Year": 2007,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.740Z",
         "updatedAt": "2020-01-27T20:44:19.740Z"
     },
@@ -45328,7 +45328,7 @@
         "Year": 2007,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.783Z",
         "updatedAt": "2020-01-27T20:44:19.783Z"
     },
@@ -45382,7 +45382,7 @@
         "Year": 2007,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.783Z",
         "updatedAt": "2020-01-27T20:44:19.783Z"
     },
@@ -45400,7 +45400,7 @@
         "Year": 2007,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.783Z",
         "updatedAt": "2020-01-27T20:44:19.783Z"
     },
@@ -45508,7 +45508,7 @@
         "Year": 2007,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.783Z",
         "updatedAt": "2020-01-27T20:44:19.783Z"
     },
@@ -45697,7 +45697,7 @@
         "Year": 2007,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.784Z",
         "updatedAt": "2020-01-27T20:44:19.784Z"
     },
@@ -45859,7 +45859,7 @@
         "Year": 2007,
         "Make": "Mercedes-Benz",
         "Model": "GL-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.784Z",
         "updatedAt": "2020-01-27T20:44:19.784Z"
     },
@@ -45940,7 +45940,7 @@
         "Year": 2007,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.825Z",
         "updatedAt": "2020-01-27T20:44:19.825Z"
     },
@@ -46066,7 +46066,7 @@
         "Year": 2007,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.825Z",
         "updatedAt": "2020-01-27T20:44:19.825Z"
     },
@@ -46273,7 +46273,7 @@
         "Year": 2007,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.826Z",
         "updatedAt": "2020-01-27T20:44:19.826Z"
     },
@@ -46462,7 +46462,7 @@
         "Year": 2007,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.826Z",
         "updatedAt": "2020-01-27T20:44:19.826Z"
     },
@@ -46633,7 +46633,7 @@
         "Year": 2007,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.826Z",
         "updatedAt": "2020-01-27T20:44:19.826Z"
     },
@@ -46957,7 +46957,7 @@
         "Year": 2006,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.863Z",
         "updatedAt": "2020-01-27T20:44:19.863Z"
     },
@@ -47308,7 +47308,7 @@
         "Year": 2006,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.864Z",
         "updatedAt": "2020-01-27T20:44:19.864Z"
     },
@@ -47686,7 +47686,7 @@
         "Year": 2006,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.864Z",
         "updatedAt": "2020-01-27T20:44:19.864Z"
     },
@@ -47992,7 +47992,7 @@
         "Year": 2006,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.897Z",
         "updatedAt": "2020-01-27T20:44:19.897Z"
     },
@@ -48433,7 +48433,7 @@
         "Year": 2006,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.898Z",
         "updatedAt": "2020-01-27T20:44:19.898Z"
     },
@@ -48523,7 +48523,7 @@
         "Year": 2006,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.897Z",
         "updatedAt": "2020-01-27T20:44:19.897Z"
     },
@@ -48541,7 +48541,7 @@
         "Year": 2006,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.898Z",
         "updatedAt": "2020-01-27T20:44:19.898Z"
     },
@@ -48559,7 +48559,7 @@
         "Year": 2006,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.898Z",
         "updatedAt": "2020-01-27T20:44:19.898Z"
     },
@@ -48784,7 +48784,7 @@
         "Year": 2006,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.937Z",
         "updatedAt": "2020-01-27T20:44:19.937Z"
     },
@@ -48910,7 +48910,7 @@
         "Year": 2006,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.937Z",
         "updatedAt": "2020-01-27T20:44:19.937Z"
     },
@@ -49000,7 +49000,7 @@
         "Year": 2006,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.938Z",
         "updatedAt": "2020-01-27T20:44:19.938Z"
     },
@@ -49504,7 +49504,7 @@
         "Year": 2006,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.938Z",
         "updatedAt": "2020-01-27T20:44:19.938Z"
     },
@@ -49558,7 +49558,7 @@
         "Year": 2006,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.969Z",
         "updatedAt": "2020-01-27T20:44:19.969Z"
     },
@@ -49693,7 +49693,7 @@
         "Year": 2006,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.969Z",
         "updatedAt": "2020-01-27T20:44:19.969Z"
     },
@@ -50062,7 +50062,7 @@
         "Year": 2005,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:19.970Z",
         "updatedAt": "2020-01-27T20:44:19.970Z"
     },
@@ -50449,7 +50449,7 @@
         "Year": 2005,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.006Z",
         "updatedAt": "2020-01-27T20:44:20.006Z"
     },
@@ -50872,7 +50872,7 @@
         "Year": 2005,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.006Z",
         "updatedAt": "2020-01-27T20:44:20.006Z"
     },
@@ -51250,7 +51250,7 @@
         "Year": 2005,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.007Z",
         "updatedAt": "2020-01-27T20:44:20.007Z"
     },
@@ -51619,7 +51619,7 @@
         "Year": 2005,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.039Z",
         "updatedAt": "2020-01-27T20:44:20.039Z"
     },
@@ -51673,7 +51673,7 @@
         "Year": 2005,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.039Z",
         "updatedAt": "2020-01-27T20:44:20.039Z"
     },
@@ -51691,7 +51691,7 @@
         "Year": 2005,
         "Make": "Lincoln",
         "Model": "Aviator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.040Z",
         "updatedAt": "2020-01-27T20:44:20.040Z"
     },
@@ -51718,7 +51718,7 @@
         "Year": 2005,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.040Z",
         "updatedAt": "2020-01-27T20:44:20.040Z"
     },
@@ -51817,7 +51817,7 @@
         "Year": 2005,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.040Z",
         "updatedAt": "2020-01-27T20:44:20.040Z"
     },
@@ -51871,7 +51871,7 @@
         "Year": 2005,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.040Z",
         "updatedAt": "2020-01-27T20:44:20.040Z"
     },
@@ -52114,7 +52114,7 @@
         "Year": 2005,
         "Make": "Nissan",
         "Model": "Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.040Z",
         "updatedAt": "2020-01-27T20:44:20.040Z"
     },
@@ -52177,7 +52177,7 @@
         "Year": 2005,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.040Z",
         "updatedAt": "2020-01-27T20:44:20.040Z"
     },
@@ -52717,7 +52717,7 @@
         "Year": 2005,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.075Z",
         "updatedAt": "2020-01-27T20:44:20.075Z"
     },
@@ -52771,7 +52771,7 @@
         "Year": 2005,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.075Z",
         "updatedAt": "2020-01-27T20:44:20.075Z"
     },
@@ -52951,7 +52951,7 @@
         "Year": 2004,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.076Z",
         "updatedAt": "2020-01-27T20:44:20.076Z"
     },
@@ -52969,7 +52969,7 @@
         "Year": 2005,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.075Z",
         "updatedAt": "2020-01-27T20:44:20.075Z"
     },
@@ -53608,7 +53608,7 @@
         "Year": 2004,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.117Z",
         "updatedAt": "2020-01-27T20:44:20.117Z"
     },
@@ -53986,7 +53986,7 @@
         "Year": 2004,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.118Z",
         "updatedAt": "2020-01-27T20:44:20.118Z"
     },
@@ -54301,7 +54301,7 @@
         "Year": 2004,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.157Z",
         "updatedAt": "2020-01-27T20:44:20.157Z"
     },
@@ -54589,7 +54589,7 @@
         "Year": 2004,
         "Make": "Lincoln",
         "Model": "Aviator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.157Z",
         "updatedAt": "2020-01-27T20:44:20.157Z"
     },
@@ -54598,7 +54598,7 @@
         "Year": 2004,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.157Z",
         "updatedAt": "2020-01-27T20:44:20.157Z"
     },
@@ -54688,7 +54688,7 @@
         "Year": 2004,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.157Z",
         "updatedAt": "2020-01-27T20:44:20.157Z"
     },
@@ -54769,7 +54769,7 @@
         "Year": 2004,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.157Z",
         "updatedAt": "2020-01-27T20:44:20.157Z"
     },
@@ -54877,7 +54877,7 @@
         "Year": 2004,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.157Z",
         "updatedAt": "2020-01-27T20:44:20.157Z"
     },
@@ -54886,7 +54886,7 @@
         "Year": 2004,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.158Z",
         "updatedAt": "2020-01-27T20:44:20.158Z"
     },
@@ -55102,7 +55102,7 @@
         "Year": 2004,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.194Z",
         "updatedAt": "2020-01-27T20:44:20.194Z"
     },
@@ -55210,7 +55210,7 @@
         "Year": 2004,
         "Make": "Nissan",
         "Model": "Pathfinder Armada",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.194Z",
         "updatedAt": "2020-01-27T20:44:20.194Z"
     },
@@ -55426,7 +55426,7 @@
         "Year": 2004,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.195Z",
         "updatedAt": "2020-01-27T20:44:20.195Z"
     },
@@ -55714,7 +55714,7 @@
         "Year": 2004,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.195Z",
         "updatedAt": "2020-01-27T20:44:20.195Z"
     },
@@ -55822,7 +55822,7 @@
         "Year": 2004,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.234Z",
         "updatedAt": "2020-01-27T20:44:20.234Z"
     },
@@ -56128,7 +56128,7 @@
         "Year": 2003,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.234Z",
         "updatedAt": "2020-01-27T20:44:20.234Z"
     },
@@ -56470,7 +56470,7 @@
         "Year": 2003,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.235Z",
         "updatedAt": "2020-01-27T20:44:20.235Z"
     },
@@ -56830,7 +56830,7 @@
         "Year": 2003,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.268Z",
         "updatedAt": "2020-01-27T20:44:20.268Z"
     },
@@ -57064,7 +57064,7 @@
         "Year": 2003,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.269Z",
         "updatedAt": "2020-01-27T20:44:20.269Z"
     },
@@ -57613,7 +57613,7 @@
         "Year": 2003,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.303Z",
         "updatedAt": "2020-01-27T20:44:20.303Z"
     },
@@ -57622,7 +57622,7 @@
         "Year": 2003,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.303Z",
         "updatedAt": "2020-01-27T20:44:20.303Z"
     },
@@ -57631,7 +57631,7 @@
         "Year": 2003,
         "Make": "Lincoln",
         "Model": "Aviator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.304Z",
         "updatedAt": "2020-01-27T20:44:20.304Z"
     },
@@ -57739,7 +57739,7 @@
         "Year": 2003,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.304Z",
         "updatedAt": "2020-01-27T20:44:20.304Z"
     },
@@ -57793,7 +57793,7 @@
         "Year": 2003,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.304Z",
         "updatedAt": "2020-01-27T20:44:20.304Z"
     },
@@ -57811,7 +57811,7 @@
         "Year": 2003,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.303Z",
         "updatedAt": "2020-01-27T20:44:20.303Z"
     },
@@ -58018,7 +58018,7 @@
         "Year": 2003,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.304Z",
         "updatedAt": "2020-01-27T20:44:20.304Z"
     },
@@ -58414,7 +58414,7 @@
         "Year": 2003,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.304Z",
         "updatedAt": "2020-01-27T20:44:20.304Z"
     },
@@ -58495,7 +58495,7 @@
         "Year": 2003,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.304Z",
         "updatedAt": "2020-01-27T20:44:20.304Z"
     },
@@ -58549,7 +58549,7 @@
         "Year": 2003,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.341Z",
         "updatedAt": "2020-01-27T20:44:20.341Z"
     },
@@ -58882,7 +58882,7 @@
         "Year": 2002,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.341Z",
         "updatedAt": "2020-01-27T20:44:20.341Z"
     },
@@ -59305,7 +59305,7 @@
         "Year": 2002,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.342Z",
         "updatedAt": "2020-01-27T20:44:20.342Z"
     },
@@ -59674,7 +59674,7 @@
         "Year": 2002,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.379Z",
         "updatedAt": "2020-01-27T20:44:20.379Z"
     },
@@ -60214,7 +60214,7 @@
         "Year": 2002,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.379Z",
         "updatedAt": "2020-01-27T20:44:20.379Z"
     },
@@ -60466,7 +60466,7 @@
         "Year": 2002,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.425Z",
         "updatedAt": "2020-01-27T20:44:20.425Z"
     },
@@ -60475,7 +60475,7 @@
         "Year": 2002,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.425Z",
         "updatedAt": "2020-01-27T20:44:20.425Z"
     },
@@ -60502,7 +60502,7 @@
         "Year": 2002,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.425Z",
         "updatedAt": "2020-01-27T20:44:20.425Z"
     },
@@ -60790,7 +60790,7 @@
         "Year": 2002,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.425Z",
         "updatedAt": "2020-01-27T20:44:20.425Z"
     },
@@ -60943,7 +60943,7 @@
         "Year": 2002,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.426Z",
         "updatedAt": "2020-01-27T20:44:20.426Z"
     },
@@ -61159,7 +61159,7 @@
         "Year": 2002,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.426Z",
         "updatedAt": "2020-01-27T20:44:20.426Z"
     },
@@ -61231,7 +61231,7 @@
         "Year": 2002,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.461Z",
         "updatedAt": "2020-01-27T20:44:20.461Z"
     },
@@ -62023,7 +62023,7 @@
         "Year": 2001,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.462Z",
         "updatedAt": "2020-01-27T20:44:20.462Z"
     },
@@ -62392,7 +62392,7 @@
         "Year": 2001,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.496Z",
         "updatedAt": "2020-01-27T20:44:20.496Z"
     },
@@ -62743,7 +62743,7 @@
         "Year": 2001,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.497Z",
         "updatedAt": "2020-01-27T20:44:20.497Z"
     },
@@ -63157,7 +63157,7 @@
         "Year": 2001,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.535Z",
         "updatedAt": "2020-01-27T20:44:20.535Z"
     },
@@ -63238,7 +63238,7 @@
         "Year": 2001,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.535Z",
         "updatedAt": "2020-01-27T20:44:20.535Z"
     },
@@ -63247,7 +63247,7 @@
         "Year": 2001,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.535Z",
         "updatedAt": "2020-01-27T20:44:20.535Z"
     },
@@ -63292,7 +63292,7 @@
         "Year": 2001,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.535Z",
         "updatedAt": "2020-01-27T20:44:20.535Z"
     },
@@ -63841,7 +63841,7 @@
         "Year": 2001,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.536Z",
         "updatedAt": "2020-01-27T20:44:20.536Z"
     },
@@ -63931,7 +63931,7 @@
         "Year": 2001,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.567Z",
         "updatedAt": "2020-01-27T20:44:20.567Z"
     },
@@ -64372,7 +64372,7 @@
         "Year": 2000,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.568Z",
         "updatedAt": "2020-01-27T20:44:20.568Z"
     },
@@ -64534,7 +64534,7 @@
         "Year": 2000,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.568Z",
         "updatedAt": "2020-01-27T20:44:20.568Z"
     },
@@ -65137,7 +65137,7 @@
         "Year": 2000,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.608Z",
         "updatedAt": "2020-01-27T20:44:20.608Z"
     },
@@ -65497,7 +65497,7 @@
         "Year": 2000,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.609Z",
         "updatedAt": "2020-01-27T20:44:20.609Z"
     },
@@ -65866,7 +65866,7 @@
         "Year": 2000,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.645Z",
         "updatedAt": "2020-01-27T20:44:20.645Z"
     },
@@ -65902,7 +65902,7 @@
         "Year": 2000,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.645Z",
         "updatedAt": "2020-01-27T20:44:20.645Z"
     },
@@ -65911,7 +65911,7 @@
         "Year": 2000,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.645Z",
         "updatedAt": "2020-01-27T20:44:20.645Z"
     },
@@ -66199,7 +66199,7 @@
         "Year": 2000,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.645Z",
         "updatedAt": "2020-01-27T20:44:20.645Z"
     },
@@ -66532,7 +66532,7 @@
         "Year": 2000,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.646Z",
         "updatedAt": "2020-01-27T20:44:20.646Z"
     },
@@ -66856,7 +66856,7 @@
         "Year": 1999,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.682Z",
         "updatedAt": "2020-01-27T20:44:20.682Z"
     },
@@ -67342,7 +67342,7 @@
         "Year": 1999,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.683Z",
         "updatedAt": "2020-01-27T20:44:20.683Z"
     },
@@ -67729,7 +67729,7 @@
         "Year": 1999,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.721Z",
         "updatedAt": "2020-01-27T20:44:20.721Z"
     },
@@ -68152,7 +68152,7 @@
         "Year": 1999,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.721Z",
         "updatedAt": "2020-01-27T20:44:20.721Z"
     },
@@ -68170,7 +68170,7 @@
         "Year": 1999,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.721Z",
         "updatedAt": "2020-01-27T20:44:20.721Z"
     },
@@ -68404,7 +68404,7 @@
         "Year": 1999,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.721Z",
         "updatedAt": "2020-01-27T20:44:20.721Z"
     },
@@ -68512,7 +68512,7 @@
         "Year": 1999,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.757Z",
         "updatedAt": "2020-01-27T20:44:20.757Z"
     },
@@ -68692,7 +68692,7 @@
         "Year": 1999,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.758Z",
         "updatedAt": "2020-01-27T20:44:20.758Z"
     },
@@ -69088,7 +69088,7 @@
         "Year": 1999,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.758Z",
         "updatedAt": "2020-01-27T20:44:20.758Z"
     },
@@ -69826,7 +69826,7 @@
         "Year": 1998,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.799Z",
         "updatedAt": "2020-01-27T20:44:20.799Z"
     },
@@ -70006,7 +70006,7 @@
         "Year": 1998,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.799Z",
         "updatedAt": "2020-01-27T20:44:20.799Z"
     },
@@ -70384,7 +70384,7 @@
         "Year": 1998,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.836Z",
         "updatedAt": "2020-01-27T20:44:20.836Z"
     },
@@ -70645,7 +70645,7 @@
         "Year": 1998,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.836Z",
         "updatedAt": "2020-01-27T20:44:20.836Z"
     },
@@ -70663,7 +70663,7 @@
         "Year": 1998,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.836Z",
         "updatedAt": "2020-01-27T20:44:20.836Z"
     },
@@ -70861,7 +70861,7 @@
         "Year": 1998,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.836Z",
         "updatedAt": "2020-01-27T20:44:20.836Z"
     },
@@ -71095,7 +71095,7 @@
         "Year": 1998,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.837Z",
         "updatedAt": "2020-01-27T20:44:20.837Z"
     },
@@ -71536,7 +71536,7 @@
         "Year": 1998,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.872Z",
         "updatedAt": "2020-01-27T20:44:20.872Z"
     },
@@ -72067,7 +72067,7 @@
         "Year": 1997,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.911Z",
         "updatedAt": "2020-01-27T20:44:20.911Z"
     },
@@ -72427,7 +72427,7 @@
         "Year": 1997,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.911Z",
         "updatedAt": "2020-01-27T20:44:20.911Z"
     },
@@ -72796,7 +72796,7 @@
         "Year": 1997,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.911Z",
         "updatedAt": "2020-01-27T20:44:20.911Z"
     },
@@ -73084,7 +73084,7 @@
         "Year": 1997,
         "Make": "Land Rover",
         "Model": "Defender 90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.950Z",
         "updatedAt": "2020-01-27T20:44:20.950Z"
     },
@@ -73111,7 +73111,7 @@
         "Year": 1997,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.951Z",
         "updatedAt": "2020-01-27T20:44:20.951Z"
     },
@@ -73129,7 +73129,7 @@
         "Year": 1997,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.951Z",
         "updatedAt": "2020-01-27T20:44:20.951Z"
     },
@@ -73480,7 +73480,7 @@
         "Year": 1997,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.951Z",
         "updatedAt": "2020-01-27T20:44:20.951Z"
     },
@@ -73813,7 +73813,7 @@
         "Year": 1997,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.986Z",
         "updatedAt": "2020-01-27T20:44:20.986Z"
     },
@@ -74605,7 +74605,7 @@
         "Year": 1996,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:20.987Z",
         "updatedAt": "2020-01-27T20:44:20.987Z"
     },
@@ -75361,7 +75361,7 @@
         "Year": 1996,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.027Z",
         "updatedAt": "2020-01-27T20:44:21.027Z"
     },
@@ -75388,7 +75388,7 @@
         "Year": 1996,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.028Z",
         "updatedAt": "2020-01-27T20:44:21.028Z"
     },
@@ -75460,7 +75460,7 @@
         "Year": 1996,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.028Z",
         "updatedAt": "2020-01-27T20:44:21.028Z"
     },
@@ -75955,7 +75955,7 @@
         "Year": 1996,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.064Z",
         "updatedAt": "2020-01-27T20:44:21.064Z"
     },
@@ -76180,7 +76180,7 @@
         "Year": 1996,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.065Z",
         "updatedAt": "2020-01-27T20:44:21.065Z"
     },
@@ -76936,7 +76936,7 @@
         "Year": 1995,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.101Z",
         "updatedAt": "2020-01-27T20:44:21.101Z"
     },
@@ -77548,7 +77548,7 @@
         "Year": 1995,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.139Z",
         "updatedAt": "2020-01-27T20:44:21.139Z"
     },
@@ -77818,7 +77818,7 @@
         "Year": 1995,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.139Z",
         "updatedAt": "2020-01-27T20:44:21.139Z"
     },
@@ -77836,7 +77836,7 @@
         "Year": 1995,
         "Make": "Land Rover",
         "Model": "Defender 90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.139Z",
         "updatedAt": "2020-01-27T20:44:21.139Z"
     },
@@ -78151,7 +78151,7 @@
         "Year": 1995,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.139Z",
         "updatedAt": "2020-01-27T20:44:21.139Z"
     },
@@ -78547,7 +78547,7 @@
         "Year": 1995,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.178Z",
         "updatedAt": "2020-01-27T20:44:21.178Z"
     },
@@ -79798,7 +79798,7 @@
         "Year": 1994,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.213Z",
         "updatedAt": "2020-01-27T20:44:21.213Z"
     },
@@ -80122,7 +80122,7 @@
         "Year": 1994,
         "Make": "Land Rover",
         "Model": "Defender 90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.256Z",
         "updatedAt": "2020-01-27T20:44:21.256Z"
     },
@@ -80158,7 +80158,7 @@
         "Year": 1994,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.256Z",
         "updatedAt": "2020-01-27T20:44:21.256Z"
     },
@@ -80455,7 +80455,7 @@
         "Year": 1994,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.257Z",
         "updatedAt": "2020-01-27T20:44:21.257Z"
     },
@@ -80905,7 +80905,7 @@
         "Year": 1994,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.257Z",
         "updatedAt": "2020-01-27T20:44:21.257Z"
     },
@@ -82291,7 +82291,7 @@
         "Year": 1993,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.329Z",
         "updatedAt": "2020-01-27T20:44:21.329Z"
     },
@@ -82606,7 +82606,7 @@
         "Year": 1993,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.329Z",
         "updatedAt": "2020-01-27T20:44:21.329Z"
     },
@@ -82651,7 +82651,7 @@
         "Year": 1993,
         "Make": "Land Rover",
         "Model": "Defender 110",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.329Z",
         "updatedAt": "2020-01-27T20:44:21.329Z"
     },
@@ -83029,7 +83029,7 @@
         "Year": 1993,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.367Z",
         "updatedAt": "2020-01-27T20:44:21.367Z"
     },
@@ -83497,7 +83497,7 @@
         "Year": 1993,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.367Z",
         "updatedAt": "2020-01-27T20:44:21.367Z"
     },
@@ -85126,7 +85126,7 @@
         "Year": 1992,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.444Z",
         "updatedAt": "2020-01-27T20:44:21.444Z"
     },
@@ -85288,7 +85288,7 @@
         "Year": 1992,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.444Z",
         "updatedAt": "2020-01-27T20:44:21.444Z"
     },
@@ -85675,7 +85675,7 @@
         "Year": 1992,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.610Z",
         "updatedAt": "2020-01-27T20:44:21.610Z"
     },
@@ -86053,7 +86053,7 @@
         "Year": 1992,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2020-01-27T20:44:21.610Z",
         "updatedAt": "2020-01-27T20:44:21.610Z"
     },
@@ -86278,7 +86278,7 @@
         "Year": 2021,
         "Make": "BMW",
         "Model": "X7",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:27.964Z",
         "updatedAt": "2021-04-15T13:38:27.964Z"
     },
@@ -86566,7 +86566,7 @@
         "Year": 2021,
         "Make": "Cadillac",
         "Model": "Escalade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:27.964Z",
         "updatedAt": "2021-04-15T13:38:27.964Z"
     },
@@ -86629,7 +86629,7 @@
         "Year": 2021,
         "Make": "Chevrolet",
         "Model": "Tahoe",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:27.966Z",
         "updatedAt": "2021-04-15T13:38:27.966Z"
     },
@@ -86638,7 +86638,7 @@
         "Year": 2021,
         "Make": "Chevrolet",
         "Model": "Suburban",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:27.966Z",
         "updatedAt": "2021-04-15T13:38:27.966Z"
     },
@@ -86746,7 +86746,7 @@
         "Year": 2021,
         "Make": "Ford",
         "Model": "Expedition",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:27.966Z",
         "updatedAt": "2021-04-15T13:38:27.966Z"
     },
@@ -86773,7 +86773,7 @@
         "Year": 2021,
         "Make": "Ford",
         "Model": "Expedition MAX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:27.966Z",
         "updatedAt": "2021-04-15T13:38:27.966Z"
     },
@@ -86908,7 +86908,7 @@
         "Year": 2021,
         "Make": "GMC",
         "Model": "Yukon",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:27.967Z",
         "updatedAt": "2021-04-15T13:38:27.967Z"
     },
@@ -86917,7 +86917,7 @@
         "Year": 2021,
         "Make": "GMC",
         "Model": "Yukon XL",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:27.967Z",
         "updatedAt": "2021-04-15T13:38:27.967Z"
     },
@@ -86944,7 +86944,7 @@
         "Year": 2021,
         "Make": "Genesis",
         "Model": "GV80",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:27.967Z",
         "updatedAt": "2021-04-15T13:38:27.967Z"
     },
@@ -87106,7 +87106,7 @@
         "Year": 2021,
         "Make": "Hyundai",
         "Model": "Palisade",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:27.967Z",
         "updatedAt": "2021-04-15T13:38:27.967Z"
     },
@@ -87214,7 +87214,7 @@
         "Year": 2021,
         "Make": "Kia",
         "Model": "Telluride",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.028Z",
         "updatedAt": "2021-04-15T13:38:28.028Z"
     },
@@ -87313,7 +87313,7 @@
         "Year": 2021,
         "Make": "INFINITI",
         "Model": "QX80",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.028Z",
         "updatedAt": "2021-04-15T13:38:28.028Z"
     },
@@ -87412,7 +87412,7 @@
         "Year": 2021,
         "Make": "Land Rover",
         "Model": "Range Rover",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.028Z",
         "updatedAt": "2021-04-15T13:38:28.028Z"
     },
@@ -87430,7 +87430,7 @@
         "Year": 2021,
         "Make": "Lexus",
         "Model": "GX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.028Z",
         "updatedAt": "2021-04-15T13:38:28.028Z"
     },
@@ -87466,7 +87466,7 @@
         "Year": 2021,
         "Make": "Lexus",
         "Model": "LX",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.028Z",
         "updatedAt": "2021-04-15T13:38:28.028Z"
     },
@@ -87511,7 +87511,7 @@
         "Year": 2021,
         "Make": "Lincoln",
         "Model": "Aviator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.029Z",
         "updatedAt": "2021-04-15T13:38:28.029Z"
     },
@@ -87574,7 +87574,7 @@
         "Year": 2021,
         "Make": "Lincoln",
         "Model": "Navigator",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.029Z",
         "updatedAt": "2021-04-15T13:38:28.029Z"
     },
@@ -87610,7 +87610,7 @@
         "Year": 2021,
         "Make": "Mercedes-Benz",
         "Model": "Mercedes-AMG G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.029Z",
         "updatedAt": "2021-04-15T13:38:28.029Z"
     },
@@ -87628,7 +87628,7 @@
         "Year": 2021,
         "Make": "Mercedes-Benz",
         "Model": "G-Class",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.029Z",
         "updatedAt": "2021-04-15T13:38:28.029Z"
     },
@@ -88060,7 +88060,7 @@
         "Year": 2021,
         "Make": "Tesla",
         "Model": "Model X",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.084Z",
         "updatedAt": "2021-04-15T13:38:28.084Z"
     },
@@ -88195,7 +88195,7 @@
         "Year": 2021,
         "Make": "Toyota",
         "Model": "Land Cruiser",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.084Z",
         "updatedAt": "2021-04-15T13:38:28.084Z"
     },
@@ -88231,7 +88231,7 @@
         "Year": 2021,
         "Make": "Toyota",
         "Model": "Sequoia",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.085Z",
         "updatedAt": "2021-04-15T13:38:28.085Z"
     },
@@ -88294,7 +88294,7 @@
         "Year": 2021,
         "Make": "Volkswagen",
         "Model": "Atlas",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.085Z",
         "updatedAt": "2021-04-15T13:38:28.085Z"
     },
@@ -88339,7 +88339,7 @@
         "Year": 2021,
         "Make": "Volvo",
         "Model": "XC90",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:38:28.085Z",
         "updatedAt": "2021-04-15T13:38:28.085Z"
     },
@@ -88447,7 +88447,7 @@
         "Year": 2022,
         "Make": "Jeep",
         "Model": "Grand Wagoneer",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:56:04.353Z",
         "updatedAt": "2021-04-15T13:56:04.353Z"
     },
@@ -88501,7 +88501,7 @@
         "Year": 2022,
         "Make": "Nissan",
         "Model": "Pathfinder",
-        "Category": "SUV",
+        "Category": "XL",
         "createdAt": "2021-04-15T13:56:04.353Z",
         "updatedAt": "2021-04-15T13:56:04.353Z"
     },

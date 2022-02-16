@@ -9,18 +9,14 @@ const {
 } = require('./models')
 const db = require('./database.js')
 var faker = require('faker')
-// const Sequelize = require('sequelize')
 const fs = require('fs')
 
-// const legacyOrders = JSON.parse(
-// 	fs.readFileSync('./seedData/orders.json', 'utf-8')
-// )
-// console.log('legacy orders', legacyOrders[0])
-// const legacyCustomers = JSON.parse(
-// 	fs.readFileSync('./seedData/customers.json', 'utf-8')
-// )
-const servicesSeed = JSON.parse(fs.readFileSync('./services.json', 'utf-8'))
-const carMakesSeed = JSON.parse(fs.readFileSync('./carMakesList.json', 'utf-8'))
+const servicesSeed = JSON.parse(
+  fs.readFileSync('./utils/db/services.json', 'utf-8')
+)
+const carMakesSeed = JSON.parse(
+  fs.readFileSync('./utils/db/carMakesList.json', 'utf-8')
+)
 
 let customerSeed = []
 let dealerSeed = []
