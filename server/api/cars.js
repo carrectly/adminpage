@@ -26,7 +26,7 @@ router.get('/getAllMakes', async (req, res, next) => {
   }
 })
 
-router.get('/getModelsByYearMake/:make/:year', async (req, res, next) => {
+router.get('/getModels/:make/:year', async (req, res, next) => {
   try {
     const models = await CarMakes.findAll({
       where: {
