@@ -4,7 +4,6 @@ const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
 module.exports = router
-const defaultStringCompareOptions = { sensitivity: 'base' }
 
 router.get('/getAllMakes', async (req, res, next) => {
   try {
@@ -12,14 +11,12 @@ router.get('/getAllMakes', async (req, res, next) => {
       attributes: [
         [Sequelize.fn('DISTINCT', Sequelize.col('Make')), 'car_make'],
       ],
+      order: [['Make', 'ASC']],
     })
 
-    let makesResponse = makes.map((singleBrand) => {
+    const makesResponse = makes.map((singleBrand) => {
       return singleBrand.dataValues.car_make
     })
-    makesResponse.sort((a, b) =>
-      a.localeCompare(b, defaultStringCompareOptions)
-    )
     res.json(makesResponse)
   } catch (err) {
     next(err)
@@ -28,10 +25,16 @@ router.get('/getAllMakes', async (req, res, next) => {
 
 router.get('/getModels/:make/:year', async (req, res, next) => {
   try {
+    // returning models for all years because database is flawed
+    //  does not have all the models for each year
     const models = await CarMakes.findAll({
       where: {
-        [Op.and]: [{ Year: req.params.year }, { Make: req.params.make }],
+        [Op.and]: [{ Make: req.params.make }],
       },
+      attributes: [
+        [Sequelize.fn('DISTINCT', Sequelize.col('Model')), 'car_model'],
+      ],
+      order: [['Model', 'ASC']],
     })
     res.json(models)
   } catch (err) {
