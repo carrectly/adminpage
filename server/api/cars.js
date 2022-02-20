@@ -32,7 +32,8 @@ router.get('/getModels/:make/:year', async (req, res, next) => {
         [Op.and]: [{ Make: req.params.make }],
       },
       attributes: [
-        [Sequelize.fn('DISTINCT', Sequelize.col('Model')), 'car_model'],
+        [Sequelize.fn('DISTINCT', Sequelize.col('Model')), 'Model'],
+        'Category',
       ],
       order: [['Model', 'ASC']],
     })
