@@ -37,7 +37,13 @@ router.get('/getModels/:make/:year', async (req, res, next) => {
       ],
       order: [['Model', 'ASC']],
     })
-    res.json(models)
+
+    const resp = models.reduce((accumulator, currentModel) => {
+      accumulator.filter((e) => e.Model === currentModel.Model).length === 0 &&
+        accumulator.push(currentModel)
+      return accumulator
+    }, [])
+    res.json(resp)
   } catch (err) {
     next(err)
   }
