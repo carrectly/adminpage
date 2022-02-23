@@ -129,8 +129,9 @@ const seed = async () => {
     console.log('drivers bulk created')
     await User.create({
       email: 'cody@email.com',
-      password: '123',
+      password: '12345',
       isAdmin: true,
+      role: 'admin',
     })
     await Customer.bulkCreate(legacyCustomers)
     console.log('Customer bulk created')
