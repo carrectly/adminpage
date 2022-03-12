@@ -3,6 +3,7 @@ const db = require('../database')
 var axios = require('axios')
 const Driver = require('./driver')
 const Customer = require('./customer')
+const moment = require('moment')
 if (process.env.NODE_ENV !== 'production') require('../../../secrets.js')
 
 const Order = db.define('order', {
@@ -127,13 +128,13 @@ const sendEmail = async (inst) => {
     const orderInfo = { ...inst.dataValues }
     const payload = {
       email: cust.email,
-      orderid: orderInfo.orderid,
-      make: orderInfo.make,
-      model: orderInfo.model,
-      year: orderInfo.year,
+      orderid: orderInfo.hash,
+      make: orderInfo.carMake,
+      model: orderInfo.carModel,
+      year: orderInfo.carYear,
       customerName: `${cust.firstName} ${cust.lastName}`,
-      pickupDate: orderInfo.pickupDate,
-      dropoffDate: orderInfo.dropoffDate,
+      pickupDate: moment(orderInfo.pickupDate).format('MM-DD-YY HH:00'),
+      dropoffDate: moment(orderInfo.dropoffDate).format('MM-DD-YY HH:00'),
     }
     await axios.post(
       `${process.env.DOMAIN}/auth/google/gmail/sendconfirmation`,
