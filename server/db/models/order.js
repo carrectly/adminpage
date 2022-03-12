@@ -116,6 +116,30 @@ const createInGoogle = async (inst) => {
 //     console.log(err.message)
 //   }
 // }
+const sendEmail = async (inst) => {
+  try {
+    const customer = inst.customer.dataValues
+    const orderInfo = { ...inst.dataValues }
+    const payload = {
+      email: customer.email,
+      orderid: orderInfo.orderid,
+      make: orderInfo.make,
+      model: orderInfo.model,
+      year: orderInfo.year,
+      customerName: `${customer.firstName} ${customer.lastName}`,
+      pickupDate: orderInfo.pickupDate,
+      dropoffDate: orderInfo.dropoffDate,
+    }
+    await axios.post(
+      `${process.env.DOMAIN}/auth/google/gmail/sendconfirmation`,
+      payload
+    )
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+Order.afterCreate(sendEmail)
 
 Order.afterUpdate(createInGoogle)
 // Order.afterUpdate(updateInGoogle)
