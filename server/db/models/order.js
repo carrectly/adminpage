@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../database')
 var axios = require('axios')
 const Driver = require('./driver')
+const Customer = require('./customer')
 if (process.env.NODE_ENV !== 'production') require('../../../secrets.js')
 
 const Order = db.define('order', {
@@ -118,15 +119,19 @@ const createInGoogle = async (inst) => {
 // }
 const sendEmail = async (inst) => {
   try {
-    const customer = inst.customer.dataValues
+    const newinst = { ...inst.dataValues }
+    const customerObject = await Customer.findOne({
+      where: { phoneNumber: newinst.customerPhoneNumber },
+    })
+    const cust = customerObject.dataValues
     const orderInfo = { ...inst.dataValues }
     const payload = {
-      email: customer.email,
+      email: cust.email,
       orderid: orderInfo.orderid,
       make: orderInfo.make,
       model: orderInfo.model,
       year: orderInfo.year,
-      customerName: `${customer.firstName} ${customer.lastName}`,
+      customerName: `${cust.firstName} ${cust.lastName}`,
       pickupDate: orderInfo.pickupDate,
       dropoffDate: orderInfo.dropoffDate,
     }
