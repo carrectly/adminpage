@@ -15,8 +15,8 @@
     "seed": "node server/db/seed.js",
     "seed:cars": "node server/db/seedCarTable.js",
     "start": "node server/index.js",
-    "start-dev": "NODE_ENV='development' npm run build:dev & NODE_ENV='development' npm run start-server",
-    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
+    "start-dev": "npm run build:dev & NODE_ENV='development' npm run start-server",
+    "start-server": "nodemon server -e html,js,scss --ignore dist --ignore src",
     "build:dev": "cross-env NODE_ENV=development webpack --config config/webpack.dev.js",
     "build:prod": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
     "update:list": "node ./updateCarCategories.js"

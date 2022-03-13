@@ -239,21 +239,12 @@ router.post('/single/driver/:orderid', async (req, res, next) => {
   }
 })
 
-router.post('/single/services/:orderid', async (req, res, next) => {
+router.post('/single/services/:orderid/:serviceid', async (req, res, next) => {
   try {
-    let id = req.params.orderid
-    console.log('request to change services', req.body)
-    const service = await Service.findOne({
-      where: {
-        name: req.body.name,
-      },
-    })
-
-    const order = await Order.findOne({
-      where: {
-        hash: id,
-      },
-    })
+    const orderId = req.params.orderid
+    const serviceId = req.params.serviceid
+    const service = await Service.findByPk(serviceId)
+    const order = await Order.findByPk(orderId)
 
     let resp = await order.addService(service, {
       through: { customerPrice: service.dataValues.price },
