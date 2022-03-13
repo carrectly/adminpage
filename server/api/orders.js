@@ -146,6 +146,7 @@ router.put('/single/:orderid', async (req, res, next) => {
       include: [
         { model: Service },
         { model: Customer },
+        { model: Dealer },
         { model: Driver, as: 'pickUpDriver' },
         { model: Driver, as: 'returnDriver' },
       ],
