@@ -1,3 +1,4 @@
+require('dotenv').config()
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
@@ -12,8 +13,6 @@ const app = express()
 const socketio = require('socket.io')
 
 module.exports = app
-
-if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
