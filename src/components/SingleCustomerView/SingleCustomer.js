@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getCustomerOrdersThunk } from '../../store/customerorders'
@@ -8,9 +9,11 @@ import UpdateCustomer from './UpdateCustomer'
 import moment from 'moment'
 
 const SingleCustomer = (props) => {
+  const params = useParams()
+
   useEffect(() => {
-    props.getCustomer(props.match.params.userid)
-    props.getOrders(props.match.params.userid)
+    props.getCustomer(params.userid)
+    props.getOrders(params.userid)
   }, [])
 
   const userorders = props.orders || []
