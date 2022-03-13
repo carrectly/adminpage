@@ -20,8 +20,7 @@ const AddOrderServices = (props) => {
   }
 
   const handleChange = (value) => {
-    console.log('setting value', value)
-    setService(value)
+    setService({ name: `${value}` })
   }
 
   const servicesDropDown = props.services || []
