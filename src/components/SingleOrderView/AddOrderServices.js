@@ -27,7 +27,7 @@ const AddOrderServices = (props) => {
   return (
     <div className="select-and-button">
       <Select
-        showSearch
+        showSearch={false}
         style={{ width: '80%' }}
         placeholder="Search to add service"
         optionFilterProp="children"
