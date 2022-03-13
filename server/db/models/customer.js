@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../database')
 var axios = require('axios')
-if (process.env.NODE_ENV !== 'production') require('../../../secrets.js')
 
 const Customer = db.define('customer', {
   phoneNumber: {
@@ -27,18 +26,20 @@ const Customer = db.define('customer', {
   },
 })
 
-const createInGoogle = async (inst) => {
-  try {
-    inst.isInGoogle = true
-    await axios.post(
-      `${process.env.DOMAIN}/auth/google/contacts`,
-      inst.dataValues
-    )
-  } catch (err) {
-    console.log('Failed to create a contact in google', err.message)
+if (process.env.ENVIRONMENT === 'PRODUCTION') {
+  const createInGoogle = async (inst) => {
+    try {
+      inst.isInGoogle = true
+      await axios.post(
+        `${process.env.DOMAIN}/auth/google/contacts`,
+        inst.dataValues
+      )
+    } catch (err) {
+      console.log('Failed to create a contact in google', err.message)
+    }
   }
-}
 
-Customer.afterCreate(createInGoogle)
+  Customer.afterCreate(createInGoogle)
+}
 
 module.exports = Customer
