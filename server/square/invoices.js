@@ -1,20 +1,21 @@
 const router = require('express').Router()
-const {ApiError, Client, Environment} = require('square')
+const { ApiError, Client, Environment } = require('square')
 const moment = require('moment')
 
 const client = new Client({
-	timeout: 3000,
-	environment: Environment.Production, // `Environment.Sandbox` to access sandbox resources
-	accessToken: process.env.SQUARE_TOKEN,
+  timeout: 3000,
+  environment:
+    process.env.ENVIRONMENT === 'PRODUCTION'
+      ? Environment.Production
+      : Environment.Sandbox,
+  accessToken: process.env.SQUARE_TOKEN,
 })
 
-const {ordersApi} = client
+const { ordersApi } = client
 
-const {invoicesApi} = client
+const { invoicesApi } = client
 
-var dueDate = moment()
-	.add(1, 'days')
-	.format('YYYY-MM-DD')
+var dueDate = moment().add(1, 'days').format('YYYY-MM-DD')
 
 const invoiceDescription = `Hi there!
 
@@ -34,84 +35,88 @@ const invoiceDescription = `Hi there!
 		Have a fantastic rest of the week! Thank you for servicing your car - Carrectly!`
 
 router.post('/', async (req, res, next) => {
-	try {
-		let order = req.body.obj
-		let customerid = req.body.id
-		let services = req.body.obj.services
-		let idempKey = `${order.hash}${Math.floor(Math.random() * 1000)}`
+  try {
+    let order = req.body.obj
+    let customerid = req.body.id
+    let services = req.body.obj.services
+    let idempKey = `${order.hash}${Math.floor(Math.random() * 1000)}`
 
-		let lineItems = []
-		services.forEach(service => {
-			let amt = Number(service.orderdetails.customerPrice) * 100
-			lineItems.push({
-				name: service.name,
-				quantity: '1',
-				basePriceMoney: {
-					amount: amt,
-					currency: 'USD',
-				},
-			})
-		})
+    let lineItems = []
+    services.forEach((service) => {
+      let amt = Number(service.orderdetails.customerPrice) * 100
+      lineItems.push({
+        name: service.name,
+        quantity: '1',
+        basePriceMoney: {
+          amount: amt,
+          currency: 'USD',
+        },
+      })
+    })
 
-		let orderBody = {
-			locationId: process.env.SQUARE_LOCATION_ID,
-			referenceId: order.hash,
-			lineItems: lineItems,
-			customerId: customerid,
-		}
+    let orderBody = {
+      locationId: process.env.SQUARE_LOCATION_ID,
+      referenceId: order.hash,
+      lineItems: lineItems,
+      customerId: customerid,
+    }
 
-		let discountAmt = Number(order.discount) * 100
-		if (discountAmt) {
-			const orderDiscount = [
-				{
-					amountMoney: {
-						amount: discountAmt,
-						currency: 'USD',
-					},
-					name: `${order.promoCode}`,
-				},
-			]
-			orderBody.discounts = orderDiscount
-		}
+    let discountAmt = Number(order.discount) * 100
+    if (discountAmt) {
+      const orderDiscount = [
+        {
+          amountMoney: {
+            amount: discountAmt,
+            currency: 'USD',
+          },
+          name: `${order.promoCode}`,
+        },
+      ]
+      orderBody.discounts = orderDiscount
+    }
 
-		let singleordr = await ordersApi.createOrder({
-			idempotencyKey: idempKey,
-			locationId: process.env.SQUARE_LOCATION_ID,
-			order: orderBody,
-		})
+    let singleordr = await ordersApi.createOrder({
+      idempotencyKey: idempKey,
+      locationId: process.env.SQUARE_LOCATION_ID,
+      order: orderBody,
+    })
 
-		const invoiceBody = {
-			idempotencyKey: idempKey,
-			invoice: {
-				deliveryMethod: 'EMAIL',
-				description: invoiceDescription,
-				orderId: singleordr.result.order.id,
-				locationId: process.env.SQUARE_LOCATION_ID,
-				invoiceNumber: idempKey,
-				title: `Thank you for servicing you car with us - Carrectly - ${order.hash}`,
-				primaryRecipient: {
-					customerId: customerid,
-				},
-				paymentRequests: [
-					{
-						requestType: 'BALANCE',
-						dueDate: dueDate,
-						tippingEnabled: true,
-					},
-				],
-			},
-		}
+    const invoiceBody = {
+      idempotencyKey: idempKey,
+      invoice: {
+        deliveryMethod: 'EMAIL',
+        description: invoiceDescription,
+        orderId: singleordr.result.order.id,
+        locationId: process.env.SQUARE_LOCATION_ID,
+        invoiceNumber: idempKey,
+        title: `Thank you for servicing you car with us - Carrectly - ${order.hash}`,
+        primaryRecipient: {
+          customerId: customerid,
+        },
+        acceptedPaymentMethods: {
+          card: true,
+        },
+        paymentRequests: [
+          {
+            requestType: 'BALANCE',
+            dueDate: dueDate,
+            tippingEnabled: true,
+          },
+        ],
+      },
+    }
 
-		const {result} = await invoicesApi.createInvoice(invoiceBody)
-		res.json(result)
-	} catch (error) {
-		if (error instanceof ApiError) {
-			console.log('Errors: ', error.errors)
-		} else {
-			console.log('Unexpected Error: ', error)
-		}
-		next(error)
-	}
+    const { result } = await invoicesApi.createInvoice(invoiceBody)
+
+    res.send({ id: result.invoice.id, status: 'Invoice created successfully' })
+  } catch (error) {
+    if (error instanceof ApiError) {
+      console.log('Errors: ', error.errors)
+    } else {
+      console.log('Unexpected Error: ', error)
+    }
+    next(error)
+  }
 })
 
 module.exports = router

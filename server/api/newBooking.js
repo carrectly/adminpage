@@ -5,7 +5,6 @@ const { Customer, Order } = require('../db/models')
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log('new booking request', req.body)
     let services = req.body.param.services //array
     let newcust = req.body.param.customer
     let order = req.body.param.order

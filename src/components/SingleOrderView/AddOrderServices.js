@@ -7,7 +7,7 @@ import { Select, Button } from 'antd'
 const { Option } = Select
 
 const AddOrderServices = (props) => {
-  const [service, setService] = useState(null)
+  const [serviceId, setServiceId] = useState(null)
 
   useEffect(() => {
     props.getServices()
@@ -15,20 +15,19 @@ const AddOrderServices = (props) => {
 
   const handleAddService = () => {
     let id = props.orderid
-    props.addService(id, service)
-    setService(null)
+    props.addService(id, serviceId)
+    setServiceId(null)
   }
 
   const handleChange = (value) => {
-    console.log('setting value', value)
-    setService(value)
+    setServiceId(value)
   }
 
   const servicesDropDown = props.services || []
   return (
     <div className="select-and-button">
       <Select
-        showSearch
+        showSearch={false}
         style={{ width: '80%' }}
         placeholder="Search to add service"
         optionFilterProp="children"
@@ -41,7 +40,7 @@ const AddOrderServices = (props) => {
         }
       >
         {servicesDropDown.map((svc) => (
-          <Option value={svc.name} key={svc.id} name={svc.name} id={svc.id}>
+          <Option value={svc.id} key={svc.id} name={svc.name} id={svc.id}>
             {svc.name}
           </Option>
         ))}
@@ -50,7 +49,7 @@ const AddOrderServices = (props) => {
         style={{ backgroundColor: '#6AEB6F' }}
         size="middle"
         shape="round"
-        disabled={!service}
+        disabled={!serviceId}
         onClick={handleAddService}
       >
         Add
