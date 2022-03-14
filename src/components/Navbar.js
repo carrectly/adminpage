@@ -24,17 +24,10 @@ const Navbar = (props) => {
   return (
     <div className="navbar1">
       <Popover content="Click here to book for client">
-        <a
-          className="link"
-          href="https://www.carrectly.com/book/"
-          rel="noreferrer"
-          target="_blank"
-        >
-          <img
-            id="logo"
-            src="https://www.carrectly.com/wp-content/uploads/2016/11/logo.png"
-          />
-        </a>
+        <img
+          id="logo"
+          src="https://www.carrectly.com/wp-content/uploads/2016/11/logo.png"
+        />
       </Popover>
       <Link to="/account" className="link">
         <FireOutlined className="icon" />
