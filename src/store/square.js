@@ -35,7 +35,6 @@ export const getSquareCustomerThunk = (phone) => async (dispatch) => {
 export const createInvoiceThunk = (obj, id) => async (dispatch) => {
   try {
     const res = await axios.post('/square/invoices', { obj, id })
-    console.log('thunk response invoice', res.data)
     dispatch(createInvoice(res.data))
   } catch (err) {
     console.error(err)

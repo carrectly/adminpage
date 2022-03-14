@@ -89,8 +89,6 @@ router.get('/driver/:email', async (req, res, next) => {
         email,
       },
     })
-    console.log('inside the api route for driver', driver)
-
     const orders = await Order.findAll({
       where: {
         [Op.or]: [

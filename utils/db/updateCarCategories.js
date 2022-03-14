@@ -52,7 +52,7 @@ const run = (file) => {
 
     fs.writeFileSync('carMakesListWithXL.json', JSON.stringify(newFile))
   } catch (error) {
-    console.log('proble', error)
+    console.log('problem', error)
   }
 }
 

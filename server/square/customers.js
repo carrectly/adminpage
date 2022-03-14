@@ -48,8 +48,6 @@ router.get('/:customerPhone', async (req, res, next) => {
       response.id = singlecstmr.result.customers[0].id
       response.status = 'CUSTOMER EXISTS IN SQUARE'
     }
-    console.log('sending response', response)
-
     res.json(response)
   } catch (error) {
     if (error instanceof ApiError) {
