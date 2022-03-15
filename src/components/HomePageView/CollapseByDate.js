@@ -1,19 +1,21 @@
 import React from 'react'
-import TableOrdersByStatus from './TableOrdersByStatus'
+import DefaultTable from './DefaultTable'
 import { Collapse, Spin } from 'antd'
 const { Panel } = Collapse
 import moment from 'moment'
+import { panelHeaderHelper } from '../Shared/CollapsePanelHelper'
 
 const CollapseByDate = (props) => {
   const dateColumn = props.dateColumn
   const orders = props.orders || []
+  const cols = props.columns || []
   const hashTable = {}
   let groupedArr
 
   if (orders.length) {
     orders.forEach((element) => {
       let date = moment(element[dateColumn]).format('M/D/YY')
-      if (Object.prototype.hasOwnProperty.call(hashTable, date)) {
+      if (hashTable.hasOwnProperty(date)) {
         hashTable[date].push(element)
       } else {
         hashTable[date] = [element]
@@ -26,15 +28,10 @@ const CollapseByDate = (props) => {
   }
 
   return (
-    <Collapse>
+    <Collapse defaultActiveKey={['0']}>
       {groupedArr.map((el, index) => (
-        <Panel
-          key={index}
-          header={`${dateColumn} ${moment(el[0]).format('M/D/YY')}  count ${
-            el[1].length
-          }`}
-        >
-          <TableOrdersByStatus ordersArray={el[1]} />
+        <Panel key={index} header={panelHeaderHelper(el[0], el[1])}>
+          <DefaultTable ordersArray={el[1]} columns={cols} />
         </Panel>
       ))}
     </Collapse>

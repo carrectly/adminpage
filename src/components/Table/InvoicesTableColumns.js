@@ -6,14 +6,21 @@ import {
   CustomerNameCell,
   StatusCell,
   LocationCell,
+  ServicesCell,
   ConciergeCell,
   CarMakeCell,
-  ServicesCell,
 } from './Cells.js'
+import getColumnSearchProps from './ColumnFilter.js'
 
 const defaultStringCompareOptions = { sensitivity: 'base' }
 
-const columns = [
+const InvoiceColumns = (
+  searchInput,
+  searchText,
+  searchedColumn,
+  handleSearch,
+  handleReset
+) => [
   {
     title: 'Order Link',
     dataIndex: 'hash',
@@ -27,7 +34,14 @@ const columns = [
     key: 'status',
     sorter: (a, b) =>
       a.status.localeCompare(b.status, defaultStringCompareOptions),
-    sortDirections: ['descend', 'ascend'],
+    ...getColumnSearchProps(
+      'status',
+      searchInput,
+      searchText,
+      searchedColumn,
+      handleSearch,
+      handleReset
+    ),
     render: (value) => <StatusCell value={value} />,
   },
   {
@@ -45,12 +59,6 @@ const columns = [
     render: (value) => <ConciergeCell value={value} />,
   },
   {
-    title: 'Car',
-    dataIndex: 'carMake',
-    key: 'carMake',
-    render: (value, row) => <CarMakeCell value={value} row={row} />,
-  },
-  {
     title: 'Services',
     dataIndex: 'services',
     align: 'center',
@@ -58,15 +66,16 @@ const columns = [
     render: (value, row) => <ServicesCell value={value} row={row} />,
   },
   {
+    title: 'Car',
+    dataIndex: 'carMake',
+    key: 'carMake',
+    render: (value, row) => <CarMakeCell value={value} row={row} />,
+  },
+  {
     title: 'Customer',
     dataIndex: 'customer',
     key: 'customer',
     render: (value, row) => <CustomerNameCell value={value} row={row} />,
-  },
-  {
-    title: 'Customer Phone #',
-    dataIndex: 'customerPhoneNumber',
-    key: 'customerPhoneNumber',
   },
   {
     title: 'pickupLocation',
@@ -87,10 +96,10 @@ const columns = [
     title: 'dropoffDate',
     dataIndex: 'dropoffDate',
     key: 'dropoffDate',
-    sorter: (a, b) => m(a.dropoffDate).diff(m(b.dropoffDate)),
+    sorter: (a, b) => m(a.pickupDate).diff(m(b.pickupDate)),
     sortDirections: ['descend', 'ascend'],
     render: (value) => <DateCell value={value} />,
   },
 ]
 
-export default columns
+export default InvoiceColumns
