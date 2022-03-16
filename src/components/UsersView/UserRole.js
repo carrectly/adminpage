@@ -4,7 +4,7 @@ import { Button, Dropdown, Menu } from 'antd'
 import { updateSingleUserThunk } from '../../store/users'
 import { DownOutlined } from '@ant-design/icons'
 
-const roles = ['unconfirmed', 'admin', 'driver', 'cosmetics']
+const roles = ['unconfirmed', 'admin', 'driver', 'detailer']
 
 const menuList = (fn) => {
   return (

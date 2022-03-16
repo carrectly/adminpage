@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getActiveOrdersThunk } from '../../store/activeOrders'
-import TableOrdersByStatus from './TableOrdersByStatus'
-import CollapseByDate from './CollapseByDate'
-import CollapseByBothDates from './CollapseByBothDates'
+import { getActiveOrdersThunk } from '../../../store/activeOrders'
+import DefaultTable from '../DefaultTable'
+import InvoicesTable from '../InvoicesTable'
+import CollapseByDate from '../CollapseByDate'
+import CollapseTrips from '../CollapseTrips'
+import SearchBar from '../../Shared/SearchBar'
 import {
   getTakeActionStatusArray,
   getWorkZoneStatusArray,
@@ -11,10 +13,10 @@ import {
   getQuotesStatusArray,
   getPotentialLeadsStatusArray,
   getConfirmedTripsArray,
-} from '../util'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import { Layout, Menu, Input } from 'antd'
+} from '../../util'
+import columns from '../../Table/HomeTableColumns'
+
+import { Layout, Menu } from 'antd'
 import {
   NotificationOutlined,
   ToolOutlined,
@@ -24,13 +26,12 @@ import {
   MenuOutlined,
   CarOutlined,
 } from '@ant-design/icons'
-const { Search } = Input
 const { Content } = Layout
 
-const BookingsByStatus = () => {
+const AdminMenu = () => {
   const dispatch = useDispatch()
   const [render, updateRender] = useState(1)
-  let navigate = useNavigate()
+
   useEffect(() => {
     dispatch(getActiveOrdersThunk())
   }, [])
@@ -64,41 +65,23 @@ const BookingsByStatus = () => {
   )
 
   const components = {
-    1: <CollapseByDate orders={actionArr} dateColumn="pickupDate" />,
-    // 2: <CollapseByDate orders={workZoneArr} dateColumn='pickupDate' />,
-    2: <TableOrdersByStatus ordersArray={workZoneArr} />,
-    3: <CollapseByBothDates confirmedTrips={confirmedTrips} />,
-    4: <TableOrdersByStatus ordersArray={invoiceArr} />,
-    5: <TableOrdersByStatus ordersArray={quotesArr} />,
-    6: <TableOrdersByStatus ordersArray={leadsArr} />,
-  }
-
-  const onSearch = async (value) => {
-    let strValue = value.trim()
-    let singleorder
-    try {
-      singleorder = await axios.get(`/api/orders/single/${strValue}`)
-    } catch (e) {
-      console.log('order not found', e)
-    }
-
-    if (singleorder.data) {
-      console.log('order found', singleorder)
-      navigate(`/singleorder/${strValue}`)
-    } else {
-      window.alert('Order not found')
-    }
+    1: (
+      <CollapseByDate
+        orders={actionArr}
+        dateColumn="pickupDate"
+        columns={columns}
+      />
+    ),
+    2: <DefaultTable ordersArray={workZoneArr} type="trips" />,
+    3: <CollapseTrips orders={confirmedTrips} type="trips" />,
+    4: <InvoicesTable ordersArray={invoiceArr} />,
+    5: <DefaultTable ordersArray={quotesArr} type="default" />,
+    6: <DefaultTable ordersArray={leadsArr} type="default" />,
   }
 
   return (
     <div>
-      <div>
-        <Search
-          placeholder="search for orders by order id ... "
-          onSearch={onSearch}
-          enterButton
-        />
-      </div>
+      <SearchBar />
       <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
         <Menu
           mode="horizontal"
@@ -135,4 +118,4 @@ const BookingsByStatus = () => {
   )
 }
 
-export default BookingsByStatus
+export default AdminMenu

@@ -15,7 +15,7 @@ import {
   CarOutlined,
 } from '@ant-design/icons'
 import './styles/navbar.scss'
-
+import logo from '../images/logo.png'
 const Navbar = (props) => {
   const handleLogout = () => {
     props.handleClick()
@@ -24,10 +24,14 @@ const Navbar = (props) => {
   return (
     <div className="navbar1">
       <Popover content="Click here to book for client">
-        <img
-          id="logo"
-          src="https://www.carrectly.com/wp-content/uploads/2016/11/logo.png"
-        />
+        <a
+          className="link"
+          href="https://www.carrectly.com"
+          rel="noreferrer"
+          target="_blank"
+        >
+          <img id="logo" src={logo} alt="carrectly-logo" />
+        </a>
       </Popover>
       <Link to="/account" className="link">
         <FireOutlined className="icon" />

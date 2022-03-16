@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Login, Signup } from './auth-form'
-import BookingsByStatus from './HomePageView/BookingsByStatus'
-import TableByDriver from './HomePageView/TableByDriver'
+import AdminMenu from './HomePageView/Admin/AdminMenu'
+import TableByDriver from './HomePageView/Driver/TableByDriver'
+import TableByDetailer from './HomePageView/Detailer/TableByDetailer'
 import { Tabs } from 'antd'
 const { TabPane } = Tabs
 import { UnlockFilled, EditFilled } from '@ant-design/icons'
@@ -21,10 +22,16 @@ const Account = (props) => {
           <TableByDriver email={props.user.email} />
         </React.Fragment>
       )
+    } else if (props.user.role === 'detailer') {
+      return (
+        <React.Fragment>
+          <TableByDetailer />
+        </React.Fragment>
+      )
     } else {
       return (
         <React.Fragment>
-          <BookingsByStatus />
+          <AdminMenu />
         </React.Fragment>
       )
     }
