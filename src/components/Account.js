@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import { Login, Signup } from './auth-form'
 import AdminMenu from './HomePageView/Admin/AdminMenu'
 import TableByDriver from './HomePageView/Driver/TableByDriver'
@@ -84,4 +83,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, null)(Account))
+export default connect(mapStateToProps, null)(Account)
