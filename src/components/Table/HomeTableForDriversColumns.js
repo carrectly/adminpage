@@ -9,6 +9,7 @@ import {
   ConciergeCell,
   CarMakeCell,
   ServicesCell,
+  DealersCell,
 } from './Cells.js'
 
 const defaultStringCompareOptions = { sensitivity: 'base' }
@@ -43,6 +44,20 @@ const columns = [
     align: 'center',
     key: 'returnDriver',
     render: (value) => <ConciergeCell value={value} />,
+  },
+  {
+    title: 'Customer Rep',
+    dataIndex: 'customerRep',
+    align: 'center',
+    key: 'customerRep',
+    render: (value) => <ConciergeCell value={value} />,
+  },
+  {
+    title: 'Repair Shop',
+    dataIndex: 'dealers',
+    align: 'center',
+    key: 'dealers',
+    render: (value) => <DealersCell value={value} />,
   },
   {
     title: 'Car',
