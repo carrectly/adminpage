@@ -7,10 +7,20 @@ const {
   Customer,
   Driver,
   Dealer,
+  User,
 } = require('../db/models')
 const helper = require('../utilServer')
 const Op = Sequelize.Op
 module.exports = router
+
+const associations = [
+  { model: Service },
+  { model: Dealer },
+  { model: Customer },
+  { model: User, as: 'customerRep' },
+  { model: Driver, as: 'pickUpDriver' },
+  { model: Driver, as: 'returnDriver' },
+]
 
 router.get('/', async (req, res, next) => {
   try {
@@ -38,13 +48,7 @@ router.get('/active', async (req, res, next) => {
         status: activeArr,
       },
       order: [['updatedAt', 'DESC']],
-      include: [
-        { model: Service },
-        { model: Dealer },
-        { model: Customer },
-        { model: Driver, as: 'pickUpDriver' },
-        { model: Driver, as: 'returnDriver' },
-      ],
+      include: associations,
     })
     res.json(orders)
   } catch (err) {
@@ -59,12 +63,7 @@ router.get('/detailing', async (req, res, next) => {
       where: {
         status: detailingOrders,
       },
-      include: [
-        { model: Service },
-        { model: Customer },
-        { model: Driver, as: 'pickUpDriver' },
-        { model: Driver, as: 'returnDriver' },
-      ],
+      include: associations,
     })
     res.json(orders)
   } catch (err) {
@@ -95,12 +94,7 @@ router.get('/driver/:email', async (req, res, next) => {
           },
         ],
       },
-      include: [
-        { model: Service },
-        { model: Customer },
-        { model: Driver, as: 'pickUpDriver' },
-        { model: Driver, as: 'returnDriver' },
-      ],
+      include: associations,
     })
     res.json(orders)
   } catch (err) {
@@ -129,21 +123,15 @@ router.put('/', async (req, res, next) => {
 
 router.put('/single/:orderid', async (req, res, next) => {
   try {
-    const id = req.params.orderid
-    const ord = await Order.findOne({
+    await Order.update(req.body, {
       where: {
-        hash: id,
+        hash: req.params.orderid,
       },
-      include: [
-        { model: Service },
-        { model: Customer },
-        { model: Dealer },
-        { model: Driver, as: 'pickUpDriver' },
-        { model: Driver, as: 'returnDriver' },
-      ],
     })
-    const neword = await ord.update(req.body)
-    res.json(neword)
+    const ord = await Order.findByPk(req.params.orderid, {
+      include: associations,
+    })
+    res.json(ord.dataValues)
   } catch (err) {
     next(err)
   }
@@ -165,20 +153,10 @@ router.get('/:userid', async (req, res, next) => {
 
 router.get('/single/:orderid', async (req, res, next) => {
   try {
-    let id = req.params.orderid
-    const orders = await Order.findOne({
-      where: {
-        hash: id,
-      },
-      include: [
-        { model: Service },
-        { model: Dealer },
-        { model: Customer },
-        { model: Driver, as: 'pickUpDriver' },
-        { model: Driver, as: 'returnDriver' },
-      ],
+    const order = await Order.findByPk(req.params.orderid, {
+      include: associations,
     })
-    res.json(orders)
+    res.json(order)
   } catch (err) {
     next(err)
   }
@@ -207,25 +185,36 @@ router.put('/single/services/:orderid', async (req, res, next) => {
 
 router.post('/single/driver/:orderid', async (req, res, next) => {
   try {
-    let id = req.params.orderid
-
-    const driver = await Driver.findOne({
+    const driver = { [`${req.body.tripType}DriverId`]: req.body.driverId }
+    await Order.update(driver, {
       where: {
-        id: req.body.driverId,
+        hash: req.params.orderid,
       },
     })
-
-    const order = await Order.findByPk(id, {
-      include: [{ model: Customer }],
+    const order = await Order.findByPk(req.params.orderid, {
+      include: associations,
     })
+    res.json(order.dataValues)
+  } catch (err) {
+    next(err)
+  }
+})
 
-    if (req.body.tripType === 'pickUp') {
-      await order.setPickUpDriver(driver)
-    } else {
-      await order.setReturnDriver(driver)
-    }
+router.post('/single/customerRep/:orderid', async (req, res, next) => {
+  try {
+    await Order.update(
+      { customerRepId: req.body.userId },
+      {
+        where: {
+          hash: req.params.orderid,
+        },
+      }
+    )
 
-    res.json(order)
+    const order = await Order.findByPk(req.params.orderid, {
+      include: associations,
+    })
+    res.json(order.dataValues)
   } catch (err) {
     next(err)
   }
@@ -272,13 +261,13 @@ router.put('/single/removeservice/:orderid', async (req, res, next) => {
 
 router.post('/single/dealers/:orderid', async (req, res, next) => {
   try {
-    let id = req.params.orderid
-    let dealerName = req.body.dealerName
-    const dealer = await Dealer.findOne({ where: { name: dealerName } })
-    const order = await Order.findByPk(id)
-    let resp = await order.addDealer(dealer)
+    const order = await Order.findByPk(req.params.orderid)
+    await order.addDealer(req.body.dealerId)
+    const resp = await Order.findByPk(req.params.orderid, {
+      include: associations,
+    })
 
-    res.json(resp)
+    res.json(resp.dataValues)
   } catch (err) {
     next(err)
   }
@@ -286,12 +275,13 @@ router.post('/single/dealers/:orderid', async (req, res, next) => {
 
 router.put('/single/dealers/:orderid', async (req, res, next) => {
   try {
-    let id = req.params.orderid
-    let dealerName = req.body.dealerName
-    const dealer = await Dealer.findOne({ where: { name: dealerName } })
-    const order = await Order.findByPk(id)
-    let resp = await order.removeDealer(dealer)
-    res.json(resp)
+    const order = await Order.findByPk(req.params.orderid)
+    await order.removeDealer(req.body.dealerId)
+    const resp = await Order.findByPk(req.params.orderid, {
+      include: associations,
+    })
+
+    res.json(resp.dataValues)
   } catch (err) {
     next(err)
   }

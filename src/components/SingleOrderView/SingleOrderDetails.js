@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Descriptions, Tabs, Button, Dropdown, Menu, Select } from 'antd'
 import { Link, useParams } from 'react-router-dom'
@@ -16,6 +16,7 @@ import {
   addOrderDriverThunk,
   addOrderDealerThunk,
   removeOrderDealerThunk,
+  addOrderCustomerRepThunk,
 } from '../../store/singleorder'
 import './styles.scss'
 
@@ -34,22 +35,26 @@ const menuList = (fn) => {
   )
 }
 
-const driversList = (arr, fn, tripType) => {
+const employeeList = (arr, fn, tripType) => {
   return (
     <Menu onClick={fn}>
-      {arr.map((driver) => (
-        <Menu.Item key={driver.id} id={tripType}>
-          {driver.name}
+      {arr.map((person) => (
+        <Menu.Item key={person.id} id={tripType}>
+          {person.name ? person.name : person.firstName}
         </Menu.Item>
       ))}
     </Menu>
   )
 }
 
-const flattenDealersArray1 = (arr) => {
-  return arr.map((el) => {
+const flattenDealersArray1 = (allShopsArray, shopsAlreadySelected) => {
+  const idsSelected = shopsAlreadySelected.map((el) => el.id)
+  const difference = allShopsArray.filter(
+    (element) => !idsSelected.includes(element.id)
+  )
+  return difference.map((el) => {
     return (
-      <Option value={el.name} key={el.id}>
+      <Option value={el.id} key={el.id}>
         {el.name}
       </Option>
     )
@@ -57,7 +62,13 @@ const flattenDealersArray1 = (arr) => {
 }
 
 const flattenDealersArray2 = (arr) => {
-  return arr.map((el) => el.name)
+  return arr.map((el) => {
+    return (
+      <div value={el.id} key={el.id}>
+        {el.name}
+      </div>
+    )
+  })
 }
 
 const SingleOrderDetails = (props) => {
@@ -66,11 +77,13 @@ const SingleOrderDetails = (props) => {
   const orderId = params.orderid
   const singleorder = props.order
   const pickUpDriver = props.pickUpDriver
+  const customerRep = props.customerRep
   const returnDriver = props.returnDriver
   const customer = props.customer
-  const orderDealers = flattenDealersArray2(props.orderDealers)
   const drivers = useSelector((state) => state.drivers)
-  const shops = useSelector((state) => state.dealers)
+  const users = useSelector((state) => state.users)
+  const allShops = useSelector((state) => state.dealers)
+  const orderDealers = props.orderDealers
 
   const handleStatusUpdate = (e) => {
     let obj = {
@@ -112,12 +125,12 @@ const SingleOrderDetails = (props) => {
     }
   }
 
-  const handleAddDealer = (dealerName) => {
-    dispatch(addOrderDealerThunk(orderId, dealerName))
+  const handleAddDealer = (dealerId) => {
+    dispatch(addOrderDealerThunk(orderId, dealerId))
   }
 
-  const handleRemoveDealer = (dealerName) => {
-    dispatch(removeOrderDealerThunk(orderId, dealerName))
+  const handleRemoveDealer = (evt) => {
+    dispatch(removeOrderDealerThunk(orderId, evt.key))
   }
 
   const changeDriver = (evt) => {
@@ -127,6 +140,11 @@ const SingleOrderDetails = (props) => {
         tripType: evt.item.props.id,
       })
     )
+  }
+
+  const assignCustomerRep = (evt) => {
+    console.log('assigning rep', evt)
+    dispatch(addOrderCustomerRepThunk(orderId, evt.key))
   }
 
   return (
@@ -259,9 +277,9 @@ const SingleOrderDetails = (props) => {
                   placeholder="Please select"
                   onSelect={handleAddDealer}
                   onDeselect={handleRemoveDealer}
-                  value={orderDealers}
+                  value={flattenDealersArray2(orderDealers)}
                 >
-                  {flattenDealersArray1(shops)}
+                  {flattenDealersArray1(allShops, orderDealers)}
                 </Select>
               </Descriptions.Item>
               <Descriptions.Item label="Concierge">
@@ -269,7 +287,7 @@ const SingleOrderDetails = (props) => {
               </Descriptions.Item>
               <Descriptions.Item label="Driver picking up">
                 <Dropdown
-                  overlay={() => driversList(drivers, changeDriver, 'pickUp')}
+                  overlay={() => employeeList(drivers, changeDriver, 'pickUp')}
                 >
                   <Button
                     size="small"
@@ -284,7 +302,9 @@ const SingleOrderDetails = (props) => {
                   moment(singleorder.pickupDate)
                 ) > 0 ? (
                   <Dropdown
-                    overlay={() => driversList(drivers, changeDriver, 'return')}
+                    overlay={() =>
+                      employeeList(drivers, changeDriver, 'return')
+                    }
                   >
                     <Button
                       size="small"
@@ -302,6 +322,18 @@ const SingleOrderDetails = (props) => {
                     driver
                   </div>
                 )}
+              </Descriptions.Item>
+              <Descriptions.Item label="Customer Rep in charge of the order">
+                <Dropdown
+                  overlay={() => employeeList(users, assignCustomerRep, '')}
+                >
+                  <Button
+                    size="small"
+                    style={{ padding: '0px', border: '0px' }}
+                  >
+                    <ConciergeCell value={customerRep} dropDown={true} />
+                  </Button>
+                </Dropdown>
               </Descriptions.Item>
             </Descriptions>
           </Descriptions.Item>

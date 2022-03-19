@@ -11,6 +11,7 @@ const REMOVE_ORDER_SERVICE = 'REMOVE_ORDER_SERVICE'
 const ADD_ORDER_DEALER = 'ADD_ORDER_DEALER'
 const REMOVE_ORDER_DEALER = 'REMOVE_ORDER_DEALER'
 const ADD_ORDER_DRIVER = 'ADD_ORDER_DRIVER'
+const ADD_ORDER_CUSTOMER_REP = 'ADD_ORDER_CUSTOMER_REP'
 
 /**
  * INITIAL STATE
@@ -28,6 +29,7 @@ const removeOrderService = (order) => ({ type: REMOVE_ORDER_SERVICE, order })
 const addOrderDealer = (order) => ({ type: ADD_ORDER_DEALER, order })
 const removeOrderDealer = (order) => ({ type: REMOVE_ORDER_DEALER, order })
 const addOrderDriver = (order) => ({ type: ADD_ORDER_DRIVER, order })
+const addOrderCustomerRep = (order) => ({ type: ADD_ORDER_CUSTOMER_REP, order })
 
 /**
  * THUNK CREATORS
@@ -83,27 +85,24 @@ export const removeOrderServiceThunk = (id, obj) => async (dispatch) => {
   }
 }
 
-export const addOrderDealerThunk =
-  (orderid, dealerName) => async (dispatch) => {
-    try {
-      const res = await axios.post(`/api/orders/single/dealers/${orderid}`, {
-        dealerName,
-      })
-      const resp = await axios.get(`/api/orders/single/${orderid}`)
-      dispatch(addOrderDealer(resp.data))
-    } catch (err) {
-      console.error(err)
-    }
+export const addOrderDealerThunk = (orderid, dealerId) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/api/orders/single/dealers/${orderid}`, {
+      dealerId,
+    })
+    dispatch(addOrderDealer(res.data))
+  } catch (err) {
+    console.error(err)
   }
+}
 
 export const removeOrderDealerThunk =
-  (orderid, dealerName) => async (dispatch) => {
+  (orderid, dealerId) => async (dispatch) => {
     try {
       const res = await axios.put(`/api/orders/single/dealers/${orderid}`, {
-        dealerName,
+        dealerId,
       })
-      const resp = await axios.get(`/api/orders/single/${orderid}`)
-      dispatch(removeOrderDealer(resp.data))
+      dispatch(removeOrderDealer(res.data))
     } catch (err) {
       console.error(err)
     }
@@ -112,8 +111,18 @@ export const removeOrderDealerThunk =
 export const addOrderDriverThunk = (id, obj) => async (dispatch) => {
   try {
     const res = await axios.post(`/api/orders/single/driver/${id}`, obj)
-    const resp = await axios.get(`/api/orders/single/${id}`)
-    dispatch(addOrderDriver(resp.data))
+    dispatch(addOrderDriver(res.data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const addOrderCustomerRepThunk = (id, userId) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/api/orders/single/customerRep/${id}`, {
+      userId,
+    })
+    dispatch(addOrderCustomerRep(res.data))
   } catch (err) {
     console.error(err)
   }
@@ -140,6 +149,8 @@ export default function (state = singleOrder, action) {
     case REMOVE_ORDER_DEALER:
       return action.order
     case ADD_ORDER_DRIVER:
+      return action.order
+    case ADD_ORDER_CUSTOMER_REP:
       return action.order
     default:
       return state
