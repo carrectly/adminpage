@@ -16,6 +16,9 @@ Driver.hasOne(Order, { as: 'returnDriver', foreignKey: 'returnDriverId' })
 Order.belongsTo(Driver, { as: 'pickUpDriver', foreignKey: 'pickUpDriverId' })
 Order.belongsTo(Driver, { as: 'returnDriver', foreignKey: 'returnDriverId' })
 
+User.hasOne(Order, { as: 'customerRep', foreignKey: 'customerRepId' })
+Order.belongsTo(User, { as: 'customerRep', foreignKey: 'customerRepId' })
+
 Order.belongsToMany(Service, { through: 'orderdetails' })
 Service.belongsToMany(Order, { through: 'orderdetails' })
 

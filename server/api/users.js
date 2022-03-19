@@ -5,10 +5,8 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ['id', 'email', 'isAdmin', 'role', 'firstName', 'lastName'],
+      attributes: { exclude: ['password', 'salt', 'googleId', 'token'] },
+      order: [['firstName', 'ASC']],
     })
     res.json(users)
   } catch (err) {
@@ -32,39 +30,17 @@ router.get('/', async (req, res, next) => {
 // })
 
 router.put('/:userid', async (req, res, next) => {
-  // if (req.body.email) {
-  // 	try {
-  // 		User.findByPk(req.params.userid)
-  // 			.then(user => user.update({email: req.body.email}))
-  // 			.then(user => res.json(user))
-  // 			.catch(next)
-  // 	} catch (err) {
-  // 		next(err)
-  // 	}
-  // }
-  if (req.body.password) {
-    try {
-      User.findByPk(req.params.userid)
-        .then((user) =>
-          user.update({
-            password: req.body.password,
-            resetPassword: false,
-          })
-        )
-        .then((user) => res.json(user))
-        .catch(next)
-    } catch (err) {
-      next(err)
-    }
-  } else if (req.body.role) {
-    try {
-      User.findByPk(req.params.userid)
-        .then((user) => user.update({ role: req.body.role }))
-        .then((user) => res.json(user))
-        .catch(next)
-    } catch (err) {
-      next(err)
-    }
+  try {
+    const user = await User.update(req.body, {
+      where: {
+        id: req.params.userid,
+      },
+      returning: true,
+    })
+
+    res.json(user[1][0].dataValues)
+  } catch (error) {
+    next(error)
   }
 })
 

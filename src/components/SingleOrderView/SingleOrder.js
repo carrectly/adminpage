@@ -8,6 +8,7 @@ import SingleOrderServices from './SingleOrderServices'
 import SingleOrderDetails from './SingleOrderDetails'
 import OrderComments from './OrderComments'
 import './styles.scss'
+import { getUsersThunk } from '../../store/users'
 
 const SingleOrder = (props) => {
   const params = useParams()
@@ -16,6 +17,7 @@ const SingleOrder = (props) => {
     console.log('all props', props)
     console.log('order id props', params.orderid)
     props.getOrder(params.orderid)
+    props.getUsers()
   }, [])
 
   const singleorder = props.order || {}
@@ -23,6 +25,7 @@ const SingleOrder = (props) => {
   const customer = singleorder.customer || {}
   const pickUpDriver = singleorder.pickUpDriver || {}
   const returnDriver = singleorder.returnDriver || {}
+  const customerRep = singleorder.customerRep || {}
   const orderDealers = singleorder.dealers || []
 
   return (
@@ -35,6 +38,7 @@ const SingleOrder = (props) => {
             pickUpDriver={pickUpDriver}
             returnDriver={returnDriver}
             orderDealers={orderDealers}
+            customerRep={customerRep}
           />
           <SingleOrderEmails />
         </div>
@@ -63,6 +67,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getOrder: (id) => dispatch(getSingleOrderThunk(id)),
+    getUsers: () => dispatch(getUsersThunk()),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SingleOrder)
