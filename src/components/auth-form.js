@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { auth } from '../store'
 import { Button, Form, Input } from 'antd'
 import { GoogleOutlined, UserOutlined, LockOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 
 /**
  * COMPONENT
@@ -13,14 +14,16 @@ const AuthForm = (props) => {
   const dispatch = useDispatch()
   const [form] = Form.useForm()
   const [isValid, Validate] = useState(false)
-
+  const navigate = useNavigate()
   const onFinish = (values) => {
     if (Object.prototype.hasOwnProperty.call(values, 'signup')) {
       dispatch(auth(values, 'signup'))
       form.resetFields()
+      navigate('/account')
     } else {
       dispatch(auth(values, 'login'))
       form.resetFields()
+      navigate('/account')
     }
   }
 

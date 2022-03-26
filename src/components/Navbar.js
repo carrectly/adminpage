@@ -16,9 +16,13 @@ import {
 } from '@ant-design/icons'
 import './styles/navbar.scss'
 import logo from '../images/logo.png'
+import { useNavigate } from 'react-router-dom'
+
 const Navbar = (props) => {
+  const navigate = useNavigate()
   const handleLogout = () => {
     props.handleClick()
+    navigate('/account')
   }
 
   return (

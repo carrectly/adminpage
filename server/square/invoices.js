@@ -43,7 +43,10 @@ router.post('/', async (req, res, next) => {
 
     let lineItems = []
     services.forEach((service) => {
-      let amt = Number(service.orderdetails.customerPrice) * 100
+      const itemPrice = Number(service.orderdetails.customerPrice)
+      const priceInCents = itemPrice * 100
+      let amt = Number(priceInCents.toFixed(2))
+      console.log('+++SETTING PRICE', amt)
       lineItems.push({
         name: service.name,
         quantity: '1',

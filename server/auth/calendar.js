@@ -1,24 +1,7 @@
 const router = require('express').Router()
-const { google } = require('googleapis')
-const { User } = require('../db/models')
 const moment = require('moment')
-const oAuth2Client = require('./oAuth2Client')
+const { calendar } = require('./oAuth2Client')
 module.exports = router
-
-const calendar = google.calendar({
-  version: 'v3',
-  auth: oAuth2Client,
-})
-
-router.all('*', async (req, res, next) => {
-  try {
-    let usr = await User.findOne({ where: { email: 'info@carrectly.com' } })
-    oAuth2Client.setCredentials(JSON.parse(usr.dataValues.token))
-    next()
-  } catch (err) {
-    next(err)
-  }
-})
 
 router.get('/', async (req, res, next) => {
   try {
