@@ -95,7 +95,7 @@ const Invoice = () => {
     obj.orderid = orderId
     try {
       dispatch(sendSingleEmailThunk(obj))
-      dispatch(getEmailsThunk(obj))
+      dispatch(getEmailsThunk(orderId))
     } catch (err) {
       console.log(err)
     }

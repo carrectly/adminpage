@@ -41,7 +41,6 @@
     "faker": "^5.5.3",
     "gmail-api-parse-message": "^2.1.2",
     "googleapis": "^92.0.0",
-    "history": "^5.1.0",
     "html-react-parser": "^1.4.2",
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
