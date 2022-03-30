@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { notification, Button, Dropdown, Popover, Menu } from 'antd'
-import {
-  getSquareCustomerThunk,
-  createInvoiceThunk,
-  clearSquareThunk,
-} from '../../store/square'
+import { getSquareCustomerThunk, createInvoiceThunk, clearSquareThunk } from '../../store/square'
 import { DownOutlined } from '@ant-design/icons'
 import { fetchDealersThunk } from '../../store/dealers.js'
 import { sendSingleEmailThunk } from '../../store/singleemail'
@@ -49,7 +45,7 @@ const Invoice = () => {
     const args = {
       message: customer.status,
       description: customer.status,
-      duration: 6,
+      duration: 6
     }
     notification.open(args)
   }
@@ -58,7 +54,7 @@ const Invoice = () => {
     const args = {
       message: invoice.id,
       description: invoice.id ? invoice.status : 'Failed to create invoice',
-      duration: 6,
+      duration: 6
     }
     notification.open(args)
   }
@@ -118,12 +114,7 @@ const Invoice = () => {
 							square, this button will create a new customer. Can't create an invoice until we check
 							if the customer exists in square"
       >
-        <Button
-          size="large"
-          block
-          shape="round"
-          onClick={() => checkCustomerInSquare(order.customerPhoneNumber)}
-        >
+        <Button size="large" block shape="round" onClick={() => checkCustomerInSquare(order.customerPhoneNumber)}>
           Check if customer exists in Square
         </Button>
       </Popover>
@@ -132,13 +123,7 @@ const Invoice = () => {
         content="Can't create an invoice until we check if the user
 							exists in square."
       >
-        <Button
-          size="large"
-          block
-          shape="round"
-          disabled={!invoiceBoolean}
-          onClick={() => createInvoice(customer.id)}
-        >
+        <Button size="large" block shape="round" disabled={!invoiceBoolean} onClick={() => createInvoice(customer.id)}>
           Create Invoice
         </Button>
       </Popover>
