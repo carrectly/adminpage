@@ -35,8 +35,6 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     callbackURL: process.env.GOOGLE_CALLBACK,
   }
 
-  let SCOPES = ['email', 'profile']
-
   const strategy = new GoogleStrategy(
     googleConfig,
     (token, refreshToken, profile, done) => {
@@ -44,39 +42,17 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       const email = profile.emails[0].value
       const firstName = profile.name.givenName
       const lastName = profile.name.familyName
-
       let role = 'unconfirmed'
 
       if (email === 'info@carrectly.com') {
-        SCOPES = [
-          ...SCOPES,
-          'https://www.googleapis.com/auth/gmail.readonly',
-          'https://www.googleapis.com/auth/gmail.send',
-          'https://www.googleapis.com/auth/gmail.modify',
-          'https://www.googleapis.com/auth/gmail.compose',
-          'https://www.googleapis.com/auth/contacts',
-          'https://www.googleapis.com/auth/calendar',
-        ]
         role = 'admin'
       }
-      // let tkn = {}
-
-      // if (token) {
-      // 	tkn.access_token = token
-      // }
-      // if (refreshToken) {
-      // 	tkn.refresh_token = refreshToken
-      // }
-      // tkn = JSON.stringify(tkn)
 
       User.findOrCreate({
         where: { googleId },
         defaults: { email, firstName, lastName, role },
       })
         .then((user) => {
-          // if (user[0]._options.isNewRecord) {
-          // 	user[0].update({token: tkn})
-          // }
           return done(null, user[0])
         })
         .catch(done)
@@ -85,6 +61,14 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
   passport.use(strategy)
 
+  //  when obtaining the refresh token, need to enable other scopes
+  const SCOPES = [
+    'email',
+    'profile',
+    // 'https://mail.google.com/',
+    // 'https://www.googleapis.com/auth/contacts',
+    // 'https://www.googleapis.com/auth/calendar',
+  ]
   // accessType will need to be enabled if we are trying to obtain new refresh token
   router.get(
     '/',
