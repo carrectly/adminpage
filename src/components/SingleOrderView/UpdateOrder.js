@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Modal, DatePicker, Form, Input, Button } from 'antd'
 import { updateSingleOrderThunk } from '../../store/singleorder'
@@ -7,11 +7,7 @@ import moment from 'moment'
 
 function clean(obj) {
   for (var propName in obj) {
-    if (
-      obj[propName] === null ||
-      obj[propName] === undefined ||
-      obj[propName] === ''
-    ) {
+    if (obj[propName] === null || obj[propName] === undefined || obj[propName] === '') {
       delete obj[propName]
     }
   }
@@ -19,7 +15,7 @@ function clean(obj) {
 
 const layout = {
   labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  wrapperCol: { span: 16 }
 }
 
 const UpdateOrder = () => {
@@ -33,10 +29,6 @@ const UpdateOrder = () => {
   const id = params.orderid
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
-
-  useEffect(() => {
-    form.validateFields(['promoCode'])
-  }, [checkPromo])
 
   const onDiscountChange = (e) => {
     setCheckPromo(!!e.target.value)
@@ -65,39 +57,14 @@ const UpdateOrder = () => {
 
   return (
     <div>
-      <Button
-        size="large"
-        block
-        shape="round"
-        className="manage-order-btn"
-        style={{ backgroundColor: '#6AEB6F' }}
-        onClick={() => handleShow(true)}
-      >
+      <Button size="large" block shape="round" className="manage-order-btn" style={{ backgroundColor: '#6AEB6F' }} onClick={() => handleShow(true)}>
         Update Order Details
       </Button>
-      <Modal
-        title={`Update order ${order.hash}`}
-        visible={show}
-        footer={null}
-        onCancel={onCancel}
-      >
-        <Form
-          {...layout}
-          form={form}
-          name="control-hooks"
-          size="large"
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-        >
+      <Modal title={`Update order ${order.hash}`} visible={show} footer={null} onCancel={onCancel} getContainer={false}>
+        <Form {...layout} form={form} name="control-hooks" size="large" onFinish={onFinish} onFinishFailed={onFinishFailed}>
           <Form.Item label="Pick Up Date">
             <Form.Item name="pickupDate">
-              <DatePicker
-                showTime={{ minuteStep: 15 }}
-                format="YYYY-MM-DD HH:mm"
-                placeholder={moment(order.pickupDate).format(
-                  'YYYY-MM-DD HH:mm'
-                )}
-              />
+              <DatePicker showTime={{ minuteStep: 15 }} format="YYYY-MM-DD HH:mm" placeholder={moment(order.pickupDate).format('YYYY-MM-DD HH:mm')} />
             </Form.Item>
           </Form.Item>
           <Form.Item label="Drop Off Date">
@@ -105,18 +72,12 @@ const UpdateOrder = () => {
               <DatePicker
                 showTime={{ minuteStep: 15 }}
                 format="YYYY-MM-DD HH:mm"
-                placeholder={moment(order.dropoffDate).format(
-                  'YYYY-MM-DD HH:mm'
-                )}
+                placeholder={moment(order.dropoffDate).format('YYYY-MM-DD HH:mm')}
               />
             </Form.Item>
           </Form.Item>
           <Form.Item label="Pickup Location">
-            <Form.Item
-              name="pickupLocation"
-              noStyle
-              initialValue={order.pickupLocation}
-            >
+            <Form.Item name="pickupLocation" noStyle initialValue={order.pickupLocation}>
               <Input />
             </Form.Item>
           </Form.Item>
@@ -152,9 +113,8 @@ const UpdateOrder = () => {
               rules={[
                 {
                   required: checkPromo,
-                  message:
-                    'Please add promo code before adding discount amount',
-                },
+                  message: 'Please add promo code before adding discount amount'
+                }
               ]}
               initialValue={order.promoCode || ''}
             >
@@ -162,11 +122,7 @@ const UpdateOrder = () => {
             </Form.Item>
           </Form.Item>
           <Form.Item label="Discount amount">
-            <Form.Item
-              name="discount"
-              noStyle
-              initialValue={order.discount || ''}
-            >
+            <Form.Item name="discount" noStyle initialValue={order.discount || ''}>
               <Input onChange={onDiscountChange} />
             </Form.Item>
           </Form.Item>

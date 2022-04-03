@@ -32,12 +32,7 @@ const AddOrderServices = (props) => {
         placeholder="Search to add service"
         optionFilterProp="children"
         onChange={(e) => handleChange(e)}
-        filterOption={(input, option) =>
-          option.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-        filterSort={(optionA, optionB) =>
-          optionA.toLowerCase().localeCompare(optionB.toLowerCase())
-        }
+        filterOption={(input, option) => option.toLowerCase().indexOf(input.toLowerCase()) >= 0}
       >
         {servicesDropDown.map((svc) => (
           <Option value={svc.id} key={svc.id} name={svc.name} id={svc.id}>
@@ -45,13 +40,7 @@ const AddOrderServices = (props) => {
           </Option>
         ))}
       </Select>
-      <Button
-        style={{ backgroundColor: '#6AEB6F' }}
-        size="middle"
-        shape="round"
-        disabled={!serviceId}
-        onClick={handleAddService}
-      >
+      <Button style={{ backgroundColor: '#6AEB6F' }} size="middle" shape="round" disabled={!serviceId} onClick={handleAddService}>
         Add
       </Button>
     </div>
@@ -60,14 +49,14 @@ const AddOrderServices = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    services: state.services,
+    services: state.services
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getServices: () => dispatch(fetchServicesThunk()),
-    addService: (id, obj) => dispatch(addOrderServiceThunk(id, obj)),
+    addService: (id, obj) => dispatch(addOrderServiceThunk(id, obj))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(AddOrderServices)

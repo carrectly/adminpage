@@ -14,8 +14,6 @@ const SingleOrder = (props) => {
   const params = useParams()
 
   useEffect(() => {
-    console.log('all props', props)
-    console.log('order id props', params.orderid)
     props.getOrder(params.orderid)
     props.getUsers()
   }, [])
@@ -60,14 +58,14 @@ const SingleOrder = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    order: state.singleorder,
+    order: state.singleorder
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getOrder: (id) => dispatch(getSingleOrderThunk(id)),
-    getUsers: () => dispatch(getUsersThunk()),
+    getUsers: () => dispatch(getUsersThunk())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SingleOrder)
