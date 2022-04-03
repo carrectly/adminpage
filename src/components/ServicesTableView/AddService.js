@@ -7,7 +7,7 @@ import { addServiceThunk } from '../../store/services'
 
 const layout = {
   labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  wrapperCol: { span: 16 }
 }
 
 const AddService = () => {
@@ -34,20 +34,16 @@ const AddService = () => {
   const validateMessages = {
     required: '${label} is required!',
     types: {
-      number: '${label} is not a valid number!',
-    },
+      number: '${label} is not a valid number!'
+    }
   }
 
   return (
     <div>
       <Popover content="Click here to add a new service">
-        <FontAwesomeIcon
-          className="float-plus"
-          onClick={() => handleShow(true)}
-          icon={faPlusCircle}
-        />
+        <FontAwesomeIcon className="float-plus" onClick={() => handleShow(true)} icon={faPlusCircle} />
       </Popover>
-      <Modal title="Add Service" visible={show} footer={null} closable={false}>
+      <Modal title="Add Service" visible={show} footer={null} closable={false} getContainer={false}>
         <Form
           {...layout}
           form={form}
@@ -63,11 +59,7 @@ const AddService = () => {
             </Form.Item>
           </Form.Item>
           <Form.Item label="Service Price">
-            <Form.Item
-              name="price"
-              noStyle
-              rules={[{ required: true }, { type: 'number' }]}
-            >
+            <Form.Item name="price" noStyle rules={[{ required: true }, { type: 'number' }]}>
               <InputNumber />
             </Form.Item>
           </Form.Item>

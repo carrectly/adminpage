@@ -5,7 +5,7 @@ import { Form, Button, Input, Modal } from 'antd'
 
 const layout = {
   labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  wrapperCol: { span: 16 }
 }
 
 const AddDealer = (props) => {
@@ -41,21 +41,8 @@ const AddDealer = (props) => {
   }
 
   return (
-    <Modal
-      title="New Service Shop"
-      visible={props.show}
-      footer={null}
-      closable={false}
-    >
-      <Form
-        {...layout}
-        form={form}
-        name="control-hooks"
-        size="large"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        onChange={onChange}
-      >
+    <Modal title="New Service Shop" visible={props.show} footer={null} closable={false} getContainer={false}>
+      <Form {...layout} form={form} name="control-hooks" size="large" onFinish={onFinish} onFinishFailed={onFinishFailed} onChange={onChange}>
         <Form.Item label="Shop Name">
           <Form.Item name="name" noStyle rules={[{ required: true }]}>
             <Input />

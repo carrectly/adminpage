@@ -22,7 +22,8 @@ const CollapseByDate = (props) => {
       }
     })
     groupedArr = Object.entries(hashTable)
-    groupedArr = groupedArr.sort((a, b) => moment(a[0]).diff(moment(b[0])))
+    console.log('grouped array', groupedArr)
+    groupedArr = groupedArr.sort((a, b) => new Date(a[0]) - new Date(b[0]))
   } else {
     return <Spin />
   }

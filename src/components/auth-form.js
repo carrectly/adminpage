@@ -51,13 +51,7 @@ const AuthForm = (props) => {
 
   return (
     <div className="loginForm">
-      <Form
-        form={form}
-        name={name}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        onChange={onChange}
-      >
+      <Form form={form} name={name} onFinish={onFinish} onFinishFailed={onFinishFailed} onChange={onChange}>
         <Form.Item label="">
           <Form.Item
             name="email"
@@ -65,14 +59,11 @@ const AuthForm = (props) => {
             rules={[
               {
                 required: true,
-                message: 'Please input your email!',
-              },
+                message: 'Please input your email!'
+              }
             ]}
           >
-            <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Email"
-            />
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
           </Form.Item>
         </Form.Item>
         <Form.Item label="">
@@ -82,33 +73,23 @@ const AuthForm = (props) => {
             rules={[
               {
                 required: true,
-                message: 'Please input your Password!',
-              },
+                message: 'Please input your Password!'
+              }
             ]}
           >
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Password"
-            />
+            <Input prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Password" />
           </Form.Item>
         </Form.Item>
         {name === 'signup' ? (
           <div>
             <Form.Item label="">
               <Form.Item name="firstName" noStyle>
-                <Input
-                  prefix={<UserOutlined className="site-form-item-icon" />}
-                  placeholder="First Name"
-                />
+                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="First Name" />
               </Form.Item>
             </Form.Item>
             <Form.Item label="">
               <Form.Item name="lastName" noStyle>
-                <Input
-                  prefix={<UserOutlined className="site-form-item-icon" />}
-                  placeholder="Last Name"
-                />
+                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Last Name" />
               </Form.Item>
             </Form.Item>
           </div>
@@ -116,21 +97,11 @@ const AuthForm = (props) => {
           <div />
         )}
         <Form.Item label="">
-          <Form.Item name={name}>
-            <Button
-              style={{ width: '50%' }}
-              type="primary"
-              htmlType="submit"
-              disabled={!isValid}
-            >
+          <Form.Item>
+            <Button style={{ width: '50%' }} type="primary" htmlType="submit" disabled={!isValid}>
               {displayName}
             </Button>
-            <Button
-              style={{ width: '50%' }}
-              htmlType="button"
-              type="secondary"
-              onClick={onCancel}
-            >
+            <Button style={{ width: '50%' }} htmlType="button" type="secondary" onClick={onCancel}>
               Reset
             </Button>
           </Form.Item>
@@ -150,7 +121,7 @@ const mapLogin = (state) => {
   return {
     name: 'login',
     displayName: 'Login',
-    error: state.user.error,
+    error: state.user.error
   }
 }
 
@@ -159,7 +130,7 @@ const mapSignup = (state) => {
     name: 'signup',
     displayName: 'Register',
     error: state.user.error,
-    user: state.user,
+    user: state.user
   }
 }
 
@@ -172,5 +143,5 @@ export const Signup = connect(mapSignup, null)(AuthForm)
 AuthForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
-  error: PropTypes.object,
+  error: PropTypes.object
 }
