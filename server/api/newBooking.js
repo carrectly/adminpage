@@ -10,16 +10,16 @@ router.post('/', async (req, res, next) => {
     let order = req.body.param.order
     await Customer.findOrCreate({
       where: {
-        phoneNumber: newcust.phoneNumber,
+        phoneNumber: newcust.phoneNumber
       },
-      defaults: { ...newcust, location: order.zipCode },
+      defaults: { ...newcust, location: order.zipCode }
     })
 
     let ordr = await Order.create({
       ...order,
       pickupLocation: `${order.address} ${order.city} ${order.zipCode}`,
       stickShift: order.transmission === 'automatic' ? false : true,
-      customerPhoneNumber: newcust.phoneNumber,
+      customerPhoneNumber: newcust.phoneNumber
     })
 
     const addServices = async () => {
@@ -29,7 +29,7 @@ router.post('/', async (req, res, next) => {
         //   through: { customerPrice: 20 },
         // })
         await ordr.addService(services[i].id, {
-          through: { customerPrice: services[i].price },
+          through: { customerPrice: services[i].price }
         })
       }
     }
