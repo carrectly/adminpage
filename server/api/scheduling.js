@@ -30,8 +30,6 @@ router.get('/', async (req, res, next) => {
     })
     const disableTimesArr = appointments.filter((appt) => appt.dataValues.count >= activeDrivers)
 
-    console.log('disableTimesArr', disableTimesArr)
-
     res.send(disableTimesArr)
   } catch (err) {
     console.log('error', err)
