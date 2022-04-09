@@ -26,14 +26,7 @@ const AddOrderServices = (props) => {
   const servicesDropDown = props.services || []
   return (
     <div className="select-and-button">
-      <Select
-        showSearch={false}
-        style={{ width: '80%' }}
-        placeholder="Search to add service"
-        optionFilterProp="children"
-        onChange={(e) => handleChange(e)}
-        filterOption={(input, option) => option.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-      >
+      <Select showSearch style={{ width: '80%' }} placeholder="Search to add service" optionFilterProp="children" onChange={(e) => handleChange(e)}>
         {servicesDropDown.map((svc) => (
           <Option value={svc.id} key={svc.id} name={svc.name} id={svc.id}>
             {svc.name}

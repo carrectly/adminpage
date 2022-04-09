@@ -8,10 +8,12 @@ const { Option } = Select
 
 const layout = {
   labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
+  wrapperCol: { span: 16 }
 }
 
 const colors = tagColorsArray()
+
+const driverStatusArr = ['active', 'inactive']
 
 const AddDriver = (props) => {
   const [form] = Form.useForm()
@@ -46,21 +48,8 @@ const AddDriver = (props) => {
   }
 
   return (
-    <Modal
-      title="New Driver"
-      visible={props.show}
-      footer={null}
-      closable={false}
-    >
-      <Form
-        {...layout}
-        form={form}
-        name="control-hooks"
-        size="large"
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        onChange={onChange}
-      >
+    <Modal title="New Driver" visible={props.show} footer={null} closable={false}>
+      <Form {...layout} form={form} name="control-hooks" size="large" onFinish={onFinish} onFinishFailed={onFinishFailed} onChange={onChange}>
         <Form.Item label="Driver name">
           <Form.Item name="name" noStyle rules={[{ required: true }]}>
             <Input />
@@ -87,6 +76,17 @@ const AddDriver = (props) => {
               {colors.map((color) => (
                 <Option value={color} key={color}>
                   <div style={{ backgroundColor: `${color}` }}>{color}</div>
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+        </Form.Item>
+        <Form.Item label="Status">
+          <Form.Item noStyle name="status">
+            <Select placeholder="active | inactive">
+              {driverStatusArr.map((statusName) => (
+                <Option value={statusName} key={statusName}>
+                  {statusName}
                 </Option>
               ))}
             </Select>
