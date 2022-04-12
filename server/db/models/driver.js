@@ -21,9 +21,9 @@ const Driver = db.define('driver', {
   tagColor: {
     type: Sequelize.STRING,
   },
-  // status: {
-  //   type: Sequelize.STRING,
-  // },
+  status: {
+    type: Sequelize.STRING,
+  },
 });
 
 module.exports = Driver;
