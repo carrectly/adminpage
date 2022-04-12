@@ -1,18 +1,18 @@
-const router = require('express').Router()
-const { User } = require('../db/models')
-module.exports = router
+const router = require('express').Router();
+const { User } = require('../db/models');
+module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
       attributes: { exclude: ['password', 'salt', 'googleId', 'token'] },
       order: [['firstName', 'ASC']],
-    })
-    res.json(users)
+    });
+    res.json(users);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 // router.post('/', async (req, res, next) => {
 // 	try {
@@ -36,62 +36,62 @@ router.put('/:userid', async (req, res, next) => {
         id: req.params.userid,
       },
       returning: true,
-    })
+    });
 
-    res.json(user[1][0].dataValues)
+    res.json(user[1][0].dataValues);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
 const onlyAdmins = (req, res, next) => {
   if (!req.user) {
-    console.log('USER IS NOT LOGGED IN!')
-    return res.sendStatus(401)
+    console.log('USER IS NOT LOGGED IN!');
+    return res.sendStatus(401);
   }
   if (!req.user.isAdmin) {
-    console.log('USER LOGGED IN BUT NOT AN ADMIN!')
-    return res.sendStatus(401)
+    console.log('USER LOGGED IN BUT NOT AN ADMIN!');
+    return res.sendStatus(401);
   }
-  next()
-}
+  next();
+};
 
 router.delete('/:id', onlyAdmins, async (req, res, next) => {
   try {
-    const id = req.params.id
+    const id = req.params.id;
     await User.destroy({
       where: { id },
-    })
-    res.status(204).end()
+    });
+    res.status(204).end();
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 router.put('/admin/:userid', onlyAdmins, async (req, res, next) => {
   try {
-    const id = req.params.userid
-    const user = await User.findByPk(id)
-    let adminStatus
+    const id = req.params.userid;
+    const user = await User.findByPk(id);
+    let adminStatus;
     if (!user.isAdmin) {
-      adminStatus = true
+      adminStatus = true;
     } else {
-      adminStatus = false
+      adminStatus = false;
     }
-    await user.update({ isAdmin: adminStatus })
-    res.status(204).end()
+    await user.update({ isAdmin: adminStatus });
+    res.status(204).end();
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 router.put('/reset/:userid', onlyAdmins, async (req, res, next) => {
   try {
-    const id = req.params.userid
-    const user = await User.findByPk(id)
-    await user.update({ resetPassword: true })
-    res.status(204).end()
+    const id = req.params.userid;
+    const user = await User.findByPk(id);
+    await user.update({ resetPassword: true });
+    res.status(204).end();
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});

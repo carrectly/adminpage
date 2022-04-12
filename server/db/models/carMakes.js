@@ -1,5 +1,5 @@
-const db = require('../database')
-const Sequelize = require('sequelize')
+const db = require('../database');
+const Sequelize = require('sequelize');
 
 const CarMakes = db.define('carMakes', {
   objectId: {
@@ -22,6 +22,6 @@ const CarMakes = db.define('carMakes', {
   Category: {
     type: Sequelize.STRING,
   },
-})
+});
 
-module.exports = CarMakes
+module.exports = CarMakes;

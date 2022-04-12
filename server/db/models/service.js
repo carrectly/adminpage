@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../database')
+const Sequelize = require('sequelize');
+const db = require('../database');
 
 const Service = db.define('service', {
   name: Sequelize.STRING,
@@ -8,6 +8,6 @@ const Service = db.define('service', {
     allowNull: false,
   },
   description: Sequelize.TEXT,
-})
+});
 
-module.exports = Service
+module.exports = Service;

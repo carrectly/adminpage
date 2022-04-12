@@ -1,51 +1,48 @@
-import React from 'react'
-import { Table } from 'antd'
-import defaultColumns from '../Table/HomeTableColumns'
-import './tablestyles.scss'
-import m from 'moment'
+import React from 'react';
+import { Table } from 'antd';
+import defaultColumns from '../Table/HomeTableColumns';
+import './tablestyles.scss';
+import m from 'moment';
 
 const rowColor = (record) => {
-  const timeNow = m()
-  const differrence = m(record.dropoffDate).diff(timeNow, 'hours', true)
+  const timeNow = m();
+  const differrence = m(record.dropoffDate).diff(timeNow, 'hours', true);
   if (differrence < 1) {
-    return 'one-hour-red'
+    return 'one-hour-red';
   }
   if (differrence < 2) {
-    return 'two-hour-yellow'
+    return 'two-hour-yellow';
   }
-  return 'basic-test'
-}
+  return 'basic-test';
+};
 
-const DefaultTable = (props) => {
-  const array = props.ordersArray || []
-  const cols = props.columns || defaultColumns
-  const pagination = props.pagination || false
-  const type = props.type
+const DefaultTable = ({ columns, type, pagination = false, ordersArray = [] }) => {
+  const cols = columns || defaultColumns;
 
   if (type === 'trips') {
     return (
       <Table
         scroll={{ x: 'max-content' }}
         columns={cols}
-        dataSource={array}
+        dataSource={ordersArray}
         pagination={pagination}
         size="small"
         rowKey="hash"
         rowClassName={(record, index) => rowColor(record, index)}
       />
-    )
+    );
   } else {
     return (
       <Table
         scroll={{ x: 'max-content' }}
         columns={cols}
-        dataSource={array}
+        dataSource={ordersArray}
         pagination={pagination}
         size="small"
         rowKey="hash"
       />
-    )
+    );
   }
-}
+};
 
-export default DefaultTable
+export default DefaultTable;

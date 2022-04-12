@@ -1,30 +1,32 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { getSingleOrderThunk } from '../../store/singleorder'
-import SingleOrderEmails from './SingleOrderEmails'
-import Invoice from './Invoice'
-import SingleOrderServices from './SingleOrderServices'
-import SingleOrderDetails from './SingleOrderDetails'
-import OrderComments from './OrderComments'
-import './styles.scss'
-import { getUsersThunk } from '../../store/users'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getSingleOrderThunk } from '../../store/singleorder';
+import { getUsersThunk } from '../../store/users';
+import Invoice from './Invoice';
+import OrderComments from './OrderComments';
+import SingleOrderDetails from './SingleOrderDetails';
+import SingleOrderEmails from './SingleOrderEmails';
+import SingleOrderServices from './SingleOrderServices';
+import './styles.scss';
 
-const SingleOrder = (props) => {
-  const params = useParams()
+const SingleOrder = () => {
+  const { orderid } = useParams();
+  const order = useSelector((state) => state.singleorder);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    props.getOrder(params.orderid)
-    props.getUsers()
-  }, [])
+    dispatch(getSingleOrderThunk(orderid));
+    dispatch(getUsersThunk());
+  }, []);
 
-  const singleorder = props.order || {}
-  const services = props.order.services || []
-  const customer = singleorder.customer || {}
-  const pickUpDriver = singleorder.pickUpDriver || {}
-  const returnDriver = singleorder.returnDriver || {}
-  const customerRep = singleorder.customerRep || {}
-  const orderDealers = singleorder.dealers || []
+  const singleorder = order || {};
+  const services = order.services || [];
+  const customer = singleorder.customer || {};
+  const pickUpDriver = singleorder.pickUpDriver || {};
+  const returnDriver = singleorder.returnDriver || {};
+  const customerRep = singleorder.customerRep || {};
+  const orderDealers = singleorder.dealers || [];
 
   return (
     <div>
@@ -48,24 +50,12 @@ const SingleOrder = (props) => {
             <SingleOrderServices services={services} />
           </div>
           <h3 className="sectionHeader">Internal Comments</h3>
-          <OrderComments id={params.orderid} />
+          <OrderComments id={orderid} />
         </div>
       </div>
       <br />
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = (state) => {
-  return {
-    order: state.singleorder
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getOrder: (id) => dispatch(getSingleOrderThunk(id)),
-    getUsers: () => dispatch(getUsersThunk())
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(SingleOrder)
+export default SingleOrder;

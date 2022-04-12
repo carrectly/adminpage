@@ -1,6 +1,6 @@
-import React from 'react'
-import { DeleteOrderServiceCell } from './Cells.js'
-import UpdateOrderCharges from '../SingleOrderView/UpdateOrderCharges'
+import React from 'react';
+import { DeleteOrderServiceCell } from './Cells.js';
+import UpdateOrderCharges from '../SingleOrderView/UpdateOrderCharges';
 
 const columns = [
   {
@@ -26,6 +26,6 @@ const columns = [
     title: 'Delete',
     render: (value, row) => <DeleteOrderServiceCell value={value} row={row} />,
   },
-]
+];
 
-export default columns
+export default columns;

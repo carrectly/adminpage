@@ -1,7 +1,7 @@
-import React from 'react'
-import UserRole from '../UsersView/UserRole'
-import UserColorTags from '../UsersView/UserColorTags'
-import { DeleteUserCell } from './Cells'
+import React from 'react';
+import UserRole from '../UsersView/UserRole';
+import UserColorTags from '../UsersView/UserColorTags';
+import { DeleteUserCell } from './Cells';
 
 const UserTableColumns = () => [
   {
@@ -37,6 +37,6 @@ const UserTableColumns = () => [
     key: 'id',
     render: (value, row) => <DeleteUserCell value={value} row={row} />,
   },
-]
+];
 
-export default UserTableColumns
+export default UserTableColumns;

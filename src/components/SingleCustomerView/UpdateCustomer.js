@@ -1,46 +1,41 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { updateSingleCustomerThunk } from '../../store/singlecustomer'
-import { Form, Button, Input } from 'antd'
-import { useParams } from 'react-router-dom'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { updateSingleCustomerThunk } from '../../store/singlecustomer';
+import { Form, Button, Input } from 'antd';
+import { useParams } from 'react-router-dom';
 
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
-}
+};
 
 function clean(obj) {
   for (var propName in obj) {
-    if (
-      obj[propName] === null ||
-      obj[propName] === undefined ||
-      obj[propName] === ''
-    ) {
-      delete obj[propName]
+    if (obj[propName] === null || obj[propName] === undefined || obj[propName] === '') {
+      delete obj[propName];
     }
   }
 }
 
 const UpdateCustomer = () => {
-  const [form] = Form.useForm()
-  const dispatch = useDispatch()
+  const [form] = Form.useForm();
+  const dispatch = useDispatch();
 
-  const params = useParams()
-  const userid = params.userid
+  const { userid } = useParams();
 
   const onFinish = (values) => {
-    clean(values)
-    dispatch(updateSingleCustomerThunk(userid, values))
-    form.resetFields()
-  }
+    clean(values);
+    dispatch(updateSingleCustomerThunk(userid, values));
+    form.resetFields();
+  };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo)
-  }
+    console.log('Failed:', errorInfo);
+  };
 
   const onCancel = () => {
-    form.resetFields()
-  }
+    form.resetFields();
+  };
 
   return (
     <div>
@@ -82,7 +77,7 @@ const UpdateCustomer = () => {
         </Form.Item>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default UpdateCustomer
+export default UpdateCustomer;

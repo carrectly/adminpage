@@ -1,59 +1,50 @@
-import React from 'react'
-import getColumnSearchProps from './ColumnFilter.js'
-import { DeleteCustomerCell, CustomerPhoneCell } from './Cells'
+import React from 'react';
+import getColumnSearchProps from './ColumnFilter.js';
+import { DeleteCustomerCell, CustomerPhoneCell } from './Cells';
 
-const defaultStringCompareOptions = { sensitivity: 'base' }
+const defaultStringCompareOptions = { sensitivity: 'base' };
 
-const CustomersColumns = (
-  searchInput,
-  searchText,
-  searchedColumn,
-  handleSearch,
-  handleReset
-) => [
+const CustomersColumns = (searchInput, searchText, searchedColumn, handleSearch, handleReset) => [
   {
     title: 'First Name',
     dataIndex: 'firstName',
     key: 'firstName',
-    sorter: (a, b) =>
-      a.firstName.localeCompare(b.firstName, defaultStringCompareOptions),
+    sorter: (a, b) => a.firstName.localeCompare(b.firstName, defaultStringCompareOptions),
     ...getColumnSearchProps(
       'firstName',
       searchInput,
       searchText,
       searchedColumn,
       handleSearch,
-      handleReset
+      handleReset,
     ),
   },
   {
     title: 'Last Name',
     dataIndex: 'lastName',
     key: 'lastName',
-    sorter: (a, b) =>
-      a.lastName.localeCompare(b.lastName, defaultStringCompareOptions),
+    sorter: (a, b) => a.lastName.localeCompare(b.lastName, defaultStringCompareOptions),
     ...getColumnSearchProps(
       'lastName',
       searchInput,
       searchText,
       searchedColumn,
       handleSearch,
-      handleReset
+      handleReset,
     ),
   },
   {
     title: 'Email',
     dataIndex: 'email',
     key: 'email',
-    sorter: (a, b) =>
-      a.email.localeCompare(b.email, defaultStringCompareOptions),
+    sorter: (a, b) => a.email.localeCompare(b.email, defaultStringCompareOptions),
     ...getColumnSearchProps(
       'email',
       searchInput,
       searchText,
       searchedColumn,
       handleSearch,
-      handleReset
+      handleReset,
     ),
   },
   {
@@ -66,7 +57,7 @@ const CustomersColumns = (
       searchText,
       searchedColumn,
       handleSearch,
-      handleReset
+      handleReset,
     ),
   },
   {
@@ -81,6 +72,6 @@ const CustomersColumns = (
     key: 'phoneNumber',
     render: (value) => <DeleteCustomerCell value={value} />,
   },
-]
+];
 
-export default CustomersColumns
+export default CustomersColumns;

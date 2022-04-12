@@ -1,70 +1,93 @@
-import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Modal, DatePicker, Form, Input, Button } from 'antd'
-import { updateSingleOrderThunk } from '../../store/singleorder'
-import { useParams } from 'react-router-dom'
-import moment from 'moment'
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Modal, DatePicker, Form, Input, Button } from 'antd';
+import { updateSingleOrderThunk } from '../../store/singleorder';
+import { useParams } from 'react-router-dom';
+import moment from 'moment';
 
 function clean(obj) {
   for (var propName in obj) {
     if (obj[propName] === null || obj[propName] === undefined || obj[propName] === '') {
-      delete obj[propName]
+      delete obj[propName];
     }
   }
 }
 
 const layout = {
   labelCol: { span: 8 },
-  wrapperCol: { span: 16 }
-}
+  wrapperCol: { span: 16 },
+};
 
 const UpdateOrder = () => {
-  const [form] = Form.useForm()
-  const [show, setShow] = useState(false)
-  const [checkPromo, setCheckPromo] = useState(false)
-  const order = useSelector((state) => state.singleorder)
-  const dispatch = useDispatch()
+  const [form] = Form.useForm();
+  const [show, setShow] = useState(false);
+  const [checkPromo, setCheckPromo] = useState(false);
+  const order = useSelector((state) => state.singleorder);
+  const dispatch = useDispatch();
 
-  const params = useParams()
-  const id = params.orderid
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const { orderid: id } = useParams();
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const onDiscountChange = (e) => {
-    setCheckPromo(!!e.target.value)
-  }
+    setCheckPromo(!!e.target.value);
+  };
 
   const onFinish = (values) => {
     if (values.dropoffDate) {
-      values.dropoffDate = moment(values.dropoffDate).format('M/D/YY hh:mm A')
+      values.dropoffDate = moment(values.dropoffDate).format('M/D/YY hh:mm A');
     }
     if (values.pickupDate) {
-      values.pickupDate = moment(values.pickupDate).format('M/D/YY hh:mm A')
+      values.pickupDate = moment(values.pickupDate).format('M/D/YY hh:mm A');
     }
-    clean(values)
-    dispatch(updateSingleOrderThunk(id, values))
-    handleClose()
-  }
+    clean(values);
+    dispatch(updateSingleOrderThunk(id, values));
+    handleClose();
+  };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo)
-  }
+    console.log('Failed:', errorInfo);
+  };
 
   const onCancel = () => {
-    form.resetFields()
-    handleClose()
-  }
+    form.resetFields();
+    handleClose();
+  };
 
   return (
     <div>
-      <Button size="large" block shape="round" className="manage-order-btn" style={{ backgroundColor: '#6AEB6F' }} onClick={() => handleShow(true)}>
+      <Button
+        size="large"
+        block
+        shape="default"
+        className="manage-order-btn"
+        style={{ backgroundColor: '#6AEB6F' }}
+        onClick={() => handleShow(true)}
+      >
         Update Order Details
       </Button>
-      <Modal title={`Update order ${order.hash}`} visible={show} footer={null} onCancel={onCancel} getContainer={false}>
-        <Form {...layout} form={form} name="control-hooks" size="large" onFinish={onFinish} onFinishFailed={onFinishFailed}>
+      <Modal
+        title={`Update order ${order.hash}`}
+        visible={show}
+        footer={null}
+        onCancel={onCancel}
+        getContainer={false}
+      >
+        <Form
+          {...layout}
+          form={form}
+          name="control-hooks"
+          size="large"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+        >
           <Form.Item label="Pick Up Date">
             <Form.Item name="pickupDate">
-              <DatePicker showTime={{ minuteStep: 15 }} format="YYYY-MM-DD HH:mm" placeholder={moment(order.pickupDate).format('YYYY-MM-DD HH:mm')} />
+              <DatePicker
+                showTime={{ minuteStep: 15 }}
+                format="YYYY-MM-DD HH:mm"
+                placeholder={moment(order.pickupDate).format('YYYY-MM-DD HH:mm')}
+              />
             </Form.Item>
           </Form.Item>
           <Form.Item label="Drop Off Date">
@@ -113,8 +136,8 @@ const UpdateOrder = () => {
               rules={[
                 {
                   required: checkPromo,
-                  message: 'Please add promo code before adding discount amount'
-                }
+                  message: 'Please add promo code before adding discount amount',
+                },
               ]}
               initialValue={order.promoCode || ''}
             >
@@ -135,7 +158,7 @@ const UpdateOrder = () => {
         </Form>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default UpdateOrder
+export default UpdateOrder;

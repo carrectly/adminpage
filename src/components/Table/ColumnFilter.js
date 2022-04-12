@@ -1,8 +1,8 @@
 /* eslint-disable react/display-name */
-import React from 'react'
-import Highlighter from 'react-highlight-words'
-import { SearchOutlined } from '@ant-design/icons'
-import { Input, Button, Space } from 'antd'
+import React from 'react';
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
+import { Input, Button, Space } from 'antd';
 
 const getColumnSearchProps = (
   dataIndex,
@@ -10,23 +10,16 @@ const getColumnSearchProps = (
   searchText,
   searchedColumn,
   handleSearch,
-  handleReset
+  handleReset,
 ) => ({
-  filterDropdown: ({
-    setSelectedKeys,
-    selectedKeys,
-    confirm,
-    clearFilters,
-  }) => {
+  filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => {
     return (
       <div style={{ padding: 8 }}>
         <Input
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
+          onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
           style={{ width: 188, marginBottom: 8, display: 'block' }}
         />
@@ -40,27 +33,21 @@ const getColumnSearchProps = (
           >
             Search
           </Button>
-          <Button
-            onClick={() => handleReset(clearFilters)}
-            size="small"
-            style={{ width: 90 }}
-          >
+          <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
             Reset
           </Button>
         </Space>
       </div>
-    )
+    );
   },
-  filterIcon: (filtered) => (
-    <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
-  ),
+  filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
   onFilter: (value, record) =>
     record[dataIndex]
       ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
       : '',
   onFilterDropdownVisibleChange: (visible) => {
     if (visible) {
-      setTimeout(() => searchInput.current.select(), 100)
+      setTimeout(() => searchInput.current.select(), 100);
     }
   },
   render: (text) =>
@@ -74,6 +61,6 @@ const getColumnSearchProps = (
     ) : (
       text
     ),
-})
+});
 
-export default getColumnSearchProps
+export default getColumnSearchProps;

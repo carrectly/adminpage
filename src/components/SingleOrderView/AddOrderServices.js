@@ -1,55 +1,55 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
-import { fetchServicesThunk } from '../../store/services'
-import { addOrderServiceThunk } from '../../store/singleorder'
-import { Select, Button } from 'antd'
+import React, { useState, useEffect } from 'react';
+import { fetchServicesThunk as getServices } from '../../store/services';
+import { addOrderServiceThunk as addService } from '../../store/singleorder';
+import { Select, Button } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 
-const { Option } = Select
+const { Option } = Select;
 
-const AddOrderServices = (props) => {
-  const [serviceId, setServiceId] = useState(null)
+const AddOrderServices = ({ orderid }) => {
+  const [serviceId, setServiceId] = useState(null);
+  const services = useSelector((state) => state.services) || [];
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    props.getServices()
-  }, [])
+    dispatch(getServices());
+  }, []);
 
   const handleAddService = () => {
-    let id = props.orderid
-    props.addService(id, serviceId)
-    setServiceId(null)
-  }
+    dispatch(addService(orderid, serviceId));
+    setServiceId(null);
+  };
 
   const handleChange = (value) => {
-    setServiceId(value)
-  }
+    setServiceId(value);
+  };
 
-  const servicesDropDown = props.services || []
   return (
     <div className="select-and-button">
-      <Select showSearch style={{ width: '80%' }} placeholder="Search to add service" optionFilterProp="children" onChange={(e) => handleChange(e)}>
-        {servicesDropDown.map((svc) => (
+      <Select
+        showSearch
+        style={{ width: '80%' }}
+        placeholder="Search to add service"
+        optionFilterProp="children"
+        onChange={(e) => handleChange(e)}
+      >
+        {services.map((svc) => (
           <Option value={svc.id} key={svc.id} name={svc.name} id={svc.id}>
             {svc.name}
           </Option>
         ))}
       </Select>
-      <Button style={{ backgroundColor: '#6AEB6F' }} size="middle" shape="round" disabled={!serviceId} onClick={handleAddService}>
+      <Button
+        style={{ backgroundColor: '#6AEB6F' }}
+        size="middle"
+        shape="default"
+        disabled={!serviceId}
+        onClick={handleAddService}
+      >
         Add
       </Button>
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = (state) => {
-  return {
-    services: state.services
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getServices: () => dispatch(fetchServicesThunk()),
-    addService: (id, obj) => dispatch(addOrderServiceThunk(id, obj))
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(AddOrderServices)
+export default AddOrderServices;

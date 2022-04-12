@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { notification, Button, Dropdown, Popover, Menu } from 'antd'
-import { getSquareCustomerThunk, createInvoiceThunk, clearSquareThunk } from '../../store/square'
-import { DownOutlined } from '@ant-design/icons'
-import { fetchDealersThunk } from '../../store/dealers.js'
-import { sendSingleEmailThunk } from '../../store/singleemail'
-import { getEmailsThunk } from '../../store/emails'
-import { fetchDriversThunk } from '../../store/drivers.js'
-import UpdateOrder from './UpdateOrder'
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { notification, Button, Dropdown, Popover, Menu } from 'antd';
+import { getSquareCustomerThunk, createInvoiceThunk, clearSquareThunk } from '../../store/square';
+import { DownOutlined } from '@ant-design/icons';
+import { fetchDealersThunk } from '../../store/dealers.js';
+import { sendSingleEmailThunk } from '../../store/singleemail';
+import { getEmailsThunk } from '../../store/emails';
+import { fetchDriversThunk } from '../../store/drivers.js';
+import UpdateOrder from './UpdateOrder';
 
 const dealerList = (arr, fn) => {
   return (
@@ -19,91 +19,90 @@ const dealerList = (arr, fn) => {
         </Menu.Item>
       ))}
     </Menu>
-  )
-}
+  );
+};
 
 const Invoice = () => {
-  const [invoiceBoolean, setInvoiceBoolean] = useState(false)
-  const dispatch = useDispatch()
-  const params = useParams()
-  const orderId = params.orderid
+  const [invoiceBoolean, setInvoiceBoolean] = useState(false);
+  const dispatch = useDispatch();
+  const { orderId } = useParams();
 
-  const customer = useSelector((state) => state.square.singleCustomer)
-  const invoice = useSelector((state) => state.square.invoice)
-  const order = useSelector((state) => state.singleorder)
-  const dealers = useSelector((state) => state.dealers)
+  const customer = useSelector((state) => state.square.singleCustomer);
+  const invoice = useSelector((state) => state.square.invoice);
+  const order = useSelector((state) => state.singleorder);
+  const dealers = useSelector((state) => state.dealers);
 
   useEffect(() => {
-    dispatch(fetchDealersThunk())
-    dispatch(fetchDriversThunk())
+    dispatch(fetchDealersThunk());
+    dispatch(fetchDriversThunk());
     return function cleanup() {
-      dispatch(clearSquareThunk())
-    }
-  }, [])
+      dispatch(clearSquareThunk());
+    };
+  }, []);
 
   const openNotification1 = () => {
     const args = {
       message: customer.status,
       description: customer.status,
-      duration: 6
-    }
-    notification.open(args)
-  }
+      duration: 6,
+    };
+    notification.open(args);
+  };
 
   const openNotification2 = () => {
     const args = {
       message: invoice.id,
       description: invoice.id ? invoice.status : 'Failed to create invoice',
-      duration: 6
-    }
-    notification.open(args)
-  }
+      duration: 6,
+    };
+    notification.open(args);
+  };
 
   useEffect(() => {
     if (customer.id) {
-      setInvoiceBoolean(true)
-      openNotification1()
+      setInvoiceBoolean(true);
+      openNotification1();
     }
-  }, [customer])
+  }, [customer]);
 
   useEffect(() => {
     if (invoice.id) {
-      setInvoiceBoolean(false)
-      openNotification2()
+      setInvoiceBoolean(false);
+      openNotification2();
     }
-  }, [invoice])
+  }, [invoice]);
 
   const checkCustomerInSquare = (phone) => {
-    dispatch(getSquareCustomerThunk(phone))
-  }
+    dispatch(getSquareCustomerThunk(phone));
+  };
 
   const createInvoice = (customerId) => {
-    dispatch(createInvoiceThunk(order, customerId))
-  }
+    dispatch(createInvoiceThunk(order, customerId));
+  };
 
   const handleSend = (e) => {
-    let obj = {}
-    obj.email = e.key
-    obj.year = order.carYear
-    obj.make = order.carMake
-    obj.model = order.carModel
-    obj.vin = order.vin
-    obj.orderid = orderId
+    let obj = {};
+    obj.email = e.key;
+    obj.year = order.carYear;
+    obj.make = order.carMake;
+    obj.model = order.carModel;
+    obj.vin = order.vin;
+    obj.orderid = orderId;
     try {
-      dispatch(sendSingleEmailThunk(obj))
-      dispatch(getEmailsThunk(orderId))
+      dispatch(sendSingleEmailThunk(obj));
+      dispatch(getEmailsThunk(orderId));
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
 
-    obj = {}
-  }
+    obj = {};
+  };
 
   return (
     <div className="invoicebuttons">
       <UpdateOrder id={orderId} />
       <Dropdown overlay={() => dealerList(dealers, handleSend)}>
-        <Button shape="round" size="large">
+        <Button shape="default" size="large">
           Create draft email for shops <DownOutlined />
         </Button>
       </Dropdown>
@@ -114,7 +113,12 @@ const Invoice = () => {
 							square, this button will create a new customer. Can't create an invoice until we check
 							if the customer exists in square"
       >
-        <Button size="large" block shape="round" onClick={() => checkCustomerInSquare(order.customerPhoneNumber)}>
+        <Button
+          size="large"
+          block
+          shape="default"
+          onClick={() => checkCustomerInSquare(order.customerPhoneNumber)}
+        >
           Check if customer exists in Square
         </Button>
       </Popover>
@@ -123,12 +127,18 @@ const Invoice = () => {
         content="Can't create an invoice until we check if the user
 							exists in square."
       >
-        <Button size="large" block shape="round" disabled={!invoiceBoolean} onClick={() => createInvoice(customer.id)}>
+        <Button
+          size="large"
+          block
+          shape="default"
+          disabled={!invoiceBoolean}
+          onClick={() => createInvoice(customer.id)}
+        >
           Create Invoice
         </Button>
       </Popover>
     </div>
-  )
-}
+  );
+};
 
-export default Invoice
+export default Invoice;

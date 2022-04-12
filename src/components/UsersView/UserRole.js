@@ -1,10 +1,10 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { Button, Dropdown, Menu } from 'antd'
-import { updateSingleUserThunk } from '../../store/users'
-import { DownOutlined } from '@ant-design/icons'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Button, Dropdown, Menu } from 'antd';
+import { updateSingleUserThunk } from '../../store/users';
+import { DownOutlined } from '@ant-design/icons';
 
-const roles = ['unconfirmed', 'admin', 'driver', 'detailer']
+const roles = ['unconfirmed', 'admin', 'driver', 'detailer'];
 
 const menuList = (fn) => {
   return (
@@ -15,15 +15,15 @@ const menuList = (fn) => {
         </Menu.Item>
       ))}
     </Menu>
-  )
-}
+  );
+};
 
 const UserRole = ({ value, row }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleStatusUpdate = (e) => {
-    dispatch(updateSingleUserThunk(row.id, { role: e.key }))
-  }
+    dispatch(updateSingleUserThunk(row.id, { role: e.key }));
+  };
 
   return (
     <div>
@@ -33,7 +33,7 @@ const UserRole = ({ value, row }) => {
         </Button>
       </Dropdown>
     </div>
-  )
-}
+  );
+};
 
-export default UserRole
+export default UserRole;

@@ -1,78 +1,78 @@
-const router = require('express').Router()
-var parseMessage = require('gmail-api-parse-message')
-const { gmail } = require('./oAuth2Client')
+const router = require('express').Router();
+var parseMessage = require('gmail-api-parse-message');
+const { gmail } = require('./oAuth2Client');
 
-module.exports = router
+module.exports = router;
 
 router.get('/:orderid', async (req, res, next) => {
   try {
-    const id = req.params.orderid
-    let result = await listMessages(id)
-    res.json(result)
+    const id = req.params.orderid;
+    let result = await listMessages(id);
+    res.json(result);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 router.get('/single/:messageid', async (req, res, next) => {
   try {
-    const id = req.params.messageid
-    let result = await getMessage(id)
-    res.json(result)
+    const id = req.params.messageid;
+    let result = await getMessage(id);
+    res.json(result);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 router.post('/createdraft', async (req, res, next) => {
   try {
-    const obj = req.body
-    let result = await createDraft(obj)
-    res.json(result)
+    const obj = req.body;
+    let result = await createDraft(obj);
+    res.json(result);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 router.post('/sendconfirmation', async (req, res, next) => {
   try {
-    const obj = req.body
-    console.log('reqest to send an email', req.body)
-    let result = await sendEmailConfirmation(obj)
-    res.json(result)
+    const obj = req.body;
+    console.log('reqest to send an email', req.body);
+    let result = await sendEmailConfirmation(obj);
+    res.json(result);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 async function listMessages(id) {
-  const userId = 'me'
-  const query = `subject:${id}`
+  const userId = 'me';
+  const query = `subject:${id}`;
 
   var initialRequest = await gmail.users.messages.list({
     userId: userId,
     q: query,
-  })
+  });
 
-  let nextPage = initialRequest.data.nextPageToken
+  let nextPage = initialRequest.data.nextPageToken;
 
-  var loopContinue = true
-  let newArr = []
+  var loopContinue = true;
+  let newArr = [];
   async function Managework() {
     while (loopContinue) {
       await doWork(nextPage)
         .then((val) => {
-          newArr = [...newArr, ...val.data.messages]
-          nextPage = val.data.nextPageToken || null
+          newArr = [...newArr, ...val.data.messages];
+          nextPage = val.data.nextPageToken || null;
         })
         .catch((err) => {
-          console.log('Promise fail')
-          loopContinue = false
-          console.error(err)
-        })
+          console.log('Promise fail');
+          loopContinue = false;
+          console.error(err);
+        });
     }
 
-    let headersArray = []
+    let headersArray = [];
 
     await asyncForEach(newArr, async (msg) => {
       let resp = await gmail.users.messages.get({
@@ -80,23 +80,23 @@ async function listMessages(id) {
         id: msg.id,
         format: 'metadata',
         metadataHeaders: ['Subject', 'From', 'To', 'Date'],
-      })
+      });
       let obj = {
         id: msg.id,
-      }
+      };
       resp.data.payload.headers.forEach((el) => {
-        obj[el.name] = el.value
-      })
-      headersArray.push(obj)
-    })
+        obj[el.name] = el.value;
+      });
+      headersArray.push(obj);
+    });
 
-    return headersArray
+    return headersArray;
   }
   if (initialRequest.data.resultSizeEstimate > 0) {
-    newArr = [...newArr, ...initialRequest.data.messages]
-    return Managework()
+    newArr = [...newArr, ...initialRequest.data.messages];
+    return Managework();
   } else {
-    return []
+    return [];
   }
 
   function doWork(tkn) {
@@ -106,17 +106,17 @@ async function listMessages(id) {
           userId: userId,
           pageToken: tkn,
           q: query,
-        })
-        resolve(request)
+        });
+        resolve(request);
       } else {
-        reject('no more pages')
+        reject('no more pages');
       }
-    })
+    });
   }
 
   async function asyncForEach(array, callback) {
     for (let index = 0; index < array.length; index++) {
-      await callback(array[index], index, array)
+      await callback(array[index], index, array);
     }
   }
 }
@@ -130,51 +130,51 @@ async function listMessages(id) {
  * @param  {Function} callback Function to call when the request is complete.
  */
 async function getMessage(messageId) {
-  const userId = 'me'
+  const userId = 'me';
 
   //const gmail = await google.gmail({version: 'v1', auth})
 
   var response = await gmail.users.messages.get({
     userId: userId,
     id: messageId,
-  })
+  });
 
-  var parts = response.data.payload.parts || []
+  var parts = response.data.payload.parts || [];
   //let decoded = await parseMessage(response.data.payload.body).textPlain
-  let decoded = await parseMessage(response.data)
+  let decoded = await parseMessage(response.data);
 
-  decoded = decoded.textHtml || decoded.textPlain
+  decoded = decoded.textHtml || decoded.textPlain;
 
-  let attachmentsArray = []
+  let attachmentsArray = [];
 
   if (parts.length > 0) {
     await asyncForEach(parts, async (part) => {
-      let obj = {}
+      let obj = {};
       if (part.filename && part.filename.length > 0) {
-        var attachId = part.body.attachmentId
+        var attachId = part.body.attachmentId;
         var request = await gmail.users.messages.attachments.get({
           id: attachId,
           messageId: messageId,
           userId: userId,
-        })
+        });
 
-        obj.filename = part.filename
-        obj.attachment = request.data.data
-        obj.type = part.mimeType
-        attachmentsArray.push(obj)
+        obj.filename = part.filename;
+        obj.attachment = request.data.data;
+        obj.type = part.mimeType;
+        attachmentsArray.push(obj);
       }
-    })
+    });
   }
 
   if (!decoded) {
-    return console.log('The API returned an error inside single message fetch')
+    return console.log('The API returned an error inside single message fetch');
   } else {
-    return decoded
+    return decoded;
   }
 
   async function asyncForEach(array, callback) {
     for (let index = 0; index < array.length; index++) {
-      await callback(array[index], index, array)
+      await callback(array[index], index, array);
     }
   }
 }
@@ -182,7 +182,7 @@ async function getMessage(messageId) {
 async function createDraft(msg) {
   // You can use UTF-8 encoding for the subject using the method below.
   // You can also just use a plain string if you don't need anything fancy.
-  const subject = `SERVICE QUOTE REQUEST FOR CARRECTLY - ${msg.orderid}`
+  const subject = `SERVICE QUOTE REQUEST FOR CARRECTLY - ${msg.orderid}`;
   //const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
   const messageParts = [
     'From: <info@carrectly.com>',
@@ -202,13 +202,13 @@ async function createDraft(msg) {
     `VIN: ${msg.vin}<br/>`,
     'Thank you for your business,<br/>',
     'TEAM CARRECTLY',
-  ]
-  const message = messageParts.join('\n')
+  ];
+  const message = messageParts.join('\n');
 
   const encodedMessage = Buffer.from(message)
     .toString('base64')
     .replace(/\+/g, '-')
-    .replace(/\//g, '_')
+    .replace(/\//g, '_');
   //.replace(/=+$/, '')
 
   //function to send the message
@@ -227,15 +227,15 @@ async function createDraft(msg) {
         raw: encodedMessage,
       },
     },
-  })
+  });
 
-  return res.data
+  return res.data;
 }
 
 async function sendEmailConfirmation(msg) {
   // You can use UTF-8 encoding for the subject using the method below.
   // You can also just use a plain string if you don't need anything fancy.
-  const subject = `Thank you for requesting your auto service - Carrectly Auto Care - ${msg.orderid}`
+  const subject = `Thank you for requesting your auto service - Carrectly Auto Care - ${msg.orderid}`;
   //const utf8Subject = `=?utf-8?B?${Buffer.from(subject).toString('base64')}?=`
   const messageParts = [
     'From: <info@carrectly.com>',
@@ -284,20 +284,20 @@ That is all. Let us know if you have any questions and we will help with anythin
 Thank you!
 
 - Carrectly Team`,
-  ]
-  const message = messageParts.join('\n')
+  ];
+  const message = messageParts.join('\n');
 
   const encodedMessage = Buffer.from(message)
     .toString('base64')
     .replace(/\+/g, '-')
-    .replace(/\//g, '_')
+    .replace(/\//g, '_');
 
   const res = await gmail.users.messages.send({
     userId: 'me',
     requestBody: {
       raw: encodedMessage,
     },
-  })
+  });
 
-  return res.data
+  return res.data;
 }

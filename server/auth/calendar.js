@@ -1,36 +1,36 @@
-const router = require('express').Router()
-const moment = require('moment')
-const { calendar } = require('./oAuth2Client')
-module.exports = router
+const router = require('express').Router();
+const moment = require('moment');
+const { calendar } = require('./oAuth2Client');
+module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
-    let result = await listEvents()
-    res.json(result)
+    let result = await listEvents();
+    res.json(result);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 router.post('/newevent', async (req, res, next) => {
   try {
-    const obj = req.body
-    const result = await createEvent(obj)
-    res.json(result)
+    const obj = req.body;
+    const result = await createEvent(obj);
+    res.json(result);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 router.post('/newevent/update', async (req, res, next) => {
   try {
-    const obj = req.body
-    const result = await updateEvent(obj)
-    res.json(result)
+    const obj = req.body;
+    const result = await updateEvent(obj);
+    res.json(result);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 async function listEvents() {
   let response = await calendar.events.list(
@@ -41,27 +41,27 @@ async function listEvents() {
       singleEvents: true,
       orderBy: 'startTime',
     },
-    'utf8'
-  )
+    'utf8',
+  );
   if (!response) {
-    return console.log('The API returned an error: ')
+    return console.log('The API returned an error: ');
   } else {
-    return response.data.items
+    return response.data.items;
   }
 }
 
 async function createEvent(evt) {
-  let attendeeEmail = evt.pickUpDriverEmail
-  let color = 11
-  let startTime = evt.pickupDate
+  let attendeeEmail = evt.pickUpDriverEmail;
+  let color = 11;
+  let startTime = evt.pickupDate;
   if (Object.prototype.hasOwnProperty.call(evt, 'returnDriverEmail')) {
-    attendeeEmail = evt.returnDriverEmail
-    color = 10
-    startTime = evt.dropoffDate
+    attendeeEmail = evt.returnDriverEmail;
+    color = 10;
+    startTime = evt.dropoffDate;
   }
 
-  const endTime = moment(startTime).add(1, 'hour')
-  const endTimeISO = endTime.toISOString()
+  const endTime = moment(startTime).add(1, 'hour');
+  const endTimeISO = endTime.toISOString();
 
   var event = {
     summary: `${evt.carYear} ${evt.carMake} ${evt.carModel} ${evt.customerName}`,
@@ -86,24 +86,24 @@ async function createEvent(evt) {
       ],
     },
     attendees: [{ email: attendeeEmail }],
-  }
+  };
 
   //flexible calendar id '6kllmvnusibcs0lbnh98ffiqvs@group.calendar.google.com'
   var request = await calendar.events.insert({
     calendarId: 'primary',
     resource: event,
-  })
+  });
 
   if (!request) {
-    return console.log('The API returned an error: ')
+    return console.log('The API returned an error: ');
   } else {
-    return request.data
+    return request.data;
   }
 }
 
 async function updateEvent(evt) {
-  const endTime = moment(evt.pickupDate).add(1, 'hour')
-  const endTimeISO = endTime.toISOString()
+  const endTime = moment(evt.pickupDate).add(1, 'hour');
+  const endTimeISO = endTime.toISOString();
   // let allcalendars = await calendar.calendarList.list()
   // console.log('all calendar ids', allcalendars.data.items)
   const statuses = [
@@ -115,10 +115,10 @@ async function updateEvent(evt) {
     'invoiced',
     'done',
     'cancelled',
-  ]
+  ];
   //flexibleid = 6kllmvnusibcs0lbnh98ffiqvs@group.calendar.google.com
 
-  let colorId = evt.status === statuses[0] ? 11 : statuses.indexOf(evt.status)
+  let colorId = evt.status === statuses[0] ? 11 : statuses.indexOf(evt.status);
 
   var event = {
     summary: `${evt.carYear} ${evt.carMake} ${evt.carModel} ${evt.customerName}`,
@@ -150,17 +150,17 @@ async function updateEvent(evt) {
         },
       ],
     },
-  }
+  };
 
   var request = await calendar.events.update({
     calendarId: 'primary',
     eventId: evt.hash,
     resource: event,
-  })
+  });
 
   if (!request) {
-    return console.log('The API returned an error: ')
+    return console.log('The API returned an error: ');
   } else {
-    return request.data
+    return request.data;
   }
 }

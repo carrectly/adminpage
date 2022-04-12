@@ -1,29 +1,29 @@
-const db = require('../database')
-const Sequelize = require('sequelize')
+const db = require('../database');
+const Sequelize = require('sequelize');
 
 const Driver = db.define('driver', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   email: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   phoneNumber: {
     type: Sequelize.STRING,
-    allowNull: true
+    allowNull: true,
   },
   imageUrl: {
     type: Sequelize.STRING,
-    allowNull: true
+    allowNull: true,
   },
   tagColor: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
-  status: {
-    type: Sequelize.STRING
-  }
-})
+  // status: {
+  //   type: Sequelize.STRING,
+  // },
+});
 
-module.exports = Driver
+module.exports = Driver;

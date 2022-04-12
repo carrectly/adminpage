@@ -1,5 +1,5 @@
-import React from 'react'
-import m from 'moment'
+import React from 'react';
+import m from 'moment';
 import {
   DateCell,
   OrderDetailsCell,
@@ -10,9 +10,9 @@ import {
   ConciergeCell,
   CarMakeCell,
   DealersCell,
-} from './Cells.js'
+} from './Cells.js';
 
-const defaultStringCompareOptions = { sensitivity: 'base' }
+const defaultStringCompareOptions = { sensitivity: 'base' };
 
 const columns = [
   {
@@ -26,8 +26,7 @@ const columns = [
     dataIndex: 'status',
     align: 'center',
     key: 'status',
-    sorter: (a, b) =>
-      a.status.localeCompare(b.status, defaultStringCompareOptions),
+    sorter: (a, b) => a.status.localeCompare(b.status, defaultStringCompareOptions),
     sortDirections: ['descend', 'ascend'],
     render: (value) => <StatusCell value={value} />,
   },
@@ -101,6 +100,6 @@ const columns = [
     sortDirections: ['descend', 'ascend'],
     render: (value) => <DateCell value={value} />,
   },
-]
+];
 
-export default columns
+export default columns;

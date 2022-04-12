@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const MainFooter = () => {
-	return <div className='footer'>Developed by Andre Birkus</div>
-}
+  return <div className="footer">Developed by Andre Birkus</div>;
+};
 
-export default MainFooter
+export default MainFooter;

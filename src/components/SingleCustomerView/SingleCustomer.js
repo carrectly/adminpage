@@ -1,31 +1,28 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { getCustomerOrdersThunk } from '../../store/customerorders'
-import { Card } from 'antd'
-import { getSingleCustomerThunk } from '../../store/singlecustomer'
-import UpdateCustomer from './UpdateCustomer'
-import moment from 'moment'
+import { Card } from 'antd';
+import moment from 'moment';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { getCustomerOrdersThunk as getOrders } from '../../store/customerorders';
+import { getSingleCustomerThunk as getCustomer } from '../../store/singlecustomer';
+import UpdateCustomer from './UpdateCustomer';
 
-const SingleCustomer = (props) => {
-  const params = useParams()
+const SingleCustomer = () => {
+  const { userid } = useParams();
+  const orders = useSelector((state) => state.customerorders) || [];
+  const customer = useSelector((state) => state.singlecustomer);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    props.getCustomer(params.userid)
-    props.getOrders(params.userid)
-  }, [])
+    dispatch(getCustomer(userid));
+    dispatch(getOrders(userid));
+  }, []);
 
-  const userorders = props.orders || []
-  const customer = props.customer || {}
   return (
     <div>
       <div className="customercontainer">
         <div className="customerinfo">
-          <Card
-            className="clientcard"
-            title={`${customer.firstName} ${customer.lastName}`}
-          >
+          <Card className="clientcard" title={`${customer.firstName} ${customer.lastName}`}>
             <div>{customer.email}</div>
             <div>{customer.location}</div>
             <div>{customer.phoneNumber}</div>
@@ -59,39 +56,27 @@ const SingleCustomer = (props) => {
           </tr>
         </thead>
         <tbody>
-          {userorders.map((ord) => (
-            <tr key={ord.hash}>
-              <td>{ord.status}</td>
-              <td>{new Date(ord.pickupDate).toUTCString()}</td>
-              <td>{new Date(ord.dropoffDate).toUTCString()}</td>
-              <td>{ord.pickupLocation}</td>
-              <td>{ord.carMake}</td>
-              <td>{ord.carModel}</td>
-              <td>{ord.carYear}</td>
-              <td>
-                <Link to={`/singleorder/${ord.hash}`} id={ord.hash}>
-                  View
-                </Link>
-              </td>
-            </tr>
-          ))}
+          {orders &&
+            orders.map((ord) => (
+              <tr key={ord.hash}>
+                <td>{ord.status}</td>
+                <td>{new Date(ord.pickupDate).toUTCString()}</td>
+                <td>{new Date(ord.dropoffDate).toUTCString()}</td>
+                <td>{ord.pickupLocation}</td>
+                <td>{ord.carMake}</td>
+                <td>{ord.carModel}</td>
+                <td>{ord.carYear}</td>
+                <td>
+                  <Link to={`/singleorder/${ord.hash}`} id={ord.hash}>
+                    View
+                  </Link>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = (state) => {
-  return {
-    orders: state.customerorders,
-    customer: state.singlecustomer,
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getOrders: (id) => dispatch(getCustomerOrdersThunk(id)),
-    getCustomer: (id) => dispatch(getSingleCustomerThunk(id)),
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(SingleCustomer)
+export default SingleCustomer;

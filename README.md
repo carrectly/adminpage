@@ -2,20 +2,20 @@
 
 ## Setup for local development
 
--   Clone this repo
--   `npm install`
--   -   Create postgres databases (`adminpage` should match the `name`
-        parameter in `package.json`):
--   `npm run seed`
--   Create a file called `secrets.js` in the project root
-    -   This file is listed in `.gitignore`, and will _only_ be required
-        in your _development_ environment
-    -   Its purpose is to attach the secret environment variables that you
-        will use while developing
-    -   However, it's **very** important that you **not** push it to
-        Github! Otherwise, _prying eyes_ will find your secret API keys!
-    -   It might look like this:
-    -   Heroku uses its own config variables and you can define secrets there
+- Clone this repo
+- `npm install`
+- - Create postgres databases (`adminpage` should match the `name`
+    parameter in `package.json`):
+- `npm run seed`
+- Create a file called `secrets.js` in the project root
+  - This file is listed in `.gitignore`, and will _only_ be required
+    in your _development_ environment
+  - Its purpose is to attach the secret environment variables that you
+    will use while developing
+  - However, it's **very** important that you **not** push it to
+    Github! Otherwise, _prying eyes_ will find your secret API keys!
+  - It might look like this:
+  - Heroku uses its own config variables and you can define secrets there
 
 ```
 process.env.GOOGLE_CLIENT_ID = 'hush hush'
@@ -30,9 +30,9 @@ process.env.squareBasePath = 'sandboxOrProd'
 
 ### OAuth
 
--   To use OAuth with Google, complete the steps above with a real client
-    ID and client secret supplied from Google
-    -   You can get them from the [Google APIs dashboard][google-apis].
+- To use OAuth with Google, complete the steps above with a real client
+  ID and client secret supplied from Google
+  - You can get them from the [Google APIs dashboard][google-apis].
 
 [google-apis]: https://console.developers.google.com/apis/credentials
 
@@ -48,9 +48,9 @@ and stick to it. Any linter rule that you object to can be "turned
 off" in `.eslintrc.json`. You may also choose an entirely different
 config if you don't like ours:
 
--   [Standard style guide](https://standardjs.com/)
--   [Airbnb style guide](https://github.com/airbnb/javascript)
--   [Google style guide](https://google.github.io/styleguide/jsguide.html)
+- [Standard style guide](https://standardjs.com/)
+- [Airbnb style guide](https://github.com/airbnb/javascript)
+- [Google style guide](https://google.github.io/styleguide/jsguide.html)
 
 ## Start
 
@@ -66,8 +66,8 @@ From there, just follow your bliss.
 Ready to go world wide? Here's a guide to deployment! There are two
 supported ways to deploy in Boilermaker:
 
--   automatically, via continuous deployment with Travis.
--   "manually", from your local machine via the `deploy` script.
+- automatically, via continuous deployment with Travis.
+- "manually", from your local machine via the `deploy` script.
 
 Either way, you'll need to set up your deployment server to start.
 The steps below are also covered in the CI/CD workshop.
@@ -80,17 +80,17 @@ The steps below are also covered in the CI/CD workshop.
 
 [heroku-cli]: https://devcenter.heroku.com/articles/heroku-cli
 
--   **If you are creating a new app...**
+- **If you are creating a new app...**
 
-    1.  `heroku create` or `heroku create your-app-name` if you have a
-        name in mind.
-    2.  `heroku addons:create heroku-postgresql:hobby-dev` to add
-        ("provision") a postgres database to your heroku dyno
+  1.  `heroku create` or `heroku create your-app-name` if you have a
+      name in mind.
+  2.  `heroku addons:create heroku-postgresql:hobby-dev` to add
+      ("provision") a postgres database to your heroku dyno
 
--   **If you already have a Heroku app...**
+- **If you already have a Heroku app...**
 
-    1.  `heroku git:remote your-app-name` You'll need to be a
-        collaborator on the app.
+  1.  `heroku git:remote your-app-name` You'll need to be a
+      collaborator on the app.
 
 ### Travis
 

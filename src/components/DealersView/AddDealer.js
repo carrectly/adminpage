@@ -1,48 +1,62 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { addDealerThunk } from '../../store/dealers.js'
-import { Form, Button, Input, Modal } from 'antd'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addDealerThunk as addDealer } from '../../store/dealers.js';
+import { Form, Button, Input, Modal } from 'antd';
 
 const layout = {
   labelCol: { span: 8 },
-  wrapperCol: { span: 16 }
-}
+  wrapperCol: { span: 16 },
+};
 
 const AddDealer = (props) => {
-  const [form] = Form.useForm()
-  const [isValid, Validate] = useState(false)
-  const dispatch = useDispatch()
+  const [form] = Form.useForm();
+  const [isValid, Validate] = useState(false);
+  const dispatch = useDispatch();
 
   const onFinish = (values) => {
-    dispatch(addDealerThunk(values))
-    form.resetFields()
-    props.onHide()
-  }
+    dispatch(addDealer(values));
+    form.resetFields();
+    props.onHide();
+  };
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo)
-  }
+    console.log('Failed:', errorInfo);
+  };
 
   const onCancel = () => {
-    form.resetFields()
-    props.onHide()
-  }
+    form.resetFields();
+    props.onHide();
+  };
 
   const onChange = () => {
-    const { name, email } = form.getFieldValue()
+    const { name, email } = form.getFieldValue();
     if (name && email) {
       if (name.length > 1 && email.length > 1 && email.includes('@')) {
-        Validate(true)
+        Validate(true);
       } else {
-        Validate(false)
+        Validate(false);
       }
     } else {
-      Validate(false)
+      Validate(false);
     }
-  }
+  };
 
   return (
-    <Modal title="New Service Shop" visible={props.show} footer={null} closable={false} getContainer={false}>
-      <Form {...layout} form={form} name="control-hooks" size="large" onFinish={onFinish} onFinishFailed={onFinishFailed} onChange={onChange}>
+    <Modal
+      title="New Service Shop"
+      visible={props.show}
+      footer={null}
+      closable={false}
+      getContainer={false}
+    >
+      <Form
+        {...layout}
+        form={form}
+        name="control-hooks"
+        size="large"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        onChange={onChange}
+      >
         <Form.Item label="Shop Name">
           <Form.Item name="name" noStyle rules={[{ required: true }]}>
             <Input />
@@ -78,7 +92,7 @@ const AddDealer = (props) => {
         </Form.Item>
       </Form>
     </Modal>
-  )
-}
+  );
+};
 
-export default AddDealer
+export default AddDealer;

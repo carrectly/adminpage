@@ -1,9 +1,8 @@
 /* eslint-disable complexity */
-import React from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Popover } from 'antd'
-import { logout } from '../store'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Popover } from 'antd';
+import { logout } from '../store';
 import {
   FolderOutlined,
   TeamOutlined,
@@ -13,39 +12,34 @@ import {
   FireOutlined,
   LogoutOutlined,
   CarOutlined,
-} from '@ant-design/icons'
-import './styles/navbar.scss'
-import logo from '../images/logo.png'
-import { useNavigate } from 'react-router-dom'
+} from '@ant-design/icons';
+import '../styles/navbar.scss';
+import logo from '../images/logo.png';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Navbar = (props) => {
-  const navigate = useNavigate()
+const Navbar = () => {
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector((state) => !!state.user.id);
+  const userRole = useSelector((state) => state.user.role);
+  const dispatch = useDispatch();
   const handleLogout = () => {
-    props.handleClick()
-    navigate('/account')
-  }
+    dispatch(logout());
+    navigate('/login');
+  };
 
   return (
     <div className="navbar1">
       <Popover content="Click here to book for client">
-        <a
-          className="link"
-          href="https://www.carrectly.com"
-          rel="noreferrer"
-          target="_blank"
-        >
+        <a className="link" href="https://www.carrectly.com" rel="noreferrer" target="_blank">
           <img id="logo" src={logo} alt="carrectly-logo" />
         </a>
       </Popover>
       <Link to="/account" className="link">
         <FireOutlined className="icon" />
-        {props.userRole === 'driver' ? (
-          <span>My Trips</span>
-        ) : (
-          <span>Active Orders</span>
-        )}
+        {userRole === 'driver' ? <span>My Trips</span> : <span>Active Orders</span>}
       </Link>
-      {props.userRole === 'driver' && (
+      {userRole === 'driver' && (
         <Link to="/alltrips" className="link">
           <CarOutlined className="icon" />
           All Trips
@@ -60,38 +54,38 @@ const Navbar = (props) => {
         <TeamOutlined className="icon" />
         All Customers
       </Link>
-      {props.userRole !== 'driver' && (
+      {userRole !== 'driver' && (
         <Link to="/dealers" className="link">
           <ToolOutlined className="icon" />
           Service Shops
         </Link>
       )}
-      {props.userRole !== 'driver' && (
+      {userRole !== 'driver' && (
         <Link to="/drivers" className="link">
           <CarOutlined className="icon" />
           Drivers
         </Link>
       )}
-      {props.userRole !== 'driver' && (
+      {userRole !== 'driver' && (
         <Link to="/calendar" className="link">
           <CalendarOutlined className="icon" />
           Calendar
         </Link>
       )}
-      {props.userRole !== 'driver' && (
+      {userRole !== 'driver' && (
         <Link to="/users" className="link">
           <CalendarOutlined className="icon" />
           Users
         </Link>
       )}
-      {props.userRole !== 'driver' && (
+      {userRole !== 'driver' && (
         <Link to="/allServices" className="link">
           <TableOutlined className="icon" />
           Services
         </Link>
       )}
 
-      {props.isLoggedIn ? (
+      {isLoggedIn ? (
         <a className="link" onClick={handleLogout}>
           <LogoutOutlined className="icon" />
           Log out
@@ -100,22 +94,10 @@ const Navbar = (props) => {
         <div />
       )}
     </div>
-  )
-}
+  );
+};
 
-const mapState = (state) => {
-  return {
-    isLoggedIn: !!state.user.id,
-    userRole: state.user.role,
-  }
-}
-
-const mapDispatch = (dispatch) => {
-  return {
-    handleClick: () => dispatch(logout()),
-  }
-}
-export default connect(mapState, mapDispatch)(Navbar)
+export default Navbar;
 
 // isMobile ? (
 // 			<div className='dropdown'>

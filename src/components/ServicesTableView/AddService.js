@@ -1,47 +1,51 @@
-import React, { useState } from 'react'
-import { Modal, Button, Form, Input, InputNumber, Popover } from 'antd'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch } from 'react-redux'
-import { addServiceThunk } from '../../store/services'
+import React, { useState } from 'react';
+import { Modal, Button, Form, Input, InputNumber, Popover } from 'antd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
+import { addServiceThunk } from '../../store/services';
 
 const layout = {
   labelCol: { span: 8 },
-  wrapperCol: { span: 16 }
-}
+  wrapperCol: { span: 16 },
+};
 
 const AddService = () => {
-  const [form] = Form.useForm()
-  const [show, setShow] = useState(false)
-  const dispatch = useDispatch()
+  const [form] = Form.useForm();
+  const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
 
   const handleClose = () => {
-    form.resetFields()
-    setShow(false)
-  }
-  const handleShow = () => setShow(true)
+    form.resetFields();
+    setShow(false);
+  };
+  const handleShow = () => setShow(true);
 
   const onFinish = (values) => {
-    dispatch(addServiceThunk(values))
-    handleClose()
-    form.resetFields()
-  }
+    dispatch(addServiceThunk(values));
+    handleClose();
+    form.resetFields();
+  };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo)
-  }
+    console.log('Failed:', errorInfo);
+  };
 
   const validateMessages = {
     required: '${label} is required!',
     types: {
-      number: '${label} is not a valid number!'
-    }
-  }
+      number: '${label} is not a valid number!',
+    },
+  };
 
   return (
     <div>
       <Popover content="Click here to add a new service">
-        <FontAwesomeIcon className="float-plus" onClick={() => handleShow(true)} icon={faPlusCircle} />
+        <FontAwesomeIcon
+          className="float-plus"
+          onClick={() => handleShow(true)}
+          icon={faPlusCircle}
+        />
       </Popover>
       <Modal title="Add Service" visible={show} footer={null} closable={false} getContainer={false}>
         <Form
@@ -79,7 +83,7 @@ const AddService = () => {
         </Form>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default AddService
+export default AddService;

@@ -1,150 +1,141 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Descriptions, Tabs, Button, Dropdown, Menu, Select } from 'antd'
-import { Link, useParams } from 'react-router-dom'
-const { TabPane } = Tabs
-import moment from 'moment'
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Descriptions, Tabs, Button, Dropdown, Menu, Select } from 'antd';
+import { Link, useParams } from 'react-router-dom';
+const { TabPane } = Tabs;
+import moment from 'moment';
+import { LocationCell, StatusCell, ConciergeCell, GoogleVoiceLinkCell } from '../Table/Cells.js';
+import { getStatusArray } from '../../utils';
 import {
-  LocationCell,
-  StatusCell,
-  ConciergeCell,
-  GoogleVoiceLinkCell,
-} from '../Table/Cells.js'
-import { getStatusArray } from '../util'
-import {
-  updateSingleOrderThunk,
-  addOrderDriverThunk,
-  addOrderDealerThunk,
-  removeOrderDealerThunk,
-  addOrderCustomerRepThunk,
-} from '../../store/singleorder'
-import './styles.scss'
+  updateSingleOrderThunk as updateOrder,
+  addOrderDriverThunk as addOrderDriver,
+  addOrderDealerThunk as addOrderDealer,
+  removeOrderDealerThunk as removeOrderDealer,
+  addOrderCustomerRepThunk as addOrderCustomerRep,
+} from '../../store/singleorder';
+import './styles.scss';
 
-const statusArray = getStatusArray()
-const { Option } = Select
+const statusArray = getStatusArray();
+const { Option } = Select;
 
-const menuList = (fn) => {
-  return (
-    <Menu onClick={fn}>
-      {statusArray.map((status, index) => (
-        <Menu.Item key={status} id={index}>
-          {status}
-        </Menu.Item>
-      ))}
-    </Menu>
-  )
-}
+const menuList = (fn) => (
+  <Menu onClick={fn}>
+    {statusArray.map((status, index) => (
+      <Menu.Item key={status} id={index}>
+        {status}
+      </Menu.Item>
+    ))}
+  </Menu>
+);
 
-const employeeList = (arr, fn, tripType) => {
-  return (
-    <Menu onClick={fn}>
-      {arr.map((person) => (
-        <Menu.Item key={person.id} id={tripType}>
-          {person.name ? person.name : person.firstName}
-        </Menu.Item>
-      ))}
-    </Menu>
-  )
-}
+const employeeList = (arr, fn, tripType) => (
+  <Menu onClick={fn}>
+    {arr.map((person) => (
+      <Menu.Item key={person.id} id={tripType}>
+        {person.name ? person.name : person.firstName}
+      </Menu.Item>
+    ))}
+  </Menu>
+);
 
 const flattenDealersArray1 = (allShopsArray, shopsAlreadySelected) => {
-  const idsSelected = shopsAlreadySelected.map((el) => el.id)
-  const difference = allShopsArray.filter(
-    (element) => !idsSelected.includes(element.id)
-  )
-  return difference.map((el) => {
-    return (
-      <Option value={el.id} key={el.id}>
-        {el.name}
-      </Option>
-    )
-  })
-}
+  const idsSelected = shopsAlreadySelected.map((el) => el.id);
+  const difference = allShopsArray.filter((element) => !idsSelected.includes(element.id));
+  return difference.map((el) => (
+    <Option value={el.id} key={el.id}>
+      {el.name}
+    </Option>
+  ));
+};
 
-const flattenDealersArray2 = (arr) => {
-  return arr.map((el) => {
-    return (
-      <div value={el.id} key={el.id}>
-        {el.name}
-      </div>
-    )
-  })
-}
+const flattenDealersArray2 = (arr) =>
+  arr.map((el) => (
+    <div value={el.id} key={el.id}>
+      {el.name}
+    </div>
+  ));
 
-const SingleOrderDetails = (props) => {
-  const dispatch = useDispatch()
-  const params = useParams()
-  const orderId = params.orderid
-  const singleorder = props.order
-  const pickUpDriver = props.pickUpDriver
-  const customerRep = props.customerRep
-  const returnDriver = props.returnDriver
-  const customer = props.customer
-  const drivers = useSelector((state) => state.drivers)
-  const users = useSelector((state) => state.users)
-  const allShops = useSelector((state) => state.dealers)
-  const orderDealers = props.orderDealers
+const SingleOrderDetails = ({
+  order,
+  pickUpDriver,
+  customerRep,
+  returnDriver,
+  customer,
+  orderDealers,
+}) => {
+  const dispatch = useDispatch();
+  const { orderid } = useParams();
+  const drivers = useSelector((state) => state.drivers);
+  const users = useSelector((state) => state.users);
+  const allShops = useSelector((state) => state.dealers);
 
   const handleStatusUpdate = (e) => {
     let obj = {
       status: e.key,
-    }
+    };
     if (e.key === 'cancelled') {
       if (
         window.confirm(
-          'Changing the status to cancelled will remove the order from the home page and will move it to archives. Do you want to proceed?'
+          'Changing the status to cancelled will remove the order from the home page and will move it to archives. Do you want to proceed?',
         )
       ) {
-        dispatch(updateSingleOrderThunk(orderId, obj))
+        dispatch(updateOrder(orderid, obj));
       } else {
-        console.log('changed my mind')
+        console.log('changed my mind');
       }
     } else if (e.key === 'paid') {
       if (
         window.confirm(
-          'Changing the status to paid will remove the order from the home page and will move it to archives. Do you want to proceed?'
+          'Changing the status to paid will remove the order from the home page and will move it to archives. Do you want to proceed?',
         )
       ) {
-        dispatch(updateSingleOrderThunk(orderId, obj))
+        dispatch(updateOrder(orderid, obj));
       } else {
-        console.log('changed my mind')
+        console.log('changed my mind');
       }
     } else if (e.key === 'confirmed') {
-      const diff = moment(singleorder.dropoffDate).diff(
-        moment(singleorder.pickupDate)
-      )
+      const diff = moment(order.dropoffDate).diff(moment(order.pickupDate));
       if (diff < 0 || !diff) {
         window.alert(
-          'Please enter a valid drop off date before marking the order as confirmed. Drop off date must be after pick up date'
-        )
+          'Please enter a valid drop off date before marking the order as confirmed. Drop off date must be after pick up date',
+        );
       } else {
-        dispatch(updateSingleOrderThunk(orderId, obj))
+        dispatch(updateOrder(orderid, obj));
       }
     } else {
-      dispatch(updateSingleOrderThunk(orderId, obj))
+      dispatch(updateOrder(orderid, obj));
     }
-  }
+  };
 
   const handleAddDealer = (dealerId) => {
-    dispatch(addOrderDealerThunk(orderId, dealerId))
-  }
+    dispatch(addOrderDealer(orderid, dealerId));
+  };
 
   const handleRemoveDealer = (evt) => {
-    dispatch(removeOrderDealerThunk(orderId, evt.key))
-  }
+    dispatch(removeOrderDealer(orderid, evt.key));
+  };
 
   const changeDriver = (evt) => {
     dispatch(
-      addOrderDriverThunk(orderId, {
+      addOrderDriver(orderid, {
         driverId: evt.key,
         tripType: evt.item.props.id,
-      })
-    )
-  }
+      }),
+    );
+  };
 
   const assignCustomerRep = (evt) => {
-    console.log('assigning rep', evt)
-    dispatch(addOrderCustomerRepThunk(orderId, evt.key))
+    console.log('assigning rep', evt);
+    dispatch(addOrderCustomerRep(orderid, evt.key));
+  };
+
+  let additionalComments;
+  let services;
+
+  if (Object.keys(order).length > 0 && order.customerComments.indexOf('services list') > -1) {
+    const [comments, userServices, ...others] = order.customerComments.split('services list:');
+    additionalComments = comments;
+    services = JSON.parse(userServices.replace(/\\/g, ''));
   }
 
   return (
@@ -170,39 +161,31 @@ const SingleOrderDetails = (props) => {
               column={1}
               size="small"
             >
-              <Descriptions.Item label="Order ID">
-                {singleorder.hash}
-              </Descriptions.Item>
+              <Descriptions.Item label="Order ID">{order.hash}</Descriptions.Item>
               <Descriptions.Item label="Status">
                 <Dropdown overlay={() => menuList(handleStatusUpdate)}>
                   <Button size="small" style={{ padding: '0px' }}>
-                    <StatusCell value={singleorder.status} dropDown={true} />
+                    <StatusCell value={order.status} dropDown={true} />
                   </Button>
                 </Dropdown>
               </Descriptions.Item>
               <Descriptions.Item label="Pickup Date">
-                {moment(singleorder.pickupDate).format('M/D/YY hh:mm A')}
+                {moment(order.pickupDate).format('M/D/YY hh:mm A')}
               </Descriptions.Item>
               <Descriptions.Item label="Drop Off Date">
-                {moment(singleorder.dropoffDate).format('M/D/YY hh:mm A')}
+                {moment(order.dropoffDate).format('M/D/YY hh:mm A')}
               </Descriptions.Item>
               <Descriptions.Item label="Pickup Location">
-                <LocationCell value={singleorder.pickupLocation} />
+                <LocationCell value={order.pickupLocation} />
               </Descriptions.Item>
-              <Descriptions.Item label="PROMO CODE">
-                {singleorder.promoCode}
-              </Descriptions.Item>
-              <Descriptions.Item label="Discount">
-                {singleorder.discount}
-              </Descriptions.Item>
-              <Descriptions.Item label="Flexible on Time">
-                {singleorder.flexibleOnTime}
-              </Descriptions.Item>
+              <Descriptions.Item label="PROMO CODE">{order.promoCode}</Descriptions.Item>
+              <Descriptions.Item label="Discount">{order.discount}</Descriptions.Item>
+              <Descriptions.Item label="Flexible on Time">{order.flexibleOnTime}</Descriptions.Item>
               <Descriptions.Item label="Created at">
-                {moment(singleorder.createAt).format('M/D/YY hh:mm A')}
+                {moment(order.createAt).format('M/D/YY hh:mm A')}
               </Descriptions.Item>
               <Descriptions.Item label="Updated at">
-                {moment(singleorder.updatedAt).format('M/D/YY hh:mm A')}
+                {moment(order.updatedAt).format('M/D/YY hh:mm A')}
               </Descriptions.Item>
             </Descriptions>
           </Descriptions.Item>
@@ -216,24 +199,12 @@ const SingleOrderDetails = (props) => {
               column={1}
               className="descriptionsAntd"
             >
-              <Descriptions.Item label="Car Make">
-                {singleorder.carMake}
-              </Descriptions.Item>
-              <Descriptions.Item label="Car Model">
-                {singleorder.carModel}
-              </Descriptions.Item>
-              <Descriptions.Item label="Car Year">
-                {singleorder.carYear}
-              </Descriptions.Item>
-              <Descriptions.Item label="Car Color">
-                {singleorder.carColor}
-              </Descriptions.Item>
-              <Descriptions.Item label="VIN">
-                {singleorder.vin}
-              </Descriptions.Item>
-              <Descriptions.Item label="Stick shift">
-                {singleorder.stickShift}
-              </Descriptions.Item>
+              <Descriptions.Item label="Car Make">{order.carMake}</Descriptions.Item>
+              <Descriptions.Item label="Car Model">{order.carModel}</Descriptions.Item>
+              <Descriptions.Item label="Car Year">{order.carYear}</Descriptions.Item>
+              <Descriptions.Item label="Car Color">{order.carColor}</Descriptions.Item>
+              <Descriptions.Item label="VIN">{order.vin}</Descriptions.Item>
+              <Descriptions.Item label="Stick shift">{order.stickShift}</Descriptions.Item>
             </Descriptions>
           </Descriptions.Item>
 
@@ -254,8 +225,11 @@ const SingleOrderDetails = (props) => {
                   {customer.firstName} {customer.lastName}
                 </Link>
               </Descriptions.Item>
-              <Descriptions.Item label="Customer Comments">
-                {singleorder.customerComments}
+              <Descriptions.Item label="Customer Comments" contentStyle={{ display: 'block' }}>
+                <div>{additionalComments}</div>
+                {services && services.length > 0 && (
+                  <div>Services list: {services.map((service) => service.name).join(', ')}</div>
+                )}
               </Descriptions.Item>
             </Descriptions>
           </Descriptions.Item>
@@ -283,29 +257,18 @@ const SingleOrderDetails = (props) => {
                 </Select>
               </Descriptions.Item>
               <Descriptions.Item label="Concierge">
-                <div>{singleorder.concierge}</div>
+                <div>{order.concierge}</div>
               </Descriptions.Item>
               <Descriptions.Item label="Driver picking up">
-                <Dropdown
-                  overlay={() => employeeList(drivers, changeDriver, 'pickUp')}
-                >
-                  <Button
-                    size="small"
-                    style={{ padding: '0px', border: '0px' }}
-                  >
+                <Dropdown overlay={() => employeeList(drivers, changeDriver, 'pickUp')}>
+                  <Button size="small" style={{ padding: '0px', border: '0px' }}>
                     <ConciergeCell value={pickUpDriver} dropDown={true} />
                   </Button>
                 </Dropdown>
               </Descriptions.Item>
               <Descriptions.Item label="Driver dropping off">
-                {moment(singleorder.dropoffDate).diff(
-                  moment(singleorder.pickupDate)
-                ) > 0 ? (
-                  <Dropdown
-                    overlay={() =>
-                      employeeList(drivers, changeDriver, 'return')
-                    }
-                  >
+                {moment(order.dropoffDate).diff(moment(order.pickupDate)) > 0 ? (
+                  <Dropdown overlay={() => employeeList(drivers, changeDriver, 'return')}>
                     <Button
                       size="small"
                       style={{
@@ -317,20 +280,12 @@ const SingleOrderDetails = (props) => {
                     </Button>
                   </Dropdown>
                 ) : (
-                  <div>
-                    Please enter a valid drop off date in order to assign a
-                    driver
-                  </div>
+                  <div>Please enter a valid drop off date in order to assign a driver</div>
                 )}
               </Descriptions.Item>
               <Descriptions.Item label="Customer Rep in charge of the order">
-                <Dropdown
-                  overlay={() => employeeList(users, assignCustomerRep, '')}
-                >
-                  <Button
-                    size="small"
-                    style={{ padding: '0px', border: '0px' }}
-                  >
+                <Dropdown overlay={() => employeeList(users, assignCustomerRep, '')}>
+                  <Button size="small" style={{ padding: '0px', border: '0px' }}>
                     <ConciergeCell value={customerRep} dropDown={true} />
                   </Button>
                 </Dropdown>
@@ -343,7 +298,7 @@ const SingleOrderDetails = (props) => {
         Change log coming soon ...
       </TabPane>
     </Tabs>
-  )
-}
+  );
+};
 
-export default SingleOrderDetails
+export default SingleOrderDetails;

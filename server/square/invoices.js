@@ -1,21 +1,19 @@
-const router = require('express').Router()
-const { ApiError, Client, Environment } = require('square')
-const moment = require('moment')
+const router = require('express').Router();
+const { ApiError, Client, Environment } = require('square');
+const moment = require('moment');
 
 const client = new Client({
   timeout: 3000,
   environment:
-    process.env.ENVIRONMENT === 'PRODUCTION'
-      ? Environment.Production
-      : Environment.Sandbox,
+    process.env.ENVIRONMENT === 'PRODUCTION' ? Environment.Production : Environment.Sandbox,
   accessToken: process.env.SQUARE_TOKEN,
-})
+});
 
-const { ordersApi } = client
+const { ordersApi } = client;
 
-const { invoicesApi } = client
+const { invoicesApi } = client;
 
-var dueDate = moment().add(1, 'days').format('YYYY-MM-DD')
+var dueDate = moment().add(1, 'days').format('YYYY-MM-DD');
 
 const invoiceDescription = `Hi there!
 
@@ -32,21 +30,21 @@ const invoiceDescription = `Hi there!
 		YELP: https://www.yelp.com/biz/carrectly-auto-care-chicago
 		GOOGLE: http://bit.ly/2vloaPl
 
-		Have a fantastic rest of the week! Thank you for servicing your car - Carrectly!`
+		Have a fantastic rest of the week! Thank you for servicing your car - Carrectly!`;
 
 router.post('/', async (req, res, next) => {
   try {
-    let order = req.body.obj
-    let customerid = req.body.id
-    let services = req.body.obj.services
-    let idempKey = `${order.hash}${Math.floor(Math.random() * 1000)}`
+    let order = req.body.obj;
+    let customerid = req.body.id;
+    let services = req.body.obj.services;
+    let idempKey = `${order.hash}${Math.floor(Math.random() * 1000)}`;
 
-    let lineItems = []
+    let lineItems = [];
     services.forEach((service) => {
-      const itemPrice = Number(service.orderdetails.customerPrice)
-      const priceInCents = itemPrice * 100
-      let amt = Number(priceInCents.toFixed(2))
-      console.log('+++SETTING PRICE', amt)
+      const itemPrice = Number(service.orderdetails.customerPrice);
+      const priceInCents = itemPrice * 100;
+      let amt = Number(priceInCents.toFixed(2));
+      console.log('+++SETTING PRICE', amt);
       lineItems.push({
         name: service.name,
         quantity: '1',
@@ -54,17 +52,17 @@ router.post('/', async (req, res, next) => {
           amount: amt,
           currency: 'USD',
         },
-      })
-    })
+      });
+    });
 
     let orderBody = {
       locationId: process.env.SQUARE_LOCATION_ID,
       referenceId: order.hash,
       lineItems: lineItems,
       customerId: customerid,
-    }
+    };
 
-    let discountAmt = Number(order.discount) * 100
+    let discountAmt = Number(order.discount) * 100;
     if (discountAmt) {
       const orderDiscount = [
         {
@@ -74,15 +72,15 @@ router.post('/', async (req, res, next) => {
           },
           name: `${order.promoCode}`,
         },
-      ]
-      orderBody.discounts = orderDiscount
+      ];
+      orderBody.discounts = orderDiscount;
     }
 
     let singleordr = await ordersApi.createOrder({
       idempotencyKey: idempKey,
       locationId: process.env.SQUARE_LOCATION_ID,
       order: orderBody,
-    })
+    });
 
     const invoiceBody = {
       idempotencyKey: idempKey,
@@ -107,19 +105,19 @@ router.post('/', async (req, res, next) => {
           },
         ],
       },
-    }
+    };
 
-    const { result } = await invoicesApi.createInvoice(invoiceBody)
+    const { result } = await invoicesApi.createInvoice(invoiceBody);
 
-    res.send({ id: result.invoice.id, status: 'Invoice created successfully' })
+    res.send({ id: result.invoice.id, status: 'Invoice created successfully' });
   } catch (error) {
     if (error instanceof ApiError) {
-      console.log('Errors: ', error.errors)
+      console.log('Errors: ', error.errors);
     } else {
-      console.log('Unexpected Error: ', error)
+      console.log('Unexpected Error: ', error);
     }
-    next(error)
+    next(error);
   }
-})
+});
 
-module.exports = router
+module.exports = router;

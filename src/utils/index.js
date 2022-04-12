@@ -19,8 +19,8 @@ export const getStatusArray = () => {
     'invoiced',
     'paid',
     'postponed',
-  ]
-}
+  ];
+};
 
 export const getTakeActionStatusArray = () => {
   return [
@@ -29,51 +29,36 @@ export const getTakeActionStatusArray = () => {
     'followed up - text',
     'followed up - call',
     'followed up - email',
-  ]
-}
+  ];
+};
 
 export const getWorkZoneStatusArray = () => {
-  return [
-    'in process',
-    'pending work approvals',
-    'waiting on detailing',
-    'in repair',
-  ]
-}
+  return ['in process', 'pending work approvals', 'waiting on detailing', 'in repair'];
+};
 
 export const getInvoicesStatusArray = () => {
-  return ['returned', 'invoiced']
-}
+  return ['returned', 'invoiced'];
+};
 
 export const getQuotesStatusArray = () => {
-  return [
-    'quote inquired by customer',
-    'quote sent to a shop',
-    'quote sent to a customer',
-  ]
-}
+  return ['quote inquired by customer', 'quote sent to a shop', 'quote sent to a customer'];
+};
 
 export const getDetailingStatusArray = () => {
-  return ['waiting on detailing', 'in process', 'confirmed']
-}
+  return ['waiting on detailing', 'in process', 'confirmed'];
+};
 
 export const getPotentialLeadsStatusArray = () => {
-  return ['postponed']
-}
+  return ['postponed'];
+};
 
 export const getCompletedStatusArray = () => {
-  return ['cancelled', 'postponed', 'invoiced', 'returned', 'paid']
-}
+  return ['cancelled', 'postponed', 'invoiced', 'returned', 'paid'];
+};
 
 export const getConfirmedTripsArray = () => {
-  return [
-    'confirmed',
-    'ready to be returned',
-    'booked new',
-    'in process',
-    'in repair',
-  ]
-}
+  return ['confirmed', 'ready to be returned', 'booked new', 'in process', 'in repair'];
+};
 
 export const tagColorsArray = () => {
   return [
@@ -403,5 +388,5 @@ export const tagColorsArray = () => {
     '#C74375',
     '#E48400',
     '#87421F',
-  ]
-}
+  ];
+};

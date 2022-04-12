@@ -1,30 +1,30 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { updateDealerThunk } from '../../store/dealers.js'
-import { Modal, Button, Form, Input } from 'antd'
-import { EditFilled } from '@ant-design/icons'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateDealerThunk } from '../../store/dealers.js';
+import { Modal, Button, Form, Input } from 'antd';
+import { EditFilled } from '@ant-design/icons';
 
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
-}
+};
 
-const UpdateDealer = (props) => {
-  const [form] = Form.useForm()
-  const [show, setShow] = useState(false)
-  const dispatch = useDispatch()
+const UpdateDealer = ({ dealer }) => {
+  const [form] = Form.useForm();
+  const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
 
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const onFinish = (values) => {
-    dispatch(updateDealerThunk(props.dealer.id, values))
-    handleClose()
-  }
+    dispatch(updateDealerThunk(dealer.id, values));
+    handleClose();
+  };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo)
-  }
+    console.log('Failed:', errorInfo);
+  };
 
   return (
     <div>
@@ -33,12 +33,7 @@ const UpdateDealer = (props) => {
         onClick={() => handleShow(true)}
         icon={<EditFilled style={{ color: '#7CFC00' }} />}
       ></Button>
-      <Modal
-        title={`${props.dealer.name}`}
-        visible={show}
-        footer={null}
-        closable={false}
-      >
+      <Modal title={`${dealer.name}`} visible={show} footer={null} closable={false}>
         <Form
           {...layout}
           form={form}
@@ -51,7 +46,7 @@ const UpdateDealer = (props) => {
             <Form.Item
               name="name"
               noStyle
-              initialValue={`${props.dealer.name}`}
+              initialValue={`${dealer.name}`}
               rules={[{ required: true }]}
             >
               <Input />
@@ -61,45 +56,29 @@ const UpdateDealer = (props) => {
             <Form.Item
               name="email"
               noStyle
-              initialValue={props.dealer.email}
+              initialValue={dealer.email}
               rules={[{ required: true }]}
             >
               <Input />
             </Form.Item>
           </Form.Item>
           <Form.Item label="Phone number">
-            <Form.Item
-              name="phoneNumber"
-              noStyle
-              initialValue={props.dealer.phoneNumber}
-            >
+            <Form.Item name="phoneNumber" noStyle initialValue={dealer.phoneNumber}>
               <Input />
             </Form.Item>
           </Form.Item>
           <Form.Item label="Specialty">
-            <Form.Item
-              name="specialty"
-              noStyle
-              initialValue={props.dealer.specialty || ''}
-            >
+            <Form.Item name="specialty" noStyle initialValue={dealer.specialty || ''}>
               <Input />
             </Form.Item>
           </Form.Item>
           <Form.Item label="Address">
-            <Form.Item
-              name="location"
-              noStyle
-              initialValue={props.dealer.location || ''}
-            >
+            <Form.Item name="location" noStyle initialValue={dealer.location || ''}>
               <Input />
             </Form.Item>
           </Form.Item>
           <Form.Item label="Image URL">
-            <Form.Item
-              name="imageUrl"
-              noStyle
-              initialValue={props.dealer.imageUrl || ''}
-            >
+            <Form.Item name="imageUrl" noStyle initialValue={dealer.imageUrl || ''}>
               <Input />
             </Form.Item>
           </Form.Item>
@@ -114,7 +93,7 @@ const UpdateDealer = (props) => {
         </Form>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default UpdateDealer
+export default UpdateDealer;

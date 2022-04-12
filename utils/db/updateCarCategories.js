@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs');
 
 // this script will be used once a year to update the database classifications
 // for extra large cars
@@ -40,23 +40,23 @@ const run = (file) => {
     'X7',
     'XC90',
     'Atlas',
-  ]
+  ];
 
   try {
     const newFile = file.map((singleRow) => {
       if (XLcarsArray.includes(singleRow.Model)) {
-        singleRow.Category = 'XL'
+        singleRow.Category = 'XL';
       }
-      return singleRow
-    })
+      return singleRow;
+    });
 
-    fs.writeFileSync('carMakesListWithXL.json', JSON.stringify(newFile))
+    fs.writeFileSync('carMakesListWithXL.json', JSON.stringify(newFile));
   } catch (error) {
-    console.log('problem', error)
+    console.log('problem', error);
   }
-}
+};
 
-const list = fs.readFileSync('carMakesList.json')
-run(JSON.parse(list))
+const list = fs.readFileSync('carMakesList.json');
+run(JSON.parse(list));
 
-module.exports = run
+module.exports = run;

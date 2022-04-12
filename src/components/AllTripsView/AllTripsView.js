@@ -1,24 +1,22 @@
-import React, { useEffect } from 'react'
-import CollapseTrips from '../HomePageView/CollapseTrips'
-import { useDispatch, useSelector } from 'react-redux'
-import { getConfirmedTripsArray } from '../util'
-import { getActiveOrdersThunk } from '../../store/activeOrders'
+import React, { useEffect } from 'react';
+import CollapseTrips from '../HomePageView/CollapseTrips';
+import { useDispatch, useSelector } from 'react-redux';
+import { getConfirmedTripsArray } from '../../utils';
+import { getActiveOrdersThunk } from '../../store/activeOrders';
 
-const confirmedTripsStatusArr = getConfirmedTripsArray()
+const confirmedTripsStatusArr = getConfirmedTripsArray();
 
 const AllTripsView = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getActiveOrdersThunk())
-  }, [])
+    dispatch(getActiveOrdersThunk());
+  }, []);
 
-  const orders = useSelector((state) => state.activeOrders)
+  const orders = useSelector((state) => state.activeOrders);
 
-  const confirmedTrips = orders.filter((el) =>
-    confirmedTripsStatusArr.includes(el.status)
-  )
+  const confirmedTrips = orders.filter((el) => confirmedTripsStatusArr.includes(el.status));
 
-  return <CollapseTrips orders={confirmedTrips} />
-}
+  return <CollapseTrips orders={confirmedTrips} />;
+};
 
-export default AllTripsView
+export default AllTripsView;

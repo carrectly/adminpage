@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { getEmailsThunk, clearEmailsThunk } from '../../store/emails'
-import SingleEmail from './SingleEmail.js'
-import ErrorHandler from './ErrorHandler'
-import { useDispatch, useSelector } from 'react-redux'
-import EmailSummaryCard from '../Email/EmailSummaryCard'
-import './styles.scss'
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getEmailsThunk, clearEmailsThunk } from '../../store/emails';
+import SingleEmail from './SingleEmail.js';
+import ErrorHandler from './ErrorHandler';
+import { useDispatch, useSelector } from 'react-redux';
+import EmailSummaryCard from '../Email/EmailSummaryCard';
+import './styles.scss';
 
 const SingleOrderEmails = () => {
-  const params = useParams()
-  const id = params.orderid
-  const dispatch = useDispatch()
+  const { orderid: id } = useParams();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getEmailsThunk(id))
+    dispatch(getEmailsThunk(id));
     return function cleanup() {
-      dispatch(clearEmailsThunk())
-    }
-  }, [])
+      dispatch(clearEmailsThunk());
+    };
+  }, []);
 
-  const emails = useSelector((state) => state.emails)
+  const emails = useSelector((state) => state.emails);
 
   return (
     <div>
@@ -49,7 +49,7 @@ const SingleOrderEmails = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SingleOrderEmails
+export default SingleOrderEmails;
