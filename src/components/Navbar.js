@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => !!state.user.id);
+  const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const userRole = useSelector((state) => state.user.role);
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -85,7 +85,7 @@ const Navbar = () => {
         </Link>
       )}
 
-      {isLoggedIn ? (
+      {isAuthorized ? (
         <a className="link" onClick={handleLogout}>
           <LogoutOutlined className="icon" />
           Log out
