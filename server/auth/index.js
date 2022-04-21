@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../db/models/user');
+const passport = require('passport');
 module.exports = router;
 
 router.post('/login', async (req, res, next) => {
@@ -17,6 +18,9 @@ router.post('/login', async (req, res, next) => {
         user,
         guestId,
       };
+      passport.serializeUser((user, done) => {
+        done(null, user.id);
+      });
       req.login(user, (err) => (err ? next(err) : res.json(data)));
     }
   } catch (err) {
@@ -30,6 +34,7 @@ router.post('/signup', async (req, res, next) => {
     const data = {
       user,
     };
+    passport.serializeUser((user, done) => done(null, user.id));
     req.login(user, (err) => (err ? next(err) : res.json(data)));
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {

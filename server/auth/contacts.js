@@ -27,8 +27,7 @@ router.post('/', async (req, res, next) => {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 async function listConnectionNames() {
-  //const service = await google.people({version: 'v1', auth})
-  const response = await people.people.connections.list({
+  const response = await people().connections.list({
     resourceName: 'people/me',
     pageSize: 2000,
     sortOrder: 'FIRST_NAME_ASCENDING',
@@ -43,10 +42,7 @@ async function listConnectionNames() {
 }
 
 async function addNewContact(obj) {
-  //console.log('INSIDE CONTACTS API', obj)
-  //const service = await google.people({version: 'v1', auth})
-
-  const response = await people.people.createContact({
+  const response = await people().createContact({
     requestBody: {
       emailAddresses: [{ value: obj.email }],
       phoneNumbers: [
