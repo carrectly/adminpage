@@ -8,9 +8,21 @@ const passport = require('passport');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./db');
 const sessionStore = new SequelizeStore({ db });
-const PORT = process.env.PORT || 1337;
+const PORT = process.env.PORT || 443;
 const app = express();
 const socketio = require('socket.io');
+const https = require('https');
+const fs = require('fs');
+
+const keyPass = process.env.HTTPS_KEY;
+const certificate = process.env.HTTPS_CERTIFICATE;
+
+const key = fs.readFileSync(require.resolve(keyPass), {
+  encoding: 'utf8',
+});
+const cert = fs.readFileSync(require.resolve(certificate), {
+  encoding: 'utf8',
+});
 
 module.exports = app;
 
@@ -86,7 +98,10 @@ const createApp = () => {
 
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
+
+  const server = https
+    .createServer({ key, cert }, app)
+    .listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
 
   const io = socketio(server);
   require('./socket')(io);
