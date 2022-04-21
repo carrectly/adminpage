@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 443;
 const app = express();
 const socketio = require('socket.io');
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
 
 const keyPass = process.env.HTTPS_KEY;
@@ -99,9 +100,14 @@ const createApp = () => {
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
 
-  const server = https
-    .createServer({ key, cert }, app)
-    .listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
+  let server;
+  if (process.env.NODE_ENV === 'production') {
+    server = http.createServer().listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
+  } else {
+    server = https
+      .createServer({ key, cert }, app)
+      .listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
+  }
 
   const io = socketio(server);
   require('./socket')(io);
