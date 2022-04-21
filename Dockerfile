@@ -11,7 +11,6 @@ COPY . /app
 ENV GOOGLE_CLIENT_ID=./secrets.js
 ENV GOOGLE_CLIENT_SECRET=./secrets.js
 ENV GOOGLE_CALLBACK=./secrets.js
-ENV GOOGLE_REFRESH_TOKEN=./secrets.js
 ENV DOMAIN=./secrets.js
 ENV travisApiToken=./secrets.js
 ENV squareApplicationId=./secrets.js
