@@ -8,16 +8,16 @@ COPY . /app
 
 
 
-ENV GOOGLE_CLIENT_ID=./secrets.js
-ENV GOOGLE_CLIENT_SECRET=./secrets.js
-ENV GOOGLE_CALLBACK=./secrets.js
-ENV GOOGLE_REFRESH_TOKEN=./secrets.js
-ENV DOMAIN=./secrets.js
-ENV travisApiToken=./secrets.js
-ENV squareApplicationId=./secrets.js
-ENV SQUARE_TOKEN=./secrets.js
-ENV squareBasePath=./secrets.js
-ENV SQUARE_LOCATION_ID=./secrets.js
+ARG GOOGLE_CLIENT_ID=./secrets.js
+ARG GOOGLE_CLIENT_SECRET=./secrets.js
+ARG GOOGLE_CALLBACK=./secrets.js
+ARG GOOGLE_REFRESH_TOKEN=./secrets.js
+ARG DOMAIN=./secrets.js
+ARG travisApiToken=./secrets.js
+ARG squareApplicationId=./secrets.js
+ARG SQUARE_TOKEN=./secrets.js
+ARG squareBasePath=./secrets.js
+ARG SQUARE_LOCATION_ID=./secrets.js
 
 RUN npm i 
 
