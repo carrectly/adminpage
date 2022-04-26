@@ -51,6 +51,7 @@ pipeline {
                     credentialsId: env.CREDENTIALS_ID,
                     verifyDeployments: true])
                     }
+                sh "gcloud container clusters get-credentials adminpage-chicago-k8s --zone us-east4-b --project adminpage-chicago"
                 }
             }
         }
