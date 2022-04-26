@@ -34,14 +34,9 @@ pipeline {
                  stage('Push image to registry') {
                  steps {
                      script{ 
-                         when {
-                         expression {
-                            docker.build.result == null || currentBuild.result == 'SUCCESS' 
-                            }
-                        }
                           docker.withRegistry( '', registryCredential ) {
                           dockerImage.push()
-                          }
+                            }
                         }
                     }
                 }
