@@ -1,16 +1,20 @@
 
 pipeline {
          agent any
-
          environment{
-             dockerImage =''
+             PROJECT_ID = 'adminpage-chicago'
+             CLUSTER_NAME = 'adminpage-chicago-k8s'
+             LOCATION = 'us-east4-b'
+             CREDENTIALS_ID = 'adminpage-chicago'
              registry ='pavlohortovenko20/carrectlyweb'
              registryCredential ='dockerhub_cred'
-         }
+             gitgetvers ='git rev-parse --short  HEAD'
+             kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
+            }
          stages {
                  stage('Checout') {
                  steps {
-                     checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/carrectly/adminpage.git']]])
+                     checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/carrectly/adminpage.git']]])
                     }
                  } 
                  stage('Remove older images') {
@@ -20,7 +24,7 @@ pipeline {
                             }
                         }
                     }
-                 stage('Build docker image') {
+                 stage('Build') {
                  steps {
                      script {
                         dockerImage=docker.build registry
@@ -29,20 +33,29 @@ pipeline {
                  }
                  stage('Push image to registry') {
                  steps {
-                     script{
+                     script{ 
+                         when {
+                         expression {
+                            currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+                            }
+                        }
                           docker.withRegistry( '', registryCredential ) {
                           dockerImage.push()
                           }
                         }
                     }
                 }
-                stage ('Update image by k8s cluster') {
-                steps { 
-                    script {
-                          sh ''
-                        }
+                stage('Deploy to GKE') {
+                steps{
+                    step([
+                    $class: 'KubernetesEngineBuilder',
+                    projectId: env.PROJECT_ID,
+                    clusterName: env.CLUSTER_NAME,
+                    location: env.LOCATION,
+                    manifestPattern: 'adminpage-deploy.yaml',
+                    credentialsId: env.CREDENTIALS_ID,
+                    verifyDeployments: true])
                     }
                 }
             }
         }
-    
