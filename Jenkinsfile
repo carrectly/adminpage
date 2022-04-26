@@ -36,7 +36,7 @@ pipeline {
                      script{ 
                          when {
                          expression {
-                            currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+                            docker.build.result == null || currentBuild.result == 'SUCCESS' 
                             }
                         }
                           docker.withRegistry( '', registryCredential ) {
