@@ -6,7 +6,7 @@ pipeline {
              CLUSTER_NAME = 'adminpage-chicago-k8s'
              LOCATION = 'us-east4-b'
              CREDENTIALS_ID = 'adminpage-chicago'
-             registry ='pavlohortovenko20/carrectlyweb'
+             registry ='pavlohortovenko20/adminpage'
              registryCredential ='dockerhub_cred'
              gitgetvers ='git rev-parse --short  HEAD'
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
