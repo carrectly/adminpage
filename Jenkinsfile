@@ -42,7 +42,7 @@ pipeline {
                 }
                 stage('Deploy to GKE') {
                 steps{
-                    step([
+                   /* step([
                     $class: 'KubernetesEngineBuilder',
                     projectId: env.PROJECT_ID,
                     clusterName: env.CLUSTER_NAME,
@@ -50,7 +50,7 @@ pipeline {
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
                     verifyDeployments: true])
-                    }
+                    }*/
                       sh 'gcloud container clusters get-credentials adminpage-chicago-k8s --zone us-east4-b --project adminpage-chicago'
                 }
             }
