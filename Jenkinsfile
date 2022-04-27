@@ -51,7 +51,9 @@ pipeline {
                     credentialsId: env.CREDENTIALS_ID,
                     verifyDeployments: true])
                     } 
-                    sh " kubectl apply -f ./adminpage-deploy.yaml "
+                    step(
+                            sh " kubectl apply -f ./adminpage-deploy.yaml "
+                    )
                 }
             }
         }
