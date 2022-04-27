@@ -40,8 +40,8 @@ pipeline {
                         }
                     }
                 }
-                stage('Deploy to GKE') {
-                steps{
+                 stage('Deploy to GKE') {
+                 steps{
                     step([
                     $class: 'KubernetesEngineBuilder',
                     projectId: env.PROJECT_ID,
