@@ -51,7 +51,9 @@ pipeline {
                     credentialsId: env.CREDENTIALS_ID,
                     verifyDeployments: true])
                     } 
-                sh 'kubectl get pods'
+                    script {
+                        sh 'kubectl get pods'
+                    }
                 }
             }
         }
