@@ -42,7 +42,7 @@ pipeline {
                 }
                  stage('Deploy to GKE') {
                  steps {
-                    sh "adminpage-deploy.yaml"
+                    sh "kubectl get pods"
                     step([
                     $class: 'KubernetesEngineBuilder',
                     projectId: env.PROJECT_ID,
