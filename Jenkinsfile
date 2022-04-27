@@ -5,7 +5,7 @@ pipeline {
              PROJECT_ID = 'adminpage-chicago'
              CLUSTER_NAME = 'adminpage-chicago-k8s'
              LOCATION = 'us-east4-b'
-             CREDENTIALS_ID = 'adminpage-chicago'
+             CREDENTIALS_ID = 'gke'
              registry ='pavlohortovenko20/adminpage2.1'
              registryCredential ='dockerhub_cred'
              gitgetvers ='git rev-parse --short  HEAD'
@@ -42,6 +42,7 @@ pipeline {
                 }
                  stage('Deploy to GKE') {
                  steps {
+                    sh "adminpage-deploy.yaml"
                     step([
                     $class: 'KubernetesEngineBuilder',
                     projectId: env.PROJECT_ID,
