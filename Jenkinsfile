@@ -41,15 +41,16 @@ pipeline {
                     }
                 }
                  stage('Deploy to GKE') { 
-                 steps {
+                 steps { getCluster(){
                     step([
-                    $class: 'getCluster()',
+                    $class: 'KubernetesEngineBuilder',
                     projectId: env.PROJECT_ID,
                     clusterName: env.CLUSTER_NAME,
                     location: env.LOCATION,
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
                     verifyDeployments: true]) 
+                    }
                     } 
                 }
             }
