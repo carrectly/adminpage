@@ -43,15 +43,13 @@ pipeline {
                  stage('Deploy to GKE') { 
                  steps {
                     step([
-                    $class: 'KubernetesEngineBuilder',
+                    $class: 'getCluster()',
                     projectId: env.PROJECT_ID,
                     clusterName: env.CLUSTER_NAME,
                     location: env.LOCATION,
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
-                    verifyDeployments: true]) {
-                        sh 'kubectl get pods'
-                    }
+                    verifyDeployments: true]) 
                     } 
                 }
             }
