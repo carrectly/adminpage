@@ -50,8 +50,8 @@ pipeline {
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
                     verifyDeployments: true]) {
-                        sh 'kubectl apply -f adminpage-deploy.yaml'
-                        }
+                        sh 'kubectl get pods'
+                    }
                     } 
                 }
             }
