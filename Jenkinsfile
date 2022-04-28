@@ -42,7 +42,6 @@ pipeline {
                 }
                  stage('Deploy to GKE') { 
                  steps {
-                    sh "kubectl apply '${manifestPattern}'"
                     step([
                     $class: 'KubernetesEngineBuilder',
                     projectId: env.PROJECT_ID,
