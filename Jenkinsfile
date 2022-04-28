@@ -51,9 +51,6 @@ pipeline {
                     credentialsId: env.CREDENTIALS_ID,
                     verifyDeployments: true]) 
                     } 
-                    script{
-                        getClusterName()
-                    }
                 }
             }
         }
