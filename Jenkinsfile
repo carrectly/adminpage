@@ -42,7 +42,7 @@ pipeline {
                 }
                  stage('Deploy to GKE') { 
                  steps {
-                     sh 'adminpage-deploy.yaml | kubectl apply -f '
+                     sh 'adminpage-deploy.yaml | kubectl apply  '
                     step([
                     $class: 'KubernetesEngineBuilder',
                     projectId: env.PROJECT_ID,
