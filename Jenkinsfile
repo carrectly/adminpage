@@ -49,9 +49,7 @@ pipeline {
                     location: env.LOCATION,
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
-                    verifyDeployments: true]) {
-                 manifestPattern(); 
-                        }
+                    verifyDeployments: true])
                     } 
                 }
                  stage('List pods') {
