@@ -52,12 +52,12 @@ pipeline {
                     verifyDeployments: true]) 
                     } 
                 }
-                stage('List pods') {
-                withKubeConfig([credentialsId: 'env.CREDENTIALS_ID',
+                 stage('List pods') {
+                 withKubeConfig([credentialsId: 'env.CREDENTIALS_ID',
                     clusterName: 'env.CLUSTER_NAME',
                     namespace: 'default',
                     ]) {
-                sh 'kubectl get pods'
+                 sh 'kubectl get pods'
             }
         }
     }
