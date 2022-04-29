@@ -58,7 +58,7 @@ pipeline {
                     namespace: 'default',
                     ]) {
                 sh 'kubectl get pods'
-                     }
-                 }
             }
         }
+    }
+}
