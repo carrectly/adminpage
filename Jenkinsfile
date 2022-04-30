@@ -40,7 +40,7 @@ pipeline {
                         }
                     }
                 }
-                 stage('Deploy to GKE') { 
+                /* stage('Deploy to GKE') { 
                  steps { 
                     step([
                     $class: 'KubernetesEngineBuilder',
@@ -51,7 +51,7 @@ pipeline {
                     credentialsId: env.CREDENTIALS_ID,
                     verifyDeployments: true])
                     } 
-                }
+                }*/
                 stage('Deploy via manifestfile to GKE') {
                 steps{
                     script{
