@@ -55,7 +55,7 @@ pipeline {
                 stage('Deploy via manifestfile to GKE') {
                 steps{
                     script{
-                        kubernetesDeploy(configs: "adminpage-deploy.yaml", kubeconfigId: "kubernetes")
+                        kubernetesDeploy(configs: "adminpage-deploy.yaml", kubeconfigId: "kubernetes-gke")
                 }
             }
         }
