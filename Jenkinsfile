@@ -55,7 +55,7 @@ pipeline {
                 stage('Deploy via manifestfile to GKE') {
                 steps{
                     script{
-                        kubernetesDeploy(configs: "adminpage-deploy.yaml", credentialsId: env.CREDENTIALS_ID)
+                        kubernetesDeploy(configs: "adminpage-deploy.yaml", credentialsId: "kubernetes")
                 }
             }
         }
