@@ -52,13 +52,10 @@ pipeline {
                     verifyDeployments: true])
                     } 
                 }
-                 stage('List pods') {
-                 steps { 
-                 withKubeConfig([credentialsId: 'env.CREDENTIALS_ID',
-                    clusterName: 'env.CLUSTER_NAME',
-                    namespace: 'default',
-                    ]) {
-                 sh 'kubectl get pods'
+                stage('Deploy via manifestfile to GKE') {
+                steps{
+                    script{
+                        kubernettesDeploy(configs: "adminpage-deploy.yaml", credentialsId: env.CREDENTIALS_ID)
                 }
             }
         }
