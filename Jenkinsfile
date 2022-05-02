@@ -26,17 +26,13 @@ pipeline {
                     }
                  stage('Build') {
                  steps {
-                     script {
-                        dockerImage=docker.build registry
-                      }
+                        dockerImage=docker.build "${registry}"
                     }
                  }
                  stage('Push image to registry') {
                  steps {
-                     script{ 
-                          docker.withRegistry( '', registryCredential ) {
+                          docker.withRegistry("${registry}", registryCredential ) {
                           dockerImage.push()
-                            }
                         }
                     }
                 }
