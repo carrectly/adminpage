@@ -27,7 +27,7 @@ pipeline {
                  stage('Build') {
                  steps {
                      script {
-                        dockerImage=docker.build registry args:'env.gitgetvers'
+                        dockerImage=docker.build registry args:('env.gitgetvers')
                       }
                     }
                  }
