@@ -35,7 +35,7 @@ pipeline {
                  steps {
                      script{ 
                           docker.withRegistry( '', registryCredential ) {
-                          dockerImage.push(env.gitgetvers)
+                          dockerImage.push()
                             }
                         }
                     }
