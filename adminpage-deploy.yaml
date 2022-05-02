@@ -7,19 +7,20 @@ spec:
   selector:
    matchLabels:
     app: adminapge
-  replicas: 2
+  replicas: 3
+  strategy: 
+     type: RollingUpdate
+     rollingUpdate:
+       maxSurge: 25%
+       maxUnavailable: 25%
   template:
     metadata:
       labels:
         app: adminapge
     spec:
-      hostAliases:
-      - ip: 10.124.9.235
-        hostnames:
-        - "adminpage.host"
       containers:
         - name: adminapge-container
-          image: pavlohortovenko20/adminpage2.1:latest 
+          image: pavlohortovenko20/adminpage2.1:latest
           env:
            - name: POSTGRES_DB
              valueFrom: 
