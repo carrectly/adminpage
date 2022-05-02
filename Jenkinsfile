@@ -35,7 +35,7 @@ pipeline {
                  steps {
                      script{ 
                           docker.withRegistry( '', registryCredential ) {
-                          dockerImage.push()
+                          dockerImage.push(env.gitgetvers)
                             }
                         }
                     }
@@ -50,13 +50,7 @@ pipeline {
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
                     verifyDeployments: true])
-                    } 
-                }
-                /*stage('Deploy via manifestfile to GKE') {
-                steps{
-                    script{
-                        kubernetesDeploy(configs: "adminpage-deploy.yaml", kubeconfigId: "kubernetes-gke")
-                }
-            }*/
+                } 
+            }
         }
     }
