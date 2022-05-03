@@ -49,6 +49,7 @@ pipeline {
                     location: env.LOCATION,
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
+                    arg: '${gitgetvers}'
                     verifyDeployments: true])
                 } 
             }
