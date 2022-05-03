@@ -34,8 +34,8 @@ pipeline {
                  stage('Push image to registry') {
                  steps {
                      script{ 
-                          docker.withRegistry( '', registryCredential ) {
-                          dockerImage.push()
+                          "docker.withRegistry( '', registryCredential ) {
+                          dockerImage.push() ${gitgetvers}"
                             }
                         }
                     }
