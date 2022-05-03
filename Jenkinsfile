@@ -28,6 +28,7 @@ pipeline {
                  steps {
                      script {
                         "dockerImage=docker.build registry ${gitgetvers}"
+                        "echo docker images "
                       }
                     }
                  }
@@ -35,7 +36,7 @@ pipeline {
                  steps {
                      script{ 
                           docker.withRegistry( '', registryCredential ) {
-                          dockerImage.push(env.gitgetvers) 
+                          dockerImage.push() 
                             }
                         }
                     }
