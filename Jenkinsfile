@@ -28,10 +28,8 @@ pipeline {
                  stage('Build') {
                  steps {
                      script {
-                    withDockerContainer(args: '$AAA_SECRET_TEXT') {
                         dockerImage=docker.build  registry 
                         }
-                      }
                     }
                  }
                  stage('Push image to registry') {
