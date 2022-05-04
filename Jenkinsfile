@@ -28,7 +28,6 @@ pipeline {
                  stage('Build') {
                  steps {
                      script {
-                       echo env.GOOGLE_CLIENT_ID
                         dockerImage=docker.build  registry 
                         }
                     }
