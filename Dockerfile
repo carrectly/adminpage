@@ -15,7 +15,6 @@ ENV travisApiToken=env.travisApiToken
 ENV squareApplicationId=env.squareApplicationId
 ENV SQUARE_TOKEN=env.SQUARE_TOKEN
 ENV squareBasePath=env.squareBasePath
-ENV SQUARE_LOCATION_ID=env.SQUARE_LOCATION_ID
 
 
 
