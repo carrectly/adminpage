@@ -27,10 +27,9 @@ pipeline {
                     }
                  stage('Build') {
                  steps {
-                     withCredentials([string(credentialsId: 'secrets-text', variable: ' AAA_SECRET_TEXT' )]) {
                      script {
-                        dockerImage=docker.build  registry
-                            }
+                         withENV(["$AAA_SECRET_TEXT"=secrt.txt])
+                        "dockerImage=docker.build  registry --env ${env.AAA_SECRET_TEXT}"
                         }
                     }
                  }
