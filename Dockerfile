@@ -6,7 +6,7 @@ COPY package*.json /app
 
 COPY . /app
 
-ENV PATH ./.env.AAA_SECRET_TEXT:/app/.env:$PATH
+ENV .env=.env.process.AAA_SECRET_TEXT
 
 RUN npm i 
 
