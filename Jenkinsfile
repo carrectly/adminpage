@@ -28,8 +28,8 @@ pipeline {
                  stage('Build') {
                  steps {
                      script {
-                        echo "$env.process.GOOGLE_CLIENT_ID"
-                        echo "$env.process.GOOGLE_CLIENT_ID"
+                        echo env.GOOGLE_CLIENT_ID
+                        echo env.process.GOOGLE_CLIENT_SECRET
                         dockerImage=docker.build  registry 
                         }
                     }
