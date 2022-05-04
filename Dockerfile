@@ -8,16 +8,17 @@ COPY . /app
 
 
 
-ENV GOOGLE_CLIENT_ID=./secrets.js
-ENV GOOGLE_CLIENT_SECRET=./secrets.js
-ENV GOOGLE_CALLBACK=./secrets.js
-ENV GOOGLE_REFRESH_TOKEN=./secrets.js
-ENV DOMAIN=./secrets.js
-ENV travisApiToken=./secrets.js
-ENV squareApplicationId=./secrets.js
-ENV SQUARE_TOKEN=./secrets.js
-ENV squareBasePath=./secrets.js
-ENV SQUARE_LOCATION_ID=./secrets.js
+
+ENV GOOGLE_CLIENT_ID="$GOOGLE_CLIENT_ID"
+ENV GOOGLE_CLIENT_SECRET="$GOOGLE_CLIENT_SECRET"
+ENV GOOGLE_CALLBACK="$GOOGLE_CALLBACK"
+ENV GOOGLE_REFRESH_TOKEN="$GOOGLE_REFRESH_TOKEN"
+ENV DOMAIN="$DOMAIN"
+ENV travisApiToken="$travisApiToken"
+ENV squareApplicationId="$squareApplicationId"
+ENV SQUARE_TOKEN="$SQUARE_TOKEN"
+ENV squareBasePath="$squareBasePath"
+ENV SQUARE_LOCATION_ID="$SQUARE_LOCATION_ID"
 
 RUN npm i 
 
