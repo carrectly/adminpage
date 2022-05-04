@@ -6,17 +6,18 @@ COPY package*.json /app
 
 COPY . /app
 
-ENV GOOGLE_CLIENT_ID="${.env.process.AAA_SECRET_TEXT}"
-ENV GOOGLE_CLIENT_SECRET="${.env.process.AAA_SECRET_TEXT}"
-ENV GOOGLE_CALLBACK="${.env.process.AAA_SECRET_TEXT}"
-ENV GOOGLE_REFRESH_TOKEN="${.env.process.AAA_SECRET_TEXT}"
-ENV DOMAIN="${.env.process.AAA_SECRET_TEXT}"
-ENV travisApiToken="${.env.process.AAA_SECRET_TEXT}"
-ENV squareApplicationId="${.env.process.AAA_SECRET_TEXT}"
-ENV SQUARE_TOKEN="${.env.process.AAA_SECRET_TEXT}"
-ENV squareBasePath="${.env.process.AAA_SECRET_TEXT}"
-ENV SQUARE_LOCATION_ID="${.env.process.AAA_SECRET_TEXT}"
-ENV Kubernetes_Cluster_DB="${.env.process.AAA_SECRET_TEXT}"
+
+ENV GOOGLE_CLIENT_ID="${.env.AAA_SECRET_TEXT.$GOOGLE_CLIENT_ID}"
+ENV GOOGLE_CLIENT_SECRET="${.env.AAA_SECRET_TEXT.$GOOGLE_CLIENT_SECRET}"
+ENV GOOGLE_CALLBACK="${.env.AAA_SECRET_TEXT.$GOOGLE_CALLBACK}"
+ENV GOOGLE_REFRESH_TOKEN="${.env.AAA_SECRET_TEXT.$GOOGLE_REFRESH_TOKEN}"
+ENV DOMAIN="${.env.AAA_SECRET_TEXT.$DOMAIN}"
+ENV travisApiToken="${.env.AAA_SECRET_TEXT.$travisApiToken}"
+ENV squareApplicationId="${.env.AAA_SECRET_TEXT.$squareApplicationId}"
+ENV SQUARE_TOKEN="${.env.AAA_SECRET_TEXT.$SQUARE_TOKEN}"
+ENV squareBasePath="${.env.AAA_SECRET_TEXT.$squareBasePath}"
+ENV SQUARE_LOCATION_ID="${.env.AAA_SECRET_TEXT.$SQUARE_LOCATION_ID}"
+ENV Kubernetes_Cluster_DB="${.env.AAA_SECRET_TEXT.$Kubernetes_Cluster_DB}"
 
 RUN npm i 
 
