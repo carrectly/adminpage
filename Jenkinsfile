@@ -28,7 +28,7 @@ pipeline {
                  stage('Build') {
                  steps {
                      script {
-                    withDockerContainer(args: '$AAA_SECRET_TEXT', image: 'pavlohortovenko20/adminpage2.1') {
+                    withDockerContainer(args: '$AAA_SECRET_TEXT', image: 'pavlohortovenko20/adminpage2.1:latest') {
                         dockerImage=docker.build  registry 
                         }
                       }
