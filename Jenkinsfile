@@ -30,6 +30,7 @@ pipeline {
                      withCredentials([string(credentialsId: 'secrets-text', variable: ' AAA_SECRET_TEXT' )]) {
                      script {
                         dockerImage=docker.build  registry '$AAA_SECRET_TEXT'
+                            }
                         }
                     }
                  }
