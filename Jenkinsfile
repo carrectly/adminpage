@@ -10,6 +10,7 @@ pipeline {
              registryCredential ='dockerhub_cred'
              gitgetvers ='git rev-parse --short  HEAD'
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
+             AAA_SECRET_TEXT = credentials('secret-text')
             }
          stages {
                  stage('Checout') {
@@ -27,7 +28,9 @@ pipeline {
                  stage('Build') {
                  steps {
                      script {
-                        dockerImage=docker.build registry 
+                    withDockerContainer(args: '$AAA_SECRET_TEXT', image: 'pavlohortovenko20/adminpage2.1') {
+                        dockerImage=docker.build  registry 
+                        }
                       }
                     }
                  }
