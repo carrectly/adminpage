@@ -1,7 +1,5 @@
-const debug = require('debug')('zoho-api:oauth:token');
-
 /**
- * Model for tokens used by Oauth
+ * Model for tokens used by Zoho Oauth
  */
 class Token {
   constructor(data) {
@@ -28,16 +26,11 @@ class Token {
    * @returns {boolean}
    */
   expired() {
-    let issuedAt = this.data.issuedAt;
-    let ttl = this.data.expires_in;
-    let now = Math.floor(Date.now() / 1000);
+    const expiresInTime = new Date(this.data.expires_in);
+    const now = new Date();
+    const diffTime = Math.abs(now - expiresInTime - 5);
 
-    debug('Issed at: ' + issuedAt);
-    debug('ttl: ' + ttl);
-    debug('now: ' + now);
-    debug('Diff: ' + (now - issuedAt));
-
-    if (now - issuedAt >= ttl + 10) {
+    if (diffTime > 0) {
       return true;
     }
 

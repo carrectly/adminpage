@@ -1,9 +1,9 @@
-const Api = require('./zoho-api');
+const ZohoApi = require('./zoho-api');
 const Oauth = require('./oauth');
 const Token = require('./token');
 
 module.exports = {
-  Api,
+  ZohoApi,
   Oauth,
   Token,
 };

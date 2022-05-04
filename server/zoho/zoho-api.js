@@ -1,43 +1,17 @@
-const debug = require('debug')('zoho-api');
 const axios = require('axios');
-const _ = require('lodash');
+const { defaultsDeep, get } = require('lodash');
 const qs = require('qs');
 const Oauth = require('./oauth');
 
-/**
- * Simplify access to Zoho APIs
- *
- * A one-time only call to the 'setup' method is required using a grant token
- * which can be generated on the zoho developers section.
- * Create a file to execute only that function, which creates a tokens file to
- * hold the refresh token which never expires unless revoked.
- *
- * Example: setup.js
- *
- * const Zoho = require('zoho-api');
- * const api = new Zoho({
- *      tokenFile: '/absolute/path/to/file.json',
- *      setup: true
- * });
- *
- * api.setup('1000.xxxxxxx.....');
- *
- */
 class ZohoApi {
   constructor(options) {
-    this.options = _.defaultsDeep(options, this.defaultOptions());
-    this.accessToken = '';
-
-    this.oauth = new Oauth({ file: this.opt('tokenFile') });
+    this.options = defaultsDeep(options, this.defaultOptions());
+    this.oauth = new Oauth();
 
     this.axios = axios.create({
       baseURL: this.opt('apiBaseUrl'),
       headers: this.opt('headers'),
     });
-
-    if (!this.opt('setup')) {
-      this.checkSetup();
-    }
   }
 
   /**
@@ -48,10 +22,11 @@ class ZohoApi {
    */
   defaultOptions(options) {
     let defaults = {
-      apiBaseUrl: 'https://projectsapi.zoho.com/restapi/',
-      oauthUrl: 'https://accounts.zoho.com/oauth/v2/token',
-      clientId: '',
-      clientSecret: '',
+      apiBaseUrl: process.env.ZOHO_API_URL,
+      oauthUrl: process.env.ZOHO_BASE_URL + '/oauth/v2/token',
+      clientID: process.env.ZOHO_CLIENT_ID,
+      clientSecret: process.env.ZOHO_CLIENT_SECRET,
+      callbackURL: process.env.ZOHO_REDIRECT_URL,
       refreshToken: '',
       tokenFile: '',
       headers: {},
@@ -68,7 +43,7 @@ class ZohoApi {
    * @returns {mixed}
    */
   opt(path, defaultValue = null) {
-    return _.get(this.options, path, defaultValue);
+    return get(this.options, path, defaultValue);
   }
 
   /**
@@ -76,45 +51,25 @@ class ZohoApi {
    *
    * @throws
    */
-  checkSetup() {
-    if (this.oauth.validFile()) {
-      let token = this.oauth.getLatestToken();
-      if (!token) {
-        throw 'No tokens found in tokens file, run "setup" function with a grant token';
-      }
-    } else {
-      throw 'No tokens file available, run "setup" function with a grant token';
-    }
-  }
 
   /**
-   * Setup oauth requirements for api calls.
+   * First authorization and getting credentials from Zoho API
    *
-   * This method requires a grant token which is generated in the developers section
-   * inside Zoho. This token can be used only once.
-   *
-   * This function generates the tokens file and the refresh token (which doesn't expire)
-   * so as long as the tokens file exists, it shouldn't be called again.
-   *
-   * @param {string} grantToken One-time use token generated at Zoho
-   * @returns {Promise}
    */
-  async setup(grantToken) {
-    let params = {
-      grant_type: 'authorization_code',
-      client_id: this.opt('clientId'),
-      client_secret: this.opt('clientSecret'),
-      code: grantToken,
-    };
-
-    let url = this.opt('oauthUrl') + '?' + qs.stringify(params);
-
-    return this.api('POST', url, {}, { auth: false }).then((response) => {
-      this.oauth.saveFile(response.data);
-      this.options.accessToken = response.data.access_token;
-      debug('Tokens file created successfully!');
-      debug('Path: ' + this.oauth.file);
-    });
+  checkToken(req, res, next) {
+    //?
+    if (this.oauth.validToken(req)) {
+      let token = this.oauth.getLatestToken();
+      if (!token) {
+        console.error(
+          'No tokens found in database [tokens column], generate new token with grand_token',
+        );
+      }
+    } else {
+      console.error(
+        'No tokens available, generate auth link, authorize on Zoho and get new token with grand_token',
+      );
+    }
   }
 
   /**
@@ -127,8 +82,8 @@ class ZohoApi {
    * @returns
    */
   async api(method, path, params, config) {
-    if (_.get(config, 'auth', true) === true) {
-      await this.auth();
+    if (get(config, 'auth', true) === true) {
+      await this.auth(config.email);
     }
 
     let options = {
@@ -137,7 +92,7 @@ class ZohoApi {
       data: params,
     };
 
-    debug('Current access token: ' + this.opt('accessToken'));
+    console.log('Current access token: ' + this.opt('accessToken'));
     if (this.opt('accessToken')) {
       options.headers = {
         Authorization: 'Zoho-oauthtoken ' + this.opt('accessToken'),
@@ -146,18 +101,18 @@ class ZohoApi {
 
     return this.axios(options)
       .then((response) => {
-        debug('Got response!');
-        debug(response.data);
+        console.log('Got response!');
+        console.log(response.data);
 
         if (response.data.error) {
-          debug(response);
+          console.log(response);
           throw response;
         }
 
         return response;
       })
       .catch((error) => {
-        debug(error);
+        console.log(error);
         throw error;
       });
   }
@@ -168,50 +123,93 @@ class ZohoApi {
    *
    * @returns {Promise}
    */
-  async auth() {
+  async auth(email) {
+    let token = await this.oauth.getLatestToken(email);
+    let refresh_token = await this.oauth.refreshToken(email);
     return new Promise((resolve, reject) => {
-      let token = this.oauth.getLatestToken();
       if (!token) {
-        throw 'No tokens found in tokens file, run "setup" function with a grant token';
+        throw 'No tokens found in database [tokens column], generate new token with grand_token';
       } else if (token.expired()) {
         let params = {
           grant_type: 'refresh_token',
-          client_id: this.opt('clientId'),
+          client_id: this.opt('clientID'),
           client_secret: this.opt('clientSecret'),
-          refresh_token: this.oauth.refreshToken(),
+          refresh_token: refresh_token,
         };
 
         let url = this.opt('oauthUrl') + '?' + qs.stringify(params);
 
         this.api('POST', url, {}, { auth: false })
           .then((response) => {
-            this.oauth.saveFile(response.data);
+            this.oauth.saveTokens(response.data, email);
             this.options.accessToken = response.data.access_token;
             resolve();
           })
           .catch((error) => {
-            debug('Failed to refresh expired token');
+            console.log('Failed to refresh expired token');
             reject();
           });
       } else {
-        debug('auth successfull!');
-        debug(token);
+        console.log('auth successfull!');
+        console.log(token);
         this.options.accessToken = token.accessToken();
         resolve();
       }
     });
   }
 
-  /**
-   * Perform a COQL query against Zoho's API
-   *
-   * @param {string} query
-   * @returns {Promise}
-   */
-  async coql(query) {
-    return this.api('POST', '/coql', {
-      select_query: query,
-    });
+  async firstAuth(req, res) {
+    const email = req.params.email;
+    const validToken = await this.checkToken(email);
+    if (!validToken) {
+      const authUrl = this.oauth.getAuthorizationUrl('offline', true);
+      res.redirect(authUrl);
+    } else {
+      res.redirect('/account');
+    }
+  }
+
+  async getNewTokens(req, res) {
+    const code = req.query.code;
+    if (req.query.code == null) return res.status(400).send('Invalid Request');
+    await this.oauth
+      .getAccessTokenAndRefreshToken(code)
+      .then(async (tokens) => {
+        await this.oauth
+          .saveTokens(tokens, req.user.email)
+          .then(() => {
+            console.log(`Tokens was saved successfully`, tokens);
+            res.redirect('/account');
+          })
+          .catch((err) => {
+            console.log(`Error saving tokens: ${err}`);
+          });
+      })
+      .catch((error) => {
+        console.log(`Error while generating token`, error);
+      });
+  }
+
+  /* METHODS */
+
+  // /**
+  //  * EXAMPLE
+  //  * Perform a COQL query and tasks against Zoho's API
+  //  *
+  //  * @param {string} query
+  //  * @returns {Promise}
+  //  */
+  // async coql(query) {
+  //   return await this.api('POST', '/coql', {
+  //     select_query: query,
+  //   });
+  // }
+  async tasks(project_id, email) {
+    return await this.api('GET', `/portal/carrectly/projects/${project_id}/tasks/`, {}, { email });
+  }
+
+  async projects(email) {
+    return await this.api('GET', '/portal/carrectly/projects/', {}, { email });
   }
 }
 

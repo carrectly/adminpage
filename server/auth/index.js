@@ -18,9 +18,7 @@ router.post('/login', async (req, res, next) => {
         user,
         guestId,
       };
-      passport.serializeUser((user, done) => {
-        done(null, user.id);
-      });
+      passport.serializeUser((user, done) => done(null, user.id));
       req.login(user, (err) => (err ? next(err) : res.json(data)));
     }
   } catch (err) {
@@ -56,3 +54,4 @@ router.get('/me', (req, res) => {
 });
 
 router.use('/google', require('./google'));
+router.use('/zoho', require('./zoho'));
