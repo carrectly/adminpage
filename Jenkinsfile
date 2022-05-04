@@ -28,7 +28,15 @@ pipeline {
                  stage('Build') {
                  steps {
                      script {
-                       sh 'echo $AAA_SECRET_TEXT  >.env'
+                       sh 'echo $GOOGLE_CLIENT_ID  >>.env'
+                       sh 'echo $GOOGLE_CLIENT_SECRET  >>.env'
+                       sh 'echo $GOOGLE_CALLBACK >>.env'
+                       sh 'echo $GOOGLE_REFRESH_TOKEN  >>.env'
+                       sh 'echo $DOMAIN  >>.env'
+                       sh 'echo $squareApplicationId   >>.env'
+                       sh 'echo $SQUARE_TOKEN  >>.env'
+                       sh 'echo $squareBasePath    >>.env'
+                       sh 'echo $SQUARE_LOCATION_ID  >>.env'
                         dockerImage=docker.build  registry 
                         }
                     }
