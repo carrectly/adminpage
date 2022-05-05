@@ -23,7 +23,7 @@ pipeline {
                  stage('Remove older images') {
                      when {
                         expression {
-                                params.executeTests 
+                                params.executeTests == true
                             }
                         }
                  steps {
