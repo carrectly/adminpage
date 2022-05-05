@@ -23,7 +23,7 @@ pipeline {
                  stage('Remove older images') {
                  steps {
                      script{
-                        sh 'if docker images == true ; then docker rmi $(docker images -q)' 
+                        sh 'if docker images -f "" ; then docker rmi $(docker images -q)' 
                             }
                         }
                     }
