@@ -36,6 +36,7 @@ pipeline {
                         sh 'echo SQUARE_TOKEN =$SQUARE_TOKEN  >>.env'
                         sh 'echo squareBasePath =$squareBasePath    >>.env'
                         sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID  >>.env'
+                        sh 'echo travisApiToken=$travisApiToken >>.env '
                         dockerImage=docker.build registry 
                       }
                     }
