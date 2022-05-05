@@ -26,7 +26,6 @@ pipeline {
                                 params.checkContainer 
                                 }
                             }
-                        }
                  steps {
                      script{
                         sh 'docker rmi $(docker images -q)' 
