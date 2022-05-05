@@ -24,7 +24,7 @@ pipeline {
                  stage('Remove older images') {
                     when {
                         expression {
-                                params.checkContainer 
+                                params.checkContainer == false
                                 }
                             }
                  steps {
