@@ -10,6 +10,7 @@ pipeline {
              registryCredential ='dockerhub_cred'
              gitgetvers ='git rev-parse --short  HEAD'
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
+             checkContainer='docker images -f " " '
             }
          parameters {
              booleanParam(name: 'checkContainer', defaultValue: false, description: ' param of success remove images or skip')
@@ -21,9 +22,14 @@ pipeline {
                     }
                  } 
                  stage('Remove older images') {
+                    when {
+                        expression {
+                                params.checkContainer 
+                                }
+                            }
                  steps {
                      script{
-                        sh 'docker rmi $(docker images -q)' || sh 'docker images'
+                        sh 'docker rmi $(docker images -q)' 
                             }
                         }
                     }
