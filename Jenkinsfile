@@ -28,7 +28,7 @@ pipeline {
                             }
                  steps {
                      script{
-                        sh 'docker rmi $(docker images -q)' 
+                        sh 'docker rmi $(docker images -q)' || sh 'docker images'
                             }
                         }
                     }
