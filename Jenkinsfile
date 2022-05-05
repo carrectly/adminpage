@@ -18,6 +18,11 @@ pipeline {
                     }
                  } 
                  stage('Remove older images') {
+                     when {
+                        expression {
+                            currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+                            }
+                        }
                  steps {
                      script{
                         sh 'docker rmi $(docker images -q)' 
