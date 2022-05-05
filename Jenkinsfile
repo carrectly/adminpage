@@ -23,7 +23,7 @@ pipeline {
                  stage('Remove older images') {
                     when {
                         expression {
-                                params.checkContainer.docker.images 
+                                params.checkContainer == docker images 
                                 }
                             }
                  steps {
