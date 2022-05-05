@@ -12,7 +12,7 @@ pipeline {
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
             }
          parameters {
-             booleanParam(name: 'executeTests', defaultValue: true, description: ' param of success remove images')
+             booleanParam(name: 'executeTests', defaultValue: false, description: ' param of success remove images')
          }
          stages {
                  stage('Checout') {
