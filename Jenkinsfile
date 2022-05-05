@@ -12,7 +12,7 @@ pipeline {
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
             }
          parameters {
-             booleanParam(name: 'checkContainer', defaultValue: 'docekr images == true', description: ' param of success remove images or skip')
+             booleanParam(name: 'checkContainer', defaultValue: 'docekr images == false', description: ' param of success remove images or skip')
          }
          stages {
                  stage('Checout') {
@@ -32,7 +32,7 @@ pipeline {
                             }
                         }
                     }
-                 stage('Build') {
+                 stage('Build'){
                  steps  {
                      script {
                         sh 'echo GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID  >>.env'
