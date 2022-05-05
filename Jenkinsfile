@@ -10,7 +10,7 @@ pipeline {
              registryCredential ='dockerhub_cred'
              gitgetvers ='git rev-parse --short  HEAD'
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
-             AAA_SECRET_TEXT = credentials('secrets-text')
+             AAA_SECRET_TEXT =credentials('secrets-text')
             }
          stages {
                  stage('Checout') {
@@ -28,6 +28,15 @@ pipeline {
                  stage('Build') {
                  steps {
                      script {
+                        sh 'echo GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID  >>.env'
+                        sh 'echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET  >>.env'
+                        sh 'echo GOOGLE_CALLBACK=$GOOGLE_CALLBACK >>.env'
+                        sh 'echo GOOGLE_REFRESH_TOKEN=$GOOGLE_REFRESH_TOKEN  >>.env'
+                        sh 'echo DOMAIN =$DOMAIN  >>.env'
+                        sh 'echo squareApplicationId =$squareApplicationId   >>.env'
+                        sh 'echo SQUARE_TOKEN =$SQUARE_TOKEN  >>.env'
+                        sh 'echo squareBasePath =$squareBasePath    >>.env'
+                        sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID  >>.env'
                         dockerImage=docker.build  registry 
                         }
                     }
