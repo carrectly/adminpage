@@ -21,9 +21,14 @@ pipeline {
                     }
                  } 
                  stage('Remove older images') {
+                    when {
+                        expression {
+                                params.checkContainer 
+                                }
+                            }
                  steps {
                      script{
-                        sh 'if docker images -f "" ; then docker rmi $(docker images -q)' 
+                        sh 'docker rmi $(docker images -q)' 
                             }
                         }
                     }
