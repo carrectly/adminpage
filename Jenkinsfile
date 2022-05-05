@@ -11,6 +11,9 @@ pipeline {
              gitgetvers ='git rev-parse --short  HEAD'
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
             }
+         parameters {
+             booleanParam(name: 'executeTests', defaultValue: true, description: ' param of success remove images')
+         }
          stages {
                  stage('Checout') {
                  steps {
@@ -20,7 +23,7 @@ pipeline {
                  stage('Remove older images') {
                      when {
                         expression {
-                            currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+                                params.executeTests 
                             }
                         }
                  steps {
