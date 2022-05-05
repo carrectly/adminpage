@@ -33,7 +33,7 @@ pipeline {
                         }
                     }
                  stage('Build') {
-                 steps {
+                 steps  {
                      script {
                         sh 'echo GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID  >>.env'
                         sh 'echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET  >>.env'
