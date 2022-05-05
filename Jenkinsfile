@@ -36,7 +36,7 @@ pipeline {
                         sh 'echo SQUARE_TOKEN =$SQUARE_TOKEN  >>.env'
                         sh 'echo squareBasePath =$squareBasePath    >>.env'
                         sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID  >>.env'
-                        dockerImage=docker.build -t ${env.gitgetvers} registry
+                        dockerImage=docker.build registry 
                       }
                     }
                  }
