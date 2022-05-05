@@ -12,7 +12,7 @@ pipeline {
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
             }
          parameters {
-             booleanParam(name: 'executeTests', defaultValue: true, description: ' param of success remove images')
+             booleanParam(name: 'checkContainer', defaultValue: docekr images == true, description: ' param of success remove images or skip')
          }
          stages {
                  stage('Checout') {
@@ -23,7 +23,7 @@ pipeline {
                  stage('Remove older images') {
                      when {
                         expression {
-                                params.executeTests == true
+                                params.checkContainer == false || params.checkContainer == true
                             }
                         }
                  steps {
