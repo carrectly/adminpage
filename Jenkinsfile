@@ -10,7 +10,6 @@ pipeline {
              registryCredential ='dockerhub_cred'
              gitgetvers ='git rev-parse --short  HEAD'
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
-             AAA_SECRET_TEXT =credentials('secrets-text')
             }
          stages {
                  stage('Checout') {
@@ -37,15 +36,15 @@ pipeline {
                         sh 'echo SQUARE_TOKEN =$SQUARE_TOKEN  >>.env'
                         sh 'echo squareBasePath =$squareBasePath    >>.env'
                         sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID  >>.env'
-                        dockerImage=docker.build  registry 
-                        }
+                        dockerImage=docker.build -t ${env.gitgetvers} registry
+                      }
                     }
                  }
                  stage('Push image to registry') {
                  steps {
                      script{ 
                           docker.withRegistry( '', registryCredential ) {
-                          dockerImage.push() 
+                          dockerImage.push()
                             }
                         }
                     }
