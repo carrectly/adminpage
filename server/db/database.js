@@ -3,7 +3,7 @@ const pkg = require('../../package.json');
 
 const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '');
 const dbUrl =
-  process.env.DATABASE_URL || `postgres://postgres:Postgres1234@10.124.11.230:30007/${databaseName}`;
+  process.env.DATABASE_URL || `postgres://postgres:Postgres1234@10.124.10.155:5432/${databaseName}`;
 const db = new Sequelize(dbUrl, { logging: false, native: true });
 
 module.exports = db;
