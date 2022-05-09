@@ -27,7 +27,7 @@ pipeline {
                         sh 'docker rmi $(docker images -q)'
                     }
                     failure {
-                       echo 'skip to next step'
+                       exist 0 
                         }
                     }
                 }
