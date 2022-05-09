@@ -18,19 +18,6 @@ pipeline {
                      checkout([$class: 'GitSCM', branches: [[name: '*/pipeline']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/carrectly/adminpage.git']]])
                     }
                  } 
-                 stage('Remove older images') {
-                 steps {
-                         sh 'docker images -q'
-                        }
-                post  {
-                    success {
-                        sh 'docker rmi $(docker images -q)'
-                    }
-                    failure {
-                       exist 0  
-                        }
-                    }
-                }
                  stage('Build') {
                  steps  {
                      script {
@@ -56,6 +43,11 @@ pipeline {
                             }
                         }
                     }
+                }
+                stage('Remove older images') {
+                 steps {
+                         sh 'docker images -q'
+                        }
                 }
                  stage('Deploy to GKE') { 
                  steps { 
