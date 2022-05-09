@@ -27,7 +27,9 @@ pipeline {
                         }
                 post  {
                     failure {
-                       echo 'docker skip to next step'
+                        expression {
+                            params.checkContainer 
+                            }
                         }
                     }
                 }
