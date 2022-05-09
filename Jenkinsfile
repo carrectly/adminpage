@@ -27,8 +27,10 @@ pipeline {
                         }
                 post  {
                     failure {
+                        when {
                         expression {
                             params.checkContainer 
+                                }
                             }
                         }
                     }
