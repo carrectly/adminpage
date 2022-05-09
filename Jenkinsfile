@@ -28,14 +28,14 @@ pipeline {
                             }
                         }
                     }
-                 post {
-                    success {
-                            sh 'docker rmi $(docker images -q)'
-                        }
-                    failure {
-                            sh 'docker images'
-                        }
-                    }
+          post {
+                success {
+                    sh 'docker rmi $(docker images -q)'
+                }
+                failure {
+                    sh 'docker images'
+                }
+            }
                  stage('Build') {
                  steps  {
                      script {
