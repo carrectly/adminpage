@@ -30,7 +30,7 @@ pipeline {
                         sh 'docker rmi $(docker images -q)'
                     }
                     failure {
-                       echo 'skip step'
+                       echo 'skip to next step'
                         }
                     }
                 }
