@@ -21,7 +21,6 @@ pipeline {
                   stage('set env') {
                   steps {
                      script {
-                         sh 'chmod +x ./changeTag.sh'
                          sh "./changeTag.sh ${DOCKER_TAG}"
                         }
                      }
