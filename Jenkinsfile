@@ -28,7 +28,7 @@ pipeline {
                         }
                     }
                 post  {
-                    always {
+                    success {
                         sh 'docker rmi $(docker images -q)'
                     }
                     failure {
