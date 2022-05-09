@@ -16,15 +16,9 @@ pipeline {
                  stage('Checout') {
                  steps {
                      checkout([$class: 'GitSCM', branches: [[name: '*/pipeline']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/carrectly/adminpage.git']]])
-                    }
-                 } 
-                  stage('set env') {
-                  steps {
-                     script {
-                         sh "./changeTag.sh ${DOCKER_TAG}"
                         }
                      }
-                  }
+                }   
                  stage('Build') {
                  steps  {
                      script {
@@ -38,7 +32,7 @@ pipeline {
                         sh 'echo squareBasePath =$squareBasePath    >>.env'
                         sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID  >>.env'
                         sh 'echo travisApiToken=$travisApiToken >>.env '
-                        dockerImage=docker.build "${DOCKER_TAG}"  registry 
+                        dockerImage=docker.build registry 
                         }
                     }
                  }
