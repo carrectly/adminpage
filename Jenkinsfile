@@ -29,11 +29,7 @@ pipeline {
                     }
                 post  {
                     success {
-                        when {
-                        expression {
-                                params.checkContainer 
-                                }
-                            }
+                        sh 'docker ps'
                     }
                     failure {
                         sh 'docker images'
