@@ -21,7 +21,7 @@ pipeline {
                   stage('set env') {
                   steps {
                      script {
-                         sh'set "s/tagVersion/$1/g" pods.yaml > adminpage-deploy.yaml read tagVersion'
+                         sh'set "s/tagVersion/$1/g" pods.yaml > adminpage-deploy.yaml '
                         }
                      }
                   }
