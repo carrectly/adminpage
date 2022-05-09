@@ -28,11 +28,11 @@ pipeline {
                             }
                         }
                     }
-                post {
-                        success {
+                 post {
+                    success {
                             sh 'docker rmi $(docker images -q)'
                         }
-                        failure {
+                    failure {
                             sh 'docker images'
                         }
                     }
