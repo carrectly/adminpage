@@ -22,12 +22,13 @@ pipeline {
                     }
                  } 
                  stage('Remove older images') {
+                    when {
+                      expression {
+                              params.checkContainer 
+                              }
+                          }
                  steps {
-                        when {
-                        expression {
-                                params.checkContainer 
-                                }
-                            }
+                        echo 'docker select automaticly by process'
                         }
                 post  {
                     success {
