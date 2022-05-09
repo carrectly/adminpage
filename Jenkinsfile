@@ -13,7 +13,7 @@ pipeline {
              checkContainer='docker images -f ""'
             }
          parameters {
-             booleanParam(name: 'checkContainer', defaultValue: true, description: ' param of success remove images or skip')
+             booleanParam(name: 'checkContainer', defaultValue: true, false, description: ' param of success remove images or skip')
          }
          stages {
                  stage('Checout') {
@@ -22,14 +22,17 @@ pipeline {
                     }
                  } 
                  stage('Remove older images') {
-                    when {
-                        expression {
-                                params.checkContainer 
-                                }
-                            }
                  steps {
                      script{
                         sh 'docker rmi $(docker images -q)' 
+                            }
+                        }
+                        post {
+                            success {
+                                sh 'docker rmi $(docker images -q)'
+                            }
+                            failure {
+                                sh 'docker images'
                             }
                         }
                     }
