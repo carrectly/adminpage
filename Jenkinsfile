@@ -12,9 +12,6 @@ pipeline {
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
              checkContainer='docker images -f ""'
             }
-         parameters {
-             booleanParam(name: 'checkContainer', defaultValue: false,  description: ' param of success remove images or skip')
-         }
          stages {
                  stage('Checout') {
                  steps {
