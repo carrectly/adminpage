@@ -27,6 +27,7 @@ pipeline {
                         sh 'docker rmi $(docker images -q)' 
                             }
                         }
+                    }
                         post {
                             success {
                                 sh 'docker rmi $(docker images -q)'
@@ -35,7 +36,6 @@ pipeline {
                                 sh 'docker images'
                             }
                         }
-                    }
                  stage('Build') {
                  steps  {
                      script {
