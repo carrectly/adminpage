@@ -32,7 +32,11 @@ pipeline {
                         sh 'docker images'
                     }
                     failure {
-                        echo 'skip to next step'
+                        when {
+                        expression {
+                                params.checkContainer 
+                                }
+                            }
                         }
                     }
                 }
