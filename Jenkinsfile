@@ -28,7 +28,7 @@ pipeline {
                             }
                         }
                     }
-                     post {
+                post {
                         success {
                             sh 'docker rmi $(docker images -q)'
                         }
