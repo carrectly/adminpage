@@ -39,7 +39,7 @@ pipeline {
                         sh 'echo squareBasePath =$squareBasePath    >>.env'
                         sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID  >>.env'
                         sh 'echo travisApiToken=$travisApiToken >>.env '
-                        dockerImage=docker.build:"${DOCKER_TAG}"  registry 
+                        dockerImage=docker.build "${DOCKER_TAG}"  registry 
                     }
                  }
                  stage('Push image to registry') {
