@@ -18,13 +18,13 @@ pipeline {
                      checkout([$class: 'GitSCM', branches: [[name: '*/pipeline']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/carrectly/adminpage.git']]])
                     }
                  } 
-                 stage('set env') {
-                 steps {
-                    script {
-                        sh'sed "s/tagVersion/$1/g" pods.yaml > adminpage-deploy.yaml read tagVersion'
-                       }
-                    }
-                 }
+                  stage('set env') {
+                  steps {
+                     script {
+                         sh'set "s/tagVersion/$1/g" pods.yaml > adminpage-deploy.yaml read tagVersion'
+                        }
+                     }
+                  }
                  stage('Build') {
                  steps  {
                      script {
