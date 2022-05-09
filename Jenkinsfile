@@ -21,7 +21,8 @@ pipeline {
                   stage('set env') {
                   steps {
                      script {
-                         sh'set "s/tagVersion/$1/g" pods.yaml > adminpage-deploy.yaml '
+                         sh"chmod +x changeTag.sh"
+                         sh "./changeTag.sh ${DOCKER_TAG}"
                         }
                      }
                   }
@@ -38,14 +39,14 @@ pipeline {
                         sh 'echo squareBasePath =$squareBasePath    >>.env'
                         sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID  >>.env'
                         sh 'echo travisApiToken=$travisApiToken >>.env '
-                        dockerImage=docker.build tagVersion  registry 
+                        dockerImage=docker.build:"${DOCKER_TAG}"  registry 
                     }
                  }
                  stage('Push image to registry') {
                  steps {
                      script{ 
                           docker.withRegistry( '', registryCredential ) {
-                          dockerImage.push(tagVersion)
+                          dockerImage.push()
                             }
                         }
                     }
