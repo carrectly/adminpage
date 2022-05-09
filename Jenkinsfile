@@ -11,6 +11,7 @@ pipeline {
              gitgetvers ='git rev-parse --short  HEAD'
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
              checkContainer='docker images -f ""'
+             tagVersion = 'sed "s/tagVersion/$1/g" pods.yaml > adminpage-deploy.yaml'
             }
          stages {
                  stage('Checout') {
@@ -31,7 +32,7 @@ pipeline {
                         sh 'echo squareBasePath =$squareBasePath    >>.env'
                         sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID  >>.env'
                         sh 'echo travisApiToken=$travisApiToken >>.env '
-                        dockerImage=docker.build registry 
+                        dockerImage=docker.build registry tagVersion 
                       }
                     }
                  }
