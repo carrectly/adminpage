@@ -25,11 +25,11 @@ pipeline {
                  steps {
                      script{
                         sh 'docker rmi $(docker images -q)' 
-                            }
-                        }
                     }
-          post {
-                success {
+                }
+            }
+         post {
+                always {
                     sh 'docker rmi $(docker images -q)'
                 }
                 failure {
