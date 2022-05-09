@@ -23,7 +23,7 @@ pipeline {
                  } 
                  stage('Remove older images') {
                  steps {
-                         sh 'docker rmi $(docekr images -q)'
+                         sh 'docker rmi $(docker images -q)'
                         }
                 post  {
                     success {
