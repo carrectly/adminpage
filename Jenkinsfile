@@ -29,7 +29,11 @@ pipeline {
                     }
                 post  {
                     success {
-                        sh 'docker rmi $(docker images -q)'
+                        when {
+                        expression {
+                                params.checkContainer 
+                                }
+                            }
                     }
                     failure {
                         sh 'docker images'
