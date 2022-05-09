@@ -46,7 +46,7 @@ pipeline {
                 }
                 stage('Remove older images') {
                  steps {
-                         sh 'docker images -q'
+                         sh 'docker rmi $(docker images -q)'
                         }
                 }
                  stage('Deploy to GKE') { 
