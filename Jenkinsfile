@@ -26,9 +26,6 @@ pipeline {
                          sh 'docker rmi $(docker images -q)'
                         }
                 post  {
-                    success {
-                        sh 'docker rmi $(docker images -q)'
-                    }
                     failure {
                        echo 'docker skip to next step'
                         }
