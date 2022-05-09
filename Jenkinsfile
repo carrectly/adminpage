@@ -11,7 +11,6 @@ pipeline {
              gitgetvers ='git rev-parse --short  HEAD'
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
              checkContainer='docker images -f ""'
-             tagVersion = 'sed "s/tagVersion/$1/g" pods.yaml > adminpage-deploy.yaml'
             }
          stages {
                  stage('Checout') {
@@ -19,6 +18,13 @@ pipeline {
                      checkout([$class: 'GitSCM', branches: [[name: '*/pipeline']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/carrectly/adminpage.git']]])
                     }
                  } 
+                 stage(set env) {
+                     steps {
+                         script {
+                            sh'sed "s/tagVersion/$1/g" pods.yaml > adminpage-deploy.yaml read tagVersion'
+                         }
+                     }
+                 }
                  stage('Build') {
                  steps  {
                      script {
@@ -32,15 +38,14 @@ pipeline {
                         sh 'echo squareBasePath =$squareBasePath    >>.env'
                         sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID  >>.env'
                         sh 'echo travisApiToken=$travisApiToken >>.env '
-                        dockerImage=docker.build registry tagVersion 
-                      }
+                        dockerImage=docker.build tagVersion  registry 
                     }
                  }
                  stage('Push image to registry') {
                  steps {
                      script{ 
                           docker.withRegistry( '', registryCredential ) {
-                          dockerImage.push()
+                          dockerImage.push(tagVersion)
                             }
                         }
                     }
