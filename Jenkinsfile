@@ -23,18 +23,17 @@ pipeline {
                  } 
                  stage('Remove older images') {
                  steps {
-                      when {
-                      expression {
-                              params.checkContainer 
-                            }
-                        }
+                         sh 'docker rmi $(docekr images -q)'
                         }
                 post  {
                     success {
                         sh 'docker rmi $(docker images -q)'
+                    }
+                    failure {
+                       echo 'docker skip to next step'
                         }
                     }
-                 }
+                }
                  stage('Build') {
                  steps  {
                      script {
