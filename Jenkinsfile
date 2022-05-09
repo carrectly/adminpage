@@ -27,11 +27,7 @@ pipeline {
                         }
                 post  {
                     failure {
-                        when {
-                        expression {
-                            params.checkContainer 
-                                }
-                            }
+                       echo 'skip step'
                         }
                     }
                 }
