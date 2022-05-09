@@ -24,15 +24,15 @@ pipeline {
                  stage('Remove older images') {
                  steps {
                      script{
-                        sh 'docker images' 
+                        sh 'docker rmi $(docker images -q)' 
                         }
                     }
                 post  {
                     success {
-                        sh 'docker rmi $(docker images -q)'
+                        sh 'docker images'
                     }
                     failure {
-                        sh 'docker images'
+                        echo 'skip to next step'
                         }
                     }
                 }
