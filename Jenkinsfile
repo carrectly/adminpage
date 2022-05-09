@@ -33,13 +33,13 @@ pipeline {
                     }
                 }
             }
-            post {
-                always {
-                    sh 'docker rmi $(docker images -q)'
-                }
-                failure {
-                    sh 'docker images'
-                     }
+                post {
+                    always {
+                        sh 'docker rmi $(docker images -q)'
+                    }
+                    failure {
+                        sh 'docker images'
+                    }
                 }
                  stage('Build') {
                  steps  {
