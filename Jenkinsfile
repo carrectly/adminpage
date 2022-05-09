@@ -30,15 +30,15 @@ pipeline {
                  steps {
                      script{
                         sh 'docker rmi $(docker images -q)' 
+                        }
                     }
-                }
-            }
-                post {
+                post  {
                     always {
                         sh 'docker rmi $(docker images -q)'
                     }
                     failure {
                         sh 'docker images'
+                        }
                     }
                 }
                  stage('Build') {
