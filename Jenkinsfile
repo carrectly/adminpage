@@ -60,8 +60,6 @@ pipeline {
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
                     verifyDeployments: true])
-                    script { 
-                    sh 'step <object of type com.google.jenkins.plugins.k8sengine.KubernetesEngineBuilder>'
                     }
                 } 
             }
