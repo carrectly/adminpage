@@ -64,7 +64,7 @@ pipeline {
                         try {
                             sh 'kubectl apply -f adminpage-deploy.yaml'
                         }catch(error) {
-                            sh 'kubectl delete -f adminpage-deploy.yaml && kubectl apply -f adminpage-deploy.yaml'
+                            sh 'kubectl create -f adminpage-deploy.yaml'
                         }
                     }
                 } 
