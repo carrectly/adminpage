@@ -60,12 +60,8 @@ pipeline {
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
                     verifyDeployments: true])
-                    script {
-                        try {
-                            sh 'kubectl apply -f adminpage-deploy.yaml'
-                        }catch(error) {
-                            sh 'kubectl create -f adminpage-deploy.yaml'
-                        }
+                    script { 
+                    sh 'step <object of type com.google.jenkins.plugins.k8sengine.KubernetesEngineBuilder>'
                     }
                 } 
             }
