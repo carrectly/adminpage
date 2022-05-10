@@ -63,7 +63,7 @@ pipeline {
                     script {
                         try {
                             sh 'kubectl apply -f $manifestPattern'
-                        }catch(error)
+                        }catch(error) {
                             sh 'kubectl apply -f $manifestPattern'
                         }
                     }
