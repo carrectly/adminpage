@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: adminapge-container
-          image: pavlohortovenko20/adminpage2.1:tagVersion
+          image: pavlohortovenko20/adminpage2.1:$gitgetvers
           env:
            - name: POSTGRES_DB
              valueFrom: 
