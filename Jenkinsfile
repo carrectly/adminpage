@@ -11,6 +11,7 @@ pipeline {
              gitgetvers ='git rev-parse --short  HEAD'
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
              checkContainer='docker images -f ""'
+             tagVersion='latest'
             }
          stages {
                  stage('Checout') {
