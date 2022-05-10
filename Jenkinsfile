@@ -17,8 +17,7 @@ pipeline {
                  steps {
                      checkout([$class: 'GitSCM', branches: [[name: '*/pipeline']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/carrectly/adminpage.git']]])
                         }
-                     }
-                }   
+                     }   
                  stage('Build') {
                  steps  {
                      script {
@@ -63,4 +62,4 @@ pipeline {
                 } 
             }
         }
- 
+    }
