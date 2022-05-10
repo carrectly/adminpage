@@ -64,7 +64,7 @@ pipeline {
                         try {
                             sh 'kubectl apply -f $manifestPattern'
                         }catch(error)
-                            sh 'kubectl delete -f $manifestPattern'
+                            sh 'kubectl apply -f $manifestPattern'
                         }
                     }
                 } 
