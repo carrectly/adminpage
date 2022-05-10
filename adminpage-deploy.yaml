@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: adminapge-container
-          image: pavlohortovenko20/adminpage2.1:latest
+          image: pavlohortovenko20/adminpage2.1:{{image_tag}}
           env:
            - name: POSTGRES_DB
              valueFrom: 
