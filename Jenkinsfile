@@ -59,7 +59,14 @@ pipeline {
                     location: env.LOCATION,
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
-                    verifyDeployments: true])
+                    /*verifyDeployments: true*/])
+                    script {
+                        try {
+                            sh 'kubectl apply -f $credentialsId'
+                        catch(error)
+                            sh 'kubectl delete -f $credentialsId'
+                        }
+                    }
                 } 
             }
         }

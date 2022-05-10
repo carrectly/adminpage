@@ -20,8 +20,7 @@ spec:
     spec:
       containers:
         - name: adminapge-container
-          image: pavlohortovenko20/adminpage2.1:{{env.image_tag}}
-          env:
+          image: pavlohortovenko20/adminpage2.1:latest
            - name: POSTGRES_DB
              valueFrom: 
                 secretKeyRef: 
