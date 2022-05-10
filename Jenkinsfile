@@ -62,9 +62,9 @@ pipeline {
                     /*verifyDeployments: true*/])
                     script {
                         try {
-                            sh "kubectl apply -f $credentialsId"
+                            sh 'kubectl apply -f $manifestPattern'
                         }catch(error)
-                            sh "kubectl delete -f $credentialsId"
+                            sh 'kubectl delete -f $manifestPattern'
                         }
                     }
                 } 
