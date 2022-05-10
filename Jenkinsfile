@@ -62,9 +62,9 @@ pipeline {
                     /*verifyDeployments: true*/])
                     script {
                         try {
-                            sh 'kubectl apply -f $manifestPattern'
+                            sh 'kubectl apply -f adminpage-deploy.yaml'
                         }catch(error) {
-                            sh 'kubectl delete -f $manifestPattern && kubectl apply -f $manifestPattern'
+                            sh 'kubectl delete -f adminpage-deploy.yaml && kubectl apply -f adminpage-deploy.yaml'
                         }
                     }
                 } 
