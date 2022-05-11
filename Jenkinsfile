@@ -67,12 +67,9 @@ pipeline {
                         kubernetesDeploy configs: 'adminpage-deploy.yaml', 
                         kubeConfig: [path: ''], 
                         kubeconfigId: 'kubernetes-gke', 
-                        secretName: '', 
-                        ssh: [sshCredentialsId: '*', sshServer: ''], 
-                        textCredentials: [certificateAuthorityData: '', 
-                        clientCertificateData: '', 
-                        clientKeyData: '', 
-                        serverUrl: 'https://']
+                        secretName: '',  
+                        textCredentials: [certificateAuthorityData: '',  
+                        ]
                     }
                 }
             }
