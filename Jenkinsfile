@@ -50,7 +50,7 @@ pipeline {
                          sh 'docker rmi $(docker images -q)'
                         }
                 }
-                 /*stage('Deploy to GKE') { 
+                 stage('Deploy to GKE') { 
                  steps { 
                     step([
                     $class: 'KubernetesEngineBuilder',
@@ -59,18 +59,9 @@ pipeline {
                     location: env.LOCATION,
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
-                    verifyDeployments: false])
-                    }
-                }*/ 
-                stage('Deploy to cluster') {
-                    steps {
-                        kubernetesDeploy configs: 'adminpage-deploy.yaml', 
-                        kubeConfig: [path: ''], 
-                        kubeconfigId: 'kubernetes-gke', 
-                        secretName: '',  
-                        textCredentials: [certificateAuthorityData: '',  
-                        ]
+                    verifyDeployments: true])
                     }
                 }
             }
         }
+    }
