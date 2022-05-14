@@ -15,15 +15,20 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 
-const keyPass = process.env.HTTPS_KEY || '';
-const certificate = process.env.HTTPS_CERTIFICATE || '';
+let key;
+let cert;
 
-const key = fs.readFileSync(require.resolve(keyPass), {
-  encoding: 'utf8',
-});
-const cert = fs.readFileSync(require.resolve(certificate), {
-  encoding: 'utf8',
-});
+if (process.env.NODE_ENV === 'development') {
+  const keyPass = process.env.HTTPS_KEY;
+  const certificate = process.env.HTTPS_CERTIFICATE;
+
+  key = fs.readFileSync(require.resolve(keyPass), {
+    encoding: 'utf8',
+  });
+  cert = fs.readFileSync(require.resolve(certificate), {
+    encoding: 'utf8',
+  });
+}
 
 module.exports = app;
 
