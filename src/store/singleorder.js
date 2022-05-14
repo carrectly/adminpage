@@ -12,6 +12,7 @@ const ADD_ORDER_DEALER = 'ADD_ORDER_DEALER';
 const REMOVE_ORDER_DEALER = 'REMOVE_ORDER_DEALER';
 const ADD_ORDER_DRIVER = 'ADD_ORDER_DRIVER';
 const ADD_ORDER_CUSTOMER_REP = 'ADD_ORDER_CUSTOMER_REP';
+const RESET_ORDER_DATA = 'RESET_ORDER_DATA';
 
 /**
  * INITIAL STATE
@@ -30,6 +31,7 @@ const addOrderDealer = (order) => ({ type: ADD_ORDER_DEALER, order });
 const removeOrderDealer = (order) => ({ type: REMOVE_ORDER_DEALER, order });
 const addOrderDriver = (order) => ({ type: ADD_ORDER_DRIVER, order });
 const addOrderCustomerRep = (order) => ({ type: ADD_ORDER_CUSTOMER_REP, order });
+const _resetOrderData = () => ({ type: RESET_ORDER_DATA });
 
 /**
  * THUNK CREATORS
@@ -124,6 +126,10 @@ export const addOrderCustomerRepThunk = (id, userId) => async (dispatch) => {
   }
 };
 
+export const resetOrderData = () => async (dispatch) => {
+  dispatch(_resetOrderData());
+};
+
 /**
  * REDUCER
  */
@@ -131,23 +137,25 @@ export const addOrderCustomerRepThunk = (id, userId) => async (dispatch) => {
 export default function (state = singleOrder, action) {
   switch (action.type) {
     case GET_SINGLE_ORDER:
-      return action.order;
+      return { ...state, ...action.order };
     case UPDATE_SINGLE_ORDER:
-      return action.order;
+      return { ...state, ...action.order };
     case UPDATE_ORDER_DETAILS:
-      return action.order;
+      return { ...state, ...action.order };
     case ADD_ORDER_SERVICE:
-      return action.order;
+      return { ...state, ...action.order };
     case REMOVE_ORDER_SERVICE:
-      return action.order;
+      return { ...state, ...action.order };
     case ADD_ORDER_DEALER:
-      return action.order;
+      return { ...state, ...action.order };
     case REMOVE_ORDER_DEALER:
-      return action.order;
+      return { ...state, ...action.order };
     case ADD_ORDER_DRIVER:
-      return action.order;
+      return { ...state, ...action.order };
     case ADD_ORDER_CUSTOMER_REP:
-      return action.order;
+      return { ...state, ...action.order };
+    case RESET_ORDER_DATA:
+      return { ...state };
     default:
       return state;
   }
