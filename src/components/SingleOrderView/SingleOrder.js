@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getSingleOrderThunk } from '../../store/singleorder';
+import { getSingleOrderThunk, resetOrderData } from '../../store/singleorder';
 import { getUsersThunk } from '../../store/users';
 import Invoice from './Invoice';
 import OrderComments from './OrderComments';
@@ -18,6 +18,10 @@ const SingleOrder = () => {
   useEffect(() => {
     dispatch(getSingleOrderThunk(orderid));
     dispatch(getUsersThunk());
+  }, []);
+
+  useEffect(() => {
+    dispatch(resetOrderData());
   }, []);
 
   const singleorder = order || {};
