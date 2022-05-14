@@ -10,7 +10,6 @@ COPY . /app
 ENV PATH ./.env:/app/.env:$PATH
 
 
-
 RUN npm i 
 
 CMD npm run start-prod

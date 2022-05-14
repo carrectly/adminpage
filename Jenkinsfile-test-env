@@ -3,8 +3,8 @@ pipeline {
          agent any
          environment{
              PROJECT_ID = 'adminpage-chicago'
-             CLUSTER_NAME = 'adminpage-chicago-k8s'
-             LOCATION = 'us-east4-b'
+             CLUSTER_NAME = 'cluster-test-adminpage'
+             LOCATION = 'us-central1-c'
              CREDENTIALS_ID = 'gke'
              registry ='pavlohortovenko20/adminpage2.1:latest'
              registryCredential ='dockerhub_cred'
