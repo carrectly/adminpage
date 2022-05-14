@@ -15,8 +15,8 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 
-const keyPass = process.env.HTTPS_KEY;
-const certificate = process.env.HTTPS_CERTIFICATE;
+const keyPass = process.env.HTTPS_KEY || '';
+const certificate = process.env.HTTPS_CERTIFICATE || '';
 
 const key = fs.readFileSync(require.resolve(keyPass), {
   encoding: 'utf8',
