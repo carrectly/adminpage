@@ -16,3 +16,4 @@ customers.csv
 orders.csv
 dist
 dist/*
+workspace.code-workspace
