@@ -1,6 +1,6 @@
 const router = require('express').Router();
 var parseMessage = require('gmail-api-parse-message');
-const { gmail } = require('./oAuth2Client');
+const { gmail, corporateGmail } = require('./oAuth2Client');
 
 module.exports = router;
 
@@ -48,8 +48,7 @@ router.post('/sendconfirmation', async (req, res, next) => {
 async function listMessages(id) {
   const userId = 'me';
   const query = `subject:${id}`;
-
-  var initialRequest = await gmail.users.messages.list({
+  var initialRequest = await corporateGmail().users.messages.list({
     userId: userId,
     q: query,
   });
@@ -75,7 +74,7 @@ async function listMessages(id) {
     let headersArray = [];
 
     await asyncForEach(newArr, async (msg) => {
-      let resp = await gmail.users.messages.get({
+      let resp = await corporateGmail().users.messages.get({
         userId: userId,
         id: msg.id,
         format: 'metadata',
@@ -102,7 +101,7 @@ async function listMessages(id) {
   function doWork(tkn) {
     return new Promise((resolve, reject) => {
       if (tkn) {
-        let request = gmail.users.messages.list({
+        let request = corporateGmail().users.messages.list({
           userId: userId,
           pageToken: tkn,
           q: query,
@@ -134,7 +133,7 @@ async function getMessage(messageId) {
 
   //const gmail = await google.gmail({version: 'v1', auth})
 
-  var response = await gmail.users.messages.get({
+  var response = await corporateGmail().users.messages.get({
     userId: userId,
     id: messageId,
   });
@@ -152,7 +151,7 @@ async function getMessage(messageId) {
       let obj = {};
       if (part.filename && part.filename.length > 0) {
         var attachId = part.body.attachmentId;
-        var request = await gmail.users.messages.attachments.get({
+        var request = await gmail().users.messages.attachments.get({
           id: attachId,
           messageId: messageId,
           userId: userId,
@@ -212,7 +211,7 @@ async function createDraft(msg) {
   //.replace(/=+$/, '')
 
   //function to send the message
-  // const res = await gmail.users.messages.send({
+  // const res = await gmail().users.messages.send({
   // 	userId: 'me',
   // 	requestBody: {
   // 		raw: encodedMessage,
@@ -220,7 +219,7 @@ async function createDraft(msg) {
   // })
 
   // create a draft
-  const res = await gmail.users.drafts.create({
+  const res = await corporateGmail().users.drafts.create({
     userId: 'me',
     resource: {
       message: {
@@ -292,7 +291,7 @@ Thank you!
     .replace(/\+/g, '-')
     .replace(/\//g, '_');
 
-  const res = await gmail.users.messages.send({
+  const res = await corporateGmail().users.messages.send({
     userId: 'me',
     requestBody: {
       raw: encodedMessage,
