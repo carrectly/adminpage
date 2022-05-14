@@ -226,7 +226,7 @@ class Oauth {
       await User.findOne({ where: { email: email } }).then((user) => {
         if (user) {
           const zoho_tokens = JSON.parse(user.zoho_tokens);
-          if (zoho_tokens.refreshToken && !data.refreshToken) {
+          if (zoho_tokens && zoho_tokens.refreshToken && !data.refreshToken) {
             data.refreshToken = zoho_tokens.refreshToken;
           }
           const updateUserDetails = {
@@ -303,14 +303,14 @@ class Oauth {
     return get(tokens, 'refreshToken', '');
   }
 
-  // /**
-  //  *
-  //  * @returns {string}
-  //  *
-  //  */
-  // _getScopesAsString() {
-  //   return join(this.scopes);
-  // }
+  /**
+   *
+   * @returns {string}
+   *
+   */
+  _getScopesAsString() {
+    return join(JSON.parse(this.scopes));
+  }
 
   getCodeFromRedirectedUrl(redirectedUrl) {
     if (redirectedUrl.indexOf('?') !== -1) {
