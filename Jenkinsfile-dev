@@ -8,7 +8,7 @@ pipeline {
              CLUSTER_NAME = 'adminpage-chicago-k8s'
              LOCATION = 'us-east4-b'
              CREDENTIALS_ID = 'gke'
-             registry ='pavlohortovenko20/adminpage2.1'
+             registry ='pavlohortovenko20/adminpage2.1:env.IMAGE_TAG'
              registryCredential ='dockerhub_cred'
              gitgetvers ='git rev-parse --short  HEAD'
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
@@ -35,10 +35,15 @@ pipeline {
                         sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID  >>.env'
                         sh 'echo travisApiToken=$travisApiToken >>.env '
                         sh 'echo CORPORATE_EMAIL=$CORPORATE_EMAIL >>.env'
-                        script {
-                        dockerImage=docker.build registry  {
-                        docker.build("${APP}").push("${IMAGE_TAG}")
-                                 }
+                        dockerImage=docker.build registry("${IMAGE_TAG}")
+                        }
+                    }
+                 }
+                 stage('Push image to registry') {
+                 steps {
+                     script{ 
+                          docker.withRegistry( '', registryCredential ) {
+                          dockerImage.push()
                             }
                         }
                     }
