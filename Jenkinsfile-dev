@@ -36,7 +36,7 @@ pipeline {
                         sh 'echo travisApiToken=$travisApiToken >>.env '
                         sh 'echo CORPORATE_EMAIL=$CORPORATE_EMAIL >>.env'
                         script {
-                        docker.withRegistry("${registry}", registryCredential) {
+                        docker.withRegistry(docker.build registry ) {
                         docker.build("${APP}").push("${IMAGE_TAG}")
                                  }
                             }
