@@ -55,7 +55,7 @@ pipeline {
                 }
                 stage('Set image by k8s') {
                     steps {
-                        sh "sed -i.bak 's|<imageTag>|${REGISTRY}/${APP}:${IMAGE_TAG}|' ./adminpage-deploy.yaml"
+                        sh "sed -i.bak 's|<imageTag>|${registry}|' ./adminpage-deploy.yaml"
                     }
                 }
                  stage('Deploy to GKE') { 
