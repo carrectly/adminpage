@@ -42,7 +42,7 @@ pipeline {
                  stage('Push image to registry') {
                  steps {
                      script{ 
-                          docker.withRegistry( 'pavlohortovenko20/adminpage2.1', registryCredential ) {
+                          docker.withRegistry( 'pavlohortovenko20/adminpage2.1', 'Credential' ) {
                           dockerImage("${APP}").push("${IMAGE_TAG}")
                             }
                         }
