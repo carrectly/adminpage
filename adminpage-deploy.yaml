@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: adminpage
-          image: "${imageTag}"
+          image: "<imageTag>"
           env:
            - name: POSTGRES_DB
              valueFrom: 

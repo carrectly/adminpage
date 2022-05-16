@@ -43,7 +43,7 @@ pipeline {
                  steps {
                      script{ 
                           docker.withRegistry( '', registryCredential ) {
-                          dockerImage registry.push()
+                          dockerImage.push("${registry}")
                             }
                         }
                     }
@@ -52,6 +52,11 @@ pipeline {
                  steps {
                          sh 'docker rmi $(docker images -q)'
                         }
+                }
+                stage('Set image by k8s') {
+                    steps {
+                        sh "sed -i.bak 's|<imageTag>|${REGISTRY}/${APP}:${IMAGE_TAG}|' ./adminpage-deploy.yaml"
+                    }
                 }
                  stage('Deploy to GKE') { 
                  steps { 
