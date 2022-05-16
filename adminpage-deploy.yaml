@@ -19,8 +19,8 @@ spec:
         app: adminapge
     spec:
       containers:
-        - name: adminapge-container
-          image: pavlohortovenko20/adminpage2.1:latest
+        - name: adminapge
+          image: "<imageTag>"
           env:
            - name: POSTGRES_DB
              valueFrom: 

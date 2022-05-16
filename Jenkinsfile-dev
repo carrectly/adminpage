@@ -2,6 +2,8 @@
 pipeline {
          agent any
          environment{
+             APP = "adminpage"
+             IMAGE_TAG = "${env.BUILD_NUMBER}"
              PROJECT_ID = 'adminpage-chicago'
              CLUSTER_NAME = 'adminpage-chicago-k8s'
              LOCATION = 'us-east4-b'
@@ -41,7 +43,7 @@ pipeline {
                  steps {
                      script{ 
                           docker.withRegistry( '', registryCredential ) {
-                          dockerImage.push()
+                          dockerImage("${APP}").push("${IMAGE_TAG}")
                             }
                         }
                     }
