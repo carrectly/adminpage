@@ -107,7 +107,7 @@ const startListening = () => {
 
   let server;
   if (process.env.NODE_ENV === 'production') {
-    server = http.createServer().listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
+    server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
   } else {
     server = https
       .createServer({ key, cert }, app)
