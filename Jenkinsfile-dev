@@ -35,15 +35,10 @@ pipeline {
                         sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID  >>.env'
                         sh 'echo travisApiToken=$travisApiToken >>.env '
                         sh 'echo CORPORATE_EMAIL=$CORPORATE_EMAIL >>.env'
-                        dockerImage=docker.build registry("${IMAGE_TAG}")
-                        }
-                    }
-                 }
-                 stage('Push image to registry') {
-                 steps {
-                     script{ 
-                          docker.withRegistry( 'pavlohortovenko20/adminpage2.1', 'Credential' ) {
-                          dockerImage("${dockerImage}").push("${IMAGE_TAG}")
+                        script {
+                        docker.withRegistry("${registry}", registryCredential) {
+                        docker.build("${APP}").push("${IMAGE_TAG}")
+                                 }
                             }
                         }
                     }
