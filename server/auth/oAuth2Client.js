@@ -80,7 +80,7 @@ async function getNewTokens(req, res, next) {
 async function getAuthClient() {
   let refreshToken;
   await findUser({ id: userID, typeClient: 'private' }).then((user) => {
-    if (user && user.token.length > 0) {
+    if (user && user.token) {
       refreshToken = JSON.parse(user.token).refresh_token;
     }
     return;
@@ -95,7 +95,7 @@ async function getAuthClient() {
 async function getAuthCorporateClient() {
   let refreshToken;
   await findUser({ typeClient: 'corporate' }).then((user) => {
-    if (user && user.token.length > 0) {
+    if (user && user.token) {
       const user_data_token = JSON.parse(user.token);
       refreshToken = user_data_token.refresh_token;
     }
