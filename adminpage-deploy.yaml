@@ -19,7 +19,7 @@ spec:
         app: adminapge
     spec:
       containers:
-        - name: adminapge
+        - name: adminpage
           image: "<imageTag>"
           env:
            - name: POSTGRES_DB
