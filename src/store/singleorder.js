@@ -39,7 +39,7 @@ const _resetOrderData = () => ({ type: RESET_ORDER_DATA });
 export const getSingleOrderThunk = (orderid) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/orders/single/${orderid}`);
-    await dispatch(getSingleOrder(res.data));
+    dispatch(getSingleOrder(res.data));
   } catch (err) {
     console.error(err);
   }
@@ -48,7 +48,7 @@ export const getSingleOrderThunk = (orderid) => async (dispatch) => {
 export const updateSingleOrderThunk = (orderid, obj) => async (dispatch) => {
   try {
     const res = await axios.put(`/api/orders/single/${orderid}`, obj);
-    await dispatch(updateSingleOrder(res.data));
+    dispatch(updateSingleOrder(res.data));
   } catch (err) {
     console.error(err);
   }
@@ -58,7 +58,7 @@ export const updateOrderDetailsThunk = (id, obj) => async (dispatch) => {
   try {
     await axios.put(`/api/orders/single/services/${id}`, obj);
     const resp = await axios.get(`/api/orders/single/${id}`);
-    await dispatch(updateOrderDetails(resp.data));
+    dispatch(updateOrderDetails(resp.data));
   } catch (err) {
     console.error(err);
   }
@@ -68,7 +68,7 @@ export const addOrderServiceThunk = (orderId, serviceId) => async (dispatch) => 
   try {
     await axios.post(`/api/orders/single/services/${orderId}/${serviceId}`);
     const resp = await axios.get(`/api/orders/single/${orderId}`);
-    await dispatch(addOrderService(resp.data));
+    dispatch(addOrderService(resp.data));
   } catch (err) {
     console.error(err);
   }
@@ -78,7 +78,7 @@ export const removeOrderServiceThunk = (id, obj) => async (dispatch) => {
   try {
     await axios.put(`/api/orders/single/removeservice/${id}`, obj);
     const resp = await axios.get(`/api/orders/single/${id}`);
-    await dispatch(removeOrderService(resp.data));
+    dispatch(removeOrderService(resp.data));
   } catch (err) {
     console.error(err);
   }
@@ -89,7 +89,7 @@ export const addOrderDealerThunk = (orderid, dealerId) => async (dispatch) => {
     const res = await axios.post(`/api/orders/single/dealers/${orderid}`, {
       dealerId,
     });
-    await dispatch(addOrderDealer(res.data));
+    dispatch(addOrderDealer(res.data));
   } catch (err) {
     console.error(err);
   }
@@ -100,7 +100,7 @@ export const removeOrderDealerThunk = (orderid, dealerId) => async (dispatch) =>
     const res = await axios.put(`/api/orders/single/dealers/${orderid}`, {
       dealerId,
     });
-    await dispatch(removeOrderDealer(res.data));
+    dispatch(removeOrderDealer(res.data));
   } catch (err) {
     console.error(err);
   }
@@ -109,7 +109,7 @@ export const removeOrderDealerThunk = (orderid, dealerId) => async (dispatch) =>
 export const addOrderDriverThunk = (id, obj) => async (dispatch) => {
   try {
     const res = await axios.post(`/api/orders/single/driver/${id}`, obj);
-    await dispatch(addOrderDriver(res.data));
+    dispatch(addOrderDriver(res.data));
   } catch (err) {
     console.error(err);
   }
@@ -120,7 +120,7 @@ export const addOrderCustomerRepThunk = (id, userId) => async (dispatch) => {
     const res = await axios.post(`/api/orders/single/customerRep/${id}`, {
       userId,
     });
-    await dispatch(addOrderCustomerRep(res.data));
+    dispatch(addOrderCustomerRep(res.data));
   } catch (err) {
     console.error(err);
   }

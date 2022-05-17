@@ -49,11 +49,7 @@ const flattenDealersArray1 = (allShopsArray, shopsAlreadySelected) => {
 };
 
 const flattenDealersArray2 = (arr) =>
-  arr.map((el) => (
-    <div value={el.id} key={el.id}>
-      {el.name}
-    </div>
-  ));
+  arr.map((el) => ({ key: el.id, value: el.id, label: el.name }));
 
 const SingleOrderDetails = ({
   order,
@@ -112,7 +108,7 @@ const SingleOrderDetails = ({
   };
 
   const handleRemoveDealer = (evt) => {
-    dispatch(removeOrderDealer(orderid, evt.key));
+    dispatch(removeOrderDealer(orderid, evt));
   };
 
   const changeDriver = (evt) => {
@@ -125,7 +121,6 @@ const SingleOrderDetails = ({
   };
 
   const assignCustomerRep = (evt) => {
-    console.log('assigning rep', evt);
     dispatch(addOrderCustomerRep(orderid, evt.key));
   };
 
