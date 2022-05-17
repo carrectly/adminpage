@@ -8,22 +8,27 @@ const passport = require('passport');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./db');
 const sessionStore = new SequelizeStore({ db });
-const PORT = process.env.PORT || 443;
+const PORT = process.env.PORT || 1337;
 const app = express();
 const socketio = require('socket.io');
 const https = require('https');
 const http = require('http');
 const fs = require('fs');
 
-const keyPass = process.env.HTTPS_KEY;
-const certificate = process.env.HTTPS_CERTIFICATE;
+let key;
+let cert;
 
-const key = fs.readFileSync(require.resolve(keyPass), {
-  encoding: 'utf8',
-});
-const cert = fs.readFileSync(require.resolve(certificate), {
-  encoding: 'utf8',
-});
+if (process.env.NODE_ENV === 'development') {
+  const keyPass = process.env.HTTPS_KEY;
+  const certificate = process.env.HTTPS_CERTIFICATE;
+
+  key = fs.readFileSync(require.resolve(keyPass), {
+    encoding: 'utf8',
+  });
+  cert = fs.readFileSync(require.resolve(certificate), {
+    encoding: 'utf8',
+  });
+}
 
 module.exports = app;
 
@@ -102,7 +107,7 @@ const startListening = () => {
 
   let server;
   if (process.env.NODE_ENV === 'production') {
-    server = http.createServer().listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
+    server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
   } else {
     server = https
       .createServer({ key, cert }, app)
