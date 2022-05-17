@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 1337;
 const app = express();
 const socketio = require('socket.io');
 const https = require('https');
-const http = require('http');
 const fs = require('fs');
 
 let key;

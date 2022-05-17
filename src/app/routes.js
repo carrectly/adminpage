@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Spin } from 'antd';
 import { me } from '../store';
+import { isNil } from 'lodash';
 
 const AllCustomers = React.lazy(() => import('../components/CustomersView/AllCustomers'));
 const SingleCustomer = React.lazy(() =>
@@ -20,8 +21,8 @@ const Users = React.lazy(() => import('../components/UsersView/Users'));
 const AllTripsView = React.lazy(() => import('../components/AllTripsView/AllTripsView'));
 
 const ProtectedRoute = ({ isAuthorized, children }) => {
-  if (isAuthorized && !isAuthorized) {
-    return <Navigate to="/login" />;
+  if (!isNil(isAuthorized) && isAuthorized === false) {
+    return <Navigate to="/login" replace />;
   }
   return children;
 };
