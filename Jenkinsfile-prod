@@ -6,7 +6,7 @@ pipeline {
              CLUSTER_NAME = 'cluster-test-adminpage'
              LOCATION = 'us-central1-c'
              CREDENTIALS_ID = 'gke'
-             registry ='pavlohortovenko20/adminpage2.1:latest'
+             registry = "pavlohortovenko20/adminpage2.1:${env.BUILD_NUMBER}"
              registryCredential ='dockerhub_cred'
              gitgetvers ='git rev-parse --short  HEAD'
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
@@ -26,7 +26,7 @@ pipeline {
                         sh 'echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET  >>.env'
                         sh 'echo GOOGLE_CALLBACK=$GOOGLE_CALLBACK  >>.env'
                         sh 'echo GOOGLE_REFRESH_TOKEN=$GOOGLE_REFRESH_TOKEN  >>.env'
-                        sh 'echo DOMAIN =$DOMAIN  >>.env'
+                        sh 'echo DOMAIN_NEW =$DOMAIN_NEW  >>.env'
                         sh 'echo squareApplicationId =$squareApplicationId   >>.env'
                         sh 'echo SQUARE_TOKEN =$SQUARE_TOKEN  >>.env'
                         sh 'echo squareBasePath =$squareBasePath    >>.env'
@@ -37,11 +37,11 @@ pipeline {
                         }
                     }
                  }
-                 stage('Push image to registry') {
+                stage('Push image to registry') {
                  steps {
                      script{ 
                           docker.withRegistry( '', registryCredential ) {
-                          dockerImage.push()
+                          dockerImage.push("${env.BUILD_NUMBER}")
                             }
                         }
                     }
@@ -50,6 +50,11 @@ pipeline {
                  steps {
                          sh 'docker rmi $(docker images -q)'
                         }
+                }
+                stage('Set image by k8s') {
+                    steps {
+                        sh "sed -i.bak 's|<imageTag>|${registry}|' ./adminpage-deploy.yaml"
+                    }
                 }
                  stage('Deploy to GKE') { 
                  steps { 
