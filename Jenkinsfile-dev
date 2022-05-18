@@ -16,7 +16,7 @@ pipeline {
              image_tag='latest'
             }
          stages {
-                 stage('Checout')  {
+                 stage('Checout') {
                  steps {
                      checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/carrectly/adminpage.git']]])
                         }
