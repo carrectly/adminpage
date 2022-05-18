@@ -21,7 +21,7 @@ pipeline {
                      checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/carrectly/adminpage.git']]])
                         }
                      }   
-                 stage('Build')   {
+                 stage('Build')  {
                  steps  {
                      script {
                         sh 'echo GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID  >>.env'
