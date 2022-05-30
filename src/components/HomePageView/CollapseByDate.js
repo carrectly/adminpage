@@ -19,7 +19,6 @@ const CollapseByDate = ({ dateColumn, orders = [], columns = [] }) => {
       }
     });
     groupedArr = Object.entries(hashTable);
-    console.log('grouped array', groupedArr);
     groupedArr = groupedArr.sort((a, b) => new Date(a[0]) - new Date(b[0]));
   } else {
     return (

@@ -11,6 +11,23 @@ const sessionStore = new SequelizeStore({ db });
 const PORT = process.env.PORT || 1337;
 const app = express();
 const socketio = require('socket.io');
+const https = require('https');
+const fs = require('fs');
+
+let key;
+let cert;
+
+if (process.env.NODE_ENV === 'development') {
+  const keyPass = process.env.HTTPS_KEY;
+  const certificate = process.env.HTTPS_CERTIFICATE;
+
+  key = fs.readFileSync(require.resolve(keyPass), {
+    encoding: 'utf8',
+  });
+  cert = fs.readFileSync(require.resolve(certificate), {
+    encoding: 'utf8',
+  });
+}
 
 module.exports = app;
 
@@ -86,7 +103,15 @@ const createApp = () => {
 
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
+
+  let server;
+  if (process.env.NODE_ENV === 'production') {
+    server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
+  } else {
+    server = https
+      .createServer({ key, cert }, app)
+      .listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
+  }
 
   const io = socketio(server);
   require('./socket')(io);

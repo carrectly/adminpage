@@ -1,11 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { getEventsThunk } from '../store/calendar';
 
 const CalendarView = () => {
+  const dispatch = useDispatch();
+
   return (
     <div>
-      {/* <button type='button' onClick={() => this.props.getEvents()}>
-					Get Events
-				</button> */}
+      <button type="button" onClick={() => dispatch(getEventsThunk())}>
+        Get Events
+      </button>
       <div>
         <iframe
           className="calendar"
