@@ -3,14 +3,11 @@ pipeline {
          agent any
          environment{
              PROJECT_ID = 'adminpage-chicago'
-             CLUSTER_NAME = 'cluster-test-adminpage'
-             LOCATION = 'us-central1-c'
+             CLUSTER_NAME = 'adminpage-chicago-k8s'
+             LOCATION = 'us-east4-b'
              CREDENTIALS_ID = 'gke'
              registry = "pavlohortovenko20/adminpage2.1:${env.BUILD_NUMBER}"
              registryCredential ='dockerhub_cred'
-             gitgetvers ='git rev-parse --short  HEAD'
-             kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
-             checkContainer='docker images -f ""'
              image_tag='latest'
             }
          stages {
@@ -26,7 +23,7 @@ pipeline {
                         sh 'echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET  >>.env'
                         sh 'echo GOOGLE_CALLBACK=$GOOGLE_CALLBACK  >>.env'
                         sh 'echo GOOGLE_REFRESH_TOKEN=$GOOGLE_REFRESH_TOKEN  >>.env'
-                        sh 'echo DOMAIN_NEW =$DOMAIN_NEW  >>.env'
+                        sh 'echo DOMAIN =$DOMAIN  >>.env'
                         sh 'echo squareApplicationId =$squareApplicationId   >>.env'
                         sh 'echo SQUARE_TOKEN =$SQUARE_TOKEN  >>.env'
                         sh 'echo squareBasePath =$squareBasePath    >>.env'
