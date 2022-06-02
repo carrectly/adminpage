@@ -50,7 +50,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     'https://mail.google.com/',
     'https://www.googleapis.com/auth/calendar',
     'https://www.googleapis.com/auth/calendar.events',
-    // 'https://www.googleapis.com/auth/contacts',
+    'https://www.googleapis.com/auth/contacts',
     // 'https://www.googleapis.com/auth/calendar',
   ];
   // accessType will need to be enabled if we are trying to obtain new refresh token
