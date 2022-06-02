@@ -21,7 +21,7 @@ pipeline {
                      script {
                         sh 'echo GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID  >>.env'
                         sh 'echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET  >>.env'
-                        sh 'echo GOOGLE_CALLBACK_NEW=$GOOGLE_CALLBACK_NEW  >>.env'
+                        sh 'echo GOOGLE_CALLBACK=$GOOGLE_CALLBACK_NEW  >>.env'
                         sh 'echo GOOGLE_REFRESH_TOKEN=$GOOGLE_REFRESH_TOKEN  >>.env'
                         sh 'echo DOMAIN_NEW =$DOMAIN_NEW  >>.env'
                         sh 'echo squareApplicationId =$squareApplicationId   >>.env'
