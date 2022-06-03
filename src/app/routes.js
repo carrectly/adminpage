@@ -197,32 +197,35 @@ function AppRoutes() {
           </React.Suspense>
         }
       />
-      {userRole === 'driver' && (
-        <Route
-          path="/alltrips"
-          element={
-            <React.Suspense
-              fallback={
-                <div
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Spin />
-                </div>
-              }
-            >
+
+      <Route
+        path="/alltrips"
+        element={
+          <React.Suspense
+            fallback={
+              <div
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Spin />
+              </div>
+            }
+          >
+            {userRole === 'driver' ? (
               <ProtectedRoute isAuthorized={isAuthorized}>
                 <AllTripsView />
               </ProtectedRoute>
-            </React.Suspense>
-          }
-        />
-      )}
+            ) : (
+              <Navigate to="/account" replace />
+            )}
+          </React.Suspense>
+        }
+      />
       <Route
         path="/singlecustomer/:userid"
         element={
