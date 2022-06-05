@@ -31,6 +31,9 @@ pipeline {
                         sh 'echo CORPORATE_EMAIL =$CORPORATE_EMAIL >>.env'
                         sh 'echo travisApiToken =$travisApiToken >>.env '
                         dockerImage=docker.build registry 
+                        echo $DOMAIN_ENV
+                        echo $CORPORATE_EMAIL
+                        echo $GOOGLE_CALLBACK_ENV
                         }
                     }
                  }
