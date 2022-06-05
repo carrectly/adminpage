@@ -19,17 +19,17 @@ pipeline {
                  stage('Build') {
                  steps  {
                      script {
-                        sh 'echo GOOGLE_CLIENT_ID =$GOOGLE_CLIENT_ID >>.env'
-                        sh 'echo GOOGLE_CLIENT_SECRET =$GOOGLE_CLIENT_SECRET >>.env'
-                        sh 'echo GOOGLE_CALLBACK =$GOOGLE_CALLBACK_ENV >>.env'
-                        sh 'echo GOOGLE_REFRESH_TOKEN =$GOOGLE_REFRESH_TOKEN >>.env'
+                        sh 'echo GOOGLE_CLIENT_ID =$GOOGLE_CLIENT_ID >.env'
+                        sh 'echo GOOGLE_CLIENT_SECRET =$GOOGLE_CLIENT_SECRET >.env'
+                        sh 'echo GOOGLE_CALLBACK =$GOOGLE_CALLBACK_ENV >.env'
+                        sh 'echo GOOGLE_REFRESH_TOKEN =$GOOGLE_REFRESH_TOKEN >.env'
                         sh 'echo DOMAIN =$DOMAIN_ENV >.env'
-                        sh 'echo squareApplicationId =$squareApplicationId >>.env'
-                        sh 'echo SQUARE_TOKEN =$SQUARE_TOKEN >>.env'
-                        sh 'echo squareBasePath =$squareBasePath >>.env'
-                        sh 'echo SQUARE_LOCATION_ID =$SQUARE_LOCATION_ID >>.env'
-                        sh 'echo CORPORATE_EMAIL =$CORPORATE_EMAIL>>.env'
-                        sh 'echo travisApiToken =$travisApiToken >>.env'
+                        sh 'echo squareApplicationId =$squareApplicationId >.env'
+                        sh 'echo SQUARE_TOKEN =$SQUARE_TOKEN >.env'
+                        sh 'echo squareBasePath =$squareBasePath >.env'
+                        sh 'echo SQUARE_LOCATION_ID =$SQUARE_LOCATION_ID >.env'
+                        sh 'echo CORPORATE_EMAIL =$CORPORATE_EMAIL >.env'
+                        sh 'echo travisApiToken =$travisApiToken >.env'
                         dockerImage=docker.build registry 
                         }
                     }
