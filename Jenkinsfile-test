@@ -19,7 +19,7 @@ pipeline {
                  stage('Build') {
                  steps  {
                      script {
-                        sh 'echo $secret.txt >>.env'
+                        sh 'secret.txt >.env'
                         dockerImage=docker.build registry 
                         }
                     }
