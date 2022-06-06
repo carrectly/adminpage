@@ -9,9 +9,9 @@ pipeline {
              registry = "pavlohortovenko20/adminpage2.1:${env.BUILD_NUMBER}"
              registryCredential ='dockerhub_cred'
              image_tag='latest'
-             DOMAIN = $DOMAIN_ENV
-             GOOGLE_CALLBACK = $GOOGLE_CALLBACK_ENV
-             CORPORATE_EMAIL = $CORPORATE_EMAIL
+             DOMAIN = "${DOMAIN_ENV}"
+             GOOGLE_CALLBACK = "${GOOGLE_CALLBACK_ENV}"
+             CORPORATE_EMAIL = "${CORPORATE_EMAIL}"
             }
          stages {
                  stage('Checout') {
