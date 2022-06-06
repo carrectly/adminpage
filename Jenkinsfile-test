@@ -9,7 +9,6 @@ pipeline {
              registry = "pavlohortovenko20/adminpage2.1:${env.BUILD_NUMBER}"
              registryCredential ='dockerhub_cred'
              image_tag='latest'
-             DOMAIN = "${DOMAIN_ENV}"
              GOOGLE_CALLBACK = "${GOOGLE_CALLBACK_ENV}"
              CORPORATE_EMAIL = "${CORPORATE_EMAIL}"
             }
@@ -26,7 +25,7 @@ pipeline {
                         echo "GOOGLE_CLIENT_SECRET = ${env.GOOGLE_CLIENT_SECRET}" 
                         echo "env.GOOGLE_CALLBACK = ${env.GOOGLE_CALLBACK}"
                         echo "GOOGLE_REFRESH_TOKEN = ${env.GOOGLE_REFRESH_TOKEN }"
-                        echo "DOMAIN_ENV = ${env.DOMAIN}" 
+                        echo "DOMAIN = ${env.DOMAIN}" 
                         echo "squareApplicationId = ${env.squareApplicationId}"
                         echo "SQUARE_TOKEN = ${env.SQUARE_TOKEN} " 
                         echo "squareBasePath = ${env.squareBasePath}"   
