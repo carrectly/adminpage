@@ -9,8 +9,6 @@ pipeline {
              registry = "pavlohortovenko20/adminpage2.1:${env.BUILD_NUMBER}"
              registryCredential ='dockerhub_cred'
              image_tag='latest'
-             GOOGLE_CALLBACK = "${GOOGLE_CALLBACK_ENV}"
-             CORPORATE_EMAIL = "${CORPORATE_EMAIL}"
             }
          stages {
                  stage('Checout') {
@@ -25,12 +23,12 @@ pipeline {
                         echo "GOOGLE_CLIENT_SECRET = ${env.GOOGLE_CLIENT_SECRET}" 
                         echo "GOOGLE_CALLBACK_TEST = ${env.GOOGLE_CALLBACK}"
                         echo "GOOGLE_REFRESH_TOKEN = ${env.GOOGLE_REFRESH_TOKEN }"
-                        echo "DOMAIN = ${DOMAIN} >> .env "
+                        echo "DOMAIN = ${env.DOMAIN}"
                         echo "squareApplicationId = ${env.squareApplicationId}"
                         echo "SQUARE_TOKEN = ${env.SQUARE_TOKEN} " 
                         echo "squareBasePath = ${env.squareBasePath}"   
                         echo "SQUARE_LOCATION_ID = ${env.SQUARE_LOCATION_ID}" 
-                        echo "CORPORATE_EMAIL = ${CORPORATE_EMAIL} >> .env"
+                        echo "CORPORATE_EMAIL = ${env.CORPORATE_EMAIL}"
                         echo "travisApiToken = ${env.travisApiToken}" 
                         dockerImage=docker.build registry 
                         }
