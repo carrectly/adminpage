@@ -9,7 +9,7 @@ pipeline {
              registry = "pavlohortovenko20/adminpage2.1:${env.BUILD_NUMBER}"
              registryCredential ='dockerhub_cred'
              image_tag='latest'
-             DOMAIN_ENV == "${env.DOMAIN}"
+             DOMAIN == "${env.DOMAIN}"
              GOOGLE_CALLBACK == "${env.GOOGLE_CALLBACK_ENV}"
              CORPORATE_EMAIL == "${env.CORPORATE_EEMAIL}"
             }
