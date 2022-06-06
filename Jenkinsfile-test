@@ -9,9 +9,9 @@ pipeline {
              registry = "pavlohortovenko20/adminpage2.1:${env.BUILD_NUMBER}"
              registryCredential ='dockerhub_cred'
              image_tag='latest'
-             DOMAIN_ENV = "$DOMAIN"
-             GOOGLE_CALLBACK = "$GOOGLE_CALLBACK_ENV"
-             CORPORATE_EMAIL = "$CORPORATE_EEMAIL"
+             DOMAIN_ENV = "${env.DOMAIN}"
+             GOOGLE_CALLBACK = "${env.GOOGLE_CALLBACK_ENV}"
+             CORPORATE_EMAIL = "${env.CORPORATE_EEMAIL}"
             }
          stages {
                  stage('Checout') {
@@ -22,17 +22,17 @@ pipeline {
                  stage('Build') {
                  steps  {
                      script {
-                        echo "GOOGLE_CLIENT_ID = ${env.GOOGLE_CLIENT_ID}" 
-                        echo "GOOGLE_CLIENT_SECRET = ${env.GOOGLE_CLIENT_SECRET}" 
-                        echo "env.GOOGLE_CALLBACK = ${env.GOOGLE_CALLBACK}"
-                        echo "GOOGLE_REFRESH_TOKEN = ${env.GOOGLE_REFRESH_TOKEN }"
-                        echo "DOMAIN = ${env.DOMAIN}" 
-                        echo "squareApplicationId = ${env.squareApplicationId}"
-                        echo "SQUARE_TOKEN = ${env.SQUARE_TOKEN} " 
-                        echo "squareBasePath = ${env.squareBasePath}"   
-                        echo "SQUARE_LOCATION_ID = ${env.SQUARE_LOCATION_ID}" 
-                        echo "CORPORATE_EMAIL = ${env.CORPORATE_EMAIL}"
-                        echo "travisApiToken = ${env.travisApiToken}" 
+                        echo "GOOGLE_CLIENT_ID = ${GOOGLE_CLIENT_ID}" 
+                        echo "GOOGLE_CLIENT_SECRET = ${GOOGLE_CLIENT_SECRET}" 
+                        echo "env.GOOGLE_CALLBACK = ${GOOGLE_CALLBACK}"
+                        echo "GOOGLE_REFRESH_TOKEN = ${GOOGLE_REFRESH_TOKEN }"
+                        echo "DOMAIN = ${DOMAIN}" 
+                        echo "squareApplicationId = ${squareApplicationId}"
+                        echo "SQUARE_TOKEN = ${SQUARE_TOKEN} " 
+                        echo "squareBasePath = ${squareBasePath}"   
+                        echo "SQUARE_LOCATION_ID = ${SQUARE_LOCATION_ID}" 
+                        echo "CORPORATE_EMAIL = ${CORPORATE_EMAIL}"
+                        echo "travisApiToken = ${travisApiToken}" 
                         dockerImage=docker.build registry 
                         }
                     }
