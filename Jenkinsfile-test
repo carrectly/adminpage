@@ -31,7 +31,7 @@ pipeline {
                         echo "SQUARE_TOKEN = ${env.SQUARE_TOKEN} " 
                         echo "squareBasePath = ${env.squareBasePath}"   
                         echo "SQUARE_LOCATION_ID = ${env.SQUARE_LOCATION_ID}" 
-                        echo "CORPORATE_EMAIL_ENV = ${env.EMAIL}"
+                        echo "CORPORATE_EMAIL = ${env.CORPORATE_EMAIL}"
                         echo "travisApiToken = ${env.travisApiToken}" 
                         dockerImage=docker.build registry 
                         }
