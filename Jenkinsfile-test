@@ -21,14 +21,14 @@ pipeline {
                      script {
                         echo "GOOGLE_CLIENT_ID = ${env.GOOGLE_CLIENT_ID}" 
                         echo "GOOGLE_CLIENT_SECRET = ${env.GOOGLE_CLIENT_SECRET}" 
-                        echo "GOOGLE_CALLBACK_TEST = ${env.GOOGLE_CALLBACK}"
+                        echo "GOOGLE_CALLBACK = ${env.GOOGLE_CALLBACK_TEST}"
                         echo "GOOGLE_REFRESH_TOKEN = ${env.GOOGLE_REFRESH_TOKEN }"
-                        echo "DOMAIN_TEST = ${env.DOMAIN}"
+                        echo "DOMAIN = ${env.DOMAIN_TEST}"
                         echo "squareApplicationId = ${env.squareApplicationId}"
                         echo "SQUARE_TOKEN = ${env.SQUARE_TOKEN} " 
                         echo "squareBasePath = ${env.squareBasePath}"   
                         echo "SQUARE_LOCATION_ID = ${env.SQUARE_LOCATION_ID}" 
-                        echo "CORPORATE_EMAIL_TEST = ${env.CORPORATE_EMAIL}"
+                        echo "CORPORATE_EMAIL = ${env.CORPORATE_EMAIL}"
                         echo "travisApiToken = ${env.travisApiToken}" 
                         dockerImage=docker.build registry 
                         }
