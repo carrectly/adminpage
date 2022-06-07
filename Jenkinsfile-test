@@ -29,16 +29,16 @@ pipeline {
                  stage('Build') {
                  steps  {
                      script {
-                        echo "DOMAIN = ${env.DOMAIN}"
-                        echo "GOOGLE_CLIENT_SECRET = ${env.GOOGLE_CLIENT_SECRET}"
-                        echo "GOOGLE_CLIENT_ID = ${env.GOOGLE_CLIENT_ID}"
-                        echo "GOOGLECOLLBACK = ${env.GOOGLE_CALLBACK}"
-                        echo "GOOGLE_REFRESH_TOKEN = ${env.GOOGLE_REFRESH_TOKEN}"
-                        echo "squareApplicationId = ${env.squareApplicationId}"
-                        echo "SQUARE_TOKEN = ${env.SQUARE_TOKEN}"
-                        echo "squareBasePath = ${env.squareBasePath}"
-                        echo "SQUARE_LOCATION_ID = ${env.SQUARE_LOCATION_ID}"
-                        echo "CORPORATE_EMAIL = ${env.CORPORATE_EMAIL}"
+                        echo "DOMAIN = ${DOMAIN} >>.env"
+                        echo "GOOGLE_CLIENT_SECRET = ${GOOGLE_CLIENT_SECRET} >>.env"
+                        echo "GOOGLE_CLIENT_ID = ${GOOGLE_CLIENT_ID} >>.env"
+                        echo "GOOGLECOLLBACK = ${GOOGLE_CALLBACK} >>.env"
+                        echo "GOOGLE_REFRESH_TOKEN = ${GOOGLE_REFRESH_TOKEN} >>.env"
+                        echo "squareApplicationId = ${squareApplicationId} >>.env"
+                        echo "SQUARE_TOKEN = ${SQUARE_TOKEN} >>.env"
+                        echo "squareBasePath = ${squareBasePath}"
+                        echo "SQUARE_LOCATION_ID = ${SQUARE_LOCATION_ID} >>.env"
+                        echo "CORPORATE_EMAIL = ${CORPORATE_EMAIL} >>.env"
                         dockerImage=docker.build registry 
                         }
                     }
