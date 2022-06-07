@@ -21,7 +21,7 @@ pipeline {
                      script {
                         echo "GOOGLE_CLIENT_ID = ${env.GOOGLE_CLIENT_ID}" 
                         echo "GOOGLE_CLIENT_SECRET = ${env.GOOGLE_CLIENT_SECRET}" 
-                        echo "GOOGLE_CALLBACK = ${env.GOOGLECOLLBACK}"
+                        echo "GOOGLECOLLBACK = ${env.GOOGLE_CALLBACK}"
                         echo "GOOGLE_REFRESH_TOKEN = ${env.GOOGLE_REFRESH_TOKEN }"
                         echo "DOMAIN = ${env.DOMAINTEST}"
                         echo "squareApplicationId = ${env.squareApplicationId}"
