@@ -30,17 +30,17 @@ pipeline {
                  stage('Build') {
                  steps  {
                      script {
-                        sh 'echo DOMAIN_TEST = ${env.DOMAIN}'
-                        sh 'echo GOOGLE_CLIENT_SECRET = ${env.GOOGLE_CLIENT_SECRET}'
-                        sh 'echo GOOGLE_CLIENT_ID = ${env.GOOGLE_CLIENT_ID}'
-                        sh 'echo GOOGLECOLLBACK = ${env.GOOGLE_CALLBACK}'
-                        sh 'echo GOOGLE_REFRESH_TOKEN = ${env.GOOGLE_REFRESH_TOKEN}'
-                        sh 'echo squareApplicationId = ${env.squareApplicationId}'
-                        sh 'echo SQUARE_TOKEN = ${env.SQUARE_TOKEN}'
-                        sh 'echo squareBasePath = ${env.squareBasePath}'
-                        sh 'echo SQUARE_LOCATION_ID = ${env.SQUARE_LOCATION_ID}'
-                        sh 'echo CORPORATE_EMAIL = ${env.CORPORATE_EMAIL}'
-                        sh 'echo travisApiToken = ${env.travisApiToken}'
+                        sh "echo DOMAIN_TEST = ${env.DOMAIN}"
+                        sh "echo GOOGLE_CLIENT_SECRET = ${env.GOOGLE_CLIENT_SECRET}"
+                        sh "echo GOOGLE_CLIENT_ID = ${env.GOOGLE_CLIENT_ID}"
+                        sh "echo GOOGLECOLLBACK = ${env.GOOGLE_CALLBACK}"
+                        sh "echo GOOGLE_REFRESH_TOKEN = ${env.GOOGLE_REFRESH_TOKEN}"
+                        sh "echo squareApplicationId = ${env.squareApplicationId}"
+                        sh "echo SQUARE_TOKEN = ${env.SQUARE_TOKEN}"
+                        sh "echo squareBasePath = ${env.squareBasePath}"
+                        sh "echo SQUARE_LOCATION_ID = ${env.SQUARE_LOCATION_ID}"
+                        sh "echo CORPORATE_EMAIL = ${env.CORPORATE_EMAIL}"
+                        sh "echo travisApiToken = ${env.travisApiToken}"
                         dockerImage=docker.build registry 
                         }
                     }
