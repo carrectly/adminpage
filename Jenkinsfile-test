@@ -13,7 +13,7 @@ pipeline {
              GOOGLE_CLIENT_SECRET = credentials('GOOGLE_CLIENT_SECRET')
              GOOGLE_CALLBACK = credentials('GOOGLE_CALLBACK')
              GOOGLE_REFRESH_TOKEN = credentials('GOOGLE_REFRESH_TOKEN')
-             DOMAIN = credentials('DOMAIN')
+             DOMAIN = credentials('DOMAIN_TEST')
              squareApplicationId = credentials('squareApplicationId')
              SQUARE_TOKEN = credentials('SQUARE_TOKEN')
              squareBasePath = credentials('squareBasePath')
