@@ -29,7 +29,7 @@ pipeline {
                  stage('Build') {
                  steps  {
                      script {
-                        sh "echo $DOMAIN_TEST = ${env.DOMAIN}"
+                        sh "echo $DOMAIN = ${env.DOMAIN}"
                         sh "echo $GOOGLE_CLIENT_SECRET = ${env.GOOGLE_CLIENT_SECRET}"
                         sh "echo $GOOGLE_CLIENT_ID = ${env.GOOGLE_CLIENT_ID}"
                         sh "echo $GOOGLECOLLBACK = ${env.GOOGLE_CALLBACK}"
