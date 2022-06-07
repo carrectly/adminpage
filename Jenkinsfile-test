@@ -19,6 +19,7 @@ pipeline {
                  stage('Build') {
                  steps  {
                      script {
+                        sh 'env | sort '
                         echo "GOOGLE_CLIENT_ID = ${env.GOOGLE_CLIENT_ID}" 
                         echo "GOOGLE_CLIENT_SECRET = ${env.GOOGLE_CLIENT_SECRET}" 
                         echo "GOOGLECOLLBACK = ${env.GOOGLE_CALLBACK}"
