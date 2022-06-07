@@ -20,7 +20,7 @@ pipeline {
                  stage('Build') {
                  steps  {
                      script {
-                        sh ' echo $AAA_SECRET_TEXT > .env'
+                        echo "${env.AAA_SECRET_TEXT}"
                         dockerImage=docker.build registry 
                         }
                     }
