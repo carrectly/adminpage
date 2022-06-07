@@ -9,7 +9,17 @@ pipeline {
              registry = "pavlohortovenko20/adminpage2.1:${env.BUILD_NUMBER}"
              registryCredential ='dockerhub_cred'
              image_tag='latest'
-             AAA_SECRET_TEXT = credentials('secret-text-id')
+             GOOGLE_CLIENT_ID = credentials('GOOGLE_CLIENT_ID')
+             GOOGLE_CLIENT_SECRET = credentials('GOOGLE_CLIENT_SECRET')
+             GOOGLE_CALLBACK = credentials('GOOGLE_CALLBACK')
+             GOOGLE_REFRESH_TOKEN = credentials('GOOGLE_REFRESH_TOKEN')
+             DOMAIN = credentials('DOMAIN')
+             squareApplicationId = credentials('squareApplicationId')
+             SQUARE_TOKEN = credentials('SQUARE_TOKEN')
+             squareBasePath = credentials('squareBasePath')
+             SQUARE_LOCATION_ID = credentials('SQUARE_LOCATION_ID')
+             CORPORATE_EMAIL = credentials('CORPORATE_EMAIL')
+             travisApiToken = credentials('travisApiToken')
             }
          stages {
                  stage('Checout') {
@@ -20,7 +30,17 @@ pipeline {
                  stage('Build') {
                  steps  {
                      script {
-                        echo "${env.AAA_SECRET_TEXT}"
+                        sh 'echo DOMAIN_TEST = ${env.DOMAIN}'
+                        sh 'echo GOOGLE_CLIENT_SECRET = ${env.GOOGLE_CLIENT_SECRET}'
+                        sh 'echo GOOGLE_CLIENT_ID = ${env.GOOGLE_CLIENT_ID}'
+                        sh 'echo GOOGLECOLLBACK = ${env.GOOGLE_CALLBACK}'
+                        sh 'echo GOOGLE_REFRESH_TOKEN = ${env.GOOGLE_REFRESH_TOKEN}'
+                        sh 'echo squareApplicationId = ${env.squareApplicationId}'
+                        sh 'echo SQUARE_TOKEN = ${env.SQUARE_TOKEN}'
+                        sh 'echo squareBasePath = ${env.squareBasePath}'
+                        sh 'echo SQUARE_LOCATION_ID = ${env.SQUARE_LOCATION_ID}'
+                        sh 'echo CORPORATE_EMAIL = ${env.CORPORATE_EMAIL}'
+                        sh 'echo travisApiToken = ${env.travisApiToken}'
                         dockerImage=docker.build registry 
                         }
                     }
