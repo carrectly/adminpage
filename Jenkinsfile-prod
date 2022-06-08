@@ -30,6 +30,7 @@ pipeline {
                         sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID  >>.env'
                         sh 'echo CORPORATE_EMAIL=$CORPORATE_EMAIL >>.env'
                         sh 'echo travisApiToken=$travisApiToken >>.env '
+                        sh 'echo DB_URL=$DB_URL >> .env'
                         dockerImage=docker.build registry 
                         }
                     }
