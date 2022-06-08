@@ -24,18 +24,18 @@ pipeline {
                  stage('Build') {
                  steps  {
                      script {
-                        echo "GOOGLE_CLIENT_ID = ${env.GOOGLE_CLIENT_ID} >> .env"
-                        echo "GOOGLE_CLIENT_SECRET = ${env.GOOGLE_CLIENT_SECRET} >> .env" 
-                        echo "GOOGLE_CALLBACK = ${env.GOOGLE_CALLBACK_TEST} >> .env"
-                        echo "GOOGLE_REFRESH_TOKEN = ${env.GOOGLE_REFRESH_TOKEN} >> .env"
-                        echo "DOMAIN = ${env.DOMAIN_TEST} >> .env"
-                        echo "squareApplicationId = ${env.squareApplicationId} >> .env"
-                        echo "SQUARE_TOKEN = ${env.SQUARE_TOKEN} >> .env" 
-                        echo "squareBasePath = ${env.squareBasePath} >> .env"   
-                        echo "SQUARE_LOCATION_ID = ${env.SQUARE_LOCATION_ID} >> .env" 
-                        echo "CORPORATE_EMAIL = ${env.CORPORATE_EMAIL} >>.env"
-                        echo "travisApiToken = ${env.travisApiToken} >>.env" 
-                        def DB_URL=${env.DB_URL_TEST} 
+                        sh 'echo GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID >> .env'
+                        sh 'echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET >> .env'
+                        sh 'echo GOOGLE_CALLBACK=$GOOGLE_CALLBACK_TEST >> .env'
+                        sh 'echo GOOGLE_REFRESH_TOKEN=$GOOGLE_REFRESH_TOKEN >> .env'
+                        sh 'echo DOMAIN=$DOMAIN_TEST >> .env'
+                        sh 'echo squareApplicationId=$squareApplicationId >> .env'
+                        sh 'echo SQUARE_TOKEN=$SQUARE_TOKEN >> .env'
+                        sh 'echo squareBasePath=$squareBasePath >> .env'
+                        sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID >> .env'
+                        sh 'echo CORPORATE_EMAIL=$CORPORATE_EMAIL >> .env'
+                        sh 'echo travisApiToken=$travisApiToken >> .env'
+                        sh 'echo DB_URL=$DB_URL_TEST >> .env '
                         dockerImage=docker.build registry 
                         }
                     }
