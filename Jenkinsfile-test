@@ -2,11 +2,13 @@
 pipeline {
          agent any
          environment{
+             APP = "adminpage"
+             IMAGE_TAG = "${env.BUILD_NUMBER}"
              PROJECT_ID = 'adminpage-chicago'
              CLUSTER_NAME = 'cluster-test-adminpage'
              LOCATION = 'us-central1-c'
              CREDENTIALS_ID = 'gke'
-             registry ='pavlohortovenko20/adminpage2.1:latest'
+             registry = "pavlohortovenko20/adminpage2.1:${env.BUILD_NUMBER}"
              registryCredential ='dockerhub_cred'
              gitgetvers ='git rev-parse --short  HEAD'
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
@@ -16,7 +18,7 @@ pipeline {
          stages {
                  stage('Checout') {
                  steps {
-                     checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/carrectly/adminpage.git']]])
+                     checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/carrectly/adminpage.git']]])
                         }
                      }   
                  stage('Build') {
@@ -24,15 +26,15 @@ pipeline {
                      script {
                         sh 'echo GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID  >>.env'
                         sh 'echo GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET  >>.env'
-                        sh 'echo GOOGLE_CALLBACK=$GOOGLE_CALLBACK  >>.env'
+                        sh 'echo GOOGLE_CALLBACK=$GOOGLE_CALLBACK_TEST  >>.env'
                         sh 'echo GOOGLE_REFRESH_TOKEN=$GOOGLE_REFRESH_TOKEN  >>.env'
-                        sh 'echo DOMAIN =$DOMAIN  >>.env'
+                        sh 'echo DOMAIN =$DOMAIN_TEST  >>.env'
                         sh 'echo squareApplicationId =$squareApplicationId   >>.env'
                         sh 'echo SQUARE_TOKEN =$SQUARE_TOKEN  >>.env'
                         sh 'echo squareBasePath =$squareBasePath    >>.env'
                         sh 'echo SQUARE_LOCATION_ID=$SQUARE_LOCATION_ID  >>.env'
-                        sh 'echo CORPORATE_EMAIL=$CORPORATE_EMAIL >>.env'
                         sh 'echo travisApiToken=$travisApiToken >>.env '
+                        sh 'echo CORPORATE_EMAIL=$CORPORATE_EMAIL >>.env'
                         dockerImage=docker.build registry 
                         }
                     }
@@ -41,7 +43,7 @@ pipeline {
                  steps {
                      script{ 
                           docker.withRegistry( '', registryCredential ) {
-                          dockerImage.push()
+                          dockerImage.push("${env.BUILD_NUMBER}")
                             }
                         }
                     }
@@ -50,6 +52,11 @@ pipeline {
                  steps {
                          sh 'docker rmi $(docker images -q)'
                         }
+                }
+                stage('Set image by k8s') {
+                    steps {
+                        sh "sed -i.bak 's|<imageTag>|${registry}|' ./adminpage-deploy.yaml"
+                    }
                 }
                  stage('Deploy to GKE') { 
                  steps { 
