@@ -2,12 +2,17 @@
 pipeline {
          agent any
          environment{
+             APP = "adminpage"
+             IMAGE_TAG = "${env.BUILD_NUMBER}"
              PROJECT_ID = 'adminpage-chicago'
              CLUSTER_NAME = 'cluster-test-adminpage'
              LOCATION = 'us-central1-c'
              CREDENTIALS_ID = 'gke'
              registry = "pavlohortovenko20/adminpage2.1:${env.BUILD_NUMBER}"
              registryCredential ='dockerhub_cred'
+             gitgetvers ='git rev-parse --short  HEAD'
+             kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
+             checkContainer='docker images -f ""'
              image_tag='latest'
             }
          stages {
@@ -35,7 +40,7 @@ pipeline {
                         }
                     }
                  }
-                stage('Push image to registry') {
+                 stage('Push image to registry') {
                  steps {
                      script{ 
                           docker.withRegistry( '', registryCredential ) {
