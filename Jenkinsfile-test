@@ -28,9 +28,9 @@ pipeline {
                         echo "SQUARE_TOKEN = ${env.SQUARE_TOKEN} >> .env" 
                         echo "squareBasePath = ${env.squareBasePath} >> .env"   
                         echo "SQUARE_LOCATION_ID = ${env.SQUARE_LOCATION_ID} >> .env" 
-                        echo "CORPORATE_EMAIL = ${env.CORPORATE_EMAIL} >> .env"
-                        echo "travisApiToken = ${env.travisApiToken} >> .env" 
-                        echo "DB_URL = ${env.DB_URL_TEST} >> .env"
+                        echo "CORPORATE_EMAIL = ${env.CORPORATE_EMAIL} >>.env"
+                        echo "travisApiToken = ${env.travisApiToken} >>.env" 
+                        def DB_URL=${env.DB_URL_TEST} >>.env
                         dockerImage=docker.build registry 
                         }
                     }
