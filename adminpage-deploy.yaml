@@ -22,6 +22,8 @@ spec:
         - name: adminpage
           image: "<imageTag>"
           env:
+           - name: TZ 
+              value: US/Chicago 
            - name: POSTGRES_DB
              valueFrom: 
                 secretKeyRef: 
