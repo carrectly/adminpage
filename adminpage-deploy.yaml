@@ -21,7 +21,7 @@ spec:
       containers:
         - name: adminpage
           image: "<imageTag>"
-          env:
+          env: 
            - name: POSTGRES_DB
              valueFrom: 
                 secretKeyRef: 
