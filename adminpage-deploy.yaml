@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adminapge
+  namespace: default
+spec:
+  selector:
+   matchLabels:
+    app: adminapge
+  replicas: 3
+  strategy: 
+     type: RollingUpdate
+     rollingUpdate:
+       maxSurge: 25%
+       maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: adminapge
+    spec:
+      containers:
+        - name: adminpage
+          image: "<imageTag>"
+          env:
+           - name: POSTGRES_DB
+             valueFrom: 
+                secretKeyRef: 
+                   name: mysecret
+                   key: database
+           - name: POSTGRES_USER
+             valueFrom: 
+                secretKeyRef: 
+                   name: mysecret
+                   key: user
+           - name: POSTGRES_PASSWORD
+             valueFrom: 
+                secretKeyRef: 
+                   name: mysecret
+                   key: password
+                   
+           - name: PGADMIN_PORT
+             value: "1337"
+          ports:
+            - containerPort: 1337
+              name: adminapgeport
+
+---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: adminapge
+      labels:
+        app: adminapge
+    spec:
+       ports:
+        - name: adminapge
+          port: 1337
+          targetPort: 1337
+       selector:
+        app: adminapge

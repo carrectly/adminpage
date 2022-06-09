@@ -33,7 +33,7 @@ router.post('/newevent/update', async (req, res, next) => {
 });
 
 async function listEvents() {
-  let response = await calendar.events.list(
+  let response = await calendar().events.list(
     {
       calendarId: 'primary',
       timeMin: new Date().toISOString(),
@@ -89,7 +89,7 @@ async function createEvent(evt) {
   };
 
   //flexible calendar id '6kllmvnusibcs0lbnh98ffiqvs@group.calendar.google.com'
-  var request = await calendar.events.insert({
+  var request = await calendar().events.insert({
     calendarId: 'primary',
     resource: event,
   });
@@ -152,7 +152,7 @@ async function updateEvent(evt) {
     },
   };
 
-  var request = await calendar.events.update({
+  var request = await calendar().events.update({
     calendarId: 'primary',
     eventId: evt.hash,
     resource: event,

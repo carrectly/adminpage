@@ -19,10 +19,11 @@ module.exports = merge(common, {
       errors: true,
     },
     host: '0.0.0.0', // Spin up a server for quick development
-    port: 1337,
+    port: 443,
     historyApiFallback: true,
     quiet: true,
     hot: true,
+    https: true,
   },
   watch: true,
   optimization: {
