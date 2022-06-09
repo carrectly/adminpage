@@ -23,7 +23,7 @@ spec:
           image: "<imageTag>"
           env:
            - name: TZ 
-              value: US/Chicago 
+              value: Chicago 
            - name: POSTGRES_DB
              valueFrom: 
                 secretKeyRef: 
