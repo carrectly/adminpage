@@ -21,9 +21,7 @@ spec:
       containers:
         - name: adminpage
           image: "<imageTag>"
-          env:
-           - name: TZ 
-              value: Chicago 
+          env: 
            - name: POSTGRES_DB
              valueFrom: 
                 secretKeyRef: 
