@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getActiveOrdersThunk } from '../../../store/activeOrders';
+import { getUsersThunk } from '../../../store/users';
 import DefaultTable from '../DefaultTable';
 import InvoicesTable from '../InvoicesTable';
 import CollapseByDate from '../CollapseByDate';
@@ -16,7 +17,7 @@ import {
 } from '../../../utils';
 import columns from '../../Table/HomeTableColumns';
 
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Dropdown } from 'antd';
 import {
   NotificationOutlined,
   ToolOutlined,
@@ -25,21 +26,47 @@ import {
   HourglassOutlined,
   MenuOutlined,
   CarOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
+
 const { Content } = Layout;
+
+const employeeList = (arr, userLS, handleUserMenuClick) => {
+  return (
+    <Menu
+      onClick={(e) => handleUserMenuClick(arr, e)}
+      items={arr.map((person) => ({
+        label: person.name ? person.name : person.firstName,
+        key: person.id,
+        icon: <UserOutlined />,
+      }))}
+    />
+  );
+};
 
 const AdminMenu = () => {
   const dispatch = useDispatch();
   const [render, updateRender] = useState(1);
+  const [activeUser, setActiveUser] = useState(
+    localStorage.getItem('user') !== null ? localStorage.getItem('user') : 'user',
+  );
 
   useEffect(() => {
     dispatch(getActiveOrdersThunk());
+    dispatch(getUsersThunk());
   }, []);
 
   const handleMenuClick = (menu) => {
     updateRender(menu.key);
   };
+
+  const handleUserMenuClick = (arr, e) => {
+    localStorage.setItem('user', arr.filter((user) => user.id === +e.key)[0].firstName);
+    setActiveUser(localStorage.getItem('user'));
+  };
+
   const orders = useSelector((state) => state.activeOrders);
+  const users = useSelector((state) => state.users);
 
   const actionStatusArr = getTakeActionStatusArray();
   const workZoneStatusArr = getWorkZoneStatusArray();
@@ -47,6 +74,17 @@ const AdminMenu = () => {
   const quoteStatusArr = getQuotesStatusArray();
   const leadsStatusArr = getPotentialLeadsStatusArray();
   const confirmedTripsStatusArr = getConfirmedTripsArray();
+
+  const memoizedOrderByUserArr = React.useMemo(() => {
+    return orders
+      .filter((el) => confirmedTripsStatusArr.includes(el.status))
+      .filter((el) => {
+        if (activeUser !== 'user' && el.customerRep !== null) {
+          return el.customerRep.firstName === activeUser;
+        }
+        return null;
+      });
+  }, [orders, activeUser]);
 
   const actionArr = orders.filter((el) => actionStatusArr.includes(el.status));
 
@@ -61,12 +99,29 @@ const AdminMenu = () => {
   const confirmedTrips = orders.filter((el) => confirmedTripsStatusArr.includes(el.status));
 
   const components = {
-    1: <CollapseByDate orders={actionArr} dateColumn="pickupDate" columns={columns} />,
-    2: <DefaultTable ordersArray={workZoneArr} type="trips" />,
-    3: <CollapseTrips orders={confirmedTrips} type="trips" />,
-    4: <InvoicesTable ordersArray={invoiceArr} />,
-    5: <DefaultTable ordersArray={quotesArr} type="default" />,
-    6: <DefaultTable ordersArray={leadsArr} type="default" />,
+    1: (
+      <CollapseByDate
+        orders={memoizedOrderByUserArr}
+        dateColumn="pickupDate"
+        columns={columns}
+        emptyText={
+          'You have no active orders assigned to you. Please, choose another user or assign order in section "To take action"'
+        }
+      />
+    ),
+    2: (
+      <CollapseByDate
+        orders={actionArr}
+        dateColumn="pickupDate"
+        columns={columns}
+        emptyText={'No active orders'}
+      />
+    ),
+    3: <DefaultTable ordersArray={workZoneArr} type="trips" />,
+    4: <CollapseTrips orders={confirmedTrips} type="trips" />,
+    5: <InvoicesTable ordersArray={invoiceArr} />,
+    6: <DefaultTable ordersArray={quotesArr} type="default" />,
+    7: <DefaultTable ordersArray={leadsArr} type="default" />,
   };
 
   return (
@@ -81,22 +136,32 @@ const AdminMenu = () => {
           onClick={handleMenuClick}
           style={{ height: '100%', padding: '0' }}
         >
-          <Menu.Item key="1" icon={<NotificationOutlined />}>
+          <Menu.Item key="1">
+            Orders by{' '}
+            <Dropdown.Button
+              overlay={() => employeeList(users, activeUser, handleUserMenuClick)}
+              placement="bottom"
+              icon={<UserOutlined />}
+            >
+              {activeUser ? activeUser : 'user'}
+            </Dropdown.Button>
+          </Menu.Item>
+          <Menu.Item key="2" icon={<NotificationOutlined />}>
             To take action
           </Menu.Item>
-          <Menu.Item key="2" icon={<ToolOutlined />}>
+          <Menu.Item key="3" icon={<ToolOutlined />}>
             Garage
           </Menu.Item>
-          <Menu.Item key="3" icon={<CarOutlined />}>
+          <Menu.Item key="4" icon={<CarOutlined />}>
             Trips
           </Menu.Item>
-          <Menu.Item key="4" icon={<DollarOutlined />}>
+          <Menu.Item key="5" icon={<DollarOutlined />}>
             Invoices
           </Menu.Item>
-          <Menu.Item key="5" icon={<HourglassOutlined />}>
+          <Menu.Item key="6" icon={<HourglassOutlined />}>
             Quotes
           </Menu.Item>
-          <Menu.Item key="6" icon={<PhoneOutlined />}>
+          <Menu.Item key="7" icon={<PhoneOutlined />}>
             Potential Leads
           </Menu.Item>
         </Menu>
