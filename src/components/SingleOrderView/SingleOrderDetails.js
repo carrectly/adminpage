@@ -180,7 +180,7 @@ const SingleOrderDetails = ({
               <Descriptions.Item label="Discount">{order.discount}</Descriptions.Item>
               <Descriptions.Item label="Flexible on Time">{order.flexibleOnTime}</Descriptions.Item>
               <Descriptions.Item label="Created at">
-                {moment(order.createAt).format('M/D/YY hh:mm A')}
+                {moment(order.createdAt).format('M/D/YY hh:mm A')}
               </Descriptions.Item>
               <Descriptions.Item label="Updated at">
                 {moment(order.updatedAt).format('M/D/YY hh:mm A')}
