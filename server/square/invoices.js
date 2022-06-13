@@ -13,7 +13,7 @@ const { ordersApi } = client;
 
 const { invoicesApi } = client;
 
-var dueDate = moment().add(1, 'days');
+var dueDate = moment().add(1, 'days').format('YYYY-MM-DD');
 
 const invoiceDescription = `Hi there!
 
