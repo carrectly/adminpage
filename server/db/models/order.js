@@ -72,7 +72,7 @@ const Order = db.define('order', {
   },
 });
 
-if (process.env.ENVIRONMENT === 'PRODUCTION') {
+if (process.env.NODE_ENV === 'production') {
   const createInGoogle = async (inst) => {
     try {
       const customer = inst.customer.dataValues;
