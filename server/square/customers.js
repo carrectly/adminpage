@@ -4,8 +4,7 @@ const { Customer } = require('../db/models');
 
 const client = new Client({
   timeout: 3000,
-  environment:
-    process.env.ENVIRONMENT === 'PRODUCTION' ? Environment.Production : Environment.Sandbox,
+  environment: process.env.NODE_ENV === 'production' ? Environment.Production : Environment.Sandbox,
   accessToken: process.env.SQUARE_TOKEN,
 });
 
