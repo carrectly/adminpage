@@ -8,11 +8,12 @@ spec:
    matchLabels:
     app: adminapge
   replicas: 3
+  minReadySeconds: 40
   strategy: 
      type: RollingUpdate
      rollingUpdate:
-       maxSurge: 150
-       maxUnavailable: 0 
+       maxSurge: 1
+       maxUnavailable: 1
   template:
     metadata:
       labels:
@@ -70,5 +71,5 @@ spec:
     kind: Deployment
     name: adminpage
   minReplicas: 3
-  maxReplicas: 8
+  maxReplicas: 12
   targetCPUUtilizationPercentage: 70
