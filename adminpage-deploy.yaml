@@ -58,3 +58,17 @@ spec:
           targetPort: 1337
        selector:
         app: adminapge
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: aminpage-autoscaling 
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: adminpage
+  minReplicas: 3
+  maxReplicas: 8
+  targetCPUUtilizationPercentage: 70
