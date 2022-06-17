@@ -8,11 +8,11 @@ spec:
    matchLabels:
     app: adminapge
   replicas: 3
-  minReadySeconds: 40
+  minReadySeconds: 25
   strategy: 
      type: RollingUpdate
      rollingUpdate:
-       maxSurge: 2
+       maxSurge: 1
        maxUnavailable: 0
   template:
     metadata:
