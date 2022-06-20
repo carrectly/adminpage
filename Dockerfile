@@ -9,6 +9,8 @@ COPY . /app
 
 ENV PATH ./.env:/app/.env:$PATH
 
+ENV TZ America/Chicago
+
 
 RUN npm i 
 
