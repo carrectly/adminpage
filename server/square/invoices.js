@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const { ApiError, Client, Environment } = require('square');
 const moment = require('moment');
-require('moment-timezone');
-moment.tz.setDefault('America/Chicago');
 
 const client = new Client({
   timeout: 3000,
