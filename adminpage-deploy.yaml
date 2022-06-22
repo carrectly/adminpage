@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: adminpage
-          image: pavlohortovenko20/adminpage2.1:160
+          image: "<imageTag>"  
           env: 
            - name: POSTGRES_DB
              valueFrom: 
