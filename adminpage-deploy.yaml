@@ -48,7 +48,7 @@ spec:
           volumeMounts:
             - name: zoneinfo
               mountPath: /etc/localtime
-              subPath: USA/Chicago
+              subPath:  America/Chicago
               readOnly: true
       volumes:
             - name: zoneinfo
