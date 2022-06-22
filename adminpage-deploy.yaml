@@ -44,15 +44,15 @@ spec:
           ports:
             - containerPort: 1337
               name: adminapgeport
-        volumeMounts:
+          volumeMounts:
             - name: zoneinfo
               mountPath: /etc/localtime
               subPath:  America/Chicago
               readOnly: true
-      volumes:
-            - name: zoneinfo
-              hostPath:
-                path: /usr/share/zoneinfo/
+       volumes:
+       - name: zoneinfo
+         hostPath:
+           path: /usr/share/zoneinfo/
 ---
     apiVersion: v1
     kind: Service
