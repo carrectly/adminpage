@@ -22,7 +22,7 @@ spec:
       containers:
         - name: adminpage
           image: "<imageTag>"  
-          arg: 
+          args: 
           - date
           volumeMounts:
             - name: zoneinfo
