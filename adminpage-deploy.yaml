@@ -8,7 +8,7 @@ spec:
    matchLabels:
     app: adminapge
   replicas: 3
-  minReadySeconds: 25
+  minReadySeconds: 5
   strategy: 
      type: RollingUpdate
      rollingUpdate:
