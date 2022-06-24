@@ -7,8 +7,11 @@ tockencalendar.json
 tockengmail.json
 tockencontacts.json
 .DS_Store
+
 npm-debug.log
 yarn-error.log
+yarn.lock*
+
 squareconfig.json
 samplejson.json
 .env
