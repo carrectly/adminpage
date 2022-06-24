@@ -8,11 +8,12 @@ spec:
    matchLabels:
     app: adminapge
   replicas: 3
+  minReadySeconds: 5
   strategy: 
      type: RollingUpdate
      rollingUpdate:
-       maxSurge: 25%
-       maxUnavailable: 25%
+       maxSurge: 1
+       maxUnavailable: 0
   template:
     metadata:
       labels:
@@ -20,8 +21,8 @@ spec:
     spec:
       containers:
         - name: adminpage
-          image: "<imageTag>"
-          env:
+          image: "<imageTag>"  
+          env: 
            - name: POSTGRES_DB
              valueFrom: 
                 secretKeyRef: 
@@ -43,7 +44,15 @@ spec:
           ports:
             - containerPort: 1337
               name: adminapgeport
-
+          volumeMounts:
+            - name: zoneinfo
+              mountPath: /etc/localtime
+              subPath:  America/Chicago
+              readOnly: true
+      volumes:
+      - name: zoneinfo
+        hostPath:
+          path: /usr/share/zoneinfo/
 ---
     apiVersion: v1
     kind: Service
@@ -58,3 +67,17 @@ spec:
           targetPort: 1337
        selector:
         app: adminapge
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: aminpage-autoscaling 
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: adminpage
+  minReplicas: 3
+  maxReplicas: 12
+  targetCPUUtilizationPercentage: 70
