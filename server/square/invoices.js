@@ -4,7 +4,8 @@ const moment = require('moment');
 
 const client = new Client({
   timeout: 3000,
-  environment: process.env.NODE_ENV === 'production' ? Environment.Production : Environment.Sandbox,
+  environment:
+    process.env.SQUARE_ENVIRONMENT === 'production' ? Environment.Production : Environment.Sandbox,
   accessToken: process.env.SQUARE_TOKEN,
 });
 
