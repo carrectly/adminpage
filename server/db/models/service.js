@@ -2,18 +2,19 @@ const Sequelize = require('sequelize');
 const db = require('../database');
 
 const setWebsitePrice = (val) => {
-  if (val) {
-    if (val.includes(',')) {
-      return val.split(',').map(function (item) {
+  const value_to_send = String(val);
+  if (val !== null && value_to_send.length > 0) {
+    if (value_to_send.includes(',')) {
+      return value_to_send.split(',').map(function (item) {
         return item.trim();
       });
     } else {
-      return [val].map(function (item) {
+      return [value_to_send].map(function (item) {
         return item.trim();
       });
     }
   }
-  return [];
+  return null;
 };
 
 const Service = db.define('service', {
