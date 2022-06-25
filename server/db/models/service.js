@@ -8,7 +8,7 @@ const setWebsitePrice = (val) => {
         return item.trim();
       });
     } else {
-      return val.map(function (item) {
+      return [val].map(function (item) {
         return item.trim();
       });
     }
