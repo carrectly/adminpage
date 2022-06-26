@@ -1,4 +1,6 @@
 import axios from 'axios';
+import moment from 'moment';
+import { tz } from 'moment-timezone';
 
 /**
  * ACTION TYPES
@@ -34,7 +36,9 @@ export const getSquareCustomerThunk = (phone) => async (dispatch) => {
 
 export const createInvoiceThunk = (obj, id) => async (dispatch) => {
   try {
-    const res = await axios.post('/square/invoices', { obj, id });
+    const utc_date = moment.utc().format('YYYY-MM-DD HH:mm:ss Z');
+    const due_date = moment(utc_date).tz('America/Chicago').add(1, 'days').format('YYYY-MM-DD');
+    const res = await axios.post('/square/invoices', { obj, id, due_date });
     dispatch(createInvoice(res.data));
   } catch (err) {
     console.error(err);
