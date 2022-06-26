@@ -1,8 +1,5 @@
 const router = require('express').Router();
 const { ApiError, Client, Environment } = require('square');
-const moment = require('moment');
-require('moment-timezone');
-moment.tz.setDefault('America/Chicago');
 
 const client = new Client({
   timeout: 3000,
@@ -15,7 +12,7 @@ const { ordersApi } = client;
 
 const { invoicesApi } = client;
 
-var dueDate = moment().add(1, 'days').format('YYYY-MM-DD');
+// var dueDate = moment().add(1, 'days').format('YYYY-MM-DD');
 
 const invoiceDescription = `Hi there!
 
@@ -38,6 +35,7 @@ router.post('/', async (req, res, next) => {
   try {
     let order = req.body.obj;
     let customerid = req.body.id;
+    let dueDate = req.body.due_date;
     let services = req.body.obj.services;
     let idempKey = `${order.hash}${Math.floor(Math.random() * 1000)}`;
 
