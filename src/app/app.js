@@ -26,7 +26,7 @@ const App = () => {
           <Navbar />
         </Header>
       )}
-      <Content style={{ height: '100%', padding: '0 10px' }}>
+      <Content style={{ height: '100%', padding: '0 10px', overflowY: 'auto' }}>
         <div className="allContent">
           <AppRoutes />
         </div>

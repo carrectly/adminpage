@@ -6,19 +6,13 @@ COPY package*.json /app
 
 COPY . /app
 
+RUN apt update && apt install tzdata -y
+ENV PATH ./.env:/app/.env:$PATH
 
 
-ENV GOOGLE_CLIENT_ID=./secrets.js
-ENV GOOGLE_CLIENT_SECRET=./secrets.js
-ENV GOOGLE_CALLBACK=./secrets.js
-ENV GOOGLE_REFRESH_TOKEN=./secrets.js
-ENV DOMAIN=./secrets.js
-ENV travisApiToken=./secrets.js
-ENV squareApplicationId=./secrets.js
-ENV SQUARE_TOKEN=./secrets.js
-ENV squareBasePath=./secrets.js
-ENV SQUARE_LOCATION_ID=./secrets.js
+#ENV TZ America/Chicago
+
 
 RUN npm i 
 
-CMD npm run start-dev
+CMD npm run start-prod

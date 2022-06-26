@@ -49,11 +49,7 @@ const flattenDealersArray1 = (allShopsArray, shopsAlreadySelected) => {
 };
 
 const flattenDealersArray2 = (arr) =>
-  arr.map((el) => (
-    <div value={el.id} key={el.id}>
-      {el.name}
-    </div>
-  ));
+  arr.map((el) => ({ key: el.id, value: el.id, label: el.name }));
 
 const SingleOrderDetails = ({
   order,
@@ -112,7 +108,7 @@ const SingleOrderDetails = ({
   };
 
   const handleRemoveDealer = (evt) => {
-    dispatch(removeOrderDealer(orderid, evt.key));
+    dispatch(removeOrderDealer(orderid, evt));
   };
 
   const changeDriver = (evt) => {
@@ -125,7 +121,6 @@ const SingleOrderDetails = ({
   };
 
   const assignCustomerRep = (evt) => {
-    console.log('assigning rep', evt);
     dispatch(addOrderCustomerRep(orderid, evt.key));
   };
 
@@ -134,8 +129,11 @@ const SingleOrderDetails = ({
 
   if (Object.keys(order).length > 0 && order.customerComments.indexOf('services list') > -1) {
     const [comments, userServices, ...others] = order.customerComments.split('services list:');
+
     additionalComments = comments;
     services = JSON.parse(userServices.replace(/\\/g, ''));
+  } else {
+    additionalComments = order.customerComments;
   }
 
   return (
@@ -182,7 +180,7 @@ const SingleOrderDetails = ({
               <Descriptions.Item label="Discount">{order.discount}</Descriptions.Item>
               <Descriptions.Item label="Flexible on Time">{order.flexibleOnTime}</Descriptions.Item>
               <Descriptions.Item label="Created at">
-                {moment(order.createAt).format('M/D/YY hh:mm A')}
+                {moment(order.createdAt).format('M/D/YY hh:mm A')}
               </Descriptions.Item>
               <Descriptions.Item label="Updated at">
                 {moment(order.updatedAt).format('M/D/YY hh:mm A')}
@@ -228,7 +226,9 @@ const SingleOrderDetails = ({
               <Descriptions.Item label="Customer Comments" contentStyle={{ display: 'block' }}>
                 <div>{additionalComments}</div>
                 {services && services.length > 0 && (
-                  <div>Services list: {services.map((service) => service.name).join(', ')}</div>
+                  <div>
+                    <b>Services list:</b> {services.map((service) => service.name).join(', ')}
+                  </div>
                 )}
               </Descriptions.Item>
             </Descriptions>

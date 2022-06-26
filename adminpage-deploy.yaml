@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adminapge
+  namespace: default
+spec:
+  selector:
+   matchLabels:
+    app: adminapge
+  replicas: 3
+  minReadySeconds: 5
+  strategy: 
+     type: RollingUpdate
+     rollingUpdate:
+       maxSurge: 1
+       maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: adminapge
+    spec:
+      containers:
+        - name: adminpage
+          image: "<imageTag>"  
+          env: 
+           - name: POSTGRES_DB
+             valueFrom: 
+                secretKeyRef: 
+                   name: mysecret
+                   key: database
+           - name: POSTGRES_USER
+             valueFrom: 
+                secretKeyRef: 
+                   name: mysecret
+                   key: user
+           - name: POSTGRES_PASSWORD
+             valueFrom: 
+                secretKeyRef: 
+                   name: mysecret
+                   key: password
+                   
+           - name: PGADMIN_PORT
+             value: "1337"
+          ports:
+            - containerPort: 1337
+              name: adminapgeport
+          volumeMounts:
+            - name: zoneinfo
+              mountPath: /etc/localtime
+              subPath:  America/Chicago
+              readOnly: true
+      volumes:
+      - name: zoneinfo
+        hostPath:
+          path: /usr/share/zoneinfo/
+---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: adminapge
+      labels:
+        app: adminapge
+    spec:
+       ports:
+        - name: adminapge
+          port: 1337
+          targetPort: 1337
+       selector:
+        app: adminapge
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: aminpage-autoscaling 
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: adminpage
+  minReplicas: 3
+  maxReplicas: 12
+  targetCPUUtilizationPercentage: 70
