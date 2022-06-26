@@ -547,19 +547,24 @@ table.commentlist {
 
 .float-plus {
   position: fixed;
-  color: darkblue;
-  bottom: 0;
+  color: #743794;
+  bottom: 20px;
   right: 0;
   font-size: 10rem;
   padding: 20px;
   z-index: 9999;
   transition: all 0.1s ease-in-out;
-  filter: drop-shadow(6px 10px 0 #666);
+  // filter: drop-shadow(6px 10px 0 #666);
 }
 
 .float-plus:hover {
-  filter: drop-shadow(6px 14px 0 #666);
+  // filter: drop-shadow(6px 14px 0 #666);
   transform: scale(1.05);
+}
+
+.float-plus svg {
+  width: 60px;
+  height: 60px;
 }
 
 .footer {

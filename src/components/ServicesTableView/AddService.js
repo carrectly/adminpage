@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form, Input, InputNumber, Popover } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Modal, Button, Form, Input, InputNumber, Popover, Row, Col, Checkbox } from 'antd';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { addServiceThunk } from '../../store/services';
+import { PlusCircleFilled } from '@ant-design/icons';
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
+const { TextArea } = Input;
 
 const AddService = () => {
   const [form] = Form.useForm();
@@ -41,7 +38,7 @@ const AddService = () => {
   return (
     <div>
       <Popover content="Click here to add a new service">
-        <FontAwesomeIcon
+        <PlusCircleFilled
           className="float-plus"
           onClick={() => handleShow(true)}
           icon={faPlusCircle}
@@ -49,7 +46,7 @@ const AddService = () => {
       </Popover>
       <Modal title="Add Service" visible={show} footer={null} closable={false} getContainer={false}>
         <Form
-          {...layout}
+          layout="vertical"
           form={form}
           name="control-hooks"
           size="large"
@@ -57,23 +54,49 @@ const AddService = () => {
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
-          <Form.Item label="Service Name">
-            <Form.Item name="name" noStyle rules={[{ required: true }]}>
-              <Input />
-            </Form.Item>
+          <Form.Item label="Service Name" name="name" rules={[{ required: true }]}>
+            <Input />
           </Form.Item>
-          <Form.Item label="Service Price">
-            <Form.Item name="price" noStyle rules={[{ required: true }, { type: 'number' }]}>
-              <InputNumber />
-            </Form.Item>
+
+          <Form.Item label="Show on Website" noStyle name="is_show_user" valuePropName="checked">
+            <Checkbox>Show on Website</Checkbox>
           </Form.Item>
-          <Form.Item label="Description">
-            <Form.Item noStyle name="description">
-              <Input />
-            </Form.Item>
+          <Row gutter={16}>
+            <Col span="12">
+              <Form.Item
+                label="Price in AdminPage"
+                name="price"
+                rules={[{ required: true }, { type: 'number' }]}
+              >
+                <InputNumber style={{ width: '100%' }} />
+              </Form.Item>
+            </Col>
+            <Col span="12">
+              <Form.Item label="Price for Website" name="price_customer">
+                <TextArea rows={1} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Form.Item label="Duration" name="duration">
+            <Input />
           </Form.Item>
-          <Form.Item>
-            <Button htmlType="button" type="secondary" onClick={handleClose}>
+          <Form.Item label="Description" name="description">
+            <TextArea rows={1} />
+          </Form.Item>
+          <Form.Item label="Short Description" name="short_description">
+            <TextArea rows={3} />
+          </Form.Item>
+          <Form.Item label="Long Description" name="long_description">
+            <TextArea rows={3} />
+          </Form.Item>
+          <Form.Item style={{ marginTop: '20px' }}>
+            <Button
+              htmlType="button"
+              type="secondary"
+              onClick={handleClose}
+              style={{ marginRight: '20px' }}
+            >
               Cancel
             </Button>
             <Button type="primary" htmlType="submit">

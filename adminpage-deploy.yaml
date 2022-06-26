@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: adminpage
-          image: "<imageTag>"
+          image: "<imageTag>"  
           env: 
            - name: POSTGRES_DB
              valueFrom: 
@@ -44,7 +44,15 @@ spec:
           ports:
             - containerPort: 1337
               name: adminapgeport
-
+          volumeMounts:
+            - name: zoneinfo
+              mountPath: /etc/localtime
+              subPath:  America/Chicago
+              readOnly: true
+      volumes:
+      - name: zoneinfo
+        hostPath:
+          path: /usr/share/zoneinfo/
 ---
     apiVersion: v1
     kind: Service

@@ -6,6 +6,9 @@ router.get('/', async (req, res, next) => {
     const result = await Service.findAll({
       order: [['name', 'ASC']],
     });
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
     res.json(result);
   } catch (err) {
     next(err);
