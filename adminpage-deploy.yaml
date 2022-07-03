@@ -53,20 +53,6 @@ spec:
       - name: zoneinfo
         hostPath:
           path: /usr/share/zoneinfo/
----
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: adminapge
-      labels:
-        app: adminapge
-    spec:
-       ports:
-        - name: adminapge
-          port: 1337
-          targetPort: 1337
-       selector:
-        app: adminapge
 
 ---
 apiVersion: autoscaling/v1
