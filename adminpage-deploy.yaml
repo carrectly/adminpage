@@ -53,7 +53,7 @@ spec:
       - name: zoneinfo
         hostPath:
           path: /usr/share/zoneinfo/
-
+          
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
