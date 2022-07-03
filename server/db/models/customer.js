@@ -26,7 +26,7 @@ const Customer = db.define('customer', {
   },
 });
 
-if (process.env.ENVIRONMENT === 'PRODUCTION') {
+if (process.env.NODE_ENV === 'production') {
   const createInGoogle = async (inst) => {
     try {
       inst.isInGoogle = true;

@@ -1,11 +1,11 @@
 import React from 'react';
 import DefaultTable from './DefaultTable';
-import { Collapse, Spin } from 'antd';
+import { Collapse, Empty } from 'antd';
 const { Panel } = Collapse;
 import moment from 'moment';
 import { panelHeaderHelper } from '../Shared/CollapsePanelHelper';
 
-const CollapseByDate = ({ dateColumn, orders = [], columns = [] }) => {
+const CollapseByDate = ({ dateColumn, orders = [], columns = [], emptyText = '' }) => {
   const hashTable = {};
   let groupedArr;
 
@@ -29,9 +29,10 @@ const CollapseByDate = ({ dateColumn, orders = [], columns = [] }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          marginTop: '40px',
         }}
       >
-        <Spin />
+        <Empty description={<div style={{ maxWidth: '300px' }}>{emptyText}</div>} />
       </div>
     );
   }

@@ -1,11 +1,13 @@
 const router = require('express').Router();
 const { ApiError, Client, Environment } = require('square');
 const moment = require('moment');
+require('moment-timezone');
+moment.tz.setDefault('America/Chicago');
 
 const client = new Client({
   timeout: 3000,
   environment:
-    process.env.ENVIRONMENT === 'PRODUCTION' ? Environment.Production : Environment.Sandbox,
+    process.env.SQUARE_ENVIRONMENT === 'production' ? Environment.Production : Environment.Sandbox,
   accessToken: process.env.SQUARE_TOKEN,
 });
 

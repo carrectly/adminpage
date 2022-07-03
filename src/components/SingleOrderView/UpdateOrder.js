@@ -35,10 +35,10 @@ const UpdateOrder = () => {
 
   const onFinish = (values) => {
     if (values.dropoffDate) {
-      values.dropoffDate = moment(values.dropoffDate).format('M/D/YY hh:mm A');
+      values.dropoffDate = moment(values.dropoffDate);
     }
     if (values.pickupDate) {
-      values.pickupDate = moment(values.pickupDate).format('M/D/YY hh:mm A');
+      values.pickupDate = moment(values.pickupDate);
     }
     clean(values);
     dispatch(updateSingleOrderThunk(id, values));
