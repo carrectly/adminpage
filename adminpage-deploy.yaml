@@ -8,7 +8,7 @@ spec:
    matchLabels:
     app: adminapge
   replicas: 3
-  minReadySeconds: 25
+  minReadySeconds: 5
   strategy: 
      type: RollingUpdate
      rollingUpdate:
@@ -53,21 +53,7 @@ spec:
       - name: zoneinfo
         hostPath:
           path: /usr/share/zoneinfo/
----
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: adminapge
-      labels:
-        app: adminapge
-    spec:
-       ports:
-        - name: adminapge
-          port: 1337
-          targetPort: 1337
-       selector:
-        app: adminapge
-
+          
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
