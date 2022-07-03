@@ -48,6 +48,21 @@ const AllServices = () => {
         size="small"
         loading={loading}
         rowKey="id"
+        scroll={{ y: 820 }}
+        expandable={{
+          expandedRowRender: (record) => (
+            <div>
+              <div>
+                <b>Short Description: </b>
+                <span>{record.short_description}</span>
+              </div>
+              <div>
+                <b>Long Description: </b>
+                <span>{record.long_description}</span>
+              </div>
+            </div>
+          ),
+        }}
       />
     </div>
   );
