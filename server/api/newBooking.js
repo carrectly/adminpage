@@ -5,10 +5,6 @@ const { Customer, Order } = require('../db/models');
 
 router.post('/', async (req, res, next) => {
   try {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    
     let services = req.body.param.services; //array
     let newcust = req.body.param.customer;
     let order = req.body.param.order;
