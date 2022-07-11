@@ -51,6 +51,9 @@ const User = db.define('user', {
   token: {
     type: Sequelize.TEXT,
   },
+  zoho_tokens: {
+    type: Sequelize.TEXT,
+  },
 });
 
 module.exports = User;
