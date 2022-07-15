@@ -63,6 +63,10 @@ pipeline {
                  stage('Deploy to GKE') { 
                  steps { 
                     step([
+                    sh ' curl -X POST "https://api.cloudflare.com/client/v4/user/tokens/verify" \
+                     -H "Authorization: Bearer mCA9q-VMXNyIrfQfVlGXADVIA5iDk_iMPzB77aD5" \
+                     -H "Content-Type:application/json" \
+                     --data '{"purge_everything":true}'',
                     $class: 'KubernetesEngineBuilder',
                     projectId: env.PROJECT_ID,
                     clusterName: env.CLUSTER_NAME,
@@ -70,11 +74,6 @@ pipeline {
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
                     verifyDeployments: true])
-                    sh 
-                     curl -X POST "https://api.cloudflare.com/client/v4/user/tokens/verify" \
-                     -H "Authorization: Bearer mCA9q-VMXNyIrfQfVlGXADVIA5iDk_iMPzB77aD5" \
-                     -H "Content-Type:application/json" \
-                     --data '{"purge_everything":true}'   
                     }
                 }
             }
