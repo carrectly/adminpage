@@ -71,9 +71,13 @@ pipeline {
                     location: env.LOCATION,
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
-                    verifyDeployments: true,
-                    sh "${purge}"])
+                    verifyDeployments: true])
                     }
                 }
+                 stage('purge clear') {
+                 sh 'curl -X POST "https://api.cloudflare.com/client/v4/user/tokens/verify" \
+                     -H "Authorization: Bearer mCA9q-VMXNyIrfQfVlGXADVIA5iDk_iMPzB77aD5" \
+                     -H "Content-Type:application/json"'
             }
         }
+    }
