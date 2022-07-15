@@ -77,9 +77,10 @@ pipeline {
                 }
                  stage('purge clear') {
                   steps {
-                      sh 'curl -X POST "https://api.cloudflare.com/client/v4/user/tokens/verify" \
+                      sh `curl -X POST "https://api.cloudflare.com/client/v4/user/tokens/verify" \
                           -H "Authorization: Bearer mCA9q-VMXNyIrfQfVlGXADVIA5iDk_iMPzB77aD5" \
-                          -H "Content-Type:application/json"'
+                          -H "Content-Type:application/json"
+                          `
                     }
                 }
             }
