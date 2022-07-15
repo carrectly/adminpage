@@ -63,7 +63,7 @@ pipeline {
                         sh "sed -i.bak 's|<imageTag>|${registry}|' ./adminpage-deploy.yaml"
                     }
                 }
-                 stage('Deploy to GKE') { 
+                stage('Deploy to GKE') { 
                  steps { 
                     step([
                     $class: 'KubernetesEngineBuilder',
@@ -75,7 +75,7 @@ pipeline {
                     verifyDeployments: true])
                     }
                 }
-                 stage('purge clear') {
+                stage('purge clear') {
                   steps {
                       sh 'curl -X POST "https://api.cloudflare.com/client/v4/zones/023e105f4ecef8ad9ca31a8372d0c353/purge_cache" \
                           -H "X-Auth-Email: Taras@carrectly.com" \
