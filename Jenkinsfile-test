@@ -81,7 +81,7 @@ pipeline {
                           -H "Authorization: Bearer mCA9q-VMXNyIrfQfVlGXADVIA5iDk_iMPzB77aD5" \
                           -H "Content-Type:application/json"
                           `
+                        }
                     }
                 }
             }
-        }
