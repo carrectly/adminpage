@@ -14,6 +14,10 @@ pipeline {
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
              checkContainer='docker images -f ""'
              image_tag='latest'
+             purge='curl -X POST "https://api.cloudflare.com/client/v4/user/tokens/verify" \
+                     -H "Authorization: Bearer mCA9q-VMXNyIrfQfVlGXADVIA5iDk_iMPzB77aD5" \
+                     -H "Content-Type:application/json" \
+                     --data '{"purge_everything":true}''
             }
          stages {
                  stage('Checout') {
@@ -63,17 +67,13 @@ pipeline {
                  stage('Deploy to GKE') { 
                  steps { 
                     step([
-                    sh ' curl -X POST "https://api.cloudflare.com/client/v4/user/tokens/verify" \
-                     -H "Authorization: Bearer mCA9q-VMXNyIrfQfVlGXADVIA5iDk_iMPzB77aD5" \
-                     -H "Content-Type:application/json" \
-                     --data '{"purge_everything":true}'',
-                    $class: 'KubernetesEngineBuilder',
                     projectId: env.PROJECT_ID,
                     clusterName: env.CLUSTER_NAME,
                     location: env.LOCATION,
                     manifestPattern: 'adminpage-deploy.yaml',
                     credentialsId: env.CREDENTIALS_ID,
-                    verifyDeployments: true])
+                    verifyDeployments: true,
+                    sh "${purge}"])
                     }
                 }
             }
