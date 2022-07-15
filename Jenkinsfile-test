@@ -63,9 +63,10 @@ pipeline {
                         sh "sed -i.bak 's|<imageTag>|${registry}|' ./adminpage-deploy.yaml"
                     }
                 }
-                 stage('Deploy to GKE') { 
+                stage('Deploy to GKE') { 
                  steps { 
                     step([
+                    $class: 'KubernetesEngineBuilder',
                     projectId: env.PROJECT_ID,
                     clusterName: env.CLUSTER_NAME,
                     location: env.LOCATION,
@@ -74,12 +75,15 @@ pipeline {
                     verifyDeployments: true])
                     }
                 }
-                 stage('purge clear') {
-                 steps {
-                 sh 'curl -X POST "https://api.cloudflare.com/client/v4/user/tokens/verify" \
-                     -H "Authorization: Bearer mCA9q-VMXNyIrfQfVlGXADVIA5iDk_iMPzB77aD5" \
-                     -H "Content-Type:application/json"'
+                stage('purge clear') {
+                  steps {
+                      sh 'curl -X POST "https://api.cloudflare.com/client/v4/zones/023e105f4ecef8ad9ca31a8372d0c353/purge_cache" \
+                          -H "X-Auth-Email: Taras@carrectly.com" \
+                          -H "X-Auth-Key: mCA9q-VMXNyIrfQfVlGXADVIA5iDk_iMPzB77aD5" \
+                          -H "Content-Type: application/json" \
+                          --data '{"purge_everything":true}'
+                          '
+                        }
                     }
                 }
             }
-        }
