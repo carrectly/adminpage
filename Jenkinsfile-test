@@ -81,7 +81,7 @@ pipeline {
                           -H "X-Auth-Email: Taras@carrectly.com" \
                           -H "X-Auth-Key: mCA9q-VMXNyIrfQfVlGXADVIA5iDk_iMPzB77aD5" \
                           -H "Content-Type: application/json" \
-                          --data '{"purge_everything":true}'
+                          --data '{"purge_everything": true}'
                           '
                         }
                     }
