@@ -1,0 +1,18 @@
+version: "2"
+services:
+  app:
+    build: .
+    env_file: .env
+    depends_on:
+      - postgres
+    ports:
+      - "1337:1337"
+
+  postgres:
+    image: postgres:12.9
+    environment:
+      POSTGRES_PASSWORD: Postgres1234
+      POSTGRES_USER: postgres
+      POSTGRES_DB: adminpage
+    volumes:
+      - /Users/pavlohortovenko/carrectly-chicago/dump_db/:/mnt/disk/
