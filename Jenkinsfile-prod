@@ -8,7 +8,6 @@ pipeline {
              CREDENTIALS_ID = 'gke'
              registry = "pavlohortovenko20/adminpage2.1:${env.BUILD_NUMBER}"
              registryCredential ='dockerhub_cred'
-             image_tag='latest'
             }
          stages {
                  stage('Checout') {
