@@ -14,9 +14,6 @@ pipeline {
              kubernetesSetVersion ='kubectl set image deployment/adminpage-deployment adminpage2.1:latest=adminpage2.1:latest:${gitgetvers} --record'
              checkContainer='docker images -f ""'
              image_tag='latest'
-             purge='curl -X POST "https://api.cloudflare.com/client/v4/user/tokens/verify" \
-                     -H "Authorization: Bearer mCA9q-VMXNyIrfQfVlGXADVIA5iDk_iMPzB77aD5" \
-                     -H "Content-Type:application/json"'
             }
          stages {
                  stage('Checout') {
