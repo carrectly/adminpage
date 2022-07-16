@@ -78,7 +78,8 @@ pipeline {
                 stage('Clear cache') {
                     steps {
                         script {
-                            sh "curl -X POST -H 'X-Auth-Key: mCA9q-VMXNyIrfQfVlGXADVIA5iDk_iMPzB77aD5' -H 'X-Auth-Email: Taras@carrectly.com' -H "Content-Type: application/json\" -d
+                            sh "curl -X POST -H 'X-Auth-Key: mCA9q-VMXNyIrfQfVlGXADVIA5iDk_iMPzB77aD5' -H 'X-Auth-Email: Taras@carrectly.com' -H 
+                            \"type: application/json\" -d
                              '{\"purge_everything\"
                              :true}' 'https://api.cloudflare.com/client/v4/zones/242c56eb5e439346d50924163f4a56b8/purge_cache' 
                              "
