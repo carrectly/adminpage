@@ -135,12 +135,11 @@ const SingleOrderDetails = ({
   let services;
   if (Object.keys(order).length > 0 && order.customerComments.indexOf('services list') > -1) {
     const [comments, userServices, ...others] = order.customerComments.split('services list:');
-
     additionalComments = comments;
     if (userServices.includes('\\')) {
-      return JSON.parse(userServices.replace(/\\/g, ''));
+      services = JSON.parse(userServices.replace(/\\/g, ''));
     } else {
-      return userServices.replace(/\n/g, ', ');
+      services = userServices.replace(/\n/g, ', ');
     }
   } else {
     additionalComments = order.customerComments;
