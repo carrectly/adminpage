@@ -34,6 +34,9 @@ const Order = db.define('order', {
   pickupLocation: {
     type: Sequelize.STRING,
   },
+  dropoffLocation: {
+    type: Sequelize.STRING,
+  },
   carYear: {
     type: Sequelize.INTEGER,
   },

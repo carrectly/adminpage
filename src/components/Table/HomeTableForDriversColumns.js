@@ -89,6 +89,12 @@ const columns = [
     render: (value) => <LocationCell value={value} />,
   },
   {
+    title: 'dropoffLocation',
+    dataIndex: 'dropoffLocation',
+    key: 'dropoffLocation',
+    render: (value) => <LocationCell value={value} />,
+  },
+  {
     title: 'pickupDate',
     dataIndex: 'pickupDate',
     key: 'pickupDate',
