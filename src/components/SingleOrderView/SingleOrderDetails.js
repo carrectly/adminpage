@@ -241,7 +241,10 @@ const SingleOrderDetails = ({
                 <div>{additionalComments}</div>
                 {services && services.length > 0 && (
                   <div>
-                    <b>Services list:</b> {services.map((service) => service.name).join(', ')}
+                    <b>Services list:</b>
+                    {typeof services === 'string'
+                      ? services
+                      : services.map((service) => service.name).join(', ')}
                   </div>
                 )}
               </Descriptions.Item>
