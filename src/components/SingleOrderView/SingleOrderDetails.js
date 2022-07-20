@@ -13,6 +13,7 @@ import {
   removeOrderDealerThunk as removeOrderDealer,
   addOrderCustomerRepThunk as addOrderCustomerRep,
 } from '../../store/singleorder';
+import { UserOutlined } from '@ant-design/icons';
 import './styles.scss';
 
 const statusArray = getStatusArray();
@@ -241,7 +242,7 @@ const SingleOrderDetails = ({
                 <div>{additionalComments}</div>
                 {services && services.length > 0 && (
                   <div>
-                    <b>Services list:</b>
+                    <b>Services list: </b>
                     {typeof services === 'string'
                       ? services
                       : services.map((service) => service.name).join(', ')}
