@@ -48,7 +48,7 @@ const AdminMenu = () => {
   const dispatch = useDispatch();
   const [render, updateRender] = useState(1);
   const [activeUser, setActiveUser] = useState(
-    localStorage.getItem('user') !== null ? localStorage.getItem('user') : 'user',
+    localStorage.getItem('user') !== null ? localStorage.getItem('user') : 'all',
   );
 
   useEffect(() => {
@@ -79,10 +79,10 @@ const AdminMenu = () => {
     return orders
       .filter((el) => confirmedTripsStatusArr.includes(el.status))
       .filter((el) => {
-        if (activeUser !== 'user' && el.customerRep !== null) {
+        if (activeUser !== 'all' && el.customerRep !== null) {
           return el.customerRep.firstName === activeUser;
         }
-        return null;
+        return el;
       });
   }, [orders, activeUser]);
 
@@ -143,7 +143,7 @@ const AdminMenu = () => {
               placement="bottom"
               icon={<UserOutlined />}
             >
-              {activeUser ? activeUser : 'user'}
+              {activeUser ? activeUser : 'all'}
             </Dropdown.Button>
           </Menu.Item>
           <Menu.Item key="2" icon={<NotificationOutlined />}>

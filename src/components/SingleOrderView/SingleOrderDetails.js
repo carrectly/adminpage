@@ -13,6 +13,7 @@ import {
   removeOrderDealerThunk as removeOrderDealer,
   addOrderCustomerRepThunk as addOrderCustomerRep,
 } from '../../store/singleorder';
+import { UserOutlined } from '@ant-design/icons';
 import './styles.scss';
 
 const statusArray = getStatusArray();
@@ -48,8 +49,15 @@ const flattenDealersArray1 = (allShopsArray, shopsAlreadySelected) => {
   ));
 };
 
+// const flattenDealersArray2 = (arr) =>
+//   arr.map((el) => ({ key: el.id, value: el.id, label: el.name }));
+
 const flattenDealersArray2 = (arr) =>
-  arr.map((el) => ({ key: el.id, value: el.id, label: el.name }));
+  arr.map((el) => (
+    <div value={el.id} key={el.id}>
+      {el.name}
+    </div>
+  ));
 
 const SingleOrderDetails = ({
   order,
@@ -126,12 +134,14 @@ const SingleOrderDetails = ({
 
   let additionalComments;
   let services;
-
   if (Object.keys(order).length > 0 && order.customerComments.indexOf('services list') > -1) {
     const [comments, userServices, ...others] = order.customerComments.split('services list:');
-
     additionalComments = comments;
-    services = JSON.parse(userServices.replace(/\\/g, ''));
+    if (userServices.includes('\\')) {
+      services = JSON.parse(userServices.replace(/\\/g, ''));
+    } else {
+      services = userServices.replace(/\n/g, ', ');
+    }
   } else {
     additionalComments = order.customerComments;
   }
@@ -175,6 +185,11 @@ const SingleOrderDetails = ({
               </Descriptions.Item>
               <Descriptions.Item label="Pickup Location">
                 <LocationCell value={order.pickupLocation} />
+              </Descriptions.Item>
+              <Descriptions.Item label="DropOff Location">
+                <LocationCell
+                  value={order.dropoffLocation ? order.dropoffLocation : order.pickupLocation}
+                />
               </Descriptions.Item>
               <Descriptions.Item label="PROMO CODE">{order.promoCode}</Descriptions.Item>
               <Descriptions.Item label="Discount">{order.discount}</Descriptions.Item>
@@ -227,7 +242,10 @@ const SingleOrderDetails = ({
                 <div>{additionalComments}</div>
                 {services && services.length > 0 && (
                   <div>
-                    <b>Services list:</b> {services.map((service) => service.name).join(', ')}
+                    <b>Services list: </b>
+                    {typeof services === 'string'
+                      ? services
+                      : services.map((service) => service.name).join(', ')}
                   </div>
                 )}
               </Descriptions.Item>

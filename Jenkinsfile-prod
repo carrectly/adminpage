@@ -8,7 +8,6 @@ pipeline {
              CREDENTIALS_ID = 'gke'
              registry = "pavlohortovenko20/adminpage2.1:${env.BUILD_NUMBER}"
              registryCredential ='dockerhub_cred'
-             image_tag='latest'
             }
          stages {
                  stage('Checout') {
@@ -67,5 +66,12 @@ pipeline {
                     verifyDeployments: true])
                     }
                 }
+                stage('Clear cache') {
+                    steps {
+                        script {
+                            sh "curl -X POST -H 'X-Auth-Key: kXi-d4mDjGpTiafhJt8xYf78EbQlVtjjF2wz6cUx' -H 'X-Auth-Email: Taras@carrectly.com'  -H \'type: application/json\' -d'{\"purge_everything\" :true}' 'https://api.cloudflare.com/client/v4/zones/7788351225ff0290334491b49d064a7b/purge_cache'"
+                            }
+                        }
+                    }
+                }
             }
-        }

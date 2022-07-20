@@ -104,6 +104,15 @@ const UpdateOrder = () => {
               <Input />
             </Form.Item>
           </Form.Item>
+          <Form.Item label="Drop-off Location">
+            <Form.Item
+              name="dropoffLocation"
+              noStyle
+              initialValue={order.dropoffLocation ? order.dropoffLocation : order.pickupLocation}
+            >
+              <Input />
+            </Form.Item>
+          </Form.Item>
           <Form.Item label="Car Year">
             <Form.Item name="carYear" noStyle initialValue={order.carYear}>
               <Input />

@@ -99,6 +99,20 @@ const ArchivedOrdersColumns = (
     render: (value) => <LocationCell value={value} />,
   },
   {
+    title: 'dropoffLocation',
+    dataIndex: 'dropoffLocation',
+    key: 'dropoffLocation',
+    ...getColumnSearchProps(
+      'dropoffLocation',
+      searchInput,
+      searchText,
+      searchedColumn,
+      handleSearch,
+      handleReset,
+    ),
+    render: (value) => <LocationCell value={value} />,
+  },
+  {
     title: 'pickupDate',
     dataIndex: 'pickupDate',
     key: 'pickupDate',

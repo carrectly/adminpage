@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { updateSingleCustomerThunk } from '../../store/singlecustomer';
-import { Form, Button, Input } from 'antd';
+import { Form, Button, Input, Space } from 'antd';
 import { useParams } from 'react-router-dom';
 
 const layout = {
@@ -17,7 +17,7 @@ function clean(obj) {
   }
 }
 
-const UpdateCustomer = () => {
+const UpdateCustomer = ({ customer }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
@@ -41,11 +41,19 @@ const UpdateCustomer = () => {
     <div>
       <Form
         {...layout}
+        labelAlign="left"
         form={form}
         name="control-hooks"
         size="large"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
+        initialValues={{
+          firstName: customer.firstName,
+          lastName: customer.lastName,
+          email: customer.email,
+          phoneNumber: customer.phoneNumber,
+          location: customer.location,
+        }}
       >
         <Form.Item label="First Name">
           <Form.Item noStyle name="firstName">
@@ -62,19 +70,24 @@ const UpdateCustomer = () => {
             <Input />
           </Form.Item>
         </Form.Item>
-        <Form.Item label="Phone number">
+        <Form.Item label="Phone number" disabled>
           <Form.Item noStyle name="phoneNumber">
+            <Input disabled />
+          </Form.Item>
+        </Form.Item>
+        <Form.Item label="Location">
+          <Form.Item noStyle name="location">
             <Input />
           </Form.Item>
         </Form.Item>
-        <Form.Item>
+        <Space size="middle" align="center" style={{ width: '100%', justifyContent: 'end' }}>
           <Button onClick={onCancel} type="secondary">
             Cancel
           </Button>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
-        </Form.Item>
+        </Space>
       </Form>
     </div>
   );
