@@ -138,9 +138,9 @@ const SingleOrderDetails = ({
 
     additionalComments = comments;
     if (userServices.includes('\\')) {
-      return JSON.parse(userServices.replace(/\\/g, ''));
+      services = JSON.parse(userServices.replace(/\\/g, ''));
     } else {
-      return userServices.replace(/\n/g, ', ');
+      services = userServices.replace(/\n/g, ', ');
     }
   } else {
     additionalComments = order.customerComments;
