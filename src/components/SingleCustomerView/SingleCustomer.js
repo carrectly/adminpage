@@ -6,6 +6,7 @@ import { Link, useParams } from 'react-router-dom';
 import { getCustomerOrdersThunk as getOrders } from '../../store/customerorders';
 import { getSingleCustomerThunk as getCustomer } from '../../store/singlecustomer';
 import UpdateCustomer from './UpdateCustomer';
+import { Spin } from 'antd';
 
 const columns = [
   {
@@ -75,6 +76,22 @@ const SingleCustomer = () => {
     dispatch(getOrders(userid));
   }, []);
 
+  if (Object.keys(customer).length === 0) {
+    return (
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Spin />
+      </div>
+    );
+  }
+
   return (
     <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column', width: '100%' }}>
       <div className="customercontainer">
@@ -121,7 +138,7 @@ const SingleCustomer = () => {
         </div>
         <div className="customerupdate">
           <h2>Update Customer Info</h2>
-          <UpdateCustomer />
+          <UpdateCustomer customer={customer} />
         </div>
       </div>
       <h2>Order History</h2>

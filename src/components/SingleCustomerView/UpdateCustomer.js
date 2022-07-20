@@ -17,7 +17,7 @@ function clean(obj) {
   }
 }
 
-const UpdateCustomer = () => {
+const UpdateCustomer = ({ customer }) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
 
@@ -47,6 +47,13 @@ const UpdateCustomer = () => {
         size="large"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
+        initialValues={{
+          firstName: customer.firstName,
+          lastName: customer.lastName,
+          email: customer.email,
+          phoneNumber: customer.phoneNumber,
+          location: customer.location,
+        }}
       >
         <Form.Item label="First Name">
           <Form.Item noStyle name="firstName">
@@ -63,9 +70,9 @@ const UpdateCustomer = () => {
             <Input />
           </Form.Item>
         </Form.Item>
-        <Form.Item label="Phone number">
+        <Form.Item label="Phone number" disabled>
           <Form.Item noStyle name="phoneNumber">
-            <Input />
+            <Input disabled />
           </Form.Item>
         </Form.Item>
         <Form.Item label="Location">
