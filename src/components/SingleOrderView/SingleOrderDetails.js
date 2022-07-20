@@ -138,6 +138,11 @@ const SingleOrderDetails = ({
 
     additionalComments = comments;
     services = JSON.parse(userServices.replace(/\\/g, ''));
+    if (userServices.includes('\\')) {
+      return JSON.parse(userServices.replace(/\\/g, ''));
+    } else {
+      return userServices.replace(/\n/g, ', ');
+    }
   } else {
     additionalComments = order.customerComments;
   }
