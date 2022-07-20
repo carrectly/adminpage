@@ -17,7 +17,8 @@ router.post('/', async (req, res, next) => {
 
     let ordr = await Order.create({
       ...order,
-      pickupLocation: `${order.address} ${order.city} ${order.zipCode}`,
+      pickupLocation: order.pickupLocation,
+      dropoffLocation: order.dropoffLocation,
       stickShift: order.transmission === 'automatic' ? false : true,
       customerPhoneNumber: newcust.phoneNumber,
     });

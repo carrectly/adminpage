@@ -200,13 +200,15 @@ body {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  padding: 40px;
+  padding: 20px 40px 20px 10px;
+  flex-direction: column;
 }
 
 .customerupdate {
-  padding: 40px;
+  padding: 20px;
   display: flex;
   flex-grow: 2;
+  flex-direction: column;
 }
 
 .alldealersview {

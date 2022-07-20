@@ -48,8 +48,15 @@ const flattenDealersArray1 = (allShopsArray, shopsAlreadySelected) => {
   ));
 };
 
+// const flattenDealersArray2 = (arr) =>
+//   arr.map((el) => ({ key: el.id, value: el.id, label: el.name }));
+
 const flattenDealersArray2 = (arr) =>
-  arr.map((el) => ({ key: el.id, value: el.id, label: el.name }));
+  arr.map((el) => (
+    <div value={el.id} key={el.id}>
+      {el.name}
+    </div>
+  ));
 
 const SingleOrderDetails = ({
   order,
@@ -126,7 +133,6 @@ const SingleOrderDetails = ({
 
   let additionalComments;
   let services;
-
   if (Object.keys(order).length > 0 && order.customerComments.indexOf('services list') > -1) {
     const [comments, userServices, ...others] = order.customerComments.split('services list:');
 
@@ -175,6 +181,11 @@ const SingleOrderDetails = ({
               </Descriptions.Item>
               <Descriptions.Item label="Pickup Location">
                 <LocationCell value={order.pickupLocation} />
+              </Descriptions.Item>
+              <Descriptions.Item label="DropOff Location">
+                <LocationCell
+                  value={order.dropoffLocation ? order.dropoffLocation : order.pickupLocation}
+                />
               </Descriptions.Item>
               <Descriptions.Item label="PROMO CODE">{order.promoCode}</Descriptions.Item>
               <Descriptions.Item label="Discount">{order.discount}</Descriptions.Item>

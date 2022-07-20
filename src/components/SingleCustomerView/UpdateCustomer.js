@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { updateSingleCustomerThunk } from '../../store/singlecustomer';
-import { Form, Button, Input } from 'antd';
+import { Form, Button, Input, Space } from 'antd';
 import { useParams } from 'react-router-dom';
 
 const layout = {
@@ -41,6 +41,7 @@ const UpdateCustomer = () => {
     <div>
       <Form
         {...layout}
+        labelAlign="left"
         form={form}
         name="control-hooks"
         size="large"
@@ -67,14 +68,19 @@ const UpdateCustomer = () => {
             <Input />
           </Form.Item>
         </Form.Item>
-        <Form.Item>
+        <Form.Item label="Location">
+          <Form.Item noStyle name="location">
+            <Input />
+          </Form.Item>
+        </Form.Item>
+        <Space size="middle" align="center" style={{ width: '100%', justifyContent: 'end' }}>
           <Button onClick={onCancel} type="secondary">
             Cancel
           </Button>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
-        </Form.Item>
+        </Space>
       </Form>
     </div>
   );
