@@ -137,7 +137,6 @@ const SingleOrderDetails = ({
     const [comments, userServices, ...others] = order.customerComments.split('services list:');
 
     additionalComments = comments;
-    services = JSON.parse(userServices.replace(/\\/g, ''));
     if (userServices.includes('\\')) {
       return JSON.parse(userServices.replace(/\\/g, ''));
     } else {
