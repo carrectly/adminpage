@@ -1,6 +1,6 @@
 {
   "name": "adminpage",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "administrative website for car service business",
   "engines": {
     "node": "16.x"
