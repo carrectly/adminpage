@@ -13,7 +13,6 @@ import {
   removeOrderDealerThunk as removeOrderDealer,
   addOrderCustomerRepThunk as addOrderCustomerRep,
 } from '../../store/singleorder';
-import { UserOutlined } from '@ant-design/icons';
 import './styles.scss';
 
 const statusArray = getStatusArray();
