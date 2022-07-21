@@ -237,11 +237,9 @@ const SingleOrderDetails = ({
                 {services && services.length > 0 && (
                   <div>
                     <b>Services list: </b>
-                    {typeof services === 'string' ? (
-                      <>{services}</>
-                    ) : (
-                      <>{services.map((service) => service.name).join(', ')}</>
-                    )}
+                    {typeof services === 'string'
+                      ? services
+                      : services.map((service) => service.name).join(', ')}
                   </div>
                 )}
               </Descriptions.Item>
