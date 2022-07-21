@@ -49,15 +49,8 @@ const flattenDealersArray1 = (allShopsArray, shopsAlreadySelected) => {
   ));
 };
 
-// const flattenDealersArray2 = (arr) =>
-//   arr.map((el) => ({ key: el.id, value: el.id, label: el.name }));
-
 const flattenDealersArray2 = (arr) =>
-  arr.map((el) => (
-    <div value={el.id} key={el.id}>
-      {el.name}
-    </div>
-  ));
+  arr.map((el) => ({ key: el.id, value: el.id, label: el.name }));
 
 const SingleOrderDetails = ({
   order,
@@ -140,7 +133,8 @@ const SingleOrderDetails = ({
     if (userServices.includes('\\')) {
       services = JSON.parse(userServices.replace(/\\/g, ''));
     } else {
-      services = userServices.replace(/\n/g, ', ');
+      console.log('Missing services list', userServices);
+      services = userServices[0].replace(/\n/g, ', ');
     }
   } else {
     additionalComments = order.customerComments;
@@ -243,9 +237,11 @@ const SingleOrderDetails = ({
                 {services && services.length > 0 && (
                   <div>
                     <b>Services list: </b>
-                    {typeof services === 'string'
-                      ? services
-                      : services.map((service) => service.name).join(', ')}
+                    {typeof services === 'string' ? (
+                      <>{services}</>
+                    ) : (
+                      <>{services.map((service) => service.name).join(', ')}</>
+                    )}
                   </div>
                 )}
               </Descriptions.Item>
