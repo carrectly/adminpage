@@ -49,8 +49,15 @@ const flattenDealersArray1 = (allShopsArray, shopsAlreadySelected) => {
   ));
 };
 
+// const flattenDealersArray2 = (arr) =>
+//   arr.map((el) => ({ key: el.id, value: el.id, label: el.name }));
+
 const flattenDealersArray2 = (arr) =>
-  arr.map((el) => ({ key: el.id, value: el.id, label: el.name }));
+  arr.map((el) => (
+    <div value={el.id} key={el.id}>
+      {el.name}
+    </div>
+  ));
 
 const SingleOrderDetails = ({
   order,
@@ -133,8 +140,7 @@ const SingleOrderDetails = ({
     if (userServices.includes('\\')) {
       services = JSON.parse(userServices.replace(/\\/g, ''));
     } else {
-      console.log('Missing services list', userServices);
-      services = userServices[0].replace(/\n/g, ', ');
+      services = userServices.replace(/\n/g, ', ');
     }
   } else {
     additionalComments = order.customerComments;
