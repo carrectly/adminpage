@@ -132,7 +132,6 @@ const SingleOrderDetails = ({
     if (userServices.includes('\\')) {
       services = JSON.parse(userServices.replace(/\\/g, ''));
     } else {
-      console.log('Missing services list', userServices);
       services = userServices[0].replace(/\n/g, ', ');
     }
   } else {
