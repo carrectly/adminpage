@@ -132,7 +132,7 @@ const SingleOrderDetails = ({
     if (userServices.includes('\\')) {
       services = JSON.parse(userServices.replace(/\\/g, ''));
     } else {
-      services = userServices[0].replace(/\n/g, ', ');
+      services = userServices.replace(/\n/g, ', ');
     }
   } else {
     additionalComments = order.customerComments;
